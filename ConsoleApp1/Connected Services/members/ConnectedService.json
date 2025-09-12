@@ -1,0 +1,17 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://DESKTOP-FEF2IQ4:9992/Bamburi/WS/Bamburi%20Wananchi%20Sacco/Page/Members"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, members"
+    ],
+    "sync": true,
+    "targetFramework": "net7.0",
+    "typeReuseMode": "All"
+  }
+}

@@ -1,0 +1,764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4ABA9A0C-919E-4552-99F1-CDCBE3379C27}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Collection</RootNamespace>
+    <AssemblyName>Collection</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <TargetFrameworkProfile />
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\AGENCY\AGENCY Service - Service\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sendsms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Sendsms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Collect.asmx" />
+    <Content Include="Newtonsoft.Json.dll" />
+    <Content Include="Newtonsoft.Json.pdb" />
+    <Content Include="Newtonsoft.Json.xml" />
+    <Content Include="Sendsms.dll" />
+    <Content Include="Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Soap.asmx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collect.asmx.cs">
+      <DependentUpon>Collect.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Sms.cs" />
+    <Compile Include="Soap.asmx.cs">
+      <DependentUpon>Soap.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Web References\Accounts\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Allocation_Header\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Allocation_line\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Banks\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Bank_Entries\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Devices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Group_Loan\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Loan_Req_Guarantors\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Loan_Products\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Loan_Request\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Mobile\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Non_Cash\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Receipts\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Receipt_Lines\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Repayment\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Advance_issue\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Groups\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Loans\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Logins\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Members\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Mpesa\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Sectors\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Transactions\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\TransHeader\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\TransLine\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://173.249.49.91:3547/Pawdepservice/WS/Pamoja%2520Women%2520Dev.%2520Programme/Codeunit/Mobile">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Mobile\</RelPath>
+      <UpdateFromURL>http://173.249.49.91:3547/Pawdepservice/WS/Pamoja%2520Women%2520Dev.%2520Programme/Codeunit/Mobile</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Mobile_Mobile</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Accounts">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Accounts\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Accounts</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Accounts_Accounts_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://173.249.49.91:3547/PawdepService/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Allocation_Header">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Allocation_Header\</RelPath>
+      <UpdateFromURL>http://173.249.49.91:3547/PawdepService/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Allocation_Header</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Allocation_Header_Allocation_Header_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Allocation_line">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Allocation_line\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Allocation_line</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Allocation_line_Allocation_line_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Banks">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Banks\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Banks</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Banks_Banks_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://173.249.49.91:3547/PawdepService/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Bank_Entries">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Bank_Entries\</RelPath>
+      <UpdateFromURL>http://173.249.49.91:3547/PawdepService/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Bank_Entries</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Bank_Entries_Bank_Entries_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Devices">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Devices\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Devices</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Devices_Devices_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Loan_Req_Guarantors">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Loan_Req_Guarantors\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Loan_Req_Guarantors</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Loan_Guarantors_Loan_Guarantors_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Loan_Request">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Loan_Request\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Loan_Request</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Loan_Request_Loan_Request_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://Paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Logins">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Logins\</RelPath>
+      <UpdateFromURL>http://Paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Logins</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Logins_Logins_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Group_Loan">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Group_Loan\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Group_Loan</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Group_Loan_Group_Loan_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Loan_Products">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Loan_Products\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Loan_Products</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Loan_Products_Loan_Products_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://173.249.49.91:3547/Pawdepservice/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Non_Cash">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Non_Cash\</RelPath>
+      <UpdateFromURL>http://173.249.49.91:3547/Pawdepservice/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Non_Cash</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Non_Cash_Non_Cash_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/PAWDEP6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/PW_Transactions">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Transactions\</RelPath>
+      <UpdateFromURL>http://paulo:3335/PAWDEP6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/PW_Transactions</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Transactions_PW_Transactions_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Receipts">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Receipts\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Receipts</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Receipts_Receipts_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Receipt_Lines">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Receipt_Lines\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Receipt_Lines</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Receipt_Lines_Receipt_Lines_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://Paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Repayment">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Repayment\</RelPath>
+      <UpdateFromURL>http://Paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Repayment</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Advance_Advance_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Sectors">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Sectors\</RelPath>
+      <UpdateFromURL>http://paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Sectors</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Sectors_Sectors_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:5002/PAWDEP/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Advance_issue">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Advance_issue\</RelPath>
+      <UpdateFromURL>http://paulo:5002/PAWDEP/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Advance_issue</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Advance_issue_Advance_issue_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://173.249.49.91:3547/PawdepService/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Members">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Members\</RelPath>
+      <UpdateFromURL>http://173.249.49.91:3547/PawdepService/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Members</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Members_Members_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://Paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Trans_Header">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TransHeader\</RelPath>
+      <UpdateFromURL>http://Paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Trans_Header</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_TransHeader_Trans_Header_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://173.249.49.91:3547/PawdepService/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Trans_Line">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TransLine\</RelPath>
+      <UpdateFromURL>http://173.249.49.91:3547/PawdepService/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Trans_Line</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_TransLine_Trans_Line_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://Paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Groups">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Groups\</RelPath>
+      <UpdateFromURL>http://Paulo:3335/Pawdep6/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Groups</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Groups_Groups_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://173.249.49.91:3547/Pawdepservice/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Loans">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Loans\</RelPath>
+      <UpdateFromURL>http://173.249.49.91:3547/Pawdepservice/WS/Pamoja%2520Women%2520Dev.%2520Programme/Page/Loans</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Loans_Loans_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:7047/DynamicsNAV/WS/Page/Mpesa">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Mpesa\</RelPath>
+      <UpdateFromURL>http://paulo:7047/DynamicsNAV/WS/Page/Mpesa</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Mpesa_Mpesa_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Mpesa\Mpesa.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Members\Members.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Logins\Logins.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Groups\Groups.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Group_Loan\Group_Loan.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Devices\Devices.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Banks\Banks.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Accounts\Accounts.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Accounts\Accounts.wsdl" />
+    <Content Include="Web References\Accounts\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\Allocation_Header\Allocation_Header.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Allocation_Header\Allocation_Header.wsdl" />
+    <None Include="Web References\Allocation_Header\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Allocation_line\Allocation_line.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Allocation_line\Allocation_line.wsdl" />
+    <Content Include="Web References\Allocation_line\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\Banks\Banks.wsdl" />
+    <Content Include="Web References\Banks\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\Bank_Entries\Bank_Entries.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Bank_Entries\Bank_Entries.wsdl" />
+    <None Include="Web References\Bank_Entries\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Devices\Devices.wsdl" />
+    <None Include="Web References\Devices\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Group_Loan\Group_Loan.wsdl" />
+    <None Include="Web References\Group_Loan\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Non_Cash\Non_Cash.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Loan_Products\Loan_Products.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Loan_Req_Guarantors\Loan_Req_Guarantors1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Loan_Req_Guarantors\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Loan_Req_Guarantors\Loan_Req_Guarantors.wsdl" />
+    <None Include="Web References\Loan_Products\Loan_Products.wsdl" />
+    <Content Include="Web References\Loan_Products\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\Loan_Request\Loan_Request.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Loan_Request\Loan_Request.wsdl" />
+    <Content Include="Web References\Loan_Request\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\Mobile\Mobile.wsdl" />
+    <None Include="Web References\Mobile\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Non_Cash\Non_Cash.wsdl" />
+    <None Include="Web References\Non_Cash\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Receipts\Receipts.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Receipts\Receipts.wsdl" />
+    <None Include="Web References\Receipts\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Receipt_Lines\Receipt_Lines.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Receipt_Lines\Receipt_Lines.wsdl" />
+    <None Include="Web References\Receipt_Lines\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Repayment\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Advance_issue\Advance_issue.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Advance_issue\Advance_issue.wsdl" />
+    <None Include="Web References\Advance_issue\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Groups\Groups.wsdl" />
+    <None Include="Web References\Groups\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Loans\Loans.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Loans\Loans.wsdl" />
+    <None Include="Web References\Loans\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Logins\Logins.wsdl" />
+    <None Include="Web References\Logins\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Members\Members.wsdl" />
+    <None Include="Web References\Members\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Mpesa\Mpesa.wsdl" />
+    <None Include="Web References\Mpesa\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Repayment\Repayment.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Repayment\Repayment.wsdl" />
+    <Content Include="Web References\Sectors\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\Sectors\Sectors.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Sectors\Sectors.wsdl" />
+    <Content Include="Web References\Transactions\PW_Transactions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Transactions\PW_Transactions.wsdl" />
+    <Content Include="Web References\Transactions\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\TransHeader\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\TransHeader\Trans_Header.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\TransHeader\Trans_Header.wsdl" />
+    <None Include="Web References\TransLine\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\TransLine\Trans_Line.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\TransLine\Trans_Line.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Logging\Logging 4.5.2\Logging 4.5.2.csproj">
+      <Project>{c1acebc5-d002-40f4-b810-bdf289093eb5}</Project>
+      <Name>Logging 4.5.2</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60131</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingConstraints" >
+    <data class="Memberbinding" >
+        <variable
+            name="m"
+            type="com.trimline.investors.Members" />
+        <variable
+            name="statistics"
+            type="com.trimline.investors.Statistics" />
+        <import type="android.text.Html"/>
+        <import type="android.view.View"/>
+    </data>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+      style="@style/cardview"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(`Phone: %s\nEmail: %s`, m.Phone_No , m.E_Mail)}"
+            android:hint="Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/balances"
+       style="@style/cardview"
+        app:layout_constraintTop_toBottomOf="@id/cardView"
+
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deposits"
+            android:id="@+id/capital"
+            android:hint="Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Html.fromHtml(@string/curr(statistics.Deposit_Balance))}"
+
+
+            android:gravity="end"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Loans"
+            android:id="@+id/totalloans"
+            app:layout_constraintTop_toBottomOf="@id/capital"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Html.fromHtml(@string/curr(statistics.Loan_Balances))}"
+
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:clickable="true"
+            android:focusable="true"
+
+            app:layout_constraintTop_toBottomOf="@id/capital"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/vehiclesheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="My vehicles"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/balances"
+        tools:layout_editor_absoluteX="5dp" />
+
+
+
+
+    <androidx.cardview.widget.CardView
+        style="@style/cardview"
+       android:id="@+id/vehicles"
+       app:layout_constraintTop_toBottomOf="@id/vehiclesheader"
+             >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/header"
+            android:id="@+id/vehicleheader"
+            >
+            <include layout="@layout/vehicle"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/vehiclelist"
+            tools:listitem="@layout/vehicle"
+            android:scrollbars="horizontal"
+            android:maxHeight="100dp"
+            app:layout_constraintTop_toBottomOf="@id/vehicleheader"
+            app:layout_constraintBottom_toTopOf="@id/vehicletodaystotal"
+            />
+        <TextView
+            android:id="@+id/vehicletodaystotal"
+            android:layout_height="0dp"
+            android:text="@{Html.fromHtml(@string/curr(m.Todays_Total))}"
+            android:visibility="@{m.Total_vehicles>1?View.VISIBLE : View.GONE}"
+            android:textStyle="bold"
+            style="@style/currency"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/loanheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="My Loans"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/vehicles"
+        tools:layout_editor_absoluteX="5dp" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loans"
+        style="@style/cardview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loanheader"
+
+        >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/header"
+            android:id="@+id/loansheader"
+            >
+        <include layout="@layout/loans"
+
+            />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/loanslist"
+            tools:listitem="@layout/loans"
+            app:layout_constraintTop_toBottomOf="@id/loansheader"
+            app:layout_constraintBottom_toTopOf="@id/loantodaystotal"
+            />
+        <TextView
+            android:id="@+id/loantodaystotal"
+            android:layout_height="0dp"
+            android:text="@{@string/curr(m.loans_Todays_Total)}"
+            android:visibility="@{statistics.Total_Loans >1 ? View.VISIBLE : View.GONE}"
+            android:textStyle="bold"
+            style="@style/currency"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/loanbalancetotal"/>
+
+        <TextView
+            android:id="@+id/loanbalancetotal"
+            android:layout_height="0dp"
+            android:text="@{Html.fromHtml(@string/curr(statistics.Loan_Balances))}"
+            android:visibility="@{statistics.Total_Loans >1 ? View.VISIBLE : View.GONE}"
+            android:textStyle="bold"
+            style="@style/currency"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data class="Receiptline">
+        <variable
+            name="receipt"
+            type="com.trimline.sales.Sales_invoice_lines" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:scrollbars="horizontal"
+        tools:ignore="MissingConstraints"
+        >
+
+        <AutoCompleteTextView
+            android:id="@+id/receipt_item"
+          style="@style/receiptline_item"
+            android:layout_width="100dp"
+            android:hint="item"
+            android:inputType="none"
+          android:text="@={receipt.No}"
+           app:layout_constraintStart_toStartOf="parent"
+
+             />
+        <AutoCompleteTextView
+            android:id="@+id/receipt_description"
+            android:layout_width="100dp"
+            style="@style/receiptline_item"
+            android:hint="Name"
+            android:visibility="gone"
+            android:text="@={receipt.Description}"
+            app:layout_constraintStart_toEndOf="@id/receipt_item"
+            />
+        <EditText
+            android:id="@+id/receipt_quantity"
+            style="@style/receiptline_item"
+            android:hint="Quantity"
+            android:inputType="number"
+            android:text="@={``+receipt.Quantity}"
+            app:layout_constraintStart_toEndOf="@id/receipt_description"
+            />
+        <EditText
+            android:id="@+id/receipt_amount"
+            style="@style/receiptline_item"
+            android:hint="Unit Price"
+            android:inputType="number"
+            android:text="@={``+receipt.Unit_Price}"
+            app:layout_constraintStart_toEndOf="@id/receipt_quantity"
+            />
+        <TextView
+            android:id="@+id/receipt_lineamount"
+            style="@style/receiptline_item"
+            android:hint="Line Amount"
+            android:textStyle="bold"
+            android:text="@={``+receipt.Line_Amount}"
+            app:layout_constraintEnd_toStartOf="@id/clear"
+
+            />
+
+        <ImageView
+            style="@style/receiptline_item"
+            android:src="@drawable/deletered"
+            android:layout_width="50dp"
+            android:id="@+id/clear"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

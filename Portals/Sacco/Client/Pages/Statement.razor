@@ -1,0 +1,117 @@
+@page "/Statement"
+@inject HttpClient Http
+@inject Sacco.Shared.StateContainerService stateService
+@inject NavigationManager navigationManager
+@inject IJSRuntime js
+<PageTitle>Statement </PageTitle>
+
+ 
+<div class="card">
+    
+    <div class="row card-header">
+       <label class="col" >Date From</label>    
+     <input class="col" type="date" id="fromdate" @bind-value ="startdate" />
+    <i class="col col-8"></i>
+    </div>  
+
+    <div class="row card-header">
+        <label class="col">Date To</label>
+        <input class="col" type="date" id="todate" @bind-value = "enddate" />
+        <i class="col col-8"></i>
+    </div>
+    <div class="row card-header">
+        <button class="col btn btn-primary"onclick="@(async () => await getstatement(startdate,enddate))">Get Statement</button>
+      
+        <i class="col col-8"></i>
+    </div>
+    <label class="text-danger">@error</label>
+</div>
+<div id="statement" class="row h-100 w-100 p-3 vh-100  ">
+   
+    <iframe src="@paths" id="myFrame" class="col h-100 d-inline-block mh-100" style="width: 100px; height: 200px" />
+  
+</div>
+
+@code {
+
+    private DateTime startdate { get; set; } = DateTime.Now.AddMonths(-1);
+    private DateTime enddate { get; set; } = DateTime.Now;
+    private string error { get; set; }
+    private string paths = "initial-src";
+    public string path { get =>paths; set { paths = value;StateHasChanged(); } } 
+
+
+    public Memberdata.Members member { get; set; }
+    public entriesdata.Entries[] entries { get; set; }
+    public string company_Name { get; set; }
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+            
+    //        await js.InvokeVoidAsync("setIframeSrc", path);
+    //    }
+    //}
+   
+    protected async override Task OnParametersSetAsync()
+    {
+        stateService.OnStateChange += StateHasChanged;
+
+        // if (!stateService.member.ToString().Equals(""))
+        // {
+        //     member = await Http.GetFromJsonAsync<Memberdata.Members>($"api/home/Get/{stateService.member}");
+        //     entries = await Http.GetFromJsonAsync<entriesdata.Entries[]>($"api/entries/Get/{stateService.member}");
+        // }
+        // else 
+        // navigationManager.NavigateTo("");
+    }
+    async Task getstatement(DateTime df, DateTime dt)
+    {
+        Sacco.Shared.param p;
+        HttpResponseMessage res = null;
+        error = null;
+        try
+        {
+            
+            var path = Path.GetFullPath("wwwroot\\Statements\\");
+
+            p = new Sacco.Shared.param() { No = stateService.member,Datefrom = df,DateTo = dt,folder = path };
+            Console.WriteLine(p.No);
+
+            res = await Http.PostAsJsonAsync("api/Home/getstatement", p);
+            Console.WriteLine("okk");
+
+            if (res.IsSuccessStatusCode)
+            {
+
+                p = await res.Content.ReadFromJsonAsync<Sacco.Shared.param>();
+                Console.WriteLine(p.Statementpath);
+                paths =string.Format("Statements/{0}",p.Statementpath) ;
+                
+              //
+              //  navigationManager.NavigateTo("statement")
+
+              base.StateHasChanged();
+                Console.WriteLine(path);
+            }
+                else
+                {
+                    var d = await res.Content.ReadFromJsonAsync<Sacco.Shared.param>();
+                    error = d.No;
+                }
+         
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("error");
+            Console.WriteLine(ex.Message);
+
+            error = await res.Content.ReadAsStringAsync();
+        }
+    }
+    public void Dispose()
+    {
+        stateService.Setmember("");
+        stateService.OnStateChange -= StateHasChanged;
+    }
+}

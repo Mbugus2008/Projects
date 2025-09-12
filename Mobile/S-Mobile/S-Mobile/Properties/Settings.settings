@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="S_Mobile.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="S_Mobile_Client_Client" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:802/Mobile.svc</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Mpesa_Collect" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:4004/Soap.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

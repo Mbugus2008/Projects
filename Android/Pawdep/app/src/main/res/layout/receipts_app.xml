@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data class="Receiptsbinding">
+        <variable
+            name="receipts"
+            type="com.trimline.pawdep.Receipts" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        tools:context=".Receipts_app">
+
+
+
+        <TextView
+            style="@style/receiptcardline2"
+            android:id="@+id/transid"
+            android:text="No"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/txt_transid"
+            style="@style/receiptcardtxtline2"
+
+            android:hint="No"
+            android:text="@={receipts.No}"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            style="@style/receiptcard"
+            android:id="@+id/date"
+            android:text="Date"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/txt_date"
+            style="@style/receiptcardtxt"
+            android:hint="Date"
+            android:clickable="true"
+            android:text="@={receipts.Receipt_Date}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="106dp" />
+
+        <TextView
+            style="@style/receiptcard"
+            android:id="@+id/bankcode"
+            android:text="Bank Code"
+            app:layout_constraintTop_toBottomOf="@id/date"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/txt_BankCode"
+            style="@style/receiptcardtxt"
+            android:hint="Bank code"
+            android:text="@={receipts.Bank_Code}"
+            app:layout_constraintTop_toBottomOf="@id/txt_date"
+            tools:layout_editor_absoluteX="106dp" />
+        <TextView
+            style="@style/receiptcard"
+            android:id="@+id/groupname"
+            android:text="Group Name"
+            app:layout_constraintTop_toBottomOf="@id/txt_BankCode"/>
+        <AutoCompleteTextView
+            android:id="@+id/txt_groupname"
+            style="@style/receiptcardtxt"
+            android:completionThreshold="3"
+            android:hint="Group Name"
+            android:text="@={receipts.Group_Name}"
+            app:layout_constraintTop_toBottomOf="@id/txt_BankCode"
+           />
+
+        <TextView
+            style="@style/receiptcard"
+            android:id="@+id/memberNo"
+            android:text="PAWDEP No"
+            app:layout_constraintTop_toBottomOf="@id/groupname"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/txt_memberno"
+            style="@style/receiptcardtxt"
+            android:hint="PAWDEP No"
+            android:text="@={receipts.Member_No}"
+            app:layout_constraintTop_toBottomOf="@id/txt_groupname"
+             />
+        <TextView
+            style="@style/receiptcard"
+            android:id="@+id/Receiptmode"
+            android:text="Receipt Mode"
+            app:layout_constraintTop_toBottomOf="@id/memberNo"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/txt_Receiptmode"
+            style="@style/receiptcardtxt"
+            android:hint="Receipt mode"
+            android:text="@={receipts.ReceiptMode}"
+            app:layout_constraintTop_toBottomOf="@id/txt_memberno"
+            />
+<!--Line 2-->
+        <TextView
+            style="@style/receiptcardline2"
+            android:id="@+id/Receivedfrom"
+            android:text="Received From"
+            app:layout_constraintTop_toBottomOf="@id/transid"
+            />
+        <EditText
+            android:id="@+id/txt_receivedfrom"
+            style="@style/receiptcardtxtline2"
+            android:hint="ReceivedFrom"
+            android:text="@={receipts.Received_From}"
+            app:layout_constraintTop_toBottomOf="@id/txt_transid"
+            tools:layout_editor_absoluteX="106dp" />
+        <TextView
+            style="@style/receiptcardline2"
+            android:id="@+id/documentno"
+            android:text="Document No"
+            app:layout_constraintTop_toBottomOf="@id/Receivedfrom"/>
+        <EditText
+            android:id="@+id/txt_documentno"
+            style="@style/receiptcardtxtline2"
+            android:hint="document no"
+            android:text="@={receipts.Document_No}"
+            app:layout_constraintTop_toBottomOf="@id/txt_receivedfrom"
+            tools:layout_editor_absoluteX="106dp" />
+
+        <TextView
+            style="@style/receiptcardline2"
+            android:id="@+id/Amount"
+            android:text="Amount"
+            app:layout_constraintTop_toBottomOf="@id/documentno"/>
+        <EditText
+            style="@style/receiptcardtxtline2"
+            android:id="@+id/txt_amount"
+            android:hint="Amount"
+            android:text="@={`` +receipts.Amount}"
+            app:layout_constraintTop_toBottomOf="@id/txt_documentno"
+            />
+
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/receipts_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+         app:layout_constraintTop_toBottomOf="@id/Receiptmode"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/receipt_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+    </androidx.constraintlayout.widget.ConstraintLayout></layout>

@@ -1,0 +1,72 @@
+﻿@page "/Profile/BankDetails/{Taxregno}"
+@rendermode InteractiveServer
+@inject Eproc.Services.Icprofile iprofile
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.DropDowns
+@attribute [StreamRendering]
+@{
+    var Tool = (new List<string>() { "Search", "Add", "Edit", "Delete", "Update", "Cancel" });
+}
+<SfGrid DataSource="@model" ID="bdetails" Toolbar=@Tool>
+    <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true" Mode="EditMode.Normal"></GridEditSettings>
+    <GridEvents OnActionComplete="OnActionComplete" TValue="BDetails.BankDetails"></GridEvents>
+
+    <GridColumns>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Entry_No) Visible="false" IsPrimaryKey="true" HeaderText="Entry No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Tax_Registration_No) IsPrimaryKey="true" HeaderText="Tax Registration No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Bank_Name) HeaderText="Bank Name"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Bank_Code) HeaderText="Bank Code"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Bank_Branch_Name) HeaderText="Bank Branch Name"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Bank_Branch_Code) HeaderText="Bank Branch Code"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Account_Name) HeaderText="Account Name"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Account_Number) HeaderText="Account Number"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Bank_Address) HeaderText="Bank Address"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Currency) HeaderText="Currency" EditType="EditType.DropDownEdit">
+             <EditTemplate>
+                    <SfDropDownList TValue="string" Placeholder="Select Currency" TItem="Curency.Currency" DataSource="@currencies">
+                    <DropDownListFieldSettings Text="Description" Value="Code"></DropDownListFieldSettings>
+                    </SfDropDownList>
+            </EditTemplate>
+        </Syncfusion.Blazor.Grids.GridColumn>
+
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Swift_Code) HeaderText="Swift Code"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.IBAN) HeaderText="IBAN"></Syncfusion.Blazor.Grids.GridColumn>
+    </GridColumns>
+</SfGrid>
+@code {
+    [Parameter]
+    public string Taxregno { get; set; }
+    List<BDetails.BankDetails> model { get; set; } = new List<BDetails.BankDetails>();
+    BDetails.BankDetails_Fields fields;
+    Curency.Currency[] currencies;
+
+    protected override async void OnInitialized()
+    {
+        model = await iprofile.getbankdetails(Taxregno);
+        currencies = await iprofile.getcurrencies();
+
+        StateHasChanged();
+
+
+    }
+    public void OnActionComplete(ActionEventArgs<BDetails.BankDetails> args)
+    {
+        switch (args.RequestType)
+        {
+            case Syncfusion.Blazor.Grids.Action.Add: { args.Data.Tax_Registration_No = Taxregno; break; }
+            case Syncfusion.Blazor.Grids.Action.Save:
+                {
+
+                    args.Data = iprofile.SaveData(args.Data).Result;
+
+                    break;
+                }
+            case Syncfusion.Blazor.Grids.Action.Delete:
+                {
+                    iprofile.Delete(args.Data);
+                    break;
+                }
+        }
+    }
+}
+

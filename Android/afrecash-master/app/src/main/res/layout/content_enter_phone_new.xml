@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.EnterPhone">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.06"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg" />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_gravity="center_horizontal"
+                android:text="Enter your phone number"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/cpp"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        app:ccp_autoDetectCountry="true"
+                        android:layout_marginTop="22dp"
+                        app:ccp_showFlag="true"
+                        android:layout_gravity="bottom"
+                        app:ccp_showNameCode="false"
+                        app:ccp_showPhoneCode="true"
+                        app:ccp_textSize="17sp" />
+
+
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/edit_text_underline_bg"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Your phone number"
+                        android:inputType="phone"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="A confirmation code will be sent to this phone number to verify your account." />
+
+
+                <Button
+                    android:id="@+id/btnProceed"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_primary"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="CONTINUE"
+                    android:textSize="17sp"
+                    android:textColor="@color/white" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue_300"
+                    android:clickable="true"
+                    android:id="@+id/forgotpassword"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Forgot Password" />
+
+                <EditText
+                    android:id="@+id/id_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:background="@drawable/edit_text_underline_bg"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="Your Id number"
+                    android:inputType="phone"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="17sp" />
+                <Button
+                    android:id="@+id/btnreset"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone"
+                    android:background="@drawable/button_primary"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="RESET"
+                    android:textSize="17sp"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/Receiptno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Member No"
+            android:textColor="#000"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Receiptno"
+            android:hint="Time"
+            android:textColor="#000"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/Receiptno"
+            android:layout_marginLeft="150dp"
+            android:text="Type"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/Amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:hint="amount"
+
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/loanno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/type"
+            android:layout_alignRight="@id/groupcount"
+            android:layout_marginLeft="150dp"
+            android:text="loan no"
+            android:textSize="10dp" />
+        <!--<TextView-->
+        <!--android:id="@+id/tamount"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/transtype"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:textSize="10dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:textColor="@android:color/holo_green_light"-->
+        <!--android:hint="total" />-->
+        <ImageView
+            android:id="@+id/sent"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/sent" />
+    </RelativeLayout>
+</RelativeLayout>

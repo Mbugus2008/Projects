@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    
+    android:background="@drawable/header"
+    android:layout_height="wrap_content">
+  
+    <TextView
+        android:id="@+id/loan_list_loan_No"
+        style="@style/loan_list_header"
+         android:text="Loan No"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/loan_list_Member_No"
+       style="@style/loan_list_header"
+        android:text="Member No"
+        app:layout_constraintStart_toEndOf="@id/loan_list_loan_No"
+
+        />
+    <TextView
+        android:id="@+id/loan_list_Member_Name"
+        style="@style/loan_list_header"
+        android:text="Member Name"
+        app:layout_constraintStart_toEndOf="@id/loan_list_Member_No"
+        />
+
+    <TextView
+        android:id="@+id/loan_list_loantype"
+        style="@style/loan_list_header"
+        android:text="Loan Type"
+        app:layout_constraintStart_toEndOf="@id/loan_list_Member_Name"
+
+        />
+    <TextView
+        android:id="@+id/loan_list_amountapplied"
+        style="@style/loan_list_header"
+        android:text="Amount applied"
+        app:layout_constraintStart_toEndOf="@id/loan_list_loantype"/>
+
+
+   
+</androidx.constraintlayout.widget.ConstraintLayout>

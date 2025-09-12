@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TrimData.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TrimData_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:9597/Secularm/WS/Data/Page/Members</Value>
+    </Setting>
+    <Setting Name="TrimData_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:9597/Secularm/WS/Data/Page/Loans</Value>
+    </Setting>
+    <Setting Name="TrimData_LedgerEntries_LedgerEntries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:9597/Secularm/WS/Data/Page/LedgerEntries</Value>
+    </Setting>
+    <Setting Name="TrimData_Schedule_Schedule_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:9597/Secularm/WS/Data/Page/Schedule</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".teller.AddedittellertransActivity"
+    tools:ignore="MissingConstraints">
+    <data class="Tellerlistbinding">
+
+        <variable
+            name="tellerlist"
+            type="com.trimline.paul.m_branch.teller.Teller" />
+        <import type="com.trimline.paul.m_branch.bindingadapters.BindingAdapters"></import>
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tellers"
+            android:text="@={tellerlist.No}"
+            android:layout_width="100dp"
+            android:layout_height="20dp"/>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

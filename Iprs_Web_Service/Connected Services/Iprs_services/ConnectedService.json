@@ -1,0 +1,18 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "C:/Users/mbugu/Desktop/iprs/IPRSServerwcf_1.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "messageContract": true,
+    "namespaceMappings": [
+      "*, Iprs_services"
+    ],
+    "sync": true,
+    "targetFramework": "net5.0",
+    "typeReuseMode": "All"
+  }
+}

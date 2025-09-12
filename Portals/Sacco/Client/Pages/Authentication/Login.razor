@@ -1,0 +1,121 @@
+
+@page "/"
+
+@inject NavigationManager navigationManager
+@layout AuthLayout
+@inject HttpClient Http
+@inject IJSRuntime js
+@inject Sacco.Shared.StateContainerService stateService
+<style>
+    #bc {
+    background-image: url(images/logo.bmp);background-size:cover
+    }
+
+</style>
+<EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="loginRequest" id="loginBox">
+    <DataAnnotationsValidator />
+    <h1 class="card-header d-flex justify-content-center "> Login</h1>
+    <div class="d-flex justify-content-center ">
+        <img class="d-flex justify-content-center" src="images/logo.png" />
+    </div>
+    <p></p>
+    <h3><label for="inputUsername" class="sr-only d-flex justify-content-center ">Member No</label></h3>
+    <InputText id="inputUsername" class="form-control" style="text-align:center" @bind-Value="loginRequest.UserName" autofocus placeholder="Member No" />
+    <ValidationMessage For="@(() => loginRequest.UserName)" />
+
+    <h3>  <label for="inputPassword" class="sr-only d-flex justify-content-center ">Password</label></h3>
+    <InputText type="password" id="inputPassword" class="form-control" style="text-align:center" placeholder="Password" @bind-Value="loginRequest.Password" />
+    <ValidationMessage For="@(() => loginRequest.Password)" />
+
+    @* <div class="form-check m-3">
+        <InputCheckbox id="inputRememberMe" class="form-check-input" @bind-Value="@loginRequest.RememberMe" />
+        <label class="form-check-label" for="inputRememberMe">Remember Me</label>
+        </div>*@
+    <p></p>
+    <div class="row">
+
+
+        <button class="btn btn-primary col" type="submit">Sign in</button>
+        <p></p>    
+        <NavLink href="register">
+            <h6 class="font-weight-normal text-center col">Sign up</h6>
+        </NavLink>
+    </div>
+    <label class="text-danger">@error</label>
+
+
+</EditForm>
+
+@code{
+    Sacco.Shared.user loginRequest { get; set; } = new Sacco.Shared.user();
+
+    string error { get; set; }
+    protected override async void OnInitialized()
+    {
+        try
+        {
+            stateService.OnStateChange += StateHasChanged;
+
+            stateService.Setcompany(await  Http.GetStringAsync("api/home/Getcompany"));
+
+            stateService.setid(await Http.GetStringAsync("api/home/getid"));
+
+
+            stateService.Setmember("");
+
+        }   
+        catch (Exception ex)
+        {
+            error = ex.Message;
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.StackTrace);
+        }
+
+    }
+    async Task OnSubmit()
+    { 
+        HttpResponseMessage res =null;
+        error = null;
+        try
+        {
+            Console.WriteLine("here");
+            string json = System.Text.Json.JsonSerializer.Serialize(loginRequest);
+            Console.WriteLine(json);
+
+            res = await Http.PostAsJsonAsync("api/Auth/Login", loginRequest);
+         
+
+            Console.WriteLine(res);
+
+            if (res.IsSuccessStatusCode)
+            {
+
+                Memberdata.Members m = await res.Content.ReadFromJsonAsync<Memberdata.Members>();
+                stateService.Setmember( m.No);
+                stateService.Setmember_det(m);
+
+             
+                navigationManager.NavigateTo("Home");
+
+            }
+            else{
+               
+                error = await res.Content.ReadAsStringAsync();  
+                Console.WriteLine($"Error: {error}");
+
+                Console.WriteLine("Status Code: " + (int)res.StatusCode);
+                Console.WriteLine("Reason Phrase: " + res.ReasonPhrase);
+                Console.WriteLine("Version: " + res.Version);
+                Console.WriteLine("IsSuccessStatusCode: " + res.IsSuccessStatusCode);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            
+            Console.WriteLine("error");
+            Console.WriteLine(ex.Message);
+            error = await res.Content.ReadAsStringAsync();
+        }
+    }
+}

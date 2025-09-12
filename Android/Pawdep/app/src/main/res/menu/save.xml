@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Save"
+        android:icon="@drawable/save"
+        app:showAsAction="always"
+        android:id="@+id/save" />
+    <item
+        android:title="Trans\nLine"
+        app:showAsAction="always"
+        android:id="@+id/List"
+        android:checkable="true"
+        />
+    <item
+        android:title="Advance\nRepay"
+        app:showAsAction="always"
+        android:id="@+id/advancerepayment"
+        />
+    <item
+        android:title="Advance\nLoan Issue"
+        app:showAsAction="always"
+        android:id="@+id/advance"
+        />
+    <item
+        android:title="Transactions"
+        app:showAsAction="always"
+        android:id="@+id/transaction"
+        />
+    <item
+        android:title="Disbursement"
+        app:showAsAction="always"
+        android:id="@+id/Grouploans"
+        />
+
+    <item
+        android:title="Non Cash\nTransactions"
+        app:showAsAction="always"
+        android:id="@+id/Non_Cash"
+        />
+    <item
+        android:title="Print\nReceipts"
+        app:showAsAction="always"
+        android:id="@+id/print"
+        />
+    <item
+        android:title="Send For\nApproval"
+        app:showAsAction="always"
+        android:id="@+id/Post"
+        />
+    <item
+        android:title="Loans"
+        app:showAsAction="always"
+        android:id="@+id/Loans"
+        >
+            <menu  >
+                <item android:title="Loan\nBooking"
+                    app:showAsAction="always"
+                    android:id="@+id/Booking"/>
+                <item android:title="Loan\nApplication"
+                app:showAsAction="always"
+                    android:visible="false"
+                android:id="@+id/loanapplication"/>
+            </menu>
+    </item>
+
+
+
+</menu>

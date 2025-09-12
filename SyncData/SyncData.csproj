@@ -1,0 +1,2737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{730ED1D3-F9E5-45BA-9911-412A383E5288}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SyncData</RootNamespace>
+    <AssemblyName>SyncData</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.8.4\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Spatial, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.4\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ada.cs" />
+    <Compile Include="Connected Services\Erp\erp.cs" />
+    <Compile Include="Connected Services\Erp\erpExtensions.cs" />
+    <Compile Include="Connected Services\Investment\Inv.cs" />
+    <Compile Include="Connected Services\Investment\InvExtensions.cs" />
+    <Compile Include="Crm.cs" />
+    <Compile Include="Investment.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="sync.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="sync.Designer.cs">
+      <DependentUpon>sync.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Erp.cs" />
+    <Compile Include="Web References\AccountList\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Channels\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Crmservice\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\crm_Contacts\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\crm_PropertySales\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Employee_Attachments\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ErpVendor\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Erp_Payroll_Profits\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Financial_Investments_Channel\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\GL_Account\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Imprest_Profits\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Intrasoft\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Links\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Loans\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\MemberCredits\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Members\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Member_withdrawal\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Projects\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Project_Proposals\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\VendorDocuments\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Withdrawals\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520IV/Page/Member_Channels">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Members\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520IV/Page/Member_Channels</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Members_Member_Channels_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520IV/Page/Project_Proposals">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Project_Proposals\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520IV/Page/Project_Proposals</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Project_Proposals_Project_Proposals_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Financial_Investments_Channel">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Financial_Investments_Channel\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Financial_Investments_Channel</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Financial_Investments_Channel_Financial_Investments_Channel_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Member_withdrawal">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Member_withdrawal\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Member_withdrawal</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Member_withdrawal_Member_withdrawal_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Projects">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Projects\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Projects</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Projects_Project_Proposals_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Loans">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Loans\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Loans</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Loans_Project_Proposals_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Withdrawals">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Withdrawals\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/Withdrawals</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Withdrawals_Withdrawals_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%2520UAT%2520II/Page/Employee_Attachements">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Employee_Attachments\</RelPath>
+      <UpdateFromURL>http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%2520UAT%2520II/Page/Employee_Attachements</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Employee_Attachments_Employee_Attachments_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.20:7047/DynamicsNAV110/WS/Kenya Police SACCO/Page/Imprest_Profits">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Imprest_Profits\</RelPath>
+      <UpdateFromURL>http://10.1.1.20:7047/DynamicsNAV110/WS/Kenya Police SACCO/Page/Imprest_Profits</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Imprest_Profits_Imprest_Profits_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%2520UAT%2520II/Page/Payroll_Profits">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Erp_Payroll_Profits\</RelPath>
+      <UpdateFromURL>http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%2520UAT%2520II/Page/Payroll_Profits</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Erp_Payroll_Profits_Payroll_Profits_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%2520UAT%2520II/Page/GL_Account">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\GL_Account\</RelPath>
+      <UpdateFromURL>http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%2520UAT%2520II/Page/GL_Account</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_GL_Account_VendorCard_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.20:7047/DynamicsNAV110/WS/Kenya%2520Police%2520SACCO/Page/Vendors">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ErpVendor\</RelPath>
+      <UpdateFromURL>http://10.1.1.20:7047/DynamicsNAV110/WS/Kenya%2520Police%2520SACCO/Page/Vendors</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_ErpVendor_VendorCard_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%2520UAT%2520II/Page/Vendor_Attachments">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VendorDocuments\</RelPath>
+      <UpdateFromURL>http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%2520UAT%2520II/Page/Vendor_Attachments</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_VendorDocuments_Vendor_Attachments_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/LIVE/Page/Accountlist">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AccountList\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/LIVE/Page/Accountlist</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_AccountList_Accountlist_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520IV/Page/Contact">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\crm_Contacts\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520IV/Page/Contact</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_crm_Contacts_Contact_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.4.17:7047/DynamicsNAV110/WS/Cycle%2520III/Page/Links">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Links\</RelPath>
+      <UpdateFromURL>http://10.1.4.17:7047/DynamicsNAV110/WS/Cycle%2520III/Page/Links</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Links_Links_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://kpicsprdapp01.policesacco.com:7047/DynamicsNAV110/WS/LIVE/Codeunit/Channels">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Channels\</RelPath>
+      <UpdateFromURL>http://kpicsprdapp01.policesacco.com:7047/DynamicsNAV110/WS/LIVE/Codeunit/Channels</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Channels_Channels</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://10.1.2.12/iProfits2.GatewayService/ProfitsExtGateway.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Intrasoft\</RelPath>
+      <UpdateFromURL>https://10.1.2.12/iProfits2.GatewayService/ProfitsExtGateway.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Intrasoft_ProfitsExtGateway</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520V/Page/PropertySales">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\crm_PropertySales\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520V/Page/PropertySales</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_crm_PropertySales_PropertySales_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/MemberCredits">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\MemberCredits\</RelPath>
+      <UpdateFromURL>http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%2520VI/Page/MemberCredits</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_MemberCredits_MemberCredits_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.1.23:12/Webservice1.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Crmservice\</RelPath>
+      <UpdateFromURL>http://10.1.1.23:12/Webservice1.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SyncData_Crm_WebService1</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Connected Services\Erp\ConnectedService.json" />
+    <None Include="Connected Services\Investment\ConnectedService.json" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\AccountList\Accountlist.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AccountList\Accountlist.wsdl" />
+    <None Include="Web References\AccountList\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Channels\Channels.wsdl" />
+    <None Include="Web References\Channels\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Crmservice\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Crmservice\results.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Crmservice\WebService1.wsdl" />
+    <None Include="Web References\crm_Contacts\Contact.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\crm_Contacts\Contact.wsdl" />
+    <None Include="Web References\crm_Contacts\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\crm_PropertySales\PropertySales.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\crm_PropertySales\PropertySales.wsdl" />
+    <None Include="Web References\crm_PropertySales\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Employee_Attachments\Employee_Attachements.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Employee_Attachments\Employee_Attachements.wsdl" />
+    <None Include="Web References\Employee_Attachments\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ErpVendor\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ErpVendor\Vendors.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ErpVendor\Vendors.wsdl" />
+    <None Include="Web References\Erp_Payroll_Profits\Payroll_Profits.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Erp_Payroll_Profits\Payroll_Profits.wsdl" />
+    <None Include="Web References\Erp_Payroll_Profits\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Financial_Investments_Channel\Financial_Investments_Channel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Financial_Investments_Channel\Financial_Investments_Channel.wsdl" />
+    <None Include="Web References\Financial_Investments_Channel\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\GL_Account\GL_Account.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\GL_Account\GL_Account.wsdl" />
+    <None Include="Web References\GL_Account\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Imprest_Profits\Imprest_Profits.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Imprest_Profits\Imprest_Profits.wsdl" />
+    <None Include="Web References\Imprest_Profits\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Intrasoft\A1903V_IAgrMntAgreementGuarValSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1904VAgreementLimitManipulationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1905V_BlockUnblockAgreementLimitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1906V_CustomersAgreementsInquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1907V_BranchAgreementsInquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1908V_AgreementLimitHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1909V_AgreementAccountsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1909V_CreditLineAccountsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1910VCustomerCreditLimitManipulationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1911V_CreditLimitsUsageHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1912V_AgreementAmandmentsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1913V_UpdateAgreementDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1916V_ChangeMainDebtorExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1950V_GroupLimitMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\A1954VLimitsInformationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\AccountRepaymentScheduleExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Adds01AdditionalTransactionPostingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\ADDS01_AdditionalTransactionPostingForWebExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\ADDS03_CancelAdditionalTransactionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\ADDS53_GeneralLedgerMonitoringOfAccountsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\AgreementBeneficiariesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\AgreementGuarantorsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\AgreementMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\B1276V_IndexOfBudgetLinesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\B1297V_MaintenanceOfBudgetCommitmentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BalanceInquiryMiniStatementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BDO22V_LoadingBudgetFromExcelFileOrDeleteDataExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BDO23V_BudgetMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BDO25V_BudgetExportToExcelFileExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BDO26V_ExportCriteriaExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1601V_BillRegisterExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1604V_MatureChequesManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1607V_BillDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1612V_IssuersDisperseExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1616V_BillReturnToCustomerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1617V_ChequeDispatchToBackOfficerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1618V_BillPerTypeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1621V_ReceivalOfChequesFromBackOfficerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1623V_DispachedChequesToClearingOfficeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1625V_RegisterCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1629V_CancelChequeStateExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1631V_IncomingManualChequeClearingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1632V_RegisterListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1634VDhsseclearingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1635V_BillExtraitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1643V_IncomingManualClearingChequesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1690V_BillSegmentDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1696V_IssuerBasicDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1697V_IssuerListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BI1698V_BillIssuerValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BillsChequeUploadExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BillsReverseChequePurchaseExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP001VBulkloadinstructionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP002V_ModifyInstructionsDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP003VBulkprocessinstructionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP004V_BulkFilenameListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP005V_TemplateMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP006V_TemplateDetailMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP008V_ExecutionInstructionsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP009V_MandateApplicationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP010V_MandateDetailsQueryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP011V_BankingManagementAccessibilityExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP012V_PaymentOrdersMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\BIP013V_ProfileLimitMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\C2599V_CreatePendingChargesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CDC0101V_SalesPersonExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CDC0102V_SalesChannelManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CDC0103V_SuspectCustomerMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CDC0104V_DisputesIndexForSuspectCustomerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CDC0107V_ProhibitedCountryMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CDC0110V_AccountGroupingMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CDC0112V_DynamicFormQueryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CDC0113V_MandateInformationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CdcMntUpdateCustomerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\ChequeBookRequestExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI3496V_EmailSmsNewUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI3496V_GetUserInfoExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI3496V_ProfitsOtpRequestExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI3496V_ProfitsOtpUserProcessExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI3496V_ProfitsOtpValidateExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI3496V_UsersListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI4000V_GetUnitsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI4050V_GetBankParamsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CI4100V_GetBanksListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0005V_CustomerDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0005V_CustomerDetailsForWebExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0008V_ManageMessageForCustomerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0008V_MessageRequestExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0009V_CustomerAccountMessagesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0013VThirdPartyReferenceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0176V_NewAccountOpeningProcessRemoveExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0176V_PendingApplicationsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0189V_AccountCustomerGroupsManagementMandatesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0189V_DefineMandatesForAccountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0192V_BiometricsApprovalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0193V_ExternalCardActivationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CIA0194V_CustomerTransactionsLimitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Cis0001VSuspisiousCustomerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3601VNewCardApplicationManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3601V_NewCardApplicationManagement_V2Export.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3602V_CardManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3603VCustomerCardApplicationsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3603V_CustomerCardApplicationsList_V2Export.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3604VCustomerCardsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3604V_CardListWebSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3605VCustomerCardStatementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3607V_CardUpdateHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3608V_LimitGroupManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3609V_LimitManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3610V_LimitsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3611V_LimitGroupsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3612V_LimitInGroupsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3613V_AllowedProfilePerLimitGroupExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3614V_PrintCardExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3616V_CardOrderingManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CMS3618V_CardOrderInventoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO0180V_BranchPortofolioExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO0183V_CustomerSearchExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO0184V_CustomerPortfolioListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO0185V_TransferCustomersToOtherPortfolioExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO0186V_ListBranchPortofolioExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3800V_SharesMainFinancialTransactionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3801V_MemberRegistrationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3802V_PurchaseApplicationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3803V_PurchaseApplicationPaymentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3804V_MembersSharesMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3806V_ApplicationTransferExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3807V_DistributionApplicationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3808V_AcquisitionApplicationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3809V_BlockingApplicationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3810V_UnblockApplicationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3811V_ApplicationInquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3812V_ShareCancelExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3813V_ApplicationClosureExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3814V_CancelPurchasePaymentDeletetionSharesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3815V_PurchaseRateTableMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3816V_DistributionPriceListMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3817V_AccountingValueMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3818V_MaintenanceSurplusPriceListDeletionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3819V_CancellationSpreadMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3820V_CooperativeSharesAndShareSelectionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3824V_MemberHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3825V_SystemParametersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3826V_DividentCalculationSetupExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CO3827V_MemberContributionsMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\COG007V_IpsCreditQueryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\COG009V_IpsFrtBankBicListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CollateralFinancialForAgreementAccountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CorporateCustomerMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CP2128V_DiasDebitRejectionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CP2129V_RegistrationFeesDisposalStatusExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CP2169V_DiasDebitPositionInfoExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CustomerAddressMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\CustomerPositionAndDrawdownExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0301VDepositAccountInsertExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0303VDepositAccountUpdateExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0303V_DepositAccountMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0304V_RepresentativeMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0305V_AccountHolderAdditionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0306V_BeneficiaryDisplayExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0308V_PassbookMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0309V_PassbookMaintenance2Export.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0310V_TransactionSpecialAgreementMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0311V_SpecialAgreementListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0313V_ChequebookIssuanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0314V_ChequebookCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0316V_CashChequeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0320V_ReceiptForTaxOnInterestExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0321VBlockAmountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0322V_ForecastCashWithdrawalAndChequePaymentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0323V_HolderRemovalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0325V_AuthorizeBeneficiaryAccountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0328V_BiometricsServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0328V_CashChequeWithdrawalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0333VUnBlockAmountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0334V_ForecastCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0336VMultilineReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0339V_BeneficiariesListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0341V_AutomaticTermDepositCreationFromFileExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0343V_TermDepositModificationOfInterestPaymentInstructionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0347V_CashAndChequeDepositInvestmentReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0350AV_FirstDemandExtraitForToraWalletExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0352V_DepositAccountExpectedLiquidityExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0353V_ChequebookChequeListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0354V_DepositAccountChequesEnquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0355V_DepositAccountBlockTransactionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0356V_UnitChequesListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0357VDepositsTermDepositStatementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0358V_TermDepositMaturityListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0368V_WithdrawalUnderNotificationMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0371V_ChequesTotalSummaryPerUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0372V_ChequesTotalSummaryPerBankExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0373V_UnitChequesSummaryPerUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0374V_PaidHouseChequeSummaryPerUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0381V_TermDepositReversalsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0384V_DepAdditionalInfoPrintExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0387V_TermDepositInterestMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0391V_TeamDepositsSpecialRateSummaryPerDealerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0393V_TermDepositsUnderRenewalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0394V_DeclarationOfOverdrawnAccountSummaryPerUnitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0395V_IssuedChequebookOrderMaintenanceSummaryPerUnitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0396V_HiddenAccountsSummaryPerUnitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0397V_BouncedChequesManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0398V_HolderRepresentativesSignatureMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D0399V_FinancialTransactionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D03A1V_SearchGroupedAccountsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D03A2V_HistoricChangesOfTheAccountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D03A4V_InterestResultsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D1644V_ReprintOfDispatchReceiveRegistersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D3315V_ChequesDeletionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D3316V_PendingFeesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D3362V_ChequeCarneDeletionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D3376V_DepositFromEnvelopeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D3481V_HistoricalInterestRateSpreadsPerAccExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D3483V_ChequesExtraitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D3484V_UnconditionalChequeStatusMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\D3491V_OverdraftAccExpReportExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DA0101V_ChangeDepositAccountProductExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DA0103V_DepositAccountBalanceAndAccrualsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DealerSpecialRatesMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DepositAccountRetrieveExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DepositFirstDemandWithdrawExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DES003V_CollaborationBankListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DGR0001V_UserTransactionDiaryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DOC0001V_ImageScanningExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DOC0002V_InsertDocDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DPC05V_MulticurrencyReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DPC06V_CustomerExtraitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DPC08V_CustomerMulticurrencyTransactionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DPC09V_DepositAccountFinancialCompositeTransactionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DPQ02V_DepositAccountAdditionalInfoExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DPQ04V_CheckChequeDigitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DPRNDV_PrintDepositAccountAfterCreationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DT0101V_TransferAccountToOtherUnitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF071V_OrderManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF072V_DiasTransferCntryBnkClrSysListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF078V_DiasTransferBanksExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF079V_IpsListInstrumentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF084V_AnswerToOrderRecallOrRequestForCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF088V_EftOrdersDocumentsManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF089V_VirtualRecallServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF090V_IpsGetProfitsParameterExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\DTF099V_ElectronicFundsTransferExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\ExposeAccountMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\EXT8102VExternalAccountMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\EXT8103V_RegistrationValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS01_ExchangeCalculatorExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS01_FundsTransferInHouseExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS01_FundsTransferWithExchangeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS03_ExchangeRatesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS04_FixingRateMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS05_RateTableRulesMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS13_DealerSpecialRatesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS23_OutgoingOrderIssuanceCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS32_SpecialRatesPenaltiesDisplayExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS33_CustomerSpecialAgreementDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXS54_TreasuryCancellationsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXSL1_AccountDesignationListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXSL2_AccountMandateListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FEXSV1_BankersChequeAccountListOfIssuanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTC0001V_InterbranchCashShipmentReceivingBranchChangeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS00_FundsTransferFinancialServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS01_FtrTrnInterbankOrderSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS10_StatusMaintenanceOfDomesticForeignBankDraftDrawnOnUsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS18_BlackListedChequesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS28_OutgoingInterbankPaymentOrdersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS29_IncomingInterbranchInterbankPaymentOrdersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS30_QryOutgoingBankDraftsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS31_FcLcBankDraftsDrawnOnUsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS35_QueryOfChequesPurchasedExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS39_LostOrStolenOtherBankChequesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS40_InterbankPaymentOrderReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS42_DomesticAndForeignBankDraftsDrawnOnUsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS50_ChequesSendingToClearingCenterExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS51_ChequesToClearingCenterAndDeliveryFromBranchExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS52_ChequesDeliveryFromBranchExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS53_ChequeStatusMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS54_MoneyAndChequesDispatchExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS57_MoneyDispachedAndRecievedByOtherUnitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS70_QryBillsPayableExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS77_CashShipmentsQueryInterbranchAndInterbankExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRS96_CheckCustomerServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRSC1_LocalDraftBanksParametersAndAccountsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRSC2_FxftParametersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\FTRSC2_InterbankOutgoingOrderValueDateExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0501V_GLAccountValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0502V_UnitAccountingEntriesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0505V_UnitAccountBalancesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0506V_UnitAccountBalancesPerPeriodExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0507V_UnitStatisticalAccountBalancesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0508V_BankAccountBalancesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0516V_JournalStatementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0517V_DetailedUnitAccountBalancesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0518V_SystemsAnalyticalJournalPerTransactionDateExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0519V_GlEntryAnalysisExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0520V_EntryDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0529V_ApprovalRejectionExecutionOfFilesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0533V_AccountingErrorsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0536V_SystemsAggrementWithGlExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0562V_GlDiarizedEntriesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0563V_ExternalSystemTransactionsFileLoadingDeletionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0564V_CustomerAccountBalancesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0565V_GlobalSuspenseGlInvestigationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0566V_DailyTrnsCheckingReportExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0567V_InterbranchGlAccountInvestigationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0568V_InvestigationOfBankNotesFxPositionGlsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0569V_PrepaymentsFileLoadingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0583V_ChangeAccountingRuleInNonAccountedRecordsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\G0598VManageGlAccountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GetAuthorizedExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GetBulkMessageAlertStatusExtExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GetImageExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GetMessageAlertStatusExtExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GL522V_AccountsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GL530V_GlgAccountListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GL530V_GlgAccountListForWebExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GL575V_GlgAccountValidateExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\GL575V_GlgAccountValidateForWebExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2511V_ManagementOfAssetCategoriesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2512V_TptLstAssetCategorySrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2513V_ValidateAssetCategorySrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2514V_ManagementOfAssetRegistryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2515V_LstAssetRegistryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2516V_ValidateAssetRegistryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2517V_ManagementOfDevelopmentLawsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2520V_AssetTransactionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2521V_ManagementOfAssetExtraDepreciationsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2524V_ManagementOfAssetParametersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2525V_ManagementAssetTransactionCodesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2526V_TrialBalancesPrintingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2527V_AssetTransactionsAccountingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2528V_AssetStatementDisplayExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2529V_AssetMonitoringDisplayExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2530V_ManagementOfAssetStatusesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2531V_AssetsStatusListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2533V_ManagementOfAssetPercentageReevaluationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2534V_AssetParametersPrintingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2535V_AssetRegistryPrintingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H2536V_AssetMovementsPrintingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H4438V_ApplicationManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\H4490V_LeaseApplicationListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0103V_IndividualAdditionalDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0104V_CorporationAdditionalDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0105V_LoanCustomerDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0107V_CustomerGroupExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0108V_GroupMembersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0109V_CisSignatureMntSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0112V_SpecialAgreementMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0113V_SpecialAgreementsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0114V_CorrespondentMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0117VCustomersOtherIdExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0122V_CustomerDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0122V_CustomerValidationForWebExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0124V_RelationshipTypeMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0128VCustomerRelationshipListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0128V_CustomerRelationshipOtherExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0130VCustomerCategoriesListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0131V_CustomerContactsMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0133VCustomersOtherAfmExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0135VCardMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0154V_InteractiveWebPoscustomerPositionAndDrawdownBridgeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0154V_InteractiveWebPoscustomerPositionFinalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0158VDrawdownRequestMaintenaceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0160V_CustomerDocumentManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0161V_ConfirmCustomerInformationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0166V_RecordRejectedByTeiresiasForConfirmationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0169V_TransferCustomerToOtherBranchExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0170V_TransferHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0172VProfitabilityExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0175V_CisWebLstCustomerSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0176V_CheckDigitParameterValueExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0176V_CustomerRecogniseServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0177V_NonProfitsAccountsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0180V_AddressesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I0185V_SearchCustDepAccountMobileExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I5561V_ItemManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I5562V_ItemListSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I5564V_ItemBarcodeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I5565V_TaxTypesAndFactorsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I5566V_VatSearchExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I5570V_ProjectManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I5571V_ProjectListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\I5573V_ManagementOfSuppliersPaymentMethodExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\IndividualCustomerMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\IW002V_ApprovalOfPendingRiskAnalysisRequestExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2107V_CpAgreementDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2111V_AutoPaymentsApplicationsBrowseExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2112V_OrganizationFileProcessingResultsInquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2115V_ThirdPartyPaymentsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2117V_ThirdPartyCollectionReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2122V_CashAdvanceOnLineTransactionInquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2150V_PaymentDetailsValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2155V_PaymentTransactionPostingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2194V_OnlineCollectionsLinesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\J2195V_ThirdPartyOnLineCollectionStatementInquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\JL216V_CollectionPaymentAgreementsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\JV214V_ThirdPartyAgreementValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\JV216V_AgreementDetailsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0401V_LnsMntAccountOpening2Export.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0402V_SpecialAgreementsMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0403V_AccountMaintenanceOfUnevenInstallmentsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0406V_CustomerOutstandingRequestsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0407VLoanAccountExtraitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0407V_LoanAccountExtraitForWebExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0408V_AccountRequestsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0410V_AccountHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0413V_AccountInterestSpreadHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0414V_LoanBalancesPerValueDateExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0418V_LoanInterestCalculationForecastExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0419V_DocumentMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0431V_LoanAccountCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0434V_LoanAccountAutoCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0437VLoanAccountStatementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0440V_BranchClaimNotPaidExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0440V_LoanStandingOrderExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0441V_AccountDetailsChangeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0446V_AccountProductChangeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0447V_AccountProductChangeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0448V_AccountProductChangeCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0449VDebtManagementExtraExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0453V_ProductIntRateListPerCustomerCategoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0455V_ContractTerminationLetterExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0460V_ContractTerminationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0463V_InterestDetailsChangeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0469V_InstantLoansExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0470V_AverageAccountAccountingValeurBalancesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0471V_AccountInterestMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0472V_HistoricalChangesPerformedOnLoanAccountsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0477V_ReprintVoucherExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0478V_InterestResultsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0478V_ProductClassificationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0479V_ShowAccountRequestSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0482V_BlockUnblockExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0489V_SuccessfulTransactionFinancialPrintoutTextVoucherExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0492V_LeasePaymentAndPayoffExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0493V_ComboPaymentCapitalizationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0494VMediatorsMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0496V_TransactionAmountSpecificationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0497VLoanForecastRedemptionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0498V_LoanAccountPaymentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0499V_LoansFinancialServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0701VGetBankParametersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0705V_LoginUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0716V_UserPasswordChangeSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0719V_LoginUserGetEncryptedPasswordExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0723V_LogoutUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0723V_WProfitsTellerLogoffSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0733V_ProFastTellerMenuSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0734V_UserFavoriteManageServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\L0794V_WProfitsTellerLoginExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\LettersOfCreditRetrieveExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\LettersOfGuaranteeRetrieveExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\LIN0490V_DealTicketCreationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Lna0405VSaveRepScenarioExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\LNV01V_ManagementOfAmortizedLoanDurationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\LoanAccountMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2002V_BranchCollateralsInquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2003VCustomerCollateralsQueryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2004VAccountCollateralsQueryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2005V_BranchCollateralExpiryListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Mc2006VPropertyManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2007VCollateralListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2008VGenericCollateralExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2009VAdditionalCollateralDetailInformationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Mc2019VPropertyListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2020V_CollateralLimitHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2021VMortgagePrenotationForRealEstatePropertyExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2023VMortgagePrenotationListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2024VCollateralListPerCollateralTypeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2024V_RegistryInterfaceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2025V_ShipRegistryMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2027VShipMortgageExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2028VShipMortgageListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MC2029VCollateralPfgListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Mc2032VPropertyValuerManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\MessageAlertXmlInputExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0801V_UserTotalsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0802V_UnitCloseExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0803V_TransactionsWithOtherUnitsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0804V_UnitTotalsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0808V_OpenUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0809V_CloseUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0810V_BanknotesTransferReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0811V_InsertManualTotalsReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0812V_UserTotalsChequesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0813V_ConnectDisconnectUserWithCashTillExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0817V_LimitsPerUnitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0820V_UnitOpenExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0821V_AnalysisPerUserExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0822V_AnalysisPerCurrencyListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0823V_UnitSummaryAnalysisExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0824V_TellerSummaryAnalysisExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0825V_TotalsPerSystemExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0826V_VaultListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0827V_TransactionsFromOtherUnitsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0830V_BanknotesTransferExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0831VStrongRoomVaultManipulationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0840V_BanknotesReceivalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0850V_PendingCashShipmentsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0860V_InsertManualTotalsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0862V_CashDenominationAnalysisExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0864V_UserCashLimitsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0866V_TransactionInformationRetrievalUsingTunOrReferenceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0870V_UserForceClosingByHeadquartersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0878V_UserTransactionDiaryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0879V_TotalsPerSystemExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0880V_UnitForceClosingByHeadquartersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0881V_BulkTellerCashTransferExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\P0890V_VaultChargeDischargeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PAL42V_BankLimitsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PAL43V_CountryLimitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PAL44V_DealerLimitsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PAR05V_ParameterTypesAndValuesManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PAR06V_ParameterValuesManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PAR20V_GenericDetailCollectionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PAR29V_SynchronizeBanksExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PFG001V_DynamicFormSetupExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PFG002V_ListSelectionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PFG002V_ParametricFormListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PFG004VDynamicCollateralExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PFG004VFormFieldListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PFG005V_DynamicFormsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PIGDOC1V_DocumentSaveExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PIGDOC2V_DocumentManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\POSS54_TransactionalPositionOfBankExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\POSS55_PosRecAnalysisExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\ProfitsExtGateway.wsdl" />
+    <None Include="Web References\Intrasoft\Prt022VValidationAccountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT022V_IprofitsAccCustomersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT027V_SuspiciousWalkingCustomerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT027V_SuspiciousWalkingCustomerForWebExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT028V_AccountSelectionExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT094V_IbanToProfitsAccountExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT098V_MultiProfitsAccountValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT098V_SingleProfitsAccountValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Prt099VCustomerAccountsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT099V_WebCustomerAccountsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Prt501VExternalTaskCheckExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT501V_CheckIdGetFosaSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Prt502vSaveScenarioExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\PRT503V_CustScenariosExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2601V_RetrieveMoneyMarketDealTicketsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2602V_RetrieveForeignExchangeDealTicketsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2603V_RetrieveTotalPositionDealTicketsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2604V_RetrieveMaturityOnCorrespondentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2605V_TotalPositionOfForeignCurrencyExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2606V_MoneyMarketDealExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2607V_ForeignExchangeDealExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2610V_DealTicketCreationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2610V_FxWebTrsDealTicketExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2612V_DealTicketListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2616V_BuySaleOfFcLcExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2617V_AgreementOnNostroCorrespondentExcelInputExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2618V_AgreementOnNostroCorrespondentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2621V_RetrieveSecuritiesLimitsMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2629V_MaintenanceOfSsiExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Q2699V_FxTrsParametersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\R0001V_WsiChannelStatsSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\R0224VL_AccountingRuleExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\R0236VL_RepaymentScheduleScenarioExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\R0249VL_ControlAccountDynamicSetupExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\R0260V_InterestRatesAndExecutionDatesChangeForBosaProductsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\R0261V_PrdMntAccRuleTunPrdedictSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\R0297V_DistributionChannelPermissionsMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\ReconciliationWithExternalSystemsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Intrasoft\RepaymentScheduleScenarioExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RI200VI_ListProductExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RI201VI_ListProductCurrencyExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RI215VL_LoanInterestExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RL201VL_PrdLstCurrencySrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RL207VL_ProductValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RL214VL_ProductsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RL225VL_TransactionValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RL226VL_TransactionsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\RL256VL_ProductListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0702VProfitsBankEmployeeManipulationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0703V_UnitMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0705VProfitsUserMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0709V_ProfileTransactionExecutionSetupExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0713V_AuthorizationRequestManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0713V_WebPendingAuthorizationRequestsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0716V_AuthorizationServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0722V_SecLstLoggedUsersSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0725V_AuthorizationRequestsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0732V_TransactionLinkServerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0797V_AuthorizationWhenBiometricsFailExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S0799V_LockExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S5520V_ManagementOfSupplierTransactionCodeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S5521V_ManagementOfSuppliersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S5522V_SupplierTransactionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S5523V_LstSuppliersExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S5524V_SuppliersPurchacsesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S5525V_SupplierStatementDisplayExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S5526V_PaymentOrdersManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\S5527V_MonitoringOfSuppliersPaymentsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SCN001V_ExternalImageManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SCN001V_ImageManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SearchCustomerExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SecuritiesAccountRetrieveExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SendBulkMessageAlertExtExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SendMessageAlertExtExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SL702VProfitsBankEmployeeListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SL703V_UnitListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SL705VProfitsUserListSearchExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SL713V_PendingAuthorizationRequestsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SL730V_SecLstUsersCashTillSrvExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SL793V_BankEmployeeValidationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SL797V_UserSecurityRightExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\StandbyCollectionPaymentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\StatementRequestExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\StopChequeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWG020V_ParametricFieldsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3501V_SearchSwiftCodeCriteriaExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3501V_SwiftAllianceMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3501V_SwiftCodeListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3501_SwiftItemListsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3511V_SwiftMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3530V_MntMessagesForWebExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3531V_FundsTransferOrderConfirmationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3532V_SendMessagesToSwiftAllianceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3533V_SwiftOutgoingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3541V_SwiftIncomingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3550V_CustomersWireTransferConfirmationAcquireSendersReferenceNumberExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT3550V_SetSwiftTagsFromOutgoingInterbankOrderExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\SWT452V_ConfirmSwiftExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1402V_ActualDocumentMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1404V_SpecialAgreementsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1405V_MaintenanceOfSwiftExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1407V_SpecialAgreementsLgProductsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1410V_LgIssuanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1413V_ReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1422V_AccountHistoryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1423VLetterOfGuaranteeStatementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1430V_AccountRequestsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1431V_RequestsOwedExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1432V_LgAccountQueryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1435V_CommissionForecastCustomerProfitabilityLgExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1436V_NotificationOfCommissionDebitedExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1437V_LgPermittedLimitsMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1461VLgGuarantorMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1462VlgBeneficiariesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1477_GetTheVoucherExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T1479V_CustomerPositionLettersOfGuaranteeExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T2102V_StandingOrderTransferExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T2103V_StandingOrderTransferListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T2104V_StandingOrdersInquiryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T2151VInsuranceCommitmentMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T2152VInsuranceCommitmentForecastExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T2160VInsuranceApplicationListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T2190VInsurancePolicyStatementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\T2199V_ParametersForStandingOrderExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TermDepositSpecialRatesMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3703V_DocumentsPresentedMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3704V_ImportLcExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3706V_IssuanceOfCertificationNotificationOfShippingExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3709V_SettlementsMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3711V_SettlementsAmendmentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3712V_LcIssueExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3713V_SettlementsPaymentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3714V_LcAmendmentExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3718VLc_TfStatementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3719V_LetterOfCreditRequestsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3722V_TradeFinanceCancellationExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3723V_SettlementPaymentMaturityListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TF3733V_ImportLcMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\ThirdPartyResponseExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TradeFinanceAccountRetrieveExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TRM600V_DealTicketInterbankRepoReverseRepoExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TRS01V_MainFinancialTreasuryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TRS98V_SecuritiesReversalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TRY01V_MaintenanceOfExchangeRatesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TRY02V_MaintenanceOfBondsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TRY03V_BondPositionMonitoringExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\TRY04V_SecuritiesDealsListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\UDF001V_CustomerFormListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\UDF001V_DynamicCustomerFormListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\UDF002VDynamicFieldsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\UDF003V_AttachmentMaintenanceExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\UDF004V_GetUserFieldValueExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\UDF007V_ListOfCustomerStatementsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2201V_SafeDepositBoxRegistryManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2202V_SafeDepositBoxRentalManagementExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2203V_SafeDepositBoxBeneficiariesExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2221V_SafeDepositBoxUsageExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2230VSafeDepositExtraitExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2231V_CustomerSafeDepositBoxRentalsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2232VSafeDepositBoxesListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2233V_BranchSafeDepositRentalsDisplayExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2235V_BranchSafeDepositRentalUsageExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2298V_SafeDepositBoxRentalRenewalExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X2299V_FinancialTransactionsExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X3236V_PaidRentalFeesQueryExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Intrasoft\X3237V_SdbMaturityListExport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Links\Links.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Links\Links.wsdl" />
+    <None Include="Web References\Links\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Loans\Loans.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Loans\Loans.wsdl" />
+    <None Include="Web References\Loans\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\MemberCredits\MemberCredits.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MemberCredits\MemberCredits.wsdl" />
+    <None Include="Web References\MemberCredits\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Members\Member_Channels.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Members\Member_Channels.wsdl" />
+    <None Include="Web References\Members\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Member_withdrawal\Member_withdrawal.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Member_withdrawal\Member_withdrawal.wsdl" />
+    <None Include="Web References\Member_withdrawal\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Projects\Projects.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Projects\Projects.wsdl" />
+    <None Include="Web References\Projects\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Project_Proposals\Project_Proposals.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Project_Proposals\Project_Proposals.wsdl" />
+    <None Include="Web References\Project_Proposals\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VendorDocuments\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VendorDocuments\Vendor_Attachments.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\VendorDocuments\Vendor_Attachments.wsdl" />
+    <None Include="Web References\Withdrawals\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Withdrawals\Withdrawals.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Withdrawals\Withdrawals.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging 4\Logging 4.0.csproj">
+      <Project>{1c78e6b7-870d-41d4-8234-fb43fe8b16b9}</Project>
+      <Name>Logging 4.0</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

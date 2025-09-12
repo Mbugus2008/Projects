@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="make_payment">
+        <item value="Partial Payment">Partial Payment</item>
+        <item value="Full Payment">Full Payment</item>
+    </string-array>
+    <string-array name="loan_statuses">
+        <item value="Any Status">Any Status</item>
+        <item value="Application">Application</item>
+        <item value="Appraisal">Appraisal</item>
+        <item value="Rejected">Rejected</item>
+        <item value="Approved">Approved</item>
+        <item value="Issued">Issued</item>
+    </string-array>
+    <string-array name="account_types">
+        <item value="University Staff">University Staff</item>
+        <item value="Non University Staff">Non University Staff</item>
+    </string-array>
+    <string-array name="counties">
+        <item value="Nairobi">Nairobi</item>
+        <item value="Mombasa">Mombasa</item>
+        <item value="Kwale">Kwale</item>
+        <item value="Kilifi">Kilifi</item>
+        <item value="Tana River">Tana River</item>
+        <item value="Lamu">Lamu</item>
+        <item value="Taita Taveta">Taita Taveta</item>
+        <item value="Garissa">Garissa</item>
+        <item value="Wajir">Wajir</item>
+        <item value="Mandera">Mandera</item>
+        <item value="Marsabit">Marsabit</item>
+        <item value="Isiolo">Isiolo</item>
+        <item value="Meru">Meru</item>
+        <item value="Tharaka- Nithi">Tharaka- Nithi</item>
+        <item value="Embu">Embu</item>
+        <item value="Kitui">Kitui</item>
+        <item value="Machakos">Machakos</item>
+        <item value="Makueni">Makueni</item>
+        <item value="Nyandarua">Nyandarua</item>
+        <item value="Nyeri">Nyeri</item>
+        <item value="Kirinyaga">Kirinyaga</item>
+        <item value="Muranga">Muranga</item>
+        <item value="Kiambu">Kiambu</item>
+        <item value="Turkana">Turkana</item>
+        <item value="West Pokot">West Pokot</item>
+        <item value="Samburu">Samburu</item>
+        <item value="Transnzoia">Transnzoia</item>
+        <item value="Uasin Gishu">Uasin Gishu</item>
+        <item value="Elgeyo Marakwet">Elgeyo Marakwet</item>
+        <item value="Nandi">Nandi</item>
+        <item value="Baringo">Baringo</item>
+        <item value="Laikipia">Laikipia</item>
+        <item value="Nakuru">Nakuru</item>
+        <item value="Narok">Narok</item>
+        <item value="Kajiado">Kajiado</item>
+        <item value="Kericho">Kericho</item>
+        <item value="Bomet">Bomet</item>
+        <item value="Kakamega">Kakamega</item>
+        <item value="Vihiga">Vihiga</item>
+        <item value="Bungoma">Bungoma</item>
+        <item value="Busia">Busia</item>
+        <item value="Siaya">Siaya</item>
+        <item value="Homabay">Homabay</item>
+        <item value="Migori">Migori</item>
+        <item value="Kisii">Kisii</item>
+        <item value="Nyamira">Nyamira</item>
+
+    </string-array>
+
+
+</resources>

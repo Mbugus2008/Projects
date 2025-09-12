@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class="Shareitem">
+        <variable
+            name="shares"
+            type="com.trimline.investments.Shares" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/layoutborder"
+    >
+    <TextView
+        android:id="@+id/documetno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/trocchi"
+        android:gravity="left"
+        android:hint="Share"
+        android:text="@={shares.Document_No}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        android:id="@+id/Accounttype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/trocchi"
+        android:hint="Description"
+        android:gravity="center"
+        android:text="@={shares.Account_Type}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/sharetofloat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/documetno" />
+    <TextView
+        android:id="@+id/sharetofloat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:hint="Shares"
+        android:layout_marginEnd="10dp"
+        android:text="@={``+ shares.Shares_to_Float}"
+        app:layout_constraintEnd_toStartOf="@id/bid"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+<EditText
+    android:layout_width="50dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/bid"
+    android:hint="Bid"
+    android:inputType="number"
+    app:layout_constraintEnd_toStartOf="@id/buy"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+
+    />
+    <Button
+        android:id="@+id/buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+      android:background="@drawable/layoutborder"
+        android:text="Buy"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"  android:layout_width="match_parent"
+    tools:ignore="MissingConstraints"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:src="@drawable/abc_vector_test"
+        android:id="@+id/add"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        style="@style/receiptline_item"
+        android:id="@+id/receipt_item"
+        android:layout_width="100dp"
+        android:text="Item"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        style="@style/receiptline_item"
+        android:layout_width="100dp"
+        android:id="@+id/item_description"
+        android:text="Description"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/receipt_item" />
+    <TextView
+        style="@style/receiptline_item"
+        android:id="@+id/receipt_qty"
+        android:text="Qty"
+        app:layout_constraintStart_toEndOf="@id/item_description"
+        />
+    <TextView
+        style="@style/receiptline_item"
+        android:id="@+id/receipt_Unit_Price"
+        android:text="Price"
+        app:layout_constraintStart_toEndOf="@id/receipt_qty"
+        />
+    <TextView
+        style="@style/receiptline_item"
+        android:id="@+id/receipt_Line_total"
+        android:text="Total"
+        app:layout_constraintStart_toEndOf="@id/receipt_Unit_Price"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

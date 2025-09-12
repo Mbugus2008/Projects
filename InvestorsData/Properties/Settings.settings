@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="InvestorsData.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="InvestorsData_members_Members2_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Members2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

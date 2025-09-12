@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingConstraints" >
+    <data class="Allocations_line_binding" >
+        <variable
+            name="all"
+            type="com.trimline.pawdep.Allocation_Line" />
+        <import type="com.trimline.pawdep.Converters"/>
+        <import type="com.trimline.pawdep.BindingUtils"/>
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+    <TextView
+        style="@style/all_line"
+        android:layout_marginStart="50dp"
+        android:id="@+id/all_no"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@{all.No}"
+         />
+    <Spinner
+        style="@style/all_line"
+        android:id="@+id/all_Transtype"
+        app:layout_constraintStart_toEndOf="@id/all_no"
+
+        android:selectedItemPosition="@={BindingUtils.transtype(all.Transaction_Type)}"
+        android:text="Trans Type"
+        />
+    <Spinner
+        style="@style/all_line"
+        android:id="@+id/all_accounttype"
+        android:selectedItemPosition="@={BindingUtils.accounttype(all.Account_Type)}"
+        app:layout_constraintStart_toEndOf="@id/all_Transtype"
+        android:text="Account Type"
+        />
+    <TextView
+        style="@style/all_line"
+        android:id="@+id/all_accountno"
+        app:layout_constraintStart_toEndOf="@id/all_accounttype"
+        android:text="@={all.Account_No}"
+        />
+    <TextView
+        style="@style/all_line"
+        android:id="@+id/all_accountName"
+        android:layout_width="200dp"
+        app:layout_constraintStart_toEndOf="@id/all_accountno"
+        android:text="@={all.Account_Name}"
+        />
+    <EditText
+        style="@style/all_line"
+        android:id="@+id/all_amount"
+        android:layout_width="80dp"
+        app:layout_constraintStart_toEndOf="@id/all_accountName"
+        android:hint="0.00"
+        android:inputType="numberDecimal"
+        android:text="@={``+ all.Amount}"
+        />
+    <TextView
+        style="@style/all_line"
+        android:id="@+id/all_interest"
+        android:layout_width="80dp"
+        app:layout_constraintStart_toEndOf="@id/all_amount"
+        android:text="@={``+ all.Interest_Amount}"
+        />
+    <TextView
+        style="@style/all_line"
+        android:id="@+id/all_principal"
+        android:layout_width="80dp"
+        app:layout_constraintStart_toEndOf="@id/all_interest"
+        android:text="@={`` + all.Principal_Repayment}"
+        />
+    <AutoCompleteTextView
+        style="@style/all_line"
+        android:id="@+id/all_loanno"
+        app:layout_constraintStart_toEndOf="@id/all_principal"
+        android:text="@={all.Loan_No}"
+        android:enabled="@{all.requireloan}"
+        android:completionThreshold="3"
+
+        />
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/deletered"
+        android:id="@+id/clear"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout></layout>

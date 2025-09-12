@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingConstraints" >
+    <data class="Agent" >
+        <variable
+            name="agent"
+            type="com.trimline.paul.metro.Agent" />
+        <import type="android.view.View"/>
+    </data>
+<RelativeLayout
+    android:id="@+id/activity_cashreceipt"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.trimline.paul.metro.cashreceipt">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:weightSum="10">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:layout_weight="10">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/recovery"
+                android:textSize="20dp"
+
+                android:text="Recovery"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="Recovery Date"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:layout_toRightOf="@id/recovery"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/recovery"
+                android:layout_alignBottom="@id/recovery"
+                android:id="@+id/recoverydate"
+
+              />
+            <include
+                android:visibility="visible"
+                android:id="@+id/seperator2"
+                layout="@layout/transactions"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recovery" />
+            <AutoCompleteTextView
+                android:id="@+id/memberno"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_below="@id/seperator2"
+                android:hint="ACC/Vehicle no"
+                android:inputType="number" />
+
+            <ImageButton
+                android:id="@+id/find"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/memberno"
+                android:layout_marginEnd="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginTop="20dp"
+                android:background="@null"
+                android:src="@drawable/search" />
+            <ImageButton
+                android:id="@+id/clear"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/memberno"
+
+                android:layout_marginTop="20dp"
+                android:scaleType="fitXY"
+                android:background="@null"
+                android:src="@drawable/deletered" />
+
+            <ProgressBar
+                android:id="@+id/findmember"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_toRightOf="@id/memberno"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/memberno"
+                android:layout_below="@id/clear"
+android:gravity="right"
+                android:justificationMode="inter_word"
+                android:maxHeight="200dp"
+                android:scrollbars="vertical"
+                android:fadeScrollbars="false"
+                android:text="A/C" />
+
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/memberno"
+                android:layout_below="@id/name"
+                android:gravity="right"
+                android:text="Account Name"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/LoanBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/id"
+                android:layout_alignLeft="@id/name"
+                android:gravity="right"
+                android:text="Loan balance" />
+            <TextView
+                android:id="@+id/Penalty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/name"
+                android:layout_below="@id/LoanBalance"
+                android:gravity="right"
+                android:text="Penalty" />
+            <TextView
+                android:id="@+id/operation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/name"
+                android:layout_below="@id/Penalty"
+                android:gravity="right"
+                android:text="Operation" />
+            <include
+                android:id="@+id/seperator"
+                layout="@layout/transactions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/operation" />
+
+            <Spinner
+                android:id="@+id/ttype"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/seperator"
+                android:spinnerMode="dropdown"
+
+                android:layout_marginTop="10dp">
+
+            </Spinner>
+            <Spinner
+                android:id="@+id/tvehicles"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/seperator"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/ttype">
+
+            </Spinner>
+
+            <Spinner
+                android:id="@+id/tloans"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/tvehicles"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/ttype" />
+
+            <EditText
+                android:id="@+id/texpense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvehicles"
+                android:gravity="center"
+                android:hint="Enter expense description here"
+                android:layout_marginTop="10dp"
+              />
+
+            <EditText
+                android:id="@+id/tamount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/seperator"
+                android:layout_marginRight="70dp"
+                android:hint="Amount"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/addtrans"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/seperator"
+                android:drawableLeft="@drawable/add"
+                android:text="Add" />
+
+            <include
+                android:id="@+id/seperator1"
+                layout="@layout/transactions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/texpense"
+                android:layout_marginTop="10dp" />
+
+            <ListView
+                android:id="@+id/ttrans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seperator1"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="horizontal"></ListView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/totalreceipt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Total"
+                android:textSize="30dp" />
+
+            <Button
+                android:id="@+id/postnew"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="30dp"
+                android:drawableLeft="@drawable/print"
+                android:text="  Print"
+                />
+            <Button
+                android:id="@+id/reprint"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:drawableLeft="@drawable/print"
+                android:drawableStart="@drawable/print"
+                android:text="Reprint"
+
+                />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>
+</layout>

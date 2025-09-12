@@ -1,0 +1,72 @@
+﻿@page "/"
+@page "/Clientlist"
+@using pulseem.Shared.Models
+@inject HttpClient Http
+@inject IJSRuntime js
+
+
+<h3>Clients</h3>
+
+<div class="form-group">
+    <a class="btn btn-success" href="Client/create"><i class="oi oi-plus"></i> Create New</a>
+</div>
+<br>
+@if (clients == null)
+{
+    <text>Loading...</text>
+}
+else if (clients.Length == 0)
+{
+    <text>No Records Found.</text>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>CellPhone</th>
+                <th>Email Status</th>
+                <th>Sms Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Clients cli in clients)
+            {
+                <tr>
+                    <td>@cli.Email</td>
+                    <td>@cli.Name</td>
+                    <td>@cli.CellPhone</td>
+                    <td>@cli.EmailStatus</td>
+                    <td>@cli.SmsStatus</td>
+                   
+                    <td>
+                        <a class="btn btn-success" href="Client/edit/@cli.Email">Edit</a>
+                        <button class="btn btn-danger" @onclick="@(() => Delete(cli.Email))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+
+    Clients[] clients { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("11");
+        clients = await Http.GetFromJsonAsync<Clients[]>("api/Client");
+        Console.WriteLine("2");
+    }
+    async Task Delete(string email)
+    {
+        var dev = clients.First(x => x.Email == email);
+        if (await js.InvokeAsync<bool>("confirm", $"Do you want to delete {dev.Name}'s ({dev.Email}) Record?"))
+        {
+            await Http.DeleteAsync($"api/Client/{email}");
+            await OnInitializedAsync();
+        }
+    }
+}

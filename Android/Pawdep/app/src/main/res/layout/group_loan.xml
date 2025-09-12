@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data class="Group_Loanissue">
+        <variable
+            name="grouploan"
+            type="com.trimline.pawdep.Group_Loan" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:scrollbars="horizontal"
+        android:background="@drawable/border"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/Loan_No"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Loan No"
+            android:dropDownWidth="500dp"
+            android:text="@={grouploan.Loan_No}"
+                 app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/PAWDEP_No"/>
+
+        <TextView
+            android:id="@+id/PAWDEP_No"
+            android:hint="PAWDEP No"
+            android:textSize="15dp"
+            android:text="@={grouploan.Pawdep_No}"
+            style="@style/grouploansline"
+            android:dropDownWidth="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/Loan_No"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/PAWDEP_No"/>
+        <TextView
+            android:id="@+id/Member_Name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:gravity="center"
+            android:text="@={grouploan.Member_Name}"
+            app:layout_constraintBottom_toBottomOf="@id/PAWDEP_No"
+            app:layout_constraintStart_toEndOf="@id/PAWDEP_No"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Amountapplied"
+            android:hint="Applied"
+            android:text="@={`` +grouploan.Amount_Applied}"
+            style="@style/grouploansline"
+            android:selectAllOnFocus="true"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@id/PAWDEP_No"
+            app:layout_constraintStart_toEndOf="@id/Member_Name"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+        android:id="@+id/Amountapproved"
+        android:hint="Approved"
+        android:text="@={`` +grouploan.Amount_Approved}"
+        style="@style/grouploansline"
+        android:selectAllOnFocus="true"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@id/PAWDEP_No"
+        app:layout_constraintStart_toEndOf="@id/Amountapplied"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/Disbursedamount"
+            app:layout_constraintBottom_toBottomOf="@id/PAWDEP_No"
+            android:hint="Disbursement Amount"
+            android:text="@={``+grouploan.Disbursed_Amount}"
+            style="@style/grouploansline"
+            android:selectAllOnFocus="true"
+            android:inputType="number"
+            app:layout_constraintStart_toEndOf="@id/Amountapproved"
+            app:layout_constraintTop_toTopOf="parent" />
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/deletered"
+    android:id="@+id/clear"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="@id/PAWDEP_No"
+    />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

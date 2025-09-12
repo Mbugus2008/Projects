@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <nav>
+    <NAV>
+      <Serverip>localhost</Serverip>
+      <domain>Paulo</domain>
+      <Instance>Mwirua</Instance>
+      <Port>4446</Port>
+      <Username>Mbranch</Username>
+      <pass>Mbanking12345*</pass>
+      <Companyname>Mwikure</Companyname>
+      <PostIntervalinsec>5</PostIntervalinsec>
+      <Reconnectintervalinsec>3</Reconnectintervalinsec>
+      <logpath>D:\Logs\Posting\</logpath>
+      <database>Autoweigh</database>
+      <IntegratedSecurity>false</IntegratedSecurity>
+      <certpath>E:\Tray\cert\navcert.cer</certpath>
+      <client>10000</client>
+    </NAV>
+  </nav>
+</settings>

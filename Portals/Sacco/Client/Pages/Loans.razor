@@ -1,0 +1,109 @@
+﻿@page "/Loans"
+@using Sacco.Shared
+@inject Sacco.Shared.StateContainerService stateService
+@inject HttpClient Http
+
+<PageTitle>My Loans</PageTitle>
+
+<h1  style="align-content:center">My Loans</h1>
+
+
+<h5>Current Loans</h5>
+
+@if (loanslist == null)
+{
+    <p><em>Loading Loans...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr style="background-color:darkgray">
+            
+                <th>Date</th>
+                <th>Loan No</th>
+                <th>Loan Name</th>
+                <th align="center">Installment(Months)</th>
+                <th align="right" >Monthly Repayment</th>
+                <th align="right" >Completion\nDate</th>
+                          
+                <th align="right">Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in loanslist.Where(o=>o.Loan_Balance>0))
+            {
+                <tr>
+                    
+                    <td>@loan.Loan_Disbursement_Date.ToString("dd-MMM-yyy")</td>
+                    <td>@loan.Loan_No</td>
+                    <td>@loan.Loan_Product_Type_Name</td>
+                    <td align="center">@loan.Installments</td>
+                    <td align = "right">@loan.Repayment.ToString("#,##0.00")</td>
+                    <td>@loan.Completion_Date.ToString("dd-MMM-yyy")</td>
+                 
+                    <td align = "right"> @loan.Loan_Balance.ToString("#,##0.00") </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row">Totals</th>
+                <td colspan="5"></td>
+
+                <td style="font-weight:bold" align="right">@loanslist.Where(o=>o.Loan_Balance>0).Sum(o=> o.Loan_Balance).ToString("#,##0.00") </td>
+            </tr>
+        </tfoot>
+    </table>
+    @if (loanslist.Where(o => o.Loan_Balance < 0.1).Count() > 0)
+    {
+        <h5>Older loans</h5>
+        <table class="table">
+            <thead>
+                <tr style="background-color:darkgray">
+                   
+                    <th>Date</th>
+                    <th>Loan No</th>
+                    <th>Loan Name</th>
+                    <th align="center">Installment(Months)</th>
+                    <th align="right">Monthly Repayment</th>
+
+                    <th align="right">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var loan in loanslist.Where(o => o.Loan_Balance <0.1))
+                {
+                    <tr>
+                      
+                        <td>@loan.Application_Date.ToString("dd-MMM-yyy")</td>
+                        <td>@loan.Loan_No</td>
+                        <td>@loan.Loan_Product_Type_Name</td>
+                        <td align="center">@loan.Installments</td>
+                        <td align="right">@loan.Repayment.ToString("#,##0.00")</td>
+                        <td align="right"> @loan.Loan_Balance.ToString("#,##0.00") </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th scope="row">Totals</th>
+                    <td colspan="4"></td>
+
+
+                    <td style="font-weight:bold" align="right">@loanslist.Where(o => o.Loan_Balance <0.1).Sum(o=> o.Loan_Balance).ToString("#,##0.00") </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+}
+
+@code {
+    private Loansdata.Loans[]? loanslist;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine(stateService.member);
+        loanslist = await Http.GetFromJsonAsync<Loansdata.Loans[]>($"api/loans/Get/{stateService.member}");
+    }
+}

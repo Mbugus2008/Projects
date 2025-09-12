@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KpsImprest.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="KpsImprest_Imprests_Payroll_Profits_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%20Cycle%20III/Page/Imprest_Profits</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

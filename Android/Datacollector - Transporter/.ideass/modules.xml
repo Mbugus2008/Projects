@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Datacollector_-_Transporter.iml" filepath="$PROJECT_DIR$/.idea/modules/Datacollector_-_Transporter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Datacollector_-_Transporter.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Datacollector_-_Transporter.app.iml" />
+    </modules>
+  </component>
+</project>

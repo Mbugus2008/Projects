@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Aps.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RunCodunit_Companies_powerbifinance_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.1.3:3032/ATMNas/WS/ReplaceWithAPercentEncodedCompanyName/Codeunit/RunThem</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Companies_SystemService" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://192.168.1.3:3032/ATMNas/WS/SystemService</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Companies_RunThem" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://192.168.1.3:3032/ATMNas/WS/ReplaceWithAPercentEncodedCompanyName/Codeunit/RunThem</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Companies_SalesOrder_Service" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://192.168.1.3:3032/ATMNas/WS/ReplaceWithAPercentEncodedCompanyName/Page/SalesOrder</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Sms_Sms_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vaio:4013/Mwea/WS/MWEA%20RICE/Page/Sms</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Loans</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:6021/Baraka/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Members</Value>
+    </Setting>
+    <Setting Name="RunCodunit_MobileTransactions_MobileTransactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:6021/Baraka/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/MobileTransactions</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Memberlist_Memberslist_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Memberslist</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Comp_powerbifinance_Service" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://192.168.1.3:3032/ATMNas/WS/ReplaceWithAPercentEncodedCompanyName/Page/powerbifinance</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Mbranch_RunThem" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Codeunit/RunThem</Value>
+    </Setting>
+    <Setting Name="RunCodunit_smstemplatess_SmsTemplates_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/SmsTemplates</Value>
+    </Setting>
+    <Setting Name="RunCodunit_Loanschedule_Loanschedule_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Loanschedule</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

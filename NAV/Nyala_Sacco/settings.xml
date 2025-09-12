@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <nav>
+    <NAV>
+      <Serverip>167.86.120.230</Serverip>
+      <domain>167.86.120.230</domain>
+      <Instance>Services</Instance>
+      <Port>8013</Port>
+      <Username>Mobile</Username>
+      <pass>Mbanking12345*</pass>
+      <Companyname>OPVL</Companyname>
+      <PostIntervalinsec>5</PostIntervalinsec>
+      <Reconnectintervalinsec>3</Reconnectintervalinsec>
+      <logpath>D:\Services\Logs\Posting\</logpath>
+      <database>Autoweigh</database>
+      <IntegratedSecurity>false</IntegratedSecurity>
+      <certpath>E:\Tray\cert\navcert.cer</certpath>
+      <client>OPENVALLEY</client>
+    </NAV>
+  </nav>
+</settings>

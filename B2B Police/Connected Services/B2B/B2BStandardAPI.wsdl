@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.co-opbank.co.ke/B2BStandardAPI/" name="B2BStandardAPI" targetNamespace="http://www.co-opbank.co.ke/B2BStandardAPI/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.co-opbank.co.ke/B2BStandardAPI/">
+      <xsd:complexType name="Account">
+        <xsd:sequence>
+          <xsd:element name="AccountNumber" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="AccountName" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Institution">
+        <xsd:sequence>
+          <xsd:element name="InstitutionCode" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="InstitutionName" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Payment">
+        <xsd:sequence>
+          <xsd:element name="PaymentCode" type="xsd:string" />
+          <xsd:element name="PaymentMode" type="xsd:int" />
+          <xsd:element name="PaymentAmount" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="HeaderRequest">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="serviceName" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="messageID" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Connection" type="tns:Connection" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Connection">
+        <xsd:sequence>
+          <xsd:element name="connectionID" type="xsd:string" />
+          <xsd:element name="connectionPassword" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="HeaderReply">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="messageID" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="statusCode" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="statusDescription" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getInputType">
+        <xsd:sequence>
+          <xsd:element name="operationParameters">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="1" maxOccurs="1" name="TransactionReferenceCode" nillable="true" type="xsd:string" />
+                <xsd:element minOccurs="1" maxOccurs="1" name="TransactionDate" nillable="true" type="xsd:dateTime" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="accountInfo" type="tns:Account" />
+          <xsd:element name="institution" type="tns:Institution" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getOutputType">
+        <xsd:sequence>
+          <xsd:element name="operationParameters">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="1" maxOccurs="1" name="TransactionReferenceCode" nillable="true" type="xsd:string" />
+                <xsd:element minOccurs="1" maxOccurs="1" name="TransactionDate" nillable="true" type="xsd:string" />
+                <xsd:element minOccurs="0" maxOccurs="1" name="TotalAmount" type="xsd:double" />
+                <xsd:element minOccurs="0" maxOccurs="1" name="Currency" type="xsd:string" />
+                <xsd:element minOccurs="0" maxOccurs="1" name="AdditionalInfo" type="xsd:string" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="accountInfo" type="tns:Account" />
+          <xsd:element name="institution" type="tns:Institution" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sendInputType">
+        <xsd:sequence>
+          <xsd:element name="operationParameters">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="0" name="TransactionReferenceCode" nillable="true" type="xsd:string" />
+                <xsd:element minOccurs="1" maxOccurs="1" name="TransactionDate" nillable="true" type="xsd:dateTime" />
+                <xsd:element name="TotalAmount" type="xsd:double" />
+                <xsd:element name="Currency" type="xsd:string" />
+                <xsd:element name="DocumentReferenceNumber" type="xsd:string" />
+                <xsd:element name="BankCode" type="xsd:string" />
+                <xsd:element name="BranchCode" type="xsd:string" />
+                <xsd:element name="PaymentDate" type="xsd:string" />
+                <xsd:element name="PaymentReferenceCode" type="xsd:string" />
+                <xsd:element name="PaymentDetails" type="tns:Payment" />
+                <xsd:element name="AdditionalInfo" type="xsd:string" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="account" type="tns:Account" />
+          <xsd:element name="institution" type="tns:Institution" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sendOutputType">
+        <xsd:sequence>
+          <xsd:element name="operationParameters">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="1" maxOccurs="1" name="TransactionReferenceCode" type="xsd:string" />
+                <xsd:element minOccurs="1" maxOccurs="1" name="TransactionDate" type="xsd:dateTime" />
+                <xsd:element minOccurs="0" maxOccurs="1" name="TransactionAmount" type="xsd:string" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="account" type="tns:Account" />
+          <xsd:element name="institution" type="tns:Institution" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="HeaderRequest" type="tns:HeaderRequest" />
+      <xsd:element name="HeaderReply" type="tns:HeaderReply" />
+      <xsd:element name="getAccountValidationInput" type="tns:getInputType" />
+      <xsd:element name="getAccountValidationOutput" type="tns:getOutputType" />
+      <xsd:element name="sendAccountPaymentAdviseRequest" type="tns:sendInputType" />
+      <xsd:element name="sendAccountPaymentAdviseResponse" type="tns:sendOutputType" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="HeaderRequest">
+    <wsdl:part name="HeaderRequest" element="tns:HeaderRequest" />
+  </wsdl:message>
+  <wsdl:message name="HeaderReply">
+    <wsdl:part name="HeaderReply" element="tns:HeaderReply" />
+  </wsdl:message>
+  <wsdl:message name="getAccountSummaryRequest">
+    <wsdl:part name="getInput" element="tns:getAccountValidationInput" />
+  </wsdl:message>
+  <wsdl:message name="getAccountSummaryResponse">
+    <wsdl:part name="getOutput" element="tns:getAccountValidationOutput" />
+  </wsdl:message>
+  <wsdl:message name="sendAccountPaymentAdviseRequest">
+    <wsdl:part name="sendInput" element="tns:sendAccountPaymentAdviseRequest" />
+  </wsdl:message>
+  <wsdl:message name="sendAccountPaymentAdviseResponse">
+    <wsdl:part name="sendOutput" element="tns:sendAccountPaymentAdviseResponse" />
+  </wsdl:message>
+  <wsdl:portType name="B2BStandardAPI">
+    <wsdl:operation name="getAccountValidation">
+      <wsdl:input name="getAccountSummaryRequest" message="tns:getAccountSummaryRequest" />
+      <wsdl:output name="getAccountSummaryResponse" message="tns:getAccountSummaryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendAccountPaymentAdvise">
+      <wsdl:input name="sendAccountPaymentAdviseRequest" message="tns:sendAccountPaymentAdviseRequest" />
+      <wsdl:output name="sendAccountPaymentAdviseResponse" message="tns:sendAccountPaymentAdviseResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="B2BStandardAPISOAP" type="tns:B2BStandardAPI">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getAccountValidation">
+      <soap:operation soapAction="http://www.co-opbank.co.ke/B2BStandardAPI/getAccountSummary" style="document" />
+      <wsdl:input name="getAccountSummaryRequest">
+        <soap:body use="literal" parts="getInput " />
+        <soap:header message="tns:HeaderRequest" part="HeaderRequest" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAccountSummaryResponse">
+        <soap:body use="literal" parts="getOutput " />
+        <soap:header message="tns:HeaderReply" part="HeaderReply" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAccountPaymentAdvise">
+      <soap:operation soapAction="http://www.co-opbank.co.ke/B2BStandardAPI/sendAccountPaymentAdvise" style="document" />
+      <wsdl:input name="sendAccountPaymentAdviseRequest">
+        <soap:body use="literal" parts="sendInput " />
+        <soap:header message="tns:HeaderRequest" part="HeaderRequest" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendAccountPaymentAdviseResponse">
+        <soap:body use="literal" parts="sendOutput " />
+        <soap:header message="tns:HeaderReply" part="HeaderReply" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="B2BStandardAPI">
+    <wsdl:port name="B2BStandardAPISOAP" binding="tns:B2BStandardAPISOAP">
+      <soap:address location="http://www.co-opbank.co.ke/COOPB2B/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

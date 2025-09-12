@@ -1,0 +1,69 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Matatu_Rest.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Matatu_Rest_Transactions_Daily_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/Transactions</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Teller_Transactions_Teller_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Teller_Transactions</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Agents_Users_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:9992/City/WS/Mbranch/Page/Users</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Mbranch_Header_Mbranch_Header_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:2234/Mbranch/WS/Mbranch/Page/Mbranch_Header</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Transtypes_Transtypes_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/Transtypes</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Members_Members3_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/Members</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Vehicles_Vehicles_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/Vehicles</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_VehiclesBasics_VehiclesBasics_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/VehiclesBasics</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_VehicleCrews_VehicleCrews_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/VehicleCrews</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Tamounts_Tamounts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/Tamounts</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Devices_Devices_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/Devices</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Expenses_Expenses_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Mbranch/Page/Expenses</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Vehicle_Daily_Collection_Vehicle_Daily_Collection_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:2234/Mbranch/WS/Mbranch/Page/Vehicle_Daily_Collection</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Account_Types_Account_Types_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:5552/Kmosservice/WS/KMOS/Page/Account_Types</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Deport_n_Fuel_Deport_n_Fuel_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:9992/City/WS/Mbranch/Page/Deport_n_Fuel</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Mbranch_Mbranch" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:9992/City/WS/Mbranch/Codeunit/MBranch</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_NRODefects_NRODefects_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:9992/City/WS/Mbranch/Page/NRODefects</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Mtwende_Transactions_Mtwende_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Mtwende_Transactions</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Reversals_Reversals_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5524/Embassava/WS/EMBASSAVA%20SACCO%20LTD/Page/Reversals</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Hires_Hires_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:9992/City/WS/Mbranch/Page/Hires</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Vehicle_Expenses_Vehicle_Expenses_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:9992/City/WS/Mbranch/Page/Vehicle_Expenses</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

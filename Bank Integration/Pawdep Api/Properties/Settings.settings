@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Pawdep_Api.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Pawdep_Api_Bank_Entries_Bank_Entries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://173.249.49.91:3547/PawdepService/WS/Pamoja%20Women%20Dev.%20Programme/Page/Bank_Entries</Value>
+    </Setting>
+    <Setting Name="Pawdep_Api_Mobile_Mobile" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://173.249.49.91:3547/PawdepService/WS/Pamoja%20Women%20Dev.%20Programme/Codeunit/Mobile</Value>
+    </Setting>
+    <Setting Name="Pawdep_Api_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://173.249.49.91:3547/PawdepService/WS/Pamoja%20Women%20Dev.%20Programme/Page/Members</Value>
+    </Setting>
+    <Setting Name="Pawdep_Api_Bank_Entries_Equity_Bank_Entries_Equity_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://173.249.49.91:3547/PawdepService/WS/Pamoja%20Women%20Dev.%20Programme/Page/Bank_Entries_Equity</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

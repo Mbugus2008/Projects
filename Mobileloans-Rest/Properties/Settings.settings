@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Mobileloans_Rest.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Mobileloans_Rest_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Page/Members</Value>
+    </Setting>
+    <Setting Name="Mobileloans_Rest_Alternate_Alternate" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Codeunit/Alternate</Value>
+    </Setting>
+    <Setting Name="Mobileloans_Rest_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Page/Loan</Value>
+    </Setting>
+    <Setting Name="Mobileloans_Rest_Loan_Products_Loan_Products_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Page/Loan_Products</Value>
+    </Setting>
+    <Setting Name="Mobileloans_Rest_Id_nos_ID_Nos_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Page/ID_Nos</Value>
+    </Setting>
+    <Setting Name="Mobileloans_Rest_Applications_Applications_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Page/Applications</Value>
+    </Setting>
+    <Setting Name="Mobileloans_Rest_Transunion_ControllerKenyaImplService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://secure3.crbafrica.com/crbws/ke</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

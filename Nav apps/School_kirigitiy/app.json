@@ -1,0 +1,24 @@
+{
+  "id": "d8fa14c7-d185-4a8e-8dcb-d760c972de1b",
+  "name": "MARPAULEX",
+  "publisher": "TrimLine Systems & Solutions",
+  "version": "1.0.0.0",
+  "runtime": "14.0",
+  "target": "OnPrem",
+  "application": "24.0.0.0",
+  "platform": "24.0.0.0",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true,
+    "applyToDevExtension": false
+  },
+  "features": [
+  ],
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 60000
+    }
+  ]
+}

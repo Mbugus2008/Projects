@@ -1,0 +1,54 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NyalaVision.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NyalaVision_Accounts_Accounts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Accounts</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Transactions_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Transactions</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Loans_Loans_mobile_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.0.46:7047/DynamicsNAV90/WS/NYALA%20VISION%20SACCO%20LTD/Page/Loans_mobile</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Smobile_Mobile" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Codeunit/Mobile</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Agent_App_Agent_App_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Agent_App</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Account_Entries_Account_Entries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Account_Entries</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Member_Application_Member_Application_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Member_Application</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Account_Types_Account_Types_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Account_Types</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Application_Images_Application_Images_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Application_Images</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Members_mobile_Member_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/mobile_Member</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Nextofkin_Nextofkin_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Nextofkin</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Relationshiptypes_Relationshiptypes_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Relationshiptypes</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Eligibility_Eligibility_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Eligibility</Value>
+    </Setting>
+    <Setting Name="NyalaVision_LoanProducts_LoanProducts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/LoanProducts</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Mobile_Loan_Entries_Mobile_Loan_Entries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Mobile_Loan_Entries</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Guarantors_Mobile_Guarantors_Mobile_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Guarantors_Mobile</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

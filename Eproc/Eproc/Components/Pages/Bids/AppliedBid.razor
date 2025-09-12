@@ -1,0 +1,90 @@
+﻿@page "/Bids/AppliedBids"
+@rendermode InteractiveServer
+@inject Eproc.Services.Ibids ibid
+@using Eproc.Services
+@using Microsoft.AspNetCore.Authorization
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.DropDowns
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Identity
+@using Eproc.Data
+@attribute [StreamRendering]
+@inject AuthenticationStateProvider userprovider
+@inject UserManager<ApplicationUser> UserManager
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Popups
+@using scol = Syncfusion.Blazor.Grids.GridColumn
+@attribute [Authorize]
+<div>
+    <h5>Bids</h5>
+    @{
+        var Tool = (new List<string>() { "Search" });
+    }
+    <SfGrid DataSource="@model" @ref="Grid" ID="applieddetails" AllowTextWrap="true" Toolbar=@Tool>
+        <GridEditSettings Mode="EditMode.Normal"></GridEditSettings>
+        <GridTextWrapSettings WrapMode="@WrapModeValue"></GridTextWrapSettings>
+        <GridColumns>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Bid_No) HeaderText="No" TextAlign="TextAlign.Justify"></Syncfusion.Blazor.Grids.GridColumn>
+            <scol Field=@nameof(fields.Date_Applied) HeaderText="Date Applied" Format="d" TextAlign="TextAlign.Justify"></scol>
+            <scol Field=@nameof(fields.Bid_Category) HeaderText="Category"> </scol>
+         
+            <scol Field=@nameof(fields.Bid_Status) HeaderText="Status"> </scol>
+            <scol Field=@nameof(fields.Technical_Proposals) HeaderText="Technical Proposals" Width="50"> </scol>
+            <scol Field=@nameof(fields.Financial_Proposals) HeaderText="Financial Proposals"  Width="50"> </scol>
+           
+        </GridColumns>
+    </SfGrid>
+
+</div>
+<style>
+    .form-group .form-control .form-control {
+        width: 20%;
+        /* margin-bottom: 10px; /* Adjust the margin between items */ */
+    }</style>
+@code {
+    private bool Visibility { get; set; } = false;
+    List<AppliedBids.EProcAppliedBids> model { get; set; } = new();
+   
+    AppliedBids.EProcAppliedBids_Fields fields;
+    public WrapMode WrapModeValue { get; set; } = WrapMode.Content;
+    SfGrid<AppliedBids.EProcAppliedBids> Grid;
+    private bool ShowButton { get; set; } = false;
+
+    protected override async void OnInitialized()
+    {
+        var authenticationState = await userprovider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+        ApplicationUser CurrentUser = null;
+        if (user.Identity.IsAuthenticated)
+        {
+          CurrentUser = await UserManager.GetUserAsync(user);
+                   }
+        model = await ibid.GetappliedBids(CurrentUser.TaxRegistrationNO);
+        StateHasChanged();
+
+
+    }
+    public void OnActionComplete(ActionEventArgs<BDetails.BankDetails> args)
+    {
+        switch (args.RequestType)
+        {
+            case Syncfusion.Blazor.Grids.Action.Add: { break; }
+            case Syncfusion.Blazor.Grids.Action.Save:
+                {
+
+                    // args.Data = iprofile.SaveData(args.Data).Result;
+
+                    break;
+                }
+            case Syncfusion.Blazor.Grids.Action.Delete:
+                {
+                    // iprofile.Delete(args.Data);
+                    break;
+                }
+        }
+    }
+   
+}
+

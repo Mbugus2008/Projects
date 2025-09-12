@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Hela" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Hela" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Hela" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="categoryLimit">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="custno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="categoryLimit_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="eligibility">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="custno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="loanId" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="eligibility_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="lastsmsno">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="lastsmsno_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="categoryLimit">
+    <part name="parameters" element="tns:categoryLimit" />
+  </message>
+  <message name="categoryLimit_Result">
+    <part name="parameters" element="tns:categoryLimit_Result" />
+  </message>
+  <message name="eligibility">
+    <part name="parameters" element="tns:eligibility" />
+  </message>
+  <message name="eligibility_Result">
+    <part name="parameters" element="tns:eligibility_Result" />
+  </message>
+  <message name="lastsmsno">
+    <part name="parameters" element="tns:lastsmsno" />
+  </message>
+  <message name="lastsmsno_Result">
+    <part name="parameters" element="tns:lastsmsno_Result" />
+  </message>
+  <portType name="Hela_Port">
+    <operation name="categoryLimit">
+      <input name="categoryLimit" message="tns:categoryLimit" />
+      <output name="categoryLimit_Result" message="tns:categoryLimit_Result" />
+    </operation>
+    <operation name="eligibility">
+      <input name="eligibility" message="tns:eligibility" />
+      <output name="eligibility_Result" message="tns:eligibility_Result" />
+    </operation>
+    <operation name="lastsmsno">
+      <input name="lastsmsno" message="tns:lastsmsno" />
+      <output name="lastsmsno_Result" message="tns:lastsmsno_Result" />
+    </operation>
+  </portType>
+  <binding name="Hela_Binding" type="tns:Hela_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="categoryLimit">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Hela:categoryLimit" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="categoryLimit">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="categoryLimit_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="eligibility">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Hela:eligibility" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="eligibility">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="eligibility_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="lastsmsno">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Hela:lastsmsno" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="lastsmsno">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="lastsmsno_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Hela">
+    <port name="Hela_Port" binding="tns:Hela_Binding">
+      <address location="http://db:7047/BC200/WS/SBC_LIVE/Codeunit/Hela" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

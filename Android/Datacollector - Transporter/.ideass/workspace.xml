@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b2c3ffd9-ff52-43a0-a610-e83f51e640e0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Agency Clients/Imarika/Agency.asmx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Agency Clients/Imarika/Agency.asmx.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Agency Clients/Imarika/Imarika.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Agency Clients/Imarika/Imarika.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Agency Clients/Imarika/Properties/Settings.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Agency Clients/Imarika/Properties/Settings.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Agency Clients/Imarika/Properties/Settings.settings" beforeDir="false" afterPath="$PROJECT_DIR$/../../Agency Clients/Imarika/Properties/Settings.settings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Agency Clients/Imarika/Web References/Customer/Customer.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/../../Agency Clients/Imarika/Web References/Customer/Customer.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Agency Clients/Imarika/Web References/Customer/Reference.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Agency Clients/Imarika/Web References/Customer/Reference.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Agency Clients/Imarika/Web References/Customer/Reference.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../Agency Clients/Imarika/Web References/Customer/Reference.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Agency Clients/Imarika/Web.config" beforeDir="false" afterPath="$PROJECT_DIR$/../../Agency Clients/Imarika/Web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/paul/datacollector/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/paul/datacollector/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build (Paulo's conflicted copy 2016-10-17).gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Datacollector/app/src/main/java/com/example/paul/datacollector/JsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Datacollector/app/src/main/java/com/example/paul/datacollector/JsonParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Datacollector/app/src/main/java/com/example/paul/datacollector/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Datacollector/app/src/main/java/com/example/paul/datacollector/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Datacollector/app/src/main/java/com/example/paul/datacollector/Summaries.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Datacollector/app/src/main/java/com/example/paul/datacollector/Summaries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Datacollector/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Datacollector/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Datacollector/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Datacollector/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M-Branch - Forward" beforeDir="false" afterPath="$PROJECT_DIR$/../M-Branch - Forward" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M-Branch - Latema" beforeDir="false" afterPath="$PROJECT_DIR$/../M-Branch - Latema" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M-Branch - Lopha" beforeDir="false" afterPath="$PROJECT_DIR$/../M-Branch - Lopha" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M-Branch - Metro/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../M-Branch - Metro/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M-Branch - Metro/app/src/main/java/com/trimline/paul/metro/Parcel_list.java" beforeDir="false" afterPath="$PROJECT_DIR$/../M-Branch - Metro/app/src/main/java/com/trimline/paul/metro/Parcel_list.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M-Branch - Metro/app/src/main/java/com/trimline/paul/metro/menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../M-Branch - Metro/app/src/main/java/com/trimline/paul/metro/menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M-Branch - Metro/app/src/main/res/layout/activity_parcel_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../M-Branch - Metro/app/src/main/res/layout/activity_parcel_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M-Branch - Metro/app/src/main/res/layout/menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../M-Branch - Metro/app/src/main/res/layout/menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Milestep/app/src/main/java/com/trimline/milestep/worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Milestep/app/src/main/java/com/trimline/milestep/worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Logging/Logging 4/Cutilities.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Logging/Logging 4/Cutilities.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Mobileloans-Rest/Controllers/MobileloansController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Mobileloans-Rest/Controllers/MobileloansController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Mwalimu" beforeDir="false" afterPath="$PROJECT_DIR$/../../Mwalimu" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Portals/Sms/Sms" beforeDir="false" afterPath="$PROJECT_DIR$/../../Portals/Sms/Sms" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Projects.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Projects.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SyncData/Erp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../SyncData/Erp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TestMpesa/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../TestMpesa/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TestMpesa/TestMpesa.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../TestMpesa/TestMpesa.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Weigh" beforeDir="false" afterPath="$PROJECT_DIR$/../../Weigh" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[TYNEONRAY00028600]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="1401" />
+    <option name="height" value="993" />
+  </component>
+  <component name="ProjectId" id="1nYfz3Ldvx7KPm67omsPX0NuCYG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$PROJECT_DIR$/../../../AndroidSdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="device.picker.selection" value="fec6e81c" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+    <property name="sync.plugin.last.upgrade.timestamp" value="1547673247354" />
+  </component>
+  <component name="RunManager">
+    <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+    </configuration>
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="Datacollector_-_Transporter.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b2c3ffd9-ff52-43a0-a610-e83f51e640e0" name="Default" comment="" />
+      <created>1539693664897</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1539693664897</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="286" y="163" key="#PSD" timestamp="1611576424259">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="286" y="163" key="#PSD/0.0.1536.834@0.0.1536.834" timestamp="1611576424259" />
+    <state width="516" height="88" key="javadoc.popup.new" timestamp="1611573061007">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="516" height="88" key="javadoc.popup.new/0.0.1536.834@0.0.1536.834" timestamp="1611573061007" />
+  </component>
+</project>

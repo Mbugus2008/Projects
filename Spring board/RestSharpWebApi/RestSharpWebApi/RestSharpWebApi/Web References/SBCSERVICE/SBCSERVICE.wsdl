@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="GetDemandLetter">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loano" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetDemandLetter_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetOfferletter">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loano" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetOfferletter_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetSchedule">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loano" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetSchedule_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetStatement">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="custNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="dateStart" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="dateEnd" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetStatement_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="eligibility">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="custno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="loanId" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="eligibility_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="lastsmsno">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="lastsmsno_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="postloan">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loanno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="postloan_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="GetDemandLetter">
+    <part name="parameters" element="tns:GetDemandLetter" />
+  </message>
+  <message name="GetDemandLetter_Result">
+    <part name="parameters" element="tns:GetDemandLetter_Result" />
+  </message>
+  <message name="GetOfferletter">
+    <part name="parameters" element="tns:GetOfferletter" />
+  </message>
+  <message name="GetOfferletter_Result">
+    <part name="parameters" element="tns:GetOfferletter_Result" />
+  </message>
+  <message name="GetSchedule">
+    <part name="parameters" element="tns:GetSchedule" />
+  </message>
+  <message name="GetSchedule_Result">
+    <part name="parameters" element="tns:GetSchedule_Result" />
+  </message>
+  <message name="GetStatement">
+    <part name="parameters" element="tns:GetStatement" />
+  </message>
+  <message name="GetStatement_Result">
+    <part name="parameters" element="tns:GetStatement_Result" />
+  </message>
+  <message name="eligibility">
+    <part name="parameters" element="tns:eligibility" />
+  </message>
+  <message name="eligibility_Result">
+    <part name="parameters" element="tns:eligibility_Result" />
+  </message>
+  <message name="lastsmsno">
+    <part name="parameters" element="tns:lastsmsno" />
+  </message>
+  <message name="lastsmsno_Result">
+    <part name="parameters" element="tns:lastsmsno_Result" />
+  </message>
+  <message name="postloan">
+    <part name="parameters" element="tns:postloan" />
+  </message>
+  <message name="postloan_Result">
+    <part name="parameters" element="tns:postloan_Result" />
+  </message>
+  <portType name="SBCSERVICE_Port">
+    <operation name="GetDemandLetter">
+      <input name="GetDemandLetter" message="tns:GetDemandLetter" />
+      <output name="GetDemandLetter_Result" message="tns:GetDemandLetter_Result" />
+    </operation>
+    <operation name="GetOfferletter">
+      <input name="GetOfferletter" message="tns:GetOfferletter" />
+      <output name="GetOfferletter_Result" message="tns:GetOfferletter_Result" />
+    </operation>
+    <operation name="GetSchedule">
+      <input name="GetSchedule" message="tns:GetSchedule" />
+      <output name="GetSchedule_Result" message="tns:GetSchedule_Result" />
+    </operation>
+    <operation name="GetStatement">
+      <input name="GetStatement" message="tns:GetStatement" />
+      <output name="GetStatement_Result" message="tns:GetStatement_Result" />
+    </operation>
+    <operation name="eligibility">
+      <input name="eligibility" message="tns:eligibility" />
+      <output name="eligibility_Result" message="tns:eligibility_Result" />
+    </operation>
+    <operation name="lastsmsno">
+      <input name="lastsmsno" message="tns:lastsmsno" />
+      <output name="lastsmsno_Result" message="tns:lastsmsno_Result" />
+    </operation>
+    <operation name="postloan">
+      <input name="postloan" message="tns:postloan" />
+      <output name="postloan_Result" message="tns:postloan_Result" />
+    </operation>
+  </portType>
+  <binding name="SBCSERVICE_Binding" type="tns:SBCSERVICE_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetDemandLetter">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE:GetDemandLetter" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetDemandLetter">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetDemandLetter_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetOfferletter">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE:GetOfferletter" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetOfferletter">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetOfferletter_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetSchedule">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE:GetSchedule" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetSchedule">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetSchedule_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetStatement">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE:GetStatement" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetStatement">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetStatement_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="eligibility">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE:eligibility" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="eligibility">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="eligibility_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="lastsmsno">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE:lastsmsno" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="lastsmsno">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="lastsmsno_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="postloan">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/SBCSERVICE:postloan" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="postloan">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="postloan_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="SBCSERVICE">
+    <port name="SBCSERVICE_Port" binding="tns:SBCSERVICE_Binding">
+      <address location="http://db:7047/BC200/WS/SPRINGBOARD%20CAPITAL%20-%20TEST/CodeUnit/SBCSERVICE" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

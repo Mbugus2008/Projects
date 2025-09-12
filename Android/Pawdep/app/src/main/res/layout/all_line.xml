@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data class="Allocations_binding" >
+
+        <variable
+            name="all"
+            type="com.trimline.pawdep.Allocation_header" />
+        <import type="com.trimline.pawdep.Converters"/>
+        <import type="com.trimline.pawdep.BindingUtils"/>
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints"
+    android:id="@+id/all_container"
+    >
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_no"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="No"
+        android:text="@{all.No}"/>
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_date"
+        app:layout_constraintStart_toEndOf="@id/all_no"
+        android:text="@{Converters.fromDatetostring(all.Allocation_Date)}"
+       />
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_pawdepno"
+        app:layout_constraintStart_toEndOf="@id/all_date"
+        android:hint="Pawdep No"
+        android:text="@{all.Pawdep_No}"/>
+
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_name"
+        app:layout_constraintStart_toEndOf="@id/all_pawdepno"
+        android:hint="Name"
+        android:text="@{all.Member_Names}"/>
+
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_amount"
+        app:layout_constraintStart_toEndOf="@id/all_name"
+        android:hint="Amount"
+        android:text="@{all.Amount}"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/deletered"
+        android:id="@+id/clear"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

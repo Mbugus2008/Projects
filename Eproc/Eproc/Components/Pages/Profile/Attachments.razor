@@ -1,0 +1,455 @@
+﻿@page "/Profile/Attachments/{Taxregno}"
+@rendermode InteractiveServer
+@inject Eproc.Services.Icprofile iprofile
+@using Eproc.Services
+@using Syncfusion.Blazor.Grids
+@attribute [StreamRendering]
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Popups 
+@* <SfUploader AutoUpload="true">
+    <UploaderEvents ValueChange="@OnChange"></UploaderEvents>
+</SfUploader> *@
+<SfAccordion>
+    <AccordionItems>
+        <AccordionItem Expanded="true">
+            <HeaderTemplate>
+                <div class="row"><h5>FORM 2. SPECIFIC REQUIREMENTS</h5></div>
+            </HeaderTemplate>
+            <ContentTemplate>
+                <div class="container d-flex justify-content-center align-items-center">
+                    <div class="row">
+                        @foreach (var item in specificatts.Where(o => o.Category == EProcAttachment.Attachment_Category.Statutory_Documents))
+                        {
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @item.Description
+                                    @* <i class="bi bi-check-lg" style="color: red;"></i> *@
+                                    @* <a href="/page1">@item.SubmittedAttachment.Count </a> *@
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <div class="form-group">
+                                    @switch (item.SubmittedAttachment.Count)
+                                    {
+                                        case 0:
+                                            <i class="bi bi-x-circle" style="color: red; font-size:1rem"></i>
+                                            break;
+                                        case 1:
+                                            <i class="bi bi-check-circle" style="color: #005e7f; font-size:1rem"></i>
+                                            break;
+                                        default:
+                                            <i class="bi bi-check-circle" style="color: #005e7f; font-size:1rem"></i>
+                                            break;
+                                    }  @* <a href="/page1">@item.SubmittedAttachment.Count </a> *@
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <span>
+                                        <button class="btn btn-outline-primary m-1" @onclick="() => OnBtnClick(item.AttachmentID)">
+                                            <i class="bi bi-file-earmark-plus accordion-button " style="color: #005e7f; font-size:1.2rem"> </i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </ContentTemplate>
+        </AccordionItem> <AccordionItem Expanded="true">
+            <HeaderTemplate>
+                <div class="row"><h5>FORM 3. MANAGEMENT STRUCTURE</h5></div>
+            </HeaderTemplate>
+            <ContentTemplate>
+                <div class="row">
+
+
+                    <ul>
+                        @foreach (var item in managementatts.Where(o => o.Category == EProcAttachment.Attachment_Category.Statutory_Documents))
+                        {
+                            <div class="col-6">
+                                <div class="form-group m-3 d-flex justify-content-between">
+                                    <span>
+                                        @item.Description
+                                        <a href="/page1">@item.SubmittedAttachment.Count </a>
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </ul>
+                </div>
+            </ContentTemplate>
+        </AccordionItem>
+        <AccordionItem Expanded="true">
+            <HeaderTemplate>
+                <div class="row"><h5>FORM 4. FINANCIAL POSITION</h5></div>
+            </HeaderTemplate>
+            <ContentTemplate>
+                <div class="row">
+                    <h6>A. Audited financial Statements</h6>
+                    <ul>
+                        @foreach (var item in managementatts.Where(o => o.Category == EProcAttachment.Attachment_Category.Statutory_Documents))
+                        {
+                            <div class="col-6">
+                                <div class="form-group m-3 d-flex justify-content-between">
+                                    <span>
+                                        @item.Description
+                                        <a href="/page1">@item.SubmittedAttachment.Count </a>
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </ul>
+                </div>  <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <h6>B. Company/Individual bank statements for the last 6 Months</h6>
+
+                        </div>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </AccordionItem>
+    </AccordionItems>
+
+</SfAccordion>
+<SfDialog Width="60%" Height="60%" IsModal="true" @bind-Visible="Visibility">
+    <DialogTemplates>
+        <Header> Attachments  </Header>
+        <Content>
+            <p></p>
+            <InputFile OnChange="AddFilesToQueue"
+                       @ondragenter="HandleDragEnter"
+                       @ondragleave="HandleDragLeave"
+                       disabled="@isUploading"
+                       multiple />
+            @if (filesQueue.Count > 0)
+            {
+                <div class="card mb-4">
+                    <div class="card-header">Upload queue</div>
+                    <div class="card-body">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="text-center" style="width:50px">%</th>
+                                    <th style="width:170px;"></th>
+                                    <th>FileName</th>
+                                    <th class="text-end" style="width:80px;">Size (KB)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var file in filesQueue.OrderByDescending(x => x.FileId))
+                                {
+                                    var size = Math.Round((file.Size / 1024.00));
+                                    var percentage = Math.Round(file.UploadedPercentage);
+                                    <tr>
+                                        <td class="text-center">
+                                            @if (file.HasBeenUploaded)
+                                            {
+                                                <span class="oi oi-circle-check text-success"></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="oi oi-circle-check text-icon-light"></span>
+                                            }
+                                        </td>
+                                        <td class="text-end">@($"{percentage}%")</td>
+                                        <td><progress value="@file.UploadedBytes" max="@file.Size" class="fileProgress"></progress></td>
+                                        <td>@file.FileName</td>
+                                        <td class="text-end">@string.Format("{0:#,0.##}", @size)</td>
+
+                                        <td class="text-end"><button type="button" class="btn btn-sm btn-link" disabled="@isUploading" @onclick="(() => RemoveFromQueue(file.FileId))"><span class="oi oi-trash" aria-hidden="true"></span></button></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" disabled="@isUploading" class="btn btn-sm btn-success" @onclick="UploadFileQueue">Upload file queue</button>
+                            <button type="button" disabled="@isUploading" class="btn btn-sm btn-info" @onclick="ClearFileQueue">Clear file queue</button>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </Content>
+    </DialogTemplates>
+    <DialogButtons>
+        <DialogButton Content="OK" IsPrimary="true" OnClick="@DlgButtonClick" />
+    </DialogButtons>
+    <DialogEvents OnOpen="@DialogOpen" Closed="@DialogClose" OnOverlayModalClick="@OverlayClick"></DialogEvents>
+    <DialogAnimationSettings Effect="@DialogEffect.None"></DialogAnimationSettings>
+</SfDialog>
+@code {
+    [Parameter]
+    public string Taxregno { get; set; }
+    List<EProcAttachment.EProcSubmittedAttachment> model { get; set; } = new();
+    List<AttachDocuments> specificatts { get; set; } = new(); List<EProcAttachment.EProcSubmittedAttachment> Currentattachments { get; set; } = new();
+    List<AttachDocuments> managementatts { get; set; } = new();
+    EProcAttachment.EProcSubmittedAttachment fields;
+    private bool Visibility { get; set; } = false;
+    private bool ShowButton { get; set; } = false;
+    protected override async void OnInitialized()
+    {
+        model = await iprofile.getattachment(Taxregno);
+        List<string> attachmentIds = new List<string> { "CBANK", "CCONT", "CPIN", "CPROFF", "CREG", "CVAT" };
+        specificatts = model.Where(o => attachmentIds.Contains(o.Attachment_ID)).GroupBy(p => new { p.Attachment_Category, p.Attachment_ID, p.Description }).Select(g => new AttachDocuments
+            {
+                Category = g.Key.Attachment_Category,
+                AttachmentID = g.Key.Attachment_ID,
+                Description = g.Key.Description,
+                SubmittedAttachment = g.ToList()
+            }).ToList();
+
+
+        attachmentIds = new List<string> { "CAUD", };
+        managementatts = model.Where(o => attachmentIds.Contains(o.Attachment_ID)).GroupBy(p => new { p.Attachment_Category, p.Attachment_ID, p.Description, p.Year }).Select(g => new AttachDocuments
+
+            {
+                Category = g.Key.Attachment_Category,
+                AttachmentID = g.Key.Attachment_ID,
+                Description = g.Key.Description,
+                Year = g.Key.Year,
+                SubmittedAttachment = g.ToList()
+            }).ToList();
+        StateHasChanged();
+    }
+    private async Task OnChange(UploadChangeEventArgs args)
+    {
+        try
+        {
+            foreach (var file in args.Files)
+            {
+                var path = @"" + file.FileInfo.Name;
+                FileStream filestream = new FileStream(path, FileMode.Create, FileAccess.Write);
+                await file.File.OpenReadStream(long.MaxValue).CopyToAsync(filestream);
+                filestream.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+    private void DialogOpen(Object args)
+    {
+        this.ShowButton = false;
+    }
+    private void DialogClose(Object args)
+    {
+        this.ShowButton = true;
+    }
+    private void OnBtnClick(string key)
+    {
+
+        Currentattachments = model.Where(o => o.Attachment_ID == key).ToList();
+        this.Visibility = true;
+    }
+    private void DlgButtonClick()
+    {
+        this.Visibility = false;
+    }
+    private void OverlayClick(OverlayModalClickEventArgs args)
+    {
+
+        this.Visibility = true;
+
+    }
+
+    [Inject] IFilesManager? FilesManager { get; set; }
+    private bool isUploading = false;
+    private string ErrorMessage = string.Empty;
+    private string dropClass = string.Empty;
+    private int maxAllowedFiles = 5;
+    //List<string> FileUrls = new List<string>();
+    List<FileUploadProgress> filesQueue = new();
+    private void AddFilesToQueue(InputFileChangeEventArgs e)
+    {
+        dropClass = string.Empty;
+        ErrorMessage = string.Empty;
+
+        if (e.FileCount > maxAllowedFiles)
+        {
+            ErrorMessage = $"A maximum of {maxAllowedFiles} is allowed, you have selected {e.FileCount} files!";
+        }
+        else
+        {
+            var files = e.GetMultipleFiles(maxAllowedFiles);
+            var fileCount = filesQueue.Count;
+
+            foreach (var file in files)
+            {
+                var dd = ConvertFileToBase64String(file);
+                var progress = new FileUploadProgress() { FileData = file, Size = file.Size, FileId = fileCount, FileName = file.Name };
+                filesQueue.Add(progress);
+                fileCount++;
+
+            }
+            UploadFileQueue();
+            convertto64();
+        }
+    }
+    private async Task convertto64()
+
+    {
+        foreach (var f in filesQueue)
+        {
+            f.Base64 = await ConvertFileToBase64String(f.FileData);
+
+
+        }
+    }
+
+    private async Task<string> ConvertFileToBase64String(IBrowserFile file)
+    {
+        using (var memoryStream = new MemoryStream())
+        {
+            var buffer = new byte[100000]; // Adjust buffer size as needed
+
+            using (var stream = file.OpenReadStream())
+            {
+                int bytesRead;
+                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    await memoryStream.WriteAsync(buffer, 0, bytesRead);
+                }
+            }
+
+            byte[] bytes = memoryStream.ToArray();
+            return Convert.ToBase64String(bytes);
+        }
+    }
+
+
+
+
+    void HandleDragEnter()
+    {
+        dropClass = "dropzone-active";
+    } //HandleDragEnter
+    void HandleDragLeave()
+    {
+        dropClass = string.Empty;
+    } //HandleDragLeave
+    private void RemoveFromQueue(int fileId)
+    {
+        var itemToRemove = filesQueue.SingleOrDefault(x => x.FileId == fileId);
+        if (itemToRemove != null)
+            filesQueue.Remove(itemToRemove);
+    } //RemoveFromQueue
+
+
+    private void ClearFileQueue()
+    {
+        filesQueue.Clear();
+    } //ClearFileQueue
+    private async Task UploadFileQueue()
+    {
+        isUploading = true;
+        await InvokeAsync(StateHasChanged);
+
+        foreach (var file in filesQueue.OrderByDescending(x => x.FileId))
+        {
+            if (!file.HasBeenUploaded)
+            {
+                await UploadChunks(file);
+                file.HasBeenUploaded = true;
+            }
+        }
+
+        isUploading = false;
+        StateHasChanged();
+    } //UploadFileQueue
+    private async Task UploadChunks(FileUploadProgress file)
+    {
+        var TotalBytes = file.Size;
+        long chunkSize = 400000;
+        long numChunks = TotalBytes / chunkSize;
+        long remainder = TotalBytes % chunkSize;
+
+        string nameOnly = Path.GetFileNameWithoutExtension(file.FileName);
+        var extension = Path.GetExtension(file.FileName);
+        string newFileNameWithoutPath = $"{DateTime.Now.Ticks}-{nameOnly}{extension}";
+
+        bool firstChunk = true;
+        using (var inStream = file.FileData.OpenReadStream(long.MaxValue))
+        {
+            for (int i = 0; i < numChunks; i++)
+            {
+                var buffer = new byte[chunkSize];
+                await inStream.ReadAsync(buffer, 0, buffer.Length);
+
+                var chunk = new FileChunkDto
+                    {
+                        Data = buffer,
+                        FileName = newFileNameWithoutPath,
+                        Offset = filesQueue[file.FileId].UploadedBytes,
+                        FirstChunk = firstChunk
+                    };
+
+                await FilesManager.UploadFileChunk(chunk);
+                firstChunk = false;
+
+                // Update our progress data and UI
+                filesQueue[file.FileId].UploadedBytes += chunkSize;
+                await InvokeAsync(StateHasChanged);
+            }
+
+            if (remainder > 0)
+            {
+                var buffer = new byte[remainder];
+                await inStream.ReadAsync(buffer, 0, buffer.Length);
+
+                var chunk = new FileChunkDto
+                    {
+                        Data = buffer,
+                        FileName = newFileNameWithoutPath,
+                        Offset = filesQueue[file.FileId].UploadedBytes,
+                        FirstChunk = firstChunk
+                    };
+                await FilesManager.UploadFileChunk(chunk);
+
+                // Update our progress data and UI
+                filesQueue[file.FileId].UploadedBytes += remainder;
+                //await ListFiles();
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+    }
+    // record FileUploadProgress(IBrowserFile File, string FileName, long Size, int FileId, string base64)
+    // {
+    //     public IBrowserFile FileData { get; set; } = File;
+    //     public int FileId { get; set; } = FileId;
+    //     public long UploadedBytes { get; set; }
+    //     public double UploadedPercentage => (double)UploadedBytes / (double)Size * 100d;
+    //     public bool HasBeenUploaded { get; set; } = false;
+    //     public string Base64 { get; set; }
+    // } //FileUploadProgress
+    class FileUploadProgress
+    {
+
+        public FileUploadProgress()
+        {
+            // this. FileData = File;
+            //  this.FileId = fileId;
+            //  this.Size = size;
+            //  this.Base64 = base64;
+        }
+        public IBrowserFile FileData { get; set; }
+        public long Size { get; set; }
+        public int FileId { get; set; }
+        public long UploadedBytes { get; set; }
+        public double UploadedPercentage => (double)UploadedBytes / (double)Size * 100d;
+        public bool HasBeenUploaded { get; set; } = false;
+        public string Base64 { get; set; }
+        public string FileName { get; set; }
+    } //
+
+
+
+} 

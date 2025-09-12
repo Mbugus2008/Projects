@@ -1,0 +1,70 @@
+﻿@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+@rendermode InteractiveServer
+<div class="control-container">
+    <SfAppBar ColorMode="AppBarColor.Primary">
+    
+        <SfButton CssClass="e-inherit" IconCss="e-icons e-menu"></SfButton>
+        <SfMenu CssClass="e-inherit" TValue="MenuItem">
+            <MenuItems>
+                <MenuItem Text="Profile" Url="/Profile/Profile">
+                 
+                </MenuItem>
+            </MenuItems>
+        </SfMenu>
+       
+        <SfMenu CssClass="e-inherit" TValue="MenuItem">
+            <MenuItems>
+                        <MenuItem Text="New Bids" Url="/Bids/RBids"></MenuItem>
+                <MenuItem Text="Applied Bids" Url="/Bids/AppliedBids"></MenuItem>
+               
+            </MenuItems>
+        </SfMenu>
+       
+        <AppBarSpacer></AppBarSpacer>
+
+        <SfButton CssClass="e-inherit" Content="Logout"  OnClick="SignOut"></SfButton>
+     
+        
+    </SfAppBar>
+</div>
+
+@code{
+    private bool IsLoggedIn { get; set; }
+    private string UserName { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        IsLoggedIn = user.Identity.IsAuthenticated;
+
+        if (IsLoggedIn)
+        {
+            UserName = user.Identity.Name;
+        }
+    }
+
+    private async Task SignOut()    
+    {
+        // var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        // var user = authState.User;
+
+        // if (user.Identity.IsAuthenticated)
+        // {
+            
+        //     // Call signout method from the AuthenticationStateProvider
+        //     await AuthenticationStateProvider.SignOutAsync();
+        // }
+
+        // Redirect to a specific page after signout (optional)
+        NavigationManager.NavigateTo("/Logout");
+    }
+
+
+}

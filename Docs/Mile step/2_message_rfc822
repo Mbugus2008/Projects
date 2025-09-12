@@ -1,0 +1,824 @@
+Received: from AM6PR05MB5989.eurprd05.prod.outlook.com (2603:10a6:208:55::40)
+ by AM0PR05MB5633.eurprd05.prod.outlook.com with HTTPS via
+ AM0PR05CA0027.EURPRD05.PROD.OUTLOOK.COM; Thu, 19 Dec 2019 12:25:42 +0000
+Received: from AM6PR05MB6023.eurprd05.prod.outlook.com (20.179.0.10) by
+ AM6PR05MB5989.eurprd05.prod.outlook.com (20.179.1.159) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2538.16; Thu, 19 Dec 2019 12:25:42 +0000
+Received: from AM6PR05MB6023.eurprd05.prod.outlook.com
+ ([fe80::25df:a541:f77e:9ee]) by AM6PR05MB6023.eurprd05.prod.outlook.com
+ ([fe80::25df:a541:f77e:9ee%7]) with mapi id 15.20.2559.012; Thu, 19 Dec 2019
+ 12:25:42 +0000
+From: MURIU Evans <Evans.MURIU@intrasoft-intl.com>
+To: KOSGEI Gerrard <Gerrard.KOSGEI@intrasoft-intl.com>, Solomon Kimutai
+	<solomon@iansoftltd.com>, 'Paul' <paul@iansoftltd.com>
+Subject: RE: test
+Thread-Topic: test
+Thread-Index: AdW2ZTznZnnLH8ySScuat2RQKjTJywAABzVwAABqJLA=
+Date: Thu, 19 Dec 2019 12:25:42 +0000
+Message-ID:
+ <AM6PR05MB602325EA2A8E7846CE1C518CDE520@AM6PR05MB6023.eurprd05.prod.outlook.com>
+References:
+ <AM0PR05MB563301E5D8EA9B3FFF383047AE520@AM0PR05MB5633.eurprd05.prod.outlook.com>
+ <AM0PR05MB563333E9BCE0F40DFB6BBBB7AE520@AM0PR05MB5633.eurprd05.prod.outlook.com>
+In-Reply-To:
+ <AM0PR05MB563333E9BCE0F40DFB6BBBB7AE520@AM0PR05MB5633.eurprd05.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: AM6PR05MB6023.eurprd05.prod.outlook.com
+X-MS-Has-Attach: yes
+X-MS-Exchange-Organization-Network-Message-Id:
+ dd972a2b-bd39-45c0-8c4e-08d7847e90b2
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-publictraffictype: Email
+x-ms-exchange-organization-originalclientipaddress: 41.139.185.78
+x-ms-exchange-organization-originalserveripaddress: 2603:10a6:20b:a1::10
+X-Microsoft-Antispam-Mailbox-Delivery:
+ ucf:0;jmr:0;ex:0;auth:0;dest:I;ENG:(750127)(520011016)(706158)(944506383)(944626516);
+X-Microsoft-Antispam-Message-Info:
+ BigUD4oLvWVKk+eGLznJAZoDltXuvy53PFvB/FJen/G1Dv3bN1jPydp77YzEtU/wYIMZq6HszGpHcPUA1aMXZ/kXO3Nk17+iM7hmuMYclDFDvrKbJkXkBMWtXEu8kW4PAsKkpTzBKLXoFdTNRbKpXUtLC6sXGaiKjkGK39hjcQXQGvAGNe1J5aq0xqaqyknGZ+grXW/rOWEJWCE58aj81z3bP7n619hlTjgt5kPCxk3PP+1jPLpgQQdW2QD4PBtzwa8bMPOJ+jU8w7vQyC0Hl998o6wcA6seVfcMl9vongS4gzHaQoleofIo/A2lqWNbWOu0NSrLJSfrlkIRLBzXOb1tAEXo2RplAQbZ2uykHJro/cgOrUA3nYZdcnBqhapZvvM0EKxLtAepNiBAVYhO4wOa74opvnj9ImUPZ3iDcfGMW7iBekjtB8D1Zmw2r2wS/BuRVyrH4bWu/nlBBCzVv2Hh20q/qYeXQsx99fLmwLvgKzG5nIwfJc488UWRotExLNS3etw05jAHzdhpUzCYr77gTggFpN6qcb8ZVl2ni2g=
+Content-Type: multipart/mixed;
+	boundary="_010_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_"
+MIME-Version: 1.0
+
+--_010_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: multipart/related;
+	boundary="_009_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_";
+	type="multipart/alternative"
+
+--_009_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: multipart/alternative;
+	boundary="_000_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_"
+
+--_000_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Paul,
+
+
+
+In order for you to get a list of member account use the attached API that =
+list member accounts.
+
+
+
+Regards
+
+
+
+
+
+Evans Muriu Mwangi
+
+Senior Consultant
+
+West End Towers, 6th Floor, Waiyaki Way
+
+P. O. Box 1896-00606, Nairobi, Kenya
+
+Tel: +254 20 4214000/ +254 720671102
+
+intrasoft-intl.com
+
+
+
+<https://www.linkedin.com/company/intrasoft-international/>
+
+<https://twitter.com/INTRASOFT_Int>
+
+<https://www.youtube.com/intrasoftinternational>
+
+<https://www.intrasoft-intl.com/>
+
+
+
+
+
+From: KOSGEI Gerrard
+Sent: 19 December 2019 15:11
+To: Solomon Kimutai; 'Paul'
+Cc: MURIU Evans
+Subject: RE: test
+
+
+
+
+
+
+
+Kind Regards,
+
+
+
+
+
+Gerrard Kosgei
+
+Project Manager
+
+Banking & Finance
+
+
+
+M: +254 721 262 755
+
+T: +254 20 4214000/+254 724 421400
+
+W: intrasoft-intl.com
+
+<https://www.linkedin.com/company/intrasoft-international/>
+
+<https://twitter.com/INTRASOFT_Int>
+
+<https://www.youtube.com/intrasoftinternational>
+
+<https://www.intrasoft-intl.com/>
+
+
+
+
+
+From: KOSGEI Gerrard
+Sent: Thursday, 19 December 2019 15:10
+To: Solomon Kimutai <solomon@iansoftltd.com<mailto:solomon@iansoftltd.com>>
+Subject: test
+
+
+
+
+
+
+
+Kind Regards,
+
+
+
+
+
+Gerrard Kosgei
+
+Project Manager
+
+Banking & Finance
+
+
+
+M: +254 721 262 755
+
+T: +254 20 4214000/+254 724 421400
+
+W: intrasoft-intl.com
+
+<https://www.linkedin.com/company/intrasoft-international/>
+
+<https://twitter.com/INTRASOFT_Int>
+
+<https://www.youtube.com/intrasoftinternational>
+
+<https://www.intrasoft-intl.com/>
+
+
+
+
+
+
+--_000_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:"Trebuchet MS";
+	panose-1:2 11 6 3 2 2 2 2 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-language:EN-US;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-priority:99;
+	mso-style-link:"Balloon Text Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";
+	mso-fareast-language:EN-US;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+span.EmailStyle18
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+span.EmailStyle19
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+span.EmailStyle20
+	{mso-style-type:personal;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+span.EmailStyle21
+	{mso-style-type:personal-reply;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";
+	mso-fareast-language:EN-US;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-GB" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Hi Paul,<o:p></o:p></s=
+pan></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">In order for you to ge=
+t a list of member account use the attached API that list member accounts.<=
+o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Regards<o:p></o:p></sp=
+an></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" width=3D"442" style=3D"width:331.6pt;border-collapse:collapse">
+<tbody>
+<tr style=3D"height:32.8pt">
+<td width=3D"62" rowspan=3D"2" style=3D"width:46.3pt;padding:0cm 5.4pt 0cm =
+5.4pt;height:32.8pt">
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Trebuchet MS&quot;,=
+&quot;sans-serif&quot;;color:#1F497D;mso-fareast-language:EN-GB"><img width=
+=3D"34" height=3D"58" id=3D"_x0000_i1039" src=3D"cid:image001.png@01D5B680.=
+901DAA30" alt=3D"cid:image005.png@01D4A683.DA4DDED0"></span><span style=3D"=
+color:#1F497D;mso-fareast-language:EN-GB"><o:p></o:p></span></p>
+</td>
+<td width=3D"274" rowspan=3D"2" style=3D"width:205.7pt;border:none;border-r=
+ight:solid #B9C2CC 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:32.8pt">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:13.0pt;font-family:&quot=
+;Trebuchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF;mso-fareast-langua=
+ge:EN-GB">Evans Muriu Mwangi
+</span></b><span style=3D"font-size:9.0pt;font-family:&quot;Trebuchet MS&qu=
+ot;,&quot;sans-serif&quot;;color:#00B0F0;mso-fareast-language:EN-GB">&nbsp;=
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:8.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0;mso-fareast-language:E=
+N-GB">Senior Consultant
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:8.0pt;font-f=
+amily:&quot;Trebuchet MS&quot;,&quot;sans-serif&quot;;color:#63727A;mso-far=
+east-language:EN-GB">West End Towers, 6th Floor, Waiyaki Way<o:p></o:p></sp=
+an></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:8.0pt;font-f=
+amily:&quot;Trebuchet MS&quot;,&quot;sans-serif&quot;;color:#63727A;mso-far=
+east-language:EN-GB">P. O. Box 1896-00606, Nairobi, Kenya<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:8.0pt;font-f=
+amily:&quot;Trebuchet MS&quot;,&quot;sans-serif&quot;;color:#63727A;mso-far=
+east-language:EN-GB">Tel: &#43;254 20 4214000/ &#43;254 720671102<o:p></o:p=
+></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:8.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0;mso-fareast-language:E=
+N-GB">intrasoft-intl.com</span><span style=3D"font-size:8.0pt;color:#1F497D=
+;mso-fareast-language:EN-GB"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:5.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0;mso-fareast-language:E=
+N-GB">&nbsp;</span><span style=3D"color:#1F497D;mso-fareast-language:EN-GB"=
+><o:p></o:p></span></p>
+</td>
+<td width=3D"45" style=3D"width:33.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:3=
+2.8pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.linkedin.com/company/intrasoft-international/"><span style=
+=3D"color:#1F497D;mso-fareast-language:EN-GB;text-decoration:none"><img bor=
+der=3D"0" width=3D"23" height=3D"23" id=3D"_x0000_i1038" src=3D"cid:image00=
+2.png@01D5B680.901DAA30" alt=3D"cid:image022.png@01D4A6A7.57CB0860"></span>=
+</a><span style=3D"color:#1F497D;mso-fareast-language:EN-GB"><o:p></o:p></s=
+pan></p>
+</td>
+<td width=3D"61" style=3D"width:46.0pt;padding:0cm 0cm 0cm 0cm;height:32.8p=
+t">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://twitter.com/INTRASOFT_Int"><span style=3D"color:#1F497D;mso-far=
+east-language:EN-GB;text-decoration:none"><img border=3D"0" width=3D"23" he=
+ight=3D"23" id=3D"_x0000_i1037" src=3D"cid:image003.png@01D5B680.901DAA30" =
+alt=3D"cid:image023.png@01D4A6A7.57CB0860"></span></a><span style=3D"color:=
+#1F497D;mso-fareast-language:EN-GB"><o:p></o:p></span></p>
+</td>
+</tr>
+<tr style=3D"height:32.8pt">
+<td width=3D"45" style=3D"width:33.6pt;padding:0cm 5.4pt 0cm 5.4pt;height:3=
+2.8pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.youtube.com/intrasoftinternational"><span style=3D"color:#1=
+F497D;mso-fareast-language:EN-GB;text-decoration:none"><img border=3D"0" wi=
+dth=3D"23" height=3D"23" id=3D"_x0000_i1036" src=3D"cid:image004.png@01D5B6=
+80.901DAA30" alt=3D"cid:image024.png@01D4A6A7.57CB0860"></span></a><span st=
+yle=3D"color:#1F497D;mso-fareast-language:EN-GB"><o:p></o:p></span></p>
+</td>
+<td width=3D"61" style=3D"width:46.0pt;padding:0cm 0cm 0cm 0cm;height:32.8p=
+t">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.intrasoft-intl.com/"><span style=3D"mso-fareast-language:EN=
+-GB;text-decoration:none"><img border=3D"0" width=3D"23" height=3D"23" id=
+=3D"_x0000_i1035" src=3D"cid:image005.png@01D5B680.901DAA30" alt=3D"cid:ima=
+ge025.png@01D4A6A7.57CB0860"></span></a><span style=3D"color:#1F497D;mso-fa=
+reast-language:EN-GB"><o:p></o:p></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D;mso-fareast-language:EN=
+-GB"><o:p>&nbsp;</o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US" style=3D"font-size:10.0pt;fo=
+nt-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;mso-fareast-language:EN=
+-GB">From:</span></b><span lang=3D"EN-US" style=3D"font-size:10.0pt;font-fa=
+mily:&quot;Tahoma&quot;,&quot;sans-serif&quot;;mso-fareast-language:EN-GB">=
+ KOSGEI
+ Gerrard <br>
+<b>Sent:</b> 19 December 2019 15:11<br>
+<b>To:</b> Solomon Kimutai; 'Paul'<br>
+<b>Cc:</b> MURIU Evans<br>
+<b>Subject:</b> RE: test<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Kind Regards,<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:12.0pt"><o:p=
+>&nbsp;</o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"border-collapse:collapse">
+<tbody>
+<tr style=3D"height:30.85pt">
+<td width=3D"53" rowspan=3D"2" style=3D"width:39.7pt;padding:0cm 5.4pt 0cm =
+5.4pt;height:30.85pt">
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Trebuchet MS&quot;,=
+&quot;sans-serif&quot;"><img border=3D"0" width=3D"34" height=3D"58" id=3D"=
+_x0000_i1025" src=3D"cid:image001.png@01D5B680.901DAA30" alt=3D"cid:image00=
+5.png@01D4A683.DA4DDED0"></span><o:p></o:p></p>
+</td>
+<td width=3D"205" rowspan=3D"2" style=3D"width:153.7pt;border:none;border-r=
+ight:solid #B9C2CC 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Trebuchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF">Gerrard Kosgei</s=
+pan></b><span style=3D"font-size:12.0pt"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0">Project Manager
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0">Banking &amp; Finance=
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Tr=
+ebuchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0"><o:p>&nbsp;</o:p></s=
+pan></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF">M: &#43;254 721 262 7=
+55<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:8.5pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF">T: &#43;254 20 421400=
+0/&#43;254 724 421400</span><span style=3D"font-size:8.5pt"><o:p></o:p></sp=
+an></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF">W: intrasoft-intl.com=
+</span><span style=3D"font-size:12.0pt"><o:p></o:p></span></p>
+</td>
+<td width=3D"54" style=3D"width:40.5pt;padding:0cm 5.4pt 0cm 5.4pt;height:3=
+0.85pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.linkedin.com/company/intrasoft-international/"><span style=
+=3D"color:windowtext;text-decoration:none"><img border=3D"0" width=3D"23" h=
+eight=3D"23" id=3D"_x0000_i1026" src=3D"cid:image002.png@01D5B680.901DAA30"=
+ alt=3D"cid:image022.png@01D4A6A7.57CB0860"></span></a><o:p></o:p></p>
+</td>
+<td width=3D"28" style=3D"width:21.25pt;padding:0cm 0cm 0cm 0cm;height:30.8=
+5pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://twitter.com/INTRASOFT_Int"><span style=3D"color:windowtext;text=
+-decoration:none"><img border=3D"0" width=3D"23" height=3D"23" id=3D"_x0000=
+_i1027" src=3D"cid:image003.png@01D5B680.901DAA30" alt=3D"cid:image023.png@=
+01D4A6A7.57CB0860"></span></a><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:30.85pt">
+<td width=3D"54" style=3D"width:40.5pt;padding:0cm 5.4pt 0cm 5.4pt;height:3=
+0.85pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.youtube.com/intrasoftinternational"><span style=3D"color:wi=
+ndowtext;text-decoration:none"><img border=3D"0" width=3D"23" height=3D"23"=
+ id=3D"_x0000_i1028" src=3D"cid:image004.png@01D5B680.901DAA30" alt=3D"cid:=
+image024.png@01D4A6A7.57CB0860"></span></a><o:p></o:p></p>
+</td>
+<td width=3D"28" style=3D"width:21.25pt;padding:0cm 0cm 0cm 0cm;height:30.8=
+5pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.intrasoft-intl.com/"><span style=3D"text-decoration:none"><=
+img border=3D"0" width=3D"23" height=3D"23" id=3D"_x0000_i1029" src=3D"cid:=
+image005.png@01D5B680.901DAA30" alt=3D"cid:image025.png@01D4A6A7.57CB0860">=
+</span></a><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US">From:</span></b><span lang=
+=3D"EN-US"> KOSGEI Gerrard
+<br>
+<b>Sent:</b> Thursday, 19 December 2019 15:10<br>
+<b>To:</b> Solomon Kimutai &lt;<a href=3D"mailto:solomon@iansoftltd.com">so=
+lomon@iansoftltd.com</a>&gt;<br>
+<b>Subject:</b> test<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Kind Regards,<o:p></o:p></span>=
+</p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:12.0pt"><o:p=
+>&nbsp;</o:p></span></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"border-collapse:collapse">
+<tbody>
+<tr style=3D"height:30.85pt">
+<td width=3D"53" rowspan=3D"2" style=3D"width:39.7pt;padding:0cm 5.4pt 0cm =
+5.4pt;height:30.85pt">
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;Trebuchet MS&quot;,=
+&quot;sans-serif&quot;"><img border=3D"0" width=3D"34" height=3D"58" id=3D"=
+Picture_x0020_16" src=3D"cid:image001.png@01D5B680.901DAA30" alt=3D"cid:ima=
+ge005.png@01D4A683.DA4DDED0"></span><o:p></o:p></p>
+</td>
+<td width=3D"205" rowspan=3D"2" style=3D"width:153.7pt;border:none;border-r=
+ight:solid #B9C2CC 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt">
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Trebuchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF">Gerrard Kosgei</s=
+pan></b><span style=3D"font-size:12.0pt"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0">Project Manager
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0">Banking &amp; Finance=
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Tr=
+ebuchet MS&quot;,&quot;sans-serif&quot;;color:#00B0F0"><o:p>&nbsp;</o:p></s=
+pan></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF">M: &#43;254 721 262 7=
+55<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:8.5pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF">T: &#43;254 20 421400=
+0/&#43;254 724 421400</span><span style=3D"font-size:8.5pt"><o:p></o:p></sp=
+an></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:9.0pt;font-family:&quot;Tre=
+buchet MS&quot;,&quot;sans-serif&quot;;color:#0060AF">W: intrasoft-intl.com=
+</span><span style=3D"font-size:12.0pt"><o:p></o:p></span></p>
+</td>
+<td width=3D"54" style=3D"width:40.5pt;padding:0cm 5.4pt 0cm 5.4pt;height:3=
+0.85pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.linkedin.com/company/intrasoft-international/"><span style=
+=3D"color:windowtext;text-decoration:none"><img border=3D"0" width=3D"23" h=
+eight=3D"23" id=3D"Picture_x0020_2" src=3D"cid:image002.png@01D5B680.901DAA=
+30" alt=3D"cid:image022.png@01D4A6A7.57CB0860"></span></a><o:p></o:p></p>
+</td>
+<td width=3D"28" style=3D"width:21.25pt;padding:0cm 0cm 0cm 0cm;height:30.8=
+5pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://twitter.com/INTRASOFT_Int"><span style=3D"color:windowtext;text=
+-decoration:none"><img border=3D"0" width=3D"23" height=3D"23" id=3D"Pictur=
+e_x0020_3" src=3D"cid:image003.png@01D5B680.901DAA30" alt=3D"cid:image023.p=
+ng@01D4A6A7.57CB0860"></span></a><o:p></o:p></p>
+</td>
+</tr>
+<tr style=3D"height:30.85pt">
+<td width=3D"54" style=3D"width:40.5pt;padding:0cm 5.4pt 0cm 5.4pt;height:3=
+0.85pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.youtube.com/intrasoftinternational"><span style=3D"color:wi=
+ndowtext;text-decoration:none"><img border=3D"0" width=3D"23" height=3D"23"=
+ id=3D"Picture_x0020_4" src=3D"cid:image004.png@01D5B680.901DAA30" alt=3D"c=
+id:image024.png@01D4A6A7.57CB0860"></span></a><o:p></o:p></p>
+</td>
+<td width=3D"28" style=3D"width:21.25pt;padding:0cm 0cm 0cm 0cm;height:30.8=
+5pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><a href=
+=3D"https://www.intrasoft-intl.com/"><span style=3D"text-decoration:none"><=
+img border=3D"0" width=3D"23" height=3D"23" id=3D"Picture_x0020_5" src=3D"c=
+id:image005.png@01D5B680.901DAA30" alt=3D"cid:image025.png@01D4A6A7.57CB086=
+0"></span></a><o:p></o:p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_--
+
+--_009_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=2930;
+	creation-date="Thu, 19 Dec 2019 12:25:39 GMT";
+	modification-date="Thu, 19 Dec 2019 12:25:39 GMT"
+Content-ID: <image001.png@01D5B680.901DAA30>
+Content-Transfer-Encoding: base64
+
+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
+9/4DUuB8ilUSesQAAAAASUVORK5CYII=
+
+--_009_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: image/png; name="image002.png"
+Content-Description: image002.png
+Content-Disposition: inline; filename="image002.png"; size=1184;
+	creation-date="Thu, 19 Dec 2019 12:25:39 GMT";
+	modification-date="Thu, 19 Dec 2019 12:25:39 GMT"
+Content-ID: <image002.png@01D5B680.901DAA30>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAAQgSURBVEhL
+jVVPaBx1FP5m5jez3d1smqyBbqiQpBaahrRG0dDoSXuMtA2CeOihmgj14Ll60GHsQXopxIs5tCII
+RcFium0hlyIIGshBUhPSUKRN/Euxtalxd7Oz88fvzWQnm6bN9rEDs79573vv971/ynEcPE7s5edf
+hqYPI/BfAcI+Pq2A9i+fBejGdwiDq07XTz88zl496oO9fOB1aKkPoaxnoeuAVwV8l9ghcdEKwzwE
+lTqEIPjA/vWF6wirp52uuYsPY20Ct6fbFDp7PoOVGWO0gPvfVt/iQJzJI2JmGEDqG3vpuXP46/a7
+ztCKVzdKwO3pQYWCO4n0zmFU7sdRPonUyryNBqTbx1Do7rSnrWPO0EzkYCPyXeUJZDqGUb4n0YCc
+xg7cUnMXolf+B8jkh7Hr7gQNxhJwe3ngCNIto1HEagdQK08BxpcImUhljcGvNXcgGmKfbhslXtHp
+mi0q2/5Iw4lvz8CXmzB5fq0KK/eGs/vHVR5csG8fpIPUMwnH27kJA9oTJ/DPEPeywttXBmHmelFl
+8oQ73VRw114lxiV7ebAfhpePkvuwaAwEpGNTbmgvOUgRj7iKhsdYy7GpKAa+AaUmGfES9Fo3QhqI
+U6sl1glIkW6yWio8Z8oMa2tVCR5x+TU8nFxZQPhDUGVn+b/DDzMw1DgVi/D9C8yBDl17D95akQxO
+wdVaYVbegpk+gRqd1SUq0/CwVEtf1CB1Ea+h9pXT8/Oifa8thdLecYTerNMz97Wo2H/sv+zsvtHY
+AN/bSwcVUi3HI2pFYrw+xStn2cZ8l5AT2Rm9rXW2x1SAtbkuFeTsP1/6FNXVeTo8G5164Th093hE
+n1AreJqeVfxTkpdtm0bTNzrKsM4inX8TgQf7lwNXnL1zN5E2f4NbLTMXGd5SgMVJSWhZYFJe3LbU
+tMaSCJ9ChQ0jR6bZQfubrO8QRi5p+yjJXnWB4No11vH24I2EhZDQ6iUofIoIpxu8qhTB3WuKbT5J
+jt5vtN/yrmlPOGjWLYVz4ip8/toMO3QRZrY3ql0RVePMFrm/AmSZUI2dUZeQhZ4EGev9Tb1CLg5A
+5lJ1dRFfjMwox/k45Cw4xXq+BE+uS68ujtq3BnpZU3kYkvlwgP9HoPkaK+LpqJFELwiO8HwfCn47
+m5WdRTHItG+cEtxoKsqQsW/1n0e2YzSabmbmk7hr16eiYY3A5CPirdG5jNkoygY9nu3goirdPe/s
+mS9GBCS3vZM5icJKIRqbFbIR1b4IUWQqNk5GqWeReldKIJk8x+7KVQjOnvhzAi4D3p7ffxTagwlY
+2XgTyRBqJvXZX3lwDqXqSWdoNplym9ac039DPrzDHToV7VCr5RE7lFFLHUu5BTJi3evwS6ed7iY7
+tB7k+rK9uHn7a33Rcpbt73sLbKKm2/9/IUDBH0zvtvoAAAAASUVORK5CYII=
+
+--_009_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: image/png; name="image003.png"
+Content-Description: image003.png
+Content-Disposition: inline; filename="image003.png"; size=1240;
+	creation-date="Thu, 19 Dec 2019 12:25:40 GMT";
+	modification-date="Thu, 19 Dec 2019 12:25:40 GMT"
+Content-ID: <image003.png@01D5B680.901DAA30>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAARYSURBVEhL
+hZVbTBxVGMf/c9k7LNsutHipWmO0LNXaNJIGFUIx0WQTS6IP1KCmZTH1URNTfJDTwfjQ1/pgE0os
+kRcTm1K0iWmCBG8PG41BzVL7ICZVwVK6sMveZ3b8vhl2t7vdwklmMzvnnN853/+7qZqm4V5DdA89
+CxVhmEYPzGIIRfghIwFJjkFSZqHjijY39sO99qv1JkTPm69AcX4Al/sAZAXIZYB8DnQIPYofDsdh
+uDyHUTTeFy8MzcPIf6jNTlysZVXBRaBDxcH9n6ChMQK9ACTXa9ZLQLEIZOkwfnj4Gg7A4/1C9Jw4
+j19+f1tbi+qlTWW46CCwLzSFHcEwVlcIQreUCLbd2EjCsi7YEsHB0H0ihT4tah9QubnriXPY0RLG
+rf9s3FZg1QEotFXP00Mck6zhfc27w9CJg2ikDBfdx1+Gv2kQqzfthW6ffXPWufaQBj/JlUgQlMwz
+HyVLJeRoXTplkMUKAsFB4k1rc59Oq2JkRMLs4hnrFqyn080O/JmoD5P2zWCzSwf4Gknr9BiM4mno
+12/C/Xg7Uqn3kM/fhqIcg4Rmm6OfIe6XKuZudMAf2Gc5jyHeBiAR/4giY5EgXyG4+wFs0BxLkU79
+pM1deKvihug8vQ+IruPttPdFOqAZqQ1YPOKqkIw++ljrtse0bycvic5XD8E0h+npJ3NbkUpG6/pX
+Kh6l0HwEmaw9zTziqjDRWw4rnsim+feY6B2a1GbGluj9HdE5cBrJ5CFIZm1s2jDTfI0ixmnlAWlj
+8YjL8JDlkNJwukjz7GW4M6nSJ+3HSYZ+U+/Won/EgX/+bEKB8oLBPJhHXJJF9lXFNCePLPdhyXW2
+rgS1H/+98SQFwYPk1MoMR5qs+OjmxRS/WCHII00XDgSfhrR2VvQOvKvNTFLIbTGKhQi8TcD67coi
+Tiri0s0Rg8v1TFl3jpgCyyTtQfJ6fY03MaKrPwSn5wQ2EtWnu1jaTIzhM3B7KnBextLs3NUNxfGb
+eK5tWPt+4lLt3UVnOACH73M4yEk5gt+ZbG4PO3WGZFGmYBjD1mZrgWSgoMewdusvSvFfITtjd4G7
+Bp4inSfg9u7HevzuLDa4LilTKrr3RClDr1E27rMSwKHyCSuUreNwO69qVz/OiLYRGfcvkbB6O0yp
+n+YjcJDttWDTBHEoCdeuoWdvVNVGR02qBaegOi9bN8/nZXh9R8jJRyhrM6LrjWVgUUdB3km+CZKE
+sEoC61xbd2SZMtlJkaKeYq5VFbnIiOdfH0dL66BV3TJWItFC1UPS7LUgbCoXstxmFtarmsFdZPPy
+uPbdZ9PW9rKeuT9OIq60WmWzVM+5nPKz1WAp7HoOxFeugDmbowznAi/aXjoK/H2Oyq/didgH2w3W
+mItafPU8lh86qS1c4BpgG37nXm1h1MAChqiHfm310Mam6h5qZx6VZYpjF2nP/3PZeWRT2/fQ0kGb
+zfZiVfeXqAZJ1Jwl6v56IUbleNvu/z8cEsuDW+p2eAAAAABJRU5ErkJggg==
+
+--_009_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: image/png; name="image004.png"
+Content-Description: image004.png
+Content-Disposition: inline; filename="image004.png"; size=1146;
+	creation-date="Thu, 19 Dec 2019 12:25:40 GMT";
+	modification-date="Thu, 19 Dec 2019 12:25:40 GMT"
+Content-ID: <image004.png@01D5B680.901DAA30>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAAP6SURBVEhL
+nVVNaFxVFD73581knJ90Aq1mK1FCDAQUY6d1YXEjxrRBF4KTrJpiBMVW0FpKGyau6kIUBYM2q6mi
+YGEytbabopt2cEChoKFIdCs20DSZzE/mvXev33kzk0yniU08MMy7P+e753z33O/oTCZD29k7P3x1
+UHo04pM9ZMkOWEsJIWhVkFhQJH40mi5/9GL6+nb+equF47nsK44UZ7qkHBKKaN1YqhkiH5sVDghL
+2h+WYr81dOrd/IWbrrEffDw2cbET6x7w4cK0PrjU93ncUZMewrzrM9ymCXziDKrgsIpprMWVHIoo
++d2JfPb89b2LbxRTGa/lsQE+XCjoA0uP5eJajay4XhAlgz3IVn1DSI66HT0J/14qFMaKqVRwwCb4
+P4uziZAeWQYw206AW/s4G/ZLOnpkGDhFSk1ugL+Vyx5OOuooR8wWU5Ic3NxOzQWFa8jgLvx7gAO8
+/KdjE3l9dnpa3Hmy7xxzzFREpaCKbwqW6Gcr6DZYLiGydSy50kjfSMMsOJIoTCTjwtI+hPHMQ1Kk
+yrgLxoHfOeBe0mtPPT6clKKfL68bEZd9c+mTIxOHdxp1a9/x+Wwe/qN8B0ml+hlXu2TGBNcbTIEK
+35qvdwvM+9lPCTUa3ANSYVwtrH1+3ZjgAutIi6T+uxP8vW9nk/Vw9OUbZXmhmE4zRfcb/NifcQI8
+4GoMB2rNyTr4cshf6/SsRiIgkr58LmFPPPt99nRsRV6ZSafr7fsc8tbqFu8Wk4zHuBr3F/URsMIs
+l5RPYOp+M0j1dpejnyBrc8tx8zq2fNG+zYWfAiSjN/GiGoeUwXiU53EQSfKcrZJGUvtqrve7J+zp
+ZEle6dyDyOGnGsBYZFwtyC5AQ56uYhRCeGWrY52OkWpVgPNjP60KcD6+JeeIPBZFcBVEEUGUVWMW
+tBXiWhjgrBUhTJZdt7cT/MNXp5YxN/efVWS83pDjUBncAo8PuaYdkjkc9n6jnCy4l6/h85vdliP7
+sT8b/zGujv3yRxEv9FZCyf4VPAC80NG357M32l+oIlnzyaB0pSE8U4wdjLvaXygkOMX+wKFl37/V
+8+tiUc9kMhZacFILMc8XwXIKbUlBW1KN6BsPLPgPPtvGzZWWtkASCDiocTrJuIEqssi8mcvO9YT0
+UVY3FqH/Y3scTXfq3txnwGP/DcktPtw3dWDpz0dYNnej58xyU89p1fMvM04rsE1wCPwLv109Uvqr
+b7ZbNzpRaQcZMMdMRcnzziceXZwqDo5vtK972tzMYManQTqGHnqVe+gepYZYhFgr+EkHPRS/LpQs
+lxtXRc2YmxVjHtxDW+k0m+3Fze5Ph3DIADdn7v51Swu+bxvd/6Xxbbv/v5FT3IIEi7lnAAAAAElF
+TkSuQmCC
+
+--_009_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: image/png; name="image005.png"
+Content-Description: image005.png
+Content-Disposition: inline; filename="image005.png"; size=1437;
+	creation-date="Thu, 19 Dec 2019 12:25:41 GMT";
+	modification-date="Thu, 19 Dec 2019 12:25:41 GMT"
+Content-ID: <image005.png@01D5B680.901DAA30>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAAUdSURBVEhL
+hVVNbFRVFD73vvvevDe/7UDFBlELMbZoqAbp1CGx0FpbqUETE4OJiTGAYaEuTAyaKKSwMGxYmBiI
+gejCRReyACVaSaGSONKqwZLA4IJaIw0pA50fOm/e772e+4YZOgX0rN7Mvfc753zn52PDw8NwP+sZ
+GEpzoC8Jznu54B1CQJwQKFFCs4TS0xT4dz+Nnszc7z2710G678VXmap+ommhTqpQsCwLfNsGIdGb
+muKMqSnPdVM+5x/1DG6dcl13f2bs+2NLsRrAOzo6lGWrVh8KhyM7Pc+DW7dK9fsEQ1ZVVRQKhf34
+2aSp2rsISoxwuDOk699sfH7oyPzs9K5sNuvXHtXBu7q6mBJLHk8kmrfM37wBnHOQgDXTNA1s27k6
+cWZ0bzrdl3QJfQfPSXlhASilkFy2fIeAttauWOyVyclJT767E3k4cTiZXL7l5o1cgLcY2DAMwOjA
+duw/g0OVPRM2wtSsmME9SZd8t2x5y1DOcw/jjR118HRf/9ZYPLldRrzUtFAII67sRApeR5RZec4Z
+rDPCBlg21gIzrJl839yc3I54JzJjp06wPXv2kB/PnjuABbqLCoUxcB2n8svp0SOpnv4hQqEauU+e
+yxfyn/meNxOJRg9KagKn6CjA8ckBxP2W/TA+kUo0Jdpl8WpUyDSxUyAciUCxWJiu0kSfZEA/r3Im
+2l3b+pQCbcPOaSh6uVyGWDzRLnEZZfCybLfFpmLxXM+9YlmVkhB8Np1+I8pJLs5t50J6aCjMy16c
+uXCFh+hbeH4XlRJP4jIiSJ/s48UWkRHn8yO2aWlIBQM1twbPzUxm7HpXT98GSpkrv5/d/MJTslOW
+msSTuEwArHVsp+EcWZGp/41cvEaBfMEprMemuCovoa+nQcDVbdu2aTNz+QdLxeJepPFjShW1loXE
+k7iMUBLhvl/nW/JuVUzBfZgmCjzscWtKUfT3BZCLVb7REYWp6WvXHqWKYXqu97Nu6Ay7qR4gx8dU
+USJMcFFGr5HF3Dm27TGVbcTqG22trTMzc4V1AOKrAJvCWszsS0b1Ti7EP0yhbboRJo5TqIMjHkhc
+hjN4SQtpG+zbvMtOwTTUeCIxXMzP/zoyMuJ0bx5YhV12Pmg3IVYpnPzOqXgTODnPFXhk0SAHDhAP
+HMu+xAQRY7qu18Fr7mXPIhV/4Kg/wAXOpMsupvvwmxMD3JYrInT9MT2sr7RtOy7bb7EhHg6eNca4
+B8e5zz9cWnHsawwTxj0V1iiUFDOZk2Z3z8BGrGgpk/l6obt3sE3XjSfwLTiO3bAu5H8Slw1uSk2M
+nj13ORqNti/gpNUGyfOwQBRWqKqe8h23OpkM1gufB4VFOlcvLNwCnNKG4UMcKJWKlwc3dU+wffv2
+CdwFu3F/H5c9G3COJkcax/9gc1Mz3JjLfRD86Yt2VdVi3T39O3HQDCx8Q8LyPeKAoojdEjfYinLJ
+dG3qP9rSsmJ7bSsGxcP0KmYFE4AL8rcg8FA0FuvF4vdWKpWlTMq1C7nc3NHJ8VMnqonWzCzump9X
+WnFt1ve5HD5cq5y43m/Va+Tximlise5ELDO9vc8hn58/CYhTg6yDywWPSrRVUZRDsXg8UCIJhOpD
+HI3vTW0eKGiqutJxGqcZtyIw3J6FfP5IfvaveyuR9BZIVDb7NmroqNTQSDTWqVBKcMu9JwtcLBSC
+4knhkO0maUMBmbIqlf/X0Fo6t8X2mFR/W6p/uar+uCpQ/UkJOyRrmmag/mf/Q/3/BbhKkYDuAF6h
+AAAAAElFTkSuQmCC
+
+--_009_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_--
+
+--_010_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_
+Content-Type: application/xml; name="Prt099V_CustomerAccountsList.xml"
+Content-Description: Prt099V_CustomerAccountsList.xml
+Content-Disposition: attachment; filename="Prt099V_CustomerAccountsList.xml";
+	size=1740; creation-date="Tue, 04 Jun 2019 10:01:57 GMT";
+	modification-date="Tue, 04 Jun 2019 10:02:01 GMT"
+Content-Transfer-Encoding: base64
+
+PHNvYXBlbnY6RW52ZWxvcGUgeG1sbnM6c29hcGVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5v
+cmcvc29hcC9lbnZlbG9wZS8iIHhtbG5zOnByb2Y9Imh0dHA6Ly93d3cuaW50cmFzb2Z0LWludGVy
+bmF0aW5hbC5jb20vR2F0ZXdheVNlcnZpY2UvUHJvZml0c0V4dCI+DQogICA8c29hcGVudjpIZWFk
+ZXIvPg0KICAgPHNvYXBlbnY6Qm9keT4NCiAgICAgIDxwcm9mOlBydDA5OVZfQ3VzdG9tZXJBY2Nv
+dW50c0xpc3Q+DQogICAgICAgICA8IS0tT3B0aW9uYWw6LS0+DQogICAgICAgICA8cHJvZjppbXBv
+cnQ+DQogICAgICAgICAgICA8IS0tT3B0aW9uYWw6LS0+DQogICAgICAgICAgICA8cHJvZjpJbkNy
+aXRlcmlhQ3VzdG9tZXJUeXBlQ3VzdG9tZXJTZWFyY2g+MTwvcHJvZjpJbkNyaXRlcmlhQ3VzdG9t
+ZXJUeXBlQ3VzdG9tZXJTZWFyY2g+DQogICAgICAgICAgICA8cHJvZjpJbkN1c3RvbWVyQ3VzdG9t
+ZXJDdXN0SWQ+MTU8L3Byb2Y6SW5DdXN0b21lckN1c3RvbWVyQ3VzdElkPg0KICAgICAgICAgICAg
+PHByb2Y6SW5TZWxlY3RlZFByb2R1Y3RQcm9kdWN0SWRQcm9kdWN0PjA8L3Byb2Y6SW5TZWxlY3Rl
+ZFByb2R1Y3RQcm9kdWN0SWRQcm9kdWN0Pg0KICAgICAgICAgICAgPHByb2Y6SW5TZWxlY3RlZFN5
+c3RlbVByb2ZpdHNBY2NvdW50UHJmdFN5c3RlbT4zPC9wcm9mOkluU2VsZWN0ZWRTeXN0ZW1Qcm9m
+aXRzQWNjb3VudFByZnRTeXN0ZW0+DQogICAgICAgICA8L3Byb2Y6aW1wb3J0Pg0KICAgICAgICAg
+PCEtLU9wdGlvbmFsOi0tPg0KICAgICAgICAgPHByb2Y6ZXhlY3V0aW9uUGFyYW1ldGVycz4NCiAg
+ICAgICAgICAgIDxwcm9mOkNoYW5uZWxJZD45OTk5ODwvcHJvZjpDaGFubmVsSWQ+DQogICAgICAg
+ICAgICA8IS0tT3B0aW9uYWw6LS0+DQogICAgICAgICAgICA8cHJvZjpQYXNzd29yZD4hVVNTREFQ
+UDEhPC9wcm9mOlBhc3N3b3JkPg0KICAgICAgICAgICAgPCEtLU9wdGlvbmFsOi0tPg0KICAgICAg
+ICAgICAgPHByb2Y6VW5pcXVlSWQ+Z1tQT05NTD9OO0xRe3xGVSAyUm5nPC9wcm9mOlVuaXF1ZUlk
+Pg0KICAgICAgICAgICAgPCEtLU9wdGlvbmFsOi0tPg0KICAgICAgICAgICAgPHByb2Y6Q3VsdHVy
+ZU5hbWU+ZW48L3Byb2Y6Q3VsdHVyZU5hbWU+DQogICAgICAgICAgICA8cHJvZjpGb3JjYXN0Rmxh
+Zz5mYWxzZTwvcHJvZjpGb3JjYXN0RmxhZz4NCiAgICAgICAgICAgIDwhLS1PcHRpb25hbDotLT4N
+CiAgICAgICAgICAgIDxwcm9mOlJlZmVyZW5jZUtleT5QUlQwOTlWX05BTlNZX1JFVFJJRVZFXzAw
+MDAwMjwvcHJvZjpSZWZlcmVuY2VLZXk+DQogICAgICAgICAgICA8IS0tT3B0aW9uYWw6LS0+DQog
+ICAgICAgICAgICA8cHJvZjpTb3RmT3RwPjwvcHJvZjpTb3RmT3RwPg0KICAgICAgICAgICAgPCEt
+LU9wdGlvbmFsOi0tPg0KICAgICAgICAgICAgPHByb2Y6QnJhbmNoQ29kZT48L3Byb2Y6QnJhbmNo
+Q29kZT4NCiAgICAgICAgICAgIDwhLS1PcHRpb25hbDotLT4NCiAgICAgICAgICAgIDxwcm9mOkV4
+dFVuaXF1ZVVzZXJJZD5OQU5TWTwvcHJvZjpFeHRVbmlxdWVVc2VySWQ+DQogICAgICAgICAgICA8
+IS0tT3B0aW9uYWw6LS0+DQogICAgICAgICAgICA8cHJvZjpFeHREZXZpY2VBdXRoQ29kZT48L3By
+b2Y6RXh0RGV2aWNlQXV0aENvZGU+DQogICAgICAgICA8L3Byb2Y6ZXhlY3V0aW9uUGFyYW1ldGVy
+cz4NCiAgICAgIDwvcHJvZjpQcnQwOTlWX0N1c3RvbWVyQWNjb3VudHNMaXN0Pg0KICAgPC9zb2Fw
+ZW52OkJvZHk+DQo8L3NvYXBlbnY6RW52ZWxvcGU+
+
+--_010_AM6PR05MB602325EA2A8E7846CE1C518CDE520AM6PR05MB6023eurp_--

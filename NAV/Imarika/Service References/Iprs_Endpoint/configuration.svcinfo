@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configurationSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:schemas-microsoft-com:xml-wcfconfigurationsnapshot">
+  <behaviors />
+  <bindings>
+    <binding digest="System.ServiceModel.Configuration.BasicHttpBindingElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data name=&quot;BasicHttpBinding_IServiceIPRS&quot; /&gt;" bindingType="basicHttpBinding" name="BasicHttpBinding_IServiceIPRS" />
+  </bindings>
+  <endpoints>
+    <endpoint normalizedDigest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;http://10.1.1.5:9004/IPRSServerWCF&quot; binding=&quot;basicHttpBinding&quot; bindingConfiguration=&quot;BasicHttpBinding_IServiceIPRS&quot; contract=&quot;Iprs_Endpoint.IServiceIPRS&quot; name=&quot;BasicHttpBinding_IServiceIPRS&quot; /&gt;" digest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;http://10.1.1.5:9004/IPRSServerWCF&quot; binding=&quot;basicHttpBinding&quot; bindingConfiguration=&quot;BasicHttpBinding_IServiceIPRS&quot; contract=&quot;Iprs_Endpoint.IServiceIPRS&quot; name=&quot;BasicHttpBinding_IServiceIPRS&quot; /&gt;" contractName="Iprs_Endpoint.IServiceIPRS" name="BasicHttpBinding_IServiceIPRS" />
+  </endpoints>
+</configurationSnapshot>

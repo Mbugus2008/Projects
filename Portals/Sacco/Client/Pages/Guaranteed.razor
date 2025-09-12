@@ -1,0 +1,70 @@
+﻿@page "/Guaranteed"
+
+@using Sacco.Shared
+@inject Sacco.Shared.StateContainerService stateService
+@inject HttpClient Http
+
+<PageTitle>Guaranteed Loans</PageTitle>
+
+<h1  style="align-content:center">Guaranteed Loans</h1>
+
+
+<h5>Loans I have guaranteed</h5>
+
+@if (data == null)
+{
+    <p><em>Loading Guarantors...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr style="background-color:darkgray">
+              
+               
+                <th>Member No</th>
+                <th>Member Name</th>
+                <th>Application Date</th>
+                <th>Installments</th>
+                <th align="right">Loan Balance</th>
+                <th align="right" >Amount Guaranteed</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in data)
+            {
+                <tr>
+                  
+                    
+                    <td>@loan.Owner_account</td>
+                    <td>@loan.Owner_Name</td>
+                    <td>@loan.Application_Date.ToString("dd-MMM-yyy")</td>
+                    <td>@loan.Installments</td>
+                    <td align="right">@loan.Outstanding_Balance.ToString("#,##0.00")</td>
+                    <td align = "right">@loan.Amont_Guaranteed.ToString("#,##0.00")</td>
+                  
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row">Totals</th>
+               
+                <td colspan="4"></td>
+               
+                <td style="font-weight:bold" align="right">@data.Sum(o=> o.Amont_Guaranteed).ToString("#,##0.00") </td>
+            </tr>
+        </tfoot>
+    </table>
+ 
+}
+
+@code {
+    private guarantorsdata.Guarantors[]? data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        data = await Http.GetFromJsonAsync<guarantorsdata.Guarantors[]>($"api/Guaranteed/Get/{stateService.member}");
+    }
+}

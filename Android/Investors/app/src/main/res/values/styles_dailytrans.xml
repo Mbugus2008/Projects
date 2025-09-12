@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="dailytrans" parent="android:Widget.TextView">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">wrap_content</item>
+
+      </style>
+
+
+ </resources>

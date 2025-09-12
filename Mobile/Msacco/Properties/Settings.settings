@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Msacco.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Msacco_Msacco_MSACCO" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:212/Bandari/WS/BANDARI%20TEST/Codeunit/MSACCO</Value>
+    </Setting>
+    <Setting Name="Msacco_dcs_account_details_DCS_Account_Details_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:212/Bandari/WS/BANDARI/Page/DCS_Account_Details</Value>
+    </Setting>
+    <Setting Name="Msacco_MobileTransactions_Mobile_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:212/Bandari/WS/BANDARI/Page/Mobile_Transactions</Value>
+    </Setting>
+    <Setting Name="Msacco_Mbranch_MBranch" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:212/Bandari/WS/BANDARI/Codeunit/MBranch</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

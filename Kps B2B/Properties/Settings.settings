@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Kps_B2B.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Kps_B2B_Bank_Deposits_Bank_Deposits_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:1176/INVESTMENT/WS/KPS-TEST/Page/Bank_Deposits</Value>
+    </Setting>
+    <Setting Name="Kps_B2B_Members_Member_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:1176/INVESTMENT/WS/KPS-TEST/Page/Member</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

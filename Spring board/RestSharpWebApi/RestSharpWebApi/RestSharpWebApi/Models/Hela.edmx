@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HelaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Login History">
+          <Key>
+            <PropertyRef Name="Entry No" />
+          </Key>
+          <Property Name="Entry No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Customer Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Login Time" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Mobile FAQs">
+          <Key>
+            <PropertyRef Name="No_" />
+          </Key>
+          <Property Name="No_" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="200" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="500" />
+          <Property Name="Path" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Mobile Login">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Customer No" Type="nvarchar" MaxLength="200" />
+          <Property Name="No_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PIN" Type="nvarchar" MaxLength="100" />
+          <Property Name="OTP" Type="int" />
+          <Property Name="SecurityQuestion1" Type="nvarchar" MaxLength="200" />
+          <Property Name="Answer1" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecurityQuestion2" Type="nvarchar" MaxLength="200" />
+          <Property Name="Answer2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Last Login Time" Type="datetime" />
+          <Property Name="IsVerified" Type="bit" />
+          <Property Name="OTP Time" Type="datetime" />
+          <Property Name="Login Attempts" Type="int" />
+          <Property Name="IsDisabled" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="HelaModelStoreContainer">
+          <EntitySet Name="Login History" EntityType="Self.Login History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mobile FAQs" EntityType="Self.Mobile FAQs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mobile Login" EntityType="Self.Mobile Login" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HelaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HelaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Login_Histories" EntityType="HelaModel.Login_History" />
+          <EntitySet Name="Mobile_FAQs" EntityType="HelaModel.Mobile_FAQ" />
+          <EntitySet Name="Mobile_Logins" EntityType="HelaModel.Mobile_Login" />
+        </EntityContainer>
+        <EntityType Name="Login_History">
+          <Key>
+            <PropertyRef Name="Entry_No" />
+          </Key>
+          <Property Name="Entry_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Login_Time" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Mobile_FAQ">
+          <Key>
+            <PropertyRef Name="No_" />
+          </Key>
+          <Property Name="No_" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Question" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Mobile_Login">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Customer_No" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="No_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PIN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OTP" Type="Int32" />
+          <Property Name="SecurityQuestion1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Answer1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityQuestion2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Answer2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Login_Time" Type="DateTime" Precision="3" />
+          <Property Name="IsVerified" Type="Boolean" />
+          <Property Name="OTP_Time" Type="DateTime" Precision="3" />
+          <Property Name="Login_Attempts" Type="Int32" />
+          <Property Name="IsDisabled" Type="Boolean" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HelaModelStoreContainer" CdmEntityContainer="HelaEntities">
+          <EntitySetMapping Name="Login_Histories">
+            <EntityTypeMapping TypeName="HelaModel.Login_History">
+              <MappingFragment StoreEntitySet="Login History">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Login_Time" ColumnName="Login Time" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
+                <ScalarProperty Name="Customer_No" ColumnName="Customer No" />
+                <ScalarProperty Name="Entry_No" ColumnName="Entry No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mobile_FAQs">
+            <EntityTypeMapping TypeName="HelaModel.Mobile_FAQ">
+              <MappingFragment StoreEntitySet="Mobile FAQs">
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="No_" ColumnName="No_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mobile_Logins">
+            <EntityTypeMapping TypeName="HelaModel.Mobile_Login">
+              <MappingFragment StoreEntitySet="Mobile Login">
+                <ScalarProperty Name="IsDisabled" ColumnName="IsDisabled" />
+                <ScalarProperty Name="Login_Attempts" ColumnName="Login Attempts" />
+                <ScalarProperty Name="OTP_Time" ColumnName="OTP Time" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="Last_Login_Time" ColumnName="Last Login Time" />
+                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+                <ScalarProperty Name="SecurityQuestion2" ColumnName="SecurityQuestion2" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+                <ScalarProperty Name="SecurityQuestion1" ColumnName="SecurityQuestion1" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="No_" ColumnName="No_" />
+                <ScalarProperty Name="Customer_No" ColumnName="Customer No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

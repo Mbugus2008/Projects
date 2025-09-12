@@ -1,0 +1,15 @@
+﻿@page "/Client/Create"
+@using pulseem.Shared.Models;
+@inject HttpClient http
+@inject NavigationManager uriHelper
+<h3>Create</h3>
+<Form ButtonText="Create Client" cli="@cli"
+      OnValidSubmit="@CreateClient" />
+@code {
+    Clients cli = new Clients();
+    async Task CreateClient()
+    {
+        await http.PostAsJsonAsync("api/Client", cli);
+        uriHelper.NavigateTo("Clientlist");
+    }
+}

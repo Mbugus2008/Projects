@@ -1,0 +1,51 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="S_Ussd.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="S_Ussd_S_MobileClient_Client" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:802/Mobile.svc</Value>
+    </Setting>
+    <Setting Name="S_Ussd_sms_Service1" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://197.232.21.217:4000/Sms/Service1.svc</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Members3_Members3_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:6868/SouthLeighService/WS/SOUTHLEIGH/Page/Members3</Value>
+    </Setting>
+    <Setting Name="S_Ussd_MBranch_MBranch" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:6868/SouthLeighService/WS/SOUTHLEIGH/Codeunit/MBranch</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Statistics_Statistics_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:6868/SouthLeighService/WS/SOUTHLEIGH/Page/Statistics</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:6868/SouthLeighService/WS/SOUTHLEIGH/Page/Loans</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Vehicles_Vehicles_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:6868/SouthLeighService/WS/SOUTHLEIGH/Page/Vehicles</Value>
+    </Setting>
+    <Setting Name="S_Ussd_MobileTransactions_MobileTransactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:6868/SouthLeighService/WS/SOUTHLEIGH/Page/MobileTransactions</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Memberlist_Memberslist_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2738/Metrocrewservice/WS/MetroTrans%20Crew%20Sacco/Page/Members2</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Smses_Smses_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2738/Metrocrewservice/WS/MetroTrans%20Crew%20Sacco/Page/Smses</Value>
+    </Setting>
+    <Setting Name="S_Ussd_LedgerEntries_LedgerEntries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2738/Metrocrewservice/WS/MetroTrans%20Crew%20Sacco/Page/LedgerEntries</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Loan_Products_Loan_Products_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2738/Metrocrewservice/WS/MetroTrans%20Crew%20Sacco/Page/Loan_Products</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Alternate_Alternate" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2738/Metrocrewservice/WS/MetroTrans%20Crew%20Sacco/Codeunit/Alternate</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Sacco_MobileTransactions_MobileTransactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2738/Metrocrewservice/WS/MetroTrans%20Crew%20Sacco/Page/MobileTransactions</Value>
+    </Setting>
+    <Setting Name="S_Ussd_Matatu_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:6868/SouthLeighService/WS/SOUTHLEIGH/Page/Members</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

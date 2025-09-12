@@ -1,0 +1,69 @@
+﻿@page "/Profile/ProfileContact/{Taxregno}"
+@rendermode InteractiveServer
+
+@inject Eproc.Services.Icprofile iprofile
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.DropDowns
+@attribute [StreamRendering]
+<div class="card-body">
+    @{
+        var Tool = (new List<string>() { "Search", "Add", "Edit", "Delete", "Update", "Cancel" });
+    }<SfGrid DataSource="@contacts" ID="Contacts" Toolbar=@Tool>
+        <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true" Mode="EditMode.Normal"></GridEditSettings>
+        <GridEvents OnActionComplete="OnActionComplete" TValue="Kcontact.KeyContact"></GridEvents>
+        <GridColumns>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Entry_No) Visible="false" IsPrimaryKey="true" HeaderText="Entry No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Tax_Registration_No) HeaderText="Tax Registration No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Contact_Category) HeaderText="Contact Category" EditType="EditType.DropDownEdit">
+                <EditTemplate>
+                    <SfDropDownList TValue="Kcontact.Contact_Category" Placeholder="Order Placed" TItem="string" DataSource="@EnumValues">
+                        <DropDownListFieldSettings Value="Status"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                </EditTemplate>
+            </Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Name) HeaderText="Name"></Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Job_Title) HeaderText="JobTitle" TextAlign="TextAlign.Right"></Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Phone_Mobile) HeaderText="Phone/Mobile"></Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Email) HeaderText="Email"></Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Address) HeaderText="Address"></Syncfusion.Blazor.Grids.GridColumn>
+        </GridColumns>
+    </SfGrid>
+</div>
+<style>
+    .e-grid .e-toolbar .e-tbar-btn .e-icons,
+    .e-grid .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn {
+        /*    background: #add8e6;
+                border: 1px solid #5a70cc; */
+    }</style>
+@code {
+    [Parameter]
+    public string Taxregno { get; set; }
+    List<Kcontact.KeyContact> contacts { get; set; } = new List<Kcontact.KeyContact>();
+    Kcontact.KeyContact_Fields fields;
+    protected override async void OnInitialized()
+    {
+        contacts = await iprofile.getcontacts(Taxregno);
+        StateHasChanged();
+    }
+    public string[] EnumValues = Enum.GetNames(typeof(Kcontact.Contact_Category));
+    public void OnActionComplete(ActionEventArgs<Kcontact.KeyContact> args)
+    {
+        switch (args.RequestType)
+        {
+            case Syncfusion.Blazor.Grids.Action.Add: { args.Data.Tax_Registration_No = Taxregno; break; }
+            case Syncfusion.Blazor.Grids.Action.Save:
+                {
+
+                    args.Data =    iprofile.SaveData(args.Data).Result;
+
+                    break;
+                }
+            case Syncfusion.Blazor.Grids.Action.Delete:
+                {
+                    iprofile.Delete(args.Data);
+                    break;
+                }
+        }
+    }
+}

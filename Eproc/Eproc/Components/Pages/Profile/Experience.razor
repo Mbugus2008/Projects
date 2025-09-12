@@ -1,0 +1,58 @@
+﻿@page "/Profile/Experience/{Taxregno}"
+@rendermode InteractiveServer
+@inject Eproc.Services.Icprofile iprofile
+@using Syncfusion.Blazor.Grids
+@attribute [StreamRendering]
+ @{
+    var Tool = (new List<string>() { "Search", "Add", "Edit", "Delete", "Update", "Cancel" });
+}
+<SfGrid DataSource="@expereince" ID="Experience" Toolbar=@Tool>
+    <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true" Mode="EditMode.Normal"></GridEditSettings>
+    <GridEvents OnActionComplete="OnActionComplete" TValue="Pexperience.PastExperience"></GridEvents>
+
+    <GridColumns>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Entry_No) Visible="false" IsPrimaryKey="true" HeaderText="Entry No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Tax_Registration_No) HeaderText="Tax Registration No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Name_of_Client) HeaderText="Name Of Client"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Address_of_Client) HeaderText="Address of client"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Name_of_Contact_Person) HeaderText="Name of Contact Person"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Telephone_No) HeaderText="Telephone"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Email_Address) HeaderText="Email Address"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Value_of_Contract) HeaderText="Value of Contract" TextAlign="TextAlign.Right"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Category_of_Goods_or_Service) HeaderText="Category Of goods Or Service"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Contract_Start_Date) Type="ColumnType.Date" Format="d" EditType="EditType.DatePickerEdit" HeaderText="Contract Start Date" TextAlign="TextAlign.Right"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Contract_End_Date) Type="ColumnType.Date" Format="d" EditType="EditType.DatePickerEdit" HeaderText="Contract End Date" TextAlign="TextAlign.Right"></Syncfusion.Blazor.Grids.GridColumn>
+    </GridColumns>
+</SfGrid>
+@code {
+    [Parameter]
+    public string Taxregno { get; set; }
+    List<Pexperience.PastExperience> expereince { get; set; } = new List<Pexperience.PastExperience>();
+    Pexperience.PastExperience_Fields fields;
+    protected override async void OnInitialized()
+    {
+        expereince = await iprofile.getexperience(Taxregno);
+        StateHasChanged();
+    }
+    public void OnActionComplete(ActionEventArgs<Pexperience.PastExperience> args)
+    {
+        switch (args.RequestType)
+        {
+            case Syncfusion.Blazor.Grids.Action.Add: { args.Data.Tax_Registration_No = Taxregno; break; }
+            case Syncfusion.Blazor.Grids.Action.Save:
+                {
+
+                    args.Data = iprofile.SaveData(args.Data).Result;
+
+                    break;
+                }
+            case Syncfusion.Blazor.Grids.Action.Delete:
+                {
+                    iprofile.Delete(args.Data);
+                    break;
+                }
+        }
+    }
+}
+

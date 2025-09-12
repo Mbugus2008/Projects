@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginStart="3dp"
+    android:id="@+id/autocompletelayout"
+android:background="@color/cardview_light_background"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true"
+
+    >
+
+
+                <!-- Your content goes here -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:orientation="vertical"
+                    android:layout_marginStart="3dp">
+        <TextView
+    android:id="@+id/no"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:gravity="left"
+    android:hint="No"
+    android:textStyle="bold"
+    android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/no"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="left"
+            android:hint="Name"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

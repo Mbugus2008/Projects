@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".book"
+    >
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+   >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <TextView
+    android:id="@+id/desc"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:hint="Description"
+    android:textSize="20dp"
+    android:textStyle="bold"
+    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:id="@+id/availablep"
+        android:text="Select Property"
+        android:textSize="20dp"
+
+        app:layout_constraintTop_toBottomOf="@id/desc" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/notobook"
+        android:overlapAnchor="false"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/availablep"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Price"
+        android:textSize="15dp"
+       app:layout_constraintTop_toBottomOf="@id/notobook" />
+
+    <TextView
+        android:id="@+id/Paymenttypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Payment Option"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        app:layout_constraintTop_toBottomOf="@id/price" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/paymenttype"
+        android:gravity="center"
+        android:overlapAnchor="false"
+        android:spinnerMode="dropdown"
+        app:layout_constraintTop_toBottomOf="@id/Paymenttypes"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Payment price"
+    android:id="@+id/paymentprice"
+    android:textSize="15dp"
+    android:textStyle="bold"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/paymenttype"
+    app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:layout_marginTop="50dp"
+        android:id="@+id/methodname"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentprice"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/paymentmethod"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/methodname"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/accountsname"
+        android:text="Account"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/paymentmethod"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/account"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/accountsname"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reference"
+        android:hint="Mpesa No"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/note"
+        android:text="I agree to the term and conditions set below"
+        android:textSize="13dp"
+        app:layout_constraintTop_toBottomOf="@id/reference"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms and Conditions "
+        android:id="@+id/terms"
+
+        app:layout_constraintTop_toBottomOf="@id/note"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@null"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <Button
+            android:id="@+id/book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Confirm Payment"
+            android:textSize="10sp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/spinner"
+            />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

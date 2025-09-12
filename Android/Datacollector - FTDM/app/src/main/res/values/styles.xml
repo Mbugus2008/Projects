@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#46c2eb</item>
+        <item name="colorPrimaryDark">#203d83</item>
+        <item name="colorAccent">#8cc5ea</item>
+        <item name="background">@color/colorPrimary</item>
+        <item name="checkboxStyle">@style/CheckBoxStyle</item>
+    </style>
+
+    <style name="CheckBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <!-- Customize the check color -->
+        <item name="android:colorControlActivated">#E40909</item>
+    </style>
+
+</resources>

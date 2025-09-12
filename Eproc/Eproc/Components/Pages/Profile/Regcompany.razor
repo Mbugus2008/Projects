@@ -1,0 +1,61 @@
+﻿@page "/Profile/Regcompany/{Taxregno}"
+@rendermode InteractiveServer
+@inject Eproc.Services.Icprofile iprofile
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.DropDowns
+@attribute [StreamRendering]
+@{
+    var Tool = (new List<string>() { "Search", "Add", "Edit", "Delete", "Update", "Cancel" });
+}
+<SfGrid DataSource="@model" ID="bdetails" Toolbar=@Tool>
+    <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true" Mode="EditMode.Normal"></GridEditSettings>
+    <GridEvents OnActionComplete="OnActionComplete" TValue="Rcompany.RegisteredCompany"></GridEvents>
+
+    <GridColumns>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Entry_No) Visible="false" IsPrimaryKey="true" HeaderText="Entry No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Tax_Registration_No) IsPrimaryKey="true" HeaderText="Tax Registration No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Name) HeaderText="Name"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Nationality) HeaderText="Nationality"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Identification_Document) HeaderText="Identification Document">
+            <EditTemplate>
+                    <SfDropDownList TValue="Rcompany.Identification_Document" Placeholder="Order Placed" TItem="string" DataSource="@EnumValues">
+                        <DropDownListFieldSettings Value="Status"></DropDownListFieldSettings>
+                    </SfDropDownList>
+            </EditTemplate></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Identification_Doc_No) HeaderText="Identification Doc No"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Citizenship_Details) HeaderText="Citizenship Details"></Syncfusion.Blazor.Grids.GridColumn>
+    
+    </GridColumns>
+</SfGrid>
+@code {
+    [Parameter]
+    public string Taxregno { get; set; }
+    List<Rcompany.RegisteredCompany> model { get; set; } = new ();
+    Rcompany.RegisteredCompany_Fields fields;
+    public string[] EnumValues = Enum.GetNames(typeof(Rcompany.Identification_Document));
+    protected override async void OnInitialized()
+    {
+        model = await iprofile.getrcompany(Taxregno);
+        StateHasChanged();
+    }
+    public void OnActionComplete(ActionEventArgs<Rcompany.RegisteredCompany> args)
+    {
+        switch (args.RequestType)
+        {
+            case Syncfusion.Blazor.Grids.Action.Add: { args.Data.Tax_Registration_No = Taxregno; break; }
+            case Syncfusion.Blazor.Grids.Action.Save:
+                {
+
+                    args.Data = iprofile.SaveData(args.Data).Result;
+
+                    break;
+                }
+            case Syncfusion.Blazor.Grids.Action.Delete:
+                {
+                    iprofile.Delete(args.Data);
+                    break;
+                }
+        }
+    }
+}
+

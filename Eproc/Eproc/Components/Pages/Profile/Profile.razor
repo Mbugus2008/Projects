@@ -1,0 +1,592 @@
+﻿@page "/Profile/Profile"
+@rendermode InteractiveServer
+@inject Eproc.Services.Icprofile iprofile
+@inject AuthenticationStateProvider userprovider
+@inject UserManager<ApplicationUser> UserManager
+@attribute [Authorize]
+@using Eproc.Data
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Navigations
+@using Pages.Profile
+@inject IJSRuntime JSRuntime
+@attribute [StreamRendering]
+@inject IConfiguration config
+<div class="container">
+    <div class="row">
+        <Timeline Vertical=false>
+            @foreach (Eproc.Services.Profilesstates item in profilesstates)
+
+            {
+
+                <TimelineStep State="StepState.NotStarted">
+                    <StepHeader>@item.name</StepHeader>
+                </TimelineStep>
+
+            }
+
+            @*  <TimelineStep State="StepState.Current" >
+            <StepHeader>11:52 am</StepHeader>
+            <StepTitle>Add KMS</StepTitle>
+            <StepDescription>
+            Root CA certificate requested. Upload it to the KMS to complete the connection.
+            <Button Small="true">Action</Button>
+            </StepDescription>
+            </TimelineStep>
+            <TimelineStep State="StepState.Processing" class="gemini-ignore" >
+            <StepHeader>11:53 am</StepHeader>
+            <StepTitle>Make vCenter trust KMS</StepTitle>
+            <StepDescription>
+            Root CA certificate requested. Upload it to the KMS to complete the connection. Third sentence is very long
+            and very long.
+            </StepDescription>
+            </TimelineStep>
+            <TimelineStep State="StepState.Success">
+            <StepHeader>11:54 am</StepHeader>
+            <StepTitle>Make KMS trust vCenter</StepTitle>
+            <StepDescription>
+            Upload it to the KMS to complete the connection.
+            NOTE: This step does not have click, so it does not have a hover style.
+            <Button Small="true">Action</Button>
+            </StepDescription>
+            </TimelineStep>
+            <TimelineStep State="StepState.Error" >
+            <StepHeader>11:55 am</StepHeader>
+            <StepTitle>Connected</StepTitle>
+            <StepDescription>
+            No. It's not connected.
+            </StepDescription>
+            </TimelineStep> <TimelineStep State="StepState.Error">
+            <StepHeader>11:55 am</StepHeader>
+            <StepTitle>Connected</StepTitle>
+            <StepDescription>
+            No. It's not connected.
+            </StepDescription>
+            </TimelineStep> <TimelineStep State="StepState.Error">
+            <StepHeader>11:55 am</StepHeader>
+            <StepTitle>Connected</StepTitle>
+            <StepDescription>
+            No. It's not connected.
+            </StepDescription>
+            </TimelineStep> <TimelineStep State="StepState.Error">
+            <StepHeader>11:55 am</StepHeader>
+            <StepTitle>Connected</StepTitle>
+            <StepDescription>
+            No. It's not connected.
+            </StepDescription>
+            </TimelineStep> <TimelineStep State="StepState.Error">
+            <StepHeader>11:55 am</StepHeader>
+            <StepTitle>Connected</StepTitle>
+            <StepDescription>
+            No. It's not connected.
+            </StepDescription>
+            </TimelineStep> <TimelineStep State="StepState.Error">
+            <StepHeader>11:55 am</StepHeader>
+            <StepTitle>Connected</StepTitle>
+            <StepDescription>
+            No. It's not connected.
+            </StepDescription>
+            </TimelineStep> *@
+        </Timeline>
+    </div>
+    <div class="row">
+        <EditForm Model="@profile" OnSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="custom-content">
+                <SfTab @ref="@Tab" OverflowMode="OverflowMode.Popup" @bind-SelectedItem="selectedIndex" Height="80%" HeaderPlacement="HeaderPosition.Left" EnablePersistence="true">
+                    <TabEvents Selected="OnTabSelected">
+                    </TabEvents>
+                    <TabItems>
+                        <TabItem>
+                            @*                 <ChildContent >
+                            <TabHeader Text="General Information"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+
+                                <h3>
+                                    FORM1: GENERAL INFORMATION
+                                </h3>
+
+                                <p><h7>Instructions:</h7>  Bidders are required to complete all the sections below</p>
+
+                                <SfAccordion>
+                                    <AccordionItems>
+                                        <AccordionItem Expanded="true">
+                                            <HeaderTemplate>
+                                                <div class="row"><h5>Key Information</h5></div>
+                                            </HeaderTemplate>
+                                            <ContentTemplate>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Tax_Registration_No">Tax Reg. No: </label>
+                                                                <InputText class="form-control" id="Tax_Registration_No" @bind-Value="@profile.Tax_Registration_No"> </InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Company_Name">Organization Name: </label>
+                                                                <InputText class="form-control" id="Company_Name" @bind-Value="@profile.Company_Name"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Category_of_Business">Category of Business:</label>
+                                                                <select class="form-control" @bind="@profile.Category_of_Business">
+                                                                    <option value="">Select an option</option>
+                                                                    @foreach (var enumValue in Enum.GetValues(typeof(@CompProfile.Category_of_Business)))
+                                                                    {
+                                                                        <option value="@enumValue">@enumValue.ToString()</option>
+                                                                    }
+                                                                </select>
+
+                                                            </div>
+
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Company_Registration_No">Company Registration No: </label>
+                                                                <InputText id="Company_Registration_No" class="form-control" @bind-Value="@profile.Company_Registration_No"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Primary_Country_Operation">Primary Country Operation: </label>
+                                                                <select class="form-control" @bind="@profile.Country_of_Registration">
+                                                                    <option value="">Select a country</option>
+                                                                    @foreach (var c in countries)
+                                                                    {
+                                                                        <option value="@c.Code">@c.Name</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Year_of_Registration">Year of Registration: </label>
+                                                                <input type="number" class="form-control text-end" id="Year_of_Registration" @bind-value="@profile.Year_of_Registration" />
+
+                                                            </div>
+
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Country_of_Registration">Country of Registration:</label>
+
+                                                                <select class="form-control" @bind="@profile.Country_of_Registration">
+                                                                    <option value="">Select a country</option>
+                                                                    @foreach (var c in countries)
+                                                                    {
+                                                                        <option value="@c.Code">@c.Name</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Type_of_Business">Type of Business: </label>
+                                                                <InputText id="Type_of_Business" class="form-control" @bind-Value="@profile.Type_of_Business"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Home_Page">Website: </label>
+                                                                <InputText class="form-control" id="Home_Page" @bind-Value="@profile.Home_Page"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" for="Email_Address">Email Address: </label>
+                                                                <InputText id="Email_Address" class="form-control" @bind-Value="@profile.Email_Address"></InputText>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ContentTemplate>
+                                        </AccordionItem>
+                                        <AccordionItem Expanded="true">
+                                            <HeaderTemplate>
+                                                <div class="row"><h5>Product and Services</h5></div>
+                                            </HeaderTemplate>
+                                            <ContentTemplate>
+
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group m-3">
+                                                                <label for="Email_Address">PLEASE PROVIDE DETAILS OF THE PRIMARY PRODUCT/SERVICES SUPPLIED BY YOUR ORGANIZATION: </label>
+                                                                <textarea class="form-control col-md-12" id="Email_Address" @bind="@profile.ProdServiceDescription" rows="2"></textarea>
+                                                            </div>
+                                                            <div class="form-group m-3">
+                                                                <label for="Email_Address">PLEASE EXPLAIN YOUR EXPERIENCE OF PROVIDING THE GOODS OR SERVICES REQUESTED IN THIS TENDER DOCUMENT: </label>
+                                                                <textarea class="form-control col-md-12" id="Email_Address" @bind="@profile.ExperienceProdService" rows="2"></textarea>
+                                                            </div>
+                                                            <div class="form-group m-3">
+                                                                <label for="Email_Address">HAVE YOU SUPPLIED GOODS OR SERVICES TO AECF PREVIOUSLY? IF SO, PROVIDE A BRIEF SUMMARY: </label>
+                                                                <textarea class="form-control col-md-12" id="Email_Address" @bind="@profile.SummaryPrevGoodsSupplied" rows="2"></textarea>
+                                                            </div>
+                                                            <div class="form-group m-3">
+                                                                <label for="Email_Address">PROVIDE DETAILS OF WHAT INSURANCE COVER YOU HAVE AND WHAT THE MAXIMUM VALUE IS: </label>
+                                                                <textarea class="form-control col-md-12" id="Email_Address" @bind="@profile.InsuranceCoverDetails" rows="2"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ContentTemplate>
+                                        </AccordionItem>
+                                        <AccordionItem>
+                                            <HeaderTemplate>
+                                                <div class="row"><h5>Addresses</h5></div>
+                                            </HeaderTemplate>
+                                            <ContentTemplate>
+                                                <div class="container">
+
+                                                    <div class="row">
+                                                        <div class="col-md-3 ">
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                            </div>
+                                                        </div> <div class="col-md-3 ">
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <h7>   MAIN ADDRESS</h7>
+                                                            </div>
+                                                        </div> <div class="col-md-3 ">
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <h7>   REGISTERED ADDRESS (IF DIFFERENT)</h7>
+                                                            </div>
+                                                        </div> <div class="col-md-3 ">
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <h7>  ADDRESS FOR PAYMENT (IF DIFFERENT)</h7>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+
+
+                                                            <div class="form-group m-3 align-content-center">
+                                                                <label class="form-control" style="width:100%" for="Phys_Loc_of_Business_Premises">Physical Location: </label>
+
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" style="width:100%" for="Postal_Address">Postal Address: </label>
+
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" style="width:100%" for="Main_Address_City">City: </label>
+
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+                                                                <label class="form-control" style="width:100%" for="Main_Address_Country">Country: </label>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-3 ">
+
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Phys_Loc_of_Business_Premises" @bind-Value="@profile.Phys_Loc_of_Business_Premises"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Postal_Address" @bind-Value="@profile.Postal_Address"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Main_Address_City" @bind-Value="@profile.Main_Address_City"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <select class="form-control" @bind="@profile.Main_Address_Country">
+                                                                    <option value="">Select a country</option>
+                                                                    @foreach (var c in countries)
+                                                                    {
+                                                                        <option value="@c.Code">@c.Name</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="col-md-3 ">
+
+
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Reg_Address_Physical" @bind-Value="@profile.Reg_Address_Physical"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Reg_Address_Postal" @bind-Value="@profile.Reg_Address_Postal"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Reg_Address_City" @bind-Value="@profile.Reg_Address_City"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                @* <InputText class="form-control" id="Reg_Address_Country" @bind-Value="@profile.Reg_Address_Country"></InputText> *@
+                                                                <select class="form-control" @bind="@profile.Reg_Address_Country">
+                                                                    <option value="">Select a country</option>
+                                                                    @foreach (var c in countries)
+                                                                    {
+                                                                        <option value="@c.Code">@c.Name</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 ">
+
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Pay_Address_Physical" @bind-Value="@profile.Pay_Address_Physical"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Pay_Address_Postal" @bind-Value="@profile.Pay_Address_Postal"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                <InputText class="form-control" id="Pay_Address_City" @bind-Value="@profile.Pay_Address_City"></InputText>
+                                                            </div>
+                                                            <div class="form-group m-3 d-flex justify-content-between">
+
+                                                                @* <InputText class="form-control" id="Pay_Address_Country" @bind-Value="@profile.Pay_Address_Country"></InputText> *@
+                                                                <select class="form-control" @bind="@profile.Pay_Address_Country">
+                                                                    <option value="">Select a country</option>
+                                                                    @foreach (var c in countries)
+                                                                    {
+                                                                        <option value="@c.Code">@c.Name</option>
+                                                                    }
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ContentTemplate>
+                                        </AccordionItem>
+                                    </AccordionItems>
+                                </SfAccordion>
+
+                            </ContentTemplate>
+
+                        </TabItem>
+                        <TabItem>
+                            @*  <ChildContent>
+                            <TabHeader Text="Contacts"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <ProfileContact Taxregno="@profile.Tax_Registration_No"></ProfileContact>
+
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*   <ChildContent>
+                            <TabHeader Text="Key Personnel"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <Personel Taxregno="@profile.Tax_Registration_No"></Personel>
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*  <ChildContent>
+                            <TabHeader Text="Required Attachments"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <Attachments Taxregno="@profile.Tax_Registration_No"></Attachments>
+
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*   <ChildContent>
+                            <TabHeader Text="Past Experience"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <Experience Taxregno="@profile.Tax_Registration_No"></Experience>
+
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*  <ChildContent>
+                            <TabHeader Text="Confidential Questionnare"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <Questionnare profile="@profile"></Questionnare>
+
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*   <ChildContent>
+                            <TabHeader Text="Partnership Details"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <Patnership Taxregno="@profile.Tax_Registration_No"></Patnership>
+
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*    <ChildContent>
+                            <TabHeader Text="Registered Company"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <Regcompany Taxregno="@profile.Tax_Registration_No"></Regcompany>
+
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*   <ChildContent>
+                            <TabHeader Text="Litigation History"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <Litigation Taxregno="@profile.Tax_Registration_No"></Litigation>
+
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*   <ChildContent>
+                            <TabHeader Text="Bank Details"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <BankDetails Taxregno="@profile.Tax_Registration_No"></BankDetails>
+
+                            </ContentTemplate>
+                        </TabItem>
+                        <TabItem>
+                            @*  <ChildContent>
+                            <TabHeader Text="Annual Revenue"> </TabHeader>
+                            </ChildContent> *@
+                            <ContentTemplate>
+                                <AnnualRevenue Taxregno="@profile.Tax_Registration_No"></AnnualRevenue>
+
+                            </ContentTemplate>
+                        </TabItem>
+                    </TabItems>
+                </SfTab>
+            </div>
+
+            <div class=" row form-group">
+                <span>
+                    @*   <button type="submit" class="btn btn-primary" @onclick="@HandleInvalidSubmit">Submit</button> *@
+                    <button type="button" disabled="@first" class="btn btn-primary" @onclick="@Moveback">Previous</button>
+                    <button type="button" disabled="@last" class="btn btn-primary" @onclick="@Moveforward">Next</button>
+                </span>
+            </div>
+        </EditForm>
+    </div>
+</div>
+<style>
+    .e-accordion .e-acrdn-item.e-select > .e-acrdn-header {
+        /* border: 1px solid rgb(000, 000, 000); */
+        background: #e9e9e9 !important;
+    }
+
+    .e-tab .e-tab-header .e-toolbar-item .e-tab-text,
+    .e-tab .e-tab-header .e-toolbar-item .e-tab-wrap .e-tab-icon {
+        width: 20px;
+        padding-top: 20px;
+    }
+
+    .form-group .form-control .form-control {
+        width: 20%;
+        /* margin-bottom: 10px; /* Adjust the margin between items */ */
+    }
+
+    .form-group label {
+        border: none; /* Remove border from labels */
+    }
+
+    .custom-content {
+        height: 95vh; /* Set the desired height */
+        overflow-y: auto; /* Add scrollbars if content overflows */
+        /* Other styles as needed */
+    }
+</style>
+@code {
+    SfTab Tab;
+    public bool Vertical { get; set; } = true;
+    public List<Eproc.Services.Profilesstates> profilesstates { get; set; } = new();
+
+    bool first { get; set; } = true;
+    bool last { get; set; } = false;
+    int selectedIndex { get; set; } = 0;
+    private int currentTab = 1;
+    [SupplyParameterFromForm]
+    CompProfile.CompanyProfile profile { get; set; } =
+        new CompProfile.CompanyProfile();
+    public IEnumerable<string> category_Of_Business = Enum.GetNames(typeof(CompProfile.Category_of_Business));
+    protected string UserEmail { get; private set; }
+
+    List<Countries.Country> countries { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+
+            var authenticationState = await userprovider.GetAuthenticationStateAsync();
+            var user = authenticationState.User;
+            ApplicationUser CurrentUser = null;
+            if (user.Identity.IsAuthenticated)
+            {
+                CurrentUser = await UserManager.GetUserAsync(user);
+
+                UserEmail = user.FindFirst(ClaimTypes.Email)?.Value;
+            }
+            else
+            {
+                // User is not authenticated
+                UserEmail = "Anonymous";
+            }
+            profilesstates = await new Eproc.Services.Profilesstates().getstates(CurrentUser.TaxRegistrationNO);
+
+
+            profile = await iprofile.getprofile(CurrentUser.TaxRegistrationNO /* "ASPPIQO8927N" */);
+            if (profile == null)
+                profile = new CompProfile.CompanyProfile();
+
+            countries = await iprofile.getcountries();
+        }
+        catch (Exception)
+        {
+
+
+        }
+        StateHasChanged();
+    }
+    public void OnTabSelected(SelectEventArgs args)
+    {
+        first = args.SelectedIndex == 0;
+        last = args.SelectedIndex == Tab.Items.Count - 1;
+        //var tabs = Tab.Items.Count;
+        var index = args.SelectedIndex;
+    }
+    public void OnTabSelecting(SelectingEventArgs args)
+    {
+
+    } private void Moveforward()
+    {
+ 
+  
+        selectedIndex = selectedIndex + 1;
+        first = selectedIndex == 0;
+
+    }
+    private void Moveback()
+    {
+
+        selectedIndex = selectedIndex - 1;
+        last = selectedIndex == Tab.Items.Count - 1;
+    }
+    private void HandleInvalidSubmit()
+    {
+
+    }
+
+    class Statemanager
+    {
+        public bool Generalinfo { get; set; }
+        public bool contact { get; set; }
+        public bool Personel { get; set; }
+        public bool Experience { get; set; }
+        public bool bankdetails { get; set; }
+        public bool Partnership { get; set; }
+        public bool Questionnare { get; set; }
+        public bool Attachment { get; set; }
+        public bool litigation { get; set; }
+
+    }
+  
+}

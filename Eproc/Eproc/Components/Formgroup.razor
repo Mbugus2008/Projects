@@ -1,0 +1,15 @@
+﻿@typeparam TValue
+
+<div class="form-group m-3 d-flex justify-content-between">
+    <label class="form-control" for=@nameof(BoundValue)>@Label</label>
+    <input type="@InputType" class="form-control" id=@nameof(BoundValue) @bind="@BoundValue" />
+</div>
+
+@code {
+    [Parameter]
+    public string Label { get; set; }
+    [Parameter]
+    public string InputType { get; set; } = "text";
+    [Parameter]
+    public TValue BoundValue { get; set; }
+}

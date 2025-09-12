@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data class="Loanguarantors">
+        <variable
+            name="guarantors"
+            type="com.trimline.pawdep.Loan_guarantors" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:scrollbars="horizontal"
+        android:background="@drawable/border"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/memberNo"
+            android:textSize="15dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="PAWDEP No"
+            android:text="@={guarantors.Member_No}"
+            android:completionThreshold="1"
+            android:dropDownWidth="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+          />
+
+        <TextView
+            android:id="@+id/Member_Name"
+            style="@style/loan_guarantors"
+            android:hint="Name"
+            android:layout_width="150dp"
+            android:text="@={guarantors.Description}"
+            app:layout_constraintStart_toEndOf="@id/memberNo"
+         />
+        <TextView
+            android:id="@+id/Outstandingbalance"
+            style="@style/loan_guarantors"
+            android:hint="Outstanding balance"
+            android:text="@={``+guarantors.Outstanding_Balance}"
+            app:layout_constraintStart_toEndOf="@id/Member_Name"
+            />
+
+        <TextView
+            android:id="@+id/currentloan"
+            style="@style/loan_guarantors"
+            android:hint="Current Loan balance"
+            android:text="@={``+guarantors.Current_Loan_Balance}"
+            app:layout_constraintStart_toEndOf="@id/Outstandingbalance"
+            />
+        <TextView
+            android:id="@+id/savings"
+            style="@style/loan_guarantors"
+            android:hint="Current Loan balance"
+            android:text="@={``+guarantors.Savings}"
+            app:layout_constraintStart_toEndOf="@id/currentloan"
+            />
+
+        <TextView
+            android:id="@+id/Outsandingloanpercent"
+            style="@style/loan_guarantors"
+            android:hint="OUtstanding loan %"
+            android:text="@={``+guarantors.Required_Percent_of_Outstanding_Loan}"
+            app:layout_constraintStart_toEndOf="@id/savings"
+            />
+
+        <TextView
+            android:id="@+id/Loansguaranteed"
+            style="@style/loan_guarantors"
+            android:hint="OUtstanding loan %"
+            android:text="@={``+guarantors.Loans_Guaranted}"
+            app:layout_constraintStart_toEndOf="@id/Outsandingloanpercent"
+            />
+        <TextView
+            android:id="@+id/amountguaranteed"
+            style="@style/loan_guarantors"
+            android:hint="Amount Guaranteed"
+            android:text="@={``+guarantors.Amount_Guaranteed}"
+            app:layout_constraintStart_toEndOf="@id/Loansguaranteed"
+            />
+        <TextView
+        android:id="@+id/amountavailable"
+        style="@style/loan_guarantors"
+        android:hint="Amount Available"
+        android:text="@={``+guarantors.Amount_Available}"
+        app:layout_constraintStart_toEndOf="@id/amountguaranteed"
+        />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/deletered"
+            android:id="@+id/clear"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

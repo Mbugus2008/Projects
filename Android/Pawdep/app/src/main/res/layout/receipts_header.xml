@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"  android:layout_width="match_parent"
+    
+    android:background="@drawable/header"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+
+        android:src="@drawable/action_new"
+        android:id="@+id/add"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        style="@style/receiptlineheader"
+        android:id="@+id/receipt_transtype"
+        android:text="Transaction type"
+        app:layout_constraintStart_toStartOf="parent"
+       />
+
+    <TextView
+        style="@style/receiptlineheader"
+        android:id="@+id/receipt_accounttype"
+        android:text="Account Type"
+        app:layout_constraintStart_toEndOf="@id/receipt_transtype"
+        />
+    <TextView
+        style="@style/receiptlineheader"
+        android:id="@+id/receipt_account_No"
+        android:text="Account No"
+        app:layout_constraintStart_toEndOf="@id/receipt_accounttype"
+        />
+    <TextView
+        style="@style/receiptlineheader"
+        android:id="@+id/receipt_Amount"
+        android:text="Amount"
+        app:layout_constraintStart_toEndOf="@id/receipt_account_No"
+        />
+    <TextView
+        style="@style/receiptlineheader"
+        android:id="@+id/receipt_LoanNo"
+        android:text="Loan No"
+        app:layout_constraintStart_toEndOf="@id/receipt_Amount"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

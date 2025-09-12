@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Agency.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Agency_Transactions_AgentTransactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vaio:3112/Trim/WS/IANSOFT/Page/AgentTransactions</Value>
+    </Setting>
+    <Setting Name="Agency_Customer_Customer_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:3346/IMA/WS/IMARIKA%20SACCO%20LTD/Page/Customer</Value>
+    </Setting>
+    <Setting Name="Agency_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:7047/DynamicsNAV90/WS/IMARIKA%20SACCO%20LTD/Page/Loans</Value>
+    </Setting>
+    <Setting Name="Agency_Charges_AgentCharges_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vaio:3112/Trim/WS/IANSOFT/Page/AgentCharges</Value>
+    </Setting>
+    <Setting Name="Agency_Dimensions_Dimensions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vaio:3112/Trim/WS/IANSOFT/Page/Dimensions</Value>
+    </Setting>
+    <Setting Name="Agency_CustomerDetails_CustomerDetails_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vaio:3112/Trim/WS/IANSOFT/Page/CustomerDetails</Value>
+    </Setting>
+    <Setting Name="Agency_AccountTypes_AccountTypes_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vaio:3112/Trim/WS/IANSOFT/Page/AccountTypes</Value>
+    </Setting>
+    <Setting Name="Agency_LoanProducts_LoanProducts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vaio:3112/Trim/WS/IANSOFT/Page/LoanProducts</Value>
+    </Setting>
+    <Setting Name="Agency_Functions_Agency" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:412/APS/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Codeunit/Agency</Value>
+    </Setting>
+    <Setting Name="Agency_Agents_AgentApplications_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.4.88:8082/MwalimuERPLive/WS/Mwalimu%20National%20Sacco%20Ltd/Page/AgentApplications</Value>
+    </Setting>
+    <Setting Name="Agency_Branches_Branches_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vaio:3112/Trim/WS/IANSOFT/Page/Branches</Value>
+    </Setting>
+    <Setting Name="Agency_Registration_Member_Application_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:412/APS/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Member_Application</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

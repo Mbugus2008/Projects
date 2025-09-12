@@ -1,0 +1,62 @@
+﻿@page "/Myguarantors"
+@using Sacco.Shared
+
+@inject HttpClient Http
+@inject Sacco.Shared.StateContainerService stateService
+<PageTitle>My Guarantors</PageTitle>
+
+<h1  style="align-content:center">My Guarantors</h1>
+
+
+<h5>My Guarantrors</h5>
+
+@if (data == null)
+{
+    <p><em>Loading Guarantors...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr style="background-color:darkgray">
+                <th>Loan No</th>
+                <th>Application Date</th>
+                <th>Installments</th>
+                <th>Member No</th>
+                <th>Member Name</th>
+                <th align="center">Loan Balance</th>
+                <th align="right" >Amount Guaranteed</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in data)
+            {
+                <tr>
+                    <td>@loan.Loan_No</td>
+                    <td>@loan.Application_Date.ToString("dd-MMM-yyy")</td>
+                    <td>@loan.Installments</td>
+                    <td>@loan.Member_No</td>
+                    <td>@loan.Name</td>
+                    <td align="right">@loan.Outstanding_Balance.ToString("#,##0.00")</td>
+                    <td align = "right">@loan.Amont_Guaranteed.ToString("#,##0.00")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row">Totals</th>
+                <td colspan="5"></td>
+                <td style="font-weight:bold" align="right">@data.Sum(o=> o.Amont_Guaranteed).ToString("#,##0.00") </td>
+            </tr>
+        </tfoot>
+    </table>
+ 
+}
+
+@code {
+    private guarantorsdata.Guarantors[]? data;
+    protected override async Task OnInitializedAsync()
+    {
+        data = await Http.GetFromJsonAsync<guarantorsdata.Guarantors[]>($"api/Myguarantors/Get/{stateService.member}");
+    }
+}

@@ -1,0 +1,131 @@
+﻿
+@page "/register"
+
+@inject NavigationManager navigationManager
+@layout AuthLayout
+@inject HttpClient Http
+@inject IJSRuntime js
+
+
+<EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="loginRequest" id="loginBox">
+    <DataAnnotationsValidator />
+    <h1 class="card-header d-flex justify-content-center "> Register</h1>
+    <div class="d-flex justify-content-center ">
+        <img class="d-flex justify-content-center" src="images/logo.png" />
+    </div>
+    <p></p>
+    <h4><label for="inputUsername" class="sr-only d-flex justify-content-center ">Member No</label></h4>
+    <InputText id="inputUsername" class="form-control" style="text-align:center" @bind-Value="loginRequest.UserName" autofocus placeholder="Member No" />
+    <ValidationMessage For="@(() => loginRequest.UserName)" />
+
+   <h4> <label for="inputPassword" class="sr-only d-flex justify-content-center ">Password</label></h4>
+    <InputText type="password" id="inputPassword" class="form-control" style="text-align:center" placeholder="Password" @bind-Value="loginRequest.Password" />
+    <ValidationMessage For="@(() => loginRequest.Password)" />
+
+
+    <h4>
+        <label for="inputPasswordConfirm" class="sr-only  d-flex justify-content-center">Pass Confirmation</label></h4>
+    <InputText type="password" id="inputPasswordConfirm" class="form-control" style="text-align:center" placeholder="Password Confirmation" @bind-Value="@loginRequest.PasswordConfirm" />
+    <ValidationMessage For="@(() => loginRequest.PasswordConfirm)" />
+
+        <p></p>
+         <h4>
+        <label for="otp" class="sr-only  d-flex justify-content-center">Sms Code</label></h4>
+        <div class="row">
+        <InputText type="" id="otp" class="form-control col" style="text-align:center" placeholder="Otp" @bind-Value="@loginRequest.Otp" />
+        <button type="button" class="btn btn-sm btn-primary ms-lg-1  d-flex justify-content-center col" onclick="@(async () => await getcode(loginRequest.UserName))">Get code</button>
+    </div>
+
+    <label class="text-info pt-1">@info</label>
+    <ValidationMessage For="@(() => loginRequest.Otp)" />
+
+<p></p>
+<div class="row">
+    <button class="btn btn-lg btn-primary btn-block  d-flex justify-content-center" type="submit">Sign in</button>
+    </div>
+    <label class="text-danger">@error</label>
+
+   
+</EditForm>
+
+@code{
+    Sacco.Shared.register loginRequest { get; set; } = new Sacco.Shared.register();
+    Sacco.Shared.param p;
+    string error { get; set; }
+    string info { get; set; }
+
+    async Task OnSubmit()
+    {
+        HttpResponseMessage res = null;
+        error = null;
+        try
+        {
+            Console.WriteLine("here");
+
+
+
+            if (!p.Otp.ToString().Equals(loginRequest.Otp))
+            { error = "Incorrect Otp";
+                return;
+            }
+            res = await Http.PostAsJsonAsync("api/Auth/register", loginRequest);
+            if (res.IsSuccessStatusCode)
+            {
+                navigationManager.NavigateTo("");
+            }
+            else
+            {
+
+                error = await res.Content.ReadFromJsonAsync<String>();
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("error");
+            Console.WriteLine(ex.InnerException);
+            error = await res.Content.ReadAsStringAsync();
+        }
+    }
+    async Task getcode(string No)
+    {
+         HttpResponseMessage res = null;
+        error = null;
+        try
+        {
+            if (!string.IsNullOrEmpty(No))
+            {
+                p = new Sacco.Shared.param() { No = No };
+                Console.WriteLine(p.No);
+
+                  res = await Http.PostAsJsonAsync ("api/Auth/Getcode",p);
+                Console.WriteLine("okk");
+
+                if (res.IsSuccessStatusCode)
+                {
+
+                    p = await res.Content.ReadFromJsonAsync<Sacco.Shared.param>();
+
+                    info = string.Format("Otp sent to {0}.....{1}", p.phone.Substring(0,3),p.phone.Substring(p.phone.Length -2,2));
+                }
+                else
+                {
+                    var d = await res.Content.ReadFromJsonAsync<Sacco.Shared.param>();
+                    error = d.No;
+                }
+            } else
+            {
+
+                error = "Kindly enter the Member No";
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("error");
+            Console.WriteLine(ex.Message);
+
+            error =  await res.Content.ReadAsStringAsync();
+        }
+    }
+}

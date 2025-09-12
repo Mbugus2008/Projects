@@ -1,0 +1,120 @@
+﻿@page "/Profile/Questionare/{Taxregno}"
+@rendermode InteractiveServer
+@inject Eproc.Services.Icprofile iprofile
+@using Syncfusion.Blazor.Grids
+@attribute [StreamRendering]
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Navigations
+<SfAccordion>
+    <AccordionItems>
+
+        <AccordionItem Expanded="true">
+            <HeaderTemplate>
+             Part 1: General
+            </HeaderTemplate>
+            <ContentTemplate>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Phys_Loc_of_Business_Premises)>Physical Location of Business Premises: </label>
+                                <InputText class="form-control" id=@nameof(fields.Phys_Loc_of_Business_Premises) @bind-Value="@profile.Phys_Loc_of_Business_Premises"> </InputText>
+                            </div>
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Plot_No)>Plot No: </label>
+                                <InputText class="form-control" id=@nameof(fields.Plot_No) @bind-Value="@profile.Plot_No"></InputText>
+                            </div>
+                         
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Building_Name)>Building Name: </label>
+                                <InputText id=@nameof(fields.Building_Name) class="form-control" @bind-Value="@profile.Building_Name"></InputText>
+                            </div>
+                      
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Street_Road)>Street/Road: </label>
+                                <input type="number" class="form-control text-end" id=@nameof(fields.Street_Road) @bind-value="@profile.Street_Road" />
+
+                            </div>
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Postal_Address)>Postal Address:</label>
+                                <InputText id=@nameof(fields.Postal_Address) class="form-control" @bind-Value="@profile.Postal_Address"></InputText>
+
+                            </div>
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Contact_Personnel)>Type of Business: </label>
+                                <InputText id=@nameof(fields.Contact_Personnel) class="form-control" @bind-Value="@profile.Telephone_No"></InputText>
+                            </div>
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Telephone_No)>Email Address: </label>
+                                <InputText id=@nameof(fields.Telephone_No) class="form-control" @bind-Value="@profile.Email_Address"></InputText>
+                            </div>
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Contact_Personnel)>Contact Personnel: </label>
+                                <InputText id=@nameof(fields.Contact_Personnel) class="form-control" @bind-Value="@profile.Contact_Personnel"></InputText>
+                            </div>
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Current_Trade_License_No)>Current Trade License No: </label>
+                                <InputText id=@nameof(fields.Current_Trade_License_No) class="form-control" @bind-Value="@profile.Current_Trade_License_No"></InputText>
+                            </div> 
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Maximum_Value_of_Business)>Maximum Value of Business: </label>
+                                <input type="number" class="form-control text-end" id=@nameof(fields.Maximum_Value_of_Business) @bind-value="@profile.Maximum_Value_of_Business" />
+                            </div> 
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.No_of_Years_in_Business)>No of ears in_Business: </label>
+                                <input type="number" class="form-control text-end" id=@nameof(fields.No_of_Years_in_Business) @bind-value="@profile.No_of_Years_in_Business" />
+                            </div>
+                           
+                            <Formgroup Label="Current Trade License No" BoundValue="@profile.Contact_Personnel" InputType="text" />
+                        </div>
+                            
+                           
+                        
+                    </div>
+                </div>
+            </ContentTemplate>
+        </AccordionItem>
+        <AccordionItem Expanded="true">
+            <HeaderTemplate>
+                Part 2(A) Sole Proprietorship/Individual
+            </HeaderTemplate>
+            <ContentTemplate>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Individual_Name)>Individual Name: </label>
+                                <InputText id=@nameof(fields.Individual_Name) class="form-control" @bind-Value="@profile.Individual_Name"></InputText>
+                            </div>  
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=Individual_Nationality>Individual Nationality: </label>
+                                <InputText id=@nameof(fields.Individual_Nationality) class="form-control" @bind-Value="@profile.Individual_Nationality"></InputText>
+                            </div> <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Individual_Country)>Individual Country: </label>
+                                <InputText id=@nameof(fields.Individual_Country) class="form-control" @bind-Value="@profile.Individual_Country"></InputText>
+                            </div>
+                            <div class="form-group m-3 d-flex justify-content-between">
+                                <label class="form-control" for=@nameof(fields.Citizenship_Details)>Citizenship Details: </label>
+
+                                <InputText id=@nameof(fields.Citizenship_Details) class="form-control" @bind-Value="@profile.Citizenship_Details"></InputText>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </AccordionItem>
+       </AccordionItems>
+</SfAccordion>
+
+@code {
+    [Parameter]
+    public CompProfile.CompanyProfile profile { get; set; }
+
+    CompProfile.CompanyProfile fields;
+    protected override async void OnInitialized()
+    {
+    }
+}
+

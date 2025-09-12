@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".transline">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/c1"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+    <TextView
+        android:id="@+id/pawdep"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Pawdep No"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Name"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@id/pawdep"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/memberNo"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="No"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@id/name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/savingsbf"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Savings b/F"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/memberNo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/loansbf"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Loans b/F"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/savingsbf"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/expprincipal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Exp. Prin."
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/loansbf"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/expectedinterest"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Exp. Inte."
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/expprincipal"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/totalpaid"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/expectedinterest"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/savings"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Savings"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/totalpaid"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <TextView
+        android:id="@+id/Loan_Principle_Paid"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Prin. Paid"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/savings"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Loan_Interest_Paid"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Int. Paid"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/Loan_Principle_Paid"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/hall"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Hall"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/Loan_Interest_Paid"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/loanno"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Loan No"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/hall"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/totals"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="M. Total"
+        android:theme="@style/tlistheader"
+        app:layout_constraintStart_toEndOf="@id/loanno"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transline"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/c1"
+        app:layout_constraintVertical_bias="0.0">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/loaddata"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

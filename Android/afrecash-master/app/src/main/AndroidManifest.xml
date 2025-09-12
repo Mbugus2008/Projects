@@ -1,0 +1,89 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.openvalley.afrecash">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+    <application
+        android:name="com.openvalley.afrecash.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name="com.openvalley.afrecash.activities.Launch"
+            android:theme="@style/AppThemeWhite_Light"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.openvalley.afrecash.activities.EnterPhone"
+            android:label="@string/title_activity_enter_phone"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.openvalley.afrecash.activities.ResetPIN"
+            android:label="@string/title_activity_enter_phone"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.openvalley.afrecash.activities.Verify"
+            android:label="@string/title_activity_enter_phone"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.openvalley.afrecash.activities.VerifyLoan"
+            android:label="@string/title_activity_enter_phone"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.openvalley.afrecash.activities.Home"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.openvalley.afrecash.activities.EnterName"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.openvalley.afrecash.activities.RequestLoan"
+            android:label="@string/title_activity_request_loan"
+            android:parentActivityName="com.openvalley.afrecash.activities.Home"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.openvalley.afrecash.activities.Home" />
+        </activity>
+        <activity
+            android:name="com.openvalley.afrecash.activities.MyLoans"
+            android:label="@string/title_activity_my_loans"
+            android:parentActivityName="com.openvalley.afrecash.activities.Home"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.openvalley.afrecash.activities.Home" />
+        </activity>
+        <activity
+            android:name="com.openvalley.afrecash.activities.LoanDetails"
+            android:label="@string/title_activity_loan_details"
+            android:parentActivityName="com.openvalley.afrecash.activities.MyLoans"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.openvalley.afrecash.activities.MyLoans" />
+        </activity>
+        <activity
+            android:name="com.openvalley.afrecash.activities.ViewLoan"
+            android:label="@string/title_activity_view_loan"
+            android:parentActivityName="com.openvalley.afrecash.activities.MyLoans"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.openvalley.afrecash.activities.MyLoans" />
+        </activity>
+    </application>
+
+</manifest>

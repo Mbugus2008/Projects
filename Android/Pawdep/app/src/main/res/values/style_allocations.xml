@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="all_addedit_line1" parent="android:Widget.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">37dp</item>
+        <item name="android:gravity">center|left</item>
+        <item name="layout_constraintEnd_toStartOf">@id/guideline12</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+    </style>
+
+    <style name="all_addedit_line2" parent="android:Widget.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">37dp</item>
+
+        <item name="android:gravity">center|left</item>
+        <item name="layout_constraintEnd_toStartOf">@id/guideline11</item>
+        <item name="layout_constraintStart_toStartOf">@id/guideline12</item>
+    </style>
+    <style name="all_addedit_line3" parent="android:Widget.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">37dp</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="layout_constraintEnd_toStartOf">@id/guideline13</item>
+        <item name="layout_constraintStart_toStartOf">@id/guideline11</item>
+    </style>
+    <style name="all_addedit_line4" parent="android:Widget.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">37dp</item>
+        <item name="android:gravity">center|left</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">@id/guideline13</item>
+    </style>
+
+</resources>

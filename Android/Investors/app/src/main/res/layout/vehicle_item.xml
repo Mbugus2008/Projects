@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingConstraints" >
+    <data class="Dailytrans" >
+        <variable
+            name="d"
+            type="com.trimline.investors.Daily_Transactions" />
+        <import type="android.view.View"/>
+        <import type="android.text.Html"/>
+        <import type="com.trimline.investors.Converters"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        tools:context=".vehicles">
+        <TextView
+            style="@style/dailytrans"
+            android:hint="Date"
+            android:id="@+id/d_date"
+            android:text="@={Converters.fromDatetostring(d.Date )}"
+        />
+        <TextView
+            style="@style/currency"
+            android:id="@+id/d_management"
+            android:hint="Mngt/Sacco"
+            app:layout_constraintLeft_toRightOf="@id/d_date"
+            android:text="@{Html.fromHtml(d !=null ? `Mngt/Sacco ` +   @string/curr(d.Management + d.Sacco + d.Operation ):`Mngt/Sacco` )}"
+        />
+        <TextView
+            style="@style/currency"
+            android:hint="Loans"
+            app:layout_constraintLeft_toRightOf="@id/d_date"
+            app:layout_constraintTop_toBottomOf="@id/d_management"
+            android:text="@{Html.fromHtml(d !=null ? `Loans ` +  @string/curr(d.Loans  ):`Loans` )}"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

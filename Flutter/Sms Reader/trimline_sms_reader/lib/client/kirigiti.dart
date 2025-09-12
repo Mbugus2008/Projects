@@ -1,0 +1,112 @@
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:telephony/telephony.dart';
+import 'package:trimline_sms_reader/Apis.dart';
+import 'package:trimline_sms_reader/Controller.dart';
+import 'package:trimline_sms_reader/client/client.dart';
+import 'package:trimline_sms_reader/t__results.dart';
+import 'package:trimline_sms_reader/transaction.dart';
+
+class kiriigiti extends SmsClients {
+  @override
+  Future<void> getsms() async {
+    List<SmsMessage> messages = await telephony.getInboxSms(
+        filter: SmsFilter.where(SmsColumn.ADDRESS).equals("CoopBank"),
+        //filter: SmsFilter.where(SmsColumn.ADDRESS).equals("LOPHA_SACCO"),
+        //.and(SmsColumn.DATE)
+        //.greaterThan(DateTime(2023, 09, 01).toString()),
+        sortOrder: [
+          OrderBy(SmsColumn.DATE, sort: Sort.DESC),
+          OrderBy(SmsColumn.BODY)
+        ]);
+    if (messages.isNotEmpty) {
+      messages = messages
+          .where(
+              (element) => element.body!.contains('Dear PCEA KIRIGITI CHURCH'))
+          .toList();
+    }
+    //print(messages.length);
+    gettrans(messages);
+  }
+
+  Future<void> gettrans(List<SmsMessage> mss) async {
+    for (var ms in mss) {
+      try {
+        transaction? tr = transaction();
+        tr.Transtype = TransType.Receipts;
+        //Paybill Offering - Collins Mwangi  - Ref:RHK2KTV7QE.. - Undefined
+
+        //Dear PCEA KIRIGITI CHURCH, you have received Ksh. 10905.0 from ISAAC MUNGA KABUTHU for 1767371#JPRC Refund on 05/06/2023 at 07:35:28. MPESA Ref. RE65U10Z31..
+        String? date = ms.body!
+            .substring(ms.body!.indexOf(" on ") + 4, ms.body!.indexOf(" at "));
+        int? year = int.tryParse(date.split(RegExp(r'[/\-]'))[2]);
+        String? time = ms.body!
+            .substring(
+                ms.body!.indexOf(" at ") + 4, ms.body!.indexOf("Ref.") - 7)
+            .replaceAll('.', '');
+        tr.Transaction_Date = DateTime(
+          year!,
+          int.tryParse(date.split(RegExp(r'[/\-]'))[0])!,
+          int.tryParse(date.split(RegExp(r'[/\-]'))[1])!,
+        );
+        tr.Completion_Time = DateTime(
+            year,
+            int.tryParse(date.split(RegExp(r'[/\-]'))[0])!,
+            int.tryParse(date.split(RegExp(r'[/\-]'))[1])!,
+            int.tryParse(time.split(':')[0])!,
+            int.tryParse(time.split(':')[1])!,
+            int.tryParse(time.split(':')[2])!);
+        tr.A_C_No = ms.body!
+            .substring(ms.body!.indexOf(" for ") + 5, ms.body!.indexOf(" on "));
+        tr.Paid_In = double.tryParse(ms.body!.substring(
+            ms.body!.indexOf("Ksh. ") + 5, ms.body!.indexOf(" from ")));
+        tr.Name = ms.body!.substring(
+            ms.body!.indexOf(" from ") + 6, ms.body!.indexOf(" for "));
+        tr.Receipt_No = ms.body!
+            .substring(ms.body!.indexOf("MPESA Ref. ") + 11)
+            .replaceAll(".", "")
+            .replaceAll("\n", "");
+        tr.Detaills = "Paybill - ${tr.Name} - Ref:${tr.Receipt_No}";
+
+        transaction? exist = Get.find<SmsController>()
+            .messages
+            .firstWhereOrNull(
+                (element) => element.Receipt_No == tr?.Receipt_No);
+        //db.insert(tr);
+        if (exist == null) {
+          //trr.add(tr);
+          Get.find<SmsController>().messages.add(tr);
+        }
+        await ApiClient()
+            .postdata("mpesa", tr.toJson(), 'kirigiti')
+            .then((r) async {
+          if (r.statusCode == 200) {
+            t_Results results = t_Results.fromJson(r.body);
+            if (results.Code == 0) {
+              tr = results.Contents;
+              tr!.Sent = true;
+              tr!.Detaills =
+                  "Paybill - ${tr!.Name} - Ref:${tr!.Receipt_No} - ${tr!.Purpose}";
+              //db.update(tr!);
+            }
+          }
+        });
+      } catch (e) {
+        e.printError();
+      }
+      //  messages.value.add(tr!);
+    }
+    Get.find<SmsController>().reading.value = false;
+  }
+
+  DateTime convert12To24Hour(String time12h) {
+    final DateFormat format12Hour = DateFormat('hh:mm a');
+    final DateFormat format24Hour = DateFormat('HH:mm');
+
+    DateTime dateTime = format12Hour.parse(time12h);
+    String time24h = format24Hour.format(dateTime);
+
+    // You can return the DateTime object if you need to use it later.
+    return dateTime;
+  }
+}

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.EnterPhone">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.06"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg" />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Request a loan,"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:text="Enter the amount you wish to request.\n\nAll figures are in KShs (Kenya Shillings)."
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+
+                            <EditText
+                                android:id="@+id/amount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:background="@drawable/edit_text_underline_bg"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="left"
+                                android:hint="Request Amount"
+                                android:inputType="numberDecimal"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey_700"
+                                android:textSize="18sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp">
+
+                                    <EditText
+                                        android:id="@+id/monthly_interest"
+                                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="left"
+                                        android:hint="Monthly Interest"
+                                        android:inputType="numberDecimal"
+                                        android:text="0.00"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/grey_700"
+                                        android:textSize="18sp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp">
+
+                                    <EditText
+                                        android:id="@+id/monthly_principal"
+                                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="left"
+                                        android:hint="Monthly Principal"
+                                        android:inputType="numberDecimal"
+                                        android:text="0.00"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/grey_700"
+                                        android:textSize="18sp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp">
+
+                                    <EditText
+                                        android:id="@+id/total_monthly_pay"
+                                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="left"
+                                        android:hint="Total Monthly Repayment"
+                                        android:inputType="numberDecimal"
+                                        android:text="0.00"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/grey_700"
+                                        android:textSize="18sp" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp">
+
+                                    <EditText
+                                        android:id="@+id/total_repay"
+                                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="left"
+                                        android:hint="Total amount to repay after 30 days"
+                                        android:inputType="numberDecimal"
+                                        android:text="0.00"
+                                        android:textColor="@color/red_700"
+                                        android:textColorHint="@color/grey_700"
+                                        android:textSize="30sp"
+                                        android:textStyle="bold" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btnProceed"
+                                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:background="@drawable/button_primary"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="REQUEST LOAN"
+                                android:textColor="@color/white"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

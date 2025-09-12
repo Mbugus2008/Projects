@@ -1,0 +1,6 @@
+@MatatuCore_HostAddress = http://localhost:5145
+
+GET {{MatatuCore_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data class="Advanceitems">
+
+        <variable
+            name="advance"
+            type="com.trimline.pawdep.Repayment" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:scrollbars="horizontal"
+        android:background="@drawable/border"
+        >
+
+
+        <TextView
+            android:id="@+id/PAWDEP_No"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+           android:hint="PAWDEP No"
+
+            android:text="@={advance.Pawdep_No}"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/Principle_Paid"/>
+        <TextView
+            android:id="@+id/Member_Name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:text="@={advance.Member_Name}"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/Principle_Paid"
+            app:layout_constraintStart_toEndOf="@id/PAWDEP_No"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+        android:id="@+id/memberNo"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="Member No"
+        android:textSize="10dp"
+        android:text="@={advance.Member_No }"
+        app:layout_constraintBottom_toBottomOf="@id/Principle_Paid"
+        app:layout_constraintStart_toEndOf="@id/Member_Name"
+        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Loan_No"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Loan_No"
+            android:textSize="10dp"
+            android:text="@={advance.Loan_No}"
+            app:layout_constraintBottom_toBottomOf="@id/Principle_Paid"
+            app:layout_constraintStart_toEndOf="@id/memberNo"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Expected_Repayment"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Expected_Repayment"
+            android:text="@={`` +advance.Expected_Repayment}"
+            style="@style/groupheader"
+            app:layout_constraintBottom_toBottomOf="@id/Principle_Paid"
+            app:layout_constraintStart_toEndOf="@id/Loan_No"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Expected_Interest"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/Principle_Paid"
+            android:hint="Expected_Interest"
+            android:text="@={``+advance.Expected_Interest}"
+            style="@style/groupheader"
+            app:layout_constraintStart_toEndOf="@id/Expected_Repayment"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <EditText
+            android:id="@+id/Principle_Paid"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Principle_Paid"
+            android:text="@={``+advance.Principle_Paid }"
+            android:theme="@style/tlist"
+            app:layout_constraintStart_toEndOf="@id/Expected_Interest"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/Interest_Paid"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Interest_Paid"
+            android:text="@={``+advance.Interest_Paid }"
+            android:theme="@style/tlist"
+            app:layout_constraintStart_toEndOf="@id/Principle_Paid"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/Penalty"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Penalty"
+            android:text="@={``+advance.Penalty }"
+            android:theme="@style/tlist"
+            app:layout_constraintStart_toEndOf="@id/Interest_Paid"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

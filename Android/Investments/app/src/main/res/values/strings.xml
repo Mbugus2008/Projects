@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Investments</string>
+    <string name="title_activity_home">KENYA POLICE INVESTMENT CO-OP</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+    <string name="curr">%,.2f</string>
+
+    <string name="lcurr"><![CDATA[<i>Bal:</i><b>%,.2f</b>]]></string>
+    <string name="projectid"><![CDATA[<i>App No:</i><b>%s</b>]]></string>
+    <string name="date"><![CDATA[<i>App date: </i><b>%s</b>]]></string>
+    <string name="desc"><![CDATA[<i>Name: </i><b>%s</b>]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_balances">balances</string>
+    <string name="title_activity_mini">mini</string>
+
+
+    <string name="downloadStarted">Download Started…</string>
+    <string name="downloadCompleted">Download Completed…</string>
+    <string name="downloadFailed">Download Failed…</string>
+    <string name="downloadAgain">Download Again</string>
+    <string-array name="Paymenttypes">
+        <item>Mpesa</item>
+        <item>Transfer</item>
+        <item>Other</item>
+    </string-array>
+    <string name="title_activity_forgot__password">Forgot Password</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_activefunds">activefunds</string>
+</resources>
+

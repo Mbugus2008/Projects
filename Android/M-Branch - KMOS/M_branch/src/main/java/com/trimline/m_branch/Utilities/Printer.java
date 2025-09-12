@@ -1,0 +1,500 @@
+package com.trimline.m_branch.Utilities;
+
+
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Handler;
+import android.os.ParcelUuid;
+import android.util.Log;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+
+import com.google.gson.Gson;
+
+import com.trimline.m_branch.reports.tsummary;
+import com.trimline.m_branch.transaction;
+
+public  class Printer extends Thread {
+    private BluetoothSocket pSocket;
+    Handler mHandler = null;
+    SharedPreferences preferences;
+    public BluetoothSocket printersock;
+    public OutputStream printerout;
+    Context context;
+    public BluetoothDevice printerdevice;
+
+    public Printer(SharedPreferences s, Handler mHandler, Context c) {
+        try {
+            preferences = s;
+            this.context = c;
+            this.mHandler = mHandler;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void run() {
+        byte[] pbuffer = new byte[1024];
+        int pbytes = 0;
+        int pbegin = 0;
+
+        BluetoothAdapter ad = BluetoothAdapter.getDefaultAdapter();
+        BluetoothDevice prnt;
+        // Make a connection to the BluetoothSocket
+        while (true) {
+            try {
+                String value = preferences.getString("PRINTER", "");
+                if (!value.equals("")) {
+                    prnt = ad.getRemoteDevice(value);
+                    if (printersock == null) {
+//                        if (!printersock.isConnected())
+//                        {
+                        Log.i("thread", "running");
+
+//                BluetoothDevice prnt = BluetoothAdapter.getDefaultAdapter().                        getRemoteDevice("00:02:0A:02:60:10");
+                        if (!value.equals("")) {
+
+                            if (ad != null) {
+                                if (!ad.isEnabled())
+                                    ad.enable();
+
+                                ParcelUuid[] uuds = prnt.getUuids();
+                                if (uuds != null)
+                                    for (ParcelUuid u : uuds
+                                    ) {
+                                        UUID pa = u.getUuid();
+                                        Log.i("Device uuid", pa.toString());
+                                    }
+                                printerdevice = prnt;
+                                Method m = prnt.getClass().getMethod("createRfcommSocket",
+                                        new Class[]{int.class});
+                                printersock = (BluetoothSocket) m.invoke(prnt, Integer.valueOf(1));
+                                try {
+                                    Thread.sleep(1000);
+                                    if (printersock.isConnected())
+                                        Log.i("thread1", "printer connected");
+                                    printersock.connect();
+                                } catch (IOException ex) {
+                                    BluetoothConnector bc;
+                                    final UUID MY_UUID_SECURE =
+                                            UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
+                                    List<UUID> ids = new ArrayList<>();
+                                    UUID id = MY_UUID_SECURE;
+                                    ids.add(id);
+                                    bc = new BluetoothConnector(prnt, true, ad, ids);
+                                    Thread.sleep(1000);
+                                    if (printersock.isConnected())
+                                        Log.i("thread2", "printer connected");
+                                    printersock = bc.connect();
+                                }
+                                mHandler.obtainMessage(Constants.PRINTER_CONNECTED, true).sendToTarget();
+                                pSocket = printersock;
+                                printerout = pSocket.getOutputStream();
+                                //Log.i("thread", "printer connected");
+                                //return;
+                                try {
+                                    while (printersock.isConnected()) {
+                                        Log.i("thread", "printer connected");
+                                        this.sleep(2000);
+                                    }
+
+                                    // mHandler.obtainMessage(Constants.PRINTER_DISCONNECTED, true).sendToTarget();
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } else
+                                mHandler.obtainMessage(Constants.MESSAGE_TOAST, "No bluetooth found").sendToTarget();
+
+                        } else return;
+                    } else {
+                        if (!printersock.isConnected()) {
+                            BluetoothConnector bc;
+                            final UUID MY_UUID_SECURE =
+                                    UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
+                            List<UUID> ids = new ArrayList<>();
+                            UUID id = MY_UUID_SECURE;
+                            ids.add(id);
+                            bc = new BluetoothConnector(prnt, true, ad, ids);
+                            printerdevice = prnt;
+                            Method m = prnt.getClass().getMethod("createRfcommSocket",
+                                    new Class[]{int.class});
+                            printersock = (BluetoothSocket) m.invoke(prnt, Integer.valueOf(1));
+                            Thread.sleep(1000);
+                            if (printersock.isConnected())
+                                Log.i("thread2", "printer connected");
+                            printersock = bc.connect();
+                            mHandler.obtainMessage(Constants.PRINTER_CONNECTED, true).sendToTarget();
+                            pSocket = printersock;
+                            printerout = pSocket.getOutputStream();
+                        }
+
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+
+            }
+            //}
+        }
+        // Reset the ConnectThread because we're done
+
+
+        // Start the connected thread
+    }
+
+    public void write(byte[] buffer) {
+        try {
+            printerout.write(buffer);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void write(int buffer) {
+        try {
+            printerout.write(buffer);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void flush() {
+        try {
+            printerout.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void cancel() {
+        try {
+            pSocket.close();
+            printerout.close();
+        } catch (IOException e) {
+
+        }
+    }
+    public void printcollection(Bitmap logo, List<transaction> t) {
+        try {
+
+            String head;
+            head = "Lopha Multipurpose co-operative\n";
+            head += "            Society            \n";
+            head += "    P.O Box 70462-100100       \n";
+            head += "        Nairobi, Kenya         \n";
+            head += "    Tel: 0734281110            \n";
+            head += "  Email: info@lophasacco.co.ke \n";
+            head += "-------------------------------\n";
+            head += "         CASH RECIEPT          \n";
+            String data = "";
+            data = "--------------------------------\n";
+            data += printout("Ref:", t.get(0).OTTN);//"Ref:   " + t.get(0).OTTN + "\n";
+
+            data += printout("M. No:", t.get(0).Account_No);//+ "\n";
+            data += printout("Name:", t.get(0).Account_Name);// + "\n";
+            data += printout("V. No:", t.get(0).Loan_No);// + "\n";
+            data += printout("Date:", t.get(0).Date);// + "\n";
+            data += printout("Time:", t.get(0).Time);// + "\n";
+            data += "--------------------------------\n";
+            data += printout("Trans Type", "Amount");//
+            data += printout("----------", "------");//
+            double total = 0.0;
+            for (transaction tt : t
+            ) {
+                total += tt.Amount;
+                data += printout(tt.typename, String.format("%.2f", tt.Amount));
+            }
+            data += "--------------------------------\n";
+            data += printout("TOTAL", String.format(Locale.getDefault(), "%.2f\n", total));
+            data += printout("Served by:", ((Mbranch) context).CurrentAgent.Name) + "\n\n";
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (printersock != null) {
+                byte[] arrayOfByte1 = {27, 33, 0};
+                byte[] format = {27, 33, 0};
+                printerout.write(format);
+                String msg = head;
+                printerout.write(msg.getBytes());
+                byte[] printformat = {27, 33, 0};
+                printerout.write(printformat);
+                msg = data;
+                printerout.write(msg.getBytes());
+                printerout.write(0x0D);
+                printerout.write(0x0D);
+                printerout.write(0x0D);
+                printerout.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void printSummary(List<tsummary> t) {
+        try {
+            Log.i("Summary", new Gson().toJson(t));
+            // print_image(logo);
+            String header, value;
+            String head;
+            head = "Lopha Multipurpose co-operative\n";
+            head += "            Society            \n";
+            head += "    P.O Box 70462-100100       \n";
+            head += "        Nairobi, Kenya         \n";
+            head += "    Tel: 0734281110            \n";
+            head += "  Email: info@lophasacco.co.ke \n";
+            head += "-------------------------------\n";
+            head += "         Transaction summary   \n";
+            head += "         " + t.get(0).Date + " \n";
+            String data = "";
+
+            data += "--------------------------------\n";
+            data += printout("Trans Type", "Amount");
+            data += printout("----------", "------");
+            double total = 0.0;
+            for (tsummary tt : t
+            ) {
+                total += tt.Amount;
+
+                data += printout(tt.Type, String.format("%.2f", tt.Amount));
+            }
+            data += "--------------------------------\n";
+            data += printout("Total", String.format("%.2f", total)) + "\n";
+            data += printout("Printed by:", ((Mbranch) context).CurrentAgent.Name) + "\n";
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (printersock != null) {
+                byte[] arrayOfByte1 = {27, 33, 0};
+                byte[] format = {27, 33, 0};
+                printerout.write(format);
+                String msg = head;
+                printerout.write(msg.getBytes());
+                byte[] printformat = {27, 33, 0};
+                printerout.write(printformat);
+                msg = data;
+                printerout.write(msg.getBytes());
+                printerout.write(0x0D);
+                printerout.write(0x0D);
+                printerout.write(0x0D);
+                printerout.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public String printout(String header, String value) {
+        String space = "";
+        return header + String.format("%" + (31 - (header.length() + value.length())) + "s", space) + value + "\n";
+    }
+    public void printcollectioncopy(Bitmap logo, List<transaction> t) {
+        try {
+            String head;
+            head = "Lopha Multipurpose co-operative\n";
+            head += "            Society            \n";
+            head += "    P.O Box 70462-100100       \n";
+            head += "        Nairobi, Kenya         \n";
+            head += "    Tel: 0734281110            \n";
+            head += "  Email: info@lophasacco.co.ke \n";
+            head += "-------------------------------\n";
+
+            head += "         CASH RECIEPT          \n";
+            head += "             (COPY)\n";
+            String data = "";
+            data = "--------------------------------\n\n";
+            data += "Ref:   " + t.get(0).OTTN + "\n";
+            data += "M. No: " + t.get(0).Account_No + "\n";
+            data += "Name:  " + t.get(0).Account_Name + "\n";
+            data += "Date:  " + t.get(0).Date + "\n";
+            data += "Time:  " + t.get(0).Time + "\n";
+            data += "--------------------------------\n\n";
+            data += "Trans Type            Amount\n";
+            data += "----------            ------\n";
+            double total = 0.0;
+            for (transaction tt : t
+            ) {
+                total += tt.Amount;
+                if (!tt.Loan_No.equals("")) {
+                    data += tt.typename + "\n";
+                    if (tt.Type.contains("LOAN")) {
+                        data += "(" + tt.Ward + ")" + String.format("%-" + (22 - tt.Ward.length()) + "s", "") + tt.Amount.toString() + "\n";
+                        data += "(" + tt.Loan_No + ")\n";//+ String.format("%-" + (22 - tt.Ward.length()) + "s", "") + tt.Amount.toString() + "\n";
+
+                    } else
+                        data += "(" + tt.Loan_No + ")" + String.format("%-" + (22 - tt.Loan_No.length()) + "s", "") + tt.Amount.toString() + "\n";
+
+                } else
+                    data += tt.typename + ":" + String.format("%-" + (22 - tt.typename.length()) + "s", "") + tt.Amount.toString() + "\n";
+            }
+            data += "--------------------------------\n";
+            data += "TOTAL                 " + String.format("%.2f", total) + "\n\n";
+
+            data += "Served by:  " + ((Mbranch) context).CurrentAgent.Name + "\n\n\n\n\n";
+
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (printersock != null) {
+
+
+                byte[] arrayOfByte1 = {27, 33, 0};
+                byte[] format = {27, 33, 0};
+
+                printerout.write(format);
+                String msg = head;
+                printerout.write(msg.getBytes());
+                byte[] printformat = {27, 33, 0};
+                printerout.write(printformat);
+                msg = data;
+                printerout.write(msg.getBytes());
+                printerout.write(0x0D);
+                printerout.write(0x0D);
+                printerout.write(0x0D);
+                printerout.flush();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void print_image(Bitmap bb) {
+        try {
+            Bitmap bmp = bb;
+            convertBitmap(bmp);
+            printerout.write(PrinterCommands.SET_LINE_SPACING_24);
+
+            int offset = 0;
+            while (offset < bmp.getHeight()) {
+                printerout.write(PrinterCommands.SELECT_BIT_IMAGE_MODE);
+                for (int x = 0; x < bmp.getWidth(); ++x) {
+
+                    for (int k = 0; k < 3; ++k) {
+
+                        byte slice = 0;
+                        for (int b = 0; b < 8; ++b) {
+                            int y = (((offset / 8) + k) * 8) + b;
+                            int i = (y * bmp.getWidth()) + x;
+                            boolean v = false;
+                            if (i < dots.length()) {
+                                v = dots.get(i);
+                            }
+                            slice |= (byte) ((v ? 1 : 0) << (7 - b));
+                        }
+                        printerout.write(slice);
+                    }
+                }
+                offset += 24;
+                printerout.write(PrinterCommands.FEED_LINE);
+                printerout.write(PrinterCommands.FEED_LINE);
+                printerout.write(PrinterCommands.FEED_LINE);
+                printerout.write(PrinterCommands.FEED_LINE);
+                printerout.write(PrinterCommands.FEED_LINE);
+                printerout.write(PrinterCommands.FEED_LINE);
+            }
+            printerout.write(PrinterCommands.SET_LINE_SPACING_30);
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    int mWidth, mHeight;
+    String mStatus;
+
+    public String convertBitmap(Bitmap inputBitmap) {
+
+        mWidth = inputBitmap.getWidth();
+        mHeight = inputBitmap.getHeight();
+
+        convertArgbToGrayscale(inputBitmap, mWidth, mHeight);
+        mStatus = "ok";
+        return mStatus;
+
+    }
+
+    BitSet dots;
+
+    private void convertArgbToGrayscale(Bitmap bmpOriginal, int width,
+                                        int height) {
+        int pixel;
+        int k = 0;
+        int B = 0, G = 0, R = 0;
+        dots = new BitSet();
+        try {
+
+            for (int x = 0; x < height; x++) {
+                for (int y = 0; y < width; y++) {
+                    // get one pixel color
+                    pixel = bmpOriginal.getPixel(y, x);
+
+                    // retrieve color of all channels
+                    R = Color.red(pixel);
+                    G = Color.green(pixel);
+                    B = Color.blue(pixel);
+                    // take conversion up to one single value by calculating
+                    // pixel intensity.
+                    R = G = B = (int) (0.299 * R + 0.587 * G + 0.114 * B);
+                    // set bit into bitset, by calculating the pixel's luma
+                    if (R < 55) {
+                        dots.set(k);//this is the bitset that i'm printing
+                    }
+                    k++;
+
+                }
+
+
+            }
+
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            Log.e("TAG", e.toString());
+        }
+    }
+
+    private String getpreferences(SharedPreferences s, String key) {
+        String pref = "";
+        String value = s.getString(key, "");
+
+        if (value != null || value != "") {
+            pref = value;
+        }
+        return pref;
+    }
+
+
+}

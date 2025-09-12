@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/page/sms" targetNamespace="urn:microsoft-dynamics-schemas/page/sms" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/page/sms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="Source">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="New_Member" />
+          <xsd:enumeration value="New_Account" />
+          <xsd:enumeration value="Loan_Account_Approval" />
+          <xsd:enumeration value="Deposit_Confirmation" />
+          <xsd:enumeration value="Cash_Withdrawal_Confirm" />
+          <xsd:enumeration value="Loan_Application" />
+          <xsd:enumeration value="Loan_Appraisal" />
+          <xsd:enumeration value="Loan_Guarantors" />
+          <xsd:enumeration value="Loan_Rejected" />
+          <xsd:enumeration value="Loan_Posted" />
+          <xsd:enumeration value="Loan_defaulted" />
+          <xsd:enumeration value="Salary_Processing" />
+          <xsd:enumeration value="Teller_Cash_Deposit" />
+          <xsd:enumeration value="_Teller_Cash_Withdrawal" />
+          <xsd:enumeration value="Teller_Cheque_Deposit" />
+          <xsd:enumeration value="Fixed_Deposit_Maturity" />
+          <xsd:enumeration value="InterAccount_Transfer" />
+          <xsd:enumeration value="Account_Status" />
+          <xsd:enumeration value="Status_Order" />
+          <xsd:enumeration value="EFT_Effected" />
+          <xsd:enumeration value="_ATM_Application_Failed" />
+          <xsd:enumeration value="ATM_Collection" />
+          <xsd:enumeration value="MSACCO" />
+          <xsd:enumeration value="Member_Changes" />
+          <xsd:enumeration value="Cashier_Below_Limit" />
+          <xsd:enumeration value="Cashier_Above_Limit" />
+          <xsd:enumeration value="InternetBanking" />
+          <xsd:enumeration value="CRM" />
+          <xsd:enumeration value="Bulk" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Sent_To_Server">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="No" />
+          <xsd:enumeration value="Yes" />
+          <xsd:enumeration value="Failed" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Sms">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Source" type="tns:Source" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Telephone_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Date_Entered" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Time_Entered" type="xsd:time" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Entered_By" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="SMS_Message" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Sent_To_Server" type="tns:Sent_To_Server" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Date_Sent_to_Server" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Member_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Account_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Document_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="System_Created_Entry" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Bulk_SMS_Balance" type="xsd:decimal" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Sms_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="Sms" type="tns:Sms" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Sms_Fields">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Source" />
+          <xsd:enumeration value="Telephone_No" />
+          <xsd:enumeration value="Date_Entered" />
+          <xsd:enumeration value="Time_Entered" />
+          <xsd:enumeration value="Entered_By" />
+          <xsd:enumeration value="SMS_Message" />
+          <xsd:enumeration value="Sent_To_Server" />
+          <xsd:enumeration value="Date_Sent_to_Server" />
+          <xsd:enumeration value="Member_No" />
+          <xsd:enumeration value="Account_No" />
+          <xsd:enumeration value="Document_No" />
+          <xsd:enumeration value="System_Created_Entry" />
+          <xsd:enumeration value="Bulk_SMS_Balance" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Sms_Filter">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Field" type="tns:Sms_Fields" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Criteria" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ReadByRecId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="recId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="Sms" type="tns:Sms" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="filter" type="tns:Sms_Filter" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="bookmarkKey" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="setSize" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="ReadMultiple_Result" type="tns:Sms_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="IsUpdated_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="GetRecIdFromKey_Result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="ReadByRecId">
+    <part name="parameters" element="tns:ReadByRecId" />
+  </message>
+  <message name="ReadByRecId_Result">
+    <part name="parameters" element="tns:ReadByRecId_Result" />
+  </message>
+  <message name="ReadMultiple">
+    <part name="parameters" element="tns:ReadMultiple" />
+  </message>
+  <message name="ReadMultiple_Result">
+    <part name="parameters" element="tns:ReadMultiple_Result" />
+  </message>
+  <message name="IsUpdated">
+    <part name="parameters" element="tns:IsUpdated" />
+  </message>
+  <message name="IsUpdated_Result">
+    <part name="parameters" element="tns:IsUpdated_Result" />
+  </message>
+  <message name="GetRecIdFromKey">
+    <part name="parameters" element="tns:GetRecIdFromKey" />
+  </message>
+  <message name="GetRecIdFromKey_Result">
+    <part name="parameters" element="tns:GetRecIdFromKey_Result" />
+  </message>
+  <portType name="Sms_Port">
+    <operation name="ReadByRecId">
+      <input name="ReadByRecId" message="tns:ReadByRecId" />
+      <output name="ReadByRecId_Result" message="tns:ReadByRecId_Result" />
+    </operation>
+    <operation name="ReadMultiple">
+      <input name="ReadMultiple" message="tns:ReadMultiple" />
+      <output name="ReadMultiple_Result" message="tns:ReadMultiple_Result" />
+    </operation>
+    <operation name="IsUpdated">
+      <input name="IsUpdated" message="tns:IsUpdated" />
+      <output name="IsUpdated_Result" message="tns:IsUpdated_Result" />
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <input name="GetRecIdFromKey" message="tns:GetRecIdFromKey" />
+      <output name="GetRecIdFromKey_Result" message="tns:GetRecIdFromKey_Result" />
+    </operation>
+  </portType>
+  <binding name="Sms_Binding" type="tns:Sms_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="ReadByRecId">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/sms:ReadByRecId" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadByRecId">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadByRecId_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/sms:ReadMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IsUpdated">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/sms:IsUpdated" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsUpdated">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsUpdated_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/sms:GetRecIdFromKey" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetRecIdFromKey">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetRecIdFromKey_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Sms_Service">
+    <port name="Sms_Port" binding="tns:Sms_Binding">
+      <address location="http://192.168.1.74:7147/KSSLMBS/WS/kssl/Page/Sms" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

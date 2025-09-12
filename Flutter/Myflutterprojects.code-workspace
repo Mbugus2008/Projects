@@ -1,0 +1,13 @@
+{
+    "folders": [
+		{
+			"name": "Flutter",
+			"path": "."
+		},
+		{
+			"name": "smobile",
+			"path": "..\\smobile\\smobile"
+		}
+	],
+    "settings": {}
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/account"
+        android:icon="@drawable/myaccount"
+        android:title="MY ACCOUNT">
+        <menu>
+            <item
+                android:id="@+id/Balance"
+                android:title="Balances"
+                android:icon="@drawable/tab_right"
+                />
+            <item
+                android:id="@+id/Statement"
+                android:title="Statement"
+                android:icon="@drawable/tab_right"
+                />
+<!--            <item-->
+<!--                android:id="@+id/Nextofkin"-->
+<!--                android:title="Next of Kin"-->
+<!--                />-->
+        </menu>
+
+    </item>
+    <item android:id="@+id/properties"
+        android:icon="@drawable/myaccount"
+        android:title="MY PROPERTIES">
+        <menu>
+            <item
+                android:id="@+id/mybooking"
+                android:title="My Bookings"
+                android:icon="@drawable/tab_right"
+                />
+            <item
+                android:id="@+id/prop"
+                android:title="My Properties"
+                android:icon="@drawable/tab_right"
+                />
+
+        </menu>
+    </item>
+    <item android:id="@+id/realestate"
+        android:icon="@drawable/myaccount"
+        android:title="REAL ESTATE FUNDS">
+        <menu>
+            <item
+                android:id="@+id/applications"
+                android:title="My Applications"
+                android:icon="@drawable/tab_right"
+                />
+            <item
+                android:id="@+id/Runnning"
+                android:title="Active"
+                android:icon="@drawable/tab_right"
+                />
+
+        </menu>
+    </item>
+
+</menu>

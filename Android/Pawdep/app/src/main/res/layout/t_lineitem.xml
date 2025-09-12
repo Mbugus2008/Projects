@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data class="Tline">
+
+        <variable
+            name="transaction"
+            type="com.trimline.pawdep.T_line" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:scrollbars="horizontal"
+        android:background="@drawable/border"
+        >
+
+
+        <TextView
+            android:id="@+id/transid"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+           android:hint="PAWDEP No"
+
+            android:text="@={transaction.PAWDEP_No}"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/savings"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:text="@={transaction.Member_Name}"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            app:layout_constraintStart_toEndOf="@id/transid"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/memberNo"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:hint="Member No"
+            android:text="@={transaction.Member_No}"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            app:layout_constraintStart_toEndOf="@id/name"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/savingsbf"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:hint="Savings"
+            android:textStyle="bold"
+            android:text="@={`` +transaction.Savings_B_F}"
+            android:gravity="center_horizontal|end"
+
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            app:layout_constraintStart_toEndOf="@id/memberNo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/loansbf"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            android:hint="Loans B/F"
+            android:text="@={``+transaction.Loan_Balance_B_F }"
+            style="@style/groupheader"
+            app:layout_constraintStart_toEndOf="@id/savingsbf"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/expectedprincipal"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            android:hint="Exp prin."
+            android:text="@={``+transaction.Expected_Principal }"
+            android:theme="@style/tlist"
+            app:layout_constraintStart_toEndOf="@id/loansbf"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/expectedinterest"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            android:hint="exp int."
+            android:text="@={``+transaction.Expected_Interest }"
+            android:theme="@style/tlist"
+            app:layout_constraintStart_toEndOf="@id/expectedprincipal"
+            app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/Totalpaid"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            android:hint="Total paid"
+            android:theme="@style/tlist"
+            android:text="@={``+transaction.Total_Paid }"
+            android:textStyle="normal|bold"
+            app:layout_constraintStart_toEndOf="@id/expectedinterest"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/savings"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:hint="Savings"
+            android:text="@={``+transaction.Monthly_Savings }"
+            android:gravity="center_horizontal|end"
+            app:layout_constraintBottom_toBottomOf="@id/Totalpaid"
+            app:layout_constraintStart_toEndOf="@id/Totalpaid"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Loan_Principle_Paid"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:hint="Prin. Paid"
+            android:text="@={``+transaction.Principle_Paid }"
+            android:gravity="center_horizontal|end"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            app:layout_constraintStart_toEndOf="@id/savings"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/interestpaid"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:hint="Interst Paid"
+            android:text="@={``+transaction.interest_Paid }"
+            android:gravity="center_horizontal|end"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            app:layout_constraintStart_toEndOf="@id/Loan_Principle_Paid"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <EditText
+            android:id="@+id/hall"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:hint="Hall"
+            android:text="@={``+transaction.Hall}"
+            android:theme="@style/tlist"
+            app:layout_constraintStart_toEndOf="@id/interestpaid"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/loanno"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|end"
+            android:singleLine="true"
+            android:text="@={transaction.Loan_No}"
+            android:textAlignment="viewEnd"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            app:layout_constraintStart_toEndOf="@id/hall"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Totals"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|end"
+            android:hint="M. Total"
+            android:singleLine="true"
+            android:text="@={``+transaction.Total}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/savings"
+            app:layout_constraintStart_toEndOf="@id/loanno"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/advances"
+            android:text="Advances"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,69 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SyncData.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SyncData_Intrasoft_ProfitsExtGateway" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.12/iProfits2.GatewayService/ProfitsExtGateway.asmx</Value>
+    </Setting>
+    <Setting Name="SyncData_Crm_WebService1" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.23:12/Webservice1.asmx</Value>
+    </Setting>
+    <Setting Name="SyncData_VendorDocuments_Vendor_Attachments_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%20UAT%20II/Page/Vendor_Attachments</Value>
+    </Setting>
+    <Setting Name="SyncData_Employee_Attachments_Employee_Attachments_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%20UAT%20II/Page/Employee_Attachements</Value>
+    </Setting>
+    <Setting Name="SyncData_Links_Links_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.17:7047/DynamicsNAV110/WS/Cycle%20III/Page/Links</Value>
+    </Setting>
+    <Setting Name="SyncData_ErpVendor_VendorCard_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.20:7047/DynamicsNAV110/WS/Kenya%20Police%20SACCO/Page/Vendors</Value>
+    </Setting>
+    <Setting Name="SyncData_Erp_Payroll_Profits_Payroll_Profits_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%20UAT%20II/Page/Payroll_Profits</Value>
+    </Setting>
+    <Setting Name="SyncData_GL_Account_VendorCard_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.16:7047/DynamicsNAV110/WS/KPS%20UAT%20II/Page/GL_Account</Value>
+    </Setting>
+    <Setting Name="SyncData_Imprest_Profits_Imprest_Profits_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.20:7047/DynamicsNAV110/WS/Kenya%20Police%20SACCO/Page/Imprest_Profits</Value>
+    </Setting>
+    <Setting Name="SyncData_MemberCredits_MemberCredits_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20VI/Page/MemberCredits</Value>
+    </Setting>
+    <Setting Name="SyncData_crm_PropertySales_PropertySales_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20V/Page/PropertySales</Value>
+    </Setting>
+    <Setting Name="SyncData_crm_Contacts_Contact_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20IV/Page/Contact</Value>
+    </Setting>
+    <Setting Name="SyncData_AccountList_Accountlist_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/LIVE/Page/Accountlist</Value>
+    </Setting>
+    <Setting Name="SyncData_Members_Member_Channels_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20IV/Page/Member_Channels</Value>
+    </Setting>
+    <Setting Name="SyncData_Project_Proposals_Project_Proposals_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20IV/Page/Project_Proposals</Value>
+    </Setting>
+    <Setting Name="SyncData_Projects_Project_Proposals_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20VI/Page/Projects</Value>
+    </Setting>
+    <Setting Name="SyncData_Loans_Project_Proposals_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20VI/Page/Loans</Value>
+    </Setting>
+    <Setting Name="SyncData_Financial_Investments_Channel_Financial_Investments_Channel_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20VI/Page/Financial_Investments_Channel</Value>
+    </Setting>
+    <Setting Name="SyncData_Withdrawals_Withdrawals_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20VI/Page/Withdrawals</Value>
+    </Setting>
+    <Setting Name="SyncData_Member_withdrawal_Member_withdrawal_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20VI/Page/Member_withdrawal</Value>
+    </Setting>
+    <Setting Name="SyncData_Channels_Channels" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://kpicsprdapp01.policesacco.com:7047/DynamicsNAV110/WS/LIVE/Codeunit/Channels</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

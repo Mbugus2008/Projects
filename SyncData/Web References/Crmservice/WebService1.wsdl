@@ -1,0 +1,2784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveMember">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Phonenumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveMemberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetrieveMemberResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="leadInsert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="topic" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="hudumanumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employmentinformation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilephone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="nationality" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sex" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="APIKEY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="leadInsertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leadInsertResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewMember">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="First_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Middle_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Last_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="National_ID_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Passport_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address_2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Nationality" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="County" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sub_County" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Relationship_Officer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Officer_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobile_Phone_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="E_Mail_Address" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date_of_Birth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Place_of_Birth" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Disabled" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Disability_Description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Member_Category" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Introduced_By" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Customer_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sacco_Member" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewMemberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewMemberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewKin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sk_custid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="App_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ID_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="B_Cert_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="First_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Middle_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Last_Name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DOB" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Allocation_Percent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Next_of_KIN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone_No" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewKinResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewKinResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewNominee">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sk_custid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="App_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ID_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="B_Cert_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="First_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Middle_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Last_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DOB" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Allocation_Percent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Next_of_Nominee" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone_No" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewNomineeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewNomineeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sk_custid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="OpenedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewAccountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Updatemember">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="First_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Middle_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Last_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="National_ID_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Passport_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address_2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Nationality" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="County" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sub_County" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Relationship_Officer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Officer_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobile_Phone_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="E_Mail_Address" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date_of_Birth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Place_of_Birth" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Disabled" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Disability_Description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Member_Category" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Introduced_By" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Customer_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sacco_Member" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatememberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatememberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Updatekin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Customer_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="App_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ID_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="B_Cert_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="First_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Middle_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Last_Name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DOB" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Allocation_Percent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Next_of_KIN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatekinResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatekinResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retrieveNOK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retrieveNOKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="retrieveNOKResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Updatenominee">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Customer_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="App_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ID_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="B_Cert_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="First_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Middle_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Last_Name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DOB" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Allocation_Percent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Next_of_Nominee" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatenomineeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatenomineeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retrieveubf">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retrieveubfResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="retrieveubfResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Updateaccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="OpenedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateaccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateaccountResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="progresstracking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mobilephone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="progresstrackingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="progresstrackingResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="property">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Transaction_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Member_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Investment_Account" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Project_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Asset_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Booking_Price" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Category_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sales_Officer_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Deposit_Amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Title_Deed_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Plot_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Payment_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subdivision_Name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="propertyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="propertyResult" type="tns:results" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="results">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="code" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InvestmentAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Balance" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Share_Capital_Account" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Noofshares" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Account_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Share_Trading_Account" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Account_Status" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Member_No" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InvestmentAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InvestmentAccountResult" type="tns:results" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="servicerequest_atmcardapplication">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="branch" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cardnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cardtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="servicerequest_atmcardapplicationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="servicerequest_atmcardapplicationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="servicerequest_atmcardrenewal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="branch" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cardnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cardtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="servicerequest_atmcardrenewalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="servicerequest_atmcardrenewalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="chequebookrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="branch" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paymentmethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="debitaccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numberofleaflets" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="chequebookrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="chequebookrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="bankerschequerequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paymentmethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="debitaccount" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="amount" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="payableto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="byorderof" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="bankerschequerequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bankerschequerequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="newbosaaccountrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="newbosaaccountrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="newbosaaccountrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="newfosaaccountrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="newfosaaccountrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="newfosaaccountrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="newtermdepositrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="savingsdebitedaccount" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="initialamount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="startdate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="enddate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="autorenewal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="newtermdepositrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="newtermdepositrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="salaryprocessingrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accounttobecredited" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startdate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="station" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="salaryprocessingrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="salaryprocessingrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="funeralrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameofthedeceased" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationshiptomember" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofdeath" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="funeralrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="funeralrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VariationRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="variationType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="amountfrom" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="amountto" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VariationRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VariationRequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="servicerequest_loanapplication">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberfullname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Memberid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="loanamount" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="settlementaccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="duration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="loanpurpose" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="defaulted" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="appraisalreference" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDPassportnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="age" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guarantor1id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guarantee1amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guarantor2id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guarantee2amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guarantor3id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guarantee3amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="servicerequest_loanapplicationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="servicerequest_loanapplicationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="loanguarantors">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gurantor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gurantorid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gurantorPFNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MobileNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="loanguarantorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="loanguarantorsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="membershipcardrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberfullname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="membershipcardrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membershipcardrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="membershipcardrenewalrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberfullname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reasonforreplacement" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="membershipcardrenewalrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membershipcardrenewalrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="membershipwithdrawal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employer" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="depositsamount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="loanbalance" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="reasonforwithdrawal" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="membershipwithdrawalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membershipwithdrawalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="refundrequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employer" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="depositsamount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="loanbalance" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="reasonforwithdrawal" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="refundrequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="refundrequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="membershipre_registration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="occupation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nationality" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="krapin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinrelationship" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nextofkindob" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="nextofkinpercentageshare" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinphonenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinaddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spousefullname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spouseid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spousephonenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spouseaddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spouserelationship" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="membershipre_registrationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membershipre_registrationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="accountclosure">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fosaaaccountnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="department" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accounttype" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="accountclosureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountclosureResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UBFBenefits">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ubfnomineename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationship" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofdeath" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UBFBenefitsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UBFBenefitsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UBFBenefitsmultiple">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ubfnomineename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationship" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofdeath" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UBFBenefitsmultipleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UBFBenefitsmultipleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="salaryprocessingrequests">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fullname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="station" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="salaryprocessingrequestsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="salaryprocessingrequestsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sharetransfer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="membershipnumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="numberofshares" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransferorIDNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sharesfromaccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="stafforpayrollnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="workstation" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="effectivedate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sharetransferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sharetransferResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UBFnextofkinReg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="secondname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zipcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="townorcity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nationality" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="krapin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfnumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ubfrelationship" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKfirstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKsecondname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKlastname" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="NOKdateofbirth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKidnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKaddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKaddresscontinue" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKzipcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKcitytown" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKcountry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKemail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKmobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOKspecialinstructions" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOK" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UBFnextofkinRegResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UBFnextofkinRegResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="buysellshares">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Transferredfrom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="transferredfrommobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="transferredfromidnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="transferredto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="transferretomobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="transferredtoidnumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="buysellsharesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="buysellsharesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="finaldues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkin1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="percentage1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkin2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="percentage2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkin3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="percentage3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkin4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="percentage4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameofmember" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="totaldeposits" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="finalduesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="finalduesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="masteramendments_biodata">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="secondname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zipcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="townorcity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nationality" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="krapin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfnumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="narration" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="terms" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cancelapprovereason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iwebbankingcustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icorporatecustomer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="iapplicationstatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icancelledreason" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="masteramendments_biodataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="masteramendments_biodataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="masteramendments_nextofkin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fullname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationship" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="percentageshare" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="phonenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="masteramendments_nextofkinResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="masteramendments_nextofkinResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="masterdata">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationship" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="percentageshare" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="phonenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="masterdataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="masterdataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Masterdata_UBFdata">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spousefullname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spouseidnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spouseaddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="spousemobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Masterdata_UBFdataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Masterdata_UBFdataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="mobilebanking_registration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fosaaccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phonenumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="mobilebanking_registrationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mobilebanking_registrationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="custodial_services">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="memberid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phonenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="custodial_servicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="custodial_servicesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="investmentmembershiprequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="source" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="requesttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="occupation" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idnumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateofbirth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="nationality" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="krapin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="employer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinrelationship" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nextofkindob" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="nextofkinpercentageshare" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinphonenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nextofkinaddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="paymentmethod" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="investmentmembershiprequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="investmentmembershiprequestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateCase">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="membernumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="topic" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="origin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateCaseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateCaseResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetriveContactDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetriveContactDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetriveContactDetailsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveMemberSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrieveMember" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveMemberSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrieveMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="leadInsertSoapIn">
+    <wsdl:part name="parameters" element="tns:leadInsert" />
+  </wsdl:message>
+  <wsdl:message name="leadInsertSoapOut">
+    <wsdl:part name="parameters" element="tns:leadInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewMemberSoapIn">
+    <wsdl:part name="parameters" element="tns:NewMember" />
+  </wsdl:message>
+  <wsdl:message name="NewMemberSoapOut">
+    <wsdl:part name="parameters" element="tns:NewMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewKinSoapIn">
+    <wsdl:part name="parameters" element="tns:NewKin" />
+  </wsdl:message>
+  <wsdl:message name="NewKinSoapOut">
+    <wsdl:part name="parameters" element="tns:NewKinResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewNomineeSoapIn">
+    <wsdl:part name="parameters" element="tns:NewNominee" />
+  </wsdl:message>
+  <wsdl:message name="NewNomineeSoapOut">
+    <wsdl:part name="parameters" element="tns:NewNomineeResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:NewAccount" />
+  </wsdl:message>
+  <wsdl:message name="NewAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:NewAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatememberSoapIn">
+    <wsdl:part name="parameters" element="tns:Updatemember" />
+  </wsdl:message>
+  <wsdl:message name="UpdatememberSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatememberResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatekinSoapIn">
+    <wsdl:part name="parameters" element="tns:Updatekin" />
+  </wsdl:message>
+  <wsdl:message name="UpdatekinSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatekinResponse" />
+  </wsdl:message>
+  <wsdl:message name="retrieveNOKSoapIn">
+    <wsdl:part name="parameters" element="tns:retrieveNOK" />
+  </wsdl:message>
+  <wsdl:message name="retrieveNOKSoapOut">
+    <wsdl:part name="parameters" element="tns:retrieveNOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatenomineeSoapIn">
+    <wsdl:part name="parameters" element="tns:Updatenominee" />
+  </wsdl:message>
+  <wsdl:message name="UpdatenomineeSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatenomineeResponse" />
+  </wsdl:message>
+  <wsdl:message name="retrieveubfSoapIn">
+    <wsdl:part name="parameters" element="tns:retrieveubf" />
+  </wsdl:message>
+  <wsdl:message name="retrieveubfSoapOut">
+    <wsdl:part name="parameters" element="tns:retrieveubfResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateaccountSoapIn">
+    <wsdl:part name="parameters" element="tns:Updateaccount" />
+  </wsdl:message>
+  <wsdl:message name="UpdateaccountSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateaccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="progresstrackingSoapIn">
+    <wsdl:part name="parameters" element="tns:progresstracking" />
+  </wsdl:message>
+  <wsdl:message name="progresstrackingSoapOut">
+    <wsdl:part name="parameters" element="tns:progresstrackingResponse" />
+  </wsdl:message>
+  <wsdl:message name="propertySoapIn">
+    <wsdl:part name="parameters" element="tns:property" />
+  </wsdl:message>
+  <wsdl:message name="propertySoapOut">
+    <wsdl:part name="parameters" element="tns:propertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="InvestmentAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:InvestmentAccount" />
+  </wsdl:message>
+  <wsdl:message name="InvestmentAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:InvestmentAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="servicerequest_atmcardapplicationSoapIn">
+    <wsdl:part name="parameters" element="tns:servicerequest_atmcardapplication" />
+  </wsdl:message>
+  <wsdl:message name="servicerequest_atmcardapplicationSoapOut">
+    <wsdl:part name="parameters" element="tns:servicerequest_atmcardapplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="servicerequest_atmcardrenewalSoapIn">
+    <wsdl:part name="parameters" element="tns:servicerequest_atmcardrenewal" />
+  </wsdl:message>
+  <wsdl:message name="servicerequest_atmcardrenewalSoapOut">
+    <wsdl:part name="parameters" element="tns:servicerequest_atmcardrenewalResponse" />
+  </wsdl:message>
+  <wsdl:message name="chequebookrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:chequebookrequest" />
+  </wsdl:message>
+  <wsdl:message name="chequebookrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:chequebookrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="bankerschequerequestSoapIn">
+    <wsdl:part name="parameters" element="tns:bankerschequerequest" />
+  </wsdl:message>
+  <wsdl:message name="bankerschequerequestSoapOut">
+    <wsdl:part name="parameters" element="tns:bankerschequerequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="newbosaaccountrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:newbosaaccountrequest" />
+  </wsdl:message>
+  <wsdl:message name="newbosaaccountrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:newbosaaccountrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="newfosaaccountrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:newfosaaccountrequest" />
+  </wsdl:message>
+  <wsdl:message name="newfosaaccountrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:newfosaaccountrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="newtermdepositrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:newtermdepositrequest" />
+  </wsdl:message>
+  <wsdl:message name="newtermdepositrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:newtermdepositrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="salaryprocessingrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:salaryprocessingrequest" />
+  </wsdl:message>
+  <wsdl:message name="salaryprocessingrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:salaryprocessingrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="funeralrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:funeralrequest" />
+  </wsdl:message>
+  <wsdl:message name="funeralrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:funeralrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="VariationRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:VariationRequest" />
+  </wsdl:message>
+  <wsdl:message name="VariationRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:VariationRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="servicerequest_loanapplicationSoapIn">
+    <wsdl:part name="parameters" element="tns:servicerequest_loanapplication" />
+  </wsdl:message>
+  <wsdl:message name="servicerequest_loanapplicationSoapOut">
+    <wsdl:part name="parameters" element="tns:servicerequest_loanapplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="loanguarantorsSoapIn">
+    <wsdl:part name="parameters" element="tns:loanguarantors" />
+  </wsdl:message>
+  <wsdl:message name="loanguarantorsSoapOut">
+    <wsdl:part name="parameters" element="tns:loanguarantorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="membershipcardrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:membershipcardrequest" />
+  </wsdl:message>
+  <wsdl:message name="membershipcardrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:membershipcardrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="membershipcardrenewalrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:membershipcardrenewalrequest" />
+  </wsdl:message>
+  <wsdl:message name="membershipcardrenewalrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:membershipcardrenewalrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="membershipwithdrawalSoapIn">
+    <wsdl:part name="parameters" element="tns:membershipwithdrawal" />
+  </wsdl:message>
+  <wsdl:message name="membershipwithdrawalSoapOut">
+    <wsdl:part name="parameters" element="tns:membershipwithdrawalResponse" />
+  </wsdl:message>
+  <wsdl:message name="refundrequestSoapIn">
+    <wsdl:part name="parameters" element="tns:refundrequest" />
+  </wsdl:message>
+  <wsdl:message name="refundrequestSoapOut">
+    <wsdl:part name="parameters" element="tns:refundrequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="membershipre_registrationSoapIn">
+    <wsdl:part name="parameters" element="tns:membershipre_registration" />
+  </wsdl:message>
+  <wsdl:message name="membershipre_registrationSoapOut">
+    <wsdl:part name="parameters" element="tns:membershipre_registrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="accountclosureSoapIn">
+    <wsdl:part name="parameters" element="tns:accountclosure" />
+  </wsdl:message>
+  <wsdl:message name="accountclosureSoapOut">
+    <wsdl:part name="parameters" element="tns:accountclosureResponse" />
+  </wsdl:message>
+  <wsdl:message name="UBFBenefitsSoapIn">
+    <wsdl:part name="parameters" element="tns:UBFBenefits" />
+  </wsdl:message>
+  <wsdl:message name="UBFBenefitsSoapOut">
+    <wsdl:part name="parameters" element="tns:UBFBenefitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UBFBenefitsmultipleSoapIn">
+    <wsdl:part name="parameters" element="tns:UBFBenefitsmultiple" />
+  </wsdl:message>
+  <wsdl:message name="UBFBenefitsmultipleSoapOut">
+    <wsdl:part name="parameters" element="tns:UBFBenefitsmultipleResponse" />
+  </wsdl:message>
+  <wsdl:message name="salaryprocessingrequestsSoapIn">
+    <wsdl:part name="parameters" element="tns:salaryprocessingrequests" />
+  </wsdl:message>
+  <wsdl:message name="salaryprocessingrequestsSoapOut">
+    <wsdl:part name="parameters" element="tns:salaryprocessingrequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="sharetransferSoapIn">
+    <wsdl:part name="parameters" element="tns:sharetransfer" />
+  </wsdl:message>
+  <wsdl:message name="sharetransferSoapOut">
+    <wsdl:part name="parameters" element="tns:sharetransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="UBFnextofkinRegSoapIn">
+    <wsdl:part name="parameters" element="tns:UBFnextofkinReg" />
+  </wsdl:message>
+  <wsdl:message name="UBFnextofkinRegSoapOut">
+    <wsdl:part name="parameters" element="tns:UBFnextofkinRegResponse" />
+  </wsdl:message>
+  <wsdl:message name="buysellsharesSoapIn">
+    <wsdl:part name="parameters" element="tns:buysellshares" />
+  </wsdl:message>
+  <wsdl:message name="buysellsharesSoapOut">
+    <wsdl:part name="parameters" element="tns:buysellsharesResponse" />
+  </wsdl:message>
+  <wsdl:message name="finalduesSoapIn">
+    <wsdl:part name="parameters" element="tns:finaldues" />
+  </wsdl:message>
+  <wsdl:message name="finalduesSoapOut">
+    <wsdl:part name="parameters" element="tns:finalduesResponse" />
+  </wsdl:message>
+  <wsdl:message name="masteramendments_biodataSoapIn">
+    <wsdl:part name="parameters" element="tns:masteramendments_biodata" />
+  </wsdl:message>
+  <wsdl:message name="masteramendments_biodataSoapOut">
+    <wsdl:part name="parameters" element="tns:masteramendments_biodataResponse" />
+  </wsdl:message>
+  <wsdl:message name="masteramendments_nextofkinSoapIn">
+    <wsdl:part name="parameters" element="tns:masteramendments_nextofkin" />
+  </wsdl:message>
+  <wsdl:message name="masteramendments_nextofkinSoapOut">
+    <wsdl:part name="parameters" element="tns:masteramendments_nextofkinResponse" />
+  </wsdl:message>
+  <wsdl:message name="masterdataSoapIn">
+    <wsdl:part name="parameters" element="tns:masterdata" />
+  </wsdl:message>
+  <wsdl:message name="masterdataSoapOut">
+    <wsdl:part name="parameters" element="tns:masterdataResponse" />
+  </wsdl:message>
+  <wsdl:message name="Masterdata_UBFdataSoapIn">
+    <wsdl:part name="parameters" element="tns:Masterdata_UBFdata" />
+  </wsdl:message>
+  <wsdl:message name="Masterdata_UBFdataSoapOut">
+    <wsdl:part name="parameters" element="tns:Masterdata_UBFdataResponse" />
+  </wsdl:message>
+  <wsdl:message name="mobilebanking_registrationSoapIn">
+    <wsdl:part name="parameters" element="tns:mobilebanking_registration" />
+  </wsdl:message>
+  <wsdl:message name="mobilebanking_registrationSoapOut">
+    <wsdl:part name="parameters" element="tns:mobilebanking_registrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="custodial_servicesSoapIn">
+    <wsdl:part name="parameters" element="tns:custodial_services" />
+  </wsdl:message>
+  <wsdl:message name="custodial_servicesSoapOut">
+    <wsdl:part name="parameters" element="tns:custodial_servicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="investmentmembershiprequestSoapIn">
+    <wsdl:part name="parameters" element="tns:investmentmembershiprequest" />
+  </wsdl:message>
+  <wsdl:message name="investmentmembershiprequestSoapOut">
+    <wsdl:part name="parameters" element="tns:investmentmembershiprequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateCaseSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateCase" />
+  </wsdl:message>
+  <wsdl:message name="CreateCaseSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateCaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetriveContactDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:RetriveContactDetails" />
+  </wsdl:message>
+  <wsdl:message name="RetriveContactDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:RetriveContactDetailsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebService1Soap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMember">
+      <wsdl:input message="tns:RetrieveMemberSoapIn" />
+      <wsdl:output message="tns:RetrieveMemberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="leadInsert">
+      <wsdl:input message="tns:leadInsertSoapIn" />
+      <wsdl:output message="tns:leadInsertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewMember">
+      <wsdl:input message="tns:NewMemberSoapIn" />
+      <wsdl:output message="tns:NewMemberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewKin">
+      <wsdl:input message="tns:NewKinSoapIn" />
+      <wsdl:output message="tns:NewKinSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewNominee">
+      <wsdl:input message="tns:NewNomineeSoapIn" />
+      <wsdl:output message="tns:NewNomineeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewAccount">
+      <wsdl:input message="tns:NewAccountSoapIn" />
+      <wsdl:output message="tns:NewAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Updatemember">
+      <wsdl:input message="tns:UpdatememberSoapIn" />
+      <wsdl:output message="tns:UpdatememberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Updatekin">
+      <wsdl:input message="tns:UpdatekinSoapIn" />
+      <wsdl:output message="tns:UpdatekinSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retrieveNOK">
+      <wsdl:input message="tns:retrieveNOKSoapIn" />
+      <wsdl:output message="tns:retrieveNOKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Updatenominee">
+      <wsdl:input message="tns:UpdatenomineeSoapIn" />
+      <wsdl:output message="tns:UpdatenomineeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retrieveubf">
+      <wsdl:input message="tns:retrieveubfSoapIn" />
+      <wsdl:output message="tns:retrieveubfSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Updateaccount">
+      <wsdl:input message="tns:UpdateaccountSoapIn" />
+      <wsdl:output message="tns:UpdateaccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="progresstracking">
+      <wsdl:input message="tns:progresstrackingSoapIn" />
+      <wsdl:output message="tns:progresstrackingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="property">
+      <wsdl:input message="tns:propertySoapIn" />
+      <wsdl:output message="tns:propertySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvestmentAccount">
+      <wsdl:input message="tns:InvestmentAccountSoapIn" />
+      <wsdl:output message="tns:InvestmentAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_atmcardapplication">
+      <wsdl:input message="tns:servicerequest_atmcardapplicationSoapIn" />
+      <wsdl:output message="tns:servicerequest_atmcardapplicationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_atmcardrenewal">
+      <wsdl:input message="tns:servicerequest_atmcardrenewalSoapIn" />
+      <wsdl:output message="tns:servicerequest_atmcardrenewalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="chequebookrequest">
+      <wsdl:input message="tns:chequebookrequestSoapIn" />
+      <wsdl:output message="tns:chequebookrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="bankerschequerequest">
+      <wsdl:input message="tns:bankerschequerequestSoapIn" />
+      <wsdl:output message="tns:bankerschequerequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="newbosaaccountrequest">
+      <wsdl:input message="tns:newbosaaccountrequestSoapIn" />
+      <wsdl:output message="tns:newbosaaccountrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="newfosaaccountrequest">
+      <wsdl:input message="tns:newfosaaccountrequestSoapIn" />
+      <wsdl:output message="tns:newfosaaccountrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="newtermdepositrequest">
+      <wsdl:input message="tns:newtermdepositrequestSoapIn" />
+      <wsdl:output message="tns:newtermdepositrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="salaryprocessingrequest">
+      <wsdl:input message="tns:salaryprocessingrequestSoapIn" />
+      <wsdl:output message="tns:salaryprocessingrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="funeralrequest">
+      <wsdl:input message="tns:funeralrequestSoapIn" />
+      <wsdl:output message="tns:funeralrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VariationRequest">
+      <wsdl:input message="tns:VariationRequestSoapIn" />
+      <wsdl:output message="tns:VariationRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_loanapplication">
+      <wsdl:input message="tns:servicerequest_loanapplicationSoapIn" />
+      <wsdl:output message="tns:servicerequest_loanapplicationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="loanguarantors">
+      <wsdl:input message="tns:loanguarantorsSoapIn" />
+      <wsdl:output message="tns:loanguarantorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="membershipcardrequest">
+      <wsdl:input message="tns:membershipcardrequestSoapIn" />
+      <wsdl:output message="tns:membershipcardrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="membershipcardrenewalrequest">
+      <wsdl:input message="tns:membershipcardrenewalrequestSoapIn" />
+      <wsdl:output message="tns:membershipcardrenewalrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="membershipwithdrawal">
+      <wsdl:input message="tns:membershipwithdrawalSoapIn" />
+      <wsdl:output message="tns:membershipwithdrawalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="refundrequest">
+      <wsdl:input message="tns:refundrequestSoapIn" />
+      <wsdl:output message="tns:refundrequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="membershipre_registration">
+      <wsdl:input message="tns:membershipre_registrationSoapIn" />
+      <wsdl:output message="tns:membershipre_registrationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="accountclosure">
+      <wsdl:input message="tns:accountclosureSoapIn" />
+      <wsdl:output message="tns:accountclosureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UBFBenefits">
+      <wsdl:input message="tns:UBFBenefitsSoapIn" />
+      <wsdl:output message="tns:UBFBenefitsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UBFBenefitsmultiple">
+      <wsdl:input message="tns:UBFBenefitsmultipleSoapIn" />
+      <wsdl:output message="tns:UBFBenefitsmultipleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="salaryprocessingrequests">
+      <wsdl:input message="tns:salaryprocessingrequestsSoapIn" />
+      <wsdl:output message="tns:salaryprocessingrequestsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="sharetransfer">
+      <wsdl:input message="tns:sharetransferSoapIn" />
+      <wsdl:output message="tns:sharetransferSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UBFnextofkinReg">
+      <wsdl:input message="tns:UBFnextofkinRegSoapIn" />
+      <wsdl:output message="tns:UBFnextofkinRegSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="buysellshares">
+      <wsdl:input message="tns:buysellsharesSoapIn" />
+      <wsdl:output message="tns:buysellsharesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="finaldues">
+      <wsdl:input message="tns:finalduesSoapIn" />
+      <wsdl:output message="tns:finalduesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="masteramendments_biodata">
+      <wsdl:input message="tns:masteramendments_biodataSoapIn" />
+      <wsdl:output message="tns:masteramendments_biodataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="masteramendments_nextofkin">
+      <wsdl:input message="tns:masteramendments_nextofkinSoapIn" />
+      <wsdl:output message="tns:masteramendments_nextofkinSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="masterdata">
+      <wsdl:input message="tns:masterdataSoapIn" />
+      <wsdl:output message="tns:masterdataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Masterdata_UBFdata">
+      <wsdl:input message="tns:Masterdata_UBFdataSoapIn" />
+      <wsdl:output message="tns:Masterdata_UBFdataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mobilebanking_registration">
+      <wsdl:input message="tns:mobilebanking_registrationSoapIn" />
+      <wsdl:output message="tns:mobilebanking_registrationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="custodial_services">
+      <wsdl:input message="tns:custodial_servicesSoapIn" />
+      <wsdl:output message="tns:custodial_servicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="investmentmembershiprequest">
+      <wsdl:input message="tns:investmentmembershiprequestSoapIn" />
+      <wsdl:output message="tns:investmentmembershiprequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCase">
+      <wsdl:input message="tns:CreateCaseSoapIn" />
+      <wsdl:output message="tns:CreateCaseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetriveContactDetails">
+      <wsdl:input message="tns:RetriveContactDetailsSoapIn" />
+      <wsdl:output message="tns:RetriveContactDetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMember">
+      <soap:operation soapAction="http://tempuri.org/RetrieveMember" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="leadInsert">
+      <soap:operation soapAction="http://tempuri.org/leadInsert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewMember">
+      <soap:operation soapAction="http://tempuri.org/NewMember" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewKin">
+      <soap:operation soapAction="http://tempuri.org/NewKin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewNominee">
+      <soap:operation soapAction="http://tempuri.org/NewNominee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewAccount">
+      <soap:operation soapAction="http://tempuri.org/NewAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Updatemember">
+      <soap:operation soapAction="http://tempuri.org/Updatemember" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Updatekin">
+      <soap:operation soapAction="http://tempuri.org/Updatekin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveNOK">
+      <soap:operation soapAction="http://tempuri.org/retrieveNOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Updatenominee">
+      <soap:operation soapAction="http://tempuri.org/Updatenominee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveubf">
+      <soap:operation soapAction="http://tempuri.org/retrieveubf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Updateaccount">
+      <soap:operation soapAction="http://tempuri.org/Updateaccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="progresstracking">
+      <soap:operation soapAction="http://tempuri.org/progresstracking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="property">
+      <soap:operation soapAction="http://tempuri.org/property" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvestmentAccount">
+      <soap:operation soapAction="http://tempuri.org/InvestmentAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_atmcardapplication">
+      <soap:operation soapAction="http://tempuri.org/servicerequest_atmcardapplication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_atmcardrenewal">
+      <soap:operation soapAction="http://tempuri.org/servicerequest_atmcardrenewal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="chequebookrequest">
+      <soap:operation soapAction="http://tempuri.org/chequebookrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bankerschequerequest">
+      <soap:operation soapAction="http://tempuri.org/bankerschequerequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="newbosaaccountrequest">
+      <soap:operation soapAction="http://tempuri.org/newbosaaccountrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="newfosaaccountrequest">
+      <soap:operation soapAction="http://tempuri.org/newfosaaccountrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="newtermdepositrequest">
+      <soap:operation soapAction="http://tempuri.org/newtermdepositrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="salaryprocessingrequest">
+      <soap:operation soapAction="http://tempuri.org/salaryprocessingrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funeralrequest">
+      <soap:operation soapAction="http://tempuri.org/funeralrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VariationRequest">
+      <soap:operation soapAction="http://tempuri.org/VariationRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_loanapplication">
+      <soap:operation soapAction="http://tempuri.org/servicerequest_loanapplication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loanguarantors">
+      <soap:operation soapAction="http://tempuri.org/loanguarantors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="membershipcardrequest">
+      <soap:operation soapAction="http://tempuri.org/membershipcardrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="membershipcardrenewalrequest">
+      <soap:operation soapAction="http://tempuri.org/membershipcardrenewalrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="membershipwithdrawal">
+      <soap:operation soapAction="http://tempuri.org/membershipwithdrawal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refundrequest">
+      <soap:operation soapAction="http://tempuri.org/refundrequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="membershipre_registration">
+      <soap:operation soapAction="http://tempuri.org/membershipre_registration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountclosure">
+      <soap:operation soapAction="http://tempuri.org/accountclosure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UBFBenefits">
+      <soap:operation soapAction="http://tempuri.org/UBFBenefits" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UBFBenefitsmultiple">
+      <soap:operation soapAction="http://tempuri.org/UBFBenefitsmultiple" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="salaryprocessingrequests">
+      <soap:operation soapAction="http://tempuri.org/salaryprocessingrequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sharetransfer">
+      <soap:operation soapAction="http://tempuri.org/sharetransfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UBFnextofkinReg">
+      <soap:operation soapAction="http://tempuri.org/UBFnextofkinReg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buysellshares">
+      <soap:operation soapAction="http://tempuri.org/buysellshares" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="finaldues">
+      <soap:operation soapAction="http://tempuri.org/finaldues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="masteramendments_biodata">
+      <soap:operation soapAction="http://tempuri.org/masteramendments_biodata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="masteramendments_nextofkin">
+      <soap:operation soapAction="http://tempuri.org/masteramendments_nextofkin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="masterdata">
+      <soap:operation soapAction="http://tempuri.org/masterdata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Masterdata_UBFdata">
+      <soap:operation soapAction="http://tempuri.org/Masterdata_UBFdata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mobilebanking_registration">
+      <soap:operation soapAction="http://tempuri.org/mobilebanking_registration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="custodial_services">
+      <soap:operation soapAction="http://tempuri.org/custodial_services" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="investmentmembershiprequest">
+      <soap:operation soapAction="http://tempuri.org/investmentmembershiprequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCase">
+      <soap:operation soapAction="http://tempuri.org/CreateCase" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetriveContactDetails">
+      <soap:operation soapAction="http://tempuri.org/RetriveContactDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveMember">
+      <soap12:operation soapAction="http://tempuri.org/RetrieveMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="leadInsert">
+      <soap12:operation soapAction="http://tempuri.org/leadInsert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewMember">
+      <soap12:operation soapAction="http://tempuri.org/NewMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewKin">
+      <soap12:operation soapAction="http://tempuri.org/NewKin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewNominee">
+      <soap12:operation soapAction="http://tempuri.org/NewNominee" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewAccount">
+      <soap12:operation soapAction="http://tempuri.org/NewAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Updatemember">
+      <soap12:operation soapAction="http://tempuri.org/Updatemember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Updatekin">
+      <soap12:operation soapAction="http://tempuri.org/Updatekin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveNOK">
+      <soap12:operation soapAction="http://tempuri.org/retrieveNOK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Updatenominee">
+      <soap12:operation soapAction="http://tempuri.org/Updatenominee" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveubf">
+      <soap12:operation soapAction="http://tempuri.org/retrieveubf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Updateaccount">
+      <soap12:operation soapAction="http://tempuri.org/Updateaccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="progresstracking">
+      <soap12:operation soapAction="http://tempuri.org/progresstracking" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="property">
+      <soap12:operation soapAction="http://tempuri.org/property" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvestmentAccount">
+      <soap12:operation soapAction="http://tempuri.org/InvestmentAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_atmcardapplication">
+      <soap12:operation soapAction="http://tempuri.org/servicerequest_atmcardapplication" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_atmcardrenewal">
+      <soap12:operation soapAction="http://tempuri.org/servicerequest_atmcardrenewal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="chequebookrequest">
+      <soap12:operation soapAction="http://tempuri.org/chequebookrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bankerschequerequest">
+      <soap12:operation soapAction="http://tempuri.org/bankerschequerequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="newbosaaccountrequest">
+      <soap12:operation soapAction="http://tempuri.org/newbosaaccountrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="newfosaaccountrequest">
+      <soap12:operation soapAction="http://tempuri.org/newfosaaccountrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="newtermdepositrequest">
+      <soap12:operation soapAction="http://tempuri.org/newtermdepositrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="salaryprocessingrequest">
+      <soap12:operation soapAction="http://tempuri.org/salaryprocessingrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funeralrequest">
+      <soap12:operation soapAction="http://tempuri.org/funeralrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VariationRequest">
+      <soap12:operation soapAction="http://tempuri.org/VariationRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicerequest_loanapplication">
+      <soap12:operation soapAction="http://tempuri.org/servicerequest_loanapplication" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loanguarantors">
+      <soap12:operation soapAction="http://tempuri.org/loanguarantors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="membershipcardrequest">
+      <soap12:operation soapAction="http://tempuri.org/membershipcardrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="membershipcardrenewalrequest">
+      <soap12:operation soapAction="http://tempuri.org/membershipcardrenewalrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="membershipwithdrawal">
+      <soap12:operation soapAction="http://tempuri.org/membershipwithdrawal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refundrequest">
+      <soap12:operation soapAction="http://tempuri.org/refundrequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="membershipre_registration">
+      <soap12:operation soapAction="http://tempuri.org/membershipre_registration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountclosure">
+      <soap12:operation soapAction="http://tempuri.org/accountclosure" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UBFBenefits">
+      <soap12:operation soapAction="http://tempuri.org/UBFBenefits" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UBFBenefitsmultiple">
+      <soap12:operation soapAction="http://tempuri.org/UBFBenefitsmultiple" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="salaryprocessingrequests">
+      <soap12:operation soapAction="http://tempuri.org/salaryprocessingrequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sharetransfer">
+      <soap12:operation soapAction="http://tempuri.org/sharetransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UBFnextofkinReg">
+      <soap12:operation soapAction="http://tempuri.org/UBFnextofkinReg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buysellshares">
+      <soap12:operation soapAction="http://tempuri.org/buysellshares" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="finaldues">
+      <soap12:operation soapAction="http://tempuri.org/finaldues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="masteramendments_biodata">
+      <soap12:operation soapAction="http://tempuri.org/masteramendments_biodata" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="masteramendments_nextofkin">
+      <soap12:operation soapAction="http://tempuri.org/masteramendments_nextofkin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="masterdata">
+      <soap12:operation soapAction="http://tempuri.org/masterdata" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Masterdata_UBFdata">
+      <soap12:operation soapAction="http://tempuri.org/Masterdata_UBFdata" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mobilebanking_registration">
+      <soap12:operation soapAction="http://tempuri.org/mobilebanking_registration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="custodial_services">
+      <soap12:operation soapAction="http://tempuri.org/custodial_services" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="investmentmembershiprequest">
+      <soap12:operation soapAction="http://tempuri.org/investmentmembershiprequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCase">
+      <soap12:operation soapAction="http://tempuri.org/CreateCase" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetriveContactDetails">
+      <soap12:operation soapAction="http://tempuri.org/RetriveContactDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService1">
+    <wsdl:port name="WebService1Soap" binding="tns:WebService1Soap">
+      <soap:address location="http://10.1.1.23:12/Webservice1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebService1Soap12" binding="tns:WebService1Soap12">
+      <soap12:address location="http://10.1.1.23:12/Webservice1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

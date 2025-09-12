@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MobileModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BulkSms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source Id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="int" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="Client" Type="nvarchar" MaxLength="50" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Destination Id" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Trace" Type="nvarchar" MaxLength="100" />
+          <Property Name="SMSCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SMSCharged" Type="bit" />
+          <Property Name="Time stamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Scheduled" Type="bit" />
+          <Property Name="Scheduled Time" Type="datetime" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+          <Property Name="Sms Client" Type="int" />
+          <Property Name="Message 2" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Datetime Sent" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Client Code" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Client Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Client Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Pin Retries" Type="int" />
+          <Property Name="Show bal for overdrawan acc" Type="bit" />
+          <Property Name="Url" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sms Outlet" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sms Balance" Type="float" />
+          <Property Name="Security Crudential" Type="nvarchar" MaxLength="500" />
+          <Property Name="Customer Key" Type="nvarchar" MaxLength="50" />
+          <Property Name="Customer Secret" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bulk account" Type="nvarchar" MaxLength="50" />
+          <Property Name="Initiator Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Paybill No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Passkey" Type="nvarchar" MaxLength="100" />
+          <Property Name="Push Call Back" Type="nvarchar" MaxLength="100" />
+          <Property Name="Notify low sms" Type="bit" />
+          <Property Name="Sms reorder level" Type="int" />
+          <Property Name="Notification interval" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="500" />
+          <Property Name="Interval Type" Type="int" />
+          <Property Name="email cc" Type="nvarchar" MaxLength="500" />
+          <Property Name="Incoming sms" Type="bit" />
+          <Property Name="Charge Incoming" Type="bit" />
+          <Property Name="USSD Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sms Client" Type="int" />
+          <Property Name="Last Notification" Type="date" />
+          <Property Name="Notification Mode" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="Client" />
+          </Key>
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Client" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comments" Type="text" />
+          <Property Name="Daily_Limit" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Date_Registered" Type="datetime" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PinChanged" Type="bit" />
+          <Property Name="Status" Type="smallint" />
+          <Property Name="Subscribed" Type="smallint" />
+          <Property Name="Transaction_Limit" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Verification Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Registration Sms sent" Type="bit" />
+          <Property Name="ID NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date OF Birth" Type="date" />
+        </EntityType>
+        <EntityType Name="MPESA Transactions">
+          <Key>
+            <PropertyRef Name="Receipt No_" />
+          </Key>
+          <Property Name="Receipt No_" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Completion Time" Type="datetime" />
+          <Property Name="Detaills" Type="nvarchar" MaxLength="250" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Withdrawn" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="Paid In" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="Balance" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="Balance Confirmed" Type="int" />
+          <Property Name="Transaction Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="Other Party Info" Type="nvarchar" MaxLength="200" />
+          <Property Name="A_C No_" Type="nvarchar" MaxLength="200" />
+          <Property Name="Processed" Type="bit" />
+          <Property Name="Initiation Time" Type="datetime" />
+          <Property Name="Paybil Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Transaction Date" Type="datetime" />
+          <Property Name="Sent" Type="bit" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sms keywords">
+          <Key>
+            <PropertyRef Name="Client" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Client" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MobileModelStoreContainer">
+          <EntitySet Name="BulkSms" EntityType="Self.BulkSms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MPESA Transactions" EntityType="Self.MPESA Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sms keywords" EntityType="Self.Sms keywords" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MobileModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BulkSm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Source_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Destination_Id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Trace" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SMSCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SMSCharged" Type="Boolean" />
+          <Property Name="Time_stamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Scheduled" Type="Boolean" />
+          <Property Name="Scheduled_Time" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sms_Client" Type="Int32" />
+          <Property Name="Message_2" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Datetime_Sent" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Client_Code" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Client_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Client_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Pin_Retries" Type="Int32" />
+          <Property Name="Show_bal_for_overdrawan_acc" Type="Boolean" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sms_Outlet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sms_Balance" Type="Double" />
+          <Property Name="Security_Crudential" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Secret" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bulk_account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Initiator_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Paybill_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Passkey" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Push_Call_Back" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Notify_low_sms" Type="Boolean" />
+          <Property Name="Sms_reorder_level" Type="Int32" />
+          <Property Name="Notification_interval" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Interval_Type" Type="Int32" />
+          <Property Name="email_cc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Incoming_sms" Type="Boolean" />
+          <Property Name="Charge_Incoming" Type="Boolean" />
+          <Property Name="USSD_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sms_Client" Type="Int32" />
+          <Property Name="Last_Notification" Type="DateTime" Precision="0" />
+          <Property Name="Notification_Mode" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="Client" />
+          </Key>
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Daily_Limit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Date_Registered" Type="DateTime" Precision="3" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PinChanged" Type="Boolean" />
+          <Property Name="Status" Type="Int16" />
+          <Property Name="Subscribed" Type="Int16" />
+          <Property Name="Transaction_Limit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Verification_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Registration_Sms_sent" Type="Boolean" />
+          <Property Name="ID_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_OF_Birth" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="MPESA_Transaction">
+          <Key>
+            <PropertyRef Name="Receipt_No_" />
+          </Key>
+          <Property Name="Receipt_No_" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Completion_Time" Type="DateTime" Precision="3" />
+          <Property Name="Detaills" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Withdrawn" Type="Decimal" Precision="38" Scale="20" />
+          <Property Name="Paid_In" Type="Decimal" Precision="38" Scale="20" />
+          <Property Name="Balance" Type="Decimal" Precision="38" Scale="20" />
+          <Property Name="Balance_Confirmed" Type="Int32" />
+          <Property Name="Transaction_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Other_Party_Info" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="A_C_No_" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Processed" Type="Boolean" />
+          <Property Name="Initiation_Time" Type="DateTime" Precision="3" />
+          <Property Name="Paybil_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+          <Property Name="Sent" Type="Boolean" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sms_keyword">
+          <Key>
+            <PropertyRef Name="Client" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MobileEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BulkSms" EntityType="Self.BulkSm" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="MPESA_Transactions" EntityType="Self.MPESA_Transaction" />
+          <EntitySet Name="Sms_keywords" EntityType="Self.Sms_keyword" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MobileModelStoreContainer" CdmEntityContainer="MobileEntities">
+          <EntitySetMapping Name="BulkSms">
+            <EntityTypeMapping TypeName="MobileModel.BulkSm">
+              <MappingFragment StoreEntitySet="BulkSms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Source_Id" ColumnName="Source Id" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Destination_Id" ColumnName="Destination Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Trace" ColumnName="Trace" />
+                <ScalarProperty Name="SMSCost" ColumnName="SMSCost" />
+                <ScalarProperty Name="SMSCharged" ColumnName="SMSCharged" />
+                <ScalarProperty Name="Time_stamp" ColumnName="Time stamp" />
+                <ScalarProperty Name="Scheduled" ColumnName="Scheduled" />
+                <ScalarProperty Name="Scheduled_Time" ColumnName="Scheduled Time" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Sms_Client" ColumnName="Sms Client" />
+                <ScalarProperty Name="Message_2" ColumnName="Message 2" />
+                <ScalarProperty Name="Datetime_Sent" ColumnName="Datetime Sent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="MobileModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Client_Code" ColumnName="Client Code" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Pin_Retries" ColumnName="Pin Retries" />
+                <ScalarProperty Name="Show_bal_for_overdrawan_acc" ColumnName="Show bal for overdrawan acc" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Sms_Outlet" ColumnName="Sms Outlet" />
+                <ScalarProperty Name="Sms_Balance" ColumnName="Sms Balance" />
+                <ScalarProperty Name="Security_Crudential" ColumnName="Security Crudential" />
+                <ScalarProperty Name="Customer_Key" ColumnName="Customer Key" />
+                <ScalarProperty Name="Customer_Secret" ColumnName="Customer Secret" />
+                <ScalarProperty Name="Bulk_account" ColumnName="Bulk account" />
+                <ScalarProperty Name="Initiator_Name" ColumnName="Initiator Name" />
+                <ScalarProperty Name="Paybill_No" ColumnName="Paybill No" />
+                <ScalarProperty Name="Passkey" ColumnName="Passkey" />
+                <ScalarProperty Name="Push_Call_Back" ColumnName="Push Call Back" />
+                <ScalarProperty Name="Notify_low_sms" ColumnName="Notify low sms" />
+                <ScalarProperty Name="Sms_reorder_level" ColumnName="Sms reorder level" />
+                <ScalarProperty Name="Notification_interval" ColumnName="Notification interval" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Interval_Type" ColumnName="Interval Type" />
+                <ScalarProperty Name="email_cc" ColumnName="email cc" />
+                <ScalarProperty Name="Incoming_sms" ColumnName="Incoming sms" />
+                <ScalarProperty Name="Charge_Incoming" ColumnName="Charge Incoming" />
+                <ScalarProperty Name="USSD_Code" ColumnName="USSD Code" />
+                <ScalarProperty Name="Sms_Client" ColumnName="Sms Client" />
+                <ScalarProperty Name="Last_Notification" ColumnName="Last Notification" />
+                <ScalarProperty Name="Notification_Mode" ColumnName="Notification Mode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="MobileModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Daily_Limit" ColumnName="Daily_Limit" />
+                <ScalarProperty Name="Date_Registered" ColumnName="Date_Registered" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PinChanged" ColumnName="PinChanged" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Subscribed" ColumnName="Subscribed" />
+                <ScalarProperty Name="Transaction_Limit" ColumnName="Transaction_Limit" />
+                <ScalarProperty Name="Verification_Code" ColumnName="Verification Code" />
+                <ScalarProperty Name="Registration_Sms_sent" ColumnName="Registration Sms sent" />
+                <ScalarProperty Name="ID_NO" ColumnName="ID NO" />
+                <ScalarProperty Name="Date_OF_Birth" ColumnName="Date OF Birth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MPESA_Transactions">
+            <EntityTypeMapping TypeName="MobileModel.MPESA_Transaction">
+              <MappingFragment StoreEntitySet="MPESA Transactions">
+                <ScalarProperty Name="Receipt_No_" ColumnName="Receipt No_" />
+                <ScalarProperty Name="Completion_Time" ColumnName="Completion Time" />
+                <ScalarProperty Name="Detaills" ColumnName="Detaills" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Withdrawn" ColumnName="Withdrawn" />
+                <ScalarProperty Name="Paid_In" ColumnName="Paid In" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Balance_Confirmed" ColumnName="Balance Confirmed" />
+                <ScalarProperty Name="Transaction_Type" ColumnName="Transaction Type" />
+                <ScalarProperty Name="Other_Party_Info" ColumnName="Other Party Info" />
+                <ScalarProperty Name="A_C_No_" ColumnName="A_C No_" />
+                <ScalarProperty Name="Processed" ColumnName="Processed" />
+                <ScalarProperty Name="Initiation_Time" ColumnName="Initiation Time" />
+                <ScalarProperty Name="Paybil_Number" ColumnName="Paybil Number" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction Date" />
+                <ScalarProperty Name="Sent" ColumnName="Sent" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sms_keywords">
+            <EntityTypeMapping TypeName="MobileModel.Sms_keyword">
+              <MappingFragment StoreEntitySet="Sms keywords">
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

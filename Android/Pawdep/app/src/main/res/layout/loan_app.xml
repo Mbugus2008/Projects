@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Loan_app"
+    tools:ignore="MissingConstraints"
+    >
+    <data class="Loan_apps">
+        <variable
+            name="loan"
+            type="com.trimline.pawdep.Loan" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/Loan_No"
+        style="@style/loan_app"
+        android:text="Loan No"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Client_Category"
+        style="@style/loan_app"
+        android:text="Client Category"
+        app:layout_constraintTop_toBottomOf="@id/Loan_No" />
+
+    <TextView
+        android:id="@+id/memberNo"
+        style="@style/loan_app"
+        android:text="Member No"
+        app:layout_constraintTop_toBottomOf="@id/Loan_request_No" />
+    <TextView
+        android:id="@+id/Loan_request_No"
+        style="@style/loan_app"
+        android:text="Request No"
+        app:layout_constraintTop_toBottomOf="@id/Client_Category" />
+
+    <TextView
+        android:id="@+id/Member_Name"
+        style="@style/loan_app"
+        android:text="Member Name"
+        app:layout_constraintTop_toBottomOf="@id/memberNo" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+    <TextView
+        android:id="@+id/Loan_No_text"
+        style="@style/loan_app_text"
+        android:text="@={loan.Loan_No}"
+        app:layout_constraintTop_toTopOf="parent" />
+    <AutoCompleteTextView
+        android:id="@+id/Client_Category_Text"
+        style="@style/loan_app_text"
+        android:text="@={loan.ClientCategory}"
+        app:layout_constraintTop_toBottomOf="@id/Loan_No_text" />
+    <AutoCompleteTextView
+        android:id="@+id/Member_No_text"
+        style="@style/loan_app_text"
+        android:text="@={loan.Member_No}"
+        android:completionThreshold="1"
+        app:layout_constraintTop_toBottomOf="@id/Request_No"/>
+    <AutoCompleteTextView
+        android:id="@+id/Request_No"
+        style="@style/loan_app_text"
+        android:text="@={loan.Loan_Request_No}"
+        app:layout_constraintTop_toBottomOf="@id/Client_Category_Text"
+        android:completionThreshold="3"
+        />
+    <TextView
+        android:id="@+id/Member_Name_Text"
+        style="@style/loan_app_text"
+        android:text="@={loan.Member_Name}"
+        app:layout_constraintTop_toBottomOf="@id/Member_No_text"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+    <TextView
+        android:id="@+id/Savings"
+        style="@style/loan_app_2"
+        android:text="Loan Type"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/LoanPurpose"
+        style="@style/loan_app_2"
+        android:text="Purpose"
+        app:layout_constraintTop_toBottomOf="@id/Savings" />
+
+    <TextView
+        android:id="@+id/sector"
+        style="@style/loan_app_2"
+        android:text="Sector"
+        app:layout_constraintTop_toBottomOf="@id/LoanPurpose" />
+
+    <TextView
+        android:id="@+id/subsector"
+        style="@style/loan_app_2"
+        android:text="Sub Sector"
+        app:layout_constraintTop_toBottomOf="@id/sector" />
+
+    <TextView
+        android:id="@+id/Amountapplied"
+        style="@style/loan_app_2"
+        android:text="Amount Applied"
+        app:layout_constraintTop_toBottomOf="@id/subsector" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <AutoCompleteTextView
+        android:id="@+id/Loantype_text"
+        style="@style/loan_app_text_2"
+        android:text="@={loan.Loan_Type}"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/loanPurpose"
+        style="@style/loan_app_text_2"
+        android:text="@={loan.Loan_Purpose}"
+        app:layout_constraintTop_toBottomOf="@id/Loan_No_text" />
+    <AutoCompleteTextView
+        android:id="@+id/sector_text"
+        style="@style/loan_app_text_2"
+        android:text="@={loan.Sector}"
+        app:layout_constraintTop_toBottomOf="@id/loanPurpose" />
+    <AutoCompleteTextView
+        android:id="@+id/subsector_text"
+        style="@style/loan_app_text_2"
+        android:text="@={loan.Sub_Sector}"
+        app:layout_constraintTop_toBottomOf="@id/sector_text" />
+
+    <EditText
+        android:id="@+id/Amountapplied_text"
+        style="@style/loan_app_text_2"
+        android:text="@={``+loan.Amount_Applied}"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/subsector_text" />
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/Amountapplied_text"
+        android:id="@+id/guarantors"
+        android:textStyle="bold"
+        android:text="Guarantors"/>
+    <include
+        layout="@layout/loan_guarantors_header"
+        android:id="@+id/header"
+        app:layout_constraintTop_toBottomOf="@id/guarantors"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/guarantorslist"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

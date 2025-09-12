@@ -1,0 +1,126 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="S_Mobile.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="S_Mobile_Accounts_Accounts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/Accounts</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Transactions_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Transactions</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Loans_Loans_mobile_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/Loans_mobile</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Smobile_Mobile" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Codeunit/Mobile</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Agent_App_Agent_App_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Agent_App</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Account_Entries_Account_Entries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Account_Entries</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Member_Application_Member_Application_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/Member_Application</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Account_Types_Account_Types_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Account_Types</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Application_Images_Application_Images_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Application_Images</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Members_mobile_Member_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/mobile_Member</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Nextofkin_Nextofkin_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Nextofkin</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Relationshiptypes_Relationshiptypes_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Relationshiptypes</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Eligibility_Eligibility_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Eligibility</Value>
+    </Setting>
+    <Setting Name="S_Mobile_LoanProducts_LoanProducts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/LoanProducts</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Mobile_Loan_Entries_Mobile_Loan_Entries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Mobile_Loan_Entries</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Guarantors_Mobile_Guarantors_Mobile_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Guarantors_Mobile</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Member_mobile_info_Member_mobile_info_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/Member_mobile_info</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Account_Entries_Account_Entries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Account_Entries</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Account_Types_Account_Types_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Account_Types</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Accounts_Accounts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/Accounts</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Agent_App_Agent_App_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Agent_App</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Application_Images_Application_Images_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Application_Images</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Eligibility_Eligibility_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Eligibility</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Guarantors_Mobile_Guarantors_Mobile_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Guarantors_Mobile</Value>
+    </Setting>
+    <Setting Name="NyalaVision_LoanProducts_LoanProducts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/LoanProducts</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Loans_Loans_mobile_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/Loans_mobile</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Member_Application_Member_Application_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/Member_Application</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Member_mobile_info_Member_mobile_info_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/Member_mobile_info</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Members_mobile_Member_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:1812/Faulu/WS/FAULU%20BANK%20SACCO%20LIMITED/Page/mobile_Member</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Mobile_Loan_Entries_Mobile_Loan_Entries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Mobile_Loan_Entries</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Nextofkin_Nextofkin_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Nextofkin</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Relationshiptypes_Relationshiptypes_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Relationshiptypes</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Smobile_Mobile" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Codeunit/Mobile</Value>
+    </Setting>
+    <Setting Name="NyalaVision_Transactions_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Transactions</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Mpesa_Transactions_Mpesa_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:20248/Kanisaservice/WS/Kirigiti%20PCEA/Page/Mpesa_Transactions</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Purpose_Purpose_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Kirigiti%20PCEA/Page/Purpose</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Districts_Districts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:7047/BC140/WS/Kirigiti%20PCEA/Page/Districts</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Vouchers_Vouchers_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Vouchers</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Dimensions_Dimensions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Dimensions</Value>
+    </Setting>
+    <Setting Name="S_Mobile_Nav365_MobileBanking" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://144.91.72.27:8047/Integrations/WS/TOVU/Codeunit/MobileBanking</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,131 @@
+﻿@page "/Entries/{EncodedCustomerNo}/{EntryTypeParam:int?}"
+@using Sacco.Shared
+@using System.Web
+@inject Sacco.Shared.StateContainerService stateService
+@inject HttpClient Http
+
+<PageTitle>Entries</PageTitle>
+
+<h1  style="align-content:center"> @type()</h1>  
+@if (entries == null)
+{
+    <p><em>Loading Entries...</em></p>
+}
+else
+{
+    <div class="card row">
+
+        <table class="table">
+            <thead>
+                <tr style="background-color:darkgray">
+
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Trans Type</th>
+                    <th>Loan No</th>
+                    <th align="right">Amount</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var loan in entries)
+                {
+                    <tr>
+
+                        <td>@loan.Posting_Date.ToString("dd-MMM-yyy")</td>
+                        <td>@loan.Description</td>
+                        <td>@loan.Transaction_Type.ToString()</td>
+                        <td>@loan.Loan_No</td>
+                        @*<button type="button" class="btn btn-primary"><span class="bi bi-arrow-up"></span> Sample Button</button>*@
+                        @if (loan.Credit_Amount > 0)
+                        {
+                            <td align="right" style="color:green"><i class="bi bi-arrow-up"></i> @Math.Abs(loan.Amount).ToString("#,##0.00")</td>
+
+                        }
+                        else
+                        {
+                            <td align="right" style="color:red"><i class="bi bi-arrow-up"></i> @Math.Abs(loan.Amount).ToString("#,##0.00")</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string EncodedCustomerNo { get; set; }
+
+    [Parameter]
+    public int EntryTypeParam { get; set; }
+
+    private string CustomerNo => HttpUtility.UrlDecode(EncodedCustomerNo);
+    private entriesdata.Entries[] entries;
+    private bool isLoading;
+    private string errorMessage;
+    private string detailedError;
+    public string type()
+    {
+        return ((entriesdata.Transaction_Type)EntryTypeParam).ToString();
+
+    }
+    private async Task LoadEntries()
+    {
+        isLoading = true;
+        errorMessage = null;
+        detailedError = null;
+
+        try
+        {
+            // Double encode if needed for your API
+            var apiUrl = $"api/entries/Getbytype/{EncodedCustomerNo}?entryType={EntryTypeParam}";
+            Console.WriteLine($"API URL: {apiUrl}");
+
+            // First get the raw response
+            var response = await Http.GetAsync(apiUrl);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = $"API Error: {response.StatusCode}";
+                detailedError = await response.Content.ReadAsStringAsync();
+                return;
+            }
+            else
+            {
+                Console.WriteLine($"API resp: {response.StatusCode}");
+                Console.WriteLine($"API desc: {response.ReasonPhrase}");
+                Console.WriteLine($"API data: {response.Content.ReadAsStringAsync()}");
+
+
+            }
+
+            entries = await response.Content.ReadFromJsonAsync<entriesdata.Entries[]>();
+            StateHasChanged();
+            Console.WriteLine($"Etries {entries.Length}");
+
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Failed to load entries";
+            detailedError = ex.ToString();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        try {
+            LoadEntries();
+
+        }catch (Exception ex)
+        {
+
+            Console.WriteLine($"Error {ex.Message}");
+        }
+    }
+}

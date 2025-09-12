@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.trimline.paul.m_branch.status"
+    tools:showIn="@layout/activity_status"
+    android:gravity="top">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Date"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/recoverydate"
+        />
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchno"
+        android:hint="Vehicle no"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:inputType="textCapCharacters"
+
+        android:layout_below="@id/recoverydate"
+        />
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@null"
+        android:src="@drawable/search"
+        android:id="@+id/findveh"
+        android:layout_below="@id/recoverydate"
+        />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchprogress"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/searchno"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/statuslist"
+        android:layout_alignTop="@id/searchprogress"
+        android:visibility="gone"
+        android:layout_above="@id/total"
+        android:layout_below="@id/findveh"
+        >
+
+    </ListView>
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/searchprogress"
+
+        android:layout_above="@id/total"
+        android:layout_below="@id/findveh"
+        >
+
+
+    </ExpandableListView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:gravity="right"
+        android:textSize="50dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/total"
+        android:visibility="gone"
+        ></TextView>
+</RelativeLayout>

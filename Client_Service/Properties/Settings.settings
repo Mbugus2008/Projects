@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Client_Service.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Client_Service_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Members</Value>
+    </Setting>
+    <Setting Name="Client_Service_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Loans</Value>
+    </Setting>
+    <Setting Name="Client_Service_Transactions_MobileTransactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/MobileTransactions</Value>
+    </Setting>
+    <Setting Name="Client_Service_Alternate_Alternate" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Codeunit/Alternate</Value>
+    </Setting>
+    <Setting Name="Client_Service_Keywords_Keywords_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Keywords</Value>
+    </Setting>
+    <Setting Name="Client_Service_Applications_MobileApplications_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:6021/Baraka/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/MobileApplications</Value>
+    </Setting>
+    <Setting Name="Client_Service_Loan_Products_Loan_Products_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Loan_Products</Value>
+    </Setting>
+    <Setting Name="Client_Service_Memberslist_Memberslist_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Memberslist</Value>
+    </Setting>
+    <Setting Name="Client_Service_Loan_Eligibility_Loan_Eligibility_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Loan_Eligibility</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

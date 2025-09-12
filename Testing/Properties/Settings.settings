@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Testing.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Testing_eod_CBS_Data_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://128.0.8.1:7047/DynamicsNAV110/WS/KPS%20UAT%20II/Page/CBS_Data</Value>
+    </Setting>
+    <Setting Name="Testing_credits_MemberCredits_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:1176/Investment/WS/KPS-TEST/Page/MemberCredits</Value>
+    </Setting>
+    <Setting Name="Testing_Msacco_MSACCO" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:1913/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Codeunit/MSACCO</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

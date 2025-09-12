@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingConstraints" >
+    <data class="Vehilebinding" >
+        <variable
+            name="v"
+            type="com.trimline.investors.Vehicle" />
+        <import type="android.text.Html"/>
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+  android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+android:background="@drawable/border"
+    >
+    <TextView
+        style="@style/normal"
+        android:id="@+id/regno"
+        android:hint="Reg No"
+        android:text="@={v.Vehicle_Number}"
+        />
+    <TextView
+       style="@style/normal"
+        app:layout_constraintStart_toEndOf="@id/regno"
+        android:id="@+id/fleetno"
+        android:hint="Fleet No"
+        android:text="@={v.Fleet_No}"
+        />
+    <TextView
+
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Todays Collection"
+        android:id="@+id/Todayscoll"
+        style="@style/currency"
+
+        android:text="@{Html.fromHtml(v !=null ? @string/curr(v.Todays_Collection):`Todays Coll` )}"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

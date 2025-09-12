@@ -1,0 +1,95 @@
+name: invoice_manager
+description: "A comprehensive Flutter invoicing and payment management application."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI and Icons
+  cupertino_icons: ^1.0.2
+  material_design_icons_flutter: ^7.0.7296
+
+  # State Management
+  get: ^4.6.6
+
+  # Database
+  sqflite: ^2.3.0
+  path: ^1.8.3
+
+  # PDF Generation and Printing
+  pdf: ^3.10.4
+  printing: ^5.11.0
+
+  # Email Functionality
+  mailer: ^6.0.1
+
+  # File and Image Handling
+  image_picker: ^1.0.4
+  file_picker: ^6.1.1
+
+  # Utilities
+  intl: ^0.18.1
+  shared_preferences: ^2.2.2
+  permission_handler: ^11.0.1
+  url_launcher: ^6.2.1
+
+  # HTTP and Networking
+  http: ^1.1.0
+  dio: ^5.3.2
+  dio_certificate_pinning: ^4.1.0
+
+  # Authentication and Security
+  flutter_appauth: ^6.0.2
+  oauth2: ^2.0.2
+  flutter_secure_storage: ^9.0.0
+
+  # Connectivity
+  connectivity_plus: ^5.0.1
+
+  # Date and Time
+  table_calendar: ^3.0.9
+
+  # Form Validation
+  form_field_validator: ^1.1.0
+
+  # Charts and Graphs
+  fl_chart: ^0.65.0
+
+  # Loading and Progress Indicators
+  flutter_spinkit: ^5.2.0
+
+  # Toast and Snackbar
+  fluttertoast: ^8.2.4
+
+  # Image Handling
+  cached_network_image: ^3.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Assets
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  # Fonts
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Roboto-Light.ttf
+          weight: 300
+

@@ -1,0 +1,67 @@
+﻿@using pulseem.Shared.Models;
+<EditForm Model="@cli" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Email :</label>
+        <div>
+            <InputText @bind-Value="@cli.Email" />
+            <ValidationMessage For="@(() => cli.Email)" />
+        </div>
+    </div>
+    <div class="form-group ">
+        <div>
+            <label>Name :</label>
+            <div>
+                <InputText @bind-Value="@cli.Name" />
+                <ValidationMessage For="@(() => cli.Name)" />
+            </div>
+        </div>
+    </div>
+   
+    <div class="form-group ">
+        <div>
+            <label>Cell Phone :</label>
+            <div>
+                <InputText @bind-Value="@cli.CellPhone" />
+                <ValidationMessage For="@(() => cli.CellPhone)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <div>
+            <label>Email status :</label>
+            <div>
+                <InputSelect @bind-Value="@cli.EmailStatus">
+                    @foreach (var st in Enum.GetValues(typeof(status)))
+                    {
+                        <option value="@st">@st</option>
+                    }
+                </InputSelect> 
+
+                <ValidationMessage For="@(() => cli.EmailStatus)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <div>
+            <label>Sms status :</label>
+            <div>
+                <InputSelect @bind-Value="@cli.SmsStatus">
+                    @foreach (var st in Enum.GetValues(typeof(status)))
+                    {
+                        <option value="@st">@st</option>
+                    }
+                    </InputSelect>
+                <ValidationMessage For="@(() => cli.SmsStatus)" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">
+        @ButtonText
+    </button>
+</EditForm>
+@code {
+    [Parameter] public Clients cli { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

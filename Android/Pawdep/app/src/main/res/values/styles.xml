@@ -1,0 +1,233 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimaryDark">#75BAF1</item>
+        <item name="colorAccent">#4E6D85</item>
+        <item name="editTextStyle">@style/DefaultEdittext</item>
+        <item name="android:autoCompleteTextViewStyle">@style/Defaultautocomplete</item>
+<!--        <item name="android:textViewStyle">@style/DefaultTextview</item>-->
+        <item name="android:windowBackground">@drawable/backgroundposted</item>
+        <item name="android:spinnerStyle">@style/spinner</item>
+    </style>
+    <style name="tlist" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="editTextStyle">@style/tlisteditlist</item>
+    </style>
+    <style name="DefaultTextview" parent="android:Widget.TextView">
+        <item name="android:textColor">#ffff</item>
+        <item name="android:dropDownWidth">300dp</item>
+    </style>
+    <style name="DefaultEdittext" parent="android:Widget.EditText">
+            <item name="android:selectAllOnFocus">true</item>
+            <item name="android:textColorHint">#ffff</item>
+    </style>
+    <style name="Defaultautocomplete" parent="android:Widget.AutoCompleteTextView">
+        <item name="android:selectAllOnFocus">true</item>
+    </style>
+    <style name="tlisteditlist" parent="android:Widget.EditText">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">15dp</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical|right</item>
+    </style>
+    <style name="tlistheader" parent="android:Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="Noncash" parent="android:Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">center_vertical|right</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:layout_width">100dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="pwtrans" parent="android:Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="totals" parent="android:Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">right</item>
+        <item name="android:layout_marginEnd">20dp</item>
+    </style>
+     <style name="grouptrans" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+         <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">0dp</item>
+         <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+    <style name="groupsummaryheader" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">center_vertical|end</item>
+    <item name="android:layout_width">80dp</item>
+    <item name="android:layout_height">0dp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="layout_constraintBottom_toBottomOf">parent</item>
+</style>
+    <style name="grouploansheader" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+
+   </style>
+    <style name="grouploansline" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+
+
+
+    </style>
+
+    <style name="groupheader" parent="android:Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">top|center_horizontal</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:ellipsize">marquee</item>
+
+
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+
+<!--    Loan request-->
+
+
+
+
+    <style name="receiptcard" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">left|center_vertical</item>
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="layout_constraintStart_toStartOf">parent</item>
+    <item name="layout_constraintEnd_toEndOf">@id/guideline5</item>
+    </style>
+
+    <style name="receiptcardtxt" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">left|center_vertical</item>
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="layout_constraintStart_toStartOf">@id/guideline5</item>
+    <item name="layout_constraintEnd_toEndOf">@id/guideline6</item>
+    <item name="android:completionThreshold">1</item>
+    </style>
+
+    <style name="receiptcardline2" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="layout_constraintStart_toStartOf">@id/guideline6</item>
+        <item name="layout_constraintEnd_toEndOf">@id/guideline7</item>
+    </style>
+
+    <style name="receiptcardtxtline2" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="layout_constraintStart_toStartOf">@id/guideline7</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="android:completionThreshold">3</item>
+    </style>
+
+
+
+    <style name="receiptlinetxt" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">left</item>
+    <item name="android:layout_width">150dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="layout_constraintTop_toTopOf">parent</item>
+    <item name="android:dropDownWidth">300dp</item>
+    <item name="android:completionThreshold">1</item>
+    </style>
+    <style name="receiptlineheader" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">left|center_vertical</item>
+    <item name="android:layout_width">150dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="layout_constraintTop_toTopOf">parent</item>
+    <item name="android:dropDownWidth">300dp</item>
+    <item name="android:ellipsize">middle</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textStyle">bold</item>
+    </style>
+    <style name="receiptlistheader" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">left|center_vertical</item>
+    <item name="android:layout_width">150dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="layout_constraintTop_toTopOf">parent</item>
+    <item name="android:dropDownWidth">300dp</item>
+    <item name="android:ellipsize">middle</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="receiptlistline" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">left|center_vertical</item>
+    <item name="android:layout_width">150dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="layout_constraintTop_toTopOf">parent</item>
+    <item name="android:dropDownWidth">300dp</item>
+    <item name="android:ellipsize">middle</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="all_header" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="android:dropDownWidth">300dp</item>
+        <item name="android:ellipsize">middle</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="all_line" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="android:dropDownWidth">300dp</item>
+        <item name="android:ellipsize">middle</item>
+        <item name="android:singleLine">true</item>
+
+    </style>
+    <style name="bankentries" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+  <item name="android:padding">5dp</item>
+
+</style>
+    <style name="spinner" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/bg_spinner</item>
+        <!--<item name="android:textColorHint">#F98916</item>-->
+    </style>
+
+
+
+</resources>

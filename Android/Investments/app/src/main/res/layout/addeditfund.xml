@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class="Fundedit">
+        <variable
+            name="fund"
+            type="com.trimline.investments.RealEstate" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        >
+        <TextView
+            android:id="@+id/desc"
+            android:text="Type"
+            app:layout_constraintTop_toTopOf="parent"
+
+            style="@style/realestatefund"
+            />
+
+        <TextView
+            android:id="@+id/desc2"
+            style="@style/realestatefund"
+            android:layout_marginTop="16dp"
+            android:text="Amount"
+            app:layout_constraintTop_toBottomOf="@+id/desc"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/maturity"
+            style="@style/realestatefund"
+            android:layout_marginTop="32dp"
+            android:text="Maturity Action"
+            app:layout_constraintTop_toBottomOf="@+id/desc2"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/period"
+            style="@style/realestatefund"
+            android:layout_marginTop="16dp"
+            android:text="Period (M)"
+            app:layout_constraintTop_toBottomOf="@+id/maturity"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/fdtype"
+            style="@style/realestatefundx"
+            tools:layout_editor_absoluteX="142dp"
+            tools:layout_editor_absoluteY="16dp"></androidx.appcompat.widget.AppCompatSpinner>
+
+        <EditText
+            android:id="@+id/fdamount"
+            android:inputType="number"
+            android:layout_height="50dp"
+            android:text="@={``+ fund.Fixed_Amount}"
+            app:layout_constraintTop_toBottomOf="@id/fdtype"
+            style="@style/realestatefundx">
+        </EditText>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+             android:id="@+id/maturityaction"
+            app:layout_constraintTop_toBottomOf="@id/fdamount"
+            style="@style/realestatefundx">
+        </androidx.appcompat.widget.AppCompatSpinner>
+
+        <EditText
+            android:id="@+id/fixedperiod"
+            android:layout_height="50dp"
+            android:inputType="number"
+            android:text="@={``+ fund.Fixed_Period_M}"
+            app:layout_constraintTop_toBottomOf="@id/maturityaction"
+            style="@style/realestatefundx">
+        </EditText>
+
+<Button
+    android:id="@+id/Save"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/fixedperiod"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:text="Save"></Button>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.32" />
+    </androidx.constraintlayout.widget.ConstraintLayout></layout>

@@ -1,0 +1,30 @@
+﻿#nav {
+  margin: 0;
+  padding: 0;
+  background: #555555;
+  list-style-type: none;
+  width: 767px-127px;    
+  float: left; /* Contain floated list items */
+}
+#nav li {
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+#nav a {
+  float: left;
+  width: 127px;
+  color: #FFF;
+  text-decoration: none;
+  line-height: 2.5;
+  text-align: center;
+  border-right: 1px solid #FFF;
+  background: url(images/tab.gif) no-repeat; /* Add the background image */
+}
+#nav #nav_con a {
+  border: none;
+}
+#nav a:hover {
+  background-color: #0075BE;/*4F4532*/
+  background-position: -127px 0;
+}

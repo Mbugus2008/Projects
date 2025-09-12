@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <nav>
+    <nav>
+      <Name>Metro</Name>
+      <Server>5.189.167.52</Server>
+      <domain>5.189.167.52</domain>
+      <Instance>Blazings</Instance>
+      <Companyname>Blazing</Companyname>
+      <Port>1336</Port>
+      <Username>Mbranch</Username>
+      <pass>Mbanking12345*</pass>
+      <PostIntervalinsec>2</PostIntervalinsec>
+      <Reconnectintervalinsec>10</Reconnectintervalinsec>
+      <logpath>D:\Logs\Kanisa</logpath>
+    </nav>
+    <nav>
+      <Name>kirigiti</Name>
+      <Server>5.189.167.52</Server>
+      <domain>5.189.167.52</domain>
+      <Instance>Kanisaservice</Instance>
+      <Companyname>Kirigiti PCEA</Companyname>
+      <Port>20248</Port>
+      <Username>Mbranch</Username>
+      <pass>Mbanking12345*</pass>
+      <PostIntervalinsec>2</PostIntervalinsec>
+      <Reconnectintervalinsec>10</Reconnectintervalinsec>
+      <logpath>D:\Logs\Kanisa</logpath>
+    </nav>
+  </nav>
+</settings>
+
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <nav>
+    <!--<NAV>
+      <Serverip>5.189.167.52</Serverip>
+      <domain>5.189.167.52</domain>
+      <Instance>Embaservice</Instance>
+      <Port>888</Port>
+      <Username>Mbranch</Username>
+      <pass>Mbanking12345*</pass>
+      <Companyname>EMBASSAVA SACCO LTD</Companyname>
+      <PostIntervalinsec>2</PostIntervalinsec>
+      <Reconnectintervalinsec>3</Reconnectintervalinsec>
+      <logpath>D:\DB\Embassava\Log\Service\</logpath>
+      <database>Autoweigh</database>
+      <IntegratedSecurity>false</IntegratedSecurity>
+      <certpath>E:\Tray\cert\navcert.cer</certpath>
+      <client>EMBASSAVA</client>
+      <sms_dest>Advanta</sms_dest>
+      <partnerID>9461</partnerID>
+      <Apikey>83c0add70f04f8cfa407e93062e7c68f</Apikey>
+      <send_sms>true</send_sms>
+    </NAV>-->
+    <!--<NAV>
+      <Serverip>5.189.167.52</Serverip>
+      <domain>5.189.167.52</domain>
+      <Instance>KmoService</Instance>
+      <Port>5759</Port>
+      <Username>Mbranch</Username>
+      <pass>Mbanking12345*</pass>
+      <Companyname>KMO</Companyname>
+      <PostIntervalinsec>20</PostIntervalinsec>
+      <Reconnectintervalinsec>3</Reconnectintervalinsec>
+      <logpath>D:\DB\KMO\Logs\Service\</logpath>
+      <database>Autoweigh</database>
+      <IntegratedSecurity>false</IntegratedSecurity>
+      <certpath>E:\Tray\cert\navcert.cer</certpath>
+      <client>KMO-SACCO</client>
+      <send_sms>true</send_sms>
+    </NAV>
+    <NAV>
+      <Serverip>5.189.167.52</Serverip>
+      <domain>5.189.167.52</domain>
+      <Instance>Milestepservice</Instance>
+      <Port>2013</Port>
+      <Username>Mbranch</Username>
+      <pass>Mbanking12345*</pass>
+      <Companyname>MILESTEP</Companyname>
+      <PostIntervalinsec>20</PostIntervalinsec>
+      <Reconnectintervalinsec>3</Reconnectintervalinsec>
+      <logpath>D:\DB\Milestep\Logs\Posting\</logpath>
+      <database>Autoweigh</database>
+      <IntegratedSecurity>false</IntegratedSecurity>
+      <certpath>E:\Tray\cert\navcert.cer</certpath>
+      <client>MILESTEP</client>
+      <send_sms>true</send_sms>
+    </NAV>-->
+    <NAV>
+      <Serverip>5.189.167.52</Serverip>
+      <domain>5.189.167.52</domain>
+      <Instance>GanakiService</Instance>
+      <Port>3224</Port>
+      <Username>Mbranch</Username>
+      <pass>Mbanking12345*</pass>
+      <Companyname>Ganaki Live</Companyname>
+      <PostIntervalinsec>20</PostIntervalinsec>
+      <Reconnectintervalinsec>3</Reconnectintervalinsec>
+      <logpath>D:\DB\Ganaki\Logs\Sms\</logpath>
+      <database>Autoweigh</database>
+      <IntegratedSecurity>false</IntegratedSecurity>
+      <certpath>E:\Tray\cert\navcert.cer</certpath>
+      <client>GANAKI</client>
+      <external_sync>false</external_sync>
+      <emails>true</emails>
+    </NAV>
+  </nav>
+</settings>
+
+

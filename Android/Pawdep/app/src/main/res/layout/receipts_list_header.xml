@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/header"
+    android:layout_height="wrap_content">
+    <TextView
+        style="@style/receiptlistheader"
+        android:id="@+id/receiptList_No"
+        android:text="No"
+        app:layout_constraintStart_toStartOf="parent"
+       />
+    <TextView
+        style="@style/receiptlistheader"
+        android:id="@+id/receiptList_Date"
+        android:text="Date"
+        app:layout_constraintStart_toEndOf="@id/receiptList_No"
+        />
+    <TextView
+    style="@style/receiptlistheader"
+    android:id="@+id/receiptList_Bank_code"
+    android:text="Bank Code"
+    app:layout_constraintStart_toEndOf="@id/receiptList_Date"
+    />
+
+    <TextView
+        style="@style/receiptlistheader"
+        android:id="@+id/Group_Name"
+        android:text="Group Name"
+        app:layout_constraintStart_toEndOf="@id/receiptList_Bank_code"
+        />
+    <TextView
+        style="@style/receiptlistheader"
+        android:id="@+id/receiptList_AccounNO"
+        android:text="Member No"
+        app:layout_constraintStart_toEndOf="@id/Group_Name"
+        />
+    <TextView
+        style="@style/receiptlistheader"
+        android:id="@+id/Receivedfrom"
+        android:text="Received From"
+        app:layout_constraintStart_toEndOf="@id/receiptList_AccounNO"
+        />
+    <TextView
+        style="@style/receiptlistheader"
+        android:id="@+id/documentno"
+        android:text="Document No"
+        app:layout_constraintStart_toEndOf="@id/Receivedfrom"
+        />
+    <TextView
+        style="@style/receiptlistheader"
+        android:id="@+id/receiptList_Amount"
+        android:text="Amount"
+        app:layout_constraintStart_toEndOf="@id/documentno"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

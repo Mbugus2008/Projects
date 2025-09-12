@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02-Nov-2014, 15:47:15
+    Author     : Salomo
+*/
+
+
+    .div_container{
+        position: absolute;
+        margin-top:5%;
+        margin-left: 10%;
+       // border: 1px solid black;
+        width: 80%;
+        //height: 60%;
+
+    }
+
+    .top_left{
+        float: left;
+        width: 60%;
+        margin-right: 1%;
+        background: none repeat scroll 0% 0% rgb(238, 238, 238);
+        border-top: 10px solid rgb(216, 216, 216);
+
+    }
+
+    .bottom_left{
+        margin-top: 2%;
+        float: left;
+        width: 60%;
+        margin-right: 1%;
+        border-top: 10px solid rgb(216, 216, 216);
+
+    }
+
+    ._right{
+        position: absolute;
+        margin-left: 61%;
+        top: 0px;
+        float: left;
+        width: 38%;
+        border-top: 10px solid rgb(216, 216, 216);
+    }

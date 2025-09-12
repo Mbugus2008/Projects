@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Mobile" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Mobile" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Mobile" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="AccountStatement">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="memberno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="path" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AccountStatement_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="MemberNo">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="MemberNo_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Performancereport">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="groupname" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="fromdate" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="todate" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="path" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Performancereport_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Postallocation">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="no" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Postallocation_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Post">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Post_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="AccountStatement">
+    <part name="parameters" element="tns:AccountStatement" />
+  </message>
+  <message name="AccountStatement_Result">
+    <part name="parameters" element="tns:AccountStatement_Result" />
+  </message>
+  <message name="MemberNo">
+    <part name="parameters" element="tns:MemberNo" />
+  </message>
+  <message name="MemberNo_Result">
+    <part name="parameters" element="tns:MemberNo_Result" />
+  </message>
+  <message name="Performancereport">
+    <part name="parameters" element="tns:Performancereport" />
+  </message>
+  <message name="Performancereport_Result">
+    <part name="parameters" element="tns:Performancereport_Result" />
+  </message>
+  <message name="Postallocation">
+    <part name="parameters" element="tns:Postallocation" />
+  </message>
+  <message name="Postallocation_Result">
+    <part name="parameters" element="tns:Postallocation_Result" />
+  </message>
+  <message name="Post">
+    <part name="parameters" element="tns:Post" />
+  </message>
+  <message name="Post_Result">
+    <part name="parameters" element="tns:Post_Result" />
+  </message>
+  <portType name="Mobile_Port">
+    <operation name="AccountStatement">
+      <input name="AccountStatement" message="tns:AccountStatement" />
+      <output name="AccountStatement_Result" message="tns:AccountStatement_Result" />
+    </operation>
+    <operation name="MemberNo">
+      <input name="MemberNo" message="tns:MemberNo" />
+      <output name="MemberNo_Result" message="tns:MemberNo_Result" />
+    </operation>
+    <operation name="Performancereport">
+      <input name="Performancereport" message="tns:Performancereport" />
+      <output name="Performancereport_Result" message="tns:Performancereport_Result" />
+    </operation>
+    <operation name="Postallocation">
+      <input name="Postallocation" message="tns:Postallocation" />
+      <output name="Postallocation_Result" message="tns:Postallocation_Result" />
+    </operation>
+    <operation name="Post">
+      <input name="Post" message="tns:Post" />
+      <output name="Post_Result" message="tns:Post_Result" />
+    </operation>
+  </portType>
+  <binding name="Mobile_Binding" type="tns:Mobile_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="AccountStatement">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Mobile:AccountStatement" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AccountStatement">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AccountStatement_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="MemberNo">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Mobile:MemberNo" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="MemberNo">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="MemberNo_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Performancereport">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Mobile:Performancereport" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Performancereport">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Performancereport_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Postallocation">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Mobile:Postallocation" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Postallocation">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Postallocation_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Post">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Mobile:Post" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Post">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Post_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Mobile">
+    <port name="Mobile_Port" binding="tns:Mobile_Binding">
+      <address location="http://173.249.49.91:3547/PawdepService/WS/Pamoja%20Women%20Dev.%20Programme/Codeunit/Mobile" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

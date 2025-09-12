@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Matatu_Rest.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Matatu_Rest_Transactions_Daily_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Transactions</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Teller_Transactions_Teller_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Teller_Transactions</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Agents_Users_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Users</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Mbranch_Header_Mbranch_Header_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Mbranch_Header</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Transtypes_Transtypes_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Transtypes</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Members_Members3_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Members3</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_Vehicles_Vehicles_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Vehicles</Value>
+    </Setting>
+    <Setting Name="Matatu_Rest_VehiclesBasics_VehiclesBasics_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/VehiclesBasics</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

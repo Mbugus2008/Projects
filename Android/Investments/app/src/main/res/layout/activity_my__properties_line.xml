@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".My_Properties"
+    >
+    <data class="MyProperty">
+        <variable
+            name="myprop"
+            type="com.trimline.investments.MyProperties" />
+        <import type="android.text.Html"/>
+        <import type="com.trimline.investments.Converters"/>
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layoutborder"
+    android:layout_marginTop="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/propertyid"
+        android:hint="Property Id"
+        android:text="@{Html.fromHtml(@string/projectid(myprop.Application_No))}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date"
+        android:hint="Date"
+
+        android:text ="@{Html.fromHtml(@string/date(Converters.dateToString(myprop.Application_Date))) }"
+        app:layout_constraintTop_toBottomOf="@id/Amount"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Amount"
+        android:hint="Description"
+        android:text="@{Html.fromHtml(@string/desc(myprop.projectname_plot_No))}"
+android:singleLine="false"
+android:inputType="textMultiLine"
+        android:ellipsize="none"
+        android:maxLines="3"
+        app:layout_constraintTop_toBottomOf="@id/propertyid"
+        app:layout_constraintEnd_toStartOf="@id/pay"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="left|center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/balance"
+        android:hint="Balance"
+        android:gravity="end|center_vertical"
+        android:text="@{Html.fromHtml(@string/lcurr(myprop.Control_Account_Balance))}"
+        app:layout_constraintTop_toBottomOf="@id/Amount"
+        app:layout_constraintEnd_toStartOf="@id/pay"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make\nPayment"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/pay"/>
+    <TextView
+        android:id="@+id/textViewOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:paddingStart="5dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="&#8942;"
+        android:layout_marginEnd="10dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout></layout>

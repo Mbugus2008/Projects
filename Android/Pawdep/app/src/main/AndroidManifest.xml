@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.trimline.pawdep">
+
+    <dist:module dist:instant="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo2"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo2"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".performance_report"></activity>
+        <activity
+            android:name=".all_add_edit"
+            android:label="@string/title_activity_all_add_edit"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".Allocations"
+            android:label="Allocations"
+            android:screenOrientation="landscape" />
+        <activity android:name=".Loan_history" />
+        <activity android:name=".addeditmember" />
+        <activity android:name=".Loan_app_list" />
+        <activity
+            android:name=".Loan_app"
+            android:screenOrientation="landscape" />
+        <activity android:name=".Receipts_list" />
+        <activity
+            android:name=".Receipts_app"
+            android:screenOrientation="landscape" />
+        <activity android:name=".Loan_request_app" />
+        <activity
+            android:name=".Non_Cash_Tran"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Group_loan_issue"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".PW_Trans"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Advance_Issue"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Advance_Repayment"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".DeviceListActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Login"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".transline"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".itemlines"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Loan_guarantor_app"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".addedittrans"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Transactions"
+            android:icon="@drawable/logo2"
+            android:screenOrientation="landscape" />
+    </application>
+
+</manifest>

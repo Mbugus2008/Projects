@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <nav>
+    <NAV>
+      <Serverip>192.168.1.74</Serverip>
+      <domain>KIMISITUSACCO0</domain>
+      <Instance>KSSLMBS</Instance>
+      <Port>7147</Port>
+      <Username>Pnjoroge</Username>
+      <pass>Mbanking12345*</pass>
+      <Companyname>kssl</Companyname>
+      <PostIntervalinsec>5</PostIntervalinsec>
+      <Reconnectintervalinsec>3</Reconnectintervalinsec>
+      <logpath>C:\Logs\</logpath>
+      <database>Autoweigh</database>
+      <IntegratedSecurity>false</IntegratedSecurity>
+      <certpath>E:\Tray\cert\navcert.cer</certpath>
+      <client>10000</client>
+	<dms_destination_path>\\DBS001\edms mobilebanking</dms_destination_path>
+	<dms_source_path>\\MBS002\DOCUMENTS</dms_source_path>
+		<iprs_url>http://10.1.1.5:9004/IPRSServerwcf?wsdl</iprs_url>
+		<iprs_username>IMARIKA</iprs_username>
+		<iprs_password>s6QtFtJ2fjN4izrlcI9NoY6aS4LqJ745316qwfa06t6gfo59SYVF9TcH2B4c6FR</iprs_password>
+		
+    </NAV>
+  </nav>
+</settings>

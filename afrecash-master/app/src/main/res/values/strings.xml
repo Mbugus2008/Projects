@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Afrecash</string>
+    <string name="custom_font">fonts/montserrat_regular.ttf</string>
+    <string name="title_activity_enter_phone">Enter your phone number</string>
+    <string name="title_activity_home">Africash</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_request_loan">Request Loan</string>
+    <string name="title_activity_my_loans">My Loans</string>
+    <string name="title_activity_loan_details">LoanDetails</string>
+    <string name="title_activity_view_loan">ViewLoan</string>
+</resources>

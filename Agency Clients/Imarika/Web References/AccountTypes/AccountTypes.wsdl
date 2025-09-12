@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/page/accounttypes" targetNamespace="urn:microsoft-dynamics-schemas/page/accounttypes" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/page/accounttypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="Activity_Code">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="FOSA" />
+          <xsd:enumeration value="MICRO" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="AccountTypes">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Activity_Code" type="tns:Activity_Code" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Description" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Account_No_Prefix" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Branch" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="No_Series" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Ending_Series" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="SMS_Description" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Posting_Group" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Dormancy_Period_M" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Withdrawal_Interval" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Withdrawal_Penalty" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Withdrawal_Interval_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Requires_Opening_Deposit" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Allow_Loan_Applications" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Use_Savings_Account_Number" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Fixed_Deposit" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Minimum_Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Standing_Orders_Suspense" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Bankers_Cheque_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Maximum_Withdrawal_Amount" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Maximum_Allowable_Deposit" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Check_Off_Recovery" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Recovery_Priority" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Allow_Multiple_Accounts" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Earns_Interest" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Interest_Rate" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Interest_Calc_Min_Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Minimum_Interest_Period_M" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Interest_Expense_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Interest_Payable_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Interest_Forfeited_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Tax_On_Interest" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Interest_Tax_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Account_Openning_Fee" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Account_Openning_Fee_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Re_activation_Fee" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Re_activation_Fee_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Requires_Closure_Notice" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Closure_Notice_Period" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Closing_Charge" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Closing_Prior_Notice_Charge" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Min_Bal_Calc_Frequency" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Fee_Below_Minimum_Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Fee_bellow_Min_Bal_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Overdraft_Charge" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Authorised_Ovedraft_Charge" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Service_Charge" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Maintenence_Fee" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="External_EFT_Charges" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Internal_EFT_Charges" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="EFT_Charges_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="RTGS_Charges" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="RTGS_Charges_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Statement_Charge" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Savings_Duration" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Savings_Withdrawal_penalty" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Savings_Penalty_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="FOSA_Shares" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Pass_Book" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Registration_Fee" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Allow_Over_Draft" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Over_Draft_Interest_Percent" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Over_Draft_Interest_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Over_Draft_Issue_Charge_Percent" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Over_Draft_Issue_Charge_A_C" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Allow_Multiple_Over_Draft" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ATM_Placing_Charge" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ATM_Replacement_Charge" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Commission_on_Placing" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Commission_on_Replacement" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Comission_on_ATM_Cards_A_C" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ATM_Post_to_Stock" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ATM_Bank_GL_Account" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AccountTypes_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="AccountTypes" type="tns:AccountTypes" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="AccountTypes_Fields">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Code" />
+          <xsd:enumeration value="Activity_Code" />
+          <xsd:enumeration value="Description" />
+          <xsd:enumeration value="Account_No_Prefix" />
+          <xsd:enumeration value="Branch" />
+          <xsd:enumeration value="No_Series" />
+          <xsd:enumeration value="Ending_Series" />
+          <xsd:enumeration value="SMS_Description" />
+          <xsd:enumeration value="Posting_Group" />
+          <xsd:enumeration value="Dormancy_Period_M" />
+          <xsd:enumeration value="Withdrawal_Interval" />
+          <xsd:enumeration value="Withdrawal_Penalty" />
+          <xsd:enumeration value="Withdrawal_Interval_Account" />
+          <xsd:enumeration value="Requires_Opening_Deposit" />
+          <xsd:enumeration value="Allow_Loan_Applications" />
+          <xsd:enumeration value="Use_Savings_Account_Number" />
+          <xsd:enumeration value="Fixed_Deposit" />
+          <xsd:enumeration value="Minimum_Balance" />
+          <xsd:enumeration value="Standing_Orders_Suspense" />
+          <xsd:enumeration value="Bankers_Cheque_Account" />
+          <xsd:enumeration value="Maximum_Withdrawal_Amount" />
+          <xsd:enumeration value="Maximum_Allowable_Deposit" />
+          <xsd:enumeration value="Check_Off_Recovery" />
+          <xsd:enumeration value="Recovery_Priority" />
+          <xsd:enumeration value="Allow_Multiple_Accounts" />
+          <xsd:enumeration value="Earns_Interest" />
+          <xsd:enumeration value="Interest_Rate" />
+          <xsd:enumeration value="Interest_Calc_Min_Balance" />
+          <xsd:enumeration value="Minimum_Interest_Period_M" />
+          <xsd:enumeration value="Interest_Expense_Account" />
+          <xsd:enumeration value="Interest_Payable_Account" />
+          <xsd:enumeration value="Interest_Forfeited_Account" />
+          <xsd:enumeration value="Tax_On_Interest" />
+          <xsd:enumeration value="Interest_Tax_Account" />
+          <xsd:enumeration value="Account_Openning_Fee" />
+          <xsd:enumeration value="Account_Openning_Fee_Account" />
+          <xsd:enumeration value="Re_activation_Fee" />
+          <xsd:enumeration value="Re_activation_Fee_Account" />
+          <xsd:enumeration value="Requires_Closure_Notice" />
+          <xsd:enumeration value="Closure_Notice_Period" />
+          <xsd:enumeration value="Closing_Charge" />
+          <xsd:enumeration value="Closing_Prior_Notice_Charge" />
+          <xsd:enumeration value="Min_Bal_Calc_Frequency" />
+          <xsd:enumeration value="Fee_Below_Minimum_Balance" />
+          <xsd:enumeration value="Fee_bellow_Min_Bal_Account" />
+          <xsd:enumeration value="Overdraft_Charge" />
+          <xsd:enumeration value="Authorised_Ovedraft_Charge" />
+          <xsd:enumeration value="Service_Charge" />
+          <xsd:enumeration value="Maintenence_Fee" />
+          <xsd:enumeration value="External_EFT_Charges" />
+          <xsd:enumeration value="Internal_EFT_Charges" />
+          <xsd:enumeration value="EFT_Charges_Account" />
+          <xsd:enumeration value="RTGS_Charges" />
+          <xsd:enumeration value="RTGS_Charges_Account" />
+          <xsd:enumeration value="Statement_Charge" />
+          <xsd:enumeration value="Savings_Duration" />
+          <xsd:enumeration value="Savings_Withdrawal_penalty" />
+          <xsd:enumeration value="Savings_Penalty_Account" />
+          <xsd:enumeration value="FOSA_Shares" />
+          <xsd:enumeration value="Pass_Book" />
+          <xsd:enumeration value="Registration_Fee" />
+          <xsd:enumeration value="Allow_Over_Draft" />
+          <xsd:enumeration value="Over_Draft_Interest_Percent" />
+          <xsd:enumeration value="Over_Draft_Interest_Account" />
+          <xsd:enumeration value="Over_Draft_Issue_Charge_Percent" />
+          <xsd:enumeration value="Over_Draft_Issue_Charge_A_C" />
+          <xsd:enumeration value="Allow_Multiple_Over_Draft" />
+          <xsd:enumeration value="ATM_Placing_Charge" />
+          <xsd:enumeration value="ATM_Replacement_Charge" />
+          <xsd:enumeration value="Commission_on_Placing" />
+          <xsd:enumeration value="Commission_on_Replacement" />
+          <xsd:enumeration value="Comission_on_ATM_Cards_A_C" />
+          <xsd:enumeration value="ATM_Post_to_Stock" />
+          <xsd:enumeration value="ATM_Bank_GL_Account" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="AccountTypes_Filter">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Field" type="tns:AccountTypes_Fields" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Criteria" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Read">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Code" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Read_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="AccountTypes" type="tns:AccountTypes" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="recId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="AccountTypes" type="tns:AccountTypes" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="filter" type="tns:AccountTypes_Filter" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="bookmarkKey" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="setSize" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="ReadMultiple_Result" type="tns:AccountTypes_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="IsUpdated_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="GetRecIdFromKey_Result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Create">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="AccountTypes" type="tns:AccountTypes" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Create_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="AccountTypes" type="tns:AccountTypes" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="AccountTypes_List" type="tns:AccountTypes_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="AccountTypes_List" type="tns:AccountTypes_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Update">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="AccountTypes" type="tns:AccountTypes" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Update_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="AccountTypes" type="tns:AccountTypes" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="AccountTypes_List" type="tns:AccountTypes_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="AccountTypes_List" type="tns:AccountTypes_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Delete_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="Read">
+    <part name="parameters" element="tns:Read" />
+  </message>
+  <message name="Read_Result">
+    <part name="parameters" element="tns:Read_Result" />
+  </message>
+  <message name="ReadByRecId">
+    <part name="parameters" element="tns:ReadByRecId" />
+  </message>
+  <message name="ReadByRecId_Result">
+    <part name="parameters" element="tns:ReadByRecId_Result" />
+  </message>
+  <message name="ReadMultiple">
+    <part name="parameters" element="tns:ReadMultiple" />
+  </message>
+  <message name="ReadMultiple_Result">
+    <part name="parameters" element="tns:ReadMultiple_Result" />
+  </message>
+  <message name="IsUpdated">
+    <part name="parameters" element="tns:IsUpdated" />
+  </message>
+  <message name="IsUpdated_Result">
+    <part name="parameters" element="tns:IsUpdated_Result" />
+  </message>
+  <message name="GetRecIdFromKey">
+    <part name="parameters" element="tns:GetRecIdFromKey" />
+  </message>
+  <message name="GetRecIdFromKey_Result">
+    <part name="parameters" element="tns:GetRecIdFromKey_Result" />
+  </message>
+  <message name="Create">
+    <part name="parameters" element="tns:Create" />
+  </message>
+  <message name="Create_Result">
+    <part name="parameters" element="tns:Create_Result" />
+  </message>
+  <message name="CreateMultiple">
+    <part name="parameters" element="tns:CreateMultiple" />
+  </message>
+  <message name="CreateMultiple_Result">
+    <part name="parameters" element="tns:CreateMultiple_Result" />
+  </message>
+  <message name="Update">
+    <part name="parameters" element="tns:Update" />
+  </message>
+  <message name="Update_Result">
+    <part name="parameters" element="tns:Update_Result" />
+  </message>
+  <message name="UpdateMultiple">
+    <part name="parameters" element="tns:UpdateMultiple" />
+  </message>
+  <message name="UpdateMultiple_Result">
+    <part name="parameters" element="tns:UpdateMultiple_Result" />
+  </message>
+  <message name="Delete">
+    <part name="parameters" element="tns:Delete" />
+  </message>
+  <message name="Delete_Result">
+    <part name="parameters" element="tns:Delete_Result" />
+  </message>
+  <portType name="AccountTypes_Port">
+    <operation name="Read">
+      <input name="Read" message="tns:Read" />
+      <output name="Read_Result" message="tns:Read_Result" />
+    </operation>
+    <operation name="ReadByRecId">
+      <input name="ReadByRecId" message="tns:ReadByRecId" />
+      <output name="ReadByRecId_Result" message="tns:ReadByRecId_Result" />
+    </operation>
+    <operation name="ReadMultiple">
+      <input name="ReadMultiple" message="tns:ReadMultiple" />
+      <output name="ReadMultiple_Result" message="tns:ReadMultiple_Result" />
+    </operation>
+    <operation name="IsUpdated">
+      <input name="IsUpdated" message="tns:IsUpdated" />
+      <output name="IsUpdated_Result" message="tns:IsUpdated_Result" />
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <input name="GetRecIdFromKey" message="tns:GetRecIdFromKey" />
+      <output name="GetRecIdFromKey_Result" message="tns:GetRecIdFromKey_Result" />
+    </operation>
+    <operation name="Create">
+      <input name="Create" message="tns:Create" />
+      <output name="Create_Result" message="tns:Create_Result" />
+    </operation>
+    <operation name="CreateMultiple">
+      <input name="CreateMultiple" message="tns:CreateMultiple" />
+      <output name="CreateMultiple_Result" message="tns:CreateMultiple_Result" />
+    </operation>
+    <operation name="Update">
+      <input name="Update" message="tns:Update" />
+      <output name="Update_Result" message="tns:Update_Result" />
+    </operation>
+    <operation name="UpdateMultiple">
+      <input name="UpdateMultiple" message="tns:UpdateMultiple" />
+      <output name="UpdateMultiple_Result" message="tns:UpdateMultiple_Result" />
+    </operation>
+    <operation name="Delete">
+      <input name="Delete" message="tns:Delete" />
+      <output name="Delete_Result" message="tns:Delete_Result" />
+    </operation>
+  </portType>
+  <binding name="AccountTypes_Binding" type="tns:AccountTypes_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="Read">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:Read" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Read">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Read_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadByRecId">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:ReadByRecId" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadByRecId">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadByRecId_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:ReadMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IsUpdated">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:IsUpdated" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsUpdated">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsUpdated_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:GetRecIdFromKey" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetRecIdFromKey">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetRecIdFromKey_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Create">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:Create" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Create">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Create_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreateMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:CreateMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreateMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreateMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Update">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:Update" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Update">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Update_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:UpdateMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Delete">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/accounttypes:Delete" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Delete">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Delete_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="AccountTypes_Service">
+    <port name="AccountTypes_Port" binding="tns:AccountTypes_Binding">
+      <address location="http://vaio:3112/Trim/WS/IANSOFT/Page/AccountTypes" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

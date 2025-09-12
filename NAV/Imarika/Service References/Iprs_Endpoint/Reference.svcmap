@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="8805174a-1a39-4ef2-be5a-c665d975ec1b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="C:\Users\mbugu\Desktop\iprs\IPRSServerwcf_1.wsdl" Protocol="file" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="IPRSServerWCF_1_2.xsd" MetadataType="Schema" ID="596e3650-9623-45e2-81ce-8615d18a4ff8" SourceId="1" SourceUrl="file:///C:/Users/mbugu/Desktop/iprs/IPRSServerWCF_1_2.xsd" />
+    <MetadataFile FileName="IPRSServerWCF_1_2_3.xsd" MetadataType="Schema" ID="92d660ff-fa51-4840-9c2b-ef7d5db75cb8" SourceId="1" SourceUrl="file:///C:/Users/mbugu/Desktop/iprs/IPRSServerWCF_1_2_3.xsd" />
+    <MetadataFile FileName="IPRSServerWCF.xsd" MetadataType="Schema" ID="507f2e6c-2a82-4d5a-b3ac-b11b9359a242" SourceId="1" SourceUrl="file:///C:/Users/mbugu/Desktop/iprs/IPRSServerWCF.xsd" />
+    <MetadataFile FileName="ServerInterface.wsdl" MetadataType="Wsdl" ID="f2b07a48-f897-4cab-b173-bc6fcfac6469" SourceId="1" SourceUrl="file:///C:/Users/mbugu/Desktop/iprs/IPRSServerwcf_1.wsdl" />
+    <MetadataFile FileName="IPRSServerWCF_1.xsd" MetadataType="Schema" ID="31bd2899-aeaf-41d2-a3d5-2c6f176f4919" SourceId="1" SourceUrl="file:///C:/Users/mbugu/Desktop/iprs/IPRSServerWCF_1.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

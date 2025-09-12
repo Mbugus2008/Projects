@@ -1,0 +1,151 @@
+﻿@page "/"
+@page "/Bids/RBids"
+@rendermode InteractiveServer
+@inject Eproc.Services.Ibids ibid
+@using Eproc.Services
+@using Microsoft.AspNetCore.Authorization
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.DropDowns
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Identity
+@using Eproc.Data
+@attribute [StreamRendering]
+@inject AuthenticationStateProvider userprovider
+@inject UserManager<ApplicationUser> UserManager
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Popups
+@attribute [Authorize]
+<div>
+    <h5>Bids</h5>
+    @{
+        var Tool = (new List<string>() { "Search" });
+    }
+    <SfGrid DataSource="@model" @ref="Grid" ID="bdetails" AllowTextWrap="true" Toolbar=@Tool>
+        <GridEditSettings Mode="EditMode.Normal"></GridEditSettings><GridEvents CommandClicked="OnCommandClicked" TValue="ReleasedBids.EProcReleasedBids"></GridEvents>
+        <GridTextWrapSettings WrapMode="@WrapModeValue"></GridTextWrapSettings>
+        <GridColumns>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Description) HeaderText="Program" Width="300" TextAlign="TextAlign.Justify"></Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.No) Visible="false" IsPrimaryKey="true" HeaderText="Opening Date" Format="d"> </Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Expected_Opening_Date) HeaderText="Opening Date" Format="d" Width="50"> </Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Expected_Closing_Date) HeaderText="Clossing Date" Format="d" Width="50"> </Syncfusion.Blazor.Grids.GridColumn>
+            <Syncfusion.Blazor.Grids.GridColumn Width="50">
+                <Syncfusion.Blazor.Grids.GridCommandColumns>
+                    <GridCommandColumn ButtonOption="@(new CommandButtonOptions() { Content = "More", CssClass = "e-flat" })"></GridCommandColumn>
+                </Syncfusion.Blazor.Grids.GridCommandColumns>
+            </Syncfusion.Blazor.Grids.GridColumn>
+        </GridColumns>
+    </SfGrid>
+    <SfDialog Width="60%" Height="60%" IsModal="true" @bind-Visible="Visibility">
+        <DialogTemplates>
+            <Header><div class="align-content-center justify-content-center">Bids</div>   </Header>
+            <Content>
+                <div class="row">
+                    <div class="form-group d-flex justify-content-between">
+                        <label>Description:</label>
+                        <label class="form-control">@modelrow.Description </label>
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <label>Rfq No:</label>
+                        <label class="form-control">@modelrow.No </label>
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <label>Opening Date:</label>
+                        <label class="form-control">@modelrow.Expected_Opening_Date.ToString("D")  </label>
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <label>Closing Date:</label>
+                        <label class="form-control">@modelrow.Expected_Closing_Date.ToString("D") </label>
+                    </div>
+                </div>
+            </Content>
+        </DialogTemplates>
+        <DialogButtons>
+            <DialogButton Content="Apply" IsPrimary="true" IconCss="e-icons e-ok-icon" OnClick="@DlgButtonClick" />
+        </DialogButtons>
+        <DialogEvents OnOpen="@DialogOpen" Closed="@DialogClose" OnOverlayModalClick="@OverlayClick"></DialogEvents>
+        <DialogAnimationSettings Effect="@DialogEffect.None"></DialogAnimationSettings>
+    </SfDialog>
+</div>
+<style>
+    .form-group .form-control .form-control {
+        width: 20%;
+        /* margin-bottom: 10px; /* Adjust the margin between items */ */
+    }</style>
+@code {
+    private bool Visibility { get; set; } = false;
+    List<ReleasedBids.EProcReleasedBids> model { get; set; } = new();
+    ReleasedBids.EProcReleasedBids modelrow { get; set; } = new();
+    ReleasedBids.EProcReleasedBids_Fields fields;
+    public WrapMode WrapModeValue { get; set; } = WrapMode.Content;
+    SfGrid<ReleasedBids.EProcReleasedBids> Grid;
+    private bool ShowButton { get; set; } = false;
+
+    protected override async void OnInitialized()
+    {
+        model = await ibid.GetReleasedBids();
+        StateHasChanged();
+
+
+    }
+    public void OnActionComplete(ActionEventArgs<BDetails.BankDetails> args)
+    {
+        switch (args.RequestType)
+        {
+            case Syncfusion.Blazor.Grids.Action.Add: { break; }
+            case Syncfusion.Blazor.Grids.Action.Save:
+                {
+
+                    // args.Data = iprofile.SaveData(args.Data).Result;
+
+                    break;
+                }
+            case Syncfusion.Blazor.Grids.Action.Delete:
+                {
+                    // iprofile.Delete(args.Data);
+                    break;
+                }
+        }
+    }
+    public void OnCommandClicked(CommandClickEventArgs<ReleasedBids.EProcReleasedBids> args)
+    {
+        modelrow = args.RowData;
+        this.Visibility = true;
+    }
+    private void DialogOpen(Object args)
+    {
+        this.ShowButton = false;
+    }
+    private void DialogClose(Object args)
+    {
+        this.ShowButton = true;
+    }
+    private void OnBtnClick(string key)
+    {
+
+
+    }
+    private async void DlgButtonClick()
+    {
+        var authenticationState = await  userprovider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+        ApplicationUser user1 = null;
+        if (user.Identity.IsAuthenticated)
+        {
+             user1 = await UserManager.GetUserAsync(user);
+
+        
+        }
+        ibid.Bidsubmision(user1.TaxRegistrationNO, modelrow.No, "");
+
+        this.Visibility = false;
+    }
+    private void OverlayClick(OverlayModalClickEventArgs args)
+    {
+
+        this.Visibility = true;
+
+    }
+}
+

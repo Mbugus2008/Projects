@@ -1,0 +1,47 @@
+﻿@page "/Editloan"
+@inject Sacco.Shared.StateContainerService stateService
+@inject HttpClient Http
+
+
+<EditForm Model="@loan" OnInvalidSubmit="@HandleValidSubmit" >
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <div class="form-group">
+        <label for="Type:">Loan Type</label>
+        <InputSelect @bind-Value="selectproducts" class="form-control">
+            <option value="">Select Amount</option>
+            @foreach (var option in products)
+            {
+                <option value="@option">@option.Code</option>
+            }
+        </InputSelect>
+        <ValidationMessage for = "@(() =>  loan.Loan_Product_Type)"></ValidationMessage>
+    </div>
+
+    <div class="form-group">
+        <label for="Name:">Amount</label>
+        <InputNumber id="name"  @bind-Value="loan.Approved_Amount" format ="F2" class="form-control"> </InputNumber>
+        <ValidationMessage for = "@(() =>  loan.Approved_Amount)"></ValidationMessage>
+    </div>
+ <button type="submit" class="btn btn-primary mt-3">Save</button>
+</EditForm>
+@code {
+    private Loansdata.Loans loan = new();
+    private LoanProducts.Loan_Products[]? products;
+    private LoanProducts.Loan_Products selectproducts = new();
+    protected override async Task OnInitializedAsync()
+    {
+        products = await Http.GetFromJsonAsync<LoanProducts.Loan_Products[]>($"api/loans/loanproducts");
+
+        // Load existing user data
+        //user = await UserService.GetUserAsync(1);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        //await UserService.UpdateUserAsync(user);
+        // Optionally navigate away or show success message
+    }
+    
+    
+}

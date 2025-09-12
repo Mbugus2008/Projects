@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/bnke_tid"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Transaction id"
+        style="@style/bankentries"/>
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/bnke_tid"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/bnke_idno"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        style="@style/bankentries"
+        android:hint="Id No"/>
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/bnke_idno"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/bnke_phone"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        style="@style/bankentries"
+        android:hint="No Phone No"/>
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/bnke_phone"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/bnke_amount"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        style="@style/bankentries"
+        android:hint="Amount"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"  android:layout_width="match_parent"
+    android:paddingStart="10dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/member_grouptrans"
+
+
+        >
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/photo"
+        android:src="@drawable/nophoto"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/member_PAWDEP_No"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Member no"
+            android:textSize="15dp"
+            android:ellipsize="start"
+            android:singleLine="true"
+            android:text="member.No"
+            app:layout_constraintStart_toEndOf="@id/photo"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/member_Member_Name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="No Name"
+            android:text="member.Name"
+            android:textSize="10dp"
+            app:layout_constraintStart_toEndOf="@id/photo"
+            app:layout_constraintTop_toBottomOf="@id/member_PAWDEP_No"
+            />
+
+
+        <TextView
+            android:id="@+id/member_Loan_Principle_Paid"
+
+            style="@style/grouptrans"
+            android:hint="Loan_Principle_Paid"
+            android:text="member.Principle_Paid"
+            app:layout_constraintEnd_toEndOf="@id/member_Loan_Interest_Paid"
+            app:layout_constraintStart_toEndOf="@id/member_PAWDEP_No"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/member_Loan_Interest_Paid"
+            style="@style/grouptrans"
+            android:hint="Interest paid"
+            android:text="member.Interest_Paid"
+            app:layout_constraintStart_toEndOf="@id/member_Loan_Principle_Paid"
+
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/member_Advance_Principle_Paid"
+            style="@style/grouptrans"
+            android:hint="Advance_Principle_Paid"
+            android:text="member.Advance_Principle_Paid"
+            app:layout_constraintStart_toEndOf="@id/member_Loan_Interest_Paid"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/member_Advance_Interest_Paid"
+            style="@style/grouptrans"
+            android:hint="Advance_Interest_Paid"
+            android:text="member.Advance_Interest_Paid"
+            app:layout_constraintStart_toEndOf="@id/member_Advance_Principle_Paid"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/member_Savingsreceived"
+            style="@style/grouptrans"
+            android:hint="Savings"
+            android:text="member.Monthly_Savings"
+            app:layout_constraintStart_toEndOf="@id/member_Advance_Interest_Paid"
+
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/member_Fines"
+            style="@style/grouptrans"
+            android:hint="Group Fines"
+            android:text="member.Fines"
+            app:layout_constraintStart_toEndOf="@id/member_Savingsreceived"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/member_Advanceissue"
+            style="@style/grouptrans"
+            android:hint="Advance issued"
+            android:text="member.Advances_Issued"
+            app:layout_constraintStart_toEndOf="@id/member_Fines"
+
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/member_Othertrans"
+            style="@style/grouptrans"
+            android:hint="Other Transactions"
+            android:text="member.othertrans"
+            app:layout_constraintStart_toEndOf="@id/member_Advanceissue"
+
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/member_Hall"
+            style="@style/grouptrans"
+            android:hint="Hall"
+            android:text="member.Hall"
+            app:layout_constraintStart_toEndOf="@id/member_Othertrans"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/member_totalpaid"
+            style="@style/grouptrans"
+            android:hint="Till"
+
+            android:textStyle="bold"
+            android:text="member.Total"
+            android:layout_marginEnd="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/print"
+        android:src="@drawable/print"
+        android:scaleType="fitCenter"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@id/textViewOptions"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/textViewOptions"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="&#8942;"
+        android:layout_marginEnd="10dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>

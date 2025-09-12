@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/page/guarantors_mobile" targetNamespace="urn:microsoft-dynamics-schemas/page/guarantors_mobile" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/page/guarantors_mobile" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="Guarantor_Type">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Guarantor" />
+          <xsd:enumeration value="Collateral" />
+          <xsd:enumeration value="Lien" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Guarantors_Mobile">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Savings_Account_No_Member_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Deposits_Shares" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="No_Of_Loans_Guaranteed" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Substituted" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Shares_Recovery" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="New_Upload" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Amount_Guaranteed" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Staff_Payroll_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Account_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Self_Guarantee" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ID_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Outstanding_Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Member_Guaranteed" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Percentage_Guaranteed" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Total_Guaranteed" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Available_Shares" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Member_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_Type" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Guaranteed_Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loanee_Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Guarantor_Type" type="tns:Guarantor_Type" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Collateral_Reg_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Collateral_Value" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="SMS_Sent" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Recovered" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Guarantors_Mobile_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="Guarantors_Mobile" type="tns:Guarantors_Mobile" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Guarantors_Mobile_Fields">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Loan_No" />
+          <xsd:enumeration value="Name" />
+          <xsd:enumeration value="Savings_Account_No_Member_No" />
+          <xsd:enumeration value="Loan_Balance" />
+          <xsd:enumeration value="Deposits_Shares" />
+          <xsd:enumeration value="No_Of_Loans_Guaranteed" />
+          <xsd:enumeration value="Substituted" />
+          <xsd:enumeration value="Date" />
+          <xsd:enumeration value="Shares_Recovery" />
+          <xsd:enumeration value="New_Upload" />
+          <xsd:enumeration value="Amount_Guaranteed" />
+          <xsd:enumeration value="Staff_Payroll_No" />
+          <xsd:enumeration value="Account_No" />
+          <xsd:enumeration value="Self_Guarantee" />
+          <xsd:enumeration value="ID_No" />
+          <xsd:enumeration value="Outstanding_Balance" />
+          <xsd:enumeration value="Member_Guaranteed" />
+          <xsd:enumeration value="Percentage_Guaranteed" />
+          <xsd:enumeration value="Total_Guaranteed" />
+          <xsd:enumeration value="Available_Shares" />
+          <xsd:enumeration value="Member_No" />
+          <xsd:enumeration value="Loan_Type" />
+          <xsd:enumeration value="Guaranteed_Balance" />
+          <xsd:enumeration value="Loanee_Name" />
+          <xsd:enumeration value="Guarantor_Type" />
+          <xsd:enumeration value="Collateral_Reg_No" />
+          <xsd:enumeration value="Collateral_Value" />
+          <xsd:enumeration value="SMS_Sent" />
+          <xsd:enumeration value="Recovered" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Guarantors_Mobile_Filter">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Field" type="tns:Guarantors_Mobile_Fields" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Criteria" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Read">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Loan_No" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Staff_Payroll_No" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Savings_Account_No_Member_No" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Collateral_Reg_No" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Read_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="Guarantors_Mobile" type="tns:Guarantors_Mobile" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="recId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="Guarantors_Mobile" type="tns:Guarantors_Mobile" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="filter" type="tns:Guarantors_Mobile_Filter" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="bookmarkKey" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="setSize" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="ReadMultiple_Result" type="tns:Guarantors_Mobile_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="IsUpdated_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="GetRecIdFromKey_Result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Create">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Guarantors_Mobile" type="tns:Guarantors_Mobile" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Create_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Guarantors_Mobile" type="tns:Guarantors_Mobile" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Guarantors_Mobile_List" type="tns:Guarantors_Mobile_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Guarantors_Mobile_List" type="tns:Guarantors_Mobile_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Update">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Guarantors_Mobile" type="tns:Guarantors_Mobile" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Update_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Guarantors_Mobile" type="tns:Guarantors_Mobile" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Guarantors_Mobile_List" type="tns:Guarantors_Mobile_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Guarantors_Mobile_List" type="tns:Guarantors_Mobile_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Delete_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="Read">
+    <part name="parameters" element="tns:Read" />
+  </message>
+  <message name="Read_Result">
+    <part name="parameters" element="tns:Read_Result" />
+  </message>
+  <message name="ReadByRecId">
+    <part name="parameters" element="tns:ReadByRecId" />
+  </message>
+  <message name="ReadByRecId_Result">
+    <part name="parameters" element="tns:ReadByRecId_Result" />
+  </message>
+  <message name="ReadMultiple">
+    <part name="parameters" element="tns:ReadMultiple" />
+  </message>
+  <message name="ReadMultiple_Result">
+    <part name="parameters" element="tns:ReadMultiple_Result" />
+  </message>
+  <message name="IsUpdated">
+    <part name="parameters" element="tns:IsUpdated" />
+  </message>
+  <message name="IsUpdated_Result">
+    <part name="parameters" element="tns:IsUpdated_Result" />
+  </message>
+  <message name="GetRecIdFromKey">
+    <part name="parameters" element="tns:GetRecIdFromKey" />
+  </message>
+  <message name="GetRecIdFromKey_Result">
+    <part name="parameters" element="tns:GetRecIdFromKey_Result" />
+  </message>
+  <message name="Create">
+    <part name="parameters" element="tns:Create" />
+  </message>
+  <message name="Create_Result">
+    <part name="parameters" element="tns:Create_Result" />
+  </message>
+  <message name="CreateMultiple">
+    <part name="parameters" element="tns:CreateMultiple" />
+  </message>
+  <message name="CreateMultiple_Result">
+    <part name="parameters" element="tns:CreateMultiple_Result" />
+  </message>
+  <message name="Update">
+    <part name="parameters" element="tns:Update" />
+  </message>
+  <message name="Update_Result">
+    <part name="parameters" element="tns:Update_Result" />
+  </message>
+  <message name="UpdateMultiple">
+    <part name="parameters" element="tns:UpdateMultiple" />
+  </message>
+  <message name="UpdateMultiple_Result">
+    <part name="parameters" element="tns:UpdateMultiple_Result" />
+  </message>
+  <message name="Delete">
+    <part name="parameters" element="tns:Delete" />
+  </message>
+  <message name="Delete_Result">
+    <part name="parameters" element="tns:Delete_Result" />
+  </message>
+  <portType name="Guarantors_Mobile_Port">
+    <operation name="Read">
+      <input name="Read" message="tns:Read" />
+      <output name="Read_Result" message="tns:Read_Result" />
+    </operation>
+    <operation name="ReadByRecId">
+      <input name="ReadByRecId" message="tns:ReadByRecId" />
+      <output name="ReadByRecId_Result" message="tns:ReadByRecId_Result" />
+    </operation>
+    <operation name="ReadMultiple">
+      <input name="ReadMultiple" message="tns:ReadMultiple" />
+      <output name="ReadMultiple_Result" message="tns:ReadMultiple_Result" />
+    </operation>
+    <operation name="IsUpdated">
+      <input name="IsUpdated" message="tns:IsUpdated" />
+      <output name="IsUpdated_Result" message="tns:IsUpdated_Result" />
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <input name="GetRecIdFromKey" message="tns:GetRecIdFromKey" />
+      <output name="GetRecIdFromKey_Result" message="tns:GetRecIdFromKey_Result" />
+    </operation>
+    <operation name="Create">
+      <input name="Create" message="tns:Create" />
+      <output name="Create_Result" message="tns:Create_Result" />
+    </operation>
+    <operation name="CreateMultiple">
+      <input name="CreateMultiple" message="tns:CreateMultiple" />
+      <output name="CreateMultiple_Result" message="tns:CreateMultiple_Result" />
+    </operation>
+    <operation name="Update">
+      <input name="Update" message="tns:Update" />
+      <output name="Update_Result" message="tns:Update_Result" />
+    </operation>
+    <operation name="UpdateMultiple">
+      <input name="UpdateMultiple" message="tns:UpdateMultiple" />
+      <output name="UpdateMultiple_Result" message="tns:UpdateMultiple_Result" />
+    </operation>
+    <operation name="Delete">
+      <input name="Delete" message="tns:Delete" />
+      <output name="Delete_Result" message="tns:Delete_Result" />
+    </operation>
+  </portType>
+  <binding name="Guarantors_Mobile_Binding" type="tns:Guarantors_Mobile_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="Read">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:Read" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Read">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Read_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadByRecId">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:ReadByRecId" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadByRecId">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadByRecId_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:ReadMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IsUpdated">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:IsUpdated" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsUpdated">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsUpdated_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:GetRecIdFromKey" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetRecIdFromKey">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetRecIdFromKey_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Create">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:Create" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Create">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Create_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreateMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:CreateMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreateMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreateMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Update">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:Update" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Update">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Update_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:UpdateMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Delete">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/guarantors_mobile:Delete" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Delete">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Delete_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Guarantors_Mobile_Service">
+    <port name="Guarantors_Mobile_Port" binding="tns:Guarantors_Mobile_Binding">
+      <address location="http://paulo:5456/Nyala/WS/NYALA%20VISION%20SACCO%20LTD/Page/Guarantors_Mobile" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

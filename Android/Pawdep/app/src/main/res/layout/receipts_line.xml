@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data class="Receiptline">
+        <variable
+            name="receipt"
+            type="com.trimline.pawdep.Receipt_lines" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:scrollbars="horizontal"
+        android:background="@drawable/border"
+        >
+
+        <AutoCompleteTextView
+            android:id="@+id/transactiontype"
+          style="@style/receiptlinetxt"
+
+            android:hint="Transaction type"
+            android:inputType="none"
+          android:text="@={receipt.TransactionType}"
+           app:layout_constraintStart_toStartOf="parent"
+
+          />
+        <AutoCompleteTextView
+            android:id="@+id/Account_type"
+           style="@style/receiptlinetxt"
+            android:hint="Name"
+            android:text="@={receipt.AccountType}"
+            app:layout_constraintStart_toEndOf="@id/transactiontype"
+            />
+        <AutoCompleteTextView
+            android:id="@+id/Account_No"
+            style="@style/receiptlinetxt"
+            android:hint="Account No"
+            android:text="@={receipt.Account_No}"
+            app:layout_constraintStart_toEndOf="@id/Account_type"
+            />
+        <EditText
+            android:id="@+id/Amount"
+            style="@style/receiptlinetxt"
+            android:hint="Amount"
+            android:text="@={``+receipt.Amount}"
+            app:layout_constraintStart_toEndOf="@id/Account_No"
+            />
+        <AutoCompleteTextView
+            android:id="@+id/Loan_No"
+            style="@style/receiptlinetxt"
+            android:hint="Loan No"
+            android:text="@={receipt.Loan_No}"
+            app:layout_constraintStart_toEndOf="@id/Amount"
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/deletered"
+            android:id="@+id/clear"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

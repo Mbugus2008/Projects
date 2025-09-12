@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sacco.Data.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Sacco_Data_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:9992/Bamburi/WS/Bamburi%20Wananchi%20Sacco/Page/Members</Value>
+    </Setting>
+    <Setting Name="Sacco_Data_Logins_Logins_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:9992/Bamburi/WS/Bamburi%20Wananchi%20Sacco/Page/Logins</Value>
+    </Setting>
+    <Setting Name="Sacco_Data_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://desktop-fef2iq4:9992/Bamburi/WS/Bamburi%20Wananchi%20Sacco/Page/Loans</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

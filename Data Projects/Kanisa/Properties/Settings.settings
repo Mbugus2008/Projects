@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Kanisa.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Kanisa_Event_Events_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://195.26.249.217:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Events</Value>
+    </Setting>
+    <Setting Name="Kanisa_Members_Customers_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://195.26.249.217:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Customers</Value>
+    </Setting>
+    <Setting Name="Kanisa_MemberGroups_Member_Groups_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://195.26.249.217:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Member_Groups</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

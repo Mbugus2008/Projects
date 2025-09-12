@@ -1,0 +1,93 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NavWrapper.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NavWrapper_Receipts_Receipts_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2013/milestepservice/WS/Test/Page/Receipts</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Receipt_Line_Receipt_Line_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2013/milestepservice/WS/Test/Page/Receipt_Line</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2729/MetroCrew/WS/MetroTrans%20Crew%20Sacco/Page/Members</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5032/Milestep/WS/MILESTEP/Page/Loans</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Users_Users_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2013/milestepservice/WS/Test/Page/Users</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Mobile_Types_Mobile_Types_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5032/Milestep/WS/MILESTEP/Page/Mobile_Types</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Payment_Modes_Payment_Modes_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:5032/Milestep/WS/MILESTEP%20TRAINING/Page/Payment_Modes</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Properties_PublishedPropertiesHeader_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20V/Page/PublishedPropertiesHeader</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Investment_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/LIVE/Page/Member</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Contact_Contact_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.17:7047/DynamicsNAV110/WS/LIVE/Page/Contact</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Shares_ShareFloatingHeader_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:1176/Investment/WS/INVESTMENT/Page/ShareFloatingHeader</Value>
+    </Setting>
+    <Setting Name="NavWrapper_PropertySales_PropertySales_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://kpicsdevnav01.policesacco.com:7047/DynamicsNAV110/WS/LIVE/Page/PropertySales</Value>
+    </Setting>
+    <Setting Name="NavWrapper_ShareFloatingLines_ShareFloatingLines_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:1176/Investment/WS/INVESTMENT/Page/ShareFloatingLines</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Vendor_Details_Vendor_Details_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:4302/Investment/WS/INVESTMENT/Page/Vendor_Details</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Logins_Logins_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20VI/Page/Logins</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Presales_Presales_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://kpicsdevnav01.policesacco.com:7047/DynamicsNAV110/WS/LIVE/Page/Presales</Value>
+    </Setting>
+    <Setting Name="NavWrapper_MyProperties_MyProperties_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://kpicsprdapp01.policesacco.com:7047/DynamicsNAV110/WS/LIVE/Page/MyProperties</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Payment_Methods_Payment_Methods_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:4302/Investment/WS/INVESTMENT/Page/Payment_Methods</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Payment_Types_Payment_Types_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:4302/Investment/WS/INVESTMENT/Page/Payment_Types</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Share_Setup_Share_Setup_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:4302/Investment/WS/INVESTMENT/Page/Share_Setup</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Account_Types_Account_Types_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://paulo:4302/Investment/WS/INVESTMENT/Page/Account_Types</Value>
+    </Setting>
+    <Setting Name="NavWrapper_InvestmentFunctions_InvestmentFunctions" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:1176/INVESTMENT/WS/KPS-TEST/Codeunit/InvestmentFunctions</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Channels_Channels" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.17:7047/DynamicsNAV110/WS/LIVE/Codeunit/Channels</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Mpesa_Mpesa_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://kpicsdevnav01.policesacco.com:7047/DynamicsNAV110/WS/LIVE/Page/Mpesa</Value>
+    </Setting>
+    <Setting Name="NavWrapper_RealEstateFund_RealEstateFundApplication_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/Cycle%20V/Page/RealEstateFundApplication</Value>
+    </Setting>
+    <Setting Name="NavWrapper_FDTypes_FDTypes_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.17:7047/DynamicsNAV110/WS/LIVE/Page/FDTypes</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Accountlist_Accountlist_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.4.17:7047/DynamicsNAV110/WS/Cycle%20III/Page/Accountlist</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Mobile_Transactions_Mobile_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.1.1.24:7047/DynamicsNAV110/WS/LIVE/Page/Mobile_Transactions</Value>
+    </Setting>
+    <Setting Name="NavWrapper_Member_APP_Member_APP_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2729/MetroCrew/WS/MetroTrans%20Crew%20Sacco/Page/Member_APP</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

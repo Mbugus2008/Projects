@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    Because the window insets on round devices are larger than 15dp, this padding only applies
+    to square screens.
+    -->
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+
+    <!--
+    This padding applies to both square and round screens. The total padding between the buttons
+    and the window insets is box_inset_layout_padding (above variable) on square screens and
+    inner_frame_layout_padding (below variable) on round screens.
+    -->
+    <dimen name="inner_frame_layout_padding">5dp</dimen>
+
+    <dimen name="standard_12">12dp</dimen>
+    <dimen name="standard_23">23dp</dimen>
+    <dimen name="standard_55">55dp</dimen>
+    <dimen name="standard_100">100dp</dimen>
+    <dimen name="standard_145">145dp</dimen>
+
+    <dimen name="margin_standard">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_large">50dp</dimen>
+    <dimen name="padding_standard">16dp</dimen>
+    <dimen name="padding_standard10">10dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="progress_bar_size">60dp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="fab_pressed_elevation">12dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_corner_radius">5dp</dimen>
+    <dimen name="gender_image_height">60dp</dimen>
+    <dimen name="gender_image_width">80dp</dimen>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="New Group\nTransaction"
+        android:icon="@drawable/refresh"
+        app:showAsAction="always"
+        android:id="@+id/refresh" />
+    <item
+        android:title="New Group\nTransaction"
+        app:showAsAction="always"
+        android:id="@+id/newrans" />
+    <item
+        android:title="Receipts"
+
+        app:showAsAction="always"
+        android:id="@+id/Receipts" />
+
+    <item
+        android:id="@+id/set"
+        android:title="settings"
+        app:showAsAction="collapseActionView"/>
+</menu>

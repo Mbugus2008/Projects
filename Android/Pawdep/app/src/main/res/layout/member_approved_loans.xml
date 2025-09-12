@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<TextView
+    android:layout_width="130dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/loanno"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:hint="Loan No"/>
+<TextView
+    android:layout_width="130dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    android:id="@+id/memberNo"
+    android:hint="Member No"
+    app:layout_constraintStart_toEndOf="@id/loanno"/>
+    <TextView
+        android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    android:id="@+id/Member_Name"
+    android:hint="Member Name"
+    app:layout_constraintStart_toEndOf="@id/memberNo"/>
+    <TextView
+        android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    android:id="@+id/AmountApplied"
+        android:gravity="right"
+    android:hint="Applied"
+    app:layout_constraintStart_toEndOf="@id/Member_Name"/>
+    <TextView
+        android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    android:id="@+id/Amountapproved"
+        android:gravity="right"
+    android:hint="Approved"
+    app:layout_constraintStart_toEndOf="@id/AmountApplied"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

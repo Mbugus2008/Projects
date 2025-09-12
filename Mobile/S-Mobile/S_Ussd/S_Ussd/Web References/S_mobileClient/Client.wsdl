@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Client" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Client.Member" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Client.Accounts" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Client" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Client.Sms" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Client.S_Applications" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Client.Loans" />
+      <xs:element name="Eligibility">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="acc" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EligibilityResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="EligibilityResult" type="xs:double" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="members">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="acc" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="membersResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Client.Member" minOccurs="0" name="membersResult" nillable="true" type="q1:Members" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Memberaccounts">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="tel" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="MemberaccountsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Client.Accounts" minOccurs="0" name="MemberaccountsResult" nillable="true" type="q2:ArrayOfAccounts" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Transaction">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Client" minOccurs="0" name="t" nillable="true" type="q3:Trans" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TransactionResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Client" minOccurs="0" name="TransactionResult" nillable="true" type="q4:Trans" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sms">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="count" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="smsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Client.Sms" minOccurs="0" name="smsResult" nillable="true" type="q5:ArrayOfSms" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SmsUpdate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Client.Sms" minOccurs="0" name="s" nillable="true" type="q6:ArrayOfSms" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SmsUpdateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Client.Sms" minOccurs="0" name="SmsUpdateResult" nillable="true" type="q7:ArrayOfSms" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Bal">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="acc" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BalResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="BalResult" type="xs:double" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Registration">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RegistrationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Client.S_Applications" minOccurs="0" name="RegistrationResult" nillable="true" type="q8:ArrayOfApplications" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CustomerLoans">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="telephone" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CustomerLoansResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Client.Loans" minOccurs="0" name="CustomerLoansResult" nillable="true" type="q9:ArrayOfLoans" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Accounts">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="tel" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AccountsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Client.Accounts" minOccurs="0" name="AccountsResult" nillable="true" type="q10:ArrayOfAccounts" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Account">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="tel" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AccountResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Client.Accounts" minOccurs="0" name="AccountResult" nillable="true" type="q11:Accounts" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Client.Member" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Client.Member" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="Members">
+        <xs:sequence>
+          <xs:element name="eloan_LimitField" type="xs:decimal" />
+          <xs:element name="eloan_LimitFieldSpecified" type="xs:boolean" />
+          <xs:element name="fOSA_AccountField" nillable="true" type="xs:string" />
+          <xs:element name="global_Dimension_2_CodeField" nillable="true" type="xs:string" />
+          <xs:element name="group_NameField" nillable="true" type="xs:string" />
+          <xs:element name="iD_NoField" nillable="true" type="xs:string" />
+          <xs:element name="keyField" nillable="true" type="xs:string" />
+          <xs:element name="mPESA_Mobile_NoField" nillable="true" type="xs:string" />
+          <xs:element name="nameField" nillable="true" type="xs:string" />
+          <xs:element name="net_ChangeField" type="xs:decimal" />
+          <xs:element name="net_ChangeFieldSpecified" type="xs:boolean" />
+          <xs:element name="noField" nillable="true" type="xs:string" />
+          <xs:element name="old_Group_Account_NumberField" nillable="true" type="xs:string" />
+          <xs:element name="payroll_Staff_NoField" nillable="true" type="xs:string" />
+          <xs:element name="regionField" nillable="true" type="xs:string" />
+          <xs:element name="registration_DateField" type="xs:dateTime" />
+          <xs:element name="registration_DateFieldSpecified" type="xs:boolean" />
+          <xs:element name="sectionField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Members" nillable="true" type="tns:Members" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Client.Accounts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Client.Accounts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfAccounts">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Accounts" nillable="true" type="tns:Accounts" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfAccounts" nillable="true" type="tns:ArrayOfAccounts" />
+      <xs:complexType name="Accounts">
+        <xs:sequence>
+          <xs:element name="aTM_NoField" nillable="true" type="xs:string" />
+          <xs:element name="account_StatusField" type="tns:Account_Status" />
+          <xs:element name="account_StatusFieldSpecified" type="xs:boolean" />
+          <xs:element name="account_TypeField" nillable="true" type="xs:string" />
+          <xs:element name="balanceField" type="xs:decimal" />
+          <xs:element name="balanceFieldSpecified" type="xs:boolean" />
+          <xs:element name="blockedField" type="tns:Blocked" />
+          <xs:element name="blockedFieldSpecified" type="xs:boolean" />
+          <xs:element name="held_AmountField" type="xs:decimal" />
+          <xs:element name="held_AmountFieldSpecified" type="xs:boolean" />
+          <xs:element name="keyField" nillable="true" type="xs:string" />
+          <xs:element name="mPESA_Mobile_NoField" nillable="true" type="xs:string" />
+          <xs:element name="member_NoField" nillable="true" type="xs:string" />
+          <xs:element name="nameField" nillable="true" type="xs:string" />
+          <xs:element name="national_ID_NoField" nillable="true" type="xs:string" />
+          <xs:element name="noField" nillable="true" type="xs:string" />
+          <xs:element name="phone_NoField" nillable="true" type="xs:string" />
+          <xs:element name="search_NameField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Accounts" nillable="true" type="tns:Accounts" />
+      <xs:simpleType name="Account_Status">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Active" />
+          <xs:enumeration value="Dormant" />
+          <xs:enumeration value="Closed" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Account_Status" nillable="true" type="tns:Account_Status" />
+      <xs:simpleType name="Blocked">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="_blank_" />
+          <xs:enumeration value="Payment" />
+          <xs:enumeration value="All" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Blocked" nillable="true" type="tns:Blocked" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Client" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Client" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Client.Transactions" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Client.Loans" />
+      <xs:complexType name="Trans">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:Results">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="AccountBalance" type="xs:decimal" />
+              <xs:element minOccurs="0" name="Account_2" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Account_Name" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Account_No" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+              <xs:element minOccurs="0" name="Charge" type="xs:decimal" />
+              <xs:element minOccurs="0" name="Client" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Document_Date" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="Document_No" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Entry" type="xs:int" />
+              <xs:element minOccurs="0" name="LoanBalances" nillable="true" type="tns:ArrayOfloan" />
+              <xs:element minOccurs="0" name="LoanStatus" nillable="true" type="tns:ArrayOfloan" />
+              <xs:element minOccurs="0" name="Loan_No" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Mini" nillable="true" type="tns:ArrayOfMinistatement" />
+              <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Client.Transactions" minOccurs="0" name="Status" type="q1:Status" />
+              <xs:element minOccurs="0" name="Telephone_Number" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Transaction_Time" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="Transaction_Type" type="xs:int" />
+              <xs:element minOccurs="0" name="sharedepositbalance" type="xs:decimal" />
+              <xs:element minOccurs="0" name="statement_size" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="Trans" nillable="true" type="tns:Trans" />
+      <xs:complexType name="Results">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:int" />
+          <xs:element minOccurs="0" name="error_Desc" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Results" nillable="true" type="tns:Results" />
+      <xs:complexType name="ArrayOfloan">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="loan" nillable="true" type="tns:loan" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfloan" nillable="true" type="tns:ArrayOfloan" />
+      <xs:complexType name="loan">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="balance" type="xs:decimal" />
+          <xs:element minOccurs="0" name="loantype" nillable="true" type="xs:string" />
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Client.Loans" minOccurs="0" name="status" type="q2:Loan_Status" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="loan" nillable="true" type="tns:loan" />
+      <xs:complexType name="ArrayOfMinistatement">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Ministatement" nillable="true" type="tns:Ministatement" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfMinistatement" nillable="true" type="tns:ArrayOfMinistatement" />
+      <xs:complexType name="Ministatement">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="amount" type="xs:double" />
+          <xs:element minOccurs="0" name="desc" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="posting_Date" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Ministatement" nillable="true" type="tns:Ministatement" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Client.Loans" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Client.Loans" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="Loan_Status">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Application" />
+          <xs:enumeration value="Appraisal" />
+          <xs:enumeration value="Rejected" />
+          <xs:enumeration value="Approved" />
+          <xs:enumeration value="Issued" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Loan_Status" nillable="true" type="tns:Loan_Status" />
+      <xs:complexType name="ArrayOfLoans">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Loans" nillable="true" type="tns:Loans" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfLoans" nillable="true" type="tns:ArrayOfLoans" />
+      <xs:complexType name="Loans">
+        <xs:sequence>
+          <xs:element name="application_DateField" type="xs:dateTime" />
+          <xs:element name="application_DateFieldSpecified" type="xs:boolean" />
+          <xs:element name="appraisedField" type="xs:boolean" />
+          <xs:element name="appraisedFieldSpecified" type="xs:boolean" />
+          <xs:element name="balanceField" type="xs:decimal" />
+          <xs:element name="balanceFieldSpecified" type="xs:boolean" />
+          <xs:element name="client_CodeField" nillable="true" type="xs:string" />
+          <xs:element name="client_NameField" nillable="true" type="xs:string" />
+          <xs:element name="keyField" nillable="true" type="xs:string" />
+          <xs:element name="last_Penalty_DateField" type="xs:dateTime" />
+          <xs:element name="last_Penalty_DateFieldSpecified" type="xs:boolean" />
+          <xs:element name="last_notificationField" type="xs:dateTime" />
+          <xs:element name="last_notificationFieldSpecified" type="xs:boolean" />
+          <xs:element name="loan_NoField" nillable="true" type="xs:string" />
+          <xs:element name="loan_Product_TypeField" nillable="true" type="xs:string" />
+          <xs:element name="loan_StatusField" type="tns:Loan_Status" />
+          <xs:element name="loan_StatusFieldSpecified" type="xs:boolean" />
+          <xs:element name="oustanding_InterestField" type="xs:decimal" />
+          <xs:element name="oustanding_InterestFieldSpecified" type="xs:boolean" />
+          <xs:element name="outstanding_BalanceField" type="xs:decimal" />
+          <xs:element name="outstanding_BalanceFieldSpecified" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Loans" nillable="true" type="tns:Loans" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Client.Transactions" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Client.Transactions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="Status">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Pending" />
+          <xs:enumeration value="Completed" />
+          <xs:enumeration value="Failed" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Status" nillable="true" type="tns:Status" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Client.Sms" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Client.Sms" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfSms">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Sms" nillable="true" type="tns:Sms" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfSms" nillable="true" type="tns:ArrayOfSms" />
+      <xs:complexType name="Sms">
+        <xs:sequence>
+          <xs:element name="account_NoField" nillable="true" type="xs:string" />
+          <xs:element name="batch_NoField" nillable="true" type="xs:string" />
+          <xs:element name="bulk_SMS_BalanceField" type="xs:decimal" />
+          <xs:element name="bulk_SMS_BalanceFieldSpecified" type="xs:boolean" />
+          <xs:element name="date_EnteredField" type="xs:dateTime" />
+          <xs:element name="date_EnteredFieldSpecified" type="xs:boolean" />
+          <xs:element name="date_Sent_to_ServerField" type="xs:dateTime" />
+          <xs:element name="date_Sent_to_ServerFieldSpecified" type="xs:boolean" />
+          <xs:element name="document_NoField" nillable="true" type="xs:string" />
+          <xs:element name="entered_ByField" nillable="true" type="xs:string" />
+          <xs:element name="entry_NoField" type="xs:int" />
+          <xs:element name="entry_NoFieldSpecified" type="xs:boolean" />
+          <xs:element name="keyField" nillable="true" type="xs:string" />
+          <xs:element name="no_SeriesField" nillable="true" type="xs:string" />
+          <xs:element name="rateField" type="xs:decimal" />
+          <xs:element name="rateFieldSpecified" type="xs:boolean" />
+          <xs:element name="sMS_MessageField" nillable="true" type="xs:string" />
+          <xs:element name="sent_To_ServerField" type="tns:Sent_To_Server" />
+          <xs:element name="sent_To_ServerFieldSpecified" type="xs:boolean" />
+          <xs:element name="sourceField" nillable="true" type="xs:string" />
+          <xs:element name="system_Created_EntryField" type="xs:boolean" />
+          <xs:element name="system_Created_EntryFieldSpecified" type="xs:boolean" />
+          <xs:element name="telephone_NoField" nillable="true" type="xs:string" />
+          <xs:element name="time_EnteredField" type="xs:dateTime" />
+          <xs:element name="time_EnteredFieldSpecified" type="xs:boolean" />
+          <xs:element name="time_Sent_To_ServerField" type="xs:dateTime" />
+          <xs:element name="time_Sent_To_ServerFieldSpecified" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Sms" nillable="true" type="tns:Sms" />
+      <xs:simpleType name="Sent_To_Server">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="No" />
+          <xs:enumeration value="Yes" />
+          <xs:enumeration value="Failed" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Sent_To_Server" nillable="true" type="tns:Sent_To_Server" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Client.S_Applications" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Client.S_Applications" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfApplications">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Applications" nillable="true" type="tns:Applications" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfApplications" nillable="true" type="tns:ArrayOfApplications" />
+      <xs:complexType name="Applications">
+        <xs:sequence>
+          <xs:element name="account_NameField" nillable="true" type="xs:string" />
+          <xs:element name="account_NoField" nillable="true" type="xs:string" />
+          <xs:element name="date_AppliedField" type="xs:dateTime" />
+          <xs:element name="date_AppliedFieldSpecified" type="xs:boolean" />
+          <xs:element name="iD_NoField" nillable="true" type="xs:string" />
+          <xs:element name="keyField" nillable="true" type="xs:string" />
+          <xs:element name="sentField" type="xs:boolean" />
+          <xs:element name="sentFieldSpecified" type="xs:boolean" />
+          <xs:element name="statusField" type="tns:Status" />
+          <xs:element name="statusFieldSpecified" type="xs:boolean" />
+          <xs:element name="telephoneField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Applications" nillable="true" type="tns:Applications" />
+      <xs:simpleType name="Status">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Application" />
+          <xs:enumeration value="Pending_Approval" />
+          <xs:enumeration value="Approved" />
+          <xs:enumeration value="Rejected" />
+          <xs:enumeration value="Delinked" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Status" nillable="true" type="tns:Status" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="Mobile_Eligibility_InputMessage">
+    <wsdl:part name="parameters" element="tns:Eligibility" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Eligibility_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EligibilityResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_members_InputMessage">
+    <wsdl:part name="parameters" element="tns:members" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_members_OutputMessage">
+    <wsdl:part name="parameters" element="tns:membersResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Memberaccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:Memberaccounts" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Memberaccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MemberaccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Transaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:Transaction" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Transaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_sms_InputMessage">
+    <wsdl:part name="parameters" element="tns:sms" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_sms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:smsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_SmsUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:SmsUpdate" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_SmsUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SmsUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Bal_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bal" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Bal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BalResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Registration_InputMessage">
+    <wsdl:part name="parameters" element="tns:Registration" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Registration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_CustomerLoans_InputMessage">
+    <wsdl:part name="parameters" element="tns:CustomerLoans" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_CustomerLoans_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CustomerLoansResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Accounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:Accounts" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Accounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Account_InputMessage">
+    <wsdl:part name="parameters" element="tns:Account" />
+  </wsdl:message>
+  <wsdl:message name="Mobile_Account_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Mobile">
+    <wsdl:operation name="Eligibility">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/Eligibility" message="tns:Mobile_Eligibility_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/EligibilityResponse" message="tns:Mobile_Eligibility_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="members">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/members" message="tns:Mobile_members_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/membersResponse" message="tns:Mobile_members_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Memberaccounts">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/Memberaccounts" message="tns:Mobile_Memberaccounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/MemberaccountsResponse" message="tns:Mobile_Memberaccounts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Transaction">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/Transaction" message="tns:Mobile_Transaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/TransactionResponse" message="tns:Mobile_Transaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sms">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/sms" message="tns:Mobile_sms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/smsResponse" message="tns:Mobile_sms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/SmsUpdate" message="tns:Mobile_SmsUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/SmsUpdateResponse" message="tns:Mobile_SmsUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bal">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/Bal" message="tns:Mobile_Bal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/BalResponse" message="tns:Mobile_Bal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Registration">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/Registration" message="tns:Mobile_Registration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/RegistrationResponse" message="tns:Mobile_Registration_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerLoans">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/CustomerLoans" message="tns:Mobile_CustomerLoans_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/CustomerLoansResponse" message="tns:Mobile_CustomerLoans_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Accounts">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/Accounts" message="tns:Mobile_Accounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/AccountsResponse" message="tns:Mobile_Accounts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Account">
+      <wsdl:input wsaw:Action="http://tempuri.org/Mobile/Account" message="tns:Mobile_Account_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Mobile/AccountResponse" message="tns:Mobile_Account_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_Mobile" type="tns:Mobile">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Eligibility">
+      <soap:operation soapAction="http://tempuri.org/Mobile/Eligibility" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="members">
+      <soap:operation soapAction="http://tempuri.org/Mobile/members" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Memberaccounts">
+      <soap:operation soapAction="http://tempuri.org/Mobile/Memberaccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Transaction">
+      <soap:operation soapAction="http://tempuri.org/Mobile/Transaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sms">
+      <soap:operation soapAction="http://tempuri.org/Mobile/sms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsUpdate">
+      <soap:operation soapAction="http://tempuri.org/Mobile/SmsUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bal">
+      <soap:operation soapAction="http://tempuri.org/Mobile/Bal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Registration">
+      <soap:operation soapAction="http://tempuri.org/Mobile/Registration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerLoans">
+      <soap:operation soapAction="http://tempuri.org/Mobile/CustomerLoans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Accounts">
+      <soap:operation soapAction="http://tempuri.org/Mobile/Accounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Account">
+      <soap:operation soapAction="http://tempuri.org/Mobile/Account" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Client">
+    <wsdl:port name="BasicHttpBinding_Mobile" binding="tns:BasicHttpBinding_Mobile">
+      <soap:address location="http://localhost:802/Mobile.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

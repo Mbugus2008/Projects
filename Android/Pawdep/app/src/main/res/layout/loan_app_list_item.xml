@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data class="Loanlist">
+        <variable
+            name="loans"
+            type="com.trimline.pawdep.Loan" />
+    </data>
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+  android:background="@drawable/border"
+    android:layout_height="wrap_content">
+  
+    <TextView
+        android:id="@+id/loan_list_loan_No"
+        style="@style/loan_list_header"
+         android:text="@={loans.Loan_No}"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/loan_list_Member_No"
+       style="@style/loan_list_header"
+        android:text="@={loans.Member_No}"
+        app:layout_constraintStart_toEndOf="@id/loan_list_loan_No"
+
+        />
+    <TextView
+        android:id="@+id/loan_list_Member_Name"
+        style="@style/loan_list_header"
+        android:text="@={loans.Member_Name}"
+        app:layout_constraintStart_toEndOf="@id/loan_list_Member_No"
+        />
+
+    <TextView
+        android:id="@+id/loan_list_loantype"
+        style="@style/loan_list_header"
+        android:text="@={loans.Loan_Type}"
+        app:layout_constraintStart_toEndOf="@id/loan_list_Member_Name"
+        />
+    <TextView
+        android:id="@+id/loan_list_amountapplied"
+        style="@style/loan_list_header"
+        android:text="@={``+loans.Amount_Applied}"
+        app:layout_constraintStart_toEndOf="@id/loan_list_loantype"/>
+
+
+   
+</androidx.constraintlayout.widget.ConstraintLayout></layout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/pr"
+        android:title="Performance \nReport"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/space2"
+        android:title="                 "
+        app:showAsAction="always"/>
+
+
+    <item
+        android:id="@+id/newall"
+        android:title="New allocation"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/space"
+                android:title="                 "
+        app:showAsAction="always"/>
+    <item
+    android:id="@+id/Loanbooking"
+    android:title="Loan Booking"
+    app:showAsAction="always"/>
+    <item
+    android:id="@+id/space1"
+    android:title="                 "
+    app:showAsAction="always"/>
+    <item
+    android:id="@+id/loanapplication"
+    android:title="Loan App"
+    app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        app:showAsAction="collapseActionView"/>
+</menu>

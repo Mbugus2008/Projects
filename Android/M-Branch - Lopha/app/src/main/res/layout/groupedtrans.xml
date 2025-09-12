@@ -1,0 +1,42 @@
+<!-- res/layout/activity_main.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:id="@+id/text1"
+        android:textSize="20dp"
+        android:gravity="start"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="0dp"
+        android:gravity="end"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/material_on_background_emphasis_high_type"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2">
+
+    </TextView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+</androidx.constraintlayout.widget.ConstraintLayout>

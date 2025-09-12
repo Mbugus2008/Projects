@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsActivity">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        map:layout_constraintGuide_percent="0.04" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        map:layout_constraintGuide_percent="0.8" />
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintTop_toTopOf="parent"
+        map:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+    </fragment>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_155326"
+        android:layout_marginTop="40dp"
+        android:outlineAmbientShadowColor="@color/places_text_white_alpha_26"
+        map:layout_constraintLeft_toLeftOf="@id/guideline"
+        map:layout_constraintTop_toTopOf="parent"
+        map:layout_constraintRight_toRightOf="@id/guideline2"
+        >
+        <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </fragment>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--    <EditText-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        map:layout_constraintLeft_toLeftOf="@id/guideline"-->
+    <!--        map:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:id="@+id/from"-->
+    <!--        android:drawableStart="@drawable/ic_my_location_black_24dp"-->
+    <!--        android:inputType="text"-->
+    <!--        android:hint="From?"-->
+    <!--        android:layout_marginTop="35sp"-->
+    <!--        android:paddingEnd="5dp"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:visibility="gone"-->
+    <!--        android:textColorHint="#c7c7c7"-->
+    <!--        android:textSize="15sp"-->
+    <!--        android:background="@drawable/shadow_155326"-->
+    <!--    />-->
+
+    <!--    <EditText-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        map:layout_constraintLeft_toLeftOf="@id/guideline"-->
+    <!--        map:layout_constraintTop_toBottomOf="@id/from"-->
+    <!--        android:id="@+id/to"-->
+    <!--        android:drawableStart="@drawable/ic_location_on_black_24dp"-->
+    <!--        android:inputType="text"-->
+    <!--        android:hint="To?"-->
+    <!--        android:paddingEnd="5dp"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:visibility="gone"-->
+    <!--        android:textColorHint="#c7c7c7"-->
+    <!--        android:textSize="15sp"-->
+    <!--        android:background="@drawable/shadow_155326"-->
+    <!--    />-->
+</androidx.constraintlayout.widget.ConstraintLayout>

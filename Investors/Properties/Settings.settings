@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Investors.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Investors_Members_Members2_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Members3</Value>
+    </Setting>
+    <Setting Name="Investors_Statistics_Statistics_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Statistics</Value>
+    </Setting>
+    <Setting Name="Investors_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Loans</Value>
+    </Setting>
+    <Setting Name="Investors_Vehicle_details_Vehicle_details_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Vehicle_details</Value>
+    </Setting>
+    <Setting Name="Investors_MBranch_MBranch" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Codeunit/MBranch</Value>
+    </Setting>
+    <Setting Name="Investors_ledgerenties_ledger_entries_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/ledger_entries</Value>
+    </Setting>
+    <Setting Name="Investors_Transactions_Transactions_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Transactions</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.trimline.paul.m_branch.status"
+
+    tools:showIn="@layout/activity_status">
+
+    <AutoCompleteTextView
+        android:id="@+id/searchno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:hint="Vehicle no"
+        android:inputType="number"
+        android:textSize="30dp" />
+
+    <ImageButton
+        android:id="@+id/findveh"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:src="@drawable/search" />
+
+    <ProgressBar
+        android:id="@+id/searchprogress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchno"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/statuslist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchprogress"></ListView>
+</RelativeLayout>

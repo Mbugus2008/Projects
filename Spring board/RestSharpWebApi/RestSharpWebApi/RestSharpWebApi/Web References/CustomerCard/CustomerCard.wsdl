@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/page/customercard" targetNamespace="urn:microsoft-dynamics-schemas/page/customercard" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/page/customercard" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="TypeofCustomer">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Individual" />
+          <xsd:enumeration value="Groups" />
+          <xsd:enumeration value="Business" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Gender">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="_blank_" />
+          <xsd:enumeration value="Male" />
+          <xsd:enumeration value="Female" />
+          <xsd:enumeration value="Other" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Member_Status">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="_blank_" />
+          <xsd:enumeration value="New" />
+          <xsd:enumeration value="Active" />
+          <xsd:enumeration value="Dormant" />
+          <xsd:enumeration value="Frozen" />
+          <xsd:enumeration value="Withdrawal_Application" />
+          <xsd:enumeration value="Withdrawn" />
+          <xsd:enumeration value="Deceased" />
+          <xsd:enumeration value="Defaulter" />
+          <xsd:enumeration value="Closed" />
+          <xsd:enumeration value="Resigned" />
+          <xsd:enumeration value="Retrenched" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Marital_Status">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="_blank_" />
+          <xsd:enumeration value="Single" />
+          <xsd:enumeration value="Married" />
+          <xsd:enumeration value="Divorced" />
+          <xsd:enumeration value="Widower" />
+          <xsd:enumeration value="Widow" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Identification_Doc_Type">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="National_ID" />
+          <xsd:enumeration value="Passport" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Blocked">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="_blank_" />
+          <xsd:enumeration value="Ship" />
+          <xsd:enumeration value="Invoice" />
+          <xsd:enumeration value="All" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Rented_Owned">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Rented" />
+          <xsd:enumeration value="Owned" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Terms_of_Employment">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="_blank_" />
+          <xsd:enumeration value="Permanent" />
+          <xsd:enumeration value="Contract" />
+          <xsd:enumeration value="Casual" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="CustomerCard">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Registration_Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="TypeofCustomer" type="tns:TypeofCustomer" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Gender" type="tns:Gender" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Member_Status" type="tns:Member_Status" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Date_of_Birth" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Marital_Status" type="tns:Marital_Status" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Identification_Doc_Type" type="tns:Identification_Doc_Type" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Identification_Doc_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Passport_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="P_I_N_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Blocked" type="tns:Blocked" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Spouse_ID_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Name_of_Spouse" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Name_of_Landlord" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Estate" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Town" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Rented_Owned" type="tns:Rented_Owned" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Company_Registration_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="House_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Home_County" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Nearest_Land_Mark" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Customer_Sector" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Specific_Business_Narration" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Customer_Posting_Group" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Responsibility_Center" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Global_Dimension_1_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Global_Dimension_2_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Profile_Picture" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Current_Address" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Plot_Bldg_Street_Road" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Post_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="City" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Nationality" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Phone_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="E_Mail" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Mobile_Phone_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Spouse_Mobile_Phone_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="County" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Is_Email_Verified" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Is_phone_Verified" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Is_IDNO_Passport_Verified" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="SecurityQuestion1" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Answer1" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="SecurityQuestion2" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Answer2" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Enable_Email" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="LastLoginTime" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Enable_SMS" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Employer_Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Employer_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Terms_of_Employment" type="tns:Terms_of_Employment" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Payroll_Staff_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Occupation" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Basic_Pay" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Designation" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Station_Department" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Bank_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Branch_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Bank_Account_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Bank_Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Branch_Name" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CustomerCard_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="CustomerCard" type="tns:CustomerCard" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="CustomerCard_Fields">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="No" />
+          <xsd:enumeration value="Registration_Date" />
+          <xsd:enumeration value="TypeofCustomer" />
+          <xsd:enumeration value="Name" />
+          <xsd:enumeration value="Gender" />
+          <xsd:enumeration value="Member_Status" />
+          <xsd:enumeration value="Date_of_Birth" />
+          <xsd:enumeration value="Marital_Status" />
+          <xsd:enumeration value="Identification_Doc_Type" />
+          <xsd:enumeration value="Identification_Doc_No" />
+          <xsd:enumeration value="Passport_No" />
+          <xsd:enumeration value="P_I_N_Code" />
+          <xsd:enumeration value="Blocked" />
+          <xsd:enumeration value="Spouse_ID_No" />
+          <xsd:enumeration value="Name_of_Spouse" />
+          <xsd:enumeration value="Name_of_Landlord" />
+          <xsd:enumeration value="Estate" />
+          <xsd:enumeration value="Town" />
+          <xsd:enumeration value="Rented_Owned" />
+          <xsd:enumeration value="Company_Registration_No" />
+          <xsd:enumeration value="House_No" />
+          <xsd:enumeration value="Home_County" />
+          <xsd:enumeration value="Nearest_Land_Mark" />
+          <xsd:enumeration value="Customer_Sector" />
+          <xsd:enumeration value="Specific_Business_Narration" />
+          <xsd:enumeration value="Customer_Posting_Group" />
+          <xsd:enumeration value="Responsibility_Center" />
+          <xsd:enumeration value="Global_Dimension_1_Code" />
+          <xsd:enumeration value="Global_Dimension_2_Code" />
+          <xsd:enumeration value="Profile_Picture" />
+          <xsd:enumeration value="Current_Address" />
+          <xsd:enumeration value="Plot_Bldg_Street_Road" />
+          <xsd:enumeration value="Post_Code" />
+          <xsd:enumeration value="City" />
+          <xsd:enumeration value="Nationality" />
+          <xsd:enumeration value="Phone_No" />
+          <xsd:enumeration value="E_Mail" />
+          <xsd:enumeration value="Mobile_Phone_No" />
+          <xsd:enumeration value="Spouse_Mobile_Phone_No" />
+          <xsd:enumeration value="County" />
+          <xsd:enumeration value="Is_Email_Verified" />
+          <xsd:enumeration value="Is_phone_Verified" />
+          <xsd:enumeration value="Is_IDNO_Passport_Verified" />
+          <xsd:enumeration value="SecurityQuestion1" />
+          <xsd:enumeration value="Answer1" />
+          <xsd:enumeration value="SecurityQuestion2" />
+          <xsd:enumeration value="Answer2" />
+          <xsd:enumeration value="Enable_Email" />
+          <xsd:enumeration value="LastLoginTime" />
+          <xsd:enumeration value="Enable_SMS" />
+          <xsd:enumeration value="Employer_Name" />
+          <xsd:enumeration value="Employer_Code" />
+          <xsd:enumeration value="Terms_of_Employment" />
+          <xsd:enumeration value="Payroll_Staff_No" />
+          <xsd:enumeration value="Occupation" />
+          <xsd:enumeration value="Basic_Pay" />
+          <xsd:enumeration value="Designation" />
+          <xsd:enumeration value="Station_Department" />
+          <xsd:enumeration value="Bank_Code" />
+          <xsd:enumeration value="Branch_Code" />
+          <xsd:enumeration value="Bank_Account_No" />
+          <xsd:enumeration value="Bank_Name" />
+          <xsd:enumeration value="Branch_Name" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="CustomerCard_Filter">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Field" type="tns:CustomerCard_Fields" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Criteria" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Read">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="No" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Read_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="CustomerCard" type="tns:CustomerCard" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="recId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="CustomerCard" type="tns:CustomerCard" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="filter" type="tns:CustomerCard_Filter" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="bookmarkKey" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="setSize" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="ReadMultiple_Result" type="tns:CustomerCard_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="IsUpdated_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="GetRecIdFromKey_Result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Update">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="CustomerCard" type="tns:CustomerCard" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Update_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="CustomerCard" type="tns:CustomerCard" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="CustomerCard_List" type="tns:CustomerCard_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="CustomerCard_List" type="tns:CustomerCard_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="Read">
+    <part name="parameters" element="tns:Read" />
+  </message>
+  <message name="Read_Result">
+    <part name="parameters" element="tns:Read_Result" />
+  </message>
+  <message name="ReadByRecId">
+    <part name="parameters" element="tns:ReadByRecId" />
+  </message>
+  <message name="ReadByRecId_Result">
+    <part name="parameters" element="tns:ReadByRecId_Result" />
+  </message>
+  <message name="ReadMultiple">
+    <part name="parameters" element="tns:ReadMultiple" />
+  </message>
+  <message name="ReadMultiple_Result">
+    <part name="parameters" element="tns:ReadMultiple_Result" />
+  </message>
+  <message name="IsUpdated">
+    <part name="parameters" element="tns:IsUpdated" />
+  </message>
+  <message name="IsUpdated_Result">
+    <part name="parameters" element="tns:IsUpdated_Result" />
+  </message>
+  <message name="GetRecIdFromKey">
+    <part name="parameters" element="tns:GetRecIdFromKey" />
+  </message>
+  <message name="GetRecIdFromKey_Result">
+    <part name="parameters" element="tns:GetRecIdFromKey_Result" />
+  </message>
+  <message name="Update">
+    <part name="parameters" element="tns:Update" />
+  </message>
+  <message name="Update_Result">
+    <part name="parameters" element="tns:Update_Result" />
+  </message>
+  <message name="UpdateMultiple">
+    <part name="parameters" element="tns:UpdateMultiple" />
+  </message>
+  <message name="UpdateMultiple_Result">
+    <part name="parameters" element="tns:UpdateMultiple_Result" />
+  </message>
+  <portType name="CustomerCard_Port">
+    <operation name="Read">
+      <input name="Read" message="tns:Read" />
+      <output name="Read_Result" message="tns:Read_Result" />
+    </operation>
+    <operation name="ReadByRecId">
+      <input name="ReadByRecId" message="tns:ReadByRecId" />
+      <output name="ReadByRecId_Result" message="tns:ReadByRecId_Result" />
+    </operation>
+    <operation name="ReadMultiple">
+      <input name="ReadMultiple" message="tns:ReadMultiple" />
+      <output name="ReadMultiple_Result" message="tns:ReadMultiple_Result" />
+    </operation>
+    <operation name="IsUpdated">
+      <input name="IsUpdated" message="tns:IsUpdated" />
+      <output name="IsUpdated_Result" message="tns:IsUpdated_Result" />
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <input name="GetRecIdFromKey" message="tns:GetRecIdFromKey" />
+      <output name="GetRecIdFromKey_Result" message="tns:GetRecIdFromKey_Result" />
+    </operation>
+    <operation name="Update">
+      <input name="Update" message="tns:Update" />
+      <output name="Update_Result" message="tns:Update_Result" />
+    </operation>
+    <operation name="UpdateMultiple">
+      <input name="UpdateMultiple" message="tns:UpdateMultiple" />
+      <output name="UpdateMultiple_Result" message="tns:UpdateMultiple_Result" />
+    </operation>
+  </portType>
+  <binding name="CustomerCard_Binding" type="tns:CustomerCard_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="Read">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/customercard:Read" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Read">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Read_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadByRecId">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/customercard:ReadByRecId" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadByRecId">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadByRecId_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/customercard:ReadMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IsUpdated">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/customercard:IsUpdated" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsUpdated">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsUpdated_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/customercard:GetRecIdFromKey" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetRecIdFromKey">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetRecIdFromKey_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Update">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/customercard:Update" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Update">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Update_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/customercard:UpdateMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="CustomerCard_Service">
+    <port name="CustomerCard_Port" binding="tns:CustomerCard_Binding">
+      <address location="http://192.168.137.116:7047/BC200/WS/TEST/Page/CustomerCard" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

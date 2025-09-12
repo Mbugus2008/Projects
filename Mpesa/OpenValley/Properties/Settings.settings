@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Mpesa_Api.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Mpesa_Api_Mpesa_Mpesa_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Page/Mpesa</Value>
+    </Setting>
+    <Setting Name="Mpesa_Api_Functions_Intergrations" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Codeunit/Alternate</Value>
+    </Setting>
+    <Setting Name="Mpesa_Api_Loans_Loans_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://167.86.120.230:8013/Services/WS/OPVL/Page/Loans</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

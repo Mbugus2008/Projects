@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class="Funditems">
+        <variable
+            name="funds"
+            type="com.trimline.investments.RealEstate" />
+        <import type="com.trimline.investments.Converters"></import>
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/layoutborder"
+    >
+    <TextView
+        android:id="@+id/documetno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/trocchi"
+        android:gravity="left"
+        android:hint="Type"
+        android:text="@={funds.FD_Type}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        android:id="@+id/Accounttype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/trocchi"
+        android:hint="Amount"
+        android:gravity="center"
+        android:text="@={``+funds.Fixed_Amount}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/sharetofloat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/documetno" />
+
+    <TextView
+        android:id="@+id/sharetofloat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:hint="M-Action"
+        android:text="@={funds.MaturityAction}"
+        app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintRight_toLeftOf="@id/maturitydate"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="10dp"
+        tools:layout_editor_absoluteX="235dp" />
+
+    <TextView
+        android:id="@+id/maturitydate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:hint="Date"
+
+        android:text="@={funds.Maturity_Date}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

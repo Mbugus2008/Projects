@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <client>
+  
+      <Server>localhost</Server>
+      <Instance>SQL25014</Instance>
+      <Database>db2021</Database>
+      <Username>Mbranch</Username>
+      <pass>Mbanking12345*</pass>
+      <IntegratedSecurity>true</IntegratedSecurity>
+   
+  </client>
+  <etims>
+      <Server>localhost</Server>
+      <Instance>SQL2014</Instance>
+      <Database>Etims</Database>
+      <Username>Etims</Username>
+      <pass>Etims123</pass>
+      <IntegratedSecurity>false</IntegratedSecurity>
+    </etims>
+</Settings>
+
+

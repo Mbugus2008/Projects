@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"  >
+    <data class="Trans">
+        <variable
+            name="d"
+            type="com.trimline.investments.Transactions" />
+        <import type="com.trimline.investments.Converters"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_standard"
+        android:layout_marginTop="30dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_standard"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:contentPadding="@dimen/padding_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transfer/Deposit"
+                android:textSize="30dp"
+                android:textStyle="bold"
+app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fromcard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_standard"
+        app:cardBackgroundColor="@color/light_blue"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:contentPadding="@dimen/padding_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gfrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gfrom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From"
+            app:layout_constraintBottom_toBottomOf="@id/fromtxt"
+            app:layout_constraintEnd_toStartOf="@id/gfrom"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Spinner
+            android:id="@+id/fromtxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="From"
+            android:selectedItemPosition="@={Converters.Accounttoposition(d.AccountNo) }"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gfrom"
+
+             />
+        <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toStartOf="@id/gfrom2"
+        app:layout_constraintTop_toBottomOf="@id/fromtxt"/>
+
+        <TextView
+            android:id="@+id/bal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toStartOf="@id/gfrom2"
+            app:layout_constraintTop_toBottomOf="@id/name"/>
+        <TextView
+            android:id="@+id/nametxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Account No"
+            android:text="@={d.Account_No}"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintStart_toEndOf="@id/gfrom2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fromtxt"/>
+
+        <TextView
+            android:id="@+id/baltxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Bal"
+            android:text="@{@string/curr(d.Account_Bal)}"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintStart_toEndOf="@id/gfrom2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tocard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_standard"
+        app:cardBackgroundColor="@color/light_blue"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:contentPadding="@dimen/padding_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fromcard">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gto2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            app:layout_constraintBottom_toBottomOf="@id/totxt"
+            app:layout_constraintEnd_toStartOf="@id/gto"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <Spinner
+        android:id="@+id/totxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Send to"
+            android:selectedItemPosition="@={Converters.Depositoposition(d.Account2) }"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gto"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/toname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account"
+
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toStartOf="@id/gto2"
+            app:layout_constraintTop_toBottomOf="@id/totxt"/>
+
+        <TextView
+            android:id="@+id/tobal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toStartOf="@id/gto2"
+            app:layout_constraintTop_toBottomOf="@id/toname"/>
+        <TextView
+            android:id="@+id/tonametxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Account No"
+            android:text="@={d.Account_2}"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintStart_toEndOf="@id/gto2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totxt"/>
+
+        <TextView
+            android:id="@+id/tobaltxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Bal"
+            android:text="@{@string/curr(d.Account_2_Bal)}"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintStart_toEndOf="@id/gto2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toname"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/amountcard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard"
+            app:cardBackgroundColor="@color/light_blue"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:contentPadding="@dimen/padding_standard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tocard">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gamount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Amount"
+            app:layout_constraintBottom_toBottomOf="@id/amounttxt"
+            app:layout_constraintEnd_toStartOf="@id/gamount"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/amounttxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:selectAllOnFocus="true"
+            android:hint="Amount"
+            android:inputType="numberDecimal"
+            android:text="@={``+d.Amount}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gamount"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Transfer"
+            android:id="@+id/Ok"
+            app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="50dp"
+
+            app:layout_constraintTop_toBottomOf="@id/amountcard" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:text="Cancel"
+            android:id="@+id/Cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/amountcard" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

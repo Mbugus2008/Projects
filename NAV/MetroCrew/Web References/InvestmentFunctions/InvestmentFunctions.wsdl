@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/InvestmentFunctions" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/InvestmentFunctions" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/InvestmentFunctions" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="PostBooking">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="transactionNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostBooking_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="PostFloating">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="transactionNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostFloating_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="TakeDownShares">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="transactionNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="TakeDownShares_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="PostBooking">
+    <part name="parameters" element="tns:PostBooking" />
+  </message>
+  <message name="PostBooking_Result">
+    <part name="parameters" element="tns:PostBooking_Result" />
+  </message>
+  <message name="PostFloating">
+    <part name="parameters" element="tns:PostFloating" />
+  </message>
+  <message name="PostFloating_Result">
+    <part name="parameters" element="tns:PostFloating_Result" />
+  </message>
+  <message name="TakeDownShares">
+    <part name="parameters" element="tns:TakeDownShares" />
+  </message>
+  <message name="TakeDownShares_Result">
+    <part name="parameters" element="tns:TakeDownShares_Result" />
+  </message>
+  <portType name="InvestmentFunctions_Port">
+    <operation name="PostBooking">
+      <input name="PostBooking" message="tns:PostBooking" />
+      <output name="PostBooking_Result" message="tns:PostBooking_Result" />
+    </operation>
+    <operation name="PostFloating">
+      <input name="PostFloating" message="tns:PostFloating" />
+      <output name="PostFloating_Result" message="tns:PostFloating_Result" />
+    </operation>
+    <operation name="TakeDownShares">
+      <input name="TakeDownShares" message="tns:TakeDownShares" />
+      <output name="TakeDownShares_Result" message="tns:TakeDownShares_Result" />
+    </operation>
+  </portType>
+  <binding name="InvestmentFunctions_Binding" type="tns:InvestmentFunctions_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="PostBooking">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/InvestmentFunctions:PostBooking" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostBooking">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostBooking_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostFloating">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/InvestmentFunctions:PostFloating" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostFloating">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostFloating_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="TakeDownShares">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/InvestmentFunctions:TakeDownShares" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="TakeDownShares">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="TakeDownShares_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="InvestmentFunctions">
+    <port name="InvestmentFunctions_Port" binding="tns:InvestmentFunctions_Binding">
+      <address location="http://5.189.167.52:1176/INVESTMENT/WS/KPS-TEST/Codeunit/InvestmentFunctions" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/MBranch" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MBranch" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MBranch" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="PopulateDepot">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="dates" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PopulateDepot_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Post">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Post_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="PopulateDepot">
+    <part name="parameters" element="tns:PopulateDepot" />
+  </message>
+  <message name="PopulateDepot_Result">
+    <part name="parameters" element="tns:PopulateDepot_Result" />
+  </message>
+  <message name="Post">
+    <part name="parameters" element="tns:Post" />
+  </message>
+  <message name="Post_Result">
+    <part name="parameters" element="tns:Post_Result" />
+  </message>
+  <portType name="MBranch_Port">
+    <operation name="PopulateDepot">
+      <input name="PopulateDepot" message="tns:PopulateDepot" />
+      <output name="PopulateDepot_Result" message="tns:PopulateDepot_Result" />
+    </operation>
+    <operation name="Post">
+      <input name="Post" message="tns:Post" />
+      <output name="Post_Result" message="tns:Post_Result" />
+    </operation>
+  </portType>
+  <binding name="MBranch_Binding" type="tns:MBranch_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="PopulateDepot">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MBranch:PopulateDepot" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PopulateDepot">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PopulateDepot_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Post">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MBranch:Post" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Post">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Post_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="MBranch">
+    <port name="MBranch_Port" binding="tns:MBranch_Binding">
+      <address location="http://5.189.167.52:9992/City/WS/Mbranch/Codeunit/MBranch" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

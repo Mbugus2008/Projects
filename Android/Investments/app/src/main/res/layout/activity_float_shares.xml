@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".float_shares"  tools:ignore="MissingConstraints">
+    <data class="Floatshares">
+        <variable
+            name="shares"
+            type="com.trimline.investments.Shares" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="50dp">
+        <TextView
+            android:id="@+id/Sharetype"
+            style="@style/floattextviews"
+            android:text="Share Type"
+            app:layout_constraintTop_toTopOf="parent"
+           />
+        <TextView
+            android:id="@+id/Floattype"
+            style="@style/floattextviews"
+            android:text="Float Type"
+            app:layout_constraintTop_toBottomOf="@id/Sharetype"
+        />
+         <TextView
+            android:id="@+id/textView2"
+            style="@style/floattextviews"
+            android:text="Account Balance"
+            app:layout_constraintTop_toBottomOf="@id/Floattype"
+            />
+
+        <TextView
+            android:id="@+id/noofshares"
+            style="@style/floattextviews"
+            android:text="Total Shares"
+            app:layout_constraintTop_toBottomOf="@id/textView2" />
+
+         <TextView
+            android:id="@+id/reserveshares"
+             style="@style/floattextviews"
+            android:text="Reserve Price"
+            app:layout_constraintTop_toBottomOf="@id/noofshares" />
+        <TextView
+            android:id="@+id/sharestofloattext"
+            style="@style/floattextviews"
+            android:text="Shares to float"
+            app:layout_constraintTop_toBottomOf="@id/reserveshares"
+            />
+        <TextView
+            android:id="@+id/minimuntofloattext"
+            style="@style/floattextviews"
+            android:text="Asking share price"
+            app:layout_constraintTop_toBottomOf="@id/sharestofloat" />
+        <AutoCompleteTextView
+            android:id="@+id/share_sharetype"
+            style="@style/floatspinner"
+            android:gravity="center"
+            android:text="@={shares.Share_Type}"
+            android:hint="Select share type"
+            android:background="@drawable/backgroundposted"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <AutoCompleteTextView
+            android:id="@+id/shares_floattype"
+            style="@style/floatspinner"
+            android:gravity="center"
+            android:hint="Select Float type"
+            android:background="@drawable/backgroundposted"
+            android:text="@={shares.FloatType}"
+            app:layout_constraintTop_toBottomOf="@id/share_sharetype" />
+
+        <TextView
+            android:id="@+id/accountbal"
+            style="@style/floattextedits"
+            android:hint="Account Balance"
+            android:text="@{``+shares.Account_Balance}"
+            android:gravity="right|center_vertical"
+            app:layout_constraintTop_toBottomOf="@id/shares_floattype" />
+        <TextView
+            android:id="@+id/noofsharesvalue"
+            style="@style/floattextedits"
+            android:hint="Total Shares"
+            android:gravity="right|center_vertical"
+            android:text="@={``+shares.Total_Shares}"
+            app:layout_constraintTop_toBottomOf="@+id/accountbal" />
+        <TextView
+            android:id="@+id/reservesharesvalue"
+            style="@style/floattextedits"
+            android:hint="Reserve Price"
+            android:gravity="right|center_vertical"
+            android:text="@={``+shares.Reserve_Price}"
+            app:layout_constraintTop_toBottomOf="@+id/noofsharesvalue" />
+        <EditText
+            android:id="@+id/sharestofloat"
+            style="@style/floattextedits"
+            android:hint="Shares to float"
+            android:inputType="number"
+            android:gravity="right|center_vertical"
+            android:text="@={``+shares.shares_to_Float}"
+            app:layout_constraintTop_toBottomOf="@id/reservesharesvalue" />
+        <EditText
+            android:id="@+id/minimuntofloat"
+            style="@style/floattextedits"
+            android:hint="Minmum per share"
+            android:inputType="number"
+            android:gravity="right|center_vertical"
+            android:text="@={``+shares.minimum_Acceptable_Price}"
+            app:layout_constraintTop_toBottomOf="@id/sharestofloat" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/minimuntofloat">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/floatshare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Float" />
+
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout></layout>

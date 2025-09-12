@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints"
+    android:background="@drawable/backgroundposted"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_no"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="No"/>
+
+
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_date"
+        app:layout_constraintStart_toEndOf="@id/all_no"
+        android:text="Date"/>
+
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_pawdepno"
+        app:layout_constraintStart_toEndOf="@id/all_date"
+        android:text="Pawdep No"/>
+
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_name"
+        app:layout_constraintStart_toEndOf="@id/all_pawdepno"
+        android:text="Name"/>
+
+    <TextView
+        style="@style/all_header"
+        android:id="@+id/all_amount"
+        app:layout_constraintStart_toEndOf="@id/all_name"
+        android:text="Amount"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

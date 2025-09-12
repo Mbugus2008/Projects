@@ -1,0 +1,291 @@
+﻿@page "/Newloan"
+@using Logging
+@using Sacco.Shared
+@inject Sacco.Shared.StateContainerService stateService
+
+@inject HttpClient Http
+
+<PageTitle>My Loans</PageTitle>
+
+<h1  style="align-content:center">My Loans</h1>
+
+
+<h5>New Loan</h5>
+
+
+
+@if (loanslist == null)
+{
+    <p><em>Loading Loans...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr style="background-color:darkgray">
+                <th></th>
+              
+                <th>Date</th>
+                <th>Loan No</th>
+                <th>Loan Name</th>
+                <th align="center">Installment(Months)</th>
+                <th align="right">Amount Applied</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loan in loanslist)
+            {
+                <tr>
+                    <td>
+                        <button @onclick="@(() => EditLoan(loan))"
+                        class="btn btn-sm btn-primary">
+                            Edit
+                        </button>
+                        <button @onclick="@(() => DeleteLoan(loan))"
+                                class="btn btn-sm btn-primary">
+                            Delete
+                        </button>
+                    </td>
+                    <td>@loan.Application_Date.ToString("dd-MMM-yyy")</td>
+                    <td>@loan.Loan_No</td>
+                    <td>@loan.Loan_Product_Type_Name</td>
+                    <td align="center">@loan.Installments</td>
+                    <td align="right">@loan.Approved_Amount.ToString("#,##0.00")</td>
+
+
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row">Totals</th>
+                <td colspan="4"></td>
+                <td style="font-weight:bold" align="right">@loanslist.Sum(o => o.Approved_Amount).ToString("#,##0.00") </td>
+            </tr>
+        </tfoot>
+    </table>
+
+}
+<button @onclick="ShowDialog" class="btn btn-primary">
+    New Loan
+</button>
+
+@if (showDialog)
+{
+    <div class="modal" style="display:block; background:rgba(0,0,0,0.5)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Edit Loan</h5>
+                    <button @onclick="CloseDialog" class="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your existing edit form here -->
+                    <EditForm Model="@currentLoan" OnValidSubmit="HandleClick">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary class="alert alert-danger" /> <!-- Shows all errors in one place -->
+                        @if (!string.IsNullOrEmpty(error))
+                        {
+                            <label class="alert alert-danger">@error</label>
+                        }
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label class="form-label d-inline me-2">Client Code:</label>
+                                <span class="form-control-plaintext fw-bold d-inline">@currentLoan.Client_Code</span>
+                            </div>
+
+                            <label for="Type:">Loan Type</label>
+                            <InputSelect @bind-Value="SelectedProductId" class="form-control">
+                                <option value="">Select Loan Type</option>
+                                @foreach (var option in products)
+                                {
+                                    <option onselect="" value="@option.Code">@option.Product_Description</option>
+                                }
+                            </InputSelect>
+                            <label for="Type:">@selectproducts.Code</label>
+
+                        </div>
+
+
+                        <label for="Amount:">Amount</label>
+                        <InputNumber @bind-Value="currentLoan.Approved_Amount" min="@minimumLoan"
+                        max="@maxmumLoan" class="form-control" />
+                        <label for="Amount:">Period</label>
+                        <InputNumber @bind-Value="currentLoan.Installments" 
+                        min="@minimuminst"                                     
+                        max="@maxmuminst" 
+                        class="form-control" />
+                        <!-- Your other form fields -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" @onclick="CloseDialog" class="btn btn-secondary">Cancel</button>
+                        </div>
+
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@code {
+    private bool showDialog = false;
+
+    private Loansdata.Loans[]? loanslist;
+    private Loansdata.Loans currentLoan = new();
+    private double maxmumLoan = 1000000;
+    private double minimumLoan = 100;
+    private int maxmuminst = 1;
+    private int minimuminst = 1;
+    private LoanProducts.Loan_Products[]? products;
+    private LoanProducts.Loan_Products selectproducts = new();
+    private string error = string.Empty;
+    private EditContext editContext;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            editContext = new EditContext(currentLoan);
+            Console.WriteLine("Loan selection1");
+            Console.WriteLine(stateService.member);
+            products = await Http.GetFromJsonAsync<LoanProducts.Loan_Products[]>($"api/loans/loanproducts");
+            if (products.Length == 1)
+            {
+                selectproducts = products[0];
+                SelectedProductId = selectproducts.Code;
+            }
+
+            loanslist = await Http.GetFromJsonAsync<Loansdata.Loans[]>($"api/loans/Getloanapps/{stateService.member}");
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message);
+        }
+
+    }
+    private void EditLoan(Loansdata.Loans loan)
+    {
+        currentLoan = loan;
+        SelectedProductId = loan.Loan_Product_Type;
+        showDialog = true;
+    }
+ private async Task DeleteLoan(Loansdata.Loans loan)
+    {
+        var response = await Http.PostAsJsonAsync("api/loans/Delete", loan);
+        loanslist = await Http.GetFromJsonAsync<Loansdata.Loans[]>($"api/loans/Getloanapps/{stateService.member}");
+    }
+    private  async Task HandleClick()
+    {
+
+        try
+        {
+            error = string.Empty;
+
+            if (string.IsNullOrEmpty(currentLoan.Loan_Product_Type )) throw new Exception("Kindly Select the loan type");
+            if ( string.IsNullOrEmpty(currentLoan.Client_Code)) throw new Exception("Client Code Missing");
+
+            currentLoan.Requested_Amount = currentLoan.Approved_Amount;
+            currentLoan.Requested_AmountSpecified = true;
+            currentLoan.Application_DateSpecified = true;
+            currentLoan.Approved_AmountSpecified = true;
+            currentLoan.InstallmentsSpecified = true;
+
+            //currentLoan.Completion_Date = currentLoan.Application_Date.AddMonths(currentLoan.Installments);
+
+            var response = await Http.PostAsJsonAsync("api/loans/Save", currentLoan);
+            if (response.IsSuccessStatusCode)
+            {
+                Results<Loansdata.Loans>  result = await response.Content.ReadFromJsonAsync<Results<Loansdata.Loans>>();
+
+                if (result?.Code == 0)
+                {
+                    currentLoan = result.Contents; // Update with saved data
+                    // Optionally redirect after delay
+                    showDialog = false;
+                    loanslist = await Http.GetFromJsonAsync<Loansdata.Loans[]>($"api/loans/Getloanapps/{stateService.member}");
+                    currentLoan = new();
+                    SelectedProductId = string.Empty; // Reset selected product
+                }
+                else
+                {
+                    throw new Exception(result.Desc);
+
+                }
+            }
+            else
+            {
+                throw new Exception("Error saving loan application");
+            }
+            showDialog = false;
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+            Console.WriteLine(ex.Message);
+        }
+      
+    }
+    private void ShowDialog()
+    {
+
+        currentLoan = new Loansdata.Loans() {
+            Installments = 1,
+            Client_Code = stateService.member,
+                Application_Date = DateTime.Today,
+                Application_DateSpecified = true,
+
+
+
+
+        }; // Reset form
+        showDialog = true;
+    }
+    private void HandleProductSelection(string selectedCode)
+    {
+        Console.WriteLine("Loan selection");
+
+        selectproducts = products.FirstOrDefault(p => p.Code == selectedCode);
+
+        currentLoan.Loan_Product_Type = selectproducts.Code;
+        currentLoan.Loan_Product_Type_Name = selectproducts.Product_Description;
+        currentLoan.Installments = selectproducts.Default_Installements;
+        maxmumLoan = (double) selectproducts.Max_Loan_Amount;
+        minimumLoan =(double) selectproducts.Min_Loan_Amount;
+        Console.WriteLine($"Selected product: {selectproducts?.Product_Description}");
+
+    }
+    private void CloseDialog() => showDialog = false;
+
+    private string _selectedProductId;
+    public string SelectedProductId
+    {
+        get => _selectedProductId;
+        set
+        {
+            _selectedProductId = value;
+            // Selection handling logic fires automatically
+            selectproducts = products.FirstOrDefault(p => p.Code == value);
+            if (selectproducts != null)
+            {
+                currentLoan.Loan_Product_Type = selectproducts.Code;
+                currentLoan.Installments = selectproducts.Default_Installements;
+                if (selectproducts.Max_Loan_Amount > 0)
+                    maxmumLoan = (double)selectproducts.Max_Loan_Amount;
+                minimumLoan = (double)selectproducts.Min_Loan_Amount;
+                maxmuminst = (int)selectproducts.Default_Installements;
+                minimuminst = 1;
+            }
+            Console.WriteLine("Minmum " + minimumLoan);
+            Console.WriteLine("Maxmum " + maxmumLoan);
+
+            Console.WriteLine($"Selected: {selectproducts?.Product_Description}");
+        }
+    }
+}

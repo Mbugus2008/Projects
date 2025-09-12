@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/page/members" targetNamespace="urn:microsoft-dynamics-schemas/page/members" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/page/members" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="Destination_Type">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="None" />
+          <xsd:enumeration value="Loan_Repayment" />
+          <xsd:enumeration value="Shares_Capital" />
+          <xsd:enumeration value="Deposit_Contribution" />
+          <xsd:enumeration value="Toto_Savings" />
+          <xsd:enumeration value="Chrismas_savings" />
+          <xsd:enumeration value="Plaza_shares" />
+          <xsd:enumeration value="Plaza_Contribution" />
+          <xsd:enumeration value="Sms_Savings" />
+          <xsd:enumeration value="RRF" />
+          <xsd:enumeration value="Savings_Drive" />
+          <xsd:enumeration value="BBF" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Loan_Keywords">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Keyword" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Destination_Type" type="tns:Destination_Type" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Loan_Keywords_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="Loan_Keywords" type="tns:Loan_Keywords" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Loan_Status">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Application" />
+          <xsd:enumeration value="Appraisal" />
+          <xsd:enumeration value="Rejected" />
+          <xsd:enumeration value="Approved" />
+          <xsd:enumeration value="Issued" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Loans_Mobile">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Application_Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_Product_Type" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Client_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Client_Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Appraised" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Outstanding_Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Oustanding_Interest" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Last_notification" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Last_Penalty_Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Last_Interest_Due_Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Requested_Amount" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Approved_Amount" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Daily_interest" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Daily_interest_Generted" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Last_Interest_Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_Disbursement_Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Date_disbursed" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Penalty_Due" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Penalty_charge" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Daily_Penalty" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Outstanding_Penalty" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Branch_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Installments" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Daily_interest_count" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Flat_rate_Interest" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Total_Loans_Default" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Mobile" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Last_run_date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Total_Schedule_Repayment" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Max_Installments" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Product_Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Remarks" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Expected_Date_of_Completion" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Captured_By" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_Status" type="tns:Loan_Status" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Posted" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Total_Balance" type="xsd:decimal" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Loans_Mobile_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="Loans_Mobile" type="tns:Loans_Mobile" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Members">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Old_Group_Account_Number" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Global_Dimension_2_Code" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ID_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Payroll_Staff_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="FOSA_Account" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Section" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Registration_Date" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Region" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Group_Name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Net_Change" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Eloan_Limit" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="MPESA_Mobile_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Toto_savings" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Current_Shares" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Chrismas_Contribution" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Plaza_Savings" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Total_Outstanding_loan_Balance" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Shares_Capital" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Mobile_Money" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Sending_Mpesa" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Comment1" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Wallet" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Retirement_Contribution" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Deposit_Drive" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Phone_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Benevolent_Fund" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loan_Keywords" type="tns:Loan_Keywords_List" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Loans" type="tns:Loans_Mobile_List" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Members_List">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="Members" type="tns:Members" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Members_Fields">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="No" />
+          <xsd:enumeration value="Old_Group_Account_Number" />
+          <xsd:enumeration value="Name" />
+          <xsd:enumeration value="Global_Dimension_2_Code" />
+          <xsd:enumeration value="ID_No" />
+          <xsd:enumeration value="Payroll_Staff_No" />
+          <xsd:enumeration value="FOSA_Account" />
+          <xsd:enumeration value="Section" />
+          <xsd:enumeration value="Registration_Date" />
+          <xsd:enumeration value="Region" />
+          <xsd:enumeration value="Group_Name" />
+          <xsd:enumeration value="Net_Change" />
+          <xsd:enumeration value="Eloan_Limit" />
+          <xsd:enumeration value="MPESA_Mobile_No" />
+          <xsd:enumeration value="Toto_savings" />
+          <xsd:enumeration value="Current_Shares" />
+          <xsd:enumeration value="Chrismas_Contribution" />
+          <xsd:enumeration value="Plaza_Savings" />
+          <xsd:enumeration value="Total_Outstanding_loan_Balance" />
+          <xsd:enumeration value="Shares_Capital" />
+          <xsd:enumeration value="Mobile_Money" />
+          <xsd:enumeration value="Sending_Mpesa" />
+          <xsd:enumeration value="Comment1" />
+          <xsd:enumeration value="Wallet" />
+          <xsd:enumeration value="Retirement_Contribution" />
+          <xsd:enumeration value="Deposit_Drive" />
+          <xsd:enumeration value="Phone_No" />
+          <xsd:enumeration value="Benevolent_Fund" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Members_Filter">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="Field" type="tns:Members_Fields" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Criteria" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Read">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="No" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Read_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="Members" type="tns:Members" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="recId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadByRecId_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="Members" type="tns:Members" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="filter" type="tns:Members_Filter" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="bookmarkKey" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="setSize" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ReadMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="ReadMultiple_Result" type="tns:Members_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="IsUpdated_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="IsUpdated_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetRecIdFromKey_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="GetRecIdFromKey_Result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Create">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Members" type="tns:Members" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Create_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Members" type="tns:Members" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Members_List" type="tns:Members_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Members_List" type="tns:Members_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Update">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Members" type="tns:Members" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Update_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Members" type="tns:Members" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMultiple">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Members_List" type="tns:Members_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMultiple_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Members_List" type="tns:Members_List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Delete_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete_Loan_Keywords">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Loan_Keywords_Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete_Loan_Keywords_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Delete_Loan_Keywords_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete_Loans">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Loans_Key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Delete_Loans_Result">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Delete_Loans_Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="Read">
+    <part name="parameters" element="tns:Read" />
+  </message>
+  <message name="Read_Result">
+    <part name="parameters" element="tns:Read_Result" />
+  </message>
+  <message name="ReadByRecId">
+    <part name="parameters" element="tns:ReadByRecId" />
+  </message>
+  <message name="ReadByRecId_Result">
+    <part name="parameters" element="tns:ReadByRecId_Result" />
+  </message>
+  <message name="ReadMultiple">
+    <part name="parameters" element="tns:ReadMultiple" />
+  </message>
+  <message name="ReadMultiple_Result">
+    <part name="parameters" element="tns:ReadMultiple_Result" />
+  </message>
+  <message name="IsUpdated">
+    <part name="parameters" element="tns:IsUpdated" />
+  </message>
+  <message name="IsUpdated_Result">
+    <part name="parameters" element="tns:IsUpdated_Result" />
+  </message>
+  <message name="GetRecIdFromKey">
+    <part name="parameters" element="tns:GetRecIdFromKey" />
+  </message>
+  <message name="GetRecIdFromKey_Result">
+    <part name="parameters" element="tns:GetRecIdFromKey_Result" />
+  </message>
+  <message name="Create">
+    <part name="parameters" element="tns:Create" />
+  </message>
+  <message name="Create_Result">
+    <part name="parameters" element="tns:Create_Result" />
+  </message>
+  <message name="CreateMultiple">
+    <part name="parameters" element="tns:CreateMultiple" />
+  </message>
+  <message name="CreateMultiple_Result">
+    <part name="parameters" element="tns:CreateMultiple_Result" />
+  </message>
+  <message name="Update">
+    <part name="parameters" element="tns:Update" />
+  </message>
+  <message name="Update_Result">
+    <part name="parameters" element="tns:Update_Result" />
+  </message>
+  <message name="UpdateMultiple">
+    <part name="parameters" element="tns:UpdateMultiple" />
+  </message>
+  <message name="UpdateMultiple_Result">
+    <part name="parameters" element="tns:UpdateMultiple_Result" />
+  </message>
+  <message name="Delete">
+    <part name="parameters" element="tns:Delete" />
+  </message>
+  <message name="Delete_Result">
+    <part name="parameters" element="tns:Delete_Result" />
+  </message>
+  <message name="Delete_Loan_Keywords">
+    <part name="parameters" element="tns:Delete_Loan_Keywords" />
+  </message>
+  <message name="Delete_Loan_Keywords_Result">
+    <part name="parameters" element="tns:Delete_Loan_Keywords_Result" />
+  </message>
+  <message name="Delete_Loans">
+    <part name="parameters" element="tns:Delete_Loans" />
+  </message>
+  <message name="Delete_Loans_Result">
+    <part name="parameters" element="tns:Delete_Loans_Result" />
+  </message>
+  <portType name="Members_Port">
+    <operation name="Read">
+      <input name="Read" message="tns:Read" />
+      <output name="Read_Result" message="tns:Read_Result" />
+    </operation>
+    <operation name="ReadByRecId">
+      <input name="ReadByRecId" message="tns:ReadByRecId" />
+      <output name="ReadByRecId_Result" message="tns:ReadByRecId_Result" />
+    </operation>
+    <operation name="ReadMultiple">
+      <input name="ReadMultiple" message="tns:ReadMultiple" />
+      <output name="ReadMultiple_Result" message="tns:ReadMultiple_Result" />
+    </operation>
+    <operation name="IsUpdated">
+      <input name="IsUpdated" message="tns:IsUpdated" />
+      <output name="IsUpdated_Result" message="tns:IsUpdated_Result" />
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <input name="GetRecIdFromKey" message="tns:GetRecIdFromKey" />
+      <output name="GetRecIdFromKey_Result" message="tns:GetRecIdFromKey_Result" />
+    </operation>
+    <operation name="Create">
+      <input name="Create" message="tns:Create" />
+      <output name="Create_Result" message="tns:Create_Result" />
+    </operation>
+    <operation name="CreateMultiple">
+      <input name="CreateMultiple" message="tns:CreateMultiple" />
+      <output name="CreateMultiple_Result" message="tns:CreateMultiple_Result" />
+    </operation>
+    <operation name="Update">
+      <input name="Update" message="tns:Update" />
+      <output name="Update_Result" message="tns:Update_Result" />
+    </operation>
+    <operation name="UpdateMultiple">
+      <input name="UpdateMultiple" message="tns:UpdateMultiple" />
+      <output name="UpdateMultiple_Result" message="tns:UpdateMultiple_Result" />
+    </operation>
+    <operation name="Delete">
+      <input name="Delete" message="tns:Delete" />
+      <output name="Delete_Result" message="tns:Delete_Result" />
+    </operation>
+    <operation name="Delete_Loan_Keywords">
+      <input name="Delete_Loan_Keywords" message="tns:Delete_Loan_Keywords" />
+      <output name="Delete_Loan_Keywords_Result" message="tns:Delete_Loan_Keywords_Result" />
+    </operation>
+    <operation name="Delete_Loans">
+      <input name="Delete_Loans" message="tns:Delete_Loans" />
+      <output name="Delete_Loans_Result" message="tns:Delete_Loans_Result" />
+    </operation>
+  </portType>
+  <binding name="Members_Binding" type="tns:Members_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="Read">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:Read" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Read">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Read_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadByRecId">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:ReadByRecId" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadByRecId">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadByRecId_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReadMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:ReadMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReadMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReadMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IsUpdated">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:IsUpdated" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsUpdated">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsUpdated_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetRecIdFromKey">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:GetRecIdFromKey" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetRecIdFromKey">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetRecIdFromKey_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Create">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:Create" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Create">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Create_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreateMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:CreateMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreateMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreateMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Update">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:Update" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Update">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Update_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateMultiple">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:UpdateMultiple" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateMultiple">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateMultiple_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Delete">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:Delete" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Delete">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Delete_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Delete_Loan_Keywords">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:Delete_Loan_Keywords" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Delete_Loan_Keywords">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Delete_Loan_Keywords_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Delete_Loans">
+      <operation soapAction="urn:microsoft-dynamics-schemas/page/members:Delete_Loans" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Delete_Loans">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Delete_Loans_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Members_Service">
+    <port name="Members_Port" binding="tns:Members_Binding">
+      <address location="http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Members" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

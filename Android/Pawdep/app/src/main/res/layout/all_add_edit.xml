@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingConstraints" >
+    <data class="Allocations_Header_binding" >
+        <variable
+            name="all"
+            type="com.trimline.pawdep.Allocation_header" />
+
+        <import type="com.trimline.pawdep.Converters"/>
+        <import type="com.trimline.pawdep.BindingUtils"/>
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".all_add_edit">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:contentPadding="@dimen/padding_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headercontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
+
+            <TextView
+                style="@style/all_addedit_line1"
+                android:id="@+id/all_no"
+                android:text="No"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                style="@style/all_addedit_line1"
+                android:id="@+id/all_category"
+                android:text="Category"
+                app:layout_constraintTop_toBottomOf="@id/all_no"/>
+
+            <TextView
+                style="@style/all_addedit_line1"
+                android:id="@+id/all_transid"
+                android:text="Transaction Id"
+                app:layout_constraintTop_toBottomOf="@id/all_category"/>
+
+            <TextView
+                style="@style/all_addedit_line1"
+                android:id="@+id/all_allocation_date"
+                android:text="Allocation date"
+                app:layout_constraintTop_toBottomOf="@id/all_transid"
+
+                />
+
+            <TextView
+                style="@style/all_addedit_line1"
+                android:id="@+id/all_pawdepno"
+                android:text="Pawdep No"
+                app:layout_constraintTop_toBottomOf="@id/all_allocation_date"
+
+                />
+
+<!--            edits-->
+            <TextView
+                style="@style/all_addedit_line2"
+
+                android:hint="No"
+                android:text="@={all.No}"
+                app:layout_constraintTop_toTopOf="parent"
+               />
+
+            <Spinner
+                style="@style/all_addedit_line2"
+                android:id="@+id/all_category_edit"
+                android:hint="Category"
+                android:selectedItemPosition="@={BindingUtils.category(all.Category)}"
+                app:layout_constraintTop_toBottomOf="@id/all_no"/>
+
+            <AutoCompleteTextView
+                style="@style/all_addedit_line2"
+                android:hint="Transaction No"
+                android:id="@+id/all_transid_edit"
+                android:text="@={ all.Transaction_No}"
+                android:dropDownWidth="900dp"
+                android:completionThreshold="3"
+                app:layout_constraintTop_toBottomOf="@id/all_category"/>
+
+            <TextView
+                style="@style/all_addedit_line2"
+                android:hint="No"
+                android:text="@={Converters.fromDatetostring(all.Allocation_Date)}"
+                app:layout_constraintTop_toBottomOf="@id/all_transid"/>
+
+            <TextView
+                style="@style/all_addedit_line2"
+                android:hint="Pawdep No"
+                android:id="@+id/all_Pawdepnoedit"
+                android:text="@={all.Pawdep_No}"
+                android:completionThreshold="3"
+                app:layout_constraintTop_toBottomOf="@id/all_allocation_date"/>
+
+            <!--Column 3-->
+            <TextView
+                style="@style/all_addedit_line3"
+                android:id="@+id/all_amount"
+                android:text="Amount"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!--Column 4-->
+            <TextView
+                style="@style/all_addedit_line4"
+                android:hint="Amount"
+                android:text="@{@string/curr(all.Amount)}"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+            <TextView
+                style="@style/all_addedit_line3"
+                android:text="Amount Distributed"
+                android:id="@+id/all_amountdistributed"
+                app:layout_constraintTop_toBottomOf="@id/all_amount"/>
+
+            <!--Column 4-->
+            <TextView
+                style="@style/all_addedit_line4"
+                android:hint="Amount Disributed"
+                android:text="@{@string/curr(all.Amount_Distributed)}"
+                app:layout_constraintTop_toBottomOf="@id/all_amount"/>
+
+            <TextView
+                style="@style/all_addedit_line3"
+                android:text="Member Name"
+                android:id="@+id/all_membername"
+                app:layout_constraintTop_toBottomOf="@id/all_amountdistributed"/>
+
+            <!--Column 4-->
+            <TextView
+                style="@style/all_addedit_line4"
+                android:hint="Member Name"
+                android:text="@{all.Member_Names}"
+                app:layout_constraintTop_toBottomOf="@id/all_amountdistributed"/>
+            <TextView
+                style="@style/all_addedit_line3"
+                android:text="Group Name"
+                android:id="@+id/all_groupname"
+                app:layout_constraintTop_toBottomOf="@id/all_membername"/>
+
+            <!--Column 4-->
+            <TextView
+                style="@style/all_addedit_line4"
+                android:hint="Group Name"
+                android:text="@{all.Group_Name}"
+                app:layout_constraintTop_toBottomOf="@id/all_membername"/>
+
+            <TextView
+                style="@style/all_addedit_line3"
+                android:text="Member No"
+                android:id="@+id/all_memberno"
+                app:layout_constraintTop_toBottomOf="@id/all_groupname"/>
+
+            <!--Column 4-->
+            <TextView
+                style="@style/all_addedit_line4"
+                android:hint="Member No"
+                android:text="@{all.Member_No}"
+                app:layout_constraintTop_toBottomOf="@id/all_groupname"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/list"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_standard"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:contentPadding="@dimen/padding_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <Button
+                android:id="@+id/newline"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:drawableLeft="@drawable/action_new"
+                android:text="New"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lineheader"
+                layout="@layout/all_add_edit_line_header"
+                app:layout_constraintStart_toStartOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/allocationlines"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lineheader">
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout></layout>

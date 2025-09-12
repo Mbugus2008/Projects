@@ -1,0 +1,1 @@
+enum status { savings, loans }

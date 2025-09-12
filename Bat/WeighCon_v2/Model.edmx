@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WEIGHCONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WEIGHCON.dbo.Archive' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Archive">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Dayofweek" Type="varchar" MaxLength="255" />
+          <Property Name="Shift" Type="varchar" MaxLength="255" />
+          <Property Name="Year" Type="varchar" MaxLength="255" />
+          <Property Name="Weekofyear" Type="varchar" MaxLength="255" />
+          <Property Name="itemcode" Type="varchar" MaxLength="255" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="Mass" Type="varchar" MaxLength="255" />
+          <Property Name="Archivedate" Type="datetime" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ITEMLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dayofweek" Type="varchar" MaxLength="255" />
+          <Property Name="Shift" Type="varchar" MaxLength="255" />
+          <Property Name="Year" Type="varchar" MaxLength="255" />
+          <Property Name="Weekofyear" Type="varchar" MaxLength="255" />
+          <Property Name="itemcode" Type="varchar" MaxLength="500" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="Mass" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="Barcode" Type="varchar" MaxLength="500" />
+          <Property Name="STATUS" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ITEMMASTER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_Code" Type="varchar" MaxLength="255" />
+          <Property Name="NewBarCode" Type="varchar" MaxLength="255" />
+          <Property Name="ProductionOrderNo" Type="varchar" MaxLength="255" />
+          <Property Name="BarCode" Type="varchar" MaxLength="255" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Theoretical_Mass" Type="float" />
+          <Property Name="UOM" Type="varchar" MaxLength="255" />
+          <Property Name="Permitted_Tol_Upper_%" Type="float" />
+          <Property Name="Permitted_Tol_Lower_%" Type="float" />
+          <Property Name="IsBulk" Type="bit" />
+          <Property Name="Fixed" Type="bit" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="ProductionOrderNo1" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" />
+          <Property Name="Userfullname" Type="varchar" MaxLength="255" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="255" />
+          <Property Name="UserGroup" Type="varchar" MaxLength="255" />
+          <Property Name="Userlastmodified" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="WEIGHCONModelStoreContainer">
+          <EntitySet Name="ITEMLOG" EntityType="Self.ITEMLOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEMMASTER" EntityType="Self.ITEMMASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Archive" EntityType="Self.Archive" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Archive].[ID] AS [ID], 
+    [Archive].[Dayofweek] AS [Dayofweek], 
+    [Archive].[Shift] AS [Shift], 
+    [Archive].[Year] AS [Year], 
+    [Archive].[Weekofyear] AS [Weekofyear], 
+    [Archive].[itemcode] AS [itemcode], 
+    [Archive].[Time] AS [Time], 
+    [Archive].[Mass] AS [Mass], 
+    [Archive].[Archivedate] AS [Archivedate], 
+    [Archive].[Username] AS [Username]
+    FROM [dbo].[Archive] AS [Archive]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WEIGHCONModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ITEMLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dayofweek" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Shift" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Weekofyear" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="itemcode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="Mass" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Barcode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ITEMMASTER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NewBarCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ProductionOrderNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BarCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Theoretical_Mass" Type="Double" />
+          <Property Name="UOM" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Permitted_Tol_Upper__" Type="Double" />
+          <Property Name="Permitted_Tol_Lower__" Type="Double" />
+          <Property Name="IsBulk" Type="Boolean" />
+          <Property Name="Fixed" Type="Boolean" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="ProductionOrderNo1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Userfullname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserGroup" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Userlastmodified" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Archive">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Dayofweek" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Shift" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Weekofyear" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="itemcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="Mass" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Archivedate" Type="DateTime" Precision="3" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="WEIGHCONEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ITEMLOGs" EntityType="Self.ITEMLOG" />
+          <EntitySet Name="ITEMMASTERs" EntityType="Self.ITEMMASTER" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
+          <EntitySet Name="Archives" EntityType="Self.Archive" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WEIGHCONModelStoreContainer" CdmEntityContainer="WEIGHCONEntities">
+          <EntitySetMapping Name="ITEMLOGs">
+            <EntityTypeMapping TypeName="WEIGHCONModel.ITEMLOG">
+              <MappingFragment StoreEntitySet="ITEMLOG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Dayofweek" ColumnName="Dayofweek" />
+                <ScalarProperty Name="Shift" ColumnName="Shift" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Weekofyear" ColumnName="Weekofyear" />
+                <ScalarProperty Name="itemcode" ColumnName="itemcode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEMMASTERs">
+            <EntityTypeMapping TypeName="WEIGHCONModel.ITEMMASTER">
+              <MappingFragment StoreEntitySet="ITEMMASTER">
+                <ScalarProperty Name="ProductionOrderNo1" ColumnName="ProductionOrderNo1" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+                <ScalarProperty Name="NewBarCode" ColumnName="NewBarCode" />
+                <ScalarProperty Name="ProductionOrderNo" ColumnName="ProductionOrderNo" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Theoretical_Mass" ColumnName="Theoretical_Mass" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="Permitted_Tol_Upper__" ColumnName="Permitted_Tol_Upper_%" />
+                <ScalarProperty Name="Permitted_Tol_Lower__" ColumnName="Permitted_Tol_Lower_%" />
+                <ScalarProperty Name="IsBulk" ColumnName="IsBulk" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="WEIGHCONModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Userfullname" ColumnName="Userfullname" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserGroup" ColumnName="UserGroup" />
+                <ScalarProperty Name="Userlastmodified" ColumnName="Userlastmodified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Archives">
+            <EntityTypeMapping TypeName="WEIGHCONModel.Archive">
+              <MappingFragment StoreEntitySet="Archive">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Dayofweek" ColumnName="Dayofweek" />
+                <ScalarProperty Name="Shift" ColumnName="Shift" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Weekofyear" ColumnName="Weekofyear" />
+                <ScalarProperty Name="itemcode" ColumnName="itemcode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="Archivedate" ColumnName="Archivedate" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

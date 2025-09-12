@@ -1,0 +1,26 @@
+{
+  "id": "61660b4c-f853-4e73-82b2-a06bb13368d3",
+  "name": "SMobile",
+  "publisher": "Default publisher",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "14.0.0.0",
+  "application": "14.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://SMobile.com/help/",
+  "showMyCode": true,
+  "runtime": "3.2"
+}

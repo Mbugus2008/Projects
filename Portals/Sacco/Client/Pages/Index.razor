@@ -1,0 +1,192 @@
+@page "/Home"
+@inject HttpClient Http
+@inject Sacco.Shared.StateContainerService stateService
+@inject NavigationManager navigationManager
+<PageTitle>@stateService.company_name </PageTitle>
+        
+            <div class="row">
+    <div class="card shadow p-3 mb-3 bg-white rounded col-sm" @onclick="NavigateToDetails">
+        <div class="card-body d-flex justify-content-center">
+                <h2>    KES. @stateService.members_det.Outstanding_Balance.ToString("#,##0.00")</h2>
+         
+                </div>
+        <div class="card-footer d-flex justify-content-center bg-secondary text-white">
+                    <h4 style="font-weight:bolder"> Loans</h4>
+                    </div>
+            </div>
+
+    <div class="card shadow p-3 mb-3 bg-white rounded col-sm" @onclick="NavigateToentries">
+        <div class="card-body d-flex justify-content-center ">
+            <h2>  KES.  @Math.Abs( stateService.members_det.Current_Shares).ToString("#,##0.00")</h2>
+                </div>
+    <div class="card-footer align-content-center d-flex justify-content-center bg-secondary text-white">
+        <h4 style="font-weight:bolder"> Deposits</h4>
+        </div>
+    </div>
+
+    <div class="card shadow p-3 mb-3 bg-white rounded col-sm" @onclick="NavigateToshare">
+        <div class="card-body d-flex justify-content-center">
+            <h2>  KES.  @Math.Abs( stateService.members_det.Shares_Retained).ToString("#,##0.00")</h2>
+        </div>
+    <div class="card-footer align-content-center d-flex justify-content-center bg-secondary text-white">
+        <h4 style="font-weight:bolder"> Capital Share</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <InputText id="filter" class="col-form-label" autofocus placeholder="type to filter" @bind-Value="filter" />
+        <InputSelect id="filtercolumn" class="col-form-label" @bind-Value="filtercolumn">
+            @foreach (var item in getp())
+            {
+                if (!item.Name.Contains("Specified"))
+                {
+                    <option value="@item.Name">@item.Name.Replace("_"," " )</option>
+                }
+            }
+        </InputSelect>
+        <button type="button" id="search" class="col-3 btn btn-primary" onclick="@(async () => await filterlist(filter,filtercolumn))">
+            Search
+        </button>
+    </div>
+    <div class="inline row col-12">
+        <label class="text-danger">@errors</label>
+    </div>
+ 
+</div>
+
+<div class="card row">
+    
+<table class="table">
+    <thead>
+        <tr style="background-color:darkgray">
+          
+            <th>Date</th>
+            <th>Description</th>
+            <th>Trans Type</th>
+            <th>Loan No</th>
+            <th align="right">Amount</th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in entries)
+        {
+            <tr>
+               
+                <td>@loan.Posting_Date.ToString("dd-MMM-yyy")</td>
+                <td>@loan.Description</td>
+                <td>@loan.Transaction_Type.ToString()</td>
+                <td>@loan.Loan_No</td>
+                @*<button type="button" class="btn btn-primary"><span class="bi bi-arrow-up"></span> Sample Button</button>*@
+                @if (loan.Credit_Amount > 0)
+                {
+                    <td align="right" style="color:green"><i class="bi bi-arrow-up"></i> @Math.Abs( loan.Amount).ToString("#,##0.00")</td>
+
+                }
+                else
+                {
+                    <td align="right" style="color:red"><i class="bi bi-arrow-up"></i> @Math.Abs( loan.Amount).ToString("#,##0.00")</td>
+                }
+            </tr>
+        }
+    </tbody>
+   
+</table></div>
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    private void NavigateToDetails()
+    {
+        NavigationManager.NavigateTo("/Loans"); // Change to your target route
+    } private void NavigateToentries()
+    {
+        NavigationManager.NavigateTo($"/Entries/{stateService.member}/{(int)entriesdata.Transaction_Type.Deposit_Contribution}");
+    }
+    private void NavigateToshare()
+    {
+        NavigationManager.NavigateTo($"/Entries/{stateService.member}/{(int)entriesdata.Transaction_Type.Shares_Capital}");
+    }
+    public string? filter{ get; set; }
+    public string? errors{ get; set; }
+    public Sacco.Shared.param p;
+    public string filtercolumn { get; set; } = entriesdata.Entries_Fields.Posting_Date.ToString();
+    // public Memberdata.Members member { get; set; }
+    public entriesdata.Entries[] entries { get; set; }
+    public string company_Name { get; set; }  
+    entriesdata.Entries ent { get;set; }
+    protected List<System.Reflection.PropertyInfo> getp(){
+        ent = new entriesdata.Entries();
+        return ent.GetType()
+                     .GetProperties()
+
+                     .ToList();
+    }
+    protected async override Task OnParametersSetAsync()
+    {
+        try
+        {
+            stateService.OnStateChange += StateHasChanged;
+            Console.WriteLine("index load");
+            if (!stateService.member.ToString().Equals(""))
+            {
+                Console.WriteLine("index load2");
+                // member = await Http.GetFromJsonAsync<Memberdata.Members>($"api/home/Get/{stateService.member}");
+                Console.WriteLine("index load2");
+                entries = await Http.GetFromJsonAsync<entriesdata.Entries[]>($"api/entries/Get/{stateService.member}");
+            }
+            else
+                navigationManager.NavigateTo("");
+
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+        }
+    }
+    public void Dispose()
+    {
+        stateService.Setmember("");
+        stateService.OnStateChange -= StateHasChanged;
+    }
+    async Task filterlist(string filterstring,string columnname)
+    {
+        HttpResponseMessage res = null;
+        errors = "";
+        try
+        {
+            
+                p = new Sacco.Shared.param() { filterstring = filter,filtercolumn =filtercolumn, No= stateService.member };
+                Console.WriteLine(p.filterstring);
+
+                res = await Http.PostAsJsonAsync("api/Entries/Getfilter", p);
+                Console.WriteLine("okk");
+
+                if (res.IsSuccessStatusCode)
+                {
+
+                    var r = await res.Content.ReadFromJsonAsync<Logging.Results< entriesdata.Entries[]>>();
+                    if (r.Code == 0)
+                    { entries = r.Contents; }
+                    else
+                        errors = r.Desc;
+                    //   info = string.Format("Otp sent to {0}.....{1}", p.phone.Substring(0, 3), p.phone.Substring(p.phone.Length - 2, 2));
+                }
+                else
+                {
+                    var d = await res.Content.ReadFromJsonAsync<Sacco.Shared.param>();
+                    errors = d.No;
+                }
+          
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("error");
+            Console.WriteLine(ex.Message);
+
+            errors = await res.Content.ReadAsStringAsync();
+        }
+    }
+}

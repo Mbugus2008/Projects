@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EtimsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CreditNote">
+          <Key>
+            <PropertyRef Name="invoiceNumber" />
+          </Key>
+          <Property Name="invoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="customerPin" Type="nvarchar" MaxLength="50" />
+          <Property Name="customerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="paymentTypeCode" Type="nchar" MaxLength="10" />
+          <Property Name="saleDate" Type="date" />
+          <Property Name="totalAmount" Type="float" />
+          <Property Name="totalTaxableAmount" Type="float" />
+          <Property Name="totalTaxAmount" Type="float" />
+          <Property Name="modifierId" Type="nvarchar" MaxLength="50" />
+          <Property Name="modifierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sync" Type="bit" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="itemCode" />
+          </Key>
+          <Property Name="itemCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="itemClassificationCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="itemTypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="itemName" Type="nvarchar" MaxLength="50" />
+          <Property Name="originCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="taxationTypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="batchNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="barCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="defaultPrice" Type="float" />
+          <Property Name="Sync" Type="bit" />
+          <Property Name="rcptSign" Type="nvarchar" MaxLength="500" />
+          <Property Name="intrlData" Type="nvarchar" MaxLength="500" />
+          <Property Name="Msg" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="invoiceNumber" />
+          </Key>
+          <Property Name="invoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="customerPin" Type="nvarchar" MaxLength="50" />
+          <Property Name="customerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="paymentTypeCode" Type="nchar" MaxLength="10" />
+          <Property Name="saleDate" Type="date" />
+          <Property Name="totalAmount" Type="float" />
+          <Property Name="totalTaxableAmount" Type="float" />
+          <Property Name="totalTaxAmount" Type="float" />
+          <Property Name="modifierId" Type="nvarchar" MaxLength="50" />
+          <Property Name="modifierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sync" Type="bit" />
+          <Property Name="rcptSign" Type="nvarchar" MaxLength="500" />
+          <Property Name="intrlData" Type="nvarchar" MaxLength="500" />
+          <Property Name="Msg" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Sale Item">
+          <Key>
+            <PropertyRef Name="ItemCode" />
+            <PropertyRef Name="InvoiceNumber" />
+          </Key>
+          <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemClassificationCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="UnitPrice" Type="float" />
+          <Property Name="DiscountRate" Type="float" />
+          <Property Name="DiscountAmount" Type="float" />
+          <Property Name="TaxationTypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxAmount" Type="float" />
+          <Property Name="TotalAmount" Type="float" />
+          <Property Name="Modifier Id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Modifier Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sync" Type="bit" />
+        </EntityType>
+        <EntityType Name="Stock In Entry">
+          <Key>
+            <PropertyRef Name="ItemCode" />
+            <PropertyRef Name="StoredReleasedNo" />
+          </Key>
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemClassificationCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="ResidualQuantity" Type="float" />
+          <Property Name="UnitPrice" Type="float" />
+          <Property Name="DiscountRate" Type="float" />
+          <Property Name="DiscountAmount" Type="float" />
+          <Property Name="TaxationTypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="StoredReleasedNo" Type="int" Nullable="false" />
+          <Property Name="Sync" Type="bit" />
+        </EntityType>
+        <EntityType Name="Stock in Header">
+          <Key>
+            <PropertyRef Name="StoredReleasedNo" />
+          </Key>
+          <Property Name="Pin" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchId" Type="nvarchar" MaxLength="50" />
+          <Property Name="StoredReleasedNo" Type="int" Nullable="false" />
+          <Property Name="OriginalStoredReleasedNo" Type="int" />
+          <Property Name="StockIoTypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sync" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="EtimsModelStoreContainer">
+          <EntitySet Name="CreditNote" EntityType="Self.CreditNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale Item" EntityType="Self.Sale Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock In Entry" EntityType="Self.Stock In Entry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock in Header" EntityType="Self.Stock in Header" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EtimsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CreditNote">
+          <Key>
+            <PropertyRef Name="invoiceNumber" />
+          </Key>
+          <Property Name="invoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customerPin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="paymentTypeCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="saleDate" Type="DateTime" Precision="0" />
+          <Property Name="totalAmount" Type="Double" />
+          <Property Name="totalTaxableAmount" Type="Double" />
+          <Property Name="totalTaxAmount" Type="Double" />
+          <Property Name="modifierId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="modifierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sync" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="itemCode" />
+          </Key>
+          <Property Name="itemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="itemClassificationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="itemTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="itemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="originCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="taxationTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="batchNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="barCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="defaultPrice" Type="Double" />
+          <Property Name="Sync" Type="Boolean" />
+          <Property Name="rcptSign" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intrlData" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Msg" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="invoiceNumber" />
+          </Key>
+          <Property Name="invoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customerPin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="paymentTypeCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="saleDate" Type="DateTime" Precision="0" />
+          <Property Name="totalAmount" Type="Double" />
+          <Property Name="totalTaxableAmount" Type="Double" />
+          <Property Name="totalTaxAmount" Type="Double" />
+          <Property Name="modifierId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="modifierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sync" Type="Boolean" />
+          <Property Name="rcptSign" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intrlData" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Msg" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sale_Item">
+          <Key>
+            <PropertyRef Name="ItemCode" />
+            <PropertyRef Name="InvoiceNumber" />
+          </Key>
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemClassificationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="UnitPrice" Type="Double" />
+          <Property Name="DiscountRate" Type="Double" />
+          <Property Name="DiscountAmount" Type="Double" />
+          <Property Name="TaxationTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxAmount" Type="Double" />
+          <Property Name="TotalAmount" Type="Double" />
+          <Property Name="Modifier_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Modifier_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sync" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Stock_In_Entry">
+          <Key>
+            <PropertyRef Name="ItemCode" />
+            <PropertyRef Name="StoredReleasedNo" />
+          </Key>
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemClassificationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="ResidualQuantity" Type="Double" />
+          <Property Name="UnitPrice" Type="Double" />
+          <Property Name="DiscountRate" Type="Double" />
+          <Property Name="DiscountAmount" Type="Double" />
+          <Property Name="TaxationTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="StoredReleasedNo" Type="Int32" Nullable="false" />
+          <Property Name="Sync" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Stock_in_Header">
+          <Key>
+            <PropertyRef Name="StoredReleasedNo" />
+          </Key>
+          <Property Name="Pin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StoredReleasedNo" Type="Int32" Nullable="false" />
+          <Property Name="OriginalStoredReleasedNo" Type="Int32" />
+          <Property Name="StockIoTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sync" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="EtimsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CreditNotes" EntityType="Self.CreditNote" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="Sale_Items" EntityType="Self.Sale_Item" />
+          <EntitySet Name="Stock_In_Entries" EntityType="Self.Stock_In_Entry" />
+          <EntitySet Name="Stock_in_Headers" EntityType="Self.Stock_in_Header" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EtimsModelStoreContainer" CdmEntityContainer="EtimsEntities">
+          <EntitySetMapping Name="CreditNotes">
+            <EntityTypeMapping TypeName="EtimsModel.CreditNote">
+              <MappingFragment StoreEntitySet="CreditNote">
+                <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+                <ScalarProperty Name="customerPin" ColumnName="customerPin" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="paymentTypeCode" ColumnName="paymentTypeCode" />
+                <ScalarProperty Name="saleDate" ColumnName="saleDate" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="totalTaxableAmount" ColumnName="totalTaxableAmount" />
+                <ScalarProperty Name="totalTaxAmount" ColumnName="totalTaxAmount" />
+                <ScalarProperty Name="modifierId" ColumnName="modifierId" />
+                <ScalarProperty Name="modifierName" ColumnName="modifierName" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="EtimsModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+                <ScalarProperty Name="intrlData" ColumnName="intrlData" />
+                <ScalarProperty Name="rcptSign" ColumnName="rcptSign" />
+                <ScalarProperty Name="itemCode" ColumnName="itemCode" />
+                <ScalarProperty Name="itemClassificationCode" ColumnName="itemClassificationCode" />
+                <ScalarProperty Name="itemTypeCode" ColumnName="itemTypeCode" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="originCode" ColumnName="originCode" />
+                <ScalarProperty Name="taxationTypeCode" ColumnName="taxationTypeCode" />
+                <ScalarProperty Name="batchNumber" ColumnName="batchNumber" />
+                <ScalarProperty Name="barCode" ColumnName="barCode" />
+                <ScalarProperty Name="defaultPrice" ColumnName="defaultPrice" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="EtimsModel.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+                <ScalarProperty Name="intrlData" ColumnName="intrlData" />
+                <ScalarProperty Name="rcptSign" ColumnName="rcptSign" />
+                <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+                <ScalarProperty Name="customerPin" ColumnName="customerPin" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="paymentTypeCode" ColumnName="paymentTypeCode" />
+                <ScalarProperty Name="saleDate" ColumnName="saleDate" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="totalTaxableAmount" ColumnName="totalTaxableAmount" />
+                <ScalarProperty Name="totalTaxAmount" ColumnName="totalTaxAmount" />
+                <ScalarProperty Name="modifierId" ColumnName="modifierId" />
+                <ScalarProperty Name="modifierName" ColumnName="modifierName" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sale_Items">
+            <EntityTypeMapping TypeName="EtimsModel.Sale_Item">
+              <MappingFragment StoreEntitySet="Sale Item">
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="ItemClassificationCode" ColumnName="ItemClassificationCode" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="TaxationTypeCode" ColumnName="TaxationTypeCode" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Modifier_Id" ColumnName="Modifier Id" />
+                <ScalarProperty Name="Modifier_Name" ColumnName="Modifier Name" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock_In_Entries">
+            <EntityTypeMapping TypeName="EtimsModel.Stock_In_Entry">
+              <MappingFragment StoreEntitySet="Stock In Entry">
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="ItemClassificationCode" ColumnName="ItemClassificationCode" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ResidualQuantity" ColumnName="ResidualQuantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="TaxationTypeCode" ColumnName="TaxationTypeCode" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="StoredReleasedNo" ColumnName="StoredReleasedNo" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock_in_Headers">
+            <EntityTypeMapping TypeName="EtimsModel.Stock_in_Header">
+              <MappingFragment StoreEntitySet="Stock in Header">
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="StoredReleasedNo" ColumnName="StoredReleasedNo" />
+                <ScalarProperty Name="OriginalStoredReleasedNo" ColumnName="OriginalStoredReleasedNo" />
+                <ScalarProperty Name="StockIoTypeCode" ColumnName="StockIoTypeCode" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

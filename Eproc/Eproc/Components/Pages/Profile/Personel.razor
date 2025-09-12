@@ -1,0 +1,52 @@
+﻿@page "/Profile/Personel/{Taxregno}"
+@rendermode InteractiveServer
+@inject Eproc.Services.Icprofile iprofile
+@attribute [StreamRendering]
+@using Syncfusion.Blazor.Grids
+ @{
+    var Tool = (new List<string>() { "Search", "Add", "Edit", "Delete", "Update", "Cancel" });
+}
+<SfGrid DataSource="@personnel" ID="Personel" Toolbar=@Tool>
+    <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true" Mode="EditMode.Normal"></GridEditSettings>
+    <GridEvents OnActionComplete="OnActionComplete" TValue="KPersonnel.KeyPersonnel"></GridEvents>
+
+    <GridColumns>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Entry_No) Visible="false" IsPrimaryKey="true" HeaderText="Entry No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Tax_Registration_No) HeaderText="Tax Registration No" AllowEditing="false" AllowAdding="false"> </Syncfusion.Blazor.Grids.GridColumn>
+       
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Job_Title) HeaderText="Job Title"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Role) HeaderText="Role"></Syncfusion.Blazor.Grids.GridColumn>
+        <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(fields.Email_Address) HeaderText="Email Address"></Syncfusion.Blazor.Grids.GridColumn>
+      
+    </GridColumns>
+</SfGrid>
+@code {
+    [Parameter]
+    public string Taxregno { get; set; }
+    List<KPersonnel.KeyPersonnel> personnel { get; set; } = new List<KPersonnel.KeyPersonnel>();
+    KPersonnel.KeyPersonnel_Fields fields;
+    protected override async void OnInitialized()
+    {
+        personnel = await iprofile.getPersonnel(Taxregno);
+        StateHasChanged();
+    }
+    public void OnActionComplete(ActionEventArgs<KPersonnel.KeyPersonnel> args)
+    {
+        switch (args.RequestType)
+        {
+            case Syncfusion.Blazor.Grids.Action.Add: { args.Data.Tax_Registration_No = Taxregno; break; }
+            case Syncfusion.Blazor.Grids.Action.Save:
+                {
+
+                    args.Data = iprofile.SaveData(args.Data).Result;
+
+                    break;
+                }
+            case Syncfusion.Blazor.Grids.Action.Delete:
+                {
+                    iprofile.Delete(args.Data);
+                    break;
+                }
+        }
+    }
+}

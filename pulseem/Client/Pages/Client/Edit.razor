@@ -1,0 +1,22 @@
+﻿@page "/Client/Edit/{email}"
+@using pulseem.Shared.Models;
+@inject HttpClient http
+@inject NavigationManager uriHelper
+@inject IJSRuntime js
+<h3>Edit</h3>
+<Form ButtonText="Update" cli="cli"
+      OnValidSubmit="@EditClient" />
+@code {
+    [Parameter] public string email { get; set; }
+    Clients cli = new Clients();
+    protected async override Task OnParametersSetAsync()
+    {
+        cli = await http.GetFromJsonAsync<Clients>($"api/Client/{email}");
+    }
+    async Task EditClient()
+    {
+        await http.PutAsJsonAsync("api/Client", cli);
+        await js.InvokeVoidAsync("alert", $"Updated Successfully!");
+        uriHelper.NavigateTo("Clientlist");
+    }
+}

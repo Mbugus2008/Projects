@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d13d72e781d24d9398dc7e8c4984cb5d" Name="Diagram1" ZoomLevel="87">
+        <EntityTypeShape EntityType="MobileModel.Mpesa_Result" Width="1.5" PointX="4.625" PointY="0.5" />
+        <EntityTypeShape EntityType="MobileModel.Result_Parameter" Width="1.5" PointX="4.625" PointY="2.875" />
+        <EntityTypeShape EntityType="MobileModel.Client" Width="1.5" PointX="6.5" PointY="0.5" />
+        <EntityTypeShape EntityType="MobileModel.BulkSm" Width="1.5" PointX="8.375" PointY="0.5" />
+        <EntityTypeShape EntityType="MobileModel.Sms_keyword" Width="1.5" PointX="4.625" PointY="5" />
+        <EntityTypeShape EntityType="MobileModel.MPESA_Transaction" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MobileModel.Client_Paybill" Width="1.5" PointX="0.75" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

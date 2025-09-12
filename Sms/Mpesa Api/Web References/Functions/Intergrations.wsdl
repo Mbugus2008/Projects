@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Intergrations" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Intergrations" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Intergrations" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="PostBooking">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="transactionNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostBooking_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="PostFloating">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="transactionNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostFloating_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="TakeDownShares">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="transactionNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="TakeDownShares_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="ValidateWithdrawal">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="withdrawalNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ValidateWithdrawal_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="SendWithdrawalApproval">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="withdrawalNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SendWithdrawalApproval_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="PostFosaDebit">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="entryNo" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostFosaDebit_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="PostBooking">
+    <part name="parameters" element="tns:PostBooking" />
+  </message>
+  <message name="PostBooking_Result">
+    <part name="parameters" element="tns:PostBooking_Result" />
+  </message>
+  <message name="PostFloating">
+    <part name="parameters" element="tns:PostFloating" />
+  </message>
+  <message name="PostFloating_Result">
+    <part name="parameters" element="tns:PostFloating_Result" />
+  </message>
+  <message name="TakeDownShares">
+    <part name="parameters" element="tns:TakeDownShares" />
+  </message>
+  <message name="TakeDownShares_Result">
+    <part name="parameters" element="tns:TakeDownShares_Result" />
+  </message>
+  <message name="ValidateWithdrawal">
+    <part name="parameters" element="tns:ValidateWithdrawal" />
+  </message>
+  <message name="ValidateWithdrawal_Result">
+    <part name="parameters" element="tns:ValidateWithdrawal_Result" />
+  </message>
+  <message name="SendWithdrawalApproval">
+    <part name="parameters" element="tns:SendWithdrawalApproval" />
+  </message>
+  <message name="SendWithdrawalApproval_Result">
+    <part name="parameters" element="tns:SendWithdrawalApproval_Result" />
+  </message>
+  <message name="PostFosaDebit">
+    <part name="parameters" element="tns:PostFosaDebit" />
+  </message>
+  <message name="PostFosaDebit_Result">
+    <part name="parameters" element="tns:PostFosaDebit_Result" />
+  </message>
+  <portType name="Intergrations_Port">
+    <operation name="PostBooking">
+      <input name="PostBooking" message="tns:PostBooking" />
+      <output name="PostBooking_Result" message="tns:PostBooking_Result" />
+    </operation>
+    <operation name="PostFloating">
+      <input name="PostFloating" message="tns:PostFloating" />
+      <output name="PostFloating_Result" message="tns:PostFloating_Result" />
+    </operation>
+    <operation name="TakeDownShares">
+      <input name="TakeDownShares" message="tns:TakeDownShares" />
+      <output name="TakeDownShares_Result" message="tns:TakeDownShares_Result" />
+    </operation>
+    <operation name="ValidateWithdrawal">
+      <input name="ValidateWithdrawal" message="tns:ValidateWithdrawal" />
+      <output name="ValidateWithdrawal_Result" message="tns:ValidateWithdrawal_Result" />
+    </operation>
+    <operation name="SendWithdrawalApproval">
+      <input name="SendWithdrawalApproval" message="tns:SendWithdrawalApproval" />
+      <output name="SendWithdrawalApproval_Result" message="tns:SendWithdrawalApproval_Result" />
+    </operation>
+    <operation name="PostFosaDebit">
+      <input name="PostFosaDebit" message="tns:PostFosaDebit" />
+      <output name="PostFosaDebit_Result" message="tns:PostFosaDebit_Result" />
+    </operation>
+  </portType>
+  <binding name="Intergrations_Binding" type="tns:Intergrations_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="PostBooking">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Intergrations:PostBooking" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostBooking">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostBooking_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostFloating">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Intergrations:PostFloating" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostFloating">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostFloating_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="TakeDownShares">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Intergrations:TakeDownShares" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="TakeDownShares">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="TakeDownShares_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ValidateWithdrawal">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Intergrations:ValidateWithdrawal" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ValidateWithdrawal">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ValidateWithdrawal_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SendWithdrawalApproval">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Intergrations:SendWithdrawalApproval" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SendWithdrawalApproval">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SendWithdrawalApproval_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostFosaDebit">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Intergrations:PostFosaDebit" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostFosaDebit">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostFosaDebit_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Intergrations">
+    <port name="Intergrations_Port" binding="tns:Intergrations_Binding">
+      <address location="http://kpicsdevnav01.policesacco.com:7047/DynamicsNAV110/WS/LIVE/Codeunit/Intergrations" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Transactions">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/header"
+        android:id="@+id/c1">
+    <TextView
+        android:id="@+id/transid"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:ellipsize="start"
+        android:singleLine="true"
+        android:text="No"
+        android:textStyle="bold"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:text="Date"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transid"
+        app:layout_constraintEnd_toEndOf="@id/transid"
+        />
+
+    <TextView
+        android:id="@+id/groupcode"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+
+        android:hint="groupcode"
+        android:text="Group Code"
+        app:layout_constraintStart_toEndOf="@id/transid"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/groupname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:hint="group name"
+        android:textSize="10dp"
+       
+        android:text="Group Name"
+        app:layout_constraintStart_toEndOf="@id/date"
+
+        app:layout_constraintTop_toBottomOf="@id/groupcode"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/Loan_Principle_Paid"
+        style="@style/groupheader"
+        android:text="Principle Paid"
+
+        app:layout_constraintStart_toEndOf="@id/groupcode"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Loan_Interest_Paid"
+
+        style="@style/groupheader"
+
+        android:text="Interest Paid"
+        app:layout_constraintStart_toEndOf="@id/Loan_Principle_Paid"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/Advance_Principle_Paid"
+
+        style="@style/groupheader"
+
+        android:text="Advance Principle"
+        app:layout_constraintStart_toEndOf="@id/Loan_Interest_Paid"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Advance_Interest_Paid"
+        style="@style/groupheader"
+
+        android:text="Advance Interest"
+        app:layout_constraintStart_toEndOf="@id/Advance_Principle_Paid"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Savingsreceived"
+        style="@style/groupheader"
+
+        android:text="Savings"
+        app:layout_constraintStart_toEndOf="@id/Advance_Interest_Paid"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/Fines"
+        style="@style/groupheader"
+
+        android:text="Fines"
+        app:layout_constraintStart_toEndOf="@id/Savingsreceived"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Advanceissue"
+        style="@style/groupheader"
+
+        android:text="Advances Issued"
+        app:layout_constraintStart_toEndOf="@id/Fines"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/Othertrans"
+        style="@style/groupheader"
+
+        android:text="Other Transactions"
+        app:layout_constraintStart_toEndOf="@id/Advanceissue"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/Hall"
+        style="@style/groupheader"
+        android:text="Hall Received"
+        app:layout_constraintStart_toEndOf="@id/Othertrans"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/hallpaid"
+        style="@style/groupheader"
+
+        android:text="Hall Paid"
+        app:layout_constraintStart_toEndOf="@id/Hall"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Creditofficertotal"
+        style="@style/groupheader"
+
+        android:text="Till"
+        app:layout_constraintStart_toEndOf="@id/hallpaid"
+        app:layout_constraintBottom_toBottomOf="@id/groupname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/c1"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+        <!--tools:listitem="@layout/grouplistitem" -->
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

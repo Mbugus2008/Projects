@@ -1,0 +1,36 @@
+<resources>
+    <style name="loan_app" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">left|center_vertical</item>
+    <item name="android:layout_width">150dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="layout_constraintStart_toStartOf">parent</item>
+   </style>
+
+    <style name="loan_app_text" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="layout_constraintStart_toStartOf">@id/guideline8</item>
+        <item name="layout_constraintEnd_toEndOf">@id/guideline9</item>
+    </style>
+
+    <style name="loan_app_2" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">15dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="layout_constraintStart_toStartOf">@id/guideline9</item>
+    </style>
+
+    <style name="loan_app_text_2" parent="@android:style/Widget.TextView">
+    <item name="android:textSize">15dp</item>
+    <item name="android:gravity">left|center_vertical</item>
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">40dp</item>
+    <item name="layout_constraintStart_toStartOf">@id/guideline10</item>
+    <item name="layout_constraintEnd_toEndOf">parent</item>
+</style>
+</resources>

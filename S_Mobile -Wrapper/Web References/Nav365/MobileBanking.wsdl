@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/MobileBanking" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileBanking" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/MobileBanking" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="ActivateCustomer">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="middleName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="nationalIDNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="email" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="dateofBirth" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="gender" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ActivateCustomer_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="middleName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="nationalIDNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="email" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="dateofBirth" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="gender" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ClearParameters">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ClearParameters_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateLoanApplication">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="memberNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="productCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="appliedAmount" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="installments" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateLoanApplication_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="memberNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="productCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="appliedAmount" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="installments" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLoanBalance">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="memberNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="loanNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLoanBalance_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="memberNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="loanNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLoanProducts">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLoanProducts_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetMemberProfile">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="phoneNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetMemberProfile_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetSavingsProducts">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetSavingsProducts_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="MiniStatement">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="accountNumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="MiniStatement_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="accountNumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseMessage" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="ActivateCustomer">
+    <part name="parameters" element="tns:ActivateCustomer" />
+  </message>
+  <message name="ActivateCustomer_Result">
+    <part name="parameters" element="tns:ActivateCustomer_Result" />
+  </message>
+  <message name="ClearParameters">
+    <part name="parameters" element="tns:ClearParameters" />
+  </message>
+  <message name="ClearParameters_Result">
+    <part name="parameters" element="tns:ClearParameters_Result" />
+  </message>
+  <message name="CreateLoanApplication">
+    <part name="parameters" element="tns:CreateLoanApplication" />
+  </message>
+  <message name="CreateLoanApplication_Result">
+    <part name="parameters" element="tns:CreateLoanApplication_Result" />
+  </message>
+  <message name="GetLoanBalance">
+    <part name="parameters" element="tns:GetLoanBalance" />
+  </message>
+  <message name="GetLoanBalance_Result">
+    <part name="parameters" element="tns:GetLoanBalance_Result" />
+  </message>
+  <message name="GetLoanProducts">
+    <part name="parameters" element="tns:GetLoanProducts" />
+  </message>
+  <message name="GetLoanProducts_Result">
+    <part name="parameters" element="tns:GetLoanProducts_Result" />
+  </message>
+  <message name="GetMemberProfile">
+    <part name="parameters" element="tns:GetMemberProfile" />
+  </message>
+  <message name="GetMemberProfile_Result">
+    <part name="parameters" element="tns:GetMemberProfile_Result" />
+  </message>
+  <message name="GetSavingsProducts">
+    <part name="parameters" element="tns:GetSavingsProducts" />
+  </message>
+  <message name="GetSavingsProducts_Result">
+    <part name="parameters" element="tns:GetSavingsProducts_Result" />
+  </message>
+  <message name="MiniStatement">
+    <part name="parameters" element="tns:MiniStatement" />
+  </message>
+  <message name="MiniStatement_Result">
+    <part name="parameters" element="tns:MiniStatement_Result" />
+  </message>
+  <portType name="MobileBanking_Port">
+    <operation name="ActivateCustomer">
+      <input name="ActivateCustomer" message="tns:ActivateCustomer" />
+      <output name="ActivateCustomer_Result" message="tns:ActivateCustomer_Result" />
+    </operation>
+    <operation name="ClearParameters">
+      <input name="ClearParameters" message="tns:ClearParameters" />
+      <output name="ClearParameters_Result" message="tns:ClearParameters_Result" />
+    </operation>
+    <operation name="CreateLoanApplication">
+      <input name="CreateLoanApplication" message="tns:CreateLoanApplication" />
+      <output name="CreateLoanApplication_Result" message="tns:CreateLoanApplication_Result" />
+    </operation>
+    <operation name="GetLoanBalance">
+      <input name="GetLoanBalance" message="tns:GetLoanBalance" />
+      <output name="GetLoanBalance_Result" message="tns:GetLoanBalance_Result" />
+    </operation>
+    <operation name="GetLoanProducts">
+      <input name="GetLoanProducts" message="tns:GetLoanProducts" />
+      <output name="GetLoanProducts_Result" message="tns:GetLoanProducts_Result" />
+    </operation>
+    <operation name="GetMemberProfile">
+      <input name="GetMemberProfile" message="tns:GetMemberProfile" />
+      <output name="GetMemberProfile_Result" message="tns:GetMemberProfile_Result" />
+    </operation>
+    <operation name="GetSavingsProducts">
+      <input name="GetSavingsProducts" message="tns:GetSavingsProducts" />
+      <output name="GetSavingsProducts_Result" message="tns:GetSavingsProducts_Result" />
+    </operation>
+    <operation name="MiniStatement">
+      <input name="MiniStatement" message="tns:MiniStatement" />
+      <output name="MiniStatement_Result" message="tns:MiniStatement_Result" />
+    </operation>
+  </portType>
+  <binding name="MobileBanking_Binding" type="tns:MobileBanking_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="ActivateCustomer">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileBanking:ActivateCustomer" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ActivateCustomer">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ActivateCustomer_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ClearParameters">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileBanking:ClearParameters" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ClearParameters">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ClearParameters_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreateLoanApplication">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileBanking:CreateLoanApplication" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreateLoanApplication">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreateLoanApplication_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetLoanBalance">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileBanking:GetLoanBalance" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetLoanBalance">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetLoanBalance_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetLoanProducts">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileBanking:GetLoanProducts" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetLoanProducts">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetLoanProducts_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetMemberProfile">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileBanking:GetMemberProfile" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetMemberProfile">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetMemberProfile_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetSavingsProducts">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileBanking:GetSavingsProducts" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetSavingsProducts">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetSavingsProducts_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="MiniStatement">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/MobileBanking:MiniStatement" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="MiniStatement">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="MiniStatement_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="MobileBanking">
+    <port name="MobileBanking_Port" binding="tns:MobileBanking_Binding">
+      <address location="http://144.91.72.27:8047/Integrations/WS/TOVU/Codeunit/MobileBanking" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,763 @@
+GENERAL,OPEN BAL,1,Customer,0001,01/01/2020,Open Bal With,Opening Balance Withdrawable,"212,079.09 ",Savings
+GENERAL,OPEN BAL,2,Customer,0002,01/01/2020,Open Bal With,Opening Balance Withdrawable,"29,361.26 ",Savings
+GENERAL,OPEN BAL,3,Customer,0003,01/01/2020,Open Bal With,Opening Balance Withdrawable,"236,041.94 ",Savings
+GENERAL,OPEN BAL,4,Customer,0004,01/01/2020,Open Bal With,Opening Balance Withdrawable,(562.34),Savings
+GENERAL,OPEN BAL,5,Customer,0005,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(16,000.00)",Savings
+GENERAL,OPEN BAL,6,Customer,0006,01/01/2020,Open Bal With,Opening Balance Withdrawable,(10.00),Savings
+GENERAL,OPEN BAL,7,Customer,0007,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,200.00)",Savings
+GENERAL,OPEN BAL,8,Customer,0008,01/01/2020,Open Bal With,Opening Balance Withdrawable,"149,437.30 ",Savings
+GENERAL,OPEN BAL,9,Customer,0009,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(7,724.00)",Savings
+GENERAL,OPEN BAL,10,Customer,0010,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(12,972.00)",Savings
+GENERAL,OPEN BAL,11,Customer,0012,01/01/2020,Open Bal With,Opening Balance Withdrawable,"14,018.20 ",Savings
+GENERAL,OPEN BAL,12,Customer,0013,01/01/2020,Open Bal With,Opening Balance Withdrawable,100.00 ,Savings
+GENERAL,OPEN BAL,13,Customer,0014,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(73,220.00)",Savings
+GENERAL,OPEN BAL,14,Customer,0015,01/01/2020,Open Bal With,Opening Balance Withdrawable,(620.04),Savings
+GENERAL,OPEN BAL,15,Customer,0017,01/01/2020,Open Bal With,Opening Balance Withdrawable,(31.00),Savings
+GENERAL,OPEN BAL,16,Customer,0018,01/01/2020,Open Bal With,Opening Balance Withdrawable,"4,084.00 ",Savings
+GENERAL,OPEN BAL,17,Customer,0019,01/01/2020,Open Bal With,Opening Balance Withdrawable,(35.30),Savings
+GENERAL,OPEN BAL,18,Customer,0023,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(50,731.26)",Savings
+GENERAL,OPEN BAL,19,Customer,0024,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(6,601.00)",Savings
+GENERAL,OPEN BAL,20,Customer,0025,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,632,845.44 ",Savings
+GENERAL,OPEN BAL,21,Customer,0026,01/01/2020,Open Bal With,Opening Balance Withdrawable,183.60 ,Savings
+GENERAL,OPEN BAL,22,Customer,0027,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,23,Customer,0030,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(15,241.23)",Savings
+GENERAL,OPEN BAL,24,Customer,0031,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,25,Customer,0032,01/01/2020,Open Bal With,Opening Balance Withdrawable,"390,911.73 ",Savings
+GENERAL,OPEN BAL,26,Customer,0035,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,290.00)",Savings
+GENERAL,OPEN BAL,27,Customer,0038,01/01/2020,Open Bal With,Opening Balance Withdrawable,"52,172.67 ",Savings
+GENERAL,OPEN BAL,28,Customer,0039,01/01/2020,Open Bal With,Opening Balance Withdrawable,"72,052.39 ",Savings
+GENERAL,OPEN BAL,29,Customer,0041,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(68,200.00)",Savings
+GENERAL,OPEN BAL,30,Customer,0042,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,000.00)",Savings
+GENERAL,OPEN BAL,31,Customer,0050,01/01/2020,Open Bal With,Opening Balance Withdrawable,"11,224.00 ",Savings
+GENERAL,OPEN BAL,32,Customer,0051,01/01/2020,Open Bal With,Opening Balance Withdrawable,"16,901.98 ",Savings
+GENERAL,OPEN BAL,33,Customer,0052,01/01/2020,Open Bal With,Opening Balance Withdrawable,(59.00),Savings
+GENERAL,OPEN BAL,34,Customer,0053,01/01/2020,Open Bal With,Opening Balance Withdrawable,"15,287.08 ",Savings
+GENERAL,OPEN BAL,35,Customer,0055,01/01/2020,Open Bal With,Opening Balance Withdrawable,"23,415.23 ",Savings
+GENERAL,OPEN BAL,36,Customer,0057,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(10,188.98)",Savings
+GENERAL,OPEN BAL,37,Customer,0058,01/01/2020,Open Bal With,Opening Balance Withdrawable,"143,693.16 ",Savings
+GENERAL,OPEN BAL,38,Customer,0059,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,550.00)",Savings
+GENERAL,OPEN BAL,39,Customer,0060,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,40,Customer,0062,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(34,678.00)",Savings
+GENERAL,OPEN BAL,41,Customer,0063,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(7,570.82)",Savings
+GENERAL,OPEN BAL,42,Customer,0065,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(9,285.00)",Savings
+GENERAL,OPEN BAL,43,Customer,0067,01/01/2020,Open Bal With,Opening Balance Withdrawable,"32,018.44 ",Savings
+GENERAL,OPEN BAL,44,Customer,0068,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,45,Customer,0070,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,600.00 ",Savings
+GENERAL,OPEN BAL,46,Customer,0075,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(29,619.02)",Savings
+GENERAL,OPEN BAL,47,Customer,0079,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(14,860.00)",Savings
+GENERAL,OPEN BAL,48,Customer,0081,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(97,265.95)",Savings
+GENERAL,OPEN BAL,49,Customer,0082,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,50,Customer,0083,01/01/2020,Open Bal With,Opening Balance Withdrawable,(165.10),Savings
+GENERAL,OPEN BAL,51,Customer,0084,01/01/2020,Open Bal With,Opening Balance Withdrawable,(3.12),Savings
+GENERAL,OPEN BAL,52,Customer,0087,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,53,Customer,0091,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,211.09)",Savings
+GENERAL,OPEN BAL,54,Customer,0092,01/01/2020,Open Bal With,Opening Balance Withdrawable,"49,258.64 ",Savings
+GENERAL,OPEN BAL,55,Customer,0093,01/01/2020,Open Bal With,Opening Balance Withdrawable,"35,530.74 ",Savings
+GENERAL,OPEN BAL,56,Customer,0094,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,670.00 ",Savings
+GENERAL,OPEN BAL,57,Customer,0095,01/01/2020,Open Bal With,Opening Balance Withdrawable,"12,689.40 ",Savings
+GENERAL,OPEN BAL,58,Customer,0096,01/01/2020,Open Bal With,Opening Balance Withdrawable,(55.00),Savings
+GENERAL,OPEN BAL,59,Customer,0097,01/01/2020,Open Bal With,Opening Balance Withdrawable,(4.00),Savings
+GENERAL,OPEN BAL,60,Customer,0098,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,100.80)",Savings
+GENERAL,OPEN BAL,61,Customer,0100,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,62,Customer,0101,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,900.00)",Savings
+GENERAL,OPEN BAL,63,Customer,0102,01/01/2020,Open Bal With,Opening Balance Withdrawable,"20,099.00 ",Savings
+GENERAL,OPEN BAL,64,Customer,0104,01/01/2020,Open Bal With,Opening Balance Withdrawable,"8,058.18 ",Savings
+GENERAL,OPEN BAL,65,Customer,0106,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,270.00)",Savings
+GENERAL,OPEN BAL,66,Customer,0109,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(243,450.00)",Savings
+GENERAL,OPEN BAL,67,Customer,0110,01/01/2020,Open Bal With,Opening Balance Withdrawable,960.00 ,Savings
+GENERAL,OPEN BAL,68,Customer,0111,01/01/2020,Open Bal With,Opening Balance Withdrawable,635.22 ,Savings
+GENERAL,OPEN BAL,69,Customer,0112,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,70,Customer,0114,01/01/2020,Open Bal With,Opening Balance Withdrawable,"158,985.40 ",Savings
+GENERAL,OPEN BAL,71,Customer,0116,01/01/2020,Open Bal With,Opening Balance Withdrawable,(750.00),Savings
+GENERAL,OPEN BAL,72,Customer,0118,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,232.41)",Savings
+GENERAL,OPEN BAL,73,Customer,0119,01/01/2020,Open Bal With,Opening Balance Withdrawable,"17,744.00 ",Savings
+GENERAL,OPEN BAL,74,Customer,0122,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,100.00)",Savings
+GENERAL,OPEN BAL,75,Customer,0123,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,76,Customer,0124,01/01/2020,Open Bal With,Opening Balance Withdrawable,(470.00),Savings
+GENERAL,OPEN BAL,77,Customer,0125,01/01/2020,Open Bal With,Opening Balance Withdrawable,"15,920.00 ",Savings
+GENERAL,OPEN BAL,78,Customer,0127,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,79,Customer,0130,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,900.00 ",Savings
+GENERAL,OPEN BAL,80,Customer,0131,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,81,Customer,0132,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,82,Customer,0135,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,354.85)",Savings
+GENERAL,OPEN BAL,83,Customer,0137,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,84,Customer,0141,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,450.00)",Savings
+GENERAL,OPEN BAL,85,Customer,0142,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,000.00 ",Savings
+GENERAL,OPEN BAL,86,Customer,0144,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(7,700.00)",Savings
+GENERAL,OPEN BAL,87,Customer,0145,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,900.00)",Savings
+GENERAL,OPEN BAL,88,Customer,0150,01/01/2020,Open Bal With,Opening Balance Withdrawable,(409.00),Savings
+GENERAL,OPEN BAL,89,Customer,0153,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,600.00 ",Savings
+GENERAL,OPEN BAL,90,Customer,0158,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,300.00 ",Savings
+GENERAL,OPEN BAL,91,Customer,0159,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(494,923.00)",Savings
+GENERAL,OPEN BAL,92,Customer,0160,01/01/2020,Open Bal With,Opening Balance Withdrawable,(344.00),Savings
+GENERAL,OPEN BAL,93,Customer,0161,01/01/2020,Open Bal With,Opening Balance Withdrawable,"4,546.79 ",Savings
+GENERAL,OPEN BAL,94,Customer,0162,01/01/2020,Open Bal With,Opening Balance Withdrawable,"9,886.35 ",Savings
+GENERAL,OPEN BAL,95,Customer,0164,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,350.00)",Savings
+GENERAL,OPEN BAL,96,Customer,0167,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,97,Customer,0168,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,750.00 ",Savings
+GENERAL,OPEN BAL,98,Customer,0170,01/01/2020,Open Bal With,Opening Balance Withdrawable,"6,900.00 ",Savings
+GENERAL,OPEN BAL,99,Customer,0171,01/01/2020,Open Bal With,Opening Balance Withdrawable,"10,441.10 ",Savings
+GENERAL,OPEN BAL,100,Customer,0174,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,100.00 ",Savings
+GENERAL,OPEN BAL,101,Customer,0177,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,102,Customer,0180,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,300.00 ",Savings
+GENERAL,OPEN BAL,103,Customer,0182,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(64,013.00)",Savings
+GENERAL,OPEN BAL,104,Customer,0183,01/01/2020,Open Bal With,Opening Balance Withdrawable,"422,637.60 ",Savings
+GENERAL,OPEN BAL,105,Customer,0184,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,200.00 ",Savings
+GENERAL,OPEN BAL,106,Customer,0187,01/01/2020,Open Bal With,Opening Balance Withdrawable,"6,194.00 ",Savings
+GENERAL,OPEN BAL,107,Customer,0188,01/01/2020,Open Bal With,Opening Balance Withdrawable,"5,133.00 ",Savings
+GENERAL,OPEN BAL,108,Customer,0189,01/01/2020,Open Bal With,Opening Balance Withdrawable,(1.22),Savings
+GENERAL,OPEN BAL,109,Customer,0190,01/01/2020,Open Bal With,Opening Balance Withdrawable,"19,332.55 ",Savings
+GENERAL,OPEN BAL,110,Customer,0193,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,252.63)",Savings
+GENERAL,OPEN BAL,111,Customer,0195,01/01/2020,Open Bal With,Opening Balance Withdrawable,"308,773.18 ",Savings
+GENERAL,OPEN BAL,112,Customer,0197,01/01/2020,Open Bal With,Opening Balance Withdrawable,"145,900.00 ",Savings
+GENERAL,OPEN BAL,113,Customer,0198,01/01/2020,Open Bal With,Opening Balance Withdrawable,(950.00),Savings
+GENERAL,OPEN BAL,114,Customer,0199,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,700.00 ",Savings
+GENERAL,OPEN BAL,115,Customer,0202,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,334.00)",Savings
+GENERAL,OPEN BAL,116,Customer,0203,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(64,207.10)",Savings
+GENERAL,OPEN BAL,117,Customer,0204,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,118,Customer,0205,01/01/2020,Open Bal With,Opening Balance Withdrawable,(169.00),Savings
+GENERAL,OPEN BAL,119,Customer,0207,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,500.00 ",Savings
+GENERAL,OPEN BAL,120,Customer,0210,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,200.00 ",Savings
+GENERAL,OPEN BAL,121,Customer,0211,01/01/2020,Open Bal With,Opening Balance Withdrawable,(253.00),Savings
+GENERAL,OPEN BAL,122,Customer,0214,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,200.00 ",Savings
+GENERAL,OPEN BAL,123,Customer,0216,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,124,Customer,0217,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,125,Customer,0219,01/01/2020,Open Bal With,Opening Balance Withdrawable,(9.66),Savings
+GENERAL,OPEN BAL,126,Customer,0225,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,950.00)",Savings
+GENERAL,OPEN BAL,127,Customer,0228,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,128,Customer,0229,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,129,Customer,0232,01/01/2020,Open Bal With,Opening Balance Withdrawable,"185,848.18 ",Savings
+GENERAL,OPEN BAL,130,Customer,0233,01/01/2020,Open Bal With,Opening Balance Withdrawable,(150.00),Savings
+GENERAL,OPEN BAL,131,Customer,0237,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(21,927.40)",Savings
+GENERAL,OPEN BAL,132,Customer,0238,01/01/2020,Open Bal With,Opening Balance Withdrawable,400.00 ,Savings
+GENERAL,OPEN BAL,133,Customer,0239,01/01/2020,Open Bal With,Opening Balance Withdrawable,(2.99),Savings
+GENERAL,OPEN BAL,134,Customer,0240,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,200.00 ",Savings
+GENERAL,OPEN BAL,135,Customer,0241,01/01/2020,Open Bal With,Opening Balance Withdrawable,250.00 ,Savings
+GENERAL,OPEN BAL,136,Customer,0242,01/01/2020,Open Bal With,Opening Balance Withdrawable,"128,221.57 ",Savings
+GENERAL,OPEN BAL,137,Customer,0243,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,700.00)",Savings
+GENERAL,OPEN BAL,138,Customer,0245,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,139,Customer,0246,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,450.00 ",Savings
+GENERAL,OPEN BAL,140,Customer,0247,01/01/2020,Open Bal With,Opening Balance Withdrawable,598.00 ,Savings
+GENERAL,OPEN BAL,141,Customer,0251,01/01/2020,Open Bal With,Opening Balance Withdrawable,(650.00),Savings
+GENERAL,OPEN BAL,142,Customer,0252,01/01/2020,Open Bal With,Opening Balance Withdrawable,500.00 ,Savings
+GENERAL,OPEN BAL,143,Customer,0254,01/01/2020,Open Bal With,Opening Balance Withdrawable,"35,971.00 ",Savings
+GENERAL,OPEN BAL,144,Customer,0255,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,145,Customer,0256,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,146,Customer,0258,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,147,Customer,0259,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,148,Customer,0260,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,149,Customer,0261,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,400.00 ",Savings
+GENERAL,OPEN BAL,150,Customer,0262,01/01/2020,Open Bal With,Opening Balance Withdrawable,"29,256.66 ",Savings
+GENERAL,OPEN BAL,151,Customer,0264,01/01/2020,Open Bal With,Opening Balance Withdrawable,"38,535.00 ",Savings
+GENERAL,OPEN BAL,152,Customer,0266,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,153,Customer,0267,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,154,Customer,0270,01/01/2020,Open Bal With,Opening Balance Withdrawable,(10.00),Savings
+GENERAL,OPEN BAL,155,Customer,0271,01/01/2020,Open Bal With,Opening Balance Withdrawable,800.00 ,Savings
+GENERAL,OPEN BAL,156,Customer,0272,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(10,617.00)",Savings
+GENERAL,OPEN BAL,157,Customer,0274,01/01/2020,Open Bal With,Opening Balance Withdrawable,"7,600.00 ",Savings
+GENERAL,OPEN BAL,158,Customer,0275,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,159,Customer,0276,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,300.00 ",Savings
+GENERAL,OPEN BAL,160,Customer,0277,01/01/2020,Open Bal With,Opening Balance Withdrawable,600.00 ,Savings
+GENERAL,OPEN BAL,161,Customer,0278,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,100.00)",Savings
+GENERAL,OPEN BAL,162,Customer,0280,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,163,Customer,0281,01/01/2020,Open Bal With,Opening Balance Withdrawable,"128,290.49 ",Savings
+GENERAL,OPEN BAL,164,Customer,0282,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,517.44)",Savings
+GENERAL,OPEN BAL,165,Customer,0283,01/01/2020,Open Bal With,Opening Balance Withdrawable,(249.00),Savings
+GENERAL,OPEN BAL,166,Customer,0286,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,167,Customer,0287,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,168,Customer,0288,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,400.00 ",Savings
+GENERAL,OPEN BAL,169,Customer,0289,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,500.00)",Savings
+GENERAL,OPEN BAL,170,Customer,0291,01/01/2020,Open Bal With,Opening Balance Withdrawable,"283,970.69 ",Savings
+GENERAL,OPEN BAL,171,Customer,0292,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,172,Customer,0293,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,173,Customer,0294,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,174,Customer,0295,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,175,Customer,0296,01/01/2020,Open Bal With,Opening Balance Withdrawable,(111.00),Savings
+GENERAL,OPEN BAL,176,Customer,0297,01/01/2020,Open Bal With,Opening Balance Withdrawable,"8,601.00 ",Savings
+GENERAL,OPEN BAL,177,Customer,0298,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,700.00)",Savings
+GENERAL,OPEN BAL,178,Customer,0299,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,179,Customer,0300,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,180,Customer,0301,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,181,Customer,0303,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,999.14 ",Savings
+GENERAL,OPEN BAL,182,Customer,0305,01/01/2020,Open Bal With,Opening Balance Withdrawable,"245,971.00 ",Savings
+GENERAL,OPEN BAL,183,Customer,0306,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,000.00)",Savings
+GENERAL,OPEN BAL,184,Customer,0308,01/01/2020,Open Bal With,Opening Balance Withdrawable,90.00 ,Savings
+GENERAL,OPEN BAL,185,Customer,0309,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,050.00)",Savings
+GENERAL,OPEN BAL,186,Customer,0310,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,700.00)",Savings
+GENERAL,OPEN BAL,187,Customer,0311,01/01/2020,Open Bal With,Opening Balance Withdrawable,"4,900.00 ",Savings
+GENERAL,OPEN BAL,188,Customer,0313,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,189,Customer,0315,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,550.00 ",Savings
+GENERAL,OPEN BAL,190,Customer,0316,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,250.00)",Savings
+GENERAL,OPEN BAL,191,Customer,0318,01/01/2020,Open Bal With,Opening Balance Withdrawable,700.00 ,Savings
+GENERAL,OPEN BAL,192,Customer,0320,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,193,Customer,0321,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,200.00 ",Savings
+GENERAL,OPEN BAL,194,Customer,0322,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,195,Customer,0323,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,700.00 ",Savings
+GENERAL,OPEN BAL,196,Customer,0324,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,197,Customer,0325,01/01/2020,Open Bal With,Opening Balance Withdrawable,"6,300.00 ",Savings
+GENERAL,OPEN BAL,198,Customer,0326,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,700.00 ",Savings
+GENERAL,OPEN BAL,199,Customer,0328,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,200,Customer,0331,01/01/2020,Open Bal With,Opening Balance Withdrawable,(150.00),Savings
+GENERAL,OPEN BAL,201,Customer,0332,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,202,Customer,0333,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,203,Customer,0335,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,400.00)",Savings
+GENERAL,OPEN BAL,204,Customer,0336,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,000.00 ",Savings
+GENERAL,OPEN BAL,205,Customer,0339,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,206,Customer,0340,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,207,Customer,0341,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,208,Customer,0342,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,209,Customer,0343,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,210,Customer,0345,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,211,Customer,0346,01/01/2020,Open Bal With,Opening Balance Withdrawable,700.00 ,Savings
+GENERAL,OPEN BAL,212,Customer,0347,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,213,Customer,0348,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,800.00)",Savings
+GENERAL,OPEN BAL,214,Customer,0351,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,215,Customer,0352,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,216,Customer,0353,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,217,Customer,0354,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,218,Customer,0356,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,219,Customer,0358,01/01/2020,Open Bal With,Opening Balance Withdrawable,(186.00),Savings
+GENERAL,OPEN BAL,220,Customer,0360,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,221,Customer,0361,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,222,Customer,0362,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,550.00 ",Savings
+GENERAL,OPEN BAL,223,Customer,0363,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,224,Customer,0364,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,225,Customer,0365,01/01/2020,Open Bal With,Opening Balance Withdrawable,"6,368.00 ",Savings
+GENERAL,OPEN BAL,226,Customer,0367,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,227,Customer,0368,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,228,Customer,0371,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,229,Customer,0372,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,950.00)",Savings
+GENERAL,OPEN BAL,230,Customer,0373,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(28,920.00)",Savings
+GENERAL,OPEN BAL,231,Customer,0375,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,232,Customer,0376,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,700.00 ",Savings
+GENERAL,OPEN BAL,233,Customer,0377,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,234,Customer,0378,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,235,Customer,0379,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,236,Customer,0382,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,237,Customer,0384,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,238,Customer,0385,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,239,Customer,0386,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,240,Customer,0390,01/01/2020,Open Bal With,Opening Balance Withdrawable,(156.00),Savings
+GENERAL,OPEN BAL,241,Customer,0391,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,700.00)",Savings
+GENERAL,OPEN BAL,242,Customer,0392,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,243,Customer,0393,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,244,Customer,0394,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,245,Customer,0395,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,700.00)",Savings
+GENERAL,OPEN BAL,246,Customer,0396,01/01/2020,Open Bal With,Opening Balance Withdrawable,100.00 ,Savings
+GENERAL,OPEN BAL,247,Customer,0398,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,248,Customer,0400,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,950.00)",Savings
+GENERAL,OPEN BAL,249,Customer,0401,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,250,Customer,0402,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,251,Customer,0403,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,252,Customer,0404,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,253,Customer,0405,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,100.00 ",Savings
+GENERAL,OPEN BAL,254,Customer,0406,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,255,Customer,0407,01/01/2020,Open Bal With,Opening Balance Withdrawable,(950.00),Savings
+GENERAL,OPEN BAL,256,Customer,0408,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,257,Customer,0409,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,350.00)",Savings
+GENERAL,OPEN BAL,258,Customer,0410,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,600.00)",Savings
+GENERAL,OPEN BAL,259,Customer,0413,01/01/2020,Open Bal With,Opening Balance Withdrawable,"10,260.01 ",Savings
+GENERAL,OPEN BAL,260,Customer,0414,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,000.00)",Savings
+GENERAL,OPEN BAL,261,Customer,0415,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,802.74)",Savings
+GENERAL,OPEN BAL,262,Customer,0418,01/01/2020,Open Bal With,Opening Balance Withdrawable,100.00 ,Savings
+GENERAL,OPEN BAL,263,Customer,0420,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,264,Customer,0421,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,265,Customer,0422,01/01/2020,Open Bal With,Opening Balance Withdrawable,174.58 ,Savings
+GENERAL,OPEN BAL,266,Customer,0424,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,267,Customer,0425,01/01/2020,Open Bal With,Opening Balance Withdrawable,(150.00),Savings
+GENERAL,OPEN BAL,268,Customer,0427,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,450.00)",Savings
+GENERAL,OPEN BAL,269,Customer,0428,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,270,Customer,0429,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,271,Customer,0430,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,272,Customer,0431,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,700.00 ",Savings
+GENERAL,OPEN BAL,273,Customer,0432,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,274,Customer,0433,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,050.00)",Savings
+GENERAL,OPEN BAL,275,Customer,0434,01/01/2020,Open Bal With,Opening Balance Withdrawable,"105,821.17 ",Savings
+GENERAL,OPEN BAL,276,Customer,0435,01/01/2020,Open Bal With,Opening Balance Withdrawable,"44,417.90 ",Savings
+GENERAL,OPEN BAL,277,Customer,0437,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,700.00)",Savings
+GENERAL,OPEN BAL,278,Customer,0438,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,279,Customer,0440,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,280,Customer,0441,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,281,Customer,0443,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,282,Customer,0444,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(11,900.00)",Savings
+GENERAL,OPEN BAL,283,Customer,0445,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,284,Customer,0446,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,285,Customer,0447,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,286,Customer,0448,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,400.00)",Savings
+GENERAL,OPEN BAL,287,Customer,0449,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,100.00)",Savings
+GENERAL,OPEN BAL,288,Customer,0450,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,350.00 ",Savings
+GENERAL,OPEN BAL,289,Customer,0451,01/01/2020,Open Bal With,Opening Balance Withdrawable,750.00 ,Savings
+GENERAL,OPEN BAL,290,Customer,0452,01/01/2020,Open Bal With,Opening Balance Withdrawable,"216,837.64 ",Savings
+GENERAL,OPEN BAL,291,Customer,0453,01/01/2020,Open Bal With,Opening Balance Withdrawable,500.00 ,Savings
+GENERAL,OPEN BAL,292,Customer,0456,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,150.00)",Savings
+GENERAL,OPEN BAL,293,Customer,0459,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,100.00 ",Savings
+GENERAL,OPEN BAL,294,Customer,0460,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,700.00)",Savings
+GENERAL,OPEN BAL,295,Customer,0461,01/01/2020,Open Bal With,Opening Balance Withdrawable,"8,800.00 ",Savings
+GENERAL,OPEN BAL,296,Customer,0463,01/01/2020,Open Bal With,Opening Balance Withdrawable,900.00 ,Savings
+GENERAL,OPEN BAL,297,Customer,0464,01/01/2020,Open Bal With,Opening Balance Withdrawable,"10,902.41 ",Savings
+GENERAL,OPEN BAL,298,Customer,0465,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,300.00)",Savings
+GENERAL,OPEN BAL,299,Customer,0466,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,300,Customer,0468,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,050.00)",Savings
+GENERAL,OPEN BAL,301,Customer,0470,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,302,Customer,0471,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,303,Customer,0473,01/01/2020,Open Bal With,Opening Balance Withdrawable,(430.00),Savings
+GENERAL,OPEN BAL,304,Customer,0474,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,305,Customer,0475,01/01/2020,Open Bal With,Opening Balance Withdrawable,(9.00),Savings
+GENERAL,OPEN BAL,306,Customer,0476,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,307,Customer,0477,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,900.00 ",Savings
+GENERAL,OPEN BAL,308,Customer,0478,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,100.00)",Savings
+GENERAL,OPEN BAL,309,Customer,0482,01/01/2020,Open Bal With,Opening Balance Withdrawable,"8,864.00 ",Savings
+GENERAL,OPEN BAL,310,Customer,0484,01/01/2020,Open Bal With,Opening Balance Withdrawable,(4.00),Savings
+GENERAL,OPEN BAL,311,Customer,0487,01/01/2020,Open Bal With,Opening Balance Withdrawable,(250.00),Savings
+GENERAL,OPEN BAL,312,Customer,0488,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,000.00 ",Savings
+GENERAL,OPEN BAL,313,Customer,0489,01/01/2020,Open Bal With,Opening Balance Withdrawable,(252.96),Savings
+GENERAL,OPEN BAL,314,Customer,0490,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,315,Customer,0491,01/01/2020,Open Bal With,Opening Balance Withdrawable,900.00 ,Savings
+GENERAL,OPEN BAL,316,Customer,0492,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,500.00)",Savings
+GENERAL,OPEN BAL,317,Customer,0493,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,318,Customer,0494,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,319,Customer,0495,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,320,Customer,0496,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,321,Customer,0497,01/01/2020,Open Bal With,Opening Balance Withdrawable,(760.00),Savings
+GENERAL,OPEN BAL,322,Customer,0498,01/01/2020,Open Bal With,Opening Balance Withdrawable,400.00 ,Savings
+GENERAL,OPEN BAL,323,Customer,0499,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,000.00 ",Savings
+GENERAL,OPEN BAL,324,Customer,0500,01/01/2020,Open Bal With,Opening Balance Withdrawable,100.00 ,Savings
+GENERAL,OPEN BAL,325,Customer,0501,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,800.00)",Savings
+GENERAL,OPEN BAL,326,Customer,0502,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,327,Customer,0503,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,328,Customer,0504,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,329,Customer,0505,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,330,Customer,0507,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,000.00 ",Savings
+GENERAL,OPEN BAL,331,Customer,0508,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,600.00 ",Savings
+GENERAL,OPEN BAL,332,Customer,0509,01/01/2020,Open Bal With,Opening Balance Withdrawable,"15,311.00 ",Savings
+GENERAL,OPEN BAL,333,Customer,0511,01/01/2020,Open Bal With,Opening Balance Withdrawable,(450.00),Savings
+GENERAL,OPEN BAL,334,Customer,0512,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,335,Customer,0515,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,900.00)",Savings
+GENERAL,OPEN BAL,336,Customer,0517,01/01/2020,Open Bal With,Opening Balance Withdrawable,"4,100.00 ",Savings
+GENERAL,OPEN BAL,337,Customer,0518,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,600.00 ",Savings
+GENERAL,OPEN BAL,338,Customer,0519,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,050.00)",Savings
+GENERAL,OPEN BAL,339,Customer,0520,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(28,410.00)",Savings
+GENERAL,OPEN BAL,340,Customer,0522,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,341,Customer,0523,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,200.00 ",Savings
+GENERAL,OPEN BAL,342,Customer,0525,01/01/2020,Open Bal With,Opening Balance Withdrawable,"42,751.64 ",Savings
+GENERAL,OPEN BAL,343,Customer,0526,01/01/2020,Open Bal With,Opening Balance Withdrawable,800.00 ,Savings
+GENERAL,OPEN BAL,344,Customer,0528,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(74,750.00)",Savings
+GENERAL,OPEN BAL,345,Customer,0529,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,600.00)",Savings
+GENERAL,OPEN BAL,346,Customer,0530,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,347,Customer,0531,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,700.00 ",Savings
+GENERAL,OPEN BAL,348,Customer,0532,01/01/2020,Open Bal With,Opening Balance Withdrawable,900.00 ,Savings
+GENERAL,OPEN BAL,349,Customer,0533,01/01/2020,Open Bal With,Opening Balance Withdrawable,(150.00),Savings
+GENERAL,OPEN BAL,350,Customer,0534,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,200.00 ",Savings
+GENERAL,OPEN BAL,351,Customer,0535,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,268.00)",Savings
+GENERAL,OPEN BAL,352,Customer,0536,01/01/2020,Open Bal With,Opening Balance Withdrawable,"129,750.00 ",Savings
+GENERAL,OPEN BAL,353,Customer,0539,01/01/2020,Open Bal With,Opening Balance Withdrawable,"14,999.00 ",Savings
+GENERAL,OPEN BAL,354,Customer,0540,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,500.00)",Savings
+GENERAL,OPEN BAL,355,Customer,0541,01/01/2020,Open Bal With,Opening Balance Withdrawable,"149,116.39 ",Savings
+GENERAL,OPEN BAL,356,Customer,0543,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,357,Customer,0544,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,970.00 ",Savings
+GENERAL,OPEN BAL,358,Customer,0546,01/01/2020,Open Bal With,Opening Balance Withdrawable,(750.00),Savings
+GENERAL,OPEN BAL,359,Customer,0547,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,500.00)",Savings
+GENERAL,OPEN BAL,360,Customer,0551,01/01/2020,Open Bal With,Opening Balance Withdrawable,700.00 ,Savings
+GENERAL,OPEN BAL,361,Customer,0552,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,362,Customer,0554,01/01/2020,Open Bal With,Opening Balance Withdrawable,"75,709.41 ",Savings
+GENERAL,OPEN BAL,363,Customer,0555,01/01/2020,Open Bal With,Opening Balance Withdrawable,"553,128.00 ",Savings
+GENERAL,OPEN BAL,364,Customer,0556,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,100.00)",Savings
+GENERAL,OPEN BAL,365,Customer,0558,01/01/2020,Open Bal With,Opening Balance Withdrawable,200.00 ,Savings
+GENERAL,OPEN BAL,366,Customer,0559,01/01/2020,Open Bal With,Opening Balance Withdrawable,(7.47),Savings
+GENERAL,OPEN BAL,367,Customer,0560,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,368,Customer,0561,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,369,Customer,0562,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,370,Customer,0563,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,371,Customer,0564,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,850.00)",Savings
+GENERAL,OPEN BAL,372,Customer,0565,01/01/2020,Open Bal With,Opening Balance Withdrawable,(60.00),Savings
+GENERAL,OPEN BAL,373,Customer,0567,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,500.00 ",Savings
+GENERAL,OPEN BAL,374,Customer,0568,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,350.00)",Savings
+GENERAL,OPEN BAL,375,Customer,0569,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,100.00)",Savings
+GENERAL,OPEN BAL,376,Customer,0570,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,769.00)",Savings
+GENERAL,OPEN BAL,377,Customer,0572,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,378,Customer,0573,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,379,Customer,0574,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,400.00 ",Savings
+GENERAL,OPEN BAL,380,Customer,0575,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,381,Customer,0576,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,800.00 ",Savings
+GENERAL,OPEN BAL,382,Customer,0579,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,110.00)",Savings
+GENERAL,OPEN BAL,383,Customer,0580,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(44,628.09)",Savings
+GENERAL,OPEN BAL,384,Customer,0583,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,300.00 ",Savings
+GENERAL,OPEN BAL,385,Customer,0584,01/01/2020,Open Bal With,Opening Balance Withdrawable,150.00 ,Savings
+GENERAL,OPEN BAL,386,Customer,0586,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,387,Customer,0587,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,985.00)",Savings
+GENERAL,OPEN BAL,388,Customer,0588,01/01/2020,Open Bal With,Opening Balance Withdrawable,400.00 ,Savings
+GENERAL,OPEN BAL,389,Customer,0589,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,390,Customer,0590,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,998.96 ",Savings
+GENERAL,OPEN BAL,391,Customer,0591,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,392,Customer,0592,01/01/2020,Open Bal With,Opening Balance Withdrawable,"16,445.00 ",Savings
+GENERAL,OPEN BAL,393,Customer,0593,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,394,Customer,0594,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,900.00)",Savings
+GENERAL,OPEN BAL,395,Customer,0595,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,396,Customer,0596,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,397,Customer,0598,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,647.00)",Savings
+GENERAL,OPEN BAL,398,Customer,0599,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,399,Customer,0600,01/01/2020,Open Bal With,Opening Balance Withdrawable,"49,206.66 ",Savings
+GENERAL,OPEN BAL,400,Customer,0602,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,200.00 ",Savings
+GENERAL,OPEN BAL,401,Customer,0603,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,200.00 ",Savings
+GENERAL,OPEN BAL,402,Customer,0604,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,403,Customer,0606,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,404,Customer,0607,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,400.00 ",Savings
+GENERAL,OPEN BAL,405,Customer,0609,01/01/2020,Open Bal With,Opening Balance Withdrawable,"4,700.00 ",Savings
+GENERAL,OPEN BAL,406,Customer,0610,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,407,Customer,0611,01/01/2020,Open Bal With,Opening Balance Withdrawable,"20,399.00 ",Savings
+GENERAL,OPEN BAL,408,Customer,0613,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,409,Customer,0615,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(12,520.00)",Savings
+GENERAL,OPEN BAL,410,Customer,0616,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,918.00)",Savings
+GENERAL,OPEN BAL,411,Customer,0617,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,500.00)",Savings
+GENERAL,OPEN BAL,412,Customer,0619,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,413,Customer,0620,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,414,Customer,0622,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,415,Customer,0623,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,000.00 ",Savings
+GENERAL,OPEN BAL,416,Customer,0624,01/01/2020,Open Bal With,Opening Balance Withdrawable,"4,257.00 ",Savings
+GENERAL,OPEN BAL,417,Customer,0625,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,418,Customer,0626,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,419,Customer,0627,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,100.00 ",Savings
+GENERAL,OPEN BAL,420,Customer,0631,01/01/2020,Open Bal With,Opening Balance Withdrawable,"6,600.00 ",Savings
+GENERAL,OPEN BAL,421,Customer,0632,01/01/2020,Open Bal With,Opening Balance Withdrawable,100.00 ,Savings
+GENERAL,OPEN BAL,422,Customer,0634,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,400.00 ",Savings
+GENERAL,OPEN BAL,423,Customer,0637,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,700.00 ",Savings
+GENERAL,OPEN BAL,424,Customer,0638,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,650.00 ",Savings
+GENERAL,OPEN BAL,425,Customer,0639,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,900.00)",Savings
+GENERAL,OPEN BAL,426,Customer,0641,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,427,Customer,0642,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,428,Customer,0643,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,429,Customer,0644,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,430,Customer,0645,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,150.00)",Savings
+GENERAL,OPEN BAL,431,Customer,0646,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,432,Customer,0647,01/01/2020,Open Bal With,Opening Balance Withdrawable,700.00 ,Savings
+GENERAL,OPEN BAL,433,Customer,0648,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,700.00 ",Savings
+GENERAL,OPEN BAL,434,Customer,0649,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,435,Customer,0650,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,100.00)",Savings
+GENERAL,OPEN BAL,436,Customer,0652,01/01/2020,Open Bal With,Opening Balance Withdrawable,"18,000.05 ",Savings
+GENERAL,OPEN BAL,437,Customer,0653,01/01/2020,Open Bal With,Opening Balance Withdrawable,400.00 ,Savings
+GENERAL,OPEN BAL,438,Customer,0655,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,500.00)",Savings
+GENERAL,OPEN BAL,439,Customer,0656,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,850.00 ",Savings
+GENERAL,OPEN BAL,440,Customer,0657,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,300.00)",Savings
+GENERAL,OPEN BAL,441,Customer,0658,01/01/2020,Open Bal With,Opening Balance Withdrawable,(250.00),Savings
+GENERAL,OPEN BAL,442,Customer,0659,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,443,Customer,0663,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(62,061.00)",Savings
+GENERAL,OPEN BAL,444,Customer,0664,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(75,850.00)",Savings
+GENERAL,OPEN BAL,445,Customer,0666,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,446,Customer,0667,01/01/2020,Open Bal With,Opening Balance Withdrawable,"4,950.00 ",Savings
+GENERAL,OPEN BAL,447,Customer,0668,01/01/2020,Open Bal With,Opening Balance Withdrawable,(50.00),Savings
+GENERAL,OPEN BAL,448,Customer,0670,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(8,500.00)",Savings
+GENERAL,OPEN BAL,449,Customer,0671,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,300.00 ",Savings
+GENERAL,OPEN BAL,450,Customer,0672,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,050.00)",Savings
+GENERAL,OPEN BAL,451,Customer,0673,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,452,Customer,0674,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,453,Customer,0675,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,800.00 ",Savings
+GENERAL,OPEN BAL,454,Customer,0676,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,500.00 ",Savings
+GENERAL,OPEN BAL,455,Customer,0677,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,700.00 ",Savings
+GENERAL,OPEN BAL,456,Customer,0679,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,457,Customer,0680,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,458,Customer,0681,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,050.00)",Savings
+GENERAL,OPEN BAL,459,Customer,0682,01/01/2020,Open Bal With,Opening Balance Withdrawable,600.00 ,Savings
+GENERAL,OPEN BAL,460,Customer,0684,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,300.00)",Savings
+GENERAL,OPEN BAL,461,Customer,0685,01/01/2020,Open Bal With,Opening Balance Withdrawable,(250.00),Savings
+GENERAL,OPEN BAL,462,Customer,0687,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,463,Customer,0688,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,464,Customer,0689,01/01/2020,Open Bal With,Opening Balance Withdrawable,500.00 ,Savings
+GENERAL,OPEN BAL,465,Customer,0691,01/01/2020,Open Bal With,Opening Balance Withdrawable,"18,819.00 ",Savings
+GENERAL,OPEN BAL,466,Customer,0692,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,300.00 ",Savings
+GENERAL,OPEN BAL,467,Customer,0693,01/01/2020,Open Bal With,Opening Balance Withdrawable,"15,850.00 ",Savings
+GENERAL,OPEN BAL,468,Customer,0696,01/01/2020,Open Bal With,Opening Balance Withdrawable,100.00 ,Savings
+GENERAL,OPEN BAL,469,Customer,0698,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(29,510.00)",Savings
+GENERAL,OPEN BAL,470,Customer,0699,01/01/2020,Open Bal With,Opening Balance Withdrawable,400.00 ,Savings
+GENERAL,OPEN BAL,471,Customer,0700,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,550.00 ",Savings
+GENERAL,OPEN BAL,472,Customer,0701,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,473,Customer,0702,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,474,Customer,0703,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,900.00 ",Savings
+GENERAL,OPEN BAL,475,Customer,0704,01/01/2020,Open Bal With,Opening Balance Withdrawable,"73,500.00 ",Savings
+GENERAL,OPEN BAL,476,Customer,0705,01/01/2020,Open Bal With,Opening Balance Withdrawable,"15,909.00 ",Savings
+GENERAL,OPEN BAL,477,Customer,0706,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,700.00)",Savings
+GENERAL,OPEN BAL,478,Customer,0708,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(6,815.00)",Savings
+GENERAL,OPEN BAL,479,Customer,0709,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,200.00 ",Savings
+GENERAL,OPEN BAL,480,Customer,0710,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,481,Customer,0711,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,350.00 ",Savings
+GENERAL,OPEN BAL,482,Customer,0712,01/01/2020,Open Bal With,Opening Balance Withdrawable,(450.00),Savings
+GENERAL,OPEN BAL,483,Customer,0713,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,300.00)",Savings
+GENERAL,OPEN BAL,484,Customer,0714,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,600.00 ",Savings
+GENERAL,OPEN BAL,485,Customer,0715,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,486,Customer,0716,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,487,Customer,0717,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,488,Customer,0718,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,500.00 ",Savings
+GENERAL,OPEN BAL,489,Customer,0719,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,490,Customer,0720,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,300.00 ",Savings
+GENERAL,OPEN BAL,491,Customer,0721,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,492,Customer,0722,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,100.00)",Savings
+GENERAL,OPEN BAL,493,Customer,0723,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,400.00)",Savings
+GENERAL,OPEN BAL,494,Customer,0724,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,495,Customer,0726,01/01/2020,Open Bal With,Opening Balance Withdrawable,50.00 ,Savings
+GENERAL,OPEN BAL,496,Customer,0727,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,497,Customer,0728,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,300.00)",Savings
+GENERAL,OPEN BAL,498,Customer,0729,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,000.00 ",Savings
+GENERAL,OPEN BAL,499,Customer,0730,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,500,Customer,0731,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,900.00 ",Savings
+GENERAL,OPEN BAL,501,Customer,0732,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,502,Customer,0733,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,503,Customer,0734,01/01/2020,Open Bal With,Opening Balance Withdrawable,800.00 ,Savings
+GENERAL,OPEN BAL,504,Customer,0735,01/01/2020,Open Bal With,Opening Balance Withdrawable,600.00 ,Savings
+GENERAL,OPEN BAL,505,Customer,0736,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,506,Customer,0737,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,000.00 ",Savings
+GENERAL,OPEN BAL,507,Customer,0738,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,508,Customer,0739,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,509,Customer,0740,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,510,Customer,0741,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,400.00)",Savings
+GENERAL,OPEN BAL,511,Customer,0742,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,512,Customer,0744,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,600.00)",Savings
+GENERAL,OPEN BAL,513,Customer,0746,01/01/2020,Open Bal With,Opening Balance Withdrawable,"4,900.00 ",Savings
+GENERAL,OPEN BAL,514,Customer,0747,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,800.00)",Savings
+GENERAL,OPEN BAL,515,Customer,0748,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,516,Customer,0749,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,517,Customer,0750,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,518,Customer,0751,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,700.00 ",Savings
+GENERAL,OPEN BAL,519,Customer,0752,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,500.00)",Savings
+GENERAL,OPEN BAL,520,Customer,0753,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,000.00)",Savings
+GENERAL,OPEN BAL,521,Customer,0754,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,522,Customer,0755,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(7,700.00)",Savings
+GENERAL,OPEN BAL,523,Customer,0756,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,400.00)",Savings
+GENERAL,OPEN BAL,524,Customer,0757,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,525,Customer,0758,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,100.00 ",Savings
+GENERAL,OPEN BAL,526,Customer,0760,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,550.00)",Savings
+GENERAL,OPEN BAL,527,Customer,0761,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,600.00)",Savings
+GENERAL,OPEN BAL,528,Customer,0762,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,600.00)",Savings
+GENERAL,OPEN BAL,529,Customer,0763,01/01/2020,Open Bal With,Opening Balance Withdrawable,"5,250.00 ",Savings
+GENERAL,OPEN BAL,530,Customer,0764,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,531,Customer,0765,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,532,Customer,0766,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,650.00)",Savings
+GENERAL,OPEN BAL,533,Customer,0767,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,534,Customer,0768,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,535,Customer,0769,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,536,Customer,0770,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,537,Customer,0771,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,500.00 ",Savings
+GENERAL,OPEN BAL,538,Customer,0772,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,539,Customer,0774,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,300.00)",Savings
+GENERAL,OPEN BAL,540,Customer,0775,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,541,Customer,0776,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,300.00)",Savings
+GENERAL,OPEN BAL,542,Customer,0778,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,543,Customer,0779,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,544,Customer,0780,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,000.00 ",Savings
+GENERAL,OPEN BAL,545,Customer,0781,01/01/2020,Open Bal With,Opening Balance Withdrawable,"5,700.00 ",Savings
+GENERAL,OPEN BAL,546,Customer,0782,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,547,Customer,0783,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,548,Customer,0784,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,200.00)",Savings
+GENERAL,OPEN BAL,549,Customer,0785,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,550,Customer,0786,01/01/2020,Open Bal With,Opening Balance Withdrawable,400.00 ,Savings
+GENERAL,OPEN BAL,551,Customer,0787,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,552,Customer,0789,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,553,Customer,0790,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,554,Customer,0791,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,555,Customer,0792,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,300.00)",Savings
+GENERAL,OPEN BAL,556,Customer,0793,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,557,Customer,0796,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,558,Customer,0797,01/01/2020,Open Bal With,Opening Balance Withdrawable,300.00 ,Savings
+GENERAL,OPEN BAL,559,Customer,0798,01/01/2020,Open Bal With,Opening Balance Withdrawable,(650.00),Savings
+GENERAL,OPEN BAL,560,Customer,0799,01/01/2020,Open Bal With,Opening Balance Withdrawable,200.00 ,Savings
+GENERAL,OPEN BAL,561,Customer,0800,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,800.00 ",Savings
+GENERAL,OPEN BAL,562,Customer,0801,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,850.00)",Savings
+GENERAL,OPEN BAL,563,Customer,0802,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,564,Customer,0803,01/01/2020,Open Bal With,Opening Balance Withdrawable,750.00 ,Savings
+GENERAL,OPEN BAL,565,Customer,0804,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,566,Customer,0805,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,900.00)",Savings
+GENERAL,OPEN BAL,567,Customer,0806,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,568,Customer,0807,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,300.00)",Savings
+GENERAL,OPEN BAL,569,Customer,0808,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,570,Customer,0809,01/01/2020,Open Bal With,Opening Balance Withdrawable,500.00 ,Savings
+GENERAL,OPEN BAL,571,Customer,0811,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,572,Customer,0812,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,100.00 ",Savings
+GENERAL,OPEN BAL,573,Customer,0813,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,574,Customer,0814,01/01/2020,Open Bal With,Opening Balance Withdrawable,100.00 ,Savings
+GENERAL,OPEN BAL,575,Customer,0815,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,576,Customer,0816,01/01/2020,Open Bal With,Opening Balance Withdrawable,500.00 ,Savings
+GENERAL,OPEN BAL,577,Customer,0817,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,578,Customer,0818,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,600.00)",Savings
+GENERAL,OPEN BAL,579,Customer,0819,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,900.00 ",Savings
+GENERAL,OPEN BAL,580,Customer,0821,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,581,Customer,0822,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,600.00 ",Savings
+GENERAL,OPEN BAL,582,Customer,0823,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,583,Customer,0825,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,584,Customer,0826,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,400.00 ",Savings
+GENERAL,OPEN BAL,585,Customer,0827,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,000.00 ",Savings
+GENERAL,OPEN BAL,586,Customer,0828,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,587,Customer,0829,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,500.00)",Savings
+GENERAL,OPEN BAL,588,Customer,0830,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,589,Customer,0831,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,590,Customer,0832,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,591,Customer,0833,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,592,Customer,0834,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,593,Customer,0835,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,594,Customer,0837,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,600.00 ",Savings
+GENERAL,OPEN BAL,595,Customer,0838,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,500.00)",Savings
+GENERAL,OPEN BAL,596,Customer,0839,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(5,300.00)",Savings
+GENERAL,OPEN BAL,597,Customer,0840,01/01/2020,Open Bal With,Opening Balance Withdrawable,700.00 ,Savings
+GENERAL,OPEN BAL,598,Customer,0841,01/01/2020,Open Bal With,Opening Balance Withdrawable,200.00 ,Savings
+GENERAL,OPEN BAL,599,Customer,0842,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,600,Customer,0845,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,601,Customer,0846,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,602,Customer,0848,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,603,Customer,0849,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,604,Customer,0850,01/01/2020,Open Bal With,Opening Balance Withdrawable,(850.00),Savings
+GENERAL,OPEN BAL,605,Customer,0852,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,606,Customer,0853,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,000.00 ",Savings
+GENERAL,OPEN BAL,607,Customer,0854,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,608,Customer,0855,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,609,Customer,0856,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,100.00)",Savings
+GENERAL,OPEN BAL,610,Customer,0857,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,400.00)",Savings
+GENERAL,OPEN BAL,611,Customer,0858,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,612,Customer,0859,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,613,Customer,0860,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,614,Customer,0862,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,615,Customer,0863,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,616,Customer,0864,01/01/2020,Open Bal With,Opening Balance Withdrawable,700.00 ,Savings
+GENERAL,OPEN BAL,617,Customer,0865,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,600.00)",Savings
+GENERAL,OPEN BAL,618,Customer,0866,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,619,Customer,0867,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,200.00)",Savings
+GENERAL,OPEN BAL,620,Customer,0868,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,621,Customer,0870,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,622,Customer,0871,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,900.00)",Savings
+GENERAL,OPEN BAL,623,Customer,0875,01/01/2020,Open Bal With,Opening Balance Withdrawable,"10,800.00 ",Savings
+GENERAL,OPEN BAL,624,Customer,0876,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,600.00)",Savings
+GENERAL,OPEN BAL,625,Customer,0877,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,626,Customer,0878,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,600.00)",Savings
+GENERAL,OPEN BAL,627,Customer,0879,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,628,Customer,0880,01/01/2020,Open Bal With,Opening Balance Withdrawable,200.00 ,Savings
+GENERAL,OPEN BAL,629,Customer,0881,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,200.00 ",Savings
+GENERAL,OPEN BAL,630,Customer,0882,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,631,Customer,0883,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,632,Customer,0884,01/01/2020,Open Bal With,Opening Balance Withdrawable,"27,000.00 ",Savings
+GENERAL,OPEN BAL,633,Customer,0886,01/01/2020,Open Bal With,Opening Balance Withdrawable,200.00 ,Savings
+GENERAL,OPEN BAL,634,Customer,0887,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,635,Customer,0888,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,900.00 ",Savings
+GENERAL,OPEN BAL,636,Customer,0889,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,637,Customer,0891,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,638,Customer,0892,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,639,Customer,0894,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,400.00 ",Savings
+GENERAL,OPEN BAL,640,Customer,0895,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,641,Customer,0896,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,642,Customer,0897,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,643,Customer,0898,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,644,Customer,0899,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,645,Customer,0901,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,900.00 ",Savings
+GENERAL,OPEN BAL,646,Customer,0902,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,647,Customer,0903,01/01/2020,Open Bal With,Opening Balance Withdrawable,"3,558.00 ",Savings
+GENERAL,OPEN BAL,648,Customer,0904,01/01/2020,Open Bal With,Opening Balance Withdrawable,650.00 ,Savings
+GENERAL,OPEN BAL,649,Customer,0905,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,650,Customer,0906,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,651,Customer,0909,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,652,Customer,0910,01/01/2020,Open Bal With,Opening Balance Withdrawable,800.00 ,Savings
+GENERAL,OPEN BAL,653,Customer,0913,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,100.00)",Savings
+GENERAL,OPEN BAL,654,Customer,0914,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,655,Customer,0915,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,656,Customer,0916,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,657,Customer,0917,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,300.00 ",Savings
+GENERAL,OPEN BAL,658,Customer,0919,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,150.00)",Savings
+GENERAL,OPEN BAL,659,Customer,0921,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,660,Customer,0922,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(7,400.00)",Savings
+GENERAL,OPEN BAL,661,Customer,0923,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,000.00 ",Savings
+GENERAL,OPEN BAL,662,Customer,0924,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,663,Customer,0925,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,100.00)",Savings
+GENERAL,OPEN BAL,664,Customer,0927,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,150.00)",Savings
+GENERAL,OPEN BAL,665,Customer,0928,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,600.00 ",Savings
+GENERAL,OPEN BAL,666,Customer,0929,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,000.00 ",Savings
+GENERAL,OPEN BAL,667,Customer,0930,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,668,Customer,0931,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,550.00)",Savings
+GENERAL,OPEN BAL,669,Customer,0932,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,100.00)",Savings
+GENERAL,OPEN BAL,670,Customer,0933,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,200.00)",Savings
+GENERAL,OPEN BAL,671,Customer,0934,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(6,430.00)",Savings
+GENERAL,OPEN BAL,672,Customer,0935,01/01/2020,Open Bal With,Opening Balance Withdrawable,"10,800.00 ",Savings
+GENERAL,OPEN BAL,673,Customer,0936,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,450.00)",Savings
+GENERAL,OPEN BAL,674,Customer,0937,01/01/2020,Open Bal With,Opening Balance Withdrawable,"7,900.00 ",Savings
+GENERAL,OPEN BAL,675,Customer,0938,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,100.00 ",Savings
+GENERAL,OPEN BAL,676,Customer,0939,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,677,Customer,0940,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,678,Customer,0941,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(12,550.00)",Savings
+GENERAL,OPEN BAL,679,Customer,0942,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,500.00)",Savings
+GENERAL,OPEN BAL,680,Customer,0943,01/01/2020,Open Bal With,Opening Balance Withdrawable,900.00 ,Savings
+GENERAL,OPEN BAL,681,Customer,0944,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,682,Customer,0945,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,683,Customer,0946,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,684,Customer,0947,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,850.00 ",Savings
+GENERAL,OPEN BAL,685,Customer,0948,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,700.00)",Savings
+GENERAL,OPEN BAL,686,Customer,0949,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(7,500.00)",Savings
+GENERAL,OPEN BAL,687,Customer,0950,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,300.00)",Savings
+GENERAL,OPEN BAL,688,Customer,0951,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,689,Customer,0952,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,900.00)",Savings
+GENERAL,OPEN BAL,690,Customer,0953,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,691,Customer,0954,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,692,Customer,0955,01/01/2020,Open Bal With,Opening Balance Withdrawable,100.00 ,Savings
+GENERAL,OPEN BAL,693,Customer,0956,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,300.00)",Savings
+GENERAL,OPEN BAL,694,Customer,0959,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,700.00)",Savings
+GENERAL,OPEN BAL,695,Customer,0960,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,300.00)",Savings
+GENERAL,OPEN BAL,696,Customer,0961,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,697,Customer,0962,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,698,Customer,0964,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,699,Customer,0966,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,700,Customer,0967,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,701,Customer,0968,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,500.00)",Savings
+GENERAL,OPEN BAL,702,Customer,0969,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,500.00)",Savings
+GENERAL,OPEN BAL,703,Customer,0971,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(8,400.00)",Savings
+GENERAL,OPEN BAL,704,Customer,0972,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,700.00)",Savings
+GENERAL,OPEN BAL,705,Customer,0973,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,900.00)",Savings
+GENERAL,OPEN BAL,706,Customer,0974,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,707,Customer,0975,01/01/2020,Open Bal With,Opening Balance Withdrawable,(700.00),Savings
+GENERAL,OPEN BAL,708,Customer,0976,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings
+GENERAL,OPEN BAL,709,Customer,0977,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,700.00)",Savings
+GENERAL,OPEN BAL,710,Customer,0978,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,500.00 ",Savings
+GENERAL,OPEN BAL,711,Customer,0979,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,712,Customer,0981,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,713,Customer,0983,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,600.00)",Savings
+GENERAL,OPEN BAL,714,Customer,0984,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,715,Customer,0985,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,400.00)",Savings
+GENERAL,OPEN BAL,716,Customer,0986,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,717,Customer,0987,01/01/2020,Open Bal With,Opening Balance Withdrawable,400.00 ,Savings
+GENERAL,OPEN BAL,718,Customer,0988,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,700.00)",Savings
+GENERAL,OPEN BAL,719,Customer,0989,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,500.00)",Savings
+GENERAL,OPEN BAL,720,Customer,0990,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,721,Customer,0991,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,100.00)",Savings
+GENERAL,OPEN BAL,722,Customer,0992,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,723,Customer,0993,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,700.00 ",Savings
+GENERAL,OPEN BAL,724,Customer,0994,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,000.00 ",Savings
+GENERAL,OPEN BAL,725,Customer,0995,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,600.00)",Savings
+GENERAL,OPEN BAL,726,Customer,0996,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,727,Customer,0997,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,200.00)",Savings
+GENERAL,OPEN BAL,728,Customer,0998,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,729,Customer,0999,01/01/2020,Open Bal With,Opening Balance Withdrawable,(900.00),Savings
+GENERAL,OPEN BAL,730,Customer,1000,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,000.00)",Savings
+GENERAL,OPEN BAL,731,Customer,1001,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,732,Customer,1002,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(47,770.00)",Savings
+GENERAL,OPEN BAL,733,Customer,1003,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,734,Customer,1004,01/01/2020,Open Bal With,Opening Balance Withdrawable,(600.00),Savings
+GENERAL,OPEN BAL,735,Customer,1005,01/01/2020,Open Bal With,Opening Balance Withdrawable,200.00 ,Savings
+GENERAL,OPEN BAL,736,Customer,1007,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,200.00)",Savings
+GENERAL,OPEN BAL,737,Customer,1008,01/01/2020,Open Bal With,Opening Balance Withdrawable,200.00 ,Savings
+GENERAL,OPEN BAL,738,Customer,1009,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,739,Customer,1010,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(7,490.00)",Savings
+GENERAL,OPEN BAL,740,Customer,1011,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,741,Customer,1012,01/01/2020,Open Bal With,Opening Balance Withdrawable,500.00 ,Savings
+GENERAL,OPEN BAL,742,Customer,1013,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,400.00 ",Savings
+GENERAL,OPEN BAL,743,Customer,1014,01/01/2020,Open Bal With,Opening Balance Withdrawable,500.00 ,Savings
+GENERAL,OPEN BAL,744,Customer,1015,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,745,Customer,1016,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,800.00)",Savings
+GENERAL,OPEN BAL,746,Customer,1017,01/01/2020,Open Bal With,Opening Balance Withdrawable,"2,000.00 ",Savings
+GENERAL,OPEN BAL,747,Customer,1018,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(1,100.00)",Savings
+GENERAL,OPEN BAL,748,Customer,1019,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(3,300.00)",Savings
+GENERAL,OPEN BAL,749,Customer,1020,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,000.00 ",Savings
+GENERAL,OPEN BAL,750,Customer,1021,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(2,400.00)",Savings
+GENERAL,OPEN BAL,751,Customer,1022,01/01/2020,Open Bal With,Opening Balance Withdrawable,"1,100.00 ",Savings
+GENERAL,OPEN BAL,752,Customer,1023,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(113,040.00)",Savings
+GENERAL,OPEN BAL,753,Customer,1025,01/01/2020,Open Bal With,Opening Balance Withdrawable,(100.00),Savings
+GENERAL,OPEN BAL,754,Customer,1026,01/01/2020,Open Bal With,Opening Balance Withdrawable,(400.00),Savings
+GENERAL,OPEN BAL,755,Customer,1027,01/01/2020,Open Bal With,Opening Balance Withdrawable,"(4,000.00)",Savings
+GENERAL,OPEN BAL,756,Customer,1028,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,757,Customer,1029,01/01/2020,Open Bal With,Opening Balance Withdrawable,500.00 ,Savings
+GENERAL,OPEN BAL,758,Customer,1030,01/01/2020,Open Bal With,Opening Balance Withdrawable,400.00 ,Savings
+GENERAL,OPEN BAL,759,Customer,1031,01/01/2020,Open Bal With,Opening Balance Withdrawable,800.00 ,Savings
+GENERAL,OPEN BAL,760,Customer,1032,01/01/2020,Open Bal With,Opening Balance Withdrawable,(300.00),Savings
+GENERAL,OPEN BAL,761,Customer,1034,01/01/2020,Open Bal With,Opening Balance Withdrawable,(500.00),Savings
+GENERAL,OPEN BAL,762,Customer,1035,01/01/2020,Open Bal With,Opening Balance Withdrawable,(800.00),Savings
+GENERAL,OPEN BAL,763,Customer,1036,01/01/2020,Open Bal With,Opening Balance Withdrawable,(200.00),Savings

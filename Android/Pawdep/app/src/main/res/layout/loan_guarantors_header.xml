@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"  android:layout_width="match_parent"
+    
+    android:background="@drawable/header"
+    android:layout_height="wrap_content">
+  
+    <TextView
+        android:id="@+id/member_PAWDEP_No"
+        style="@style/loan_guarantors"
+        android:text="Pawdep No"
+        android:layout_width="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/member_Member_Name"
+        style="@style/loan_guarantors"
+        android:text="Name" 
+      android:layout_width="150dp"
+        app:layout_constraintStart_toEndOf="@id/member_PAWDEP_No"
+       
+        />
+    <TextView
+        android:id="@+id/Outstandingbalance"
+       style="@style/loan_guarantors"
+        android:text="Outs. bal"
+        app:layout_constraintStart_toEndOf="@id/member_Member_Name"
+       />
+
+    <TextView
+        android:id="@+id/currentloan"
+        style="@style/loan_guarantors"
+        android:text="Current Loan"
+        app:layout_constraintStart_toEndOf="@id/Outstandingbalance"
+
+        />
+    <TextView
+        android:id="@+id/Savings"
+        style="@style/loan_guarantors"
+        android:text="Savings"
+        app:layout_constraintStart_toEndOf="@id/currentloan"
+    />
+    <TextView
+        android:id="@+id/Outsandingloanpercent"
+        style="@style/loan_guarantors"
+        android:text="Req. % loan"
+        app:layout_constraintStart_toEndOf="@id/Savings"
+       />
+    <TextView
+        android:id="@+id/Loansguaranteed"
+        style="@style/loan_guarantors"
+        android:text="Loans Guaranteed"
+        app:layout_constraintStart_toEndOf="@id/Outsandingloanpercent"
+        />
+    <TextView
+        android:id="@+id/amountguaranteed"
+        style="@style/loan_guarantors"
+        android:text="Amount Guaranteed"
+        app:layout_constraintStart_toEndOf="@id/Loansguaranteed"
+        />
+    <TextView
+    android:id="@+id/amountavailable"
+    style="@style/loan_guarantors"
+    android:text="Amount Available"
+    app:layout_constraintStart_toEndOf="@id/amountguaranteed"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>
