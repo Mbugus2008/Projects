@@ -46,7 +46,7 @@ namespace Collection.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Members")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Members")]
         public string Collection_Members_Members_Service {
             get {
                 return ((string)(this["Collection_Members_Members_Service"]));
@@ -76,7 +76,7 @@ namespace Collection.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://5.189.167.52:888/Embaservice/WS/EMBASSAVA%20SACCO%20LTD/Page/Vehicles")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Vehicles")]
         public string Collection_Vehicles_Vehicles_Service {
             get {
                 return ((string)(this["Collection_Vehicles_Vehicles_Service"]));

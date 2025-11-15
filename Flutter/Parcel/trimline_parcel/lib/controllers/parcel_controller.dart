@@ -1,22 +1,21 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trimline_parcel/database/database_helper.dart'; // Ensure this import is correct
+
+import '../database/database_helper.dart';
+import '../models/Parcel_Details.dart';
 import '../models/parcel_model.dart';
 
 class ParcelController extends GetxController {
-  // Initialize DatabaseHelper
-     Parcel? parcel;
-   ParcelController({this.parcel
-}) {
-    parcel ??= fillcurrentParcel();
-    _populateFormWithParcel(parcel!);
+  ParcelController({Parcel? initialParcel}) {
+    parcel = initialParcel ?? _buildSampleParcel();
+    populateFormWithParcel(parcel!);
   }
-  final DatabaseHelper _dbHelper = DatabaseHelper(); // Correctly initialize here
+
+  final DatabaseHelper _dbHelper = DatabaseHelper();
 
   final RxList<Parcel> _parcels = <Parcel>[].obs;
   final RxList<Parcel> _filteredParcels = <Parcel>[].obs;
@@ -24,18 +23,48 @@ class ParcelController extends GetxController {
   final RxString _searchQuery = ''.obs;
   final Rx<ParcelStatus?> _statusFilter = Rx<ParcelStatus?>(null);
 
-  // Getters
+  static const List<ParcelStatus> _statusOrder = <ParcelStatus>[
+    ParcelStatus.pending,
+    ParcelStatus.inTransit,
+    ParcelStatus.received,
+    ParcelStatus.collected,
+  ];
+
+  Parcel? parcel;
+
   List<Parcel> get parcels => _parcels;
   List<Parcel> get filteredParcels => _filteredParcels;
   bool get isLoading => _isLoading.value;
   String get searchQuery => _searchQuery.value;
   ParcelStatus? get statusFilter => _statusFilter.value;
+  List<ParcelStatus> get supportedStatuses => _statusOrder;
 
+  Map<ParcelStatus, List<Parcel>> get parcelsByStatus {
+    final Map<ParcelStatus, List<Parcel>> grouped = {
+      for (final status in _statusOrder) status: <Parcel>[],
+    };
+    for (final parcel in _parcels) {
+      final status = parcel.Status ?? ParcelStatus.pending;
+      grouped.putIfAbsent(status, () => <Parcel>[]).add(parcel);
+    }
+    return grouped;
+  }
+
+  String statusLabel(ParcelStatus status) {
+    switch (status) {
+      case ParcelStatus.pending:
+        return 'Pending';
+      case ParcelStatus.inTransit:
+        return 'In Transit';
+      case ParcelStatus.received:
+        return 'Received';
+      case ParcelStatus.collected:
+        return 'Collected';
+    }
+  }
 
   final formKey = GlobalKey<FormState>();
 
-  
-  // Form controllers
   final documentNoController = TextEditingController();
   final senderNameController = TextEditingController();
   final senderIdController = TextEditingController();
@@ -48,80 +77,18 @@ class ParcelController extends GetxController {
   final driverController = TextEditingController();
   final vehicleController = TextEditingController();
   final amountPaidController = TextEditingController();
+
   ParcelStatus selectedStatus = ParcelStatus.pending;
   WhoToPay paymentResponsibility = WhoToPay.Sender;
   DateTime selectedDate = DateTime.now();
+  bool paid = false;
 
-Parcel fillcurrentParcel() {
-    //if (!kReleaseMode) {
-     // Only prefill in debug mode
-     Parcel parcel = Parcel(  
-      Document_No: _generateDocumentNumber().asStream().first.toString(),
-      Sender_Name: 'Test Sender',
-      Sender_ID: 'S999',
-      Sender_Phone: '0712345678',
-      From: 'Nairobi',
-      To: 'Mombasa',
-      Receiver_Name: 'Test Receiver',
-      Receiver_ID: 'R999',
-      Receiver_Phone: '0723456789',
-      Driver: 'Test Driver',
-      Vehicle: 'KAA 999X',
-      Amount_Paid: 500,
-      Status: ParcelStatus.inTransit,
-      Who_to_Pay: WhoToPay.Sender,
-      Date_sent: DateTime.now(),
-      Notes: 'Test Notes',
-    );
-   
-    return parcel;
-    //}
-  }
-    Future<String> _generateDocumentNumber() async {
-    try {
-      final deviceInfo = DeviceInfoPlugin();
-      String deviceId;
-      
-      if (Platform.isAndroid) {
-        final androidInfo = await deviceInfo.androidInfo;
-        deviceId = androidInfo.id;
-      } else if (Platform.isIOS) {
-        final iosInfo = await deviceInfo.iosInfo;
-        deviceId = iosInfo.identifierForVendor!;
-      } else {
-        deviceId = 'UNKNOWN';
-      }
+  RxString parcelinformationError = ''.obs;
+  RxString senderinformationError = ''.obs;
+  RxString receiverinformationError = ''.obs;
+  RxString deliveryinformationError = ''.obs;
+  RxString paymentinformationError = ''.obs;
 
-      final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-      final documentNo = '${deviceId.substring(0, 8)}-${timestamp.substring(0, 8)}';
-      return documentNo;
-    
-    } catch (e) {
-      print('Error generating document number: $e');
-   
-      return 'DOC-${DateTime.now().millisecondsSinceEpoch}';
-     
-    }
-  }
-void _populateFormWithParcel(Parcel parcel) {
-  documentNoController.text = parcel.Document_No;
-  senderNameController.text = parcel.Sender_Name;
-  senderIdController.text = parcel.Sender_ID;
-  senderPhoneController.text = parcel.Sender_Phone;
-  fromController.text = parcel.From;
-  toController.text = parcel.To;
-  receiverNameController.text = parcel.Receiver_Name;
-  receiverIdController.text = parcel.Receiver_ID;
-  receiverPhoneController.text = parcel.Receiver_Phone;
-  driverController.text = parcel.Driver;
-  vehicleController.text = parcel.Vehicle;
-  amountPaidController.text = parcel.Amount_Paid.toString();
-  selectedStatus = parcel.Status;
-  paymentResponsibility = parcel.Who_to_Pay;
-  selectedDate = parcel.Date_sent;
-
- 
-}
   @override
   void onInit() {
     super.onInit();
@@ -131,21 +98,16 @@ void _populateFormWithParcel(Parcel parcel) {
   Future<void> loadParcels() async {
     _isLoading.value = true;
     try {
-      // Load from database instead of mock data
-      final dbParcels = await _dbHelper.getAllParcels();
-      _parcels.assignAll(dbParcels); // Assign all loaded parcels to the observable list
-      _filterParcels(); // Apply any existing filters to the newly loaded data
+      final items = await _dbHelper.getAllParcels();
+      _parcels.assignAll(items);
+      _filterParcels();
     } catch (e) {
       if (kDebugMode) {
-        print('Error loading parcels from DB: $e');
+        debugPrint('Error loading parcels: ');
       }
-      Get.snackbar(
-        'Error',
-        'Failed to load parcels: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      _parcels.clear(); // Clear parcels on error
+      _parcels.clear();
       _filteredParcels.clear();
+      Get.snackbar('Error', 'Failed to load parcels', snackPosition: SnackPosition.BOTTOM);
     } finally {
       _isLoading.value = false;
     }
@@ -160,66 +122,98 @@ void _populateFormWithParcel(Parcel parcel) {
     _statusFilter.value = status;
     _filterParcels();
   }
-
   void _filterParcels() {
-    try {
-      if (kDebugMode) {
-        debugPrint('Filtering parcels. Search: "$searchQuery", Status: $statusFilter');
-      }
-      
-      final filtered = _parcels.where((parcel) {
-        // Skip filtering if no search query and no status filter
-        if (searchQuery.isEmpty && statusFilter == null) return true;
-        
-        bool matchesSearch = searchQuery.isEmpty;
-        
-        // Check search query against all relevant fields (all non-nullable in Parcel model)
-        if (!matchesSearch) {
-          final searchLower = searchQuery.toLowerCase();
-          matchesSearch = 
-              parcel.Document_No.toLowerCase().contains(searchLower) ||
-              parcel.Sender_Name.toLowerCase().contains(searchLower) ||
-              (parcel.Sender_ID?.toLowerCase().contains(searchLower) ?? false) || // Handle nullable Sender_ID
-              parcel.Sender_Phone.toLowerCase().contains(searchLower) ||
-              parcel.From.toLowerCase().contains(searchLower) ||
-              parcel.To.toLowerCase().contains(searchLower) ||
-              parcel.Receiver_Name.toLowerCase().contains(searchLower) ||
-              (parcel.Receiver_ID?.toLowerCase().contains(searchLower) ?? false) || // Handle nullable Receiver_ID
-              parcel.Receiver_Phone.toLowerCase().contains(searchLower) ||
-              parcel.Driver.toLowerCase().contains(searchLower) ||
-              parcel.Vehicle.toLowerCase().contains(searchLower) ||
-              (parcel.Notes?.toLowerCase().contains(searchLower) ?? false); // Search in Notes
-        }
-        
-        // Check status filter if set
-        final matchesStatus = statusFilter == null || parcel.Status == statusFilter;
-        
-        return matchesSearch && matchesStatus;
-      }).toList();
+    final query = _searchQuery.value.trim().toLowerCase();
+    final status = _statusFilter.value;
 
-      // Sort parcels: pending first, then by date (newest first)
-      filtered.sort((a, b) {
-        // If one is pending and the other is not, the pending one comes first
-        if (a.Status == ParcelStatus.pending && b.Status != ParcelStatus.pending) return -1;
-        if (a.Status != ParcelStatus.pending && b.Status == ParcelStatus.pending) return 1;
-        
-        // If both have the same status or neither is pending, sort by date (newest first)
-        return b.Date_sent.compareTo(a.Date_sent);
+    Iterable<Parcel> filtered = _parcels;
+
+    if (status != null) {
+      filtered = filtered.where(
+        (parcel) => (parcel.Status ?? ParcelStatus.pending) == status,
+      );
+    }
+
+    if (query.isNotEmpty) {
+      filtered = filtered.where((parcel) {
+        bool matches(String? value) => value?.toLowerCase().contains(query) ?? false;
+
+        return matches(parcel.Document_No) ||
+            matches(parcel.Sender_Name) ||
+            matches(parcel.Sender_Phone) ||
+            matches(parcel.Receiver_Name) ||
+            matches(parcel.Receiver_Phone) ||
+            matches(parcel.From) ||
+            matches(parcel.To) ||
+            parcel.parcelDetails.any((detail) => matches(detail.Description));
       });
+    }
 
-      if (kDebugMode) {
-        debugPrint('Found ${filtered.length} matching parcels out of ${_parcels.length}');
+    _filteredParcels.assignAll(filtered);
+  }
+
+  void addParcelDetail() {
+    final docNo = documentNoController.text.isEmpty
+        ? 'TEMP-'
+        : documentNoController.text;
+    parcel ??= _buildEmptyParcel(docNo);
+    parcel!.parcelDetails.add(
+      Parcel_Details(
+        Document_No: docNo,
+        Description: '',
+        Amount: 0,
+        Remarks: '',
+      ),
+    );
+  }
+
+  Future<void> updateParcelStatus(Parcel parcel, ParcelStatus newStatus) async {
+    final currentStatus = parcel.Status ?? ParcelStatus.pending;
+    if (currentStatus == newStatus) return;
+
+    final currentIndex = _statusOrder.indexOf(currentStatus);
+    final nextIndex = _statusOrder.indexOf(newStatus);
+    if (nextIndex < currentIndex || nextIndex - currentIndex > 1) {
+      Get.snackbar(
+        'Invalid transition',
+        'Status can only advance one step at a time.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
+    final updated = parcel.copyWith(
+      Status: newStatus,
+      Date_Delivered: newStatus == ParcelStatus.received ? DateTime.now() : parcel.Date_Delivered,
+      Date_Collected: newStatus == ParcelStatus.collected ? DateTime.now() : parcel.Date_Collected,
+    );
+
+    try {
+      await _dbHelper.updateParcel(updated);
+      final index = _parcels.indexWhere((p) => p.Document_No == updated.Document_No);
+      if (index != -1) {
+        _parcels[index] = updated;
+        _parcels.refresh();
       }
-      
-      _filteredParcels.assignAll(filtered); // Use assignAll for RxList
-      // update(); // Not strictly needed if using RxList and GetX widgets observing it.
-      
+      _filterParcels();
+
+      // TODO: PUT status update to backend endpoint when available.
+      // TODO: Trigger backend SMS when status becomes received.
+
+      Get.snackbar(
+        'Status updated',
+        'Parcel ${updated.Document_No ?? ''} is now ${statusLabel(newStatus)}.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } catch (e) {
       if (kDebugMode) {
-        debugPrint('Error filtering parcels: $e');
+        debugPrint('Failed to update parcel status: ');
       }
-      _filteredParcels.assignAll(_parcels); // On error, show all loaded parcels
-      // rethrow; // Decide if you want to rethrow or handle gracefully
+      Get.snackbar(
+        'Error',
+        'Unable to update parcel status. Please try again.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
@@ -227,22 +221,22 @@ void _populateFormWithParcel(Parcel parcel) {
     _isLoading.value = true;
     try {
       await _dbHelper.insertParcel(parcel);
-      // Reload all parcels from the database to ensure consistency after insertion
-      await loadParcels(); 
+
+      // TODO: POST parcel to backend create endpoint once provided.
+
+      await loadParcels();
       Get.snackbar(
         'Success',
-        'Parcel ${parcel.Document_No} added successfully!',
+        'Parcel  added successfully.',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
       );
     } catch (e) {
       if (kDebugMode) {
-        print('Error adding parcel to DB: $e');
+        debugPrint('Error adding parcel: ');
       }
       Get.snackbar(
         'Error',
-        'Failed to add parcel: ${e.toString()}',
+        'Failed to add parcel. Please try again.',
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
@@ -250,30 +244,26 @@ void _populateFormWithParcel(Parcel parcel) {
     }
   }
 
-  Future<void> updateParcel(Parcel updatedParcel) async {
+  Future<void> updateParcel(Parcel parcel) async {
     _isLoading.value = true;
     try {
-      final rowsAffected = await _dbHelper.updateParcel(updatedParcel);
-      if (rowsAffected > 0) {
-        // Reload all parcels from the database after update
-        await loadParcels();
-         Get.snackbar(
-          'Success',
-          'Parcel ${updatedParcel.Document_No} updated successfully!',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.blue,
-          colorText: Colors.white,
-        );
-      } else {
-        throw Exception('Parcel not found in DB or no changes made.');
-      }
+      await _dbHelper.updateParcel(parcel);
+
+      // TODO: PUT updated parcel to backend endpoint once available.
+
+      await loadParcels();
+      Get.snackbar(
+        'Success',
+        'Parcel  updated successfully.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } catch (e) {
       if (kDebugMode) {
-        print('Error updating parcel in DB: $e');
+        debugPrint('Error updating parcel: ');
       }
       Get.snackbar(
         'Error',
-        'Failed to update parcel: ${e.toString()}',
+        'Failed to update parcel. Please try again.',
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
@@ -284,58 +274,112 @@ void _populateFormWithParcel(Parcel parcel) {
   Future<void> deleteParcel(String documentNo) async {
     _isLoading.value = true;
     try {
-      final rowsAffected = await _dbHelper.deleteParcel(documentNo);
-      if (rowsAffected > 0) {
-        await loadParcels(); // Reload to reflect deletion
-        Get.snackbar(
-          'Success',
-          'Parcel $documentNo deleted successfully!',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
-      } else {
-         Get.snackbar(
-          'Info',
-          'Parcel $documentNo not found or already deleted.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
-      }
+      await _dbHelper.deleteParcel(documentNo);
+
+      // TODO: DELETE parcel on backend once endpoint is available.
+
+      await loadParcels();
+      Get.snackbar(
+        'Deleted',
+        'Parcel  deleted successfully.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } catch (e) {
       if (kDebugMode) {
-        print('Error deleting parcel from DB: $e');
+        debugPrint('Error deleting parcel: ');
       }
-       Get.snackbar(
-          'Error',
-          'Failed to delete parcel: ${e.toString()}',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+      Get.snackbar(
+        'Error',
+        'Failed to delete parcel. Please try again.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } finally {
       _isLoading.value = false;
     }
   }
 
-  Color getStatusColor(ParcelStatus status) {
-    switch (status) {
-      case ParcelStatus.delivered:
-        return Colors.green;
-      case ParcelStatus.inTransit:
-        return Colors.blue;
-      case ParcelStatus.outForDelivery:
-        return Colors.orange;
-      case ParcelStatus.failed:
-        return Colors.red;
-      case ParcelStatus.returned:
-        return Colors.purple;
-      case ParcelStatus.pending:
-      default: // Added default for safety
-        return Colors.grey;
+  Future<Parcel> newparcel() async {
+    final docNo = await _generateDocumentNumber();
+    final fresh = _buildEmptyParcel(docNo);
+    parcel = fresh;
+    populateFormWithParcel(fresh);
+    return fresh;
+  }
+
+  Future<String> _generateDocumentNumber() async {
+    try {
+      final deviceInfo = DeviceInfoPlugin();
+      String deviceId;
+      if (Platform.isAndroid) {
+        final info = await deviceInfo.androidInfo;
+        deviceId = info.id;
+      } else if (Platform.isIOS) {
+        final info = await deviceInfo.iosInfo;
+        deviceId = info.identifierForVendor ?? 'IOSDEVICE';
+      } else {
+        deviceId = 'UNKNOWNDEVICE';
+      }
+      final sanitized = deviceId.replaceAll(RegExp('[^A-Za-z0-9]'), '').padRight(6, 'X');
+      final normalized = sanitized.substring(0, 6).toUpperCase();
+      final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+      final suffix = timestamp.substring(timestamp.length - 6);
+      return '$normalized-$suffix';
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('Error generating document number: ');
+      }
+      return 'DOC';
     }
   }
 
-  String formatDate(DateTime? date) {
-    if (date == null) return 'N/A';
-    // Consider using intl package for more robust date formatting if needed
-    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
+  Parcel _buildEmptyParcel(String documentNo) {
+    return Parcel(
+      Document_No: documentNo,
+      Date_sent: DateTime.now(),
+      Status: ParcelStatus.pending,
+      parcelDetails: <Parcel_Details>[],
+    );
   }
+
+  Parcel _buildSampleParcel() {
+    return Parcel(
+      Document_No: 'PENDING-SAMPLE',
+      Date_sent: DateTime.now(),
+      Sender_Name: 'Sample Sender',
+      Sender_ID: 'S123456',
+      Sender_Phone: '0712345678',
+      From: 'Nairobi',
+      To: 'Mombasa',
+      Receiver_Name: 'Sample Receiver',
+      Receiver_ID: 'R987654',
+      Receiver_Phone: '0798765432',
+      Status: ParcelStatus.pending,
+      Driver: 'Sample Driver',
+      Vehicle: 'KBA 123X',
+      Amount_Paid: 0,
+      Paid: false,
+      Notes: 'Sample data for testing',
+    );
+  }
+
+  void populateFormWithParcel(Parcel parcel) {
+    documentNoController.text = parcel.Document_No ?? '';
+    senderNameController.text = parcel.Sender_Name ?? '';
+    senderIdController.text = parcel.Sender_ID ?? '';
+    senderPhoneController.text = parcel.Sender_Phone ?? '';
+    fromController.text = parcel.From ?? '';
+    toController.text = parcel.To ?? '';
+    receiverNameController.text = parcel.Receiver_Name ?? '';
+    receiverIdController.text = parcel.Receiver_ID ?? '';
+    receiverPhoneController.text = parcel.Receiver_Phone ?? '';
+    driverController.text = parcel.Driver ?? '';
+    vehicleController.text = parcel.Vehicle ?? '';
+    amountPaidController.text = (parcel.Amount_Paid ?? 0).toString();
+    selectedStatus = parcel.Status ?? ParcelStatus.pending;
+    paymentResponsibility = parcel.Who_to_Pay ?? WhoToPay.Sender;
+    selectedDate = parcel.Date_sent ?? DateTime.now();
+    paid = parcel.Paid ?? false;
+  }
+
+  void PopulateFormWithParcel(Parcel parcel) => populateFormWithParcel(parcel);
 }

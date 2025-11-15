@@ -889,7 +889,7 @@ namespace Collection
                 // Build filters
                 var filters = new List<Transactions.Transactions_Filter>
         {
-       
+
             new Transactions.Transactions_Filter
             {
                 Field = Transactions.Transactions_Fields.Transaction_Date,
@@ -900,7 +900,7 @@ namespace Collection
                 // Query transactions
                 var transactions = Tservice.ReadMultiple(filters.ToArray(), null, 0).ToList();
 
-              
+
 
                 // Format transaction dates
                 FormatTransactionDates(transactions);
@@ -1074,7 +1074,7 @@ namespace Collection
             {
                 v = JsonConvert.DeserializeObject<getdata>(data);
                
-                var c = Rservice.ReadMultiple(new Reversals.Reversals_Filter[] { new Reversals.Reversals_Filter { Criteria = v.user, Field = Reversals.Reversals_Fields.Agent_Code } }, null, 1000) .ToList();
+                var c = Rservice.ReadMultiple(new Reversals.Reversals_Filter[] { new Reversals.Reversals_Filter { Criteria = v.user, Field = Reversals.Reversals_Fields.Agent_Code } }, null, 20) .ToList();
                 foreach (var cc in c)
                 {
                     if (string.IsNullOrEmpty(cc.Date))

@@ -12,20 +12,19 @@ import 'package:kanisa/screens/my_account_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Welcome extends StatelessWidget {
-  Welcome({Key? key}) : super(key: key);
+  Welcome({super.key});
 
   final List<String> imgList = [
     'assets/Image1.jpg',
     'assets/Image2.jpg',
     'assets/Image3.jpg',
-
   ];
 
   final controller = Get.put(CarouselController());
 
   @override
   Widget build(BuildContext context) {
-   // clearPreferences();
+    // clearPreferences();
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -48,7 +47,6 @@ class Welcome extends StatelessWidget {
                   child: PictureSlider(imgList: imgList),
                 ),
               ),
-
               Expanded(
                 flex: 5,
                 child: GridView.count(
@@ -58,16 +56,30 @@ class Welcome extends StatelessWidget {
                   crossAxisSpacing: 16,
                   childAspectRatio: 1.5,
                   children: [
-                    MenuCard(name: 'Sermons', icon: Icons.church_outlined, onTap: () => _handleMenuItemTap('Sermons', context)),
-                    MenuCard(name: 'Events', icon: Icons.event_available_outlined, onTap: () => _handleMenuItemTap('Events', context)),
-                    MenuCard(name: 'Live Feed', icon: Icons.live_tv, onTap: () => _handleMenuItemTap('Live Feed', context)),
-                    MenuCard(name: 'Bible', icon: Icons.bookmark_add_outlined, onTap: () => _handleMenuItemTap('Bible', context)),
-                    MenuCard(name: 'My Account', icon: Icons.account_circle_outlined, onTap: () => _handleMenuItemTap('My Account', context)),
+                    MenuCard(
+                        name: 'Sermons',
+                        icon: Icons.church_outlined,
+                        onTap: () => _handleMenuItemTap('Sermons', context)),
+                    MenuCard(
+                        name: 'Events',
+                        icon: Icons.event_available_outlined,
+                        onTap: () => _handleMenuItemTap('Events', context)),
+                    MenuCard(
+                        name: 'Live Feed',
+                        icon: Icons.live_tv,
+                        onTap: () => _handleMenuItemTap('Live Feed', context)),
+                    MenuCard(
+                        name: 'Bible',
+                        icon: Icons.bookmark_add_outlined,
+                        onTap: () => _handleMenuItemTap('Bible', context)),
+                    MenuCard(
+                        name: 'My Account',
+                        icon: Icons.account_circle_outlined,
+                        onTap: () => _handleMenuItemTap('My Account', context)),
                   ],
                 ),
               ),
-                 Container(
-                
+              Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -87,20 +99,16 @@ class Welcome extends StatelessWidget {
       ),
     );
   }
-   
+
   Future<String?> checkPhoneNumber(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? phoneNumber = prefs.getString('phone_number');
-    if (phoneNumber == null) {
-   phoneNumber = await  promptForPhoneNumber(context);
-  //savePhoneNumber(phoneNumber ??"");//TODO remove for live
-   
-    }  
-      return phoneNumber;
-  //   else {
-  //  ApiClient().checkCustomerExists(phoneNumber);
-  //       Get.to(() => MyAccountScreen(customer: Customer()));
-  //   }
+    phoneNumber ??= await promptForPhoneNumber(context);
+    return phoneNumber;
+    //   else {
+    //  ApiClient().checkCustomerExists(phoneNumber);
+    //       Get.to(() => MyAccountScreen(customer: Customer()));
+    //   }
   }
 
   final TextEditingController phoneController = TextEditingController();
@@ -151,16 +159,19 @@ class Welcome extends StatelessWidget {
   }
 
   Future<void> savePhoneNumber(String phoneNumber) async {
-    if ( phoneNumber.isNotEmpty ){
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('phone_number', phoneNumber);
-    // Optionally navigate or refresh UI
-  }}
+    if (phoneNumber.isNotEmpty) {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('phone_number', phoneNumber);
+      // Optionally navigate or refresh UI
+    }
+  }
+
   Future<void> clearPreferences() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
     Get.snackbar("Preferences Cleared", "All saved data has been removed.");
   }
+
   void _handleMenuItemTap(String item, BuildContext context) async {
     switch (item) {
       case 'Sermons':
@@ -186,16 +197,17 @@ class Welcome extends StatelessWidget {
             );
           },
         );
-        
+
         try {
           String? pn = await checkPhoneNumber(context);
           if (pn != null) {
             Customer? customer = await ApiClient().checkCustomerExists(pn);
             // Close loading dialog
             Navigator.of(context, rootNavigator: true).pop();
-            
+
             if (customer != null) {
-              Get.to(() => MyAccountScreen(cust: customer), transition: Transition.fadeIn);
+              Get.to(() => MyAccountScreen(cust: customer),
+                  transition: Transition.fadeIn);
               if (customer.Phone_No != null) {
                 savePhoneNumber(customer.Phone_No ?? "");
               }
@@ -224,11 +236,11 @@ class MenuCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const MenuCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.icon,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -239,24 +251,32 @@ class MenuCard extends StatelessWidget {
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: _getIconColor(name), size: 30),
-              SizedBox(height: 8),
-              Text(
-                name,
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+              Icon(icon, color: _getIconColor(name), size: 28),
+              const SizedBox(height: 6),
+              Flexible(
+                child: Text(
+                  name,
+                  style: const TextStyle(
+                      fontSize: 13, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              SizedBox(height: 4),
-              Text(
-                _getPreviewText(name),
-                style: TextStyle(fontSize: 10, color: Colors.grey[600]),
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
+              const SizedBox(height: 3),
+              Flexible(
+                child: Text(
+                  _getPreviewText(name),
+                  style: TextStyle(fontSize: 9, color: Colors.grey[600]),
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
@@ -303,7 +323,7 @@ class MenuCard extends StatelessWidget {
 class PictureSlider extends StatelessWidget {
   final List<String> imgList;
 
-  const PictureSlider({Key? key, required this.imgList}) : super(key: key);
+  const PictureSlider({super.key, required this.imgList});
 
   @override
   Widget build(BuildContext context) {
@@ -314,7 +334,7 @@ class PictureSlider extends StatelessWidget {
         Expanded(
           child: CarouselSlider(
             options: CarouselOptions(
-              aspectRatio: 16/9,
+              aspectRatio: 16 / 9,
               viewportFraction: 1,
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -329,29 +349,32 @@ class PictureSlider extends StatelessWidget {
               },
               scrollDirection: Axis.horizontal,
             ),
-            items: imgList.map((item) => ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(item, fit: BoxFit.cover, width: 1000),
-            )).toList(),
+            items: imgList
+                .map((item) => ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(item, fit: BoxFit.cover, width: 1000),
+                    ))
+                .toList(),
           ),
         ),
         SizedBox(height: 8),
         Obx(() => Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: imgList.asMap().entries.map((entry) {
-            return Container(
-              width: 8.0,
-              height: 8.0,
-              margin: EdgeInsets.symmetric(horizontal: 4.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue.shade700.withOpacity(
-                  controller.currentImageIndex.value == entry.key ? 0.9 : 0.4
-                ),
-              ),
-            );
-          }).toList(),
-        )),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: imgList.asMap().entries.map((entry) {
+                return Container(
+                  width: 8.0,
+                  height: 8.0,
+                  margin: EdgeInsets.symmetric(horizontal: 4.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.blue.shade700.withOpacity(
+                        controller.currentImageIndex.value == entry.key
+                            ? 0.9
+                            : 0.4),
+                  ),
+                );
+              }).toList(),
+            )),
       ],
     );
   }

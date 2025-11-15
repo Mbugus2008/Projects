@@ -107,8 +107,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.reportgroup, null);
         }
-        ImageView im = (ImageView) convertView.findViewById(R.id.groupheadericon);
-
 
         TextView lblgroupname = (TextView) convertView
                 .findViewById(R.id.lblListHeader);

@@ -14,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Map;
 
 public class vehiclereport extends AppCompatActivity {
     Vehicleadapter listAdapter;
@@ -79,30 +81,6 @@ public class vehiclereport extends AppCompatActivity {
         }
     }
 
-    private void DateCollection() {
-        listDataHeader = new ArrayList<summaries.collectiondates>();
-        listDataChild = new HashMap<summaries.collectiondates, List<transaction>>();
-        listDataHeader = db.getcollectiondates();
-        for (summaries.collectiondates c : listDataHeader
-                ) {
-
-            List<transaction> t = db.gettransbydate(c.date);
-            c.Count = t.size();
-
-            double total = 0.0;
-            c.MemberNo = t.get(0).Account_No;
-            c.MemberName = t.get(0).Account_Name;
-            for (transaction tt : t
-                    ) {
-                c.date = tt.Date;
-                tt.typename = db.gettype(tt.Type).Name;
-                total += tt.getAmount();
-            }
-            c.Total = total;
-            listDataChild.put(c, t);
-        }
-    }
-
     private class loaddata extends AsyncTask<Void, Void, Void> {
         private ProgressDialog progress;
         int i = 1;
@@ -129,29 +107,39 @@ public class vehiclereport extends AppCompatActivity {
 
             try {
 
-                listDataHeader = new ArrayList<summaries.collectiondates>();
-                listDataChild = new HashMap<summaries.collectiondates, List<transaction>>();
-                listDataHeader = db.getcollectiondates();
-                progress.setMax(listDataHeader.size());
+                List<transaction> allTransactions = db.getalltransactions(); 
 
-                for (summaries.collectiondates c : listDataHeader
-                        ) {
+                Map<String, List<transaction>> groupedByVehicle = allTransactions.stream()
+                        .collect(Collectors.groupingBy(transaction::getLoan_No));
+
+                listDataHeader = new ArrayList<>();
+                listDataChild = new HashMap<>();
+                progress.setMax(groupedByVehicle.size());
+
+                for (Map.Entry<String, List<transaction>> entry : groupedByVehicle.entrySet()) {
                     publishProgress();
 
-                    List<transaction> t = db.gettransbydate(c.date);
-                    c.Count = t.size();
+                    String vehicleNo = entry.getKey();
+                    List<transaction> transactions = entry.getValue();
+
+                    summaries.collectiondates header = new summaries.collectiondates();
+                    header.date = vehicleNo; 
+                    header.Count = transactions.size();
 
                     double total = 0.0;
-                    c.MemberNo = t.get(0).Account_No;
-                    c.MemberName = t.get(0).Account_Name;
-                    for (transaction tt : t
-                            ) {
-                        c.date = tt.Date;
+                    if (!transactions.isEmpty()) {
+                        header.MemberNo = transactions.get(0).Account_No;
+                        header.MemberName = transactions.get(0).Account_Name;
+                    }
+
+                    for (transaction tt : transactions) {
                         tt.typename = db.gettype(tt.Type).Name;
                         total += tt.getAmount();
                     }
-                    c.Total = total;
-                    listDataChild.put(c, t);
+                    header.Total = total;
+
+                    listDataHeader.add(header);
+                    listDataChild.put(header, transactions);
                     i++;
                 }
             } catch (Exception e) {
@@ -165,7 +153,7 @@ public class vehiclereport extends AppCompatActivity {
             try {
                 if (progress.isShowing())
                     progress.dismiss();
-                listAdapter = new Vehicleadapter(vehiclereport.this, listDataHeader, listDataChild);
+                listAdapter = new Vehicleadapter(vehiclereport.this, listDataHeader, listDataChild, db);
                 report.setAdapter(listAdapter);
             } catch (Exception ex) {
                 ex.printStackTrace();

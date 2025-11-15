@@ -7,22 +7,20 @@ import '../../Assets/utils.dart';
 
 class collDataSource extends DataGridSource {
   collDataSource(List<Collections> l) {
-    if (l != null) {
-      _ledger = l
-          .map<DataGridRow>((e) => DataGridRow(cells: [
-                DataGridCell<String>(
-                    columnName: 'Documentno', value: e.Document_No),
-                DataGridCell<String>(
-                    columnName: 'Date',
-                    value: customFormat.format(e.Transaction_Date!)),
-                DataGridCell<String>(
-                    columnName: 'Desc', value: e.Type.toString().toLowerCase()),
-                DataGridCell<String>(
-                    columnName: 'Amount',
-                    value: NumberFormat("#,##0.00", "en_US").format(e.Amount)),
-              ]))
-          .toList();
-    }
+    _ledger = l
+        .map<DataGridRow>((e) => DataGridRow(cells: [
+              DataGridCell<String>(
+                  columnName: 'Documentno', value: e.Document_No),
+              DataGridCell<String>(
+                  columnName: 'Date',
+                  value: customFormat.format(e.Transaction_Date!)),
+              DataGridCell<String>(
+                  columnName: 'Desc', value: e.Type.toString().toLowerCase()),
+              DataGridCell<String>(
+                  columnName: 'Amount',
+                  value: NumberFormat("#,##0.00", "en_US").format(e.Amount)),
+            ]))
+        .toList();
   }
 
   List<DataGridRow> _ledger = [];

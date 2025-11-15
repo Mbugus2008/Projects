@@ -81,6 +81,16 @@
           <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="Log Path" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Customer Mobile Setup">
+          <Key>
+            <PropertyRef Name="Customer" />
+          </Key>
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShortCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="customer_secret" Type="nvarchar" MaxLength="500" />
+          <Property Name="customer_key" Type="nvarchar" MaxLength="500" />
+          <Property Name="passkey" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Mpesa Results">
           <Key>
             <PropertyRef Name="OriginatorConversationID" />
@@ -134,14 +144,44 @@
           <Property Name="Client" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="StkPushTransaction">
+          <Key>
+            <PropertyRef Name="MerchantRequestID" />
+            <PropertyRef Name="CheckoutRequestID" />
+          </Key>
+          <Property Name="BusinessShortCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Timestamp" Type="char" MaxLength="14" Nullable="false" />
+          <Property Name="TransactionType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PartyA" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PartyB" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CallBackURL" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="AccountReference" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TransactionDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="Passkey" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MerchantRequestID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CheckoutRequestID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ResponseCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="ResponseDescription" Type="nvarchar" MaxLength="255" />
+          <Property Name="CustomerMessage" Type="nvarchar" MaxLength="255" />
+          <Property Name="HttpError" Type="nvarchar" MaxLength="255" />
+          <Property Name="Success" Type="bit" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Mpesacode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="MobileModelStoreContainer">
           <EntitySet Name="BulkSms" EntityType="Self.BulkSms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client Paybills" EntityType="Self.Client Paybills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer Mobile Setup" EntityType="Self.Customer Mobile Setup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mpesa Results" EntityType="Self.Mpesa Results" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MPESA Transactions" EntityType="Self.MPESA Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Result Parameters" EntityType="Self.Result Parameters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sms keywords" EntityType="Self.Sms keywords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StkPushTransaction" EntityType="Self.StkPushTransaction" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -155,6 +195,8 @@
           <EntitySet Name="Sms_keywords" EntityType="MobileModel.Sms_keyword" />
           <EntitySet Name="MPESA_Transactions" EntityType="MobileModel.MPESA_Transaction" />
           <EntitySet Name="Client_Paybills" EntityType="MobileModel.Client_Paybill" />
+          <EntitySet Name="StkPushTransactions" EntityType="MobileModel.StkPushTransaction" />
+          <EntitySet Name="Customer_Mobile_Setups" EntityType="MobileModel.Customer_Mobile_Setup" />
         </EntityContainer>
         <EntityType Name="Mpesa_Result">
           <Key>
@@ -284,6 +326,44 @@
           </Key>
           <Property Name="PayBill" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Client" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StkPushTransaction">
+          <Key>
+            <PropertyRef Name="MerchantRequestID" />
+            <PropertyRef Name="CheckoutRequestID" />
+          </Key>
+          <Property Name="BusinessShortCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Timestamp" Type="String" Nullable="false" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Name="TransactionType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PartyA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PartyB" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CallBackURL" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AccountReference" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Passkey" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MerchantRequestID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CheckoutRequestID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HttpError" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Success" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="Mpesacode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Customer_Mobile_Setup">
+          <Key>
+            <PropertyRef Name="Customer" />
+          </Key>
+          <Property Name="Customer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="customer_secret" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="customer_key" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="passkey" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -421,6 +501,45 @@
               <MappingFragment StoreEntitySet="Client Paybills">
                 <ScalarProperty Name="Client" ColumnName="Client" />
                 <ScalarProperty Name="PayBill" ColumnName="PayBill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StkPushTransactions">
+            <EntityTypeMapping TypeName="MobileModel.StkPushTransaction">
+              <MappingFragment StoreEntitySet="StkPushTransaction">
+                <ScalarProperty Name="Mpesacode" ColumnName="Mpesacode" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Success" ColumnName="Success" />
+                <ScalarProperty Name="HttpError" ColumnName="HttpError" />
+                <ScalarProperty Name="CustomerMessage" ColumnName="CustomerMessage" />
+                <ScalarProperty Name="ResponseDescription" ColumnName="ResponseDescription" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="CheckoutRequestID" ColumnName="CheckoutRequestID" />
+                <ScalarProperty Name="MerchantRequestID" ColumnName="MerchantRequestID" />
+                <ScalarProperty Name="Passkey" ColumnName="Passkey" />
+                <ScalarProperty Name="TransactionDesc" ColumnName="TransactionDesc" />
+                <ScalarProperty Name="AccountReference" ColumnName="AccountReference" />
+                <ScalarProperty Name="CallBackURL" ColumnName="CallBackURL" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PartyB" ColumnName="PartyB" />
+                <ScalarProperty Name="PartyA" ColumnName="PartyA" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="BusinessShortCode" ColumnName="BusinessShortCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Mobile_Setups">
+            <EntityTypeMapping TypeName="MobileModel.Customer_Mobile_Setup">
+              <MappingFragment StoreEntitySet="Customer Mobile Setup">
+                <ScalarProperty Name="passkey" ColumnName="passkey" />
+                <ScalarProperty Name="customer_key" ColumnName="customer_key" />
+                <ScalarProperty Name="customer_secret" ColumnName="customer_secret" />
+                <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

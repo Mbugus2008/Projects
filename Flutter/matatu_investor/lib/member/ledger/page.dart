@@ -41,13 +41,13 @@ class ledgerpage extends StatelessWidget {
             ),
             centerTitle: true,
           ),
-          body: controller.ledgerentries.value.length > 0
+          body: controller.ledgerentries.length > 0
               ? SfDataGridTheme(
                   data:
                       SfDataGridThemeData(headerColor: const Color(0xff009889)),
                   child: SfDataGrid(
-                    source: ledgerDataSource(controller.ledgerentries.value,
-                        controller.ledgerentries.value),
+                    source: ledgerDataSource(
+                        controller.ledgerentries, controller.ledgerentries),
                     columnWidthMode: ColumnWidthMode.fill,
                     columns: <GridColumn>[
                       GridColumn(

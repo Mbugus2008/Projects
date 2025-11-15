@@ -11,7 +11,7 @@ namespace MemberLoans
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans", ConfigurationName="MemberLoans.Loans_Port")]
     public interface Loans_Port
     {
@@ -98,7 +98,7 @@ namespace MemberLoans
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
     public partial class Loans
@@ -122,7 +122,7 @@ namespace MemberLoans
         
         private bool savingsFieldSpecified;
         
-        private decimal existing_LoanField;
+        private bool existing_LoanField;
         
         private bool existing_LoanFieldSpecified;
         
@@ -141,12 +141,6 @@ namespace MemberLoans
         private decimal insuranceField;
         
         private bool insuranceFieldSpecified;
-        
-        private string source_of_FundsField;
-        
-        private int client_CycleField;
-        
-        private bool client_CycleFieldSpecified;
         
         private string client_NameField;
         
@@ -233,6 +227,14 @@ namespace MemberLoans
         private string captured_ByField;
         
         private string call_Back_UrlField;
+        
+        private Recovery_Mode recovery_ModeField;
+        
+        private bool recovery_ModeFieldSpecified;
+        
+        private Repayment_Method repayment_MethodField;
+        
+        private bool repayment_MethodFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -362,7 +364,7 @@ namespace MemberLoans
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public decimal Existing_Loan
+        public bool Existing_Loan
         {
             get
             {
@@ -502,48 +504,6 @@ namespace MemberLoans
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string Source_of_Funds
-        {
-            get
-            {
-                return this.source_of_FundsField;
-            }
-            set
-            {
-                this.source_of_FundsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public int Client_Cycle
-        {
-            get
-            {
-                return this.client_CycleField;
-            }
-            set
-            {
-                this.client_CycleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Client_CycleSpecified
-        {
-            get
-            {
-                return this.client_CycleFieldSpecified;
-            }
-            set
-            {
-                this.client_CycleFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
         public string Client_Name
         {
             get
@@ -557,7 +517,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
         public Loan_Status Loan_Status
         {
             get
@@ -585,7 +545,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=16)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=14)]
         public System.DateTime Issued_Date
         {
             get
@@ -613,7 +573,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
         public int Installments
         {
             get
@@ -641,7 +601,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=18)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=16)]
         public System.DateTime Loan_Disbursement_Date
         {
             get
@@ -669,7 +629,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
         public Mode_of_Disbursement Mode_of_Disbursement
         {
             get
@@ -697,7 +657,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=20)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=18)]
         public System.DateTime Date_Approved
         {
             get
@@ -725,7 +685,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
         public bool Mobile_Loan
         {
             get
@@ -753,7 +713,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
         public bool Posted
         {
             get
@@ -781,7 +741,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
         public decimal Outstanding_Balance
         {
             get
@@ -809,7 +769,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
         public decimal Oustanding_Interest
         {
             get
@@ -837,7 +797,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
         public string Product_Description
         {
             get
@@ -851,7 +811,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
         public string Remarks
         {
             get
@@ -865,7 +825,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
         public decimal Repayment
         {
             get
@@ -893,7 +853,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
         public Loans_Category_SASRA Loans_Category_SASRA
         {
             get
@@ -921,7 +881,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
         public decimal Loan_Repayment
         {
             get
@@ -949,7 +909,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=30)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=28)]
         public System.DateTime Last_Pay_Date
         {
             get
@@ -977,7 +937,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
         public string Loan_Purpose
         {
             get
@@ -991,7 +951,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
         public string Sasra_Main
         {
             get
@@ -1005,7 +965,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
         public string Sasra_Sub_Sector_I
         {
             get
@@ -1019,7 +979,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
         public string Sasra_Sub_Sector_II
         {
             get
@@ -1033,7 +993,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
         public Source Source
         {
             get
@@ -1061,7 +1021,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
         public decimal Recommended_Amount
         {
             get
@@ -1089,7 +1049,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
         public bool Call_Back_updated
         {
             get
@@ -1117,7 +1077,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
         public string Captured_By
         {
             get
@@ -1131,7 +1091,7 @@ namespace MemberLoans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
         public string Call_Back_Url
         {
             get
@@ -1143,10 +1103,66 @@ namespace MemberLoans
                 this.call_Back_UrlField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
+        public Recovery_Mode Recovery_Mode
+        {
+            get
+            {
+                return this.recovery_ModeField;
+            }
+            set
+            {
+                this.recovery_ModeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Recovery_ModeSpecified
+        {
+            get
+            {
+                return this.recovery_ModeFieldSpecified;
+            }
+            set
+            {
+                this.recovery_ModeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
+        public Repayment_Method Repayment_Method
+        {
+            get
+            {
+                return this.repayment_MethodField;
+            }
+            set
+            {
+                this.repayment_MethodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Repayment_MethodSpecified
+        {
+            get
+            {
+                return this.repayment_MethodFieldSpecified;
+            }
+            set
+            {
+                this.repayment_MethodFieldSpecified = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
     public enum Loan_Status
     {
@@ -1158,45 +1174,42 @@ namespace MemberLoans
         Appraisal,
         
         /// <remarks/>
+        Disbursed,
+        
+        /// <remarks/>
         Rejected,
         
         /// <remarks/>
-        Approved,
-        
-        /// <remarks/>
-        Issued,
+        Reversed,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
     public enum Mode_of_Disbursement
     {
         
         /// <remarks/>
-        Individual_Cheques,
+        FOSA_Full,
         
         /// <remarks/>
-        Cheque,
+        BOSA,
         
         /// <remarks/>
-        Transfer_to_FOSA,
+        FOSA_Partial,
         
         /// <remarks/>
-        M_Pesa,
-        
-        /// <remarks/>
-        Inter_Loan_Transfer,
+        Payables,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
     public enum Loans_Category_SASRA
     {
         
         /// <remarks/>
-        Perfoming,
+        Performing,
         
         /// <remarks/>
         Watch,
@@ -1205,33 +1218,77 @@ namespace MemberLoans
         Substandard,
         
         /// <remarks/>
-        Doubtful,
+        Doubtfull,
         
         /// <remarks/>
         Loss,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
     public enum Source
     {
         
         /// <remarks/>
-        BOSA,
+        CoreBanking,
         
         /// <remarks/>
-        FOSA,
-        
-        /// <remarks/>
-        MICRO,
-        
-        /// <remarks/>
-        HR_LOANS,
+        Channels,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
+    public enum Recovery_Mode
+    {
+        
+        /// <remarks/>
+        Checkoff,
+        
+        /// <remarks/>
+        Internal_STO,
+        
+        /// <remarks/>
+        External_STO,
+        
+        /// <remarks/>
+        Cash,
+        
+        /// <remarks/>
+        Mpesa,
+        
+        /// <remarks/>
+        Direct_Debit,
+        
+        /// <remarks/>
+        Dividend,
+        
+        /// <remarks/>
+        Salary,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
+    public enum Repayment_Method
+    {
+        
+        /// <remarks/>
+        _blank_,
+        
+        /// <remarks/>
+        Straight_Line,
+        
+        /// <remarks/>
+        Reducing_Balance,
+        
+        /// <remarks/>
+        Amortised,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
     public partial class Loans_Filter
@@ -1271,7 +1328,7 @@ namespace MemberLoans
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loans")]
     public enum Loans_Fields
     {
@@ -1308,12 +1365,6 @@ namespace MemberLoans
         
         /// <remarks/>
         Insurance,
-        
-        /// <remarks/>
-        Source_of_Funds,
-        
-        /// <remarks/>
-        Client_Cycle,
         
         /// <remarks/>
         Client_Name,
@@ -1392,10 +1443,16 @@ namespace MemberLoans
         
         /// <remarks/>
         Call_Back_Url,
+        
+        /// <remarks/>
+        Recovery_Mode,
+        
+        /// <remarks/>
+        Repayment_Method,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class Read
@@ -1415,7 +1472,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class Read_Result
@@ -1435,7 +1492,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class ReadByRecId
@@ -1455,7 +1512,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class ReadByRecId_Result
@@ -1475,7 +1532,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class ReadMultiple
@@ -1504,7 +1561,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class ReadMultiple_Result
@@ -1525,7 +1582,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class IsUpdated
@@ -1545,7 +1602,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class IsUpdated_Result
@@ -1565,7 +1622,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class GetRecIdFromKey
@@ -1585,7 +1642,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
@@ -1605,7 +1662,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class Create
     {
@@ -1624,7 +1681,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class Create_Result
     {
@@ -1643,7 +1700,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class CreateMultiple
     {
@@ -1663,7 +1720,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class CreateMultiple_Result
     {
@@ -1683,7 +1740,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class Update
     {
@@ -1702,7 +1759,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class Update_Result
     {
@@ -1721,7 +1778,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class UpdateMultiple
     {
@@ -1741,7 +1798,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class UpdateMultiple_Result
     {
@@ -1761,7 +1818,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class Delete
@@ -1781,7 +1838,7 @@ namespace MemberLoans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loans", IsWrapped=true)]
     public partial class Delete_Result
@@ -1800,13 +1857,13 @@ namespace MemberLoans
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface Loans_PortChannel : MemberLoans.Loans_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class Loans_PortClient : System.ServiceModel.ClientBase<MemberLoans.Loans_Port>, MemberLoans.Loans_Port
     {
         
@@ -2097,6 +2154,13 @@ namespace MemberLoans
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
             if ((endpointConfiguration == EndpointConfiguration.Loans_Port))
@@ -2115,7 +2179,7 @@ namespace MemberLoans
         {
             if ((endpointConfiguration == EndpointConfiguration.Loans_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Page/Loans");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:46047/BC260/WS/NATION/Page/Loans");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

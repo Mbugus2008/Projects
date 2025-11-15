@@ -1,5 +1,4 @@
-﻿using Ledgers;
-using LoanProduct;
+﻿using LoanProduct;
 using MemberLoans;
 using Nation_Sacco.Controllers.Models;
 using Microsoft.AspNetCore.Http;
@@ -82,38 +81,42 @@ namespace Nation_Sacco.Controllers
             groups memberData = new groups();
 
             Results response = new Results();
-            try { 
-            var mmm = members.ReadMultiple(new  Member.Members_Filter[] { new  Member.Members_Filter { Criteria = req.member_number, Field =  Member.Members_Fields.No } }, null, 0).FirstOrDefault();
-
-            var mm = members.ReadMultiple(new Member.Members_Filter[] { new Member.Members_Filter { Criteria = mmm.Group_Account_Number, Field = Member.Members_Fields.No } }, null, 0).FirstOrDefault();
-
-            if (mm != null)
+            try
             {
-                Group group = new Group { Code = mm.No,Name = mm.Name };
-               
-                var gm = members.ReadMultiple(new Member.Members_Filter[] { new Member.Members_Filter { Criteria = mm.No, Field = Member.Members_Fields.Group_Account_Number } }, null, 0);
-                foreach (var item in gm)
+                var mmm = members.ReadMultiple(new Member.Members_Filter[] { new Member.Members_Filter { Criteria = req.member_number, Field = Member.Members_Fields.No } }, null, 0).FirstOrDefault();
+                if (mmm == null) throw new Exception("Member not found");
+                if ( string.IsNullOrEmpty(mmm.Group_Account_Number))
+                    throw new Exception("Member is not part of any group");
+                var mm = members.ReadMultiple(new Member.Members_Filter[] { new Member.Members_Filter { Criteria = mmm.Group_Account_Number, Field = Member.Members_Fields.No } }, null, 0).FirstOrDefault();
+
+                if (mm != null)
                 {
-                    group.Members.Add(new Group_Member()
+                    Group group = new Group { Code = mm.No, Name = mm.Name };
+
+                    var gm = members.ReadMultiple(new Member.Members_Filter[] { new Member.Members_Filter { Criteria = mm.No, Field = Member.Members_Fields.Group_Account_Number } }, null, 0);
+                    foreach (var item in gm)
                     {
-                        Member_Full_Name = item.Name,
-                        Member_Number = item.No,
-                        Id_Number = item.ID_No,
+                        group.Members.Add(new Group_Member()
+                        {
+                            Member_Full_Name = item.Name,
+                            Member_Number = item.No,
+                            Id_Number = item.ID_No,
 
-                    });
+                        });
+                    }
+                    memberData.Group = new List<Group> { group };
+
+                    response.data = memberData;
                 }
-                memberData.Group = new List<Group> { group };
-
-                response.data = memberData;
+                else
+                {
+                    response.result_code = 400;
+                    response.result_message = "Member with number {0}- NOT found!";
+                    response.data = new error { error_message = string.Format("Member with number {0}- NOT found!", req.member_number) };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                response.result_code = 400;
-                response.result_message = "Member with number {0}- NOT found!";
-                response.data = new error { error_message = string.Format("Member with number {0}- NOT found!", req.member_number) };
-            }
-            }
-            catch (Exception ex) {
                 _logger.LogError(ex.Message);
                 _logger.LogTrace(ex.StackTrace);
                 response.result_code = 400;
@@ -121,7 +124,7 @@ namespace Nation_Sacco.Controllers
                 response.data = new error { error_message = string.Format(ex.Message, req.member_number) };
 
             }
-            return Ok( response);
+            return Ok(response);
         }
         [HttpPost("Group_Details")]
         public IActionResult Group_Details(request req)
@@ -212,21 +215,23 @@ namespace Nation_Sacco.Controllers
         [HttpPost("Loan_Schedule")]
         public IActionResult Loan_Schedule(request req)
         {
-            LoanSchedule memberData = new LoanSchedule();
+            List<LoanSchedule> memberData = new List<LoanSchedule>();
             Results response = new Results();
             Loanrepschedule.LoanSchedule_PortClient loanSchedule = nm.InitializeClient<Loanrepschedule.LoanSchedule>();
 
-            var mm = loanSchedule.ReadMultiple(new Loanrepschedule.LoanSchedule_Filter[] { new  Loanrepschedule.LoanSchedule_Filter { Criteria = req.loan_number, Field =  Loanrepschedule.LoanSchedule_Fields.Loan_No } }, null, 0).FirstOrDefault();
+            var mm = loanSchedule.ReadMultiple(new Loanrepschedule.LoanSchedule_Filter[] { new  Loanrepschedule.LoanSchedule_Filter { Criteria = req.loan_number, Field =  Loanrepschedule.LoanSchedule_Fields.Loan_No } }, null, 0);
             if (mm != null)
             {
-                memberData = new LoanSchedule
+                foreach (var item in mm)
                 {
-                    Month = mm.Repayment_Date.ToString(),
-                    Amount = mm.Monthly_Repayment,
-                    Principal = mm.Principal_Repayment ,
-                    Interest = mm.Monthly_Interest,
-                
-                };
+                    memberData.Add(new LoanSchedule
+                    {
+                        Month = item.Expected_Date.ToString(),
+                        Amount = item.Monthly_Repayment,
+                        Principal = item.Principle_Repayment,
+                        Interest = item.Interest_Repayment,
+                    });
+                }
 
                 response.data = memberData;
             }
@@ -236,7 +241,7 @@ namespace Nation_Sacco.Controllers
                 response.result_message = "Member with number {0}- NOT found!";
                 response.data = new error { error_message = string.Format("Member with number {0}- NOT found!", req.member_number) };
             }
-            return Ok( response);
+            return Ok(response);
         }
         [HttpPost("Application_Status_callBack")]
         public Results Application_Status_callBack(request req)
@@ -277,8 +282,11 @@ namespace Nation_Sacco.Controllers
         {
             List<Models.Purposes> memberData = new();
             Results<List<Models.Purposes>> response = new Results<List<Models.Purposes>>();
-
-            var m = loanPurpose.ReadMultiple(new  LnPurpose.LoanPurpose_Filter[] { }, null, 0);
+            
+            try
+            {
+throw new Exception("No List found");
+ var m = loanPurpose.ReadMultiple(new  LnPurpose.LoanPurpose_Filter[] { }, null, 0);
             if (m.Any())
             {
                 foreach (var mm in m)
@@ -298,9 +306,17 @@ namespace Nation_Sacco.Controllers
             else
             {
                 response.result_code = 400;
-                response.result_message = "No Products found!";
+                response.result_message = "Nothing found!";
                 //response.data = new error { error_message = "No Products found" };
             }
+            }
+            catch (Exception ex)
+            {
+response.result_code = 400;
+                response.result_message = "Nothing found!";
+                
+            }
+           
             return response;
         }
         [HttpPost("Loan_data")]
@@ -314,7 +330,7 @@ namespace Nation_Sacco.Controllers
                 Loans_PortClient loans = nm.InitializeClient<MemberLoans.Loans>();
                 var ln = loans.ReadMultiple(new Loans_Filter[] {
             new Loans_Filter{ Criteria =  loan.MemberNumber, Field = Loans_Fields.Client_Code },
-            new Loans_Filter{ Criteria = $"{MemberLoans.Loan_Status.Application.ToString()}|{MemberLoans.Loan_Status.Appraisal}|{MemberLoans.Loan_Status.Approved}", Field = Loans_Fields.Loan_Status },
+            new Loans_Filter{ Criteria = $"{MemberLoans.Loan_Status.Application.ToString()}|{MemberLoans.Loan_Status.Appraisal}|{MemberLoans.Loan_Status.Appraisal}", Field = Loans_Fields.Loan_Status },
             }, null, 0).FirstOrDefault();
 
                 // if (ln != null) throw new Exception("Member has an Existing Application");
@@ -553,41 +569,54 @@ namespace Nation_Sacco.Controllers
         {
             List<Models.Sector> memberData = new();
             Results<List<Models.Sector>> response = new Results<List<Models.Sector>>();
-            Sectors.Sector_PortClient sc = nm.InitializeClient<Sectors.Sector>();
-            SubSector_I.Sub_Sector_I_PortClient ss1 = nm.InitializeClient<SubSector_I.Sub_Sector_I>();
-            SubSector_II.Sub_Sector_II_PortClient ss2 = nm.InitializeClient<SubSector_II.Sub_Sector_II>();
+            Sectors.EconomicSectors_PortClient sc = nm.InitializeClient<Sectors.EconomicSectors>();
+            SubSector_I.EconomicSubSectors_PortClient ss1 = nm.InitializeClient<SubSector_I.EconomicSubSectors>();
+            SubSector_II.EconomicSpecificSectors_PortClient ss2 = nm.InitializeClient<SubSector_II.EconomicSpecificSectors>();
             
 
-            var s = sc.ReadMultiple(new Sector_Filter [] { }, null, 0);
-            var s1 = ss1.ReadMultiple(new  Sub_Sector_I_Filter [] { }, null, 0);
-            var s2 = ss2.ReadMultiple(new  SubSector_II.Sub_Sector_II_Filter [] { }, null, 0);
+            var s = sc.ReadMultiple(new EconomicSectors_Filter [] { }, null, 0);
+            var s1 = ss1.ReadMultiple(new  EconomicSubSectors_Filter [] { }, null, 0);
+            var s2 = ss2.ReadMultiple(new  SubSector_II.EconomicSpecificSectors_Filter [] { }, null, 0);
 
             foreach (var item in s)
             {
                 List<Models.Sector> sector2 = new();
-                var sector1 = s1.Where(o => o.Sasra_Main == item.Sasra_Main).ToList();
+                var sector1 = s1.Where(o => o.Sector_Code == item.Sector_Code).ToList();
 
                 foreach (var item2 in sector1)
                 {
-                    Models.Sector sec2 = new Models.Sector() { sector_code = item2.Sasra_Sub_Sector_I, parent_sector = item.Sasra_Main, sector_description = item2.Details, sector_level = 1 };
+                    Models.Sector sec2 = new Models.Sector()
+                    {
+                        sector_code = item2.Sub_Sector_Code,
+                        parent_sector = item.Sector_Code,
+                        sector_description = item2.Sub_Sector_Name,
+                        sector_level = 1
+                    };
                     sec2.sub_sectors = new();
-                    var sector3 = s2.Where(o => o.Sasra_Sub_Sector_I == item2.Sasra_Sub_Sector_I).ToList();
+                    var sector3 = s2.Where(o => o.Sub_Sector_Code == item2.Sub_Sector_Code).ToList();
 
                     foreach (var item3 in sector3)
                     {
-                        Models.Sector sec3 = new Models.Sector() { sector_code = item3.Sasra_Sub_Sector_II, parent_sector = item3.Sasra_Sub_Sector_I, sector_description = item3.Details, sector_level = 2 };
+                        Models.Sector sec3 = new Models.Sector()
+                        {
+                            sector_code = item3.Sub_Subsector_Code,
+                            parent_sector = item3.Sub_Sector_Code,
+                            sector_description = item3.Sub_Subsector_Description,
+                            sector_level = 2
+                        };
                         sec2.sub_sectors.Add(sec3);
                     }
 
 
                     sector2.Add(sec2);
 
-                };
+                }
+                ;
 
                 memberData.Add(new Models.Sector
                 {
-                    sector_code = item.Sasra_Main,
-                    sector_description = item.Details,
+                    sector_code = item.Sector_Code,
+                    sector_description = item.Sector_Name,
                     sub_sectors = sector2
 
 
@@ -602,7 +631,10 @@ namespace Nation_Sacco.Controllers
         {
             List<Models.LoanProduct> memberData = new();
             Results<List<Models.LoanProduct>> response = new Results<List<Models.LoanProduct>>();
+            try
+            {
 
+          
             var m = products.ReadMultiple(new LoanProducts_Filter[] { }, null, 0);
             if (m.Any())
             {
@@ -612,10 +644,10 @@ namespace Nation_Sacco.Controllers
                     memberData.Add(new Models.LoanProduct
                     {
                         Product_Id = mm.Code,
-                        Source = mm.Source.ToString(),
+                        Source = "",// mm.Source.ToString(),
                         Loan_Name = mm.Product_Description,
-                        Min_Guarantors = mm.Min_No_Of_Guarantors,
-                        Max_Guarantors = mm.Max_No_Of_Guarantors,
+                        Min_Guarantors = 0,//mm.,
+                        Max_Guarantors = 0,//mm.Max_No_Of_Guarantors,
                         Min_Loan_Amount = mm.Min_Loan_Amount,
                         Max_Loan_Amount = mm.Max_Loan_Amount,
                         Interest_rate = mm.Interest_rate,
@@ -637,7 +669,14 @@ namespace Nation_Sacco.Controllers
             {
                 response.result_code = 400;
                 response.result_message = "No Products found!";
-                //response.data = new error { error_message = "No Products found" };
+                    //response.data = new error { error_message = "No Products found" };
+                }
+            }
+            catch (Exception ex)
+            {
+
+                response.result_code = 400;
+                response.result_message = ex.Message;
             }
             return response;
         } 
@@ -650,11 +689,13 @@ namespace Nation_Sacco.Controllers
             {
                 if (req.installments == null || req.installments < 1) throw new Exception("Installments should have a value greater than 0");
                 if (string.IsNullOrEmpty(req.account_number)) throw new Exception("Account Number should have a value");
+               // if (string.IsNullOrEmpty(req.Loan_type)) throw new Exception("Loan_Type should have a value");
 
                 Mobileloanlimits.MobileLimits ml = new Mobileloanlimits.MobileLimits();
                 ml.Account_No = req.account_number;
                 ml.Installments = req.installments.Value;
-                ml.InstallmentsSpecified    = true; 
+                ml.InstallmentsSpecified    = true;
+                ml.Loan_Type = req.Loan_type;
                 MobileLimits.Create(ref ml);
                 response.data = ml;
                 if (!string.IsNullOrEmpty( ml.Error))
@@ -718,25 +759,3 @@ namespace Mobileloanlimits {
 
 
 
-namespace MemberLoans
-{
-
-    public partial class Loans
-    { 
-    public Source getsource(string source)
-        {
-            switch (source) { 
-                case "FOSA":return Source.FOSA;
-                case "BOSA":return Source.BOSA;
-                case "MICRO": return Source.MICRO;
-                case "HR_LOANS": return Source.HR_LOANS;
-                default:
-                    throw new Exception("Unknown source");
-            }
-
-
-        }
-    
-    } 
-
-}

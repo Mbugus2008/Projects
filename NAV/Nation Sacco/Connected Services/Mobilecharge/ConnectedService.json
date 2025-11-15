@@ -1,7 +1,7 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://172.16.7.181:7052/test/WS/Nation Sacco/Page/MobileCharges"
+      "http://157.173.123.120:7047/BC260/WS/NATION/Page/MobileCharges"
     ],
     "collectionTypes": [
       "System.Array",
@@ -11,7 +11,7 @@
       "*, Mobilecharge"
     ],
     "sync": true,
-    "targetFramework": "net8.0",
+    "targetFramework": "net10.0",
     "typeReuseMode": "All"
   }
 }

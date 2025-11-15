@@ -5,7 +5,7 @@ import 'package:trimline_parcel/widgets/parcel_card.dart';
 
 class Send extends StatelessWidget {
    Send({Key? key}) : super(key: key);
-final ParcelController _parcelController = Get.put(ParcelController());
+final ParcelController _parcelController = Get.find<ParcelController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ final ParcelController _parcelController = Get.put(ParcelController());
 } 
 class ReceiveParcelListPage extends StatelessWidget {
    ReceiveParcelListPage({Key? key}) : super(key: key);
-final ParcelController _parcelController = Get.put(ParcelController());
+final ParcelController _parcelController = Get.find<ParcelController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -21,6 +21,8 @@ namespace S_Mobile.Models.Paybill
             {
                 case "CITYHOPPER":
                     return new Cityhoppa(clientRecord.Client);
+                case "REMBOCLASIC":
+                    return new REMBOCLASIC(clientRecord.Client);
                 case "TrimLine":
                     return new Trimline(clientRecord.Client);
                 case "EMBASSAVA":

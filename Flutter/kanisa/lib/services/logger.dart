@@ -7,21 +7,19 @@ import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
-
 class LoggerService extends GetxService {
-   Logger logger = Logger();
+  Logger logger = Logger();
 
   @override
- 
-  Future<void>  onInit()  async{
+  Future<void> onInit() async {
     super.onInit();
-    await LogWriter.init(); 
-   await LogWriter.init();  // Initialize Logs folder
+    await LogWriter.init();
+    await LogWriter.init(); // Initialize Logs folder
 
     logger = Logger(
-      level: Level.all,// kReleaseMode ? Level.all : Level.debug,
+      level: Level.all, // kReleaseMode ? Level.all : Level.debug,
       printer: PrettyPrinter(methodCount: 0),
-      output: _DailyFileOutput(),  // Custom output to daily file
+      output: _DailyFileOutput(), // Custom output to daily file
     );
   }
 
@@ -29,10 +27,10 @@ class LoggerService extends GetxService {
   void debug(String? message) => logger.d(message);
   void info(String? message) => logger.i(message);
   void warning(String? message) => logger.w(message);
-  void error(String? message, {dynamic error, StackTrace? stackTrace}) => 
+  void error(String? message, {dynamic error, StackTrace? stackTrace}) =>
       logger.e(message, error: error, stackTrace: stackTrace);
-      
 }
+
 class _DailyFileOutput extends LogOutput {
   @override
   void output(OutputEvent event) {
@@ -40,12 +38,11 @@ class _DailyFileOutput extends LogOutput {
     event.lines.forEach(print);
 
     // Write to today's log file
-    event.lines.forEach((line) {
+    for (var line in event.lines) {
       LogWriter.write(line).catchError((e) => print("Log write error: $e"));
-    });
+    }
   }
 }
-
 
 class LogWriter {
   static Directory? _logDir;
@@ -56,51 +53,53 @@ class LogWriter {
   static Future<void> init() async {
     try {
       if (_logDir != null) return;
-  
-          final Directory folder = Directory('/storage/emulated/0/Documents/Mbranch');
-            _logDir = folder;
-          if (!await folder.exists()) {
-            await folder.create(recursive: true);
-            print('Folder created at: $folder');
-          } else {
-            print('Folder already exists at: $folder');
-          }
+
+      final Directory folder =
+          Directory('/storage/emulated/0/Documents/Mbranch');
+      _logDir = folder;
+      if (!await folder.exists()) {
+        await folder.create(recursive: true);
+        print('Folder created at: $folder');
+      } else {
+        print('Folder already exists at: $folder');
+      }
 //         }
 //       }
-    
     } catch (e) {
       stderr.writeln('Failed to initialize log directory: $e');
       rethrow;
     }
   }
- Future<void> createFolderInSharedDocuments(String folderName) async {
-      // Get the external storage directories (including Shared Documents)
-      List<String> directories = (await getExternalStorageDirectories())!
-          .whereType<Directory>()
-          .map((d) => d.path)
-          .toList();
 
-      // Iterate through the directories to find Shared Documents
-      for (var dir in directories) {
-        // Check if the directory path contains "Documents" (or similar term)
-        if (dir.toLowerCase().contains("documents") ||
-            dir.toLowerCase().contains("downloads") ||
-            dir.toLowerCase().contains("shared")) {
-          // Construct the full path to your folder
-          String folderPath = '$dir/$folderName';
+  Future<void> createFolderInSharedDocuments(String folderName) async {
+    // Get the external storage directories (including Shared Documents)
+    List<String> directories = (await getExternalStorageDirectories())!
+        .whereType<Directory>()
+        .map((d) => d.path)
+        .toList();
 
-          // Create the directory
-          final Directory folder = Directory(folderPath);
-            _logDir = folder;
-          if (!await folder.exists()) {
-            await folder.create(recursive: true);
-            print('Folder created at: $folderPath');
-          } else {
-            print('Folder already exists at: $folderPath');
-          }
+    // Iterate through the directories to find Shared Documents
+    for (var dir in directories) {
+      // Check if the directory path contains "Documents" (or similar term)
+      if (dir.toLowerCase().contains("documents") ||
+          dir.toLowerCase().contains("downloads") ||
+          dir.toLowerCase().contains("shared")) {
+        // Construct the full path to your folder
+        String folderPath = '$dir/$folderName';
+
+        // Create the directory
+        final Directory folder = Directory(folderPath);
+        _logDir = folder;
+        if (!await folder.exists()) {
+          await folder.create(recursive: true);
+          print('Folder created at: $folderPath');
+        } else {
+          print('Folder already exists at: $folderPath');
         }
       }
     }
+  }
+
   /// Get today's log file (creates if missing)
   static Future<File> _getTodayLogFile() async {
     if (_logDir == null) await init();
@@ -142,7 +141,7 @@ class LogWriter {
           .whereType<File>()
           .where((file) => file.path.endsWith('.log'))
           .toList()
-          ..sort((a, b) => b.path.compareTo(a.path));
+        ..sort((a, b) => b.path.compareTo(a.path));
     } catch (e) {
       stderr.writeln("Failed to list log files: $e");
       return [];

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.trimline.paul.metro.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -56,7 +57,10 @@ public class AgentTypeSummaryAdapter extends BaseAdapter {
         AgentTypeSummary item = getItem(position);
         holder.agentNameView.setText(item.getAgentCode());
         holder.typeView.setText(item.getType());
-        holder.amountView.setText(String.format(Locale.getDefault(), "%.2f", item.getAmount()));
+
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
+        String formattedAmount = formatter.format(item.getAmount());
+        holder.amountView.setText(formattedAmount);
 
         return convertView;
     }

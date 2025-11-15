@@ -11,15 +11,15 @@ namespace sms_tests
  
         static void Main(string[] args)
         {
-            //sms_tangazo.sms s = new sms_tangazo.sms(@"D:\logs\sms");
-            //s.User_ID = "1359";
-            //s.service = "1";
-            //s.passkey = "391ELT5DWW";
-            //s.Sender = "IMARIKA";
-            //s.Phone = "+254724367745";
-            //s.Message = "Agency sms test";
-            //s.Type = "Notification";
-            //s=   s.send(s);
+            sms_tangazo.sms s = new sms_tangazo.sms(@"D:\logs\sms");
+            s.User_ID = "1359";
+            s.service = "1";
+            s.passkey = "391ELT5DWW";
+            s.Sender = "IMARIKA";
+            s.Phone = "254710563359";
+            s.Message = "Agency sms test";
+            s.Type = "Notification";
+            s = s.send(s);
 
             //Africanstalking.sms s = new Africanstalking.sms();
             //s.from = "mwiruafcs";
@@ -30,14 +30,14 @@ namespace sms_tests
 
             //s = s.send(s);
 
-            Procom.Procom p = new Procom.Procom("mbugus2008@gmail.com", "Mbanking12345*");
+            //Procom.Procom p = new Procom.Procom("mbugus2008@gmail.com", "Mbanking12345*");
 
-            Procom.Procom.smss sms = new Procom.Procom.smss();
-            sms.message = "Testings";
-            sms.phone_number = "+254710563359";
-            sms.sender_name = "PROCOM LTD";
-            sms.unique_identifier = "000333";
-            var pp =p.sendsms(sms);
+            //Procom.Procom.smss sms = new Procom.Procom.smss();
+            //sms.message = "Testings";
+            //sms.phone_number = "+254710563359";
+            //sms.sender_name = "PROCOM LTD";
+            //sms.unique_identifier = "000333";
+            //var pp =p.sendsms(sms);
 
         }
     }

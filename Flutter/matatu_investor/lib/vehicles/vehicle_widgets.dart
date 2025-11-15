@@ -156,7 +156,7 @@ class Vsummary extends StatelessWidget {
   }) : super(key: key);
 
   final List<Vehicles>? vehicles;
-  double w = 60;
+  final double w = 60;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -269,7 +269,7 @@ class Vtotals extends StatelessWidget {
   }) : super(key: key);
 
   final List<Vehicles>? vehicles;
-  double w = 60;
+  final double w = 60;
   @override
   Widget build(BuildContext context) {
     return Row(

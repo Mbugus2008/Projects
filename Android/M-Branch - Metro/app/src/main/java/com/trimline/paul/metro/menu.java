@@ -536,7 +536,7 @@ public class menu extends AppCompatActivity
                             f.sent = true;
                             f.Constituency = "1";
                             db.inserttrans(f);
-
+                            db.inserttrans(f);
                             t.Constituency = "1";
                             db.updatetrans(t);
 

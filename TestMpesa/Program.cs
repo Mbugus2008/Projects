@@ -70,23 +70,23 @@ namespace TestMpesa
 
             // var t =     matchnames("OUMA ALVISTOR DIANA", "ALVISTOR OUMA DIANA");
             MpesaApi.Cust c = new MpesaApi.Cust();
-            c.customer_key = "ANIDUOF2QtUkQZc3PSQKXPj47X0lXDzAujSLISdkn41yHbW6";
-            c.customer_secret = "adQKotoAyEyV2b0AqfeerjuqG9pbtL541pSPpqmA0UJHp31qAVfsLHVfncAuWCIg";
-            c.ShortCode = "5428730";
+            c.customer_key = "UYqYR5vpagoS34rGaekiFGCLptdM5Fp8QVLxtPBd5LlBGWnK";
+            c.customer_secret = "uXNPiIYGjnuMxdXYUecVAizBVxfz0346NZvtcuLWUcAj3r9GwRjbTOIlHZMm43pR";
+            c.ShortCode = "4187941";
             MpesaApi.MpesaApi m = new MpesaApi.MpesaApi(c);
             string ok = "";
-            //MpesaApi.stkpush r = new MpesaApi.stkpush();
-            //r.passkey = "8d777e028006665355e1ee4d11a1a0e656ad53c2085f7bd63c5b0d8417e06ab9";
-            //r.BusinessShortCode = "371888";
-            //r.TransactionType = "CustomerPayBillOnline";
-            //r.Amount = 10;
-            //            r.PartyA = "254710563359";
-            //r.PartyB = r.BusinessShortCode;
-            //r.PhoneNumber = r.PartyA;// "254710563359";
-            //r.CallBackURL = "https://197.155.74.209:806/Deposit.svc/stkpush";
-            //r.AccountReference = "Test";
-            //r.TransactionDesc = "Test";
-            //var sp = m.Stkpush(r);
+            MpesaApi.stkpush r = new MpesaApi.stkpush();
+            r.passkey = "8b3707da60b786b81afb1b866eee599788ef20403c88be86278ef98d92b63c4e";
+            r.BusinessShortCode = "4187941";
+            r.TransactionType = "CustomerPayBillOnline";
+            r.Amount = 10;
+            r.PartyA = "254710563359";
+            r.PartyB = r.BusinessShortCode;
+            r.PhoneNumber = r.PartyA;// "254710563359";
+            r.CallBackURL = "https://trimline.co.ke:4001/api/stkpush";
+            r.AccountReference = "Test";
+            r.TransactionDesc = "Test";
+            var sp = m.Stkpush(r);
 
             //    var shortcodes = new List<(string shortcode, string customerKey, string customerSecret)>
             //{
@@ -151,7 +151,7 @@ namespace TestMpesa
             //c.customer_secret = "VEiS3clIrPJUPCYIPhkO8a8pBwRLs1TGs1kyBxMX8mW5KLKvWRnnB8LL6vPBKWfA";
 
             //MpesaApi.MpesaApi mpesa = new MpesaApi.MpesaApi(c);
-              //var d = m.author.access_token;
+            //var d = m.author.access_token;
             //var mm=  m.auth(c);
             //Console.WriteLine(d);
             //string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");

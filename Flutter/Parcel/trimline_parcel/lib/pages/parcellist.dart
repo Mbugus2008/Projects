@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trimline_parcel/pages/addeditparcel.dart';
 import 'package:trimline_parcel/pages/send.dart';
+import 'package:trimline_parcel/pages/parcel_dashboard_page.dart';
 import 'package:trimline_parcel/widgets/parcel_card.dart';
 import '../models/parcel_model.dart';
 import '../controllers/parcel_controller.dart';
-import '../pages/add_parcel_page.dart';
+
 
 class ParcelListPage extends StatefulWidget {
   const ParcelListPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class ParcelListPage extends StatefulWidget {
 }
 
 class _ParcelListPageState extends State<ParcelListPage> {
-  final ParcelController _parcelController = Get.put(ParcelController());
+  final ParcelController _parcelController = Get.find<ParcelController>();
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -34,8 +35,6 @@ class _ParcelListPageState extends State<ParcelListPage> {
     _parcelController.setSearchQuery(_searchController.text);
   }
 
-  
-
   void _showStatusFilterDialog() {
     Get.dialog(
       AlertDialog(
@@ -44,14 +43,16 @@ class _ParcelListPageState extends State<ParcelListPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildStatusFilterOption(null, 'All Statuses'),
-            ...ParcelStatus.values.map((status) => _buildStatusFilterOption(status, status.toString().split('.').last)),
+            ...ParcelStatus.values.map(
+              (status) => _buildStatusFilterOption(
+                status,
+                _parcelController.statusLabel(status),
+              ),
+            ),
           ],
         ),
         actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Close'),
-          ),
+          TextButton(onPressed: () => Get.back(), child: const Text('Close')),
         ],
       ),
     );
@@ -86,43 +87,57 @@ class _ParcelListPageState extends State<ParcelListPage> {
         title: const Text('Parcel List'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.dashboard_customize_outlined),
+            onPressed: () => Get.to(() => const ParcelDashboardPage()),
+          ),
+          IconButton(
             icon: const Icon(Icons.filter_alt),
             onPressed: _showStatusFilterDialog,
           ),
-          Obx(() => IconButton(
-                icon: const Icon(Icons.refresh),
-                onPressed: _parcelController.isLoading ? null : _parcelController.loadParcels,
-              )),
+          Obx(
+            () => IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed:
+                  _parcelController.isLoading
+                      ? null
+                      : _parcelController.loadParcels,
+            ),
+          ),
         ],
       ),
       body: Column(
         children: [
- SizedBox(
-          
+          SizedBox(
             width: double.infinity,
             child: Card(
               color: Colors.blue,
               margin: const EdgeInsets.all(8.0),
-                
-                child: TextButton(
-                  onPressed: () => Get.to(() => Send()),
-                  child: const Text('Send Parcel',style: TextStyle(color: Colors.white,fontSize: 24),),
+
+              child: TextButton(
+                onPressed: () => Get.to(() => Send()),
+                child: const Text(
+                  'Send Parcel',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
                 ),
               ),
             ),
-           
+          ),
+
           SizedBox(
             width: double.infinity,
             child: Card(
               color: Colors.green,
               margin: const EdgeInsets.all(8.0),
-                child: TextButton(
-                  onPressed: () => Get.to(() => ReceiveParcelListPage()),
-                  child: const Text('Receive Parcel',style: TextStyle(color: Colors.white,fontSize: 24),),
+              child: TextButton(
+                onPressed: () => Get.to(() => ReceiveParcelListPage()),
+                child: const Text(
+                  'Receive Parcel',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
                 ),
               ),
             ),
-          
+          ),
+
           Padding(
             padding: const EdgeInsets.all(1.0),
             child: TextField(
@@ -139,30 +154,29 @@ class _ParcelListPageState extends State<ParcelListPage> {
             ),
           ),
 
-         
-         
           Obx(() {
             if (_parcelController.isLoading) {
               return const Expanded(
                 child: Center(child: CircularProgressIndicator()),
               );
             }
-            
+
             if (_parcelController.filteredParcels.isEmpty) {
               return const Expanded(
-                child: Center(
-                  child: Text('No parcels found'),
-                ),
+                child: Center(child: Text('No parcels found')),
               );
             }
-            
+
             return Expanded(
               child: ListView.builder(
                 itemCount: _parcelController.filteredParcels.length,
                 itemBuilder: (context, index) {
                   final parcel = _parcelController.filteredParcels[index];
                   return Card(
-                    margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     child: ParcelCard(parcel: parcel),
                   );
                 },
@@ -173,7 +187,15 @@ class _ParcelListPageState extends State<ParcelListPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final result = await Get.to(() =>  AddEditParcelPage());
+          Get.snackbar(
+            "Please wait",
+            "Creating parcel...",
+            showProgressIndicator: true,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+          Parcel parcel = await _parcelController.newparcel();
+          Get.closeCurrentSnackbar();
+          final result = await Get.to(() => AddEditParcelPage(parcel: parcel));
           if (result == true) {
             _parcelController.loadParcels();
           }
@@ -183,3 +205,6 @@ class _ParcelListPageState extends State<ParcelListPage> {
     );
   }
 }
+
+
+

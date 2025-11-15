@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kanisa/models/account_model.dart';
 import 'package:kanisa/Network/Apis.dart';
+import 'package:kanisa/models/account_model.dart';
+import 'package:kanisa/screens/payment_history_screen.dart';
+import 'package:kanisa/screens/payment_screen.dart';
 import 'package:kanisa/screens/registration_screen.dart';
 import 'package:kanisa/services/logger.dart';
 import 'package:kanisa/splash.dart';
@@ -12,10 +14,10 @@ class MyAccountScreen extends StatelessWidget {
   Customer? cust;
   final ApiClient api = ApiClient();
   final LoggerService logger = Get.find();
-   MyAccountScreen({
-    Key? key,
+  MyAccountScreen({
+    super.key,
     this.cust,
-  }) : super(key: key){
+  }) {
     customer.value = cust!;
   }
 
@@ -23,6 +25,12 @@ class MyAccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     print(customer.toString());
     return Scaffold(
+      appBar: AppBar(
+        title: Text(customer.value.Name ?? 'My Account'),
+        backgroundColor: Colors.blue.shade600,
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -32,183 +40,331 @@ class MyAccountScreen extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                expandedHeight: 200.0,
-                floating: false,
-                pinned: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text(customer.value.Name ?? 'My Account'),
-                  background: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Colors.blue.shade400, Colors.green.shade400],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                     Obx(() => Center(
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.account_circle,
-                              size: 100,
-                              color: Colors.blue.shade700,
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              customer.value.Name ?? 'No Name Provided',
-                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              customer.value.E_Mail ?? 'No Email Provided',
-                              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                            ),
-                       
-                             RichText(
-                              text: TextSpan(
-                                style: const TextStyle(fontSize: 16, color: Colors.black), // Default text style for the whole RichText
-                                children: [
-                                  const TextSpan(
-                                    text: 'DISTRICT: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold), // Bold style for 'Group:'
-                                  ),
-                                  TextSpan(
-                                    text: customer.value.Global_Dimension_1_Code ?? 'No District Provided',
-                                    // Inherits default style, no additional styling needed
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                style: const TextStyle(fontSize: 16, color: Colors.black), // Default text style for the whole RichText
-                                children: [
-                                  const TextSpan(
-                                    text: 'My Groups: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold), // Bold style for 'Group:'
-                                  ),
-                                  for (var group in customer.value.MembersGroups ?? [])
-                                    TextSpan(
-                                      text: '\n${group.Global_Dimension_2_Code}',
-                                      // Inherits default style, no additional styling needed
-                                    ),
-                                ],
-                              ),
-                            ),],
-                        ),
-                      )),
-                      const SizedBox(height: 32),
-                      const Text(
-                        'Account',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 8),
-                      AccountOptionCard(
-                        icon: Icons.person,
-                        title: 'Edit Profile',
-                        onTap: () async {
-                          Customer? updatedCustomer = await Get.to(() => RegistrationScreen(customer: customer.value));
-                          logger.info(updatedCustomer.toString());
-                          if (updatedCustomer != null) {
-                            customer.value = updatedCustomer;
-                          }
-                        },
-                      ),
-                      AccountOptionCard(
-                        icon: Icons.settings,
-                        title: 'Preferences',
-                        onTap: () => Get.snackbar('Preferences', 'Feature coming soon!'),
-                      ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        'Security',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 8),
-                      AccountOptionCard(
-                        icon: Icons.lock,
-                        title: 'Change Password',
-                        onTap: () => Get.snackbar('Change Password', 'Feature coming soon!'),
-                      ),
-                      AccountOptionCard(
-                        icon: Icons.security,
-                        title: 'Two-Factor Authentication',
-                        onTap: () => Get.snackbar('Two-Factor Authentication', 'Feature coming soon!'),
-                      ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        'Support',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 8),
-                      AccountOptionCard(
-                        icon: Icons.help,
-                        title: 'Help & Support',
-                        onTap: () => Get.snackbar('Help & Support', 'Feature coming soon!'),
-                      ),
-                      AccountOptionCard(
-                        icon: Icons.info,
-                        title: 'About',
-                        onTap: () => Get.snackbar('About', 'Feature coming soon!'),
-                      ),
-                      const SizedBox(height: 24),
-                      Center(
-                        child: ElevatedButton.icon(
-                          onPressed: () async {
-                            final SharedPreferences prefs = await SharedPreferences.getInstance();
-                            await prefs.remove('phone_number');
-                            Get.offAll(() => Welcome());  
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              // Responsive design based on screen height
+              final isSmallScreen = constraints.maxHeight < 700;
 
-                          } , 
-                          icon: const Icon(Icons.exit_to_app),
-                          label: const Text('Logout'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red.shade400,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Profile Bio Card
+                      Obx(() => Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
                             ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.all(isSmallScreen ? 12.0 : 20.0),
+                              child: Column(
+                                children: [
+                                  // Avatar
+                                  Container(
+                                    padding: const EdgeInsets.all(3),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.blue.shade400,
+                                          Colors.green.shade400
+                                        ],
+                                      ),
+                                    ),
+                                    child: Container(
+                                      padding: EdgeInsets.all(
+                                          isSmallScreen ? 12 : 16),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Icons.person,
+                                        size: isSmallScreen ? 40 : 50,
+                                        color: Colors.blue.shade700,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: isSmallScreen ? 8 : 12),
+
+                                  // Name
+                                  Text(
+                                    customer.value.Name ?? 'No Name Provided',
+                                    style: TextStyle(
+                                      fontSize: isSmallScreen ? 18 : 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue.shade900,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 6),
+
+                                  // Member Number Badge
+                                  if (customer.value.No != null)
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 12, vertical: 4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue.shade50,
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                            color: Colors.blue.shade200),
+                                      ),
+                                      child: Text(
+                                        'Member #${customer.value.No}',
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.blue.shade700,
+                                        ),
+                                      ),
+                                    ),
+                                  SizedBox(height: isSmallScreen ? 8 : 12),
+
+                                  // Contact Info in Compact Cards
+                                  _buildCompactInfo(
+                                    Icons.email_outlined,
+                                    customer.value.E_Mail ?? 'No Email',
+                                    Colors.orange,
+                                  ),
+                                  const SizedBox(height: 6),
+                                  _buildCompactInfo(
+                                    Icons.phone_outlined,
+                                    customer.value.Phone_No ?? 'No Phone',
+                                    Colors.green,
+                                  ),
+                                  const SizedBox(height: 6),
+                                  _buildCompactInfo(
+                                    Icons.location_on_outlined,
+                                    customer.value.Global_Dimension_1_Code ??
+                                        'No District',
+                                    Colors.purple,
+                                  ),
+
+                                  // Groups Section (compact)
+                                  if (customer.value.MembersGroups != null &&
+                                      customer
+                                          .value.MembersGroups!.isNotEmpty) ...[
+                                    SizedBox(height: isSmallScreen ? 8 : 12),
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.green.shade50,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.green.shade200),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(Icons.group,
+                                                  size: 16,
+                                                  color: Colors.green.shade700),
+                                              const SizedBox(width: 6),
+                                              Text(
+                                                'My Groups',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.green.shade900,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Wrap(
+                                            spacing: 6,
+                                            runSpacing: 6,
+                                            alignment: WrapAlignment.center,
+                                            children: customer
+                                                .value.MembersGroups!
+                                                .map((group) => Container(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 10,
+                                                          vertical: 4),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                        border: Border.all(
+                                                            color: Colors.green
+                                                                .shade300),
+                                                      ),
+                                                      child: Text(
+                                                        group.Global_Dimension_2_Code ??
+                                                            '',
+                                                        style: TextStyle(
+                                                          fontSize: 11,
+                                                          color: Colors
+                                                              .green.shade700,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ))
+                                                .toList(),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          )),
+                      SizedBox(height: isSmallScreen ? 8 : 12),
+
+                      // Quick Actions Grid
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        childAspectRatio: isSmallScreen ? 1.4 : 1.5,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                        children: [
+                          _buildQuickActionCard(
+                            icon: Icons.person,
+                            title: 'Edit Profile',
+                            color: Colors.blue,
+                            onTap: () async {
+                              Customer? updatedCustomer = await Get.to(() =>
+                                  RegistrationScreen(customer: customer.value));
+                              logger.info(updatedCustomer.toString());
+                              if (updatedCustomer != null) {
+                                customer.value = updatedCustomer;
+                              }
+                            },
                           ),
-                        ),
+                          _buildQuickActionCard(
+                            icon: Icons.payment,
+                            title: 'Make Payment',
+                            color: Colors.green,
+                            onTap: () => Get.to(
+                                () => PaymentScreen(customer: customer.value)),
+                          ),
+                          _buildQuickActionCard(
+                            icon: Icons.history,
+                            title: 'Payment History',
+                            color: Colors.orange,
+                            onTap: () => Get.to(() =>
+                                PaymentHistoryScreen(customer: customer.value)),
+                          ),
+                          _buildQuickActionCard(
+                            icon: Icons.exit_to_app,
+                            title: 'Logout',
+                            color: Colors.red,
+                            onTap: () async {
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              await prefs.remove('phone_number');
+                              Get.offAll(() => Welcome());
+                            },
+                          ),
+                        ],
                       ),
+                      SizedBox(height: isSmallScreen ? 8 : 12),
                     ],
                   ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuickActionCard({
+    required IconData icon,
+    required String title,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon, size: 28, color: color),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey.shade800,
                 ),
               ),
             ],
           ),
         ),
       ),
-      
     );
   }
 
-  void _registerCustomerIfNeeded() async {
-    try {
-      Customer? exists = await api.checkCustomerExists(customer.value.Phone_No ?? '');
-      if (exists == null) {
-        await api.registerCustomer(customer.value);
-        Get.snackbar('Success', 'Customer registered successfully!');
-      } else {
-        Get.snackbar('Notice', 'Customer already exists.');
-      }
-    } catch (e) {
-      Get.snackbar('Error', 'Failed to register customer: $e');
-    }
+  Widget _buildCompactInfo(IconData icon, String value, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Icon(icon, size: 16, color: color),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -218,11 +374,11 @@ class AccountOptionCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const AccountOptionCard({
-    Key? key,
+    super.key,
     required this.icon,
     required this.title,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

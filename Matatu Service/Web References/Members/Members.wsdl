@@ -34,9 +34,8 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="Start_Date" type="xsd:date" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Code" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Id_Number" type="xsd:string" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Arrears" type="xsd:decimal" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Penalty" type="xsd:decimal" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Parking" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Fleet_No" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Last_Modification" type="xsd:date" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Vehicles_Details_Mbranch_List">
@@ -54,17 +53,8 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="Gender" type="tns:Gender" />
           <xsd:element minOccurs="0" maxOccurs="1" name="E_Mail" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Status" type="tns:Status" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Outstanding_Penalty" type="xsd:decimal" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="dailyrepayment" type="xsd:decimal" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Savings" type="xsd:decimal" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Xmas" type="xsd:decimal" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Last_update_savings" type="xsd:date" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Last_update_xmas" type="xsd:date" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Last_update_Loan" type="xsd:date" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Last_Date_Modified" type="xsd:date" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Deposit" type="xsd:decimal" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="Welfare" type="xsd:decimal" />
-          <xsd:element minOccurs="0" maxOccurs="1" name="ParkingBal" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Password" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Password_Changed" type="xsd:boolean" />
           <xsd:element minOccurs="0" maxOccurs="1" name="vehicles" type="tns:Vehicles_Details_Mbranch_List" />
         </xsd:sequence>
       </xsd:complexType>
@@ -82,17 +72,8 @@
           <xsd:enumeration value="Gender" />
           <xsd:enumeration value="E_Mail" />
           <xsd:enumeration value="Status" />
-          <xsd:enumeration value="Outstanding_Penalty" />
-          <xsd:enumeration value="dailyrepayment" />
-          <xsd:enumeration value="Savings" />
-          <xsd:enumeration value="Xmas" />
-          <xsd:enumeration value="Last_update_savings" />
-          <xsd:enumeration value="Last_update_xmas" />
-          <xsd:enumeration value="Last_update_Loan" />
-          <xsd:enumeration value="Last_Date_Modified" />
-          <xsd:enumeration value="Deposit" />
-          <xsd:enumeration value="Welfare" />
-          <xsd:enumeration value="ParkingBal" />
+          <xsd:enumeration value="Password" />
+          <xsd:enumeration value="Password_Changed" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="Members_Filter">
@@ -475,7 +456,7 @@
   </binding>
   <service name="Members_Service">
     <port name="Members_Port" binding="tns:Members_Binding">
-      <address location="http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Members" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Members" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

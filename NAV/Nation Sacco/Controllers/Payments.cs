@@ -1,4 +1,4 @@
-﻿using Ledgers;
+﻿
 using LoanProduct;
 using MemberLoans;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +26,8 @@ namespace Nation_Sacco.Controllers
             MobileTransaction.Transactions transact = null;
             try
             {
+               // throw new Exception("Service Temporarily Unavailable");
+
                 if (trans.transaction_type < 1) throw new Exception("Transaction type required");//Transaction type required
                 if (trans.From_Account_Number == "") throw new Exception("From_Account_Number required");//Transaction type required
                 if (trans.phone_number == null) throw new Exception("Phone No Required");
@@ -39,8 +41,8 @@ namespace Nation_Sacco.Controllers
                     new MobileTransaction.Transactions_Filter { Field = MobileTransaction.Transactions_Fields.Status, Criteria = MobileTransaction.Status.Pending_Posting.ToString() },
                  new MobileTransaction.Transactions_Filter { Field = MobileTransaction.Transactions_Fields.Account_No, Criteria = trans.From_Account_Number }
                 }, null, 0).FirstOrDefault();
-
-                if (t != null) throw new Exception("We are processing a similar transaction kindly try again later");//Transaction pending
+                
+                if (t != null && t.Source == MobileTransaction.Source.Fosa) throw new Exception("We are processing a similar transaction kindly try again later");//Transaction pending
                 t = mobileTransaction.ReadMultiple(new MobileTransaction.Transactions_Filter[] { 
                     new MobileTransaction.Transactions_Filter { Field = MobileTransaction.Transactions_Fields.Document_No, Criteria = trans.Transaction_Reference } ,
                 new MobileTransaction.Transactions_Filter { Field = MobileTransaction.Transactions_Fields.Transaction_Type, Criteria = trans.transaction_type.ToString() }
@@ -50,14 +52,14 @@ namespace Nation_Sacco.Controllers
 
                 if (t != null && trans.request_type == Controllers.Transaction.Request_type.Initial) throw new Exception("Reference Already Exists");//Transaction already exist
 
-                if (t == null && ((MobileTransaction.Transaction_Type)trans.transaction_type == MobileTransaction.Transaction_Type.Mpesa_Withdrawal || (MobileTransaction.Transaction_Type)trans.transaction_type == MobileTransaction.Transaction_Type.Bank_Transfer) && (trans.request_type == Controllers.Transaction.Request_type.confirmation))
+                if (t == null && ((MobileTransaction.Transaction_Type)trans.transaction_type == MobileTransaction.Transaction_Type.Mpesa_Withdrawal || (MobileTransaction.Transaction_Type)trans.transaction_type == MobileTransaction.Transaction_Type.Bank_Transfer|| (MobileTransaction.Transaction_Type)trans.transaction_type == MobileTransaction.Transaction_Type.Till_Payment) && (trans.request_type == Controllers.Transaction.Request_type.confirmation))
                 {
                     throw new Exception("We could not find the initial transaction");
                 }
 
                 if ((t != null) && (trans.request_type == Controllers.Transaction.Request_type.confirmation))
                 {
-                    if (trans.reference == null) throw new Exception("Transaction reference expected");
+                    if (String.IsNullOrEmpty( trans.reference )) throw new Exception("Transaction reference expected");
                     transact = t;
                     
                     transact.Document_No = trans.reference;
@@ -94,10 +96,10 @@ namespace Nation_Sacco.Controllers
                     transact.Description = transact.Transaction_Type.ToString();
                     if (!string.IsNullOrEmpty(trans.to_mpesa_phone))
                       transact.Description = trans.to_mpesa_phone;
-                    if (transact.Transaction_Type == Transaction_Type.Bank_Transfer)
+                    if ((transact.Transaction_Type == Transaction_Type.Bank_Transfer) || transact.Transaction_Type == Transaction_Type.Till_Payment)
                         transact.Account_No_2 = transact.Description;
 
-                    if ((transact.Transaction_Type == MobileTransaction.Transaction_Type.Mpesa_Withdrawal || transact.Transaction_Type == MobileTransaction.Transaction_Type.Bank_Transfer) && trans.request_type == Controllers.Transaction.Request_type.Initial)
+                    if ((transact.Transaction_Type == MobileTransaction.Transaction_Type.Mpesa_Withdrawal || transact.Transaction_Type == MobileTransaction.Transaction_Type.Bank_Transfer || transact.Transaction_Type == MobileTransaction.Transaction_Type.Till_Payment) && trans.request_type == Controllers.Transaction.Request_type.Initial)
                     {
                         transact.Status = MobileTransaction.Status.Sending_Money;
                         transact.StatusSpecified = true;
@@ -125,7 +127,8 @@ namespace Nation_Sacco.Controllers
                         {
 
                             acc = macc.data;
-                            
+                            transact.Member_No = acc.member_no;
+
                         }
 
                     }
@@ -147,6 +150,10 @@ namespace Nation_Sacco.Controllers
                         break;
                     case MobileTransaction.Transaction_Type.Mpesa_Deposit:
                         if (transact.Source == MobileTransaction.Source.Fosa) throw new Exception("Source parameter should be Mpesa");
+
+                        break;   
+                    case MobileTransaction.Transaction_Type.Transfer_to_FOSA:
+                        if (transact.Account_No == transact.Account_No_2) throw new Exception("You can't transfer to same account");
 
                         break;
                     case MobileTransaction.Transaction_Type.Reversal:
@@ -176,10 +183,17 @@ namespace Nation_Sacco.Controllers
 
                         if (charges.Limit_Per_Transaction > 0 && charges.Limit_Per_Transaction < transact.Amount)
                             throw new Exception($"Transaction Amount exceeds Limit of {charges.Limit_Per_Transaction}");
-
-                        var mmm = memberAccounts.ReadMultiple(new MemberAccounts.Accounts_Filter[] { new MemberAccounts.Accounts_Filter { Criteria = trans.From_Account_Number, Field = MemberAccounts.Accounts_Fields.No }, new MemberAccounts.Accounts_Filter { Criteria = DateTime.Today.Date.ToString("MM/dd/yyyy"), Field = MemberAccounts.Accounts_Fields.Date_Filter }, new MemberAccounts.Accounts_Filter { Field = MemberAccounts.Accounts_Fields.Transaction_Type, Criteria = transact.Transaction_Type.ToString() } }, null, 0).FirstOrDefault();
+                        var mmmm = mobileTransaction.ReadMultiple( new Transactions_Filter[] {new Transactions_Filter { Field = Transactions_Fields.Account_No ,Criteria = trans.From_Account_Number },
+                        new Transactions_Filter{Field = Transactions_Fields.Transaction_Date, Criteria = DateTime.Today.Date.ToString("MM/dd/yyyy") },
+new Transactions_Filter{Field = Transactions_Fields.Transaction_Type, Criteria = transact.Transaction_Type.ToString() }
+                        },null,0 );
+                        var mmm = mmmm.Sum(o => o.Amount);
+                        //var mmm = memberAccounts.ReadMultiple(new MemberAccounts.Accounts_Filter[] { 
+                        //    new MemberAccounts.Accounts_Filter { Criteria = trans.From_Account_Number, Field = MemberAccounts.Accounts_Fields.No }, 
+                        //    new MemberAccounts.Accounts_Filter { Criteria = DateTime.Today.Date.ToString("MM/dd/yyyy"), Field = MemberAccounts.Accounts_Fields.Date_Filter },
+                        //    new MemberAccounts.Accounts_Filter { Field = MemberAccounts.Accounts_Fields.Transaction_Type, Criteria = transact.Transaction_Type.ToString() } }, null, 0).FirstOrDefault();
                         
-                        if (charges.Daily_Amount_Limits > 0 && charges.Daily_Amount_Limits < mmm.Mobile_Amounts)
+                        if (charges.Daily_Amount_Limits > 0 && charges.Daily_Amount_Limits < mmm)
                             throw new Exception($"Transaction Amount exceeds Daily Limit of {charges.Daily_Amount_Limits}");
                     }
                 }
@@ -191,34 +205,33 @@ namespace Nation_Sacco.Controllers
                         case MobileTransaction.Transaction_Type.Member_Onboarding_with_IPRS_AI:
                             break;
                         case MobileTransaction.Transaction_Type.Transfer_to_FOSA:
-                            
-                         
-                            var mm = memberAccounts.ReadMultiple(new MemberAccounts.Accounts_Filter[] { new MemberAccounts.Accounts_Filter { Criteria = transact.Account_No, Field = MemberAccounts.Accounts_Fields.No } }, null, 0).FirstOrDefault();
+
+                            string accc = "";
+                            var mm = memberAccounts.ReadMultiple(new MemberAccounts.Accounts_Filter[] { 
+                                new MemberAccounts.Accounts_Filter { Criteria = transact.Member_No, Field = MemberAccounts.Accounts_Fields.Member_No } }, null, 0);
                             if (mm != null)
                             {
-                                var member = members.ReadMultiple(new Member.Members_Filter[] { new Member.Members_Filter { Criteria = mm.BOSA_Account_No, Field = Member.Members_Fields.No } }, null, 0).FirstOrDefault();
-
-                                if (member != null)
-                                {   
+                                
                                     switch (transact.Account_No_2)
-                            {
-                                case "SHARES":
-                                            checkbosabal(ref transact, member.Current_Shares);
+                                    {
+                                        case "SHARES":
+                                            accc = mm.FirstOrDefault( o => o.Account_Type == MemberAccounts.Account_Type.Non_Withdrawable_Deposit).No;
+                                          
                                             break;
-                                case "SHARES_CAPITAL":
-                                            checkbosabal(ref transact, member.Shares_Retained);
+                                        case "SHARES_CAPITAL":
+                                            accc = mm.Where(o => o.Account_Type == MemberAccounts.Account_Type.Share_Capital_Account).FirstOrDefault().No;
+                                            //checkbosabal(ref transact, member.Shares_Retained);
                                             break;
-                                case "BENEVOLENT_FUND":
-                                            checkbosabal(ref transact, member.Benevolent_Fund);
+                                        case "BENEVOLENT_FUND":
+                                            accc = mm.Where(o=> o.Account_Type == MemberAccounts.Account_Type.Benevolent_Account).FirstOrDefault().No;
+                                            //checkbosabal(ref transact, member.Benevolent_Fund);
                                             break;
-                                case "SCHOOL_FEES":
-                                            checkbosabal(ref transact, member.School_Fees_Contributions);
+                                        case "SCHOOL_FEES":
+                                            accc = mm.Where(o=> o.Account_Type == MemberAccounts.Account_Type.School_Fee_Account).FirstOrDefault().No;
+                                            //checkbosabal(ref transact, member.School_Fees_Contributions);
                                             break;
-                            }
-                                   
-                                
-                                
-                                }
+                                    }
+                                checkbal(ref transact, accc);
                             }
                             break;
                         default:
@@ -261,10 +274,15 @@ namespace Nation_Sacco.Controllers
             return Ok(response);
         }
 
-        void checkbal(ref MobileTransaction.Transactions t )
+        void checkbal(ref MobileTransaction.Transactions t,String account = "")
         {
-            var bal = polaris.GetAccountBal(t.Account_No);
-            var charges = polaris.GetCharges((int)t.Transaction_Type, t.Amount);
+            var acc = account == "" ? t.Account_No : account;
+
+            var bal = polaris.GetAccountBal(acc);
+            string ch = ((int)t.Transaction_Type).ToString();
+            var charges = polaris.GetCharges(ch, t.Amount);
+            t.Charge = charges;
+            t.ChargeSpecified = true;
             _logger.LogInformation($"Charges: {charges}");
             if (bal < t.Amount + charges)
             {
@@ -276,7 +294,7 @@ namespace Nation_Sacco.Controllers
         void checkbosabal(ref MobileTransaction.Transactions t,decimal accountbal)
         {
             var bal = accountbal;
-            var charges = polaris.GetCharges((int)t.Transaction_Type, t.Amount);
+            var charges = polaris.GetCharges(t.Transaction_Type.ToString(), t.Amount);
             _logger.LogInformation($"Charges: {charges}");
             if (bal < t.Amount + charges)
             {
@@ -287,30 +305,30 @@ namespace Nation_Sacco.Controllers
         }
     }
     public static class TransactionTypeHelper
+    {
+        public static string GetDescription(this MobileTransaction.Transaction_Type transactionType)
         {
-            public static string GetDescription(this MemberAccounts.Transaction_Type transactionType)
-            {
-                // Convert enum name to a readable format
-                string name = transactionType.ToString();
+            // Convert enum name to a readable format
+            string name = transactionType.ToString();
 
-                // Replace underscores and special encoded characters with spaces
-                name = name.Replace("_", " ")
-                          .Replace("x0026", "&")  // Handle & symbol
-                          .Replace("x000A", ""); // Handle newline (if needed)
+            // Replace underscores and special encoded characters with spaces
+            name = name.Replace("_", " ")
+                      .Replace("x0026", "&")  // Handle & symbol
+                      .Replace("x000A", ""); // Handle newline (if needed)
 
-                // Trim any extra spaces and return
-                return string.Join(" ", name.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-            }
-
-            // Optional: Preload all descriptions into a dictionary for performance
-            public static readonly Dictionary<MemberAccounts.Transaction_Type, string> DescriptionLookup =
-                Enum.GetValues(typeof(MemberAccounts.Transaction_Type))
-                    .Cast<MemberAccounts.Transaction_Type>()
-                    .ToDictionary(
-                        value => value,
-                        value => value.GetDescription()
-                    );
+            // Trim any extra spaces and return
+            return string.Join(" ", name.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
         }
+
+        // Optional: Preload all descriptions into a dictionary for performance
+        public static readonly Dictionary<MobileTransaction.Transaction_Type, string> DescriptionLookup =
+            Enum.GetValues(typeof(MobileTransaction.Transaction_Type))
+                .Cast<MobileTransaction.Transaction_Type>()
+                .ToDictionary(
+                    value => value,
+                    value => value.GetDescription()
+                );
+    }
     public class Transaction
     {
         public enum Request_type { Initial,confirmation };

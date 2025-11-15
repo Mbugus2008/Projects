@@ -11,104 +11,110 @@ namespace Sectors
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", ConfigurationName="Sectors.Sector_Port")]
-    public interface Sector_Port
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", ConfigurationName="Sectors.EconomicSectors_Port")]
+    public interface EconomicSectors_Port
     {
         
         // CODEGEN: Generating message contract since the wrapper name (Read_Result) of message Read_Result does not match the default value (Read)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:Read", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:Read", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.Read_Result Read(Sectors.Read request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:Read", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:Read", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.Read_Result> ReadAsync(Sectors.Read request);
         
         // CODEGEN: Generating message contract since the wrapper name (ReadByRecId_Result) of message ReadByRecId_Result does not match the default value (ReadByRecId)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:ReadByRecId", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:ReadByRecId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.ReadByRecId_Result ReadByRecId(Sectors.ReadByRecId request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:ReadByRecId", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:ReadByRecId", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.ReadByRecId_Result> ReadByRecIdAsync(Sectors.ReadByRecId request);
         
         // CODEGEN: Generating message contract since the wrapper name (ReadMultiple_Result) of message ReadMultiple_Result does not match the default value (ReadMultiple)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:ReadMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:ReadMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.ReadMultiple_Result ReadMultiple(Sectors.ReadMultiple request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:ReadMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:ReadMultiple", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.ReadMultiple_Result> ReadMultipleAsync(Sectors.ReadMultiple request);
         
         // CODEGEN: Generating message contract since the wrapper name (IsUpdated_Result) of message IsUpdated_Result does not match the default value (IsUpdated)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:IsUpdated", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:IsUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.IsUpdated_Result IsUpdated(Sectors.IsUpdated request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:IsUpdated", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:IsUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.IsUpdated_Result> IsUpdatedAsync(Sectors.IsUpdated request);
         
         // CODEGEN: Generating message contract since the wrapper name (GetRecIdFromKey_Result) of message GetRecIdFromKey_Result does not match the default value (GetRecIdFromKey)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:GetRecIdFromKey", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:GetRecIdFromKey", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.GetRecIdFromKey_Result GetRecIdFromKey(Sectors.GetRecIdFromKey request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:GetRecIdFromKey", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:GetRecIdFromKey", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.GetRecIdFromKey_Result> GetRecIdFromKeyAsync(Sectors.GetRecIdFromKey request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:Create", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:Create", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.Create_Result Create(Sectors.Create request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:Create", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:Create", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.Create_Result> CreateAsync(Sectors.Create request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:CreateMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:CreateMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.CreateMultiple_Result CreateMultiple(Sectors.CreateMultiple request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:CreateMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:CreateMultiple", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.CreateMultiple_Result> CreateMultipleAsync(Sectors.CreateMultiple request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:Update", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:Update", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.Update_Result Update(Sectors.Update request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:Update", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:Update", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.Update_Result> UpdateAsync(Sectors.Update request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:UpdateMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:UpdateMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.UpdateMultiple_Result UpdateMultiple(Sectors.UpdateMultiple request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:UpdateMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:UpdateMultiple", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.UpdateMultiple_Result> UpdateMultipleAsync(Sectors.UpdateMultiple request);
         
         // CODEGEN: Generating message contract since the wrapper name (Delete_Result) of message Delete_Result does not match the default value (Delete)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:Delete", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:Delete", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Sectors.Delete_Result Delete(Sectors.Delete request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sector:Delete", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsectors:Delete", ReplyAction="*")]
         System.Threading.Tasks.Task<Sectors.Delete_Result> DeleteAsync(Sectors.Delete request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector")]
-    public partial class Sector
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors")]
+    public partial class EconomicSectors
     {
         
         private string keyField;
         
-        private string sasra_MainField;
+        private string sector_CodeField;
         
-        private string detailsField;
+        private string sector_NameField;
+        
+        private string created_ByField;
+        
+        private System.DateTime created_OnField;
+        
+        private bool created_OnFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -126,47 +132,89 @@ namespace Sectors
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Sasra_Main
+        public string Sector_Code
         {
             get
             {
-                return this.sasra_MainField;
+                return this.sector_CodeField;
             }
             set
             {
-                this.sasra_MainField = value;
+                this.sector_CodeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Details
+        public string Sector_Name
         {
             get
             {
-                return this.detailsField;
+                return this.sector_NameField;
             }
             set
             {
-                this.detailsField = value;
+                this.sector_NameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string Created_By
+        {
+            get
+            {
+                return this.created_ByField;
+            }
+            set
+            {
+                this.created_ByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public System.DateTime Created_On
+        {
+            get
+            {
+                return this.created_OnField;
+            }
+            set
+            {
+                this.created_OnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Created_OnSpecified
+        {
+            get
+            {
+                return this.created_OnFieldSpecified;
+            }
+            set
+            {
+                this.created_OnFieldSpecified = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector")]
-    public partial class Sector_Filter
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors")]
+    public partial class EconomicSectors_Filter
     {
         
-        private Sector_Fields fieldField;
+        private EconomicSectors_Fields fieldField;
         
         private string criteriaField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Sector_Fields Field
+        public EconomicSectors_Fields Field
         {
             get
             {
@@ -194,70 +242,72 @@ namespace Sectors
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector")]
-    public enum Sector_Fields
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors")]
+    public enum EconomicSectors_Fields
     {
         
         /// <remarks/>
-        Sasra_Main,
+        Sector_Code,
         
         /// <remarks/>
-        Details,
+        Sector_Name,
+        
+        /// <remarks/>
+        Created_By,
+        
+        /// <remarks/>
+        Created_On,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class Read
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
-        public string Sasra_Main;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=1)]
-        public string Details;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
+        public string Sector_Code;
         
         public Read()
         {
         }
         
-        public Read(string Sasra_Main, string Details)
+        public Read(string Sector_Code)
         {
-            this.Sasra_Main = Sasra_Main;
-            this.Details = Details;
+            this.Sector_Code = Sector_Code;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class Read_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
-        public Sectors.Sector Sector;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
+        public Sectors.EconomicSectors EconomicSectors;
         
         public Read_Result()
         {
         }
         
-        public Read_Result(Sectors.Sector Sector)
+        public Read_Result(Sectors.EconomicSectors EconomicSectors)
         {
-            this.Sector = Sector;
+            this.EconomicSectors = EconomicSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class ReadByRecId
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         public string recId;
         
         public ReadByRecId()
@@ -271,47 +321,47 @@ namespace Sectors
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class ReadByRecId_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
-        public Sectors.Sector Sector;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
+        public Sectors.EconomicSectors EconomicSectors;
         
         public ReadByRecId_Result()
         {
         }
         
-        public ReadByRecId_Result(Sectors.Sector Sector)
+        public ReadByRecId_Result(Sectors.EconomicSectors EconomicSectors)
         {
-            this.Sector = Sector;
+            this.EconomicSectors = EconomicSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class ReadMultiple
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("filter")]
-        public Sectors.Sector_Filter[] filter;
+        public Sectors.EconomicSectors_Filter[] filter;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=1)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=1)]
         public string bookmarkKey;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=2)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=2)]
         public int setSize;
         
         public ReadMultiple()
         {
         }
         
-        public ReadMultiple(Sectors.Sector_Filter[] filter, string bookmarkKey, int setSize)
+        public ReadMultiple(Sectors.EconomicSectors_Filter[] filter, string bookmarkKey, int setSize)
         {
             this.filter = filter;
             this.bookmarkKey = bookmarkKey;
@@ -320,34 +370,34 @@ namespace Sectors
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class ReadMultiple_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadMultiple_Result", Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadMultiple_Result", Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Sectors.Sector[] ReadMultiple_Result1;
+        public Sectors.EconomicSectors[] ReadMultiple_Result1;
         
         public ReadMultiple_Result()
         {
         }
         
-        public ReadMultiple_Result(Sectors.Sector[] ReadMultiple_Result1)
+        public ReadMultiple_Result(Sectors.EconomicSectors[] ReadMultiple_Result1)
         {
             this.ReadMultiple_Result1 = ReadMultiple_Result1;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class IsUpdated
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         public string Key;
         
         public IsUpdated()
@@ -361,13 +411,13 @@ namespace Sectors
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class IsUpdated_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUpdated_Result", Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUpdated_Result", Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         public bool IsUpdated_Result1;
         
         public IsUpdated_Result()
@@ -381,13 +431,13 @@ namespace Sectors
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class GetRecIdFromKey
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         public string Key;
         
         public GetRecIdFromKey()
@@ -401,13 +451,13 @@ namespace Sectors
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetRecIdFromKey_Result", Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetRecIdFromKey_Result", Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         public string GetRecIdFromKey_Result1;
         
         public GetRecIdFromKey_Result()
@@ -421,169 +471,169 @@ namespace Sectors
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class Create
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
-        public Sectors.Sector Sector;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
+        public Sectors.EconomicSectors EconomicSectors;
         
         public Create()
         {
         }
         
-        public Create(Sectors.Sector Sector)
+        public Create(Sectors.EconomicSectors EconomicSectors)
         {
-            this.Sector = Sector;
+            this.EconomicSectors = EconomicSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class Create_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
-        public Sectors.Sector Sector;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
+        public Sectors.EconomicSectors EconomicSectors;
         
         public Create_Result()
         {
         }
         
-        public Create_Result(Sectors.Sector Sector)
+        public Create_Result(Sectors.EconomicSectors EconomicSectors)
         {
-            this.Sector = Sector;
+            this.EconomicSectors = EconomicSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class CreateMultiple
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Sectors.Sector[] Sector_List;
+        public Sectors.EconomicSectors[] EconomicSectors_List;
         
         public CreateMultiple()
         {
         }
         
-        public CreateMultiple(Sectors.Sector[] Sector_List)
+        public CreateMultiple(Sectors.EconomicSectors[] EconomicSectors_List)
         {
-            this.Sector_List = Sector_List;
+            this.EconomicSectors_List = EconomicSectors_List;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class CreateMultiple_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Sectors.Sector[] Sector_List;
+        public Sectors.EconomicSectors[] EconomicSectors_List;
         
         public CreateMultiple_Result()
         {
         }
         
-        public CreateMultiple_Result(Sectors.Sector[] Sector_List)
+        public CreateMultiple_Result(Sectors.EconomicSectors[] EconomicSectors_List)
         {
-            this.Sector_List = Sector_List;
+            this.EconomicSectors_List = EconomicSectors_List;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class Update
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
-        public Sectors.Sector Sector;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
+        public Sectors.EconomicSectors EconomicSectors;
         
         public Update()
         {
         }
         
-        public Update(Sectors.Sector Sector)
+        public Update(Sectors.EconomicSectors EconomicSectors)
         {
-            this.Sector = Sector;
+            this.EconomicSectors = EconomicSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class Update_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
-        public Sectors.Sector Sector;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
+        public Sectors.EconomicSectors EconomicSectors;
         
         public Update_Result()
         {
         }
         
-        public Update_Result(Sectors.Sector Sector)
+        public Update_Result(Sectors.EconomicSectors EconomicSectors)
         {
-            this.Sector = Sector;
+            this.EconomicSectors = EconomicSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class UpdateMultiple
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Sectors.Sector[] Sector_List;
+        public Sectors.EconomicSectors[] EconomicSectors_List;
         
         public UpdateMultiple()
         {
         }
         
-        public UpdateMultiple(Sectors.Sector[] Sector_List)
+        public UpdateMultiple(Sectors.EconomicSectors[] EconomicSectors_List)
         {
-            this.Sector_List = Sector_List;
+            this.EconomicSectors_List = EconomicSectors_List;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class UpdateMultiple_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Sectors.Sector[] Sector_List;
+        public Sectors.EconomicSectors[] EconomicSectors_List;
         
         public UpdateMultiple_Result()
         {
         }
         
-        public UpdateMultiple_Result(Sectors.Sector[] Sector_List)
+        public UpdateMultiple_Result(Sectors.EconomicSectors[] EconomicSectors_List)
         {
-            this.Sector_List = Sector_List;
+            this.EconomicSectors_List = EconomicSectors_List;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class Delete
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         public string Key;
         
         public Delete()
@@ -597,13 +647,13 @@ namespace Sectors
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sector", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsectors", IsWrapped=true)]
     public partial class Delete_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="Delete_Result", Namespace="urn:microsoft-dynamics-schemas/page/sector", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="Delete_Result", Namespace="urn:microsoft-dynamics-schemas/page/economicsectors", Order=0)]
         public bool Delete_Result1;
         
         public Delete_Result()
@@ -616,14 +666,14 @@ namespace Sectors
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface Sector_PortChannel : Sectors.Sector_Port, System.ServiceModel.IClientChannel
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    public interface EconomicSectors_PortChannel : Sectors.EconomicSectors_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class Sector_PortClient : System.ServiceModel.ClientBase<Sectors.Sector_Port>, Sectors.Sector_Port
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    public partial class EconomicSectors_PortClient : System.ServiceModel.ClientBase<Sectors.EconomicSectors_Port>, Sectors.EconomicSectors_Port
     {
         
         /// <summary>
@@ -633,84 +683,82 @@ namespace Sectors
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public Sector_PortClient() : 
-                base(Sector_PortClient.GetDefaultBinding(), Sector_PortClient.GetDefaultEndpointAddress())
+        public EconomicSectors_PortClient() : 
+                base(EconomicSectors_PortClient.GetDefaultBinding(), EconomicSectors_PortClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.Sector_Port.ToString();
+            this.Endpoint.Name = EndpointConfiguration.EconomicSectors_Port.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Sector_PortClient(EndpointConfiguration endpointConfiguration) : 
-                base(Sector_PortClient.GetBindingForEndpoint(endpointConfiguration), Sector_PortClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public Sector_PortClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(Sector_PortClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public EconomicSectors_PortClient(EndpointConfiguration endpointConfiguration) : 
+                base(EconomicSectors_PortClient.GetBindingForEndpoint(endpointConfiguration), EconomicSectors_PortClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Sector_PortClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(Sector_PortClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public EconomicSectors_PortClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(EconomicSectors_PortClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Sector_PortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public EconomicSectors_PortClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(EconomicSectors_PortClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public EconomicSectors_PortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.Read_Result Sectors.Sector_Port.Read(Sectors.Read request)
+        Sectors.Read_Result Sectors.EconomicSectors_Port.Read(Sectors.Read request)
         {
             return base.Channel.Read(request);
         }
         
-        public Sectors.Sector Read(string Sasra_Main, string Details)
+        public Sectors.EconomicSectors Read(string Sector_Code)
         {
             Sectors.Read inValue = new Sectors.Read();
-            inValue.Sasra_Main = Sasra_Main;
-            inValue.Details = Details;
-            Sectors.Read_Result retVal = ((Sectors.Sector_Port)(this)).Read(inValue);
-            return retVal.Sector;
+            inValue.Sector_Code = Sector_Code;
+            Sectors.Read_Result retVal = ((Sectors.EconomicSectors_Port)(this)).Read(inValue);
+            return retVal.EconomicSectors;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Sectors.Read_Result> Sectors.Sector_Port.ReadAsync(Sectors.Read request)
+        System.Threading.Tasks.Task<Sectors.Read_Result> Sectors.EconomicSectors_Port.ReadAsync(Sectors.Read request)
         {
             return base.Channel.ReadAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Sectors.Read_Result> ReadAsync(string Sasra_Main, string Details)
+        public System.Threading.Tasks.Task<Sectors.Read_Result> ReadAsync(string Sector_Code)
         {
             Sectors.Read inValue = new Sectors.Read();
-            inValue.Sasra_Main = Sasra_Main;
-            inValue.Details = Details;
-            return ((Sectors.Sector_Port)(this)).ReadAsync(inValue);
+            inValue.Sector_Code = Sector_Code;
+            return ((Sectors.EconomicSectors_Port)(this)).ReadAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.ReadByRecId_Result Sectors.Sector_Port.ReadByRecId(Sectors.ReadByRecId request)
+        Sectors.ReadByRecId_Result Sectors.EconomicSectors_Port.ReadByRecId(Sectors.ReadByRecId request)
         {
             return base.Channel.ReadByRecId(request);
         }
         
-        public Sectors.Sector ReadByRecId(string recId)
+        public Sectors.EconomicSectors ReadByRecId(string recId)
         {
             Sectors.ReadByRecId inValue = new Sectors.ReadByRecId();
             inValue.recId = recId;
-            Sectors.ReadByRecId_Result retVal = ((Sectors.Sector_Port)(this)).ReadByRecId(inValue);
-            return retVal.Sector;
+            Sectors.ReadByRecId_Result retVal = ((Sectors.EconomicSectors_Port)(this)).ReadByRecId(inValue);
+            return retVal.EconomicSectors;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Sectors.ReadByRecId_Result> Sectors.Sector_Port.ReadByRecIdAsync(Sectors.ReadByRecId request)
+        System.Threading.Tasks.Task<Sectors.ReadByRecId_Result> Sectors.EconomicSectors_Port.ReadByRecIdAsync(Sectors.ReadByRecId request)
         {
             return base.Channel.ReadByRecIdAsync(request);
         }
@@ -719,42 +767,42 @@ namespace Sectors
         {
             Sectors.ReadByRecId inValue = new Sectors.ReadByRecId();
             inValue.recId = recId;
-            return ((Sectors.Sector_Port)(this)).ReadByRecIdAsync(inValue);
+            return ((Sectors.EconomicSectors_Port)(this)).ReadByRecIdAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.ReadMultiple_Result Sectors.Sector_Port.ReadMultiple(Sectors.ReadMultiple request)
+        Sectors.ReadMultiple_Result Sectors.EconomicSectors_Port.ReadMultiple(Sectors.ReadMultiple request)
         {
             return base.Channel.ReadMultiple(request);
         }
         
-        public Sectors.Sector[] ReadMultiple(Sectors.Sector_Filter[] filter, string bookmarkKey, int setSize)
+        public Sectors.EconomicSectors[] ReadMultiple(Sectors.EconomicSectors_Filter[] filter, string bookmarkKey, int setSize)
         {
             Sectors.ReadMultiple inValue = new Sectors.ReadMultiple();
             inValue.filter = filter;
             inValue.bookmarkKey = bookmarkKey;
             inValue.setSize = setSize;
-            Sectors.ReadMultiple_Result retVal = ((Sectors.Sector_Port)(this)).ReadMultiple(inValue);
+            Sectors.ReadMultiple_Result retVal = ((Sectors.EconomicSectors_Port)(this)).ReadMultiple(inValue);
             return retVal.ReadMultiple_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Sectors.ReadMultiple_Result> Sectors.Sector_Port.ReadMultipleAsync(Sectors.ReadMultiple request)
+        System.Threading.Tasks.Task<Sectors.ReadMultiple_Result> Sectors.EconomicSectors_Port.ReadMultipleAsync(Sectors.ReadMultiple request)
         {
             return base.Channel.ReadMultipleAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Sectors.ReadMultiple_Result> ReadMultipleAsync(Sectors.Sector_Filter[] filter, string bookmarkKey, int setSize)
+        public System.Threading.Tasks.Task<Sectors.ReadMultiple_Result> ReadMultipleAsync(Sectors.EconomicSectors_Filter[] filter, string bookmarkKey, int setSize)
         {
             Sectors.ReadMultiple inValue = new Sectors.ReadMultiple();
             inValue.filter = filter;
             inValue.bookmarkKey = bookmarkKey;
             inValue.setSize = setSize;
-            return ((Sectors.Sector_Port)(this)).ReadMultipleAsync(inValue);
+            return ((Sectors.EconomicSectors_Port)(this)).ReadMultipleAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.IsUpdated_Result Sectors.Sector_Port.IsUpdated(Sectors.IsUpdated request)
+        Sectors.IsUpdated_Result Sectors.EconomicSectors_Port.IsUpdated(Sectors.IsUpdated request)
         {
             return base.Channel.IsUpdated(request);
         }
@@ -763,12 +811,12 @@ namespace Sectors
         {
             Sectors.IsUpdated inValue = new Sectors.IsUpdated();
             inValue.Key = Key;
-            Sectors.IsUpdated_Result retVal = ((Sectors.Sector_Port)(this)).IsUpdated(inValue);
+            Sectors.IsUpdated_Result retVal = ((Sectors.EconomicSectors_Port)(this)).IsUpdated(inValue);
             return retVal.IsUpdated_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Sectors.IsUpdated_Result> Sectors.Sector_Port.IsUpdatedAsync(Sectors.IsUpdated request)
+        System.Threading.Tasks.Task<Sectors.IsUpdated_Result> Sectors.EconomicSectors_Port.IsUpdatedAsync(Sectors.IsUpdated request)
         {
             return base.Channel.IsUpdatedAsync(request);
         }
@@ -777,11 +825,11 @@ namespace Sectors
         {
             Sectors.IsUpdated inValue = new Sectors.IsUpdated();
             inValue.Key = Key;
-            return ((Sectors.Sector_Port)(this)).IsUpdatedAsync(inValue);
+            return ((Sectors.EconomicSectors_Port)(this)).IsUpdatedAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.GetRecIdFromKey_Result Sectors.Sector_Port.GetRecIdFromKey(Sectors.GetRecIdFromKey request)
+        Sectors.GetRecIdFromKey_Result Sectors.EconomicSectors_Port.GetRecIdFromKey(Sectors.GetRecIdFromKey request)
         {
             return base.Channel.GetRecIdFromKey(request);
         }
@@ -790,12 +838,12 @@ namespace Sectors
         {
             Sectors.GetRecIdFromKey inValue = new Sectors.GetRecIdFromKey();
             inValue.Key = Key;
-            Sectors.GetRecIdFromKey_Result retVal = ((Sectors.Sector_Port)(this)).GetRecIdFromKey(inValue);
+            Sectors.GetRecIdFromKey_Result retVal = ((Sectors.EconomicSectors_Port)(this)).GetRecIdFromKey(inValue);
             return retVal.GetRecIdFromKey_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Sectors.GetRecIdFromKey_Result> Sectors.Sector_Port.GetRecIdFromKeyAsync(Sectors.GetRecIdFromKey request)
+        System.Threading.Tasks.Task<Sectors.GetRecIdFromKey_Result> Sectors.EconomicSectors_Port.GetRecIdFromKeyAsync(Sectors.GetRecIdFromKey request)
         {
             return base.Channel.GetRecIdFromKeyAsync(request);
         }
@@ -804,21 +852,21 @@ namespace Sectors
         {
             Sectors.GetRecIdFromKey inValue = new Sectors.GetRecIdFromKey();
             inValue.Key = Key;
-            return ((Sectors.Sector_Port)(this)).GetRecIdFromKeyAsync(inValue);
+            return ((Sectors.EconomicSectors_Port)(this)).GetRecIdFromKeyAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.Create_Result Sectors.Sector_Port.Create(Sectors.Create request)
+        Sectors.Create_Result Sectors.EconomicSectors_Port.Create(Sectors.Create request)
         {
             return base.Channel.Create(request);
         }
         
-        public void Create(ref Sectors.Sector Sector)
+        public void Create(ref Sectors.EconomicSectors EconomicSectors)
         {
             Sectors.Create inValue = new Sectors.Create();
-            inValue.Sector = Sector;
-            Sectors.Create_Result retVal = ((Sectors.Sector_Port)(this)).Create(inValue);
-            Sector = retVal.Sector;
+            inValue.EconomicSectors = EconomicSectors;
+            Sectors.Create_Result retVal = ((Sectors.EconomicSectors_Port)(this)).Create(inValue);
+            EconomicSectors = retVal.EconomicSectors;
         }
         
         public System.Threading.Tasks.Task<Sectors.Create_Result> CreateAsync(Sectors.Create request)
@@ -827,17 +875,17 @@ namespace Sectors
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.CreateMultiple_Result Sectors.Sector_Port.CreateMultiple(Sectors.CreateMultiple request)
+        Sectors.CreateMultiple_Result Sectors.EconomicSectors_Port.CreateMultiple(Sectors.CreateMultiple request)
         {
             return base.Channel.CreateMultiple(request);
         }
         
-        public void CreateMultiple(ref Sectors.Sector[] Sector_List)
+        public void CreateMultiple(ref Sectors.EconomicSectors[] EconomicSectors_List)
         {
             Sectors.CreateMultiple inValue = new Sectors.CreateMultiple();
-            inValue.Sector_List = Sector_List;
-            Sectors.CreateMultiple_Result retVal = ((Sectors.Sector_Port)(this)).CreateMultiple(inValue);
-            Sector_List = retVal.Sector_List;
+            inValue.EconomicSectors_List = EconomicSectors_List;
+            Sectors.CreateMultiple_Result retVal = ((Sectors.EconomicSectors_Port)(this)).CreateMultiple(inValue);
+            EconomicSectors_List = retVal.EconomicSectors_List;
         }
         
         public System.Threading.Tasks.Task<Sectors.CreateMultiple_Result> CreateMultipleAsync(Sectors.CreateMultiple request)
@@ -846,17 +894,17 @@ namespace Sectors
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.Update_Result Sectors.Sector_Port.Update(Sectors.Update request)
+        Sectors.Update_Result Sectors.EconomicSectors_Port.Update(Sectors.Update request)
         {
             return base.Channel.Update(request);
         }
         
-        public void Update(ref Sectors.Sector Sector)
+        public void Update(ref Sectors.EconomicSectors EconomicSectors)
         {
             Sectors.Update inValue = new Sectors.Update();
-            inValue.Sector = Sector;
-            Sectors.Update_Result retVal = ((Sectors.Sector_Port)(this)).Update(inValue);
-            Sector = retVal.Sector;
+            inValue.EconomicSectors = EconomicSectors;
+            Sectors.Update_Result retVal = ((Sectors.EconomicSectors_Port)(this)).Update(inValue);
+            EconomicSectors = retVal.EconomicSectors;
         }
         
         public System.Threading.Tasks.Task<Sectors.Update_Result> UpdateAsync(Sectors.Update request)
@@ -865,17 +913,17 @@ namespace Sectors
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.UpdateMultiple_Result Sectors.Sector_Port.UpdateMultiple(Sectors.UpdateMultiple request)
+        Sectors.UpdateMultiple_Result Sectors.EconomicSectors_Port.UpdateMultiple(Sectors.UpdateMultiple request)
         {
             return base.Channel.UpdateMultiple(request);
         }
         
-        public void UpdateMultiple(ref Sectors.Sector[] Sector_List)
+        public void UpdateMultiple(ref Sectors.EconomicSectors[] EconomicSectors_List)
         {
             Sectors.UpdateMultiple inValue = new Sectors.UpdateMultiple();
-            inValue.Sector_List = Sector_List;
-            Sectors.UpdateMultiple_Result retVal = ((Sectors.Sector_Port)(this)).UpdateMultiple(inValue);
-            Sector_List = retVal.Sector_List;
+            inValue.EconomicSectors_List = EconomicSectors_List;
+            Sectors.UpdateMultiple_Result retVal = ((Sectors.EconomicSectors_Port)(this)).UpdateMultiple(inValue);
+            EconomicSectors_List = retVal.EconomicSectors_List;
         }
         
         public System.Threading.Tasks.Task<Sectors.UpdateMultiple_Result> UpdateMultipleAsync(Sectors.UpdateMultiple request)
@@ -884,7 +932,7 @@ namespace Sectors
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Sectors.Delete_Result Sectors.Sector_Port.Delete(Sectors.Delete request)
+        Sectors.Delete_Result Sectors.EconomicSectors_Port.Delete(Sectors.Delete request)
         {
             return base.Channel.Delete(request);
         }
@@ -893,12 +941,12 @@ namespace Sectors
         {
             Sectors.Delete inValue = new Sectors.Delete();
             inValue.Key = Key;
-            Sectors.Delete_Result retVal = ((Sectors.Sector_Port)(this)).Delete(inValue);
+            Sectors.Delete_Result retVal = ((Sectors.EconomicSectors_Port)(this)).Delete(inValue);
             return retVal.Delete_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Sectors.Delete_Result> Sectors.Sector_Port.DeleteAsync(Sectors.Delete request)
+        System.Threading.Tasks.Task<Sectors.Delete_Result> Sectors.EconomicSectors_Port.DeleteAsync(Sectors.Delete request)
         {
             return base.Channel.DeleteAsync(request);
         }
@@ -907,7 +955,7 @@ namespace Sectors
         {
             Sectors.Delete inValue = new Sectors.Delete();
             inValue.Key = Key;
-            return ((Sectors.Sector_Port)(this)).DeleteAsync(inValue);
+            return ((Sectors.EconomicSectors_Port)(this)).DeleteAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -915,9 +963,16 @@ namespace Sectors
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.Sector_Port))
+            if ((endpointConfiguration == EndpointConfiguration.EconomicSectors_Port))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -931,27 +986,27 @@ namespace Sectors
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.Sector_Port))
+            if ((endpointConfiguration == EndpointConfiguration.EconomicSectors_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Page/Sector");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:7047/BC260/WS/NATION/Page/EconomicSectors");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return Sector_PortClient.GetBindingForEndpoint(EndpointConfiguration.Sector_Port);
+            return EconomicSectors_PortClient.GetBindingForEndpoint(EndpointConfiguration.EconomicSectors_Port);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return Sector_PortClient.GetEndpointAddress(EndpointConfiguration.Sector_Port);
+            return EconomicSectors_PortClient.GetEndpointAddress(EndpointConfiguration.EconomicSectors_Port);
         }
         
         public enum EndpointConfiguration
         {
             
-            Sector_Port,
+            EconomicSectors_Port,
         }
     }
 }

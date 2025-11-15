@@ -11,7 +11,7 @@ namespace NextofKin
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", ConfigurationName="NextofKin.NofKin_Port")]
     internal interface NofKin_Port
     {
@@ -55,10 +55,50 @@ namespace NextofKin
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:GetRecIdFromKey", ReplyAction="*")]
         System.Threading.Tasks.Task<NextofKin.GetRecIdFromKey_Result> GetRecIdFromKeyAsync(NextofKin.GetRecIdFromKey request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:Create", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        NextofKin.Create_Result Create(NextofKin.Create request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:Create", ReplyAction="*")]
+        System.Threading.Tasks.Task<NextofKin.Create_Result> CreateAsync(NextofKin.Create request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:CreateMultiple", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        NextofKin.CreateMultiple_Result CreateMultiple(NextofKin.CreateMultiple request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:CreateMultiple", ReplyAction="*")]
+        System.Threading.Tasks.Task<NextofKin.CreateMultiple_Result> CreateMultipleAsync(NextofKin.CreateMultiple request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:Update", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        NextofKin.Update_Result Update(NextofKin.Update request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:Update", ReplyAction="*")]
+        System.Threading.Tasks.Task<NextofKin.Update_Result> UpdateAsync(NextofKin.Update request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:UpdateMultiple", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        NextofKin.UpdateMultiple_Result UpdateMultiple(NextofKin.UpdateMultiple request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:UpdateMultiple", ReplyAction="*")]
+        System.Threading.Tasks.Task<NextofKin.UpdateMultiple_Result> UpdateMultipleAsync(NextofKin.UpdateMultiple request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (Delete_Result) of message Delete_Result does not match the default value (Delete)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:Delete", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        NextofKin.Delete_Result Delete(NextofKin.Delete request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/nofkin:Delete", ReplyAction="*")]
+        System.Threading.Tasks.Task<NextofKin.Delete_Result> DeleteAsync(NextofKin.Delete request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin")]
     public partial class NofKin
@@ -66,25 +106,19 @@ namespace NextofKin
         
         private string keyField;
         
-        private Type typeField;
+        private string addressField;
         
-        private bool typeFieldSpecified;
+        private string emailField;
+        
+        private string account_NoField;
         
         private string nameField;
         
-        private string iD_NoField;
-        
-        private string addressField;
-        
         private string relationshipField;
         
-        private decimal percentAllocationField;
+        private Identification_Type identification_TypeField;
         
-        private bool percentAllocationFieldSpecified;
-        
-        private bool beneficiaryField;
-        
-        private bool beneficiaryFieldSpecified;
+        private bool identification_TypeFieldSpecified;
         
         private System.DateTime date_of_BirthField;
         
@@ -92,11 +126,15 @@ namespace NextofKin
         
         private string telephoneField;
         
-        private string faxField;
+        private string iD_NoField;
         
-        private string emailField;
+        private decimal percentAllocationField;
         
-        private string account_NoField;
+        private bool percentAllocationFieldSpecified;
+        
+        private Type typeField;
+        
+        private bool typeFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -114,62 +152,6 @@ namespace NextofKin
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public Type Type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TypeSpecified
-        {
-            get
-            {
-                return this.typeFieldSpecified;
-            }
-            set
-            {
-                this.typeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string ID_No
-        {
-            get
-            {
-                return this.iD_NoField;
-            }
-            set
-            {
-                this.iD_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public string Address
         {
             get
@@ -179,6 +161,48 @@ namespace NextofKin
             set
             {
                 this.addressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string Email
+        {
+            get
+            {
+                return this.emailField;
+            }
+            set
+            {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string Account_No
+        {
+            get
+            {
+                return this.account_NoField;
+            }
+            set
+            {
+                this.account_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string Name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
             }
         }
         
@@ -198,62 +222,34 @@ namespace NextofKin
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public decimal PercentAllocation
+        public Identification_Type Identification_Type
         {
             get
             {
-                return this.percentAllocationField;
+                return this.identification_TypeField;
             }
             set
             {
-                this.percentAllocationField = value;
+                this.identification_TypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PercentAllocationSpecified
+        public bool Identification_TypeSpecified
         {
             get
             {
-                return this.percentAllocationFieldSpecified;
+                return this.identification_TypeFieldSpecified;
             }
             set
             {
-                this.percentAllocationFieldSpecified = value;
+                this.identification_TypeFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public bool Beneficiary
-        {
-            get
-            {
-                return this.beneficiaryField;
-            }
-            set
-            {
-                this.beneficiaryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BeneficiarySpecified
-        {
-            get
-            {
-                return this.beneficiaryFieldSpecified;
-            }
-            set
-            {
-                this.beneficiaryFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=7)]
         public System.DateTime Date_of_Birth
         {
             get
@@ -281,7 +277,7 @@ namespace NextofKin
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
         public string Telephone
         {
             get
@@ -295,50 +291,100 @@ namespace NextofKin
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public string Fax
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string ID_No
         {
             get
             {
-                return this.faxField;
+                return this.iD_NoField;
             }
             set
             {
-                this.faxField = value;
+                this.iD_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public decimal PercentAllocation
+        {
+            get
+            {
+                return this.percentAllocationField;
+            }
+            set
+            {
+                this.percentAllocationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PercentAllocationSpecified
+        {
+            get
+            {
+                return this.percentAllocationFieldSpecified;
+            }
+            set
+            {
+                this.percentAllocationFieldSpecified = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public string Email
+        public Type Type
         {
             get
             {
-                return this.emailField;
+                return this.typeField;
             }
             set
             {
-                this.emailField = value;
+                this.typeField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string Account_No
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TypeSpecified
         {
             get
             {
-                return this.account_NoField;
+                return this.typeFieldSpecified;
             }
             set
             {
-                this.account_NoField = value;
+                this.typeFieldSpecified = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin")]
+    public enum Identification_Type
+    {
+        
+        /// <remarks/>
+        _blank_,
+        
+        /// <remarks/>
+        National_ID,
+        
+        /// <remarks/>
+        Passport,
+        
+        /// <remarks/>
+        Birth_Certificate,
+        
+        /// <remarks/>
+        Birth_Notification,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin")]
     public enum Type
     {
@@ -347,14 +393,14 @@ namespace NextofKin
         Next_of_Kin,
         
         /// <remarks/>
-        Spouse,
+        Nominee,
         
         /// <remarks/>
-        Benevolent_Beneficiary,
+        Benevolent,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin")]
     public partial class NofKin_Filter
@@ -394,31 +440,28 @@ namespace NextofKin
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin")]
     public enum NofKin_Fields
     {
         
         /// <remarks/>
-        Type,
+        Address,
+        
+        /// <remarks/>
+        Email,
+        
+        /// <remarks/>
+        Account_No,
         
         /// <remarks/>
         Name,
         
         /// <remarks/>
-        ID_No,
-        
-        /// <remarks/>
-        Address,
-        
-        /// <remarks/>
         Relationship,
         
         /// <remarks/>
-        PercentAllocation,
-        
-        /// <remarks/>
-        Beneficiary,
+        Identification_Type,
         
         /// <remarks/>
         Date_of_Birth,
@@ -427,17 +470,17 @@ namespace NextofKin
         Telephone,
         
         /// <remarks/>
-        Fax,
+        ID_No,
         
         /// <remarks/>
-        Email,
+        PercentAllocation,
         
         /// <remarks/>
-        Account_No,
+        Type,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class Read
@@ -447,21 +490,29 @@ namespace NextofKin
         public string Account_No;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=1)]
-        public string Name;
+        public string Relationship;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=2)]
+        public string ID_No;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=3)]
+        public string Type;
         
         public Read()
         {
         }
         
-        public Read(string Account_No, string Name)
+        public Read(string Account_No, string Relationship, string ID_No, string Type)
         {
             this.Account_No = Account_No;
-            this.Name = Name;
+            this.Relationship = Relationship;
+            this.ID_No = ID_No;
+            this.Type = Type;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class Read_Result
@@ -481,7 +532,7 @@ namespace NextofKin
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class ReadByRecId
@@ -501,7 +552,7 @@ namespace NextofKin
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class ReadByRecId_Result
@@ -521,7 +572,7 @@ namespace NextofKin
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class ReadMultiple
@@ -550,7 +601,7 @@ namespace NextofKin
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class ReadMultiple_Result
@@ -571,7 +622,7 @@ namespace NextofKin
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class IsUpdated
@@ -591,7 +642,7 @@ namespace NextofKin
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class IsUpdated_Result
@@ -611,7 +662,7 @@ namespace NextofKin
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class GetRecIdFromKey
@@ -631,7 +682,7 @@ namespace NextofKin
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
     internal partial class GetRecIdFromKey_Result
@@ -650,13 +701,209 @@ namespace NextofKin
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class Create
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        public NextofKin.NofKin NofKin;
+        
+        public Create()
+        {
+        }
+        
+        public Create(NextofKin.NofKin NofKin)
+        {
+            this.NofKin = NofKin;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class Create_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        public NextofKin.NofKin NofKin;
+        
+        public Create_Result()
+        {
+        }
+        
+        public Create_Result(NextofKin.NofKin NofKin)
+        {
+            this.NofKin = NofKin;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class CreateMultiple
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public NextofKin.NofKin[] NofKin_List;
+        
+        public CreateMultiple()
+        {
+        }
+        
+        public CreateMultiple(NextofKin.NofKin[] NofKin_List)
+        {
+            this.NofKin_List = NofKin_List;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class CreateMultiple_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public NextofKin.NofKin[] NofKin_List;
+        
+        public CreateMultiple_Result()
+        {
+        }
+        
+        public CreateMultiple_Result(NextofKin.NofKin[] NofKin_List)
+        {
+            this.NofKin_List = NofKin_List;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class Update
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        public NextofKin.NofKin NofKin;
+        
+        public Update()
+        {
+        }
+        
+        public Update(NextofKin.NofKin NofKin)
+        {
+            this.NofKin = NofKin;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class Update_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        public NextofKin.NofKin NofKin;
+        
+        public Update_Result()
+        {
+        }
+        
+        public Update_Result(NextofKin.NofKin NofKin)
+        {
+            this.NofKin = NofKin;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class UpdateMultiple
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public NextofKin.NofKin[] NofKin_List;
+        
+        public UpdateMultiple()
+        {
+        }
+        
+        public UpdateMultiple(NextofKin.NofKin[] NofKin_List)
+        {
+            this.NofKin_List = NofKin_List;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class UpdateMultiple_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public NextofKin.NofKin[] NofKin_List;
+        
+        public UpdateMultiple_Result()
+        {
+        }
+        
+        public UpdateMultiple_Result(NextofKin.NofKin[] NofKin_List)
+        {
+            this.NofKin_List = NofKin_List;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class Delete
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        public string Key;
+        
+        public Delete()
+        {
+        }
+        
+        public Delete(string Key)
+        {
+            this.Key = Key;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/nofkin", IsWrapped=true)]
+    internal partial class Delete_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="Delete_Result", Namespace="urn:microsoft-dynamics-schemas/page/nofkin", Order=0)]
+        public bool Delete_Result1;
+        
+        public Delete_Result()
+        {
+        }
+        
+        public Delete_Result(bool Delete_Result1)
+        {
+            this.Delete_Result1 = Delete_Result1;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     internal interface NofKin_PortChannel : NextofKin.NofKin_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     internal partial class NofKin_PortClient : System.ServiceModel.ClientBase<NextofKin.NofKin_Port>, NextofKin.NofKin_Port
     {
         
@@ -706,11 +953,13 @@ namespace NextofKin
             return base.Channel.Read(request);
         }
         
-        public NextofKin.NofKin Read(string Account_No, string Name)
+        public NextofKin.NofKin Read(string Account_No, string Relationship, string ID_No, string Type)
         {
             NextofKin.Read inValue = new NextofKin.Read();
             inValue.Account_No = Account_No;
-            inValue.Name = Name;
+            inValue.Relationship = Relationship;
+            inValue.ID_No = ID_No;
+            inValue.Type = Type;
             NextofKin.Read_Result retVal = ((NextofKin.NofKin_Port)(this)).Read(inValue);
             return retVal.NofKin;
         }
@@ -721,11 +970,13 @@ namespace NextofKin
             return base.Channel.ReadAsync(request);
         }
         
-        public System.Threading.Tasks.Task<NextofKin.Read_Result> ReadAsync(string Account_No, string Name)
+        public System.Threading.Tasks.Task<NextofKin.Read_Result> ReadAsync(string Account_No, string Relationship, string ID_No, string Type)
         {
             NextofKin.Read inValue = new NextofKin.Read();
             inValue.Account_No = Account_No;
-            inValue.Name = Name;
+            inValue.Relationship = Relationship;
+            inValue.ID_No = ID_No;
+            inValue.Type = Type;
             return ((NextofKin.NofKin_Port)(this)).ReadAsync(inValue);
         }
         
@@ -841,10 +1092,120 @@ namespace NextofKin
             return ((NextofKin.NofKin_Port)(this)).GetRecIdFromKeyAsync(inValue);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        NextofKin.Create_Result NextofKin.NofKin_Port.Create(NextofKin.Create request)
+        {
+            return base.Channel.Create(request);
+        }
+        
+        public void Create(ref NextofKin.NofKin NofKin)
+        {
+            NextofKin.Create inValue = new NextofKin.Create();
+            inValue.NofKin = NofKin;
+            NextofKin.Create_Result retVal = ((NextofKin.NofKin_Port)(this)).Create(inValue);
+            NofKin = retVal.NofKin;
+        }
+        
+        public System.Threading.Tasks.Task<NextofKin.Create_Result> CreateAsync(NextofKin.Create request)
+        {
+            return base.Channel.CreateAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        NextofKin.CreateMultiple_Result NextofKin.NofKin_Port.CreateMultiple(NextofKin.CreateMultiple request)
+        {
+            return base.Channel.CreateMultiple(request);
+        }
+        
+        public void CreateMultiple(ref NextofKin.NofKin[] NofKin_List)
+        {
+            NextofKin.CreateMultiple inValue = new NextofKin.CreateMultiple();
+            inValue.NofKin_List = NofKin_List;
+            NextofKin.CreateMultiple_Result retVal = ((NextofKin.NofKin_Port)(this)).CreateMultiple(inValue);
+            NofKin_List = retVal.NofKin_List;
+        }
+        
+        public System.Threading.Tasks.Task<NextofKin.CreateMultiple_Result> CreateMultipleAsync(NextofKin.CreateMultiple request)
+        {
+            return base.Channel.CreateMultipleAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        NextofKin.Update_Result NextofKin.NofKin_Port.Update(NextofKin.Update request)
+        {
+            return base.Channel.Update(request);
+        }
+        
+        public void Update(ref NextofKin.NofKin NofKin)
+        {
+            NextofKin.Update inValue = new NextofKin.Update();
+            inValue.NofKin = NofKin;
+            NextofKin.Update_Result retVal = ((NextofKin.NofKin_Port)(this)).Update(inValue);
+            NofKin = retVal.NofKin;
+        }
+        
+        public System.Threading.Tasks.Task<NextofKin.Update_Result> UpdateAsync(NextofKin.Update request)
+        {
+            return base.Channel.UpdateAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        NextofKin.UpdateMultiple_Result NextofKin.NofKin_Port.UpdateMultiple(NextofKin.UpdateMultiple request)
+        {
+            return base.Channel.UpdateMultiple(request);
+        }
+        
+        public void UpdateMultiple(ref NextofKin.NofKin[] NofKin_List)
+        {
+            NextofKin.UpdateMultiple inValue = new NextofKin.UpdateMultiple();
+            inValue.NofKin_List = NofKin_List;
+            NextofKin.UpdateMultiple_Result retVal = ((NextofKin.NofKin_Port)(this)).UpdateMultiple(inValue);
+            NofKin_List = retVal.NofKin_List;
+        }
+        
+        public System.Threading.Tasks.Task<NextofKin.UpdateMultiple_Result> UpdateMultipleAsync(NextofKin.UpdateMultiple request)
+        {
+            return base.Channel.UpdateMultipleAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        NextofKin.Delete_Result NextofKin.NofKin_Port.Delete(NextofKin.Delete request)
+        {
+            return base.Channel.Delete(request);
+        }
+        
+        public bool Delete(string Key)
+        {
+            NextofKin.Delete inValue = new NextofKin.Delete();
+            inValue.Key = Key;
+            NextofKin.Delete_Result retVal = ((NextofKin.NofKin_Port)(this)).Delete(inValue);
+            return retVal.Delete_Result1;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<NextofKin.Delete_Result> NextofKin.NofKin_Port.DeleteAsync(NextofKin.Delete request)
+        {
+            return base.Channel.DeleteAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<NextofKin.Delete_Result> DeleteAsync(string Key)
+        {
+            NextofKin.Delete inValue = new NextofKin.Delete();
+            inValue.Key = Key;
+            return ((NextofKin.NofKin_Port)(this)).DeleteAsync(inValue);
+        }
+        
         public virtual System.Threading.Tasks.Task OpenAsync()
         {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
+        
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
@@ -864,7 +1225,7 @@ namespace NextofKin
         {
             if ((endpointConfiguration == EndpointConfiguration.NofKin_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Page/NofKin");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:7047/BC260/WS/NATION/Page/NofKin");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

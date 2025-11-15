@@ -4473,6 +4473,59 @@
         <member name="P:S_Mobile.Transactions.DeleteCompletedEventArgs.Result">
             <remarks/>
         </member>
+        <member name="P:S_Mobile.Logs.Logger.BaseLogPath">
+            <summary>
+            Gets or sets the base log path for all logger instances
+            </summary>
+        </member>
+        <member name="P:S_Mobile.Logs.Logger.CurrentLogPath">
+            <summary>
+            Gets or sets the current log path for this logger instance
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Logs.Logger.#ctor(System.String)">
+            <summary>
+            Creates a new logger instance with optional custom path
+            </summary>
+            <param name="customPath">Custom log path relative to base path or absolute path</param>
+        </member>
+        <member name="M:S_Mobile.Logs.Logger.LogInfo(System.String)">
+            <summary>
+            Logs an informational message
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Logs.Logger.LogError(System.String,System.Exception)">
+            <summary>
+            Logs an error message
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Logs.Logger.LogWarning(System.String)">
+            <summary>
+            Logs a warning message
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Logs.Logger.LogDebug(System.String)">
+            <summary>
+            Logs a debug message
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Logs.Logger.WriteLog(System.String,System.String)">
+            <summary>
+            Writes the log entry to file
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Logs.Logger.EnsureDirectoryExists(System.String)">
+            <summary>
+            Ensures the directory exists
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Logs.Logger.ForController(System.String)">
+            <summary>
+            Creates a logger for a specific controller
+            </summary>
+            <param name="controllerName">Name of the controller</param>
+            <returns>Logger instance configured for the controller</returns>
+        </member>
         <member name="T:S_Mobile.Accounts_Service.Accounts_Service">
             <remarks/>
         </member>

@@ -1,7 +1,7 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Codeunit/PolarisIntegration"
+      "http://157.173.123.120:46047/BC260/WS/NATION/Codeunit/PolarisIntegration"
     ],
     "collectionTypes": [
       "System.Array",
@@ -11,7 +11,7 @@
       "*, Polaris"
     ],
     "sync": true,
-    "targetFramework": "net8.0",
+    "targetFramework": "net9.0",
     "typeReuseMode": "All"
   }
 }

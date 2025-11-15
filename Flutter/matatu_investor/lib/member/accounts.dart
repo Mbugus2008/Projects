@@ -42,7 +42,9 @@ class accounts {
         balance: map['balance'] != null ? map['balance'] as double : null,
         lastdateupdated: map['lastdateupdated'] != null
             ? DateTime.fromMillisecondsSinceEpoch(
-                (map['lastdateupdated'] ?? 0) as int)
+                ((map['lastdateupdated'] ?? 0) is double
+                    ? (map['lastdateupdated'] as double).toInt()
+                    : (map['lastdateupdated'] ?? 0) as int))
             : null,
         transaction_types: hobbies);
   }

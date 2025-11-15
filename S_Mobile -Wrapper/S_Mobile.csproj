@@ -255,6 +255,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\Clients\RemboClassic.cs" />
     <Compile Include="Controllers\Clients\Embassava.cs" />
     <Compile Include="Controllers\Clients\Cityhoppa.cs" />
     <Compile Include="Controllers\Clients\kirigiti.cs" />
@@ -274,6 +275,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logs\Logger.cs" />
     <Compile Include="Models\BulkSm.cs">
       <DependentUpon>data.tt</DependentUpon>
     </Compile>
@@ -282,6 +284,9 @@
       <DependentUpon>data.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Client_Paybill.cs">
+      <DependentUpon>data.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer_Mobile_Setup.cs">
       <DependentUpon>data.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ismsrepository.cs" />
@@ -320,6 +325,9 @@
     <Compile Include="Models\sms\zetta.cs" />
     <Compile Include="Models\sms\Zettasms.cs" />
     <Compile Include="Models\Sms_keyword.cs">
+      <DependentUpon>data.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StkPushTransaction.cs">
       <DependentUpon>data.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1014,6 +1022,10 @@
     <ProjectReference Include="..\Logging\Logging 4\Logging 4.0.csproj">
       <Project>{a3344075-77bb-4fde-881f-d122c70c369f}</Project>
       <Name>Logging 4.0</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobile\S-Mobile\MpesaApi\MpesaApi.csproj">
+      <Project>{67171593-ea85-435d-95b6-d6fd798503a4}</Project>
+      <Name>MpesaApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

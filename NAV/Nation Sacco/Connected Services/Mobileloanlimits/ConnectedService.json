@@ -1,7 +1,7 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://172.16.7.181:7052/test/WS/Nation Sacco/Page/MobileLimits"
+      "http://157.173.123.120:46047/BC260/WS/NATION/Page/MobileLimits"
     ],
     "collectionTypes": [
       "System.Array",
@@ -10,8 +10,46 @@
     "namespaceMappings": [
       "*, Mobileloanlimits"
     ],
+    "references": [
+      "D:\\Projects\\NAV\\Nation Sacco\\bin\\Release\\net10.0\\EntityFramework.dll",
+      "D:\\Projects\\NAV\\Nation Sacco\\bin\\Release\\net10.0\\Logging.dll",
+      "Microsoft.AspNetCore.Authentication.JwtBearer, {Microsoft.AspNetCore.Authentication.JwtBearer, 9.0.10}",
+      "Microsoft.Extensions.DependencyModel, {Microsoft.Extensions.DependencyModel, 9.0.0}",
+      "Microsoft.IdentityModel.Abstractions, {Microsoft.IdentityModel.Abstractions, 8.14.0}",
+      "Microsoft.IdentityModel.JsonWebTokens, {Microsoft.IdentityModel.JsonWebTokens, 8.14.0}",
+      "Microsoft.IdentityModel.Logging, {Microsoft.IdentityModel.Logging, 8.14.0}",
+      "Microsoft.IdentityModel.Protocols, {Microsoft.IdentityModel.Protocols, 8.0.1}",
+      "Microsoft.IdentityModel.Protocols.OpenIdConnect, {Microsoft.IdentityModel.Protocols.OpenIdConnect, 8.0.1}",
+      "Microsoft.IdentityModel.Protocols.WsTrust, {Microsoft.IdentityModel.Protocols.WsTrust, 6.8.0}",
+      "Microsoft.IdentityModel.Tokens, {Microsoft.IdentityModel.Tokens, 8.14.0}",
+      "Microsoft.IdentityModel.Tokens.Saml, {Microsoft.IdentityModel.Tokens.Saml, 8.2.0}",
+      "Microsoft.IdentityModel.Xml, {Microsoft.IdentityModel.Xml, 8.2.0}",
+      "Microsoft.OpenApi, {Microsoft.OpenApi, 1.6.25}",
+      "Serilog, {Serilog, 4.3.0}",
+      "Serilog.AspNetCore, {Serilog.AspNetCore, 9.0.0}",
+      "Serilog.Extensions.Hosting, {Serilog.Extensions.Hosting, 9.0.0}",
+      "Serilog.Extensions.Logging, {Serilog.Extensions.Logging, 9.0.2}",
+      "Serilog.Formatting.Compact, {Serilog.Formatting.Compact, 3.0.0}",
+      "Serilog.Settings.Configuration, {Serilog.Settings.Configuration, 9.0.0}",
+      "Serilog.Sinks.Console, {Serilog.Sinks.Console, 6.1.1}",
+      "Serilog.Sinks.Debug, {Serilog.Sinks.Debug, 3.0.0}",
+      "Serilog.Sinks.File, {Serilog.Sinks.File, 7.0.0}",
+      "Swashbuckle.AspNetCore.Swagger, {Swashbuckle.AspNetCore.Swagger, 9.0.6}",
+      "Swashbuckle.AspNetCore.SwaggerGen, {Swashbuckle.AspNetCore.SwaggerGen, 9.0.6}",
+      "Swashbuckle.AspNetCore.SwaggerUI, {Swashbuckle.AspNetCore.SwaggerUI, 9.0.6}",
+      "System.IdentityModel.Tokens.Jwt, {System.IdentityModel.Tokens.Jwt, 8.0.1}",
+      "System.Security.Cryptography.Pkcs, {System.Security.Cryptography.Pkcs, 9.0.10}",
+      "System.ServiceModel, {System.ServiceModel.Primitives, 8.1.2}",
+      "System.ServiceModel.Duplex, {System.ServiceModel.Duplex, 6.0.0}",
+      "System.ServiceModel.Federation, {System.ServiceModel.Federation, 8.1.2}",
+      "System.ServiceModel.Http, {System.ServiceModel.Http, 8.1.2}",
+      "System.ServiceModel.NetFramingBase, {System.ServiceModel.NetFramingBase, 8.1.2}",
+      "System.ServiceModel.NetTcp, {System.ServiceModel.NetTcp, 8.1.2}",
+      "System.ServiceModel.Primitives, {System.ServiceModel.Primitives, 8.1.2}",
+      "System.ServiceModel.Security, {System.ServiceModel.Primitives, 8.1.2}"
+    ],
     "sync": true,
-    "targetFramework": "net8.0",
+    "targetFramework": "net10.0",
     "typeReuseMode": "All"
   }
 }

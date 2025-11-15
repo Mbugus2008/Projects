@@ -27,7 +27,11 @@ class Member_Results {
 
   factory Member_Results.fromMap(Map<String, dynamic> map) {
     return Member_Results(
-      Code: map['Code'] != null ? map['Code'] as int : null,
+      Code: map['Code'] != null
+          ? (map['Code'] is double
+              ? (map['Code'] as double).toInt()
+              : map['Code'] as int)
+          : null,
       Desc: map['Desc'] != null ? map['Desc'] as String : null,
       Contents: map['Contents'] != null
           ? member.fromMap(map['Contents'] as Map<String, dynamic>)
@@ -40,7 +44,6 @@ class Member_Results {
   factory Member_Results.fromJson(String source) =>
       Member_Results.fromMap(json.decode(source) as Map<String, dynamic>);
 }
-
 
 class Statistics_Results {
   int? Code = 0;
@@ -64,7 +67,11 @@ class Statistics_Results {
 
   factory Statistics_Results.fromMap(Map<String, dynamic> map) {
     return Statistics_Results(
-      Code: map['Code'] != null ? map['Code'] as int : null,
+      Code: map['Code'] != null
+          ? (map['Code'] is double
+              ? (map['Code'] as double).toInt()
+              : map['Code'] as int)
+          : null,
       Desc: map['Desc'] != null ? map['Desc'] as String : null,
       Contents: map['Contents'] != null
           ? Statistic.fromMap(map['Contents'] as Map<String, dynamic>)
@@ -100,7 +107,11 @@ class Loans_Results {
 
   factory Loans_Results.fromMap(Map<String, dynamic> map) {
     return Loans_Results(
-      Code: map['Code'] != null ? map['Code'] as int : null,
+      Code: map['Code'] != null
+          ? (map['Code'] is double
+              ? (map['Code'] as double).toInt()
+              : map['Code'] as int)
+          : null,
       Desc: map['Desc'] != null ? map['Desc'] as String : null,
       Contents: map['Contents'] != null
           ? List<Loan>.from(

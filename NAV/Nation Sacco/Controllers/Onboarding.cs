@@ -1,4 +1,4 @@
-﻿using Ledgers;
+﻿
 using LnPurpose;
 using LoanProduct;
 using Member;
@@ -28,7 +28,7 @@ namespace Nation_Sacco.Controllers
         NextofKin.NofKin_PortClient nextofKin;
         MemberAccounts.Accounts_PortClient memberAccounts;
         MemberLoans.Loans_PortClient loans;
-        AccountTransactions_PortClient AccountTrans;
+        //AccountTransactions_PortClient AccountTrans;
         Polaris.PolarisIntegration_PortClient polaris;
         LoanProducts_PortClient products;
         LnPurpose.LoanPurpose_PortClient loanPurpose;
@@ -57,15 +57,16 @@ namespace Nation_Sacco.Controllers
           .SetBasePath(Directory.GetCurrentDirectory())
           .AddJsonFile("appsettings.json")
           .Build();
-           nm  = new Get_Namespace(_configuration);
-           branches = nm.InitializeClient<Branch.Branches>();
+
+            nm = new Get_Namespace(_configuration);
+            branches = nm.InitializeClient<Branch.Branches>();
             guarantors = nm.InitializeClient<Guarantors.Loan_Guarators>();
             members = nm.InitializeClient < Member.Members>();
             nextofKin = nm.InitializeClient<NextofKin.NofKin>();
             memberAccounts = nm.InitializeClient<MemberAccounts.Accounts>();
             loanPurpose = nm.InitializeClient<LnPurpose.LoanPurpose>();
             loans = nm.InitializeClient<MemberLoans.Loans>();
-            AccountTrans = nm.InitializeClient<Ledgers.AccountTransactions>();
+            //AccountTrans = nm.InitializeClient<Ledgers.AccountTransactions>();
             loanPurpose = nm.InitializeClient<LnPurpose.LoanPurpose>();
             products = nm.InitializeClient<LoanProduct.LoanProducts>();
             mobileTransaction = nm.InitializeClient<MobileTransaction.Transactions>();
@@ -91,13 +92,15 @@ namespace Nation_Sacco.Controllers
 
         
         }
-
         [HttpPost("search")]
         public Results<MembersData> SearchMember(IdentifierRequest request)
         {
             MembersData memberData = new MembersData();
             Results<MembersData> response = new Results<MembersData>();
+            try
+            {
 
+          
             if (request == null || string.IsNullOrEmpty(request.Identifier))
             {
                 memberData.error_message = "Invalid request data.";
@@ -134,7 +137,7 @@ namespace Nation_Sacco.Controllers
                 new Member.Members_Filter
                 {
                     Criteria =$"*{request.Identifier.Substring(request.Identifier.Length-9)}*",
-                    Field = Member.Members_Fields.Mobile_Phone_No
+                    Field = Member.Members_Fields.Phone_No
                 }
             };
                     break;
@@ -151,20 +154,17 @@ namespace Nation_Sacco.Controllers
 
                     break;
             }
-
-
             Member.Members? member = null;
             if (mfilter.Any())
             {
                 member = members.ReadMultiple(mfilter, null, 0).FirstOrDefault();
                 if (member != null)
                 {
-
                     var nok = nextofKin.ReadMultiple(new NextofKin.NofKin_Filter[] { new NextofKin.NofKin_Filter { Criteria = member.No, Field = NextofKin.NofKin_Fields.Account_No } }, null, 0);
                     List<NokBeneficiaryNomineeInfo> nokInfoList = nok.Select(kin => new NokBeneficiaryNomineeInfo
                     {
-                        //identification_type = "id_number", // Set according to your business logic
-                        //identification_value = kin.Id_Value, // Map appropriately from `kin`
+                        identification_type =(int) kin.Identification_Type,//"id_number", // Set according to your business logic
+                        identification_value = kin.ID_No, // Map appropriately from `kin`
                         full_names = kin.Name, // Example, use correct property from `kin`
                         relationship = kin.Relationship,
                         date_of_birth = kin.Date_of_Birth,
@@ -172,14 +172,14 @@ namespace Nation_Sacco.Controllers
                         mobile_no = kin.Telephone,
                         email_address = kin.Email,
                         is_next_of_kin = kin.Type == NextofKin.Type.Next_of_Kin,
-                        is_beneficiary = kin.Beneficiary,
+                        is_beneficiary =kin.Type == NextofKin.Type.Nominee ,
                         //is_contact_person = kin.IsContactPerson.ToString().ToLower(),
                         //is_nominee = kin.IsNominee.ToString().ToLower(),
                         allocation = (int)kin.PercentAllocation  // Assuming Allocation is nullable
                     }).ToList();
                     memberData = new MembersData
                     {
-                        MloanStatus = member.M_Loans_Status,
+                        MloanStatus =false,// member.M_Loans_Status,
                         selfguaranteed = member.Self_Gauanteed,
                         selfguaranteedAmount = (double)member.Self_Guarantee_Amount,
                         member_number = member.No,
@@ -193,10 +193,17 @@ namespace Nation_Sacco.Controllers
                         date_of_birth = member.Birth_Date,
                         staff_number = member.Payroll_Staff_No,
                         nok_beneficiary_nominee_info = nokInfoList,
-                        member_type = member.Member_Type.ToString(),
+                        member_type = member.Member_Category,
 
                     };
+                    response.data = memberData;
                 }
+                else
+            {
+                response.result_code = 400;
+                response.result_message = $"Member with {request.Identifier_Type} {request.Identifier}  NOT found!";
+                memberData.error_message = "Member not found.";
+            }
             }
             else
             {
@@ -204,7 +211,14 @@ namespace Nation_Sacco.Controllers
                 response.result_message = "Member with number {0}- NOT found!";
                 memberData.error_message = "Member not found.";
             }
-            response.data = memberData;
+            }
+            catch (Exception ex)
+            {
+                response.result_code = 400;
+                response.result_message = ex.Message;
+                memberData.error_message = "Member not found.";
+             
+            }
             return response;
         }
         [HttpPost("institutions")]
@@ -563,7 +577,7 @@ namespace Nation_Sacco.Controllers
                         memberData.Add(new MemberAccount
                         {
                             account_number = mm.No,
-                            product_name = mm.Account_Type,
+                            product_name =  mm.Account_Type.ToString(),
                             status = mm.Status.ToString(),
                             branch = mm.Global_Dimension_2_Code,
                             balance = (double)polaris.GetAccountBal(mm.No),
@@ -575,50 +589,50 @@ namespace Nation_Sacco.Controllers
 
                         });
                     }
-                    var member = members.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = req.member_number, Field = Members_Fields.No } }, null, 0).FirstOrDefault();
-                    if (member != null)
-                    {
-                        memberData.Add(new MemberAccount
-                        {
-                            account_number = "Shares",
-                            product_name = "Current Shares",
-                            status = "Active",
-                            balance = (double)member.Current_Shares,
-                            opened_at = member.Registration_Date
+                    //var member = members.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = req.member_number, Field = Members_Fields.No } }, null, 0).FirstOrDefault();
+                    //if (member != null)
+                    //{
+                    //    memberData.Add(new MemberAccount
+                    //    {
+                    //        account_number = "Shares",
+                    //        product_name = "Current Shares",
+                    //        status = "Active",
+                    //        balance = (double)member.Current_Shares,
+                    //        opened_at = member.Registration_Date
 
 
-                        });
-                        memberData.Add(new MemberAccount
-                        {
-                            account_number = "Shares_Capital",
-                            product_name = "Share Capital",
-                            status = "Active",
-                            balance = (double)member.Shares_Retained,
-                            opened_at = member.Registration_Date
+                    //    });
+                    //    memberData.Add(new MemberAccount
+                    //    {
+                    //        account_number = "Shares_Capital",
+                    //        product_name = "Share Capital",
+                    //        status = "Active",
+                    //        balance = (double)member.Shares_Retained,
+                    //        opened_at = member.Registration_Date
 
 
-                        });
-                        memberData.Add(new MemberAccount
-                        {
-                            account_number = "Benevolent_Fund",
-                            product_name = "Benevolent Fund",
-                            status = "Active",
-                            balance = (double)member.Benevolent_Fund,
-                            opened_at = member.Registration_Date
+                    //    });
+                    //    memberData.Add(new MemberAccount
+                    //    {
+                    //        account_number = "Benevolent_Fund",
+                    //        product_name = "Benevolent Fund",
+                    //        status = "Active",
+                    //        balance = (double)member.Benevolent_Fund,
+                    //        opened_at = member.Registration_Date
 
 
-                        });
-                        memberData.Add(new MemberAccount
-                        {
-                            account_number = "School_Fees",
-                            product_name = "School Fees",
-                            status = "Active",
-                            balance = (double)member.School_Fees_Contributions,
-                            opened_at = member.Registration_Date
+                    //    });
+                    //    memberData.Add(new MemberAccount
+                    //    {
+                    //        account_number = "School_Fees",
+                    //        product_name = "School Fees",
+                    //        status = "Active",
+                    //        balance = (double)member.School_Fees_Contributions,
+                    //        opened_at = member.Registration_Date
 
 
-                        });
-                    }
+                    //    });
+                    //}
                     response.data = memberData;
                 }
                 else
@@ -716,13 +730,12 @@ namespace Nation_Sacco.Controllers
             List<ledgerentries> memberData = new List<ledgerentries>();
            
             var date = string.Format("{0}..{1}",((DateTime) req.from).ToString("MM/dd/yyyy"), ((DateTime)req.to).ToString("MM/dd/yyyy"));
-            var mmm = AccountTrans.ReadMultiple(new AccountTransactions_Filter[] { new AccountTransactions_Filter { Criteria = req.account_number, Field = AccountTransactions_Fields.Vendor_No }, new AccountTransactions_Filter { Criteria = date, Field = AccountTransactions_Fields.Posting_Date } }, null, 0);
-
+            var mmm = memberTrans.ReadMultiple(new MemberTransactions_Filter[] { new MemberTransactions_Filter { Criteria = req.account_number, Field = MemberTransactions_Fields.Vendor_No }, new MemberTransactions_Filter { Criteria = date, Field = MemberTransactions_Fields.Posting_Date } }, null, 0);
             if (mmm.Any())
-
             {
-                foreach (AccountTransactions mm in mmm)
+                foreach (MemberTransactions mm in mmm)
                 {
+             
                     memberData.Add(new ledgerentries
                     {
                         TransactionCode = mm.Document_No,
@@ -759,39 +772,45 @@ namespace Nation_Sacco.Controllers
             {
                 List<ledgerentries> memberData = new List<ledgerentries>();
                                 var date = string.Format("{0}..{1}", ((DateTime)req.from).ToString("MM/dd/yyyy"), ((DateTime)req.to).ToString("MM/dd/yyyy"));
-
+              List<MemberTransactions_Filter> tfilters = new List<MemberTransactions_Filter>()   ;
                 var tfilter = new MemberTransactions_Filter();
-               
-                   tfilter.Field = MemberTransactions_Fields.Transaction_Type;
+                string pst = "";
               switch (req.transaction_Type)
                 {
                     case Ttype.Shares_Capital:
-                          tfilter.Criteria = MemberTrans.Transaction_Type.Shares_Capital.ToString(); break;
+                          tfilter.Criteria =((int)MemberTrans.Product_Posting_Type.Share_Capital_Account).ToString(); break;
                     case Ttype.Deposit_Contribution:
-                        tfilter.Criteria = MemberTrans.Transaction_Type.Deposit_Contribution.ToString(); break;
+                        tfilter.Criteria = ((int)MemberTrans.Product_Posting_Type.Non_Withdrawable_Deposit).ToString(); break;
                     case Ttype.Benevolent_Fund:
-                        tfilter.Criteria = MemberTrans.Transaction_Type.Benevolent_Fund.ToString(); break;
+                        tfilter.Criteria = ((int)MemberTrans.Product_Posting_Type.Benevolent_Account).ToString() ; break;
                     case Ttype.School_Fee:
-                        tfilter.Criteria = MemberTrans.Transaction_Type.School_Fee.ToString();
+                        tfilter.Criteria = ((int)MemberTrans.Product_Posting_Type.School_Fee_Account).ToString();
                         break;
                     default:
                         break;
                 }
-               
 
-
-                var mmm = memberTrans.ReadMultiple(new  MemberTransactions_Filter[] { 
-                    new  MemberTransactions_Filter { Criteria = req.member_number, Field =  MemberTransactions_Fields.Customer_No }, 
-                    new  MemberTransactions_Filter  { Criteria = date, Field =  MemberTransactions_Fields.Posting_Date } ,
-                    tfilter 
+                var ma = memberAccounts.ReadMultiple(new MemberAccounts.Accounts_Filter[] { 
+                    new MemberAccounts.Accounts_Filter {Criteria = req.member_number,Field = MemberAccounts.Accounts_Fields.Member_No} ,
+                 new MemberAccounts.Accounts_Filter {Criteria = tfilter.Criteria,Field = MemberAccounts.Accounts_Fields.Account_Type} 
+                },null,0).FirstOrDefault();
                 
-                }, null, 0);
+                tfilter.Field = MemberTransactions_Fields.Product_Posting_Type;
+                //tfilters.Add(tfilter);
+                tfilter = new MemberTransactions_Filter { Criteria = ma.No, Field = MemberTransactions_Fields.Vendor_No };
+                tfilters.Add(tfilter);
+                tfilter = new MemberTransactions_Filter { Criteria = date, Field = MemberTransactions_Fields.Posting_Date };
+                tfilters.Add(tfilter); 
+
+
+                var mmm = memberTrans.ReadMultiple(tfilters.ToArray(), null, 0);
 
                 if (mmm.Any())
 
                 {
                     foreach (MemberTransactions mm in mmm)
                     {
+
                         memberData.Add(new ledgerentries
                         {
                             TransactionCode = mm.Document_No,
@@ -881,7 +900,9 @@ namespace Nation_Sacco.Controllers
 
                 var date = string.Format("{0}..{1}", ((DateTime)req.from).ToString("MM/dd/yyyy"), ((DateTime)req.to).ToString("MM/dd/yyyy"));
 
-                var mmm = memberTrans.ReadMultiple( new  MemberTrans.MemberTransactions_Filter  [] { new  MemberTrans.MemberTransactions_Filter { Criteria = req.loan_number, Field =  MemberTrans.MemberTransactions_Fields.Loan_No }, new  MemberTrans.MemberTransactions_Filter { Criteria = date, Field =   MemberTrans.MemberTransactions_Fields.Posting_Date } }, null, 50);
+                var mmm = memberTrans.ReadMultiple( new  MemberTrans.MemberTransactions_Filter  [] { 
+                    new  MemberTrans.MemberTransactions_Filter { Criteria = req.loan_number, Field =  MemberTrans.MemberTransactions_Fields.Loan_No }, 
+                    new  MemberTrans.MemberTransactions_Filter { Criteria = date, Field =   MemberTrans.MemberTransactions_Fields.Posting_Date } }, null, 50);
 
             if (mmm.Any())
 
@@ -926,7 +947,7 @@ namespace Nation_Sacco.Controllers
                 memberData = new MemberAccount
                 {
                     account_number = mm.No,
-                    product_name = mm.Account_Type,
+                    product_name = mm.Account_Type.ToString(),
                     status = mm.Status.ToString(),
                     branch = mm.Global_Dimension_2_Code,
                     balance = (double)polaris.GetAccountBal(mm.No),

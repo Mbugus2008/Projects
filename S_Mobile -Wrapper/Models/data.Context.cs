@@ -32,5 +32,7 @@ namespace S_Mobile.Models
         public virtual DbSet<Sms_keyword> Sms_keywords { get; set; }
         public virtual DbSet<MPESA_Transaction> MPESA_Transactions { get; set; }
         public virtual DbSet<Client_Paybill> Client_Paybills { get; set; }
+        public virtual DbSet<StkPushTransaction> StkPushTransactions { get; set; }
+        public virtual DbSet<Customer_Mobile_Setup> Customer_Mobile_Setups { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web.Http;
 
 namespace S_Mobile.Models
@@ -100,6 +101,9 @@ namespace S_Mobile.Controllers
                 {
                     return new Logging.Results<BulkSm>() { Code = -1, Desc = "Client not active" };
                 }
+                //sms.Message = Regex.Replace(sms.Message, @"\s+", " ");
+
+                sms.Message = Regex.Replace(sms.Message, @"[^\S\r\n]+", " ");
 
                 var chopped = choppedtext(sms.Message, 160);
 

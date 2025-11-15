@@ -11,7 +11,7 @@ namespace Loanrepschedule
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", ConfigurationName="Loanrepschedule.LoanSchedule_Port")]
     public interface LoanSchedule_Port
     {
@@ -55,50 +55,10 @@ namespace Loanrepschedule
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:GetRecIdFromKey", ReplyAction="*")]
         System.Threading.Tasks.Task<Loanrepschedule.GetRecIdFromKey_Result> GetRecIdFromKeyAsync(Loanrepschedule.GetRecIdFromKey request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:Create", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Loanrepschedule.Create_Result Create(Loanrepschedule.Create request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:Create", ReplyAction="*")]
-        System.Threading.Tasks.Task<Loanrepschedule.Create_Result> CreateAsync(Loanrepschedule.Create request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:CreateMultiple", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Loanrepschedule.CreateMultiple_Result CreateMultiple(Loanrepschedule.CreateMultiple request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:CreateMultiple", ReplyAction="*")]
-        System.Threading.Tasks.Task<Loanrepschedule.CreateMultiple_Result> CreateMultipleAsync(Loanrepschedule.CreateMultiple request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:Update", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Loanrepschedule.Update_Result Update(Loanrepschedule.Update request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:Update", ReplyAction="*")]
-        System.Threading.Tasks.Task<Loanrepschedule.Update_Result> UpdateAsync(Loanrepschedule.Update request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:UpdateMultiple", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Loanrepschedule.UpdateMultiple_Result UpdateMultiple(Loanrepschedule.UpdateMultiple request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:UpdateMultiple", ReplyAction="*")]
-        System.Threading.Tasks.Task<Loanrepschedule.UpdateMultiple_Result> UpdateMultipleAsync(Loanrepschedule.UpdateMultiple request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (Delete_Result) of message Delete_Result does not match the default value (Delete)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:Delete", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Loanrepschedule.Delete_Result Delete(Loanrepschedule.Delete request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/loanschedule:Delete", ReplyAction="*")]
-        System.Threading.Tasks.Task<Loanrepschedule.Delete_Result> DeleteAsync(Loanrepschedule.Delete request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule")]
     public partial class LoanSchedule
@@ -106,91 +66,35 @@ namespace Loanrepschedule
         
         private string keyField;
         
+        private int entry_NoField;
+        
+        private bool entry_NoFieldSpecified;
+        
         private string loan_NoField;
         
-        private string member_NoField;
+        private string document_NoField;
         
-        private string loan_CategoryField;
+        private System.DateTime expected_DateField;
         
-        private System.DateTime closed_DateField;
+        private bool expected_DateFieldSpecified;
         
-        private bool closed_DateFieldSpecified;
-        
-        private decimal loan_AmountField;
-        
-        private bool loan_AmountFieldSpecified;
-        
-        private decimal interest_RateField;
-        
-        private bool interest_RateFieldSpecified;
+        private string descriptionField;
         
         private decimal monthly_RepaymentField;
         
         private bool monthly_RepaymentFieldSpecified;
         
-        private string member_NameField;
+        private decimal principle_RepaymentField;
         
-        private decimal monthly_InterestField;
+        private bool principle_RepaymentFieldSpecified;
         
-        private bool monthly_InterestFieldSpecified;
+        private decimal interest_RepaymentField;
         
-        private decimal amount_RepayedField;
+        private bool interest_RepaymentFieldSpecified;
         
-        private bool amount_RepayedFieldSpecified;
+        private decimal running_BalanceField;
         
-        private System.DateTime repayment_DateField;
-        
-        private bool repayment_DateFieldSpecified;
-        
-        private decimal principal_RepaymentField;
-        
-        private bool principal_RepaymentFieldSpecified;
-        
-        private bool paidField;
-        
-        private bool paidFieldSpecified;
-        
-        private decimal remaining_DebtField;
-        
-        private bool remaining_DebtFieldSpecified;
-        
-        private int instalment_NoField;
-        
-        private bool instalment_NoFieldSpecified;
-        
-        private System.DateTime actual_Loan_Repayment_DateField;
-        
-        private bool actual_Loan_Repayment_DateFieldSpecified;
-        
-        private string repayment_CodeField;
-        
-        private string group_CodeField;
-        
-        private string loan_Application_NoField;
-        
-        private decimal actual_Principal_PaidField;
-        
-        private bool actual_Principal_PaidFieldSpecified;
-        
-        private decimal actual_Interest_PaidField;
-        
-        private bool actual_Interest_PaidFieldSpecified;
-        
-        private decimal actual_Installment_PaidField;
-        
-        private bool actual_Installment_PaidFieldSpecified;
-        
-        private decimal repayment_AdjustmentField;
-        
-        private bool repayment_AdjustmentFieldSpecified;
-        
-        private decimal loan_BalanceField;
-        
-        private bool loan_BalanceFieldSpecified;
-        
-        private System.DateTime graced_Repayment_DateField;
-        
-        private bool graced_Repayment_DateFieldSpecified;
+        private bool running_BalanceFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -208,6 +112,34 @@ namespace Loanrepschedule
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public int Entry_No
+        {
+            get
+            {
+                return this.entry_NoField;
+            }
+            set
+            {
+                this.entry_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Entry_NoSpecified
+        {
+            get
+            {
+                return this.entry_NoFieldSpecified;
+            }
+            set
+            {
+                this.entry_NoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
         public string Loan_No
         {
             get
@@ -221,119 +153,63 @@ namespace Loanrepschedule
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Member_No
-        {
-            get
-            {
-                return this.member_NoField;
-            }
-            set
-            {
-                this.member_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string Loan_Category
+        public string Document_No
         {
             get
             {
-                return this.loan_CategoryField;
+                return this.document_NoField;
             }
             set
             {
-                this.loan_CategoryField = value;
+                this.document_NoField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=4)]
-        public System.DateTime Closed_Date
+        public System.DateTime Expected_Date
         {
             get
             {
-                return this.closed_DateField;
+                return this.expected_DateField;
             }
             set
             {
-                this.closed_DateField = value;
+                this.expected_DateField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Closed_DateSpecified
+        public bool Expected_DateSpecified
         {
             get
             {
-                return this.closed_DateFieldSpecified;
+                return this.expected_DateFieldSpecified;
             }
             set
             {
-                this.closed_DateFieldSpecified = value;
+                this.expected_DateFieldSpecified = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public decimal Loan_Amount
+        public string Description
         {
             get
             {
-                return this.loan_AmountField;
+                return this.descriptionField;
             }
             set
             {
-                this.loan_AmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Loan_AmountSpecified
-        {
-            get
-            {
-                return this.loan_AmountFieldSpecified;
-            }
-            set
-            {
-                this.loan_AmountFieldSpecified = value;
+                this.descriptionField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public decimal Interest_Rate
-        {
-            get
-            {
-                return this.interest_RateField;
-            }
-            set
-            {
-                this.interest_RateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Interest_RateSpecified
-        {
-            get
-            {
-                return this.interest_RateFieldSpecified;
-            }
-            set
-            {
-                this.interest_RateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
         public decimal Monthly_Repayment
         {
             get
@@ -361,456 +237,92 @@ namespace Loanrepschedule
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string Member_Name
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public decimal Principle_Repayment
         {
             get
             {
-                return this.member_NameField;
+                return this.principle_RepaymentField;
             }
             set
             {
-                this.member_NameField = value;
+                this.principle_RepaymentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Principle_RepaymentSpecified
+        {
+            get
+            {
+                return this.principle_RepaymentFieldSpecified;
+            }
+            set
+            {
+                this.principle_RepaymentFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public decimal Interest_Repayment
+        {
+            get
+            {
+                return this.interest_RepaymentField;
+            }
+            set
+            {
+                this.interest_RepaymentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Interest_RepaymentSpecified
+        {
+            get
+            {
+                return this.interest_RepaymentFieldSpecified;
+            }
+            set
+            {
+                this.interest_RepaymentFieldSpecified = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public decimal Monthly_Interest
+        public decimal Running_Balance
         {
             get
             {
-                return this.monthly_InterestField;
+                return this.running_BalanceField;
             }
             set
             {
-                this.monthly_InterestField = value;
+                this.running_BalanceField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Monthly_InterestSpecified
+        public bool Running_BalanceSpecified
         {
             get
             {
-                return this.monthly_InterestFieldSpecified;
+                return this.running_BalanceFieldSpecified;
             }
             set
             {
-                this.monthly_InterestFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public decimal Amount_Repayed
-        {
-            get
-            {
-                return this.amount_RepayedField;
-            }
-            set
-            {
-                this.amount_RepayedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Amount_RepayedSpecified
-        {
-            get
-            {
-                return this.amount_RepayedFieldSpecified;
-            }
-            set
-            {
-                this.amount_RepayedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=11)]
-        public System.DateTime Repayment_Date
-        {
-            get
-            {
-                return this.repayment_DateField;
-            }
-            set
-            {
-                this.repayment_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Repayment_DateSpecified
-        {
-            get
-            {
-                return this.repayment_DateFieldSpecified;
-            }
-            set
-            {
-                this.repayment_DateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public decimal Principal_Repayment
-        {
-            get
-            {
-                return this.principal_RepaymentField;
-            }
-            set
-            {
-                this.principal_RepaymentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Principal_RepaymentSpecified
-        {
-            get
-            {
-                return this.principal_RepaymentFieldSpecified;
-            }
-            set
-            {
-                this.principal_RepaymentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public bool Paid
-        {
-            get
-            {
-                return this.paidField;
-            }
-            set
-            {
-                this.paidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PaidSpecified
-        {
-            get
-            {
-                return this.paidFieldSpecified;
-            }
-            set
-            {
-                this.paidFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public decimal Remaining_Debt
-        {
-            get
-            {
-                return this.remaining_DebtField;
-            }
-            set
-            {
-                this.remaining_DebtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Remaining_DebtSpecified
-        {
-            get
-            {
-                return this.remaining_DebtFieldSpecified;
-            }
-            set
-            {
-                this.remaining_DebtFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
-        public int Instalment_No
-        {
-            get
-            {
-                return this.instalment_NoField;
-            }
-            set
-            {
-                this.instalment_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Instalment_NoSpecified
-        {
-            get
-            {
-                return this.instalment_NoFieldSpecified;
-            }
-            set
-            {
-                this.instalment_NoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=16)]
-        public System.DateTime Actual_Loan_Repayment_Date
-        {
-            get
-            {
-                return this.actual_Loan_Repayment_DateField;
-            }
-            set
-            {
-                this.actual_Loan_Repayment_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Actual_Loan_Repayment_DateSpecified
-        {
-            get
-            {
-                return this.actual_Loan_Repayment_DateFieldSpecified;
-            }
-            set
-            {
-                this.actual_Loan_Repayment_DateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
-        public string Repayment_Code
-        {
-            get
-            {
-                return this.repayment_CodeField;
-            }
-            set
-            {
-                this.repayment_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
-        public string Group_Code
-        {
-            get
-            {
-                return this.group_CodeField;
-            }
-            set
-            {
-                this.group_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
-        public string Loan_Application_No
-        {
-            get
-            {
-                return this.loan_Application_NoField;
-            }
-            set
-            {
-                this.loan_Application_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
-        public decimal Actual_Principal_Paid
-        {
-            get
-            {
-                return this.actual_Principal_PaidField;
-            }
-            set
-            {
-                this.actual_Principal_PaidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Actual_Principal_PaidSpecified
-        {
-            get
-            {
-                return this.actual_Principal_PaidFieldSpecified;
-            }
-            set
-            {
-                this.actual_Principal_PaidFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
-        public decimal Actual_Interest_Paid
-        {
-            get
-            {
-                return this.actual_Interest_PaidField;
-            }
-            set
-            {
-                this.actual_Interest_PaidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Actual_Interest_PaidSpecified
-        {
-            get
-            {
-                return this.actual_Interest_PaidFieldSpecified;
-            }
-            set
-            {
-                this.actual_Interest_PaidFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
-        public decimal Actual_Installment_Paid
-        {
-            get
-            {
-                return this.actual_Installment_PaidField;
-            }
-            set
-            {
-                this.actual_Installment_PaidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Actual_Installment_PaidSpecified
-        {
-            get
-            {
-                return this.actual_Installment_PaidFieldSpecified;
-            }
-            set
-            {
-                this.actual_Installment_PaidFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
-        public decimal Repayment_Adjustment
-        {
-            get
-            {
-                return this.repayment_AdjustmentField;
-            }
-            set
-            {
-                this.repayment_AdjustmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Repayment_AdjustmentSpecified
-        {
-            get
-            {
-                return this.repayment_AdjustmentFieldSpecified;
-            }
-            set
-            {
-                this.repayment_AdjustmentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
-        public decimal Loan_Balance
-        {
-            get
-            {
-                return this.loan_BalanceField;
-            }
-            set
-            {
-                this.loan_BalanceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Loan_BalanceSpecified
-        {
-            get
-            {
-                return this.loan_BalanceFieldSpecified;
-            }
-            set
-            {
-                this.loan_BalanceFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=25)]
-        public System.DateTime Graced_Repayment_Date
-        {
-            get
-            {
-                return this.graced_Repayment_DateField;
-            }
-            set
-            {
-                this.graced_Repayment_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Graced_Repayment_DateSpecified
-        {
-            get
-            {
-                return this.graced_Repayment_DateFieldSpecified;
-            }
-            set
-            {
-                this.graced_Repayment_DateFieldSpecified = value;
+                this.running_BalanceFieldSpecified = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule")]
     public partial class LoanSchedule_Filter
@@ -850,118 +362,61 @@ namespace Loanrepschedule
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule")]
     public enum LoanSchedule_Fields
     {
         
         /// <remarks/>
+        Entry_No,
+        
+        /// <remarks/>
         Loan_No,
         
         /// <remarks/>
-        Member_No,
+        Document_No,
         
         /// <remarks/>
-        Loan_Category,
+        Expected_Date,
         
         /// <remarks/>
-        Closed_Date,
-        
-        /// <remarks/>
-        Loan_Amount,
-        
-        /// <remarks/>
-        Interest_Rate,
+        Description,
         
         /// <remarks/>
         Monthly_Repayment,
         
         /// <remarks/>
-        Member_Name,
+        Principle_Repayment,
         
         /// <remarks/>
-        Monthly_Interest,
+        Interest_Repayment,
         
         /// <remarks/>
-        Amount_Repayed,
-        
-        /// <remarks/>
-        Repayment_Date,
-        
-        /// <remarks/>
-        Principal_Repayment,
-        
-        /// <remarks/>
-        Paid,
-        
-        /// <remarks/>
-        Remaining_Debt,
-        
-        /// <remarks/>
-        Instalment_No,
-        
-        /// <remarks/>
-        Actual_Loan_Repayment_Date,
-        
-        /// <remarks/>
-        Repayment_Code,
-        
-        /// <remarks/>
-        Group_Code,
-        
-        /// <remarks/>
-        Loan_Application_No,
-        
-        /// <remarks/>
-        Actual_Principal_Paid,
-        
-        /// <remarks/>
-        Actual_Interest_Paid,
-        
-        /// <remarks/>
-        Actual_Installment_Paid,
-        
-        /// <remarks/>
-        Repayment_Adjustment,
-        
-        /// <remarks/>
-        Loan_Balance,
-        
-        /// <remarks/>
-        Graced_Repayment_Date,
+        Running_Balance,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class Read
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        public string Loan_No;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=1)]
-        public string Member_No;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=2)]
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Repayment_Date;
+        public int Entry_No;
         
         public Read()
         {
         }
         
-        public Read(string Loan_No, string Member_No, System.DateTime Repayment_Date)
+        public Read(int Entry_No)
         {
-            this.Loan_No = Loan_No;
-            this.Member_No = Member_No;
-            this.Repayment_Date = Repayment_Date;
+            this.Entry_No = Entry_No;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class Read_Result
@@ -981,7 +436,7 @@ namespace Loanrepschedule
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class ReadByRecId
@@ -1001,7 +456,7 @@ namespace Loanrepschedule
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class ReadByRecId_Result
@@ -1021,7 +476,7 @@ namespace Loanrepschedule
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class ReadMultiple
@@ -1050,7 +505,7 @@ namespace Loanrepschedule
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class ReadMultiple_Result
@@ -1071,7 +526,7 @@ namespace Loanrepschedule
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class IsUpdated
@@ -1091,7 +546,7 @@ namespace Loanrepschedule
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class IsUpdated_Result
@@ -1111,7 +566,7 @@ namespace Loanrepschedule
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class GetRecIdFromKey
@@ -1131,7 +586,7 @@ namespace Loanrepschedule
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
@@ -1150,209 +605,13 @@ namespace Loanrepschedule
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class Create
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        public Loanrepschedule.LoanSchedule LoanSchedule;
-        
-        public Create()
-        {
-        }
-        
-        public Create(Loanrepschedule.LoanSchedule LoanSchedule)
-        {
-            this.LoanSchedule = LoanSchedule;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class Create_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        public Loanrepschedule.LoanSchedule LoanSchedule;
-        
-        public Create_Result()
-        {
-        }
-        
-        public Create_Result(Loanrepschedule.LoanSchedule LoanSchedule)
-        {
-            this.LoanSchedule = LoanSchedule;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class CreateMultiple
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Loanrepschedule.LoanSchedule[] LoanSchedule_List;
-        
-        public CreateMultiple()
-        {
-        }
-        
-        public CreateMultiple(Loanrepschedule.LoanSchedule[] LoanSchedule_List)
-        {
-            this.LoanSchedule_List = LoanSchedule_List;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class CreateMultiple_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Loanrepschedule.LoanSchedule[] LoanSchedule_List;
-        
-        public CreateMultiple_Result()
-        {
-        }
-        
-        public CreateMultiple_Result(Loanrepschedule.LoanSchedule[] LoanSchedule_List)
-        {
-            this.LoanSchedule_List = LoanSchedule_List;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class Update
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        public Loanrepschedule.LoanSchedule LoanSchedule;
-        
-        public Update()
-        {
-        }
-        
-        public Update(Loanrepschedule.LoanSchedule LoanSchedule)
-        {
-            this.LoanSchedule = LoanSchedule;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class Update_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        public Loanrepschedule.LoanSchedule LoanSchedule;
-        
-        public Update_Result()
-        {
-        }
-        
-        public Update_Result(Loanrepschedule.LoanSchedule LoanSchedule)
-        {
-            this.LoanSchedule = LoanSchedule;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class UpdateMultiple
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Loanrepschedule.LoanSchedule[] LoanSchedule_List;
-        
-        public UpdateMultiple()
-        {
-        }
-        
-        public UpdateMultiple(Loanrepschedule.LoanSchedule[] LoanSchedule_List)
-        {
-            this.LoanSchedule_List = LoanSchedule_List;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class UpdateMultiple_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Loanrepschedule.LoanSchedule[] LoanSchedule_List;
-        
-        public UpdateMultiple_Result()
-        {
-        }
-        
-        public UpdateMultiple_Result(Loanrepschedule.LoanSchedule[] LoanSchedule_List)
-        {
-            this.LoanSchedule_List = LoanSchedule_List;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class Delete
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        public string Key;
-        
-        public Delete()
-        {
-        }
-        
-        public Delete(string Key)
-        {
-            this.Key = Key;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanschedule", IsWrapped=true)]
-    public partial class Delete_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="Delete_Result", Namespace="urn:microsoft-dynamics-schemas/page/loanschedule", Order=0)]
-        public bool Delete_Result1;
-        
-        public Delete_Result()
-        {
-        }
-        
-        public Delete_Result(bool Delete_Result1)
-        {
-            this.Delete_Result1 = Delete_Result1;
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface LoanSchedule_PortChannel : Loanrepschedule.LoanSchedule_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class LoanSchedule_PortClient : System.ServiceModel.ClientBase<Loanrepschedule.LoanSchedule_Port>, Loanrepschedule.LoanSchedule_Port
     {
         
@@ -1402,12 +661,10 @@ namespace Loanrepschedule
             return base.Channel.Read(request);
         }
         
-        public Loanrepschedule.LoanSchedule Read(string Loan_No, string Member_No, System.DateTime Repayment_Date)
+        public Loanrepschedule.LoanSchedule Read(int Entry_No)
         {
             Loanrepschedule.Read inValue = new Loanrepschedule.Read();
-            inValue.Loan_No = Loan_No;
-            inValue.Member_No = Member_No;
-            inValue.Repayment_Date = Repayment_Date;
+            inValue.Entry_No = Entry_No;
             Loanrepschedule.Read_Result retVal = ((Loanrepschedule.LoanSchedule_Port)(this)).Read(inValue);
             return retVal.LoanSchedule;
         }
@@ -1418,12 +675,10 @@ namespace Loanrepschedule
             return base.Channel.ReadAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Loanrepschedule.Read_Result> ReadAsync(string Loan_No, string Member_No, System.DateTime Repayment_Date)
+        public System.Threading.Tasks.Task<Loanrepschedule.Read_Result> ReadAsync(int Entry_No)
         {
             Loanrepschedule.Read inValue = new Loanrepschedule.Read();
-            inValue.Loan_No = Loan_No;
-            inValue.Member_No = Member_No;
-            inValue.Repayment_Date = Repayment_Date;
+            inValue.Entry_No = Entry_No;
             return ((Loanrepschedule.LoanSchedule_Port)(this)).ReadAsync(inValue);
         }
         
@@ -1539,113 +794,17 @@ namespace Loanrepschedule
             return ((Loanrepschedule.LoanSchedule_Port)(this)).GetRecIdFromKeyAsync(inValue);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Loanrepschedule.Create_Result Loanrepschedule.LoanSchedule_Port.Create(Loanrepschedule.Create request)
-        {
-            return base.Channel.Create(request);
-        }
-        
-        public void Create(ref Loanrepschedule.LoanSchedule LoanSchedule)
-        {
-            Loanrepschedule.Create inValue = new Loanrepschedule.Create();
-            inValue.LoanSchedule = LoanSchedule;
-            Loanrepschedule.Create_Result retVal = ((Loanrepschedule.LoanSchedule_Port)(this)).Create(inValue);
-            LoanSchedule = retVal.LoanSchedule;
-        }
-        
-        public System.Threading.Tasks.Task<Loanrepschedule.Create_Result> CreateAsync(Loanrepschedule.Create request)
-        {
-            return base.Channel.CreateAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Loanrepschedule.CreateMultiple_Result Loanrepschedule.LoanSchedule_Port.CreateMultiple(Loanrepschedule.CreateMultiple request)
-        {
-            return base.Channel.CreateMultiple(request);
-        }
-        
-        public void CreateMultiple(ref Loanrepschedule.LoanSchedule[] LoanSchedule_List)
-        {
-            Loanrepschedule.CreateMultiple inValue = new Loanrepschedule.CreateMultiple();
-            inValue.LoanSchedule_List = LoanSchedule_List;
-            Loanrepschedule.CreateMultiple_Result retVal = ((Loanrepschedule.LoanSchedule_Port)(this)).CreateMultiple(inValue);
-            LoanSchedule_List = retVal.LoanSchedule_List;
-        }
-        
-        public System.Threading.Tasks.Task<Loanrepschedule.CreateMultiple_Result> CreateMultipleAsync(Loanrepschedule.CreateMultiple request)
-        {
-            return base.Channel.CreateMultipleAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Loanrepschedule.Update_Result Loanrepschedule.LoanSchedule_Port.Update(Loanrepschedule.Update request)
-        {
-            return base.Channel.Update(request);
-        }
-        
-        public void Update(ref Loanrepschedule.LoanSchedule LoanSchedule)
-        {
-            Loanrepschedule.Update inValue = new Loanrepschedule.Update();
-            inValue.LoanSchedule = LoanSchedule;
-            Loanrepschedule.Update_Result retVal = ((Loanrepschedule.LoanSchedule_Port)(this)).Update(inValue);
-            LoanSchedule = retVal.LoanSchedule;
-        }
-        
-        public System.Threading.Tasks.Task<Loanrepschedule.Update_Result> UpdateAsync(Loanrepschedule.Update request)
-        {
-            return base.Channel.UpdateAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Loanrepschedule.UpdateMultiple_Result Loanrepschedule.LoanSchedule_Port.UpdateMultiple(Loanrepschedule.UpdateMultiple request)
-        {
-            return base.Channel.UpdateMultiple(request);
-        }
-        
-        public void UpdateMultiple(ref Loanrepschedule.LoanSchedule[] LoanSchedule_List)
-        {
-            Loanrepschedule.UpdateMultiple inValue = new Loanrepschedule.UpdateMultiple();
-            inValue.LoanSchedule_List = LoanSchedule_List;
-            Loanrepschedule.UpdateMultiple_Result retVal = ((Loanrepschedule.LoanSchedule_Port)(this)).UpdateMultiple(inValue);
-            LoanSchedule_List = retVal.LoanSchedule_List;
-        }
-        
-        public System.Threading.Tasks.Task<Loanrepschedule.UpdateMultiple_Result> UpdateMultipleAsync(Loanrepschedule.UpdateMultiple request)
-        {
-            return base.Channel.UpdateMultipleAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Loanrepschedule.Delete_Result Loanrepschedule.LoanSchedule_Port.Delete(Loanrepschedule.Delete request)
-        {
-            return base.Channel.Delete(request);
-        }
-        
-        public bool Delete(string Key)
-        {
-            Loanrepschedule.Delete inValue = new Loanrepschedule.Delete();
-            inValue.Key = Key;
-            Loanrepschedule.Delete_Result retVal = ((Loanrepschedule.LoanSchedule_Port)(this)).Delete(inValue);
-            return retVal.Delete_Result1;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Loanrepschedule.Delete_Result> Loanrepschedule.LoanSchedule_Port.DeleteAsync(Loanrepschedule.Delete request)
-        {
-            return base.Channel.DeleteAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Loanrepschedule.Delete_Result> DeleteAsync(string Key)
-        {
-            Loanrepschedule.Delete inValue = new Loanrepschedule.Delete();
-            inValue.Key = Key;
-            return ((Loanrepschedule.LoanSchedule_Port)(this)).DeleteAsync(inValue);
-        }
-        
         public virtual System.Threading.Tasks.Task OpenAsync()
         {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
+        
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
@@ -1665,7 +824,7 @@ namespace Loanrepschedule
         {
             if ((endpointConfiguration == EndpointConfiguration.LoanSchedule_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Page/LoanSchedule");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:7047/BC260/WS/NATION/Page/LoanSchedule");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

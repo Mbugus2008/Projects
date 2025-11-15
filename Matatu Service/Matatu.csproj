@@ -525,10 +525,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Collection_Credits_Credits_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://5.189.167.52:888/Embaservice/WS/EMBASSAVA%2520SACCO%2520LTD/Page/Vehicles">
+    <WebReferenceUrl Include="http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Vehicles">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Vehicles\</RelPath>
-      <UpdateFromURL>http://5.189.167.52:888/Embaservice/WS/EMBASSAVA%2520SACCO%2520LTD/Page/Vehicles</UpdateFromURL>
+      <UpdateFromURL>http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Vehicles</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -536,10 +536,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Collection_Vehicles_Vehicles_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://5.189.167.52:2356/Lophaservice/WS/Lopha%2520Live/Page/Members">
+    <WebReferenceUrl Include="http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Members">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Members\</RelPath>
-      <UpdateFromURL>http://5.189.167.52:2356/Lophaservice/WS/Lopha%2520Live/Page/Members</UpdateFromURL>
+      <UpdateFromURL>http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Members</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

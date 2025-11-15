@@ -11,7 +11,7 @@ namespace Mobilecharge
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/mobilecharges", ConfigurationName="Mobilecharge.MobileCharges_Port")]
     public interface MobileCharges_Port
     {
@@ -98,7 +98,7 @@ namespace Mobilecharge
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/mobilecharges")]
     public partial class MobileCharges
@@ -108,11 +108,47 @@ namespace Mobilecharge
         
         private string charge_CodeField;
         
-        private string charge_DescriptionField;
-        
         private Transaction_Type transaction_TypeField;
         
         private bool transaction_TypeFieldSpecified;
+        
+        private string charge_DescriptionField;
+        
+        private bool is_StaggeredField;
+        
+        private bool is_StaggeredFieldSpecified;
+        
+        private decimal transaction_AmountField;
+        
+        private bool transaction_AmountFieldSpecified;
+        
+        private decimal sACCO_AmountField;
+        
+        private bool sACCO_AmountFieldSpecified;
+        
+        private decimal vendor_CommissionField;
+        
+        private bool vendor_CommissionFieldSpecified;
+        
+        private decimal safaricom_CommissionField;
+        
+        private bool safaricom_CommissionFieldSpecified;
+        
+        private string sacco_Commission_A_cField;
+        
+        private string vendor_Commission_A_cField;
+        
+        private string safaricom_Commission_A_cField;
+        
+        private string settlement_AccountField;
+        
+        private bool charge_Excise_DutyField;
+        
+        private bool charge_Excise_DutyFieldSpecified;
+        
+        private decimal additional_Safaricom_CommPercentField;
+        
+        private bool additional_Safaricom_CommPercentFieldSpecified;
         
         private decimal daily_Amount_LimitsField;
         
@@ -121,6 +157,12 @@ namespace Mobilecharge
         private decimal limit_Per_TransactionField;
         
         private bool limit_Per_TransactionFieldSpecified;
+        
+        private decimal minimum_WithdrawalField;
+        
+        private bool minimum_WithdrawalFieldSpecified;
+        
+        private string posting_DescriptionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -152,20 +194,6 @@ namespace Mobilecharge
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Charge_Description
-        {
-            get
-            {
-                return this.charge_DescriptionField;
-            }
-            set
-            {
-                this.charge_DescriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public Transaction_Type Transaction_Type
         {
             get
@@ -193,7 +221,273 @@ namespace Mobilecharge
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string Charge_Description
+        {
+            get
+            {
+                return this.charge_DescriptionField;
+            }
+            set
+            {
+                this.charge_DescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public bool Is_Staggered
+        {
+            get
+            {
+                return this.is_StaggeredField;
+            }
+            set
+            {
+                this.is_StaggeredField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Is_StaggeredSpecified
+        {
+            get
+            {
+                return this.is_StaggeredFieldSpecified;
+            }
+            set
+            {
+                this.is_StaggeredFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public decimal Transaction_Amount
+        {
+            get
+            {
+                return this.transaction_AmountField;
+            }
+            set
+            {
+                this.transaction_AmountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Transaction_AmountSpecified
+        {
+            get
+            {
+                return this.transaction_AmountFieldSpecified;
+            }
+            set
+            {
+                this.transaction_AmountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public decimal SACCO_Amount
+        {
+            get
+            {
+                return this.sACCO_AmountField;
+            }
+            set
+            {
+                this.sACCO_AmountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SACCO_AmountSpecified
+        {
+            get
+            {
+                return this.sACCO_AmountFieldSpecified;
+            }
+            set
+            {
+                this.sACCO_AmountFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public decimal Vendor_Commission
+        {
+            get
+            {
+                return this.vendor_CommissionField;
+            }
+            set
+            {
+                this.vendor_CommissionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Vendor_CommissionSpecified
+        {
+            get
+            {
+                return this.vendor_CommissionFieldSpecified;
+            }
+            set
+            {
+                this.vendor_CommissionFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public decimal Safaricom_Commission
+        {
+            get
+            {
+                return this.safaricom_CommissionField;
+            }
+            set
+            {
+                this.safaricom_CommissionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Safaricom_CommissionSpecified
+        {
+            get
+            {
+                return this.safaricom_CommissionFieldSpecified;
+            }
+            set
+            {
+                this.safaricom_CommissionFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string Sacco_Commission_A_c
+        {
+            get
+            {
+                return this.sacco_Commission_A_cField;
+            }
+            set
+            {
+                this.sacco_Commission_A_cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string Vendor_Commission_A_c
+        {
+            get
+            {
+                return this.vendor_Commission_A_cField;
+            }
+            set
+            {
+                this.vendor_Commission_A_cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string Safaricom_Commission_A_c
+        {
+            get
+            {
+                return this.safaricom_Commission_A_cField;
+            }
+            set
+            {
+                this.safaricom_Commission_A_cField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string Settlement_Account
+        {
+            get
+            {
+                return this.settlement_AccountField;
+            }
+            set
+            {
+                this.settlement_AccountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public bool Charge_Excise_Duty
+        {
+            get
+            {
+                return this.charge_Excise_DutyField;
+            }
+            set
+            {
+                this.charge_Excise_DutyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Charge_Excise_DutySpecified
+        {
+            get
+            {
+                return this.charge_Excise_DutyFieldSpecified;
+            }
+            set
+            {
+                this.charge_Excise_DutyFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public decimal Additional_Safaricom_CommPercent
+        {
+            get
+            {
+                return this.additional_Safaricom_CommPercentField;
+            }
+            set
+            {
+                this.additional_Safaricom_CommPercentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Additional_Safaricom_CommPercentSpecified
+        {
+            get
+            {
+                return this.additional_Safaricom_CommPercentFieldSpecified;
+            }
+            set
+            {
+                this.additional_Safaricom_CommPercentFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
         public decimal Daily_Amount_Limits
         {
             get
@@ -221,7 +515,7 @@ namespace Mobilecharge
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
         public decimal Limit_Per_Transaction
         {
             get
@@ -247,10 +541,52 @@ namespace Mobilecharge
                 this.limit_Per_TransactionFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public decimal Minimum_Withdrawal
+        {
+            get
+            {
+                return this.minimum_WithdrawalField;
+            }
+            set
+            {
+                this.minimum_WithdrawalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Minimum_WithdrawalSpecified
+        {
+            get
+            {
+                return this.minimum_WithdrawalFieldSpecified;
+            }
+            set
+            {
+                this.minimum_WithdrawalFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public string Posting_Description
+        {
+            get
+            {
+                return this.posting_DescriptionField;
+            }
+            set
+            {
+                this.posting_DescriptionField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/mobilecharges")]
     public enum Transaction_Type
     {
@@ -274,10 +610,7 @@ namespace Mobilecharge
         Loan_Disbursement_Mobile_Ovedraft,
         
         /// <remarks/>
-        Loan_Disbursement_for_FOSA,
-        
-        /// <remarks/>
-        _BOSA__x0026__Business_loans,
+        Loan_Disbursement_for_FOSA_BOSA__x0026__Business_loans,
         
         /// <remarks/>
         Member_Onboarding_with_IPRS_AI,
@@ -292,7 +625,7 @@ namespace Mobilecharge
         Balance_Enquiry,
         
         /// <remarks/>
-        _x000A_Mini_Statement,
+        Mini_Statement,
         
         /// <remarks/>
         Loan_Origination,
@@ -329,10 +662,16 @@ namespace Mobilecharge
         
         /// <remarks/>
         Transfer_to_FOSA,
+        
+        /// <remarks/>
+        Reversal,
+        
+        /// <remarks/>
+        Till_Payment,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/mobilecharges")]
     public partial class MobileCharges_Filter
@@ -372,7 +711,7 @@ namespace Mobilecharge
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/mobilecharges")]
     public enum MobileCharges_Fields
     {
@@ -381,20 +720,59 @@ namespace Mobilecharge
         Charge_Code,
         
         /// <remarks/>
+        Transaction_Type,
+        
+        /// <remarks/>
         Charge_Description,
         
         /// <remarks/>
-        Transaction_Type,
+        Is_Staggered,
+        
+        /// <remarks/>
+        Transaction_Amount,
+        
+        /// <remarks/>
+        SACCO_Amount,
+        
+        /// <remarks/>
+        Vendor_Commission,
+        
+        /// <remarks/>
+        Safaricom_Commission,
+        
+        /// <remarks/>
+        Sacco_Commission_A_c,
+        
+        /// <remarks/>
+        Vendor_Commission_A_c,
+        
+        /// <remarks/>
+        Safaricom_Commission_A_c,
+        
+        /// <remarks/>
+        Settlement_Account,
+        
+        /// <remarks/>
+        Charge_Excise_Duty,
+        
+        /// <remarks/>
+        Additional_Safaricom_CommPercent,
         
         /// <remarks/>
         Daily_Amount_Limits,
         
         /// <remarks/>
         Limit_Per_Transaction,
+        
+        /// <remarks/>
+        Minimum_Withdrawal,
+        
+        /// <remarks/>
+        Posting_Description,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class Read
@@ -414,7 +792,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class Read_Result
@@ -434,7 +812,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class ReadByRecId
@@ -454,7 +832,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class ReadByRecId_Result
@@ -474,7 +852,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class ReadMultiple
@@ -503,7 +881,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class ReadMultiple_Result
@@ -524,7 +902,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class IsUpdated
@@ -544,7 +922,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class IsUpdated_Result
@@ -564,7 +942,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class GetRecIdFromKey
@@ -584,7 +962,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
@@ -604,7 +982,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class Create
     {
@@ -623,7 +1001,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class Create_Result
     {
@@ -642,7 +1020,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class CreateMultiple
     {
@@ -662,7 +1040,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class CreateMultiple_Result
     {
@@ -682,7 +1060,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class Update
     {
@@ -701,7 +1079,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class Update_Result
     {
@@ -720,7 +1098,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class UpdateMultiple
     {
@@ -740,7 +1118,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class UpdateMultiple_Result
     {
@@ -760,7 +1138,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class Delete
@@ -780,7 +1158,7 @@ namespace Mobilecharge
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/mobilecharges", IsWrapped=true)]
     public partial class Delete_Result
@@ -799,13 +1177,13 @@ namespace Mobilecharge
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface MobileCharges_PortChannel : Mobilecharge.MobileCharges_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class MobileCharges_PortClient : System.ServiceModel.ClientBase<Mobilecharge.MobileCharges_Port>, Mobilecharge.MobileCharges_Port
     {
         
@@ -1096,6 +1474,13 @@ namespace Mobilecharge
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
             if ((endpointConfiguration == EndpointConfiguration.MobileCharges_Port))
@@ -1114,7 +1499,7 @@ namespace Mobilecharge
         {
             if ((endpointConfiguration == EndpointConfiguration.MobileCharges_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://172.16.7.181:7052/test/WS/Nation Sacco/Page/MobileCharges");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:7047/BC260/WS/NATION/Page/MobileCharges");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

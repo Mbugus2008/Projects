@@ -11,7 +11,7 @@ namespace LoanProduct
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts", ConfigurationName="LoanProduct.LoanProducts_Port")]
     public interface LoanProducts_Port
     {
@@ -98,7 +98,7 @@ namespace LoanProduct
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
     public partial class LoanProducts
@@ -110,57 +110,19 @@ namespace LoanProduct
         
         private string product_DescriptionField;
         
-        private bool business_LoanField;
-        
-        private bool business_LoanFieldSpecified;
-        
-        private decimal graduation_AmountField;
-        
-        private bool graduation_AmountFieldSpecified;
-        
-        private int multiple_LoansField;
+        private bool multiple_LoansField;
         
         private bool multiple_LoansFieldSpecified;
-        
-        private decimal upfront_Interest_PercentField;
-        
-        private bool upfront_Interest_PercentFieldSpecified;
-        
-        private string source_of_FinancingField;
         
         private decimal interest_rateField;
         
         private bool interest_rateFieldSpecified;
         
-        private string no_SeriesField;
-        
-        private string grace_PeriodField;
-        
         private int no_of_InstallmentField;
         
         private bool no_of_InstallmentFieldSpecified;
         
-        private string instalment_PeriodField;
-        
-        private decimal loan_to_Share_RatioField;
-        
-        private bool loan_to_Share_RatioFieldSpecified;
-        
-        private string penalty_Calculation_DaysField;
-        
-        private decimal penalty_PercentageField;
-        
-        private bool penalty_PercentageFieldSpecified;
-        
-        private Penalty_Calculation_Method penalty_Calculation_MethodField;
-        
-        private bool penalty_Calculation_MethodFieldSpecified;
-        
         private string penalty_Paid_AccountField;
-        
-        private bool use_CyclesField;
-        
-        private bool use_CyclesFieldSpecified;
         
         private decimal max_Loan_AmountField;
         
@@ -174,14 +136,6 @@ namespace LoanProduct
         
         private bool repayment_MethodFieldSpecified;
         
-        private int grace_Period_Principle_MField;
-        
-        private bool grace_Period_Principle_MFieldSpecified;
-        
-        private int grace_Period_Interest_MField;
-        
-        private bool grace_Period_Interest_MFieldSpecified;
-        
         private decimal min_Loan_AmountField;
         
         private bool min_Loan_AmountFieldSpecified;
@@ -192,227 +146,21 @@ namespace LoanProduct
         
         private string receivable_Interest_AccountField;
         
-        private Source sourceField;
-        
-        private bool sourceFieldSpecified;
-        
-        private int recovery_PriorityField;
-        
-        private bool recovery_PriorityFieldSpecified;
-        
-        private bool check_Off_RecoveryField;
-        
-        private bool check_Off_RecoveryFieldSpecified;
-        
-        private string sMS_DescriptionField;
-        
-        private System.DateTime date_FilterField;
-        
-        private bool date_FilterFieldSpecified;
-        
-        private int min_No_Of_GuarantorsField;
-        
-        private bool min_No_Of_GuarantorsFieldSpecified;
-        
-        private string min_Re_application_PeriodField;
-        
         private int check_Off_Loan_NoField;
         
         private bool check_Off_Loan_NoFieldSpecified;
         
-        private int shares_MultiplierField;
+        private decimal shares_MultiplierField;
         
         private bool shares_MultiplierFieldSpecified;
-        
-        private string product_Currency_CodeField;
-        
-        private System.DateTime loan_Product_Expiry_DateField;
-        
-        private bool loan_Product_Expiry_DateFieldSpecified;
-        
-        private Appln_between_Currencies appln_between_CurrenciesField;
-        
-        private bool appln_between_CurrenciesFieldSpecified;
         
         private Repayment_Frequency repayment_FrequencyField;
         
         private bool repayment_FrequencyFieldSpecified;
         
-        private bool appraise_DepositsField;
-        
-        private bool appraise_DepositsFieldSpecified;
-        
-        private bool appraise_SalaryField;
-        
-        private bool appraise_SalaryFieldSpecified;
-        
-        private bool appraise_GuarantorsField;
-        
-        private bool appraise_GuarantorsFieldSpecified;
-        
-        private bool appraise_BusinessField;
-        
-        private bool appraise_BusinessFieldSpecified;
-        
-        private Recovery_Mode recovery_ModeField;
-        
-        private bool recovery_ModeFieldSpecified;
-        
-        private decimal deposits_MultiplierField;
-        
-        private bool deposits_MultiplierFieldSpecified;
-        
-        private decimal appraise_CollateralField;
-        
-        private bool appraise_CollateralFieldSpecified;
-        
-        private bool appraise_DividendField;
-        
-        private bool appraise_DividendFieldSpecified;
-        
-        private string penalty_Charged_AccountField;
-        
-        private int ordinary_Share_MultiplierField;
-        
-        private bool ordinary_Share_MultiplierFieldSpecified;
-        
-        private int preferential_Share_MultiplierField;
-        
-        private bool preferential_Share_MultiplierFieldSpecified;
-        
-        private int ordinary_No_of_InstallmentsField;
-        
-        private bool ordinary_No_of_InstallmentsFieldSpecified;
-        
-        private int preferential_No_of_InstallmentField;
-        
-        private bool preferential_No_of_InstallmentFieldSpecified;
-        
-        private int ordinary_Default_InstallField;
-        
-        private bool ordinary_Default_InstallFieldSpecified;
-        
-        private int preferential_Default_InstallField;
-        
-        private bool preferential_Default_InstallFieldSpecified;
-        
-        private bool collateral_AppraisalField;
-        
-        private bool collateral_AppraisalFieldSpecified;
-        
-        private int max_No_Of_GuarantorsField;
-        
-        private bool max_No_Of_GuarantorsFieldSpecified;
-        
-        private bool max_Branch_ApprovalField;
-        
-        private bool max_Branch_ApprovalFieldSpecified;
-        
-        private decimal minimum_Percent_Repaid_for_Top_UpField;
-        
-        private bool minimum_Percent_Repaid_for_Top_UpFieldSpecified;
-        
-        private Nature_of_Loan_Type nature_of_Loan_TypeField;
-        
-        private bool nature_of_Loan_TypeFieldSpecified;
-        
-        private decimal max_CRB_AmountField;
-        
-        private bool max_CRB_AmountFieldSpecified;
-        
-        private bool no_Multiple_LoansField;
-        
-        private bool no_Multiple_LoansFieldSpecified;
-        
-        private string default_InstallmentField;
-        
-        private bool ignore_Guarantor_LimitField;
-        
-        private bool ignore_Guarantor_LimitFieldSpecified;
-        
-        private bool pay_to_VendorField;
-        
-        private bool pay_to_VendorFieldSpecified;
-        
-        private string pay_to_Vendor_NoField;
-        
-        private string iPP_CodeField;
-        
-        private bool show_OnlineField;
-        
-        private bool show_OnlineFieldSpecified;
-        
-        private bool no_RefinancingField;
-        
-        private bool no_RefinancingFieldSpecified;
-        
-        private bool special_LoanField;
-        
-        private bool special_LoanFieldSpecified;
-        
-        private bool advance_LoanField;
-        
-        private bool advance_LoanFieldSpecified;
-        
-        private string max_Interest_Calc_PeriodField;
-        
-        private decimal interest_On_DividendsField;
-        
-        private bool interest_On_DividendsFieldSpecified;
-        
-        private bool availableOnMobileField;
-        
-        private bool availableOnMobileFieldSpecified;
-        
-        private string insurance_AccountField;
-        
-        private bool sasra_LoanField;
-        
-        private bool sasra_LoanFieldSpecified;
-        
         private bool blockedField;
         
         private bool blockedFieldSpecified;
-        
-        private decimal service_Fee_PercentField;
-        
-        private bool service_Fee_PercentFieldSpecified;
-        
-        private string service_Fee_AccountField;
-        
-        private bool allow_Boosting_SharesField;
-        
-        private bool allow_Boosting_SharesFieldSpecified;
-        
-        private int sTO_PriorityField;
-        
-        private bool sTO_PriorityFieldSpecified;
-        
-        private int interest_rate_2Field;
-        
-        private bool interest_rate_2FieldSpecified;
-        
-        private int interest_rate_3Field;
-        
-        private bool interest_rate_3FieldSpecified;
-        
-        private decimal mobile_Loan_Top_up_LimitField;
-        
-        private bool mobile_Loan_Top_up_LimitFieldSpecified;
-        
-        private System.DateTime div_Advance_Start_DateField;
-        
-        private bool div_Advance_Start_DateFieldSpecified;
-        
-        private decimal max_Mobile_Loan_AmountField;
-        
-        private bool max_Mobile_Loan_AmountFieldSpecified;
-        
-        private string uSSD_Product_NameField;
-        
-        private string restrict_to_Emp_CodeField;
-        
-        private string next_Loan_PeriodField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -458,63 +206,7 @@ namespace LoanProduct
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public bool Business_Loan
-        {
-            get
-            {
-                return this.business_LoanField;
-            }
-            set
-            {
-                this.business_LoanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Business_LoanSpecified
-        {
-            get
-            {
-                return this.business_LoanFieldSpecified;
-            }
-            set
-            {
-                this.business_LoanFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public decimal Graduation_Amount
-        {
-            get
-            {
-                return this.graduation_AmountField;
-            }
-            set
-            {
-                this.graduation_AmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Graduation_AmountSpecified
-        {
-            get
-            {
-                return this.graduation_AmountFieldSpecified;
-            }
-            set
-            {
-                this.graduation_AmountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public int Multiple_Loans
+        public bool Multiple_Loans
         {
             get
             {
@@ -541,49 +233,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public decimal Upfront_Interest_Percent
-        {
-            get
-            {
-                return this.upfront_Interest_PercentField;
-            }
-            set
-            {
-                this.upfront_Interest_PercentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Upfront_Interest_PercentSpecified
-        {
-            get
-            {
-                return this.upfront_Interest_PercentFieldSpecified;
-            }
-            set
-            {
-                this.upfront_Interest_PercentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public string Source_of_Financing
-        {
-            get
-            {
-                return this.source_of_FinancingField;
-            }
-            set
-            {
-                this.source_of_FinancingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public decimal Interest_rate
         {
             get
@@ -611,35 +261,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public string No_Series
-        {
-            get
-            {
-                return this.no_SeriesField;
-            }
-            set
-            {
-                this.no_SeriesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public string Grace_Period
-        {
-            get
-            {
-                return this.grace_PeriodField;
-            }
-            set
-            {
-                this.grace_PeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
         public int No_of_Installment
         {
             get
@@ -667,119 +289,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string Instalment_Period
-        {
-            get
-            {
-                return this.instalment_PeriodField;
-            }
-            set
-            {
-                this.instalment_PeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public decimal Loan_to_Share_Ratio
-        {
-            get
-            {
-                return this.loan_to_Share_RatioField;
-            }
-            set
-            {
-                this.loan_to_Share_RatioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Loan_to_Share_RatioSpecified
-        {
-            get
-            {
-                return this.loan_to_Share_RatioFieldSpecified;
-            }
-            set
-            {
-                this.loan_to_Share_RatioFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public string Penalty_Calculation_Days
-        {
-            get
-            {
-                return this.penalty_Calculation_DaysField;
-            }
-            set
-            {
-                this.penalty_Calculation_DaysField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
-        public decimal Penalty_Percentage
-        {
-            get
-            {
-                return this.penalty_PercentageField;
-            }
-            set
-            {
-                this.penalty_PercentageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Penalty_PercentageSpecified
-        {
-            get
-            {
-                return this.penalty_PercentageFieldSpecified;
-            }
-            set
-            {
-                this.penalty_PercentageFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
-        public Penalty_Calculation_Method Penalty_Calculation_Method
-        {
-            get
-            {
-                return this.penalty_Calculation_MethodField;
-            }
-            set
-            {
-                this.penalty_Calculation_MethodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Penalty_Calculation_MethodSpecified
-        {
-            get
-            {
-                return this.penalty_Calculation_MethodFieldSpecified;
-            }
-            set
-            {
-                this.penalty_Calculation_MethodFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string Penalty_Paid_Account
         {
             get
@@ -793,35 +303,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
-        public bool Use_Cycles
-        {
-            get
-            {
-                return this.use_CyclesField;
-            }
-            set
-            {
-                this.use_CyclesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Use_CyclesSpecified
-        {
-            get
-            {
-                return this.use_CyclesFieldSpecified;
-            }
-            set
-            {
-                this.use_CyclesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
         public decimal Max_Loan_Amount
         {
             get
@@ -849,7 +331,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
         public decimal Compulsory_Savings
         {
             get
@@ -877,7 +359,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
         public Repayment_Method Repayment_Method
         {
             get
@@ -905,63 +387,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
-        public int Grace_Period_Principle_M
-        {
-            get
-            {
-                return this.grace_Period_Principle_MField;
-            }
-            set
-            {
-                this.grace_Period_Principle_MField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Grace_Period_Principle_MSpecified
-        {
-            get
-            {
-                return this.grace_Period_Principle_MFieldSpecified;
-            }
-            set
-            {
-                this.grace_Period_Principle_MFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
-        public int Grace_Period_Interest_M
-        {
-            get
-            {
-                return this.grace_Period_Interest_MField;
-            }
-            set
-            {
-                this.grace_Period_Interest_MField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Grace_Period_Interest_MSpecified
-        {
-            get
-            {
-                return this.grace_Period_Interest_MFieldSpecified;
-            }
-            set
-            {
-                this.grace_Period_Interest_MFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
         public decimal Min_Loan_Amount
         {
             get
@@ -989,7 +415,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
         public string Loan_Account
         {
             get
@@ -1003,7 +429,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
         public string Loan_Interest_Account
         {
             get
@@ -1017,7 +443,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
         public string Receivable_Interest_Account
         {
             get
@@ -1031,175 +457,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
-        public Source Source
-        {
-            get
-            {
-                return this.sourceField;
-            }
-            set
-            {
-                this.sourceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SourceSpecified
-        {
-            get
-            {
-                return this.sourceFieldSpecified;
-            }
-            set
-            {
-                this.sourceFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
-        public int Recovery_Priority
-        {
-            get
-            {
-                return this.recovery_PriorityField;
-            }
-            set
-            {
-                this.recovery_PriorityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Recovery_PrioritySpecified
-        {
-            get
-            {
-                return this.recovery_PriorityFieldSpecified;
-            }
-            set
-            {
-                this.recovery_PriorityFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
-        public bool Check_Off_Recovery
-        {
-            get
-            {
-                return this.check_Off_RecoveryField;
-            }
-            set
-            {
-                this.check_Off_RecoveryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Check_Off_RecoverySpecified
-        {
-            get
-            {
-                return this.check_Off_RecoveryFieldSpecified;
-            }
-            set
-            {
-                this.check_Off_RecoveryFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
-        public string SMS_Description
-        {
-            get
-            {
-                return this.sMS_DescriptionField;
-            }
-            set
-            {
-                this.sMS_DescriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=32)]
-        public System.DateTime Date_Filter
-        {
-            get
-            {
-                return this.date_FilterField;
-            }
-            set
-            {
-                this.date_FilterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Date_FilterSpecified
-        {
-            get
-            {
-                return this.date_FilterFieldSpecified;
-            }
-            set
-            {
-                this.date_FilterFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
-        public int Min_No_Of_Guarantors
-        {
-            get
-            {
-                return this.min_No_Of_GuarantorsField;
-            }
-            set
-            {
-                this.min_No_Of_GuarantorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Min_No_Of_GuarantorsSpecified
-        {
-            get
-            {
-                return this.min_No_Of_GuarantorsFieldSpecified;
-            }
-            set
-            {
-                this.min_No_Of_GuarantorsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
-        public string Min_Re_application_Period
-        {
-            get
-            {
-                return this.min_Re_application_PeriodField;
-            }
-            set
-            {
-                this.min_Re_application_PeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
         public int Check_Off_Loan_No
         {
             get
@@ -1227,8 +485,8 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
-        public int Shares_Multiplier
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public decimal Shares_Multiplier
         {
             get
             {
@@ -1255,77 +513,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
-        public string Product_Currency_Code
-        {
-            get
-            {
-                return this.product_Currency_CodeField;
-            }
-            set
-            {
-                this.product_Currency_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=38)]
-        public System.DateTime Loan_Product_Expiry_Date
-        {
-            get
-            {
-                return this.loan_Product_Expiry_DateField;
-            }
-            set
-            {
-                this.loan_Product_Expiry_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Loan_Product_Expiry_DateSpecified
-        {
-            get
-            {
-                return this.loan_Product_Expiry_DateFieldSpecified;
-            }
-            set
-            {
-                this.loan_Product_Expiry_DateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
-        public Appln_between_Currencies Appln_between_Currencies
-        {
-            get
-            {
-                return this.appln_between_CurrenciesField;
-            }
-            set
-            {
-                this.appln_between_CurrenciesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Appln_between_CurrenciesSpecified
-        {
-            get
-            {
-                return this.appln_between_CurrenciesFieldSpecified;
-            }
-            set
-            {
-                this.appln_between_CurrenciesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
         public Repayment_Frequency Repayment_Frequency
         {
             get
@@ -1353,931 +541,7 @@ namespace LoanProduct
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=41)]
-        public bool Appraise_Deposits
-        {
-            get
-            {
-                return this.appraise_DepositsField;
-            }
-            set
-            {
-                this.appraise_DepositsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Appraise_DepositsSpecified
-        {
-            get
-            {
-                return this.appraise_DepositsFieldSpecified;
-            }
-            set
-            {
-                this.appraise_DepositsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=42)]
-        public bool Appraise_Salary
-        {
-            get
-            {
-                return this.appraise_SalaryField;
-            }
-            set
-            {
-                this.appraise_SalaryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Appraise_SalarySpecified
-        {
-            get
-            {
-                return this.appraise_SalaryFieldSpecified;
-            }
-            set
-            {
-                this.appraise_SalaryFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=43)]
-        public bool Appraise_Guarantors
-        {
-            get
-            {
-                return this.appraise_GuarantorsField;
-            }
-            set
-            {
-                this.appraise_GuarantorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Appraise_GuarantorsSpecified
-        {
-            get
-            {
-                return this.appraise_GuarantorsFieldSpecified;
-            }
-            set
-            {
-                this.appraise_GuarantorsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=44)]
-        public bool Appraise_Business
-        {
-            get
-            {
-                return this.appraise_BusinessField;
-            }
-            set
-            {
-                this.appraise_BusinessField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Appraise_BusinessSpecified
-        {
-            get
-            {
-                return this.appraise_BusinessFieldSpecified;
-            }
-            set
-            {
-                this.appraise_BusinessFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=45)]
-        public Recovery_Mode Recovery_Mode
-        {
-            get
-            {
-                return this.recovery_ModeField;
-            }
-            set
-            {
-                this.recovery_ModeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Recovery_ModeSpecified
-        {
-            get
-            {
-                return this.recovery_ModeFieldSpecified;
-            }
-            set
-            {
-                this.recovery_ModeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=46)]
-        public decimal Deposits_Multiplier
-        {
-            get
-            {
-                return this.deposits_MultiplierField;
-            }
-            set
-            {
-                this.deposits_MultiplierField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Deposits_MultiplierSpecified
-        {
-            get
-            {
-                return this.deposits_MultiplierFieldSpecified;
-            }
-            set
-            {
-                this.deposits_MultiplierFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=47)]
-        public decimal Appraise_Collateral
-        {
-            get
-            {
-                return this.appraise_CollateralField;
-            }
-            set
-            {
-                this.appraise_CollateralField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Appraise_CollateralSpecified
-        {
-            get
-            {
-                return this.appraise_CollateralFieldSpecified;
-            }
-            set
-            {
-                this.appraise_CollateralFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=48)]
-        public bool Appraise_Dividend
-        {
-            get
-            {
-                return this.appraise_DividendField;
-            }
-            set
-            {
-                this.appraise_DividendField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Appraise_DividendSpecified
-        {
-            get
-            {
-                return this.appraise_DividendFieldSpecified;
-            }
-            set
-            {
-                this.appraise_DividendFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=49)]
-        public string Penalty_Charged_Account
-        {
-            get
-            {
-                return this.penalty_Charged_AccountField;
-            }
-            set
-            {
-                this.penalty_Charged_AccountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=50)]
-        public int Ordinary_Share_Multiplier
-        {
-            get
-            {
-                return this.ordinary_Share_MultiplierField;
-            }
-            set
-            {
-                this.ordinary_Share_MultiplierField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Ordinary_Share_MultiplierSpecified
-        {
-            get
-            {
-                return this.ordinary_Share_MultiplierFieldSpecified;
-            }
-            set
-            {
-                this.ordinary_Share_MultiplierFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=51)]
-        public int Preferential_Share_Multiplier
-        {
-            get
-            {
-                return this.preferential_Share_MultiplierField;
-            }
-            set
-            {
-                this.preferential_Share_MultiplierField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Preferential_Share_MultiplierSpecified
-        {
-            get
-            {
-                return this.preferential_Share_MultiplierFieldSpecified;
-            }
-            set
-            {
-                this.preferential_Share_MultiplierFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=52)]
-        public int Ordinary_No_of_Installments
-        {
-            get
-            {
-                return this.ordinary_No_of_InstallmentsField;
-            }
-            set
-            {
-                this.ordinary_No_of_InstallmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Ordinary_No_of_InstallmentsSpecified
-        {
-            get
-            {
-                return this.ordinary_No_of_InstallmentsFieldSpecified;
-            }
-            set
-            {
-                this.ordinary_No_of_InstallmentsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=53)]
-        public int Preferential_No_of_Installment
-        {
-            get
-            {
-                return this.preferential_No_of_InstallmentField;
-            }
-            set
-            {
-                this.preferential_No_of_InstallmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Preferential_No_of_InstallmentSpecified
-        {
-            get
-            {
-                return this.preferential_No_of_InstallmentFieldSpecified;
-            }
-            set
-            {
-                this.preferential_No_of_InstallmentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=54)]
-        public int Ordinary_Default_Install
-        {
-            get
-            {
-                return this.ordinary_Default_InstallField;
-            }
-            set
-            {
-                this.ordinary_Default_InstallField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Ordinary_Default_InstallSpecified
-        {
-            get
-            {
-                return this.ordinary_Default_InstallFieldSpecified;
-            }
-            set
-            {
-                this.ordinary_Default_InstallFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=55)]
-        public int Preferential_Default_Install
-        {
-            get
-            {
-                return this.preferential_Default_InstallField;
-            }
-            set
-            {
-                this.preferential_Default_InstallField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Preferential_Default_InstallSpecified
-        {
-            get
-            {
-                return this.preferential_Default_InstallFieldSpecified;
-            }
-            set
-            {
-                this.preferential_Default_InstallFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=56)]
-        public bool Collateral_Appraisal
-        {
-            get
-            {
-                return this.collateral_AppraisalField;
-            }
-            set
-            {
-                this.collateral_AppraisalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Collateral_AppraisalSpecified
-        {
-            get
-            {
-                return this.collateral_AppraisalFieldSpecified;
-            }
-            set
-            {
-                this.collateral_AppraisalFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=57)]
-        public int Max_No_Of_Guarantors
-        {
-            get
-            {
-                return this.max_No_Of_GuarantorsField;
-            }
-            set
-            {
-                this.max_No_Of_GuarantorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Max_No_Of_GuarantorsSpecified
-        {
-            get
-            {
-                return this.max_No_Of_GuarantorsFieldSpecified;
-            }
-            set
-            {
-                this.max_No_Of_GuarantorsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=58)]
-        public bool Max_Branch_Approval
-        {
-            get
-            {
-                return this.max_Branch_ApprovalField;
-            }
-            set
-            {
-                this.max_Branch_ApprovalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Max_Branch_ApprovalSpecified
-        {
-            get
-            {
-                return this.max_Branch_ApprovalFieldSpecified;
-            }
-            set
-            {
-                this.max_Branch_ApprovalFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=59)]
-        public decimal Minimum_Percent_Repaid_for_Top_Up
-        {
-            get
-            {
-                return this.minimum_Percent_Repaid_for_Top_UpField;
-            }
-            set
-            {
-                this.minimum_Percent_Repaid_for_Top_UpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Minimum_Percent_Repaid_for_Top_UpSpecified
-        {
-            get
-            {
-                return this.minimum_Percent_Repaid_for_Top_UpFieldSpecified;
-            }
-            set
-            {
-                this.minimum_Percent_Repaid_for_Top_UpFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=60)]
-        public Nature_of_Loan_Type Nature_of_Loan_Type
-        {
-            get
-            {
-                return this.nature_of_Loan_TypeField;
-            }
-            set
-            {
-                this.nature_of_Loan_TypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Nature_of_Loan_TypeSpecified
-        {
-            get
-            {
-                return this.nature_of_Loan_TypeFieldSpecified;
-            }
-            set
-            {
-                this.nature_of_Loan_TypeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=61)]
-        public decimal Max_CRB_Amount
-        {
-            get
-            {
-                return this.max_CRB_AmountField;
-            }
-            set
-            {
-                this.max_CRB_AmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Max_CRB_AmountSpecified
-        {
-            get
-            {
-                return this.max_CRB_AmountFieldSpecified;
-            }
-            set
-            {
-                this.max_CRB_AmountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=62)]
-        public bool No_Multiple_Loans
-        {
-            get
-            {
-                return this.no_Multiple_LoansField;
-            }
-            set
-            {
-                this.no_Multiple_LoansField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool No_Multiple_LoansSpecified
-        {
-            get
-            {
-                return this.no_Multiple_LoansFieldSpecified;
-            }
-            set
-            {
-                this.no_Multiple_LoansFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=63)]
-        public string Default_Installment
-        {
-            get
-            {
-                return this.default_InstallmentField;
-            }
-            set
-            {
-                this.default_InstallmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=64)]
-        public bool Ignore_Guarantor_Limit
-        {
-            get
-            {
-                return this.ignore_Guarantor_LimitField;
-            }
-            set
-            {
-                this.ignore_Guarantor_LimitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Ignore_Guarantor_LimitSpecified
-        {
-            get
-            {
-                return this.ignore_Guarantor_LimitFieldSpecified;
-            }
-            set
-            {
-                this.ignore_Guarantor_LimitFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=65)]
-        public bool Pay_to_Vendor
-        {
-            get
-            {
-                return this.pay_to_VendorField;
-            }
-            set
-            {
-                this.pay_to_VendorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Pay_to_VendorSpecified
-        {
-            get
-            {
-                return this.pay_to_VendorFieldSpecified;
-            }
-            set
-            {
-                this.pay_to_VendorFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=66)]
-        public string Pay_to_Vendor_No
-        {
-            get
-            {
-                return this.pay_to_Vendor_NoField;
-            }
-            set
-            {
-                this.pay_to_Vendor_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=67)]
-        public string IPP_Code
-        {
-            get
-            {
-                return this.iPP_CodeField;
-            }
-            set
-            {
-                this.iPP_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=68)]
-        public bool Show_Online
-        {
-            get
-            {
-                return this.show_OnlineField;
-            }
-            set
-            {
-                this.show_OnlineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Show_OnlineSpecified
-        {
-            get
-            {
-                return this.show_OnlineFieldSpecified;
-            }
-            set
-            {
-                this.show_OnlineFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=69)]
-        public bool No_Refinancing
-        {
-            get
-            {
-                return this.no_RefinancingField;
-            }
-            set
-            {
-                this.no_RefinancingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool No_RefinancingSpecified
-        {
-            get
-            {
-                return this.no_RefinancingFieldSpecified;
-            }
-            set
-            {
-                this.no_RefinancingFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=70)]
-        public bool Special_Loan
-        {
-            get
-            {
-                return this.special_LoanField;
-            }
-            set
-            {
-                this.special_LoanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Special_LoanSpecified
-        {
-            get
-            {
-                return this.special_LoanFieldSpecified;
-            }
-            set
-            {
-                this.special_LoanFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=71)]
-        public bool Advance_Loan
-        {
-            get
-            {
-                return this.advance_LoanField;
-            }
-            set
-            {
-                this.advance_LoanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Advance_LoanSpecified
-        {
-            get
-            {
-                return this.advance_LoanFieldSpecified;
-            }
-            set
-            {
-                this.advance_LoanFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=72)]
-        public string Max_Interest_Calc_Period
-        {
-            get
-            {
-                return this.max_Interest_Calc_PeriodField;
-            }
-            set
-            {
-                this.max_Interest_Calc_PeriodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=73)]
-        public decimal Interest_On_Dividends
-        {
-            get
-            {
-                return this.interest_On_DividendsField;
-            }
-            set
-            {
-                this.interest_On_DividendsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Interest_On_DividendsSpecified
-        {
-            get
-            {
-                return this.interest_On_DividendsFieldSpecified;
-            }
-            set
-            {
-                this.interest_On_DividendsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=74)]
-        public bool AvailableOnMobile
-        {
-            get
-            {
-                return this.availableOnMobileField;
-            }
-            set
-            {
-                this.availableOnMobileField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AvailableOnMobileSpecified
-        {
-            get
-            {
-                return this.availableOnMobileFieldSpecified;
-            }
-            set
-            {
-                this.availableOnMobileFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=75)]
-        public string Insurance_Account
-        {
-            get
-            {
-                return this.insurance_AccountField;
-            }
-            set
-            {
-                this.insurance_AccountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=76)]
-        public bool Sasra_Loan
-        {
-            get
-            {
-                return this.sasra_LoanField;
-            }
-            set
-            {
-                this.sasra_LoanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Sasra_LoanSpecified
-        {
-            get
-            {
-                return this.sasra_LoanFieldSpecified;
-            }
-            set
-            {
-                this.sasra_LoanFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=77)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
         public bool Blocked
         {
             get
@@ -2303,438 +567,48 @@ namespace LoanProduct
                 this.blockedFieldSpecified = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=78)]
-        public decimal Service_Fee_Percent
-        {
-            get
-            {
-                return this.service_Fee_PercentField;
-            }
-            set
-            {
-                this.service_Fee_PercentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Service_Fee_PercentSpecified
-        {
-            get
-            {
-                return this.service_Fee_PercentFieldSpecified;
-            }
-            set
-            {
-                this.service_Fee_PercentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=79)]
-        public string Service_Fee_Account
-        {
-            get
-            {
-                return this.service_Fee_AccountField;
-            }
-            set
-            {
-                this.service_Fee_AccountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=80)]
-        public bool Allow_Boosting_Shares
-        {
-            get
-            {
-                return this.allow_Boosting_SharesField;
-            }
-            set
-            {
-                this.allow_Boosting_SharesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Allow_Boosting_SharesSpecified
-        {
-            get
-            {
-                return this.allow_Boosting_SharesFieldSpecified;
-            }
-            set
-            {
-                this.allow_Boosting_SharesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=81)]
-        public int STO_Priority
-        {
-            get
-            {
-                return this.sTO_PriorityField;
-            }
-            set
-            {
-                this.sTO_PriorityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool STO_PrioritySpecified
-        {
-            get
-            {
-                return this.sTO_PriorityFieldSpecified;
-            }
-            set
-            {
-                this.sTO_PriorityFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=82)]
-        public int Interest_rate_2
-        {
-            get
-            {
-                return this.interest_rate_2Field;
-            }
-            set
-            {
-                this.interest_rate_2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Interest_rate_2Specified
-        {
-            get
-            {
-                return this.interest_rate_2FieldSpecified;
-            }
-            set
-            {
-                this.interest_rate_2FieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=83)]
-        public int Interest_rate_3
-        {
-            get
-            {
-                return this.interest_rate_3Field;
-            }
-            set
-            {
-                this.interest_rate_3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Interest_rate_3Specified
-        {
-            get
-            {
-                return this.interest_rate_3FieldSpecified;
-            }
-            set
-            {
-                this.interest_rate_3FieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=84)]
-        public decimal Mobile_Loan_Top_up_Limit
-        {
-            get
-            {
-                return this.mobile_Loan_Top_up_LimitField;
-            }
-            set
-            {
-                this.mobile_Loan_Top_up_LimitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Mobile_Loan_Top_up_LimitSpecified
-        {
-            get
-            {
-                return this.mobile_Loan_Top_up_LimitFieldSpecified;
-            }
-            set
-            {
-                this.mobile_Loan_Top_up_LimitFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=85)]
-        public System.DateTime Div_Advance_Start_Date
-        {
-            get
-            {
-                return this.div_Advance_Start_DateField;
-            }
-            set
-            {
-                this.div_Advance_Start_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Div_Advance_Start_DateSpecified
-        {
-            get
-            {
-                return this.div_Advance_Start_DateFieldSpecified;
-            }
-            set
-            {
-                this.div_Advance_Start_DateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=86)]
-        public decimal Max_Mobile_Loan_Amount
-        {
-            get
-            {
-                return this.max_Mobile_Loan_AmountField;
-            }
-            set
-            {
-                this.max_Mobile_Loan_AmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Max_Mobile_Loan_AmountSpecified
-        {
-            get
-            {
-                return this.max_Mobile_Loan_AmountFieldSpecified;
-            }
-            set
-            {
-                this.max_Mobile_Loan_AmountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=87)]
-        public string USSD_Product_Name
-        {
-            get
-            {
-                return this.uSSD_Product_NameField;
-            }
-            set
-            {
-                this.uSSD_Product_NameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=88)]
-        public string Restrict_to_Emp_Code
-        {
-            get
-            {
-                return this.restrict_to_Emp_CodeField;
-            }
-            set
-            {
-                this.restrict_to_Emp_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=89)]
-        public string Next_Loan_Period
-        {
-            get
-            {
-                return this.next_Loan_PeriodField;
-            }
-            set
-            {
-                this.next_Loan_PeriodField = value;
-            }
-        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
-    public enum Penalty_Calculation_Method
-    {
-        
-        /// <remarks/>
-        No_Penalty,
-        
-        /// <remarks/>
-        Principal_in_Arrears,
-        
-        /// <remarks/>
-        Principal_in_Arrears_x002B_Interest_in_Arrears,
-        
-        /// <remarks/>
-        Principal_in_Arrears_x002B_Interest_in_Arrears_x002B_Penalty_in_Arrears,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
     public enum Repayment_Method
-    {
-        
-        /// <remarks/>
-        Amortised,
-        
-        /// <remarks/>
-        Reducing_Balance,
-        
-        /// <remarks/>
-        Straight_Line,
-        
-        /// <remarks/>
-        Constants,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
-    public enum Source
-    {
-        
-        /// <remarks/>
-        BOSA,
-        
-        /// <remarks/>
-        FOSA,
-        
-        /// <remarks/>
-        Investment,
-        
-        /// <remarks/>
-        MICRO,
-        
-        /// <remarks/>
-        HR_LOANS,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
-    public enum Appln_between_Currencies
-    {
-        
-        /// <remarks/>
-        None,
-        
-        /// <remarks/>
-        EMU,
-        
-        /// <remarks/>
-        All,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
-    public enum Repayment_Frequency
-    {
-        
-        /// <remarks/>
-        Daily,
-        
-        /// <remarks/>
-        Weekly,
-        
-        /// <remarks/>
-        Monthly,
-        
-        /// <remarks/>
-        Quaterly,
-        
-        /// <remarks/>
-        Yearly,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
-    public enum Recovery_Mode
     {
         
         /// <remarks/>
         _blank_,
         
         /// <remarks/>
-        Checkoff,
+        Straight_Line,
         
         /// <remarks/>
-        Standing_Order,
+        Reducing_Balance,
         
         /// <remarks/>
-        Salary,
-        
-        /// <remarks/>
-        Milk,
-        
-        /// <remarks/>
-        Tea,
-        
-        /// <remarks/>
-        Coffee,
-        
-        /// <remarks/>
-        Dividend,
-        
-        /// <remarks/>
-        Cash,
-        
-        /// <remarks/>
-        DDA,
+        Amortised,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
-    public enum Nature_of_Loan_Type
+    public enum Repayment_Frequency
     {
         
         /// <remarks/>
-        Normal,
+        _blank_,
         
         /// <remarks/>
-        Defaulter,
+        Straight_Line,
+        
+        /// <remarks/>
+        Reducing_Balance,
+        
+        /// <remarks/>
+        Amortised,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
     public partial class LoanProducts_Filter
@@ -2774,7 +648,7 @@ namespace LoanProduct
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/loanproducts")]
     public enum LoanProducts_Fields
     {
@@ -2786,52 +660,16 @@ namespace LoanProduct
         Product_Description,
         
         /// <remarks/>
-        Business_Loan,
-        
-        /// <remarks/>
-        Graduation_Amount,
-        
-        /// <remarks/>
         Multiple_Loans,
-        
-        /// <remarks/>
-        Upfront_Interest_Percent,
-        
-        /// <remarks/>
-        Source_of_Financing,
         
         /// <remarks/>
         Interest_rate,
         
         /// <remarks/>
-        No_Series,
-        
-        /// <remarks/>
-        Grace_Period,
-        
-        /// <remarks/>
         No_of_Installment,
         
         /// <remarks/>
-        Instalment_Period,
-        
-        /// <remarks/>
-        Loan_to_Share_Ratio,
-        
-        /// <remarks/>
-        Penalty_Calculation_Days,
-        
-        /// <remarks/>
-        Penalty_Percentage,
-        
-        /// <remarks/>
-        Penalty_Calculation_Method,
-        
-        /// <remarks/>
         Penalty_Paid_Account,
-        
-        /// <remarks/>
-        Use_Cycles,
         
         /// <remarks/>
         Max_Loan_Amount,
@@ -2841,12 +679,6 @@ namespace LoanProduct
         
         /// <remarks/>
         Repayment_Method,
-        
-        /// <remarks/>
-        Grace_Period_Principle_M,
-        
-        /// <remarks/>
-        Grace_Period_Interest_M,
         
         /// <remarks/>
         Min_Loan_Amount,
@@ -2861,194 +693,20 @@ namespace LoanProduct
         Receivable_Interest_Account,
         
         /// <remarks/>
-        Source,
-        
-        /// <remarks/>
-        Recovery_Priority,
-        
-        /// <remarks/>
-        Check_Off_Recovery,
-        
-        /// <remarks/>
-        SMS_Description,
-        
-        /// <remarks/>
-        Date_Filter,
-        
-        /// <remarks/>
-        Min_No_Of_Guarantors,
-        
-        /// <remarks/>
-        Min_Re_application_Period,
-        
-        /// <remarks/>
         Check_Off_Loan_No,
         
         /// <remarks/>
         Shares_Multiplier,
         
         /// <remarks/>
-        Product_Currency_Code,
-        
-        /// <remarks/>
-        Loan_Product_Expiry_Date,
-        
-        /// <remarks/>
-        Appln_between_Currencies,
-        
-        /// <remarks/>
         Repayment_Frequency,
         
         /// <remarks/>
-        Appraise_Deposits,
-        
-        /// <remarks/>
-        Appraise_Salary,
-        
-        /// <remarks/>
-        Appraise_Guarantors,
-        
-        /// <remarks/>
-        Appraise_Business,
-        
-        /// <remarks/>
-        Recovery_Mode,
-        
-        /// <remarks/>
-        Deposits_Multiplier,
-        
-        /// <remarks/>
-        Appraise_Collateral,
-        
-        /// <remarks/>
-        Appraise_Dividend,
-        
-        /// <remarks/>
-        Penalty_Charged_Account,
-        
-        /// <remarks/>
-        Ordinary_Share_Multiplier,
-        
-        /// <remarks/>
-        Preferential_Share_Multiplier,
-        
-        /// <remarks/>
-        Ordinary_No_of_Installments,
-        
-        /// <remarks/>
-        Preferential_No_of_Installment,
-        
-        /// <remarks/>
-        Ordinary_Default_Install,
-        
-        /// <remarks/>
-        Preferential_Default_Install,
-        
-        /// <remarks/>
-        Collateral_Appraisal,
-        
-        /// <remarks/>
-        Max_No_Of_Guarantors,
-        
-        /// <remarks/>
-        Max_Branch_Approval,
-        
-        /// <remarks/>
-        Minimum_Percent_Repaid_for_Top_Up,
-        
-        /// <remarks/>
-        Nature_of_Loan_Type,
-        
-        /// <remarks/>
-        Max_CRB_Amount,
-        
-        /// <remarks/>
-        No_Multiple_Loans,
-        
-        /// <remarks/>
-        Default_Installment,
-        
-        /// <remarks/>
-        Ignore_Guarantor_Limit,
-        
-        /// <remarks/>
-        Pay_to_Vendor,
-        
-        /// <remarks/>
-        Pay_to_Vendor_No,
-        
-        /// <remarks/>
-        IPP_Code,
-        
-        /// <remarks/>
-        Show_Online,
-        
-        /// <remarks/>
-        No_Refinancing,
-        
-        /// <remarks/>
-        Special_Loan,
-        
-        /// <remarks/>
-        Advance_Loan,
-        
-        /// <remarks/>
-        Max_Interest_Calc_Period,
-        
-        /// <remarks/>
-        Interest_On_Dividends,
-        
-        /// <remarks/>
-        AvailableOnMobile,
-        
-        /// <remarks/>
-        Insurance_Account,
-        
-        /// <remarks/>
-        Sasra_Loan,
-        
-        /// <remarks/>
         Blocked,
-        
-        /// <remarks/>
-        Service_Fee_Percent,
-        
-        /// <remarks/>
-        Service_Fee_Account,
-        
-        /// <remarks/>
-        Allow_Boosting_Shares,
-        
-        /// <remarks/>
-        STO_Priority,
-        
-        /// <remarks/>
-        Interest_rate_2,
-        
-        /// <remarks/>
-        Interest_rate_3,
-        
-        /// <remarks/>
-        Mobile_Loan_Top_up_Limit,
-        
-        /// <remarks/>
-        Div_Advance_Start_Date,
-        
-        /// <remarks/>
-        Max_Mobile_Loan_Amount,
-        
-        /// <remarks/>
-        USSD_Product_Name,
-        
-        /// <remarks/>
-        Restrict_to_Emp_Code,
-        
-        /// <remarks/>
-        Next_Loan_Period,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class Read
@@ -3068,7 +726,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class Read_Result
@@ -3088,7 +746,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class ReadByRecId
@@ -3108,7 +766,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class ReadByRecId_Result
@@ -3128,7 +786,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class ReadMultiple
@@ -3157,7 +815,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class ReadMultiple_Result
@@ -3178,7 +836,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class IsUpdated
@@ -3198,7 +856,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class IsUpdated_Result
@@ -3218,7 +876,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class GetRecIdFromKey
@@ -3238,7 +896,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
@@ -3258,7 +916,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class Create
     {
@@ -3277,7 +935,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class Create_Result
     {
@@ -3296,7 +954,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class CreateMultiple
     {
@@ -3316,7 +974,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class CreateMultiple_Result
     {
@@ -3336,7 +994,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class Update
     {
@@ -3355,7 +1013,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class Update_Result
     {
@@ -3374,7 +1032,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class UpdateMultiple
     {
@@ -3394,7 +1052,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class UpdateMultiple_Result
     {
@@ -3414,7 +1072,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class Delete
@@ -3434,7 +1092,7 @@ namespace LoanProduct
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/loanproducts", IsWrapped=true)]
     public partial class Delete_Result
@@ -3453,13 +1111,13 @@ namespace LoanProduct
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface LoanProducts_PortChannel : LoanProduct.LoanProducts_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class LoanProducts_PortClient : System.ServiceModel.ClientBase<LoanProduct.LoanProducts_Port>, LoanProduct.LoanProducts_Port
     {
         
@@ -3750,6 +1408,13 @@ namespace LoanProduct
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
             if ((endpointConfiguration == EndpointConfiguration.LoanProducts_Port))
@@ -3768,7 +1433,7 @@ namespace LoanProduct
         {
             if ((endpointConfiguration == EndpointConfiguration.LoanProducts_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Page/LoanProducts");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:7047/BC260/WS/NATION/Page/LoanProducts");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

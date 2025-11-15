@@ -130,10 +130,16 @@ class Statistic {
       Insurance: map['Insurance'] != null ? map['Insurance'] as double : null,
       Parking: map['Parking'] != null ? map['Parking'] as double : null,
       Buses: map['Buses'] != null ? map['Buses'] as double : null,
-      No_of_Vehicles:
-          map['No_of_Vehicles'] != null ? map['No_of_Vehicles'] as int : null,
-      Total_Loans:
-          map['Total_Loans'] != null ? map['Total_Loans'] as int : null,
+      No_of_Vehicles: map['No_of_Vehicles'] != null
+          ? (map['No_of_Vehicles'] is double
+              ? (map['No_of_Vehicles'] as double).toInt()
+              : map['No_of_Vehicles'] as int)
+          : null,
+      Total_Loans: map['Total_Loans'] != null
+          ? (map['Total_Loans'] is double
+              ? (map['Total_Loans'] as double).toInt()
+              : map['Total_Loans'] as int)
+          : null,
       Loan_Balances:
           map['Loan_Balances'] != null ? map['Loan_Balances'] as double : null,
       Principal: map['Principal'] != null ? map['Principal'] as double : null,

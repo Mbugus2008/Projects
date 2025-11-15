@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace sms_tangazo
 {
+
     public class sms:Logging.Results
     {
         public string User_ID { get; set; }
@@ -34,8 +37,15 @@ return true;
             try
             {
                 ServicePointManager.Expect100Continue = true;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
+
+                //ServicePointManager.Expect100Continue = true;
+                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                restClient = new RestClient("https://api.prsp.tangazoletu.com")
+                {
+                    RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true
+                };
                 RestRequest rr = new RestRequest( Method.GET);
                 //https://api.prsp.tangazoletu.com/?User_ID=1359&passkey=391ELT5DWW&service=1&sender=IMARIKA
                 //&dest=254724367745&msg=Imarika bulk sms api test message&type=Notification
@@ -49,11 +59,10 @@ return true;
                 rr.AddParameter("type", s.Type);
 
                 Logging.Logging.LogEntryOnFile("Sending message");
-
+                Logging.Logging.LogEntryOnFile(s.Phone);
                 IRestResponse response = restClient.Execute(rr);
-
-                
-
+  Logging.Logging.LogEntryOnFile(response.ToString());
+               
                 if (response.IsSuccessful)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -82,7 +91,9 @@ return true;
             {
                 s.Code = -1;
                 s.Desc = ex.Message;
-                Logging.Logging.ReportError(ex); }
+                Logging.Logging.ReportError(ex);
+                
+            }
             return s;
         }
     }

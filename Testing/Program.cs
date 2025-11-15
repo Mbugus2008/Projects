@@ -14,24 +14,27 @@ namespace Testing
     {
         static void Main(string[] args)
         {
+
+
+
             //new M_sacco();
 
-            Contabo c = new Contabo();
-            c.CreateSnapshotAsync().GetAwaiter().GetResult();
+            //Contabo c = new Contabo();
+            //c.CreateSnapshotAsync().GetAwaiter().GetResult();
 
 
-            var client = new ApiClient("https://your-api-url");
-            var response = await client.GetSomeDataAsync();
-            Console.WriteLine(response.PropertyName);
+            //var client = new ApiClient("https://your-api-url");
+            //var response = await client.GetSomeDataAsync();
+            //Console.WriteLine(response.PropertyName);
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
 
-            string password = "System@2018";
-            string currentTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(); // Current time in seconds since the epoch
+            //string password = "System@2018";
+            //string currentTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(); // Current time in seconds since the epoch
 
-            string signature = CreateEncryptedSignature(password, currentTime);
-            Console.WriteLine("Encrypted Signature: " + signature);
+            //string signature = CreateEncryptedSignature(password, currentTime);
+            //Console.WriteLine("Encrypted Signature: " + signature);
 
 
 

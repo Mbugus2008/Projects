@@ -7,30 +7,28 @@ import '../../Assets/utils.dart';
 
 class ledgerDataSource extends DataGridSource {
   ledgerDataSource(List<ledgers> value, List<ledgers> l) {
-    l?.forEach((element) {
+    l.forEach((element) {
       print(element.toJson());
     });
-    if (l != null) {
-      _ledger = l
-          .map<DataGridRow>((e) => DataGridRow(cells: [
-                DataGridCell<int>(columnName: 'id', value: e.Entry_No),
-                DataGridCell<String>(
-                    columnName: 'Date',
-                    value: customFormat.format(e.Posting_Date!)),
-                DataGridCell<String>(
-                    columnName: 'Desc',
-                    value: e.Description.toString().toLowerCase()),
-                DataGridCell<String>(
-                    columnName: 'Debit',
-                    value: NumberFormat("#,##0.00", "en_US")
-                        .format(e.Debit_Amount)),
-                DataGridCell<String>(
-                    columnName: 'Credit',
-                    value: NumberFormat("#,##0.00", "en_US")
-                        .format(e.Credit_Amount)),
-              ]))
-          .toList();
-    }
+    _ledger = l
+        .map<DataGridRow>((e) => DataGridRow(cells: [
+              DataGridCell<int>(columnName: 'id', value: e.Entry_No),
+              DataGridCell<String>(
+                  columnName: 'Date',
+                  value: customFormat.format(e.Posting_Date!)),
+              DataGridCell<String>(
+                  columnName: 'Desc',
+                  value: e.Description.toString().toLowerCase()),
+              DataGridCell<String>(
+                  columnName: 'Debit',
+                  value:
+                      NumberFormat("#,##0.00", "en_US").format(e.Debit_Amount)),
+              DataGridCell<String>(
+                  columnName: 'Credit',
+                  value: NumberFormat("#,##0.00", "en_US")
+                      .format(e.Credit_Amount)),
+            ]))
+        .toList();
   }
 
   List<DataGridRow> _ledger = [];

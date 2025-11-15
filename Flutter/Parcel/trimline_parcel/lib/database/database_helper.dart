@@ -56,9 +56,72 @@ class DatabaseHelper {
       )
     ''');
     // Note: Removed Created_At and Ref_No as they are not in the Parcel model
-    // Added NOT NULL constraints to fields that are required in the Parcel model
+    await _seedSampleParcels(db);
   }
 
+  Future<void> _seedSampleParcels(Database db) async {
+    final now = DateTime.now();
+    const origins = <String>['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Eldoret'];
+    const destinations = <String>['Mombasa', 'Nairobi', 'Kampala', 'Dar es Salaam', 'Kigali'];
+    const drivers = <String>['Kamau', 'Achieng', 'Otieno', 'Mwangi', 'Karanja'];
+    const vehicles = <String>['KBA 123X', 'KBB 456Y', 'KBC 789Z', 'KBD 234A', 'KBE 567B'];
+    const statusLabels = <ParcelStatus, String>{
+      ParcelStatus.pending: 'Pending',
+      ParcelStatus.inTransit: 'In Transit',
+      ParcelStatus.received: 'Received',
+      ParcelStatus.collected: 'Collected',
+    };
+
+    final samples = List<Parcel>.generate(20, (index) {
+      final status = ParcelStatus.values[index % ParcelStatus.values.length];
+      final sentDate = now.subtract(Duration(days: index * 2));
+      final outForDelivery = status == ParcelStatus.inTransit ||
+              status == ParcelStatus.received ||
+              status == ParcelStatus.collected
+          ? sentDate.add(const Duration(hours: 8))
+          : null;
+      final deliveredDate = (status == ParcelStatus.received || status == ParcelStatus.collected)
+          ? sentDate.add(const Duration(days: 1))
+          : null;
+      final collectedDate = status == ParcelStatus.collected
+          ? sentDate.add(const Duration(days: 2))
+          : null;
+      final whoPays = index.isEven ? WhoToPay.Sender : WhoToPay.Receiver;
+
+      return Parcel(
+        Document_No: 'SAMPLE-${(index + 1).toString().padLeft(3, '0')}',
+        Date_sent: sentDate,
+        Sender_Name: 'Sender ${index + 1}',
+        Sender_ID: 'SID${(index + 1).toString().padLeft(4, '0')}',
+        Sender_Phone: '070${(index + 1234567).toString().padLeft(7, '0')}',
+        From: origins[index % origins.length],
+        To: destinations[index % destinations.length],
+        Receiver_Name: 'Receiver ${index + 1}',
+        Receiver_ID: 'RID${(index + 1).toString().padLeft(4, '0')}',
+        Receiver_Phone: '079${(index + 7654321).toString().padLeft(7, '0')}',
+        Status: status,
+        Driver: drivers[index % drivers.length],
+        Vehicle: vehicles[index % vehicles.length],
+        Who_to_Pay: whoPays,
+        Amount_Paid: (1500 + index * 75).toDouble(),
+        Paid: status == ParcelStatus.collected || index % 4 == 0,
+        Date_Delivered: deliveredDate,
+        Date_Collected: collectedDate,
+        Out_For_Delivery_Time: outForDelivery,
+        Notes: 'Demo parcel ${(index + 1)} (${statusLabels[status]}).',
+      );
+    });
+
+    final batch = db.batch();
+    for (final parcel in samples) {
+      batch.insert(
+        _tableName,
+        parcel.toDbMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+    await batch.commit(noResult: true);
+  }
   // --- CRUD Operations ---
 
   /// Inserts a parcel into the database.
@@ -70,6 +133,8 @@ class DatabaseHelper {
       parcel.toDbMap(),
       conflictAlgorithm: ConflictAlgorithm.replace, // Replace if Document_No already exists
     );
+
+    
   }
 
   /// Retrieves a single parcel by its Document_No.
@@ -135,3 +200,4 @@ class DatabaseHelper {
   //   });
   // }
 }
+

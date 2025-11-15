@@ -23,6 +23,7 @@ class transaction {
   String? Comments;
   String? Purpose;
   String? District;
+  String? Source;
   TransType? Transtype;
 
   transaction({
@@ -44,6 +45,7 @@ class transaction {
     this.Comments,
     this.Purpose,
     this.District,
+    this.Source,
     this.Transtype,
   });
 
@@ -67,6 +69,7 @@ class transaction {
       'Comments': Comments,
       'Purpose': Purpose,
       'District': District,
+      'Source': Source,
       'Transtype': Transtype?.index,
     };
   }
@@ -87,6 +90,7 @@ class transaction {
       'Comments': Comments,
       'Purpose': Purpose,
       'District': District,
+      'Source': Source,
       'Transtype': Transtype?.index,
     };
   }
@@ -120,6 +124,7 @@ class transaction {
       Comments: map['Comments'] != null ? map['Comments'] as String : null,
       Purpose: map['Purpose'] != null ? map['Purpose'] as String : null,
       District: map['District'] != null ? map['District'] as String : null,
+      Source: map['Source'] != null ? map['Source'] as String : null,
       Transtype: map['Transtype'] != null
           ? TransType.values[(map['Transtype'] as int)]
           : null,
@@ -152,6 +157,7 @@ class transaction {
       Comments: map['Comments'] != null ? map['Comments'] as String : null,
       Purpose: map['Purpose'] != null ? map['Purpose'] as String : null,
       District: map['District'] != null ? map['District'] as String : null,
+      Source: map['Source'] != null ? map['Source'] as String : null,
       Transtype: map['Transtype'] != null
           ? TransType.values[(map['Transtype'] as int)]
           : null,

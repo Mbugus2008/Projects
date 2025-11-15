@@ -1,8 +1,10 @@
-﻿using MatatuCore.Controllers.Helpers;
+﻿using Logging;
+using MatatuCore.Controllers.Helpers;
 using MatatuCore.Models.Database;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Parcels;
 
 namespace MatatuCore.Controllers
 {
@@ -17,13 +19,12 @@ namespace MatatuCore.Controllers
         private readonly MatatuContext _context;
         public ParcelController(IHttpContextAccessor httpContextAccessor)
         {
-
             try
             {
                 _httpContextAccessor = httpContextAccessor;
                 var clientId = _httpContextAccessor.HttpContext?.Items["X-Client-Identifier"]?.ToString();
                 // Default log folder if header missing
-                var logFolder = string.IsNullOrEmpty(clientId) ? "Logs/General" : $"Logs/{clientId}";
+                var logFolder = string.IsNullOrEmpty(clientId) ? "Logs/Parcel" : $"Logs/{clientId}";
 
                 // Daily log file
                 var logFilePath = Path.Combine(logFolder, $"{DateTime.Today:dd-MMM-yy}.txt");
@@ -48,9 +49,9 @@ namespace MatatuCore.Controllers
                     logger.LogInformation($"❌ appsettings.json not found at {configPath}");
                 }
                 var config = new ConfigurationBuilder()
-        .SetBasePath(AppContext.BaseDirectory)   // 👈 ensures correct root
-        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-        .Build();
+                .SetBasePath(AppContext.BaseDirectory)   // 👈 ensures correct root
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
 
                 var connectionString = config.GetConnectionString("DefaultConnection");
 
@@ -95,6 +96,73 @@ namespace MatatuCore.Controllers
 
 
         }
+        [HttpPost("Parcels")]
 
+        public Results<Parcels.Parcel []> Parcels(Request request)
+        {
+            try
+            {
+
+                return new Results<Parcels.Parcel[]>()
+                {
+                    Contents = client.getparcels(request)
+                };
+            }
+            catch (Exception e)
+            {
+
+                return new Results<Parcels.Parcel[]>() { Code = -1, Desc = e.Message };
+            }
+        }
+        [HttpPost("Locations")]
+
+        public Results<Location.Locations[]> locations()
+        {
+            try
+            {
+                return new Results<Location.Locations[]>()
+                {
+                    Contents = client.getlocations()
+                };
+            }
+            catch (Exception e)
+            {
+
+                return new Results<Location.Locations[]>() { Code = -1, Desc = e.Message };
+            }
+        }
+        [HttpPost("updateparcels")]
+
+        public Results<Parcels.Parcel> updateParcels(Parcels  .Parcel request)
+        {
+            try
+            {
+
+                return new Results<Parcels.Parcel>()
+                {
+                    Contents = client.Addeditparcel(request)
+                };
+            }
+            catch (Exception e)
+            {
+                return new Results<Parcels.Parcel>() { Code = -1, Desc = e.Message };
+            }
+        }
+        [HttpPost("Users")]
+
+        public Logging.Results<Agents.Users[]> agents()
+        {
+            try
+            {
+                return new Logging.Results<Agents.Users[]> { Contents = client.Users().Where(o => o.Account_type == Agents.Account_type.Parcel).ToArray() };
+
+
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return new Logging.Results<Agents.Users[]> { Code = -1, Desc = e.Message };
+            }
+        }
     }
 }

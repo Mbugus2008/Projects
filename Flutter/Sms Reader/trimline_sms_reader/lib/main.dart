@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:trimline_sms_reader/Apis.dart';
 import 'package:trimline_sms_reader/Controller.dart';
 import 'package:trimline_sms_reader/Dimensions.dart';
@@ -79,6 +80,24 @@ class _MyHomePageState extends State<MyHomePage> {
     Get.find<SmsController>().vouchers.add(Vouchers());
     cheques();
     dimensions();
+    // Ensure SMS permission at app startup
+    _ensureSmsPermission();
+  }
+
+  Future<void> _ensureSmsPermission() async {
+    try {
+      var status = await Permission.sms.status;
+      if (status.isDenied) {
+        status = await Permission.sms.request();
+      }
+      if (status.isPermanentlyDenied) {
+        // Prompt user to open app settings to grant permission
+        await openAppSettings();
+      }
+    } catch (e) {
+      // ignore errors here; permission_handler may not be available in all platforms
+      print('Failed to request SMS permission at startup: $e');
+    }
   }
 
   @override
@@ -276,11 +295,29 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             floatingActionButton: FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
                 print('getting sms');
-                SmsClients client = kiriigiti();
-                client.getsms();
-                // controller.getsavedtrans();
+                try {
+                  // Check and request SMS permission first
+                  var status = await Permission.sms.status;
+                  if (status.isDenied) {
+                    status = await Permission.sms.request();
+                  }
+                  if (status.isPermanentlyDenied) {
+                    await openAppSettings();
+                    return;
+                  }
+                  if (!status.isGranted) {
+                    print('SMS permission not granted');
+                    return;
+                  }
+
+                  // Permission granted, proceed with SMS reading
+                  SmsClients client = kiriigiti();
+                  await client.getsms();
+                } catch (e) {
+                  print('Error while handling SMS: $e');
+                }
               },
               child: Get.find<SmsController>().reading.value == false
                   ? Text("Read")

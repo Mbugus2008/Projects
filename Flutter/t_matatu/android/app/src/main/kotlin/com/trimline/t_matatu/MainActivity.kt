@@ -1,5 +1,0 @@
-package com.trimline.t_matatu
-
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity : FlutterActivity()

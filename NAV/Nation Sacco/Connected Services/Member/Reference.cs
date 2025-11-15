@@ -11,7 +11,7 @@ namespace Member
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members", ConfigurationName="Member.Members_Port")]
     public interface Members_Port
     {
@@ -58,7 +58,7 @@ namespace Member
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
     public partial class Members
@@ -68,117 +68,31 @@ namespace Member
         
         private string noField;
         
-        private string old_Account_NoField;
+        private string group_Account_NumberField;
         
         private string nameField;
         
-        private string global_Dimension_2_CodeField;
-        
-        private string pinField;
-        
-        private string iD_NoField;
-        
-        private string fOSA_AccountField;
-        
-        private string payroll_Staff_NoField;
-        
-        private string employer_CodeField;
-        
-        private Member_Type member_TypeField;
-        
-        private bool member_TypeFieldSpecified;
-        
-        private string sectionField;
-        
-        private System.DateTime registration_DateField;
-        
-        private bool registration_DateFieldSpecified;
-        
-        private decimal registration_Fee_PaidField;
-        
-        private bool registration_Fee_PaidFieldSpecified;
-        
-        private decimal un_allocated_FundsField;
-        
-        private bool un_allocated_FundsFieldSpecified;
-        
-        private decimal outstanding_BalanceField;
-        
-        private bool outstanding_BalanceFieldSpecified;
-        
-        private decimal outstanding_InterestField;
-        
-        private bool outstanding_InterestFieldSpecified;
-        
-        private decimal benevolent_FundField;
-        
-        private bool benevolent_FundFieldSpecified;
-        
-        private decimal current_SharesField;
-        
-        private bool current_SharesFieldSpecified;
-        
-        private System.DateTime last_Deposit_DateField;
-        
-        private bool last_Deposit_DateFieldSpecified;
-        
-        private decimal co_operative_SharesField;
-        
-        private bool co_operative_SharesFieldSpecified;
-        
-        private decimal shares_RetainedField;
-        
-        private bool shares_RetainedFieldSpecified;
-        
-        private decimal school_Fees_ContributionsField;
-        
-        private bool school_Fees_ContributionsFieldSpecified;
+        private string e_MailField;
         
         private Status statusField;
         
         private bool statusFieldSpecified;
         
-        private string e_Mail_PersonalField;
+        private string pinField;
         
-        private string e_MailField;
+        private string iD_NoField;
         
-        private string phone_NoField;
+        private System.DateTime registration_DateField;
         
-        private decimal dividend_AmountField;
-        
-        private bool dividend_AmountFieldSpecified;
+        private bool registration_DateFieldSpecified;
         
         private System.DateTime birth_DateField;
         
         private bool birth_DateFieldSpecified;
         
-        private Gender genderField;
+        private string payroll_Staff_NoField;
         
-        private bool genderFieldSpecified;
-        
-        private string locationField;
-        
-        private bool specialEMploymentField;
-        
-        private bool specialEMploymentFieldSpecified;
-        
-        private string specialEmpDetailsField;
-        
-        private string house_Plot_NoField;
-        
-        private string address_2Field;
-        
-        private string mobile_Phone_NoField;
-        
-        private bool group_AccountField;
-        
-        private bool group_AccountFieldSpecified;
-        
-        private string group_Account_NumberField;
-        
-        private bool m_Loans_StatusField;
-        
-        private bool m_Loans_StatusFieldSpecified;
+        private string phone_NoField;
         
         private bool self_GauanteedField;
         
@@ -187,6 +101,24 @@ namespace Member
         private decimal self_Guarantee_AmountField;
         
         private bool self_Guarantee_AmountFieldSpecified;
+        
+        private decimal current_BalanceField;
+        
+        private bool current_BalanceFieldSpecified;
+        
+        private decimal available_SharesField;
+        
+        private bool available_SharesFieldSpecified;
+        
+        private decimal outstanding_LoansField;
+        
+        private bool outstanding_LoansFieldSpecified;
+        
+        private System.DateTime last_Transaction_DateField;
+        
+        private bool last_Transaction_DateFieldSpecified;
+        
+        private string member_CategoryField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -218,15 +150,15 @@ namespace Member
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Old_Account_No
+        public string Group_Account_Number
         {
             get
             {
-                return this.old_Account_NoField;
+                return this.group_Account_NumberField;
             }
             set
             {
-                this.old_Account_NoField = value;
+                this.group_Account_NumberField = value;
             }
         }
         
@@ -246,440 +178,20 @@ namespace Member
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string Global_Dimension_2_Code
+        public string E_Mail
         {
             get
             {
-                return this.global_Dimension_2_CodeField;
+                return this.e_MailField;
             }
             set
             {
-                this.global_Dimension_2_CodeField = value;
+                this.e_MailField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string Pin
-        {
-            get
-            {
-                return this.pinField;
-            }
-            set
-            {
-                this.pinField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string ID_No
-        {
-            get
-            {
-                return this.iD_NoField;
-            }
-            set
-            {
-                this.iD_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public string FOSA_Account
-        {
-            get
-            {
-                return this.fOSA_AccountField;
-            }
-            set
-            {
-                this.fOSA_AccountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string Payroll_Staff_No
-        {
-            get
-            {
-                return this.payroll_Staff_NoField;
-            }
-            set
-            {
-                this.payroll_Staff_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public string Employer_Code
-        {
-            get
-            {
-                return this.employer_CodeField;
-            }
-            set
-            {
-                this.employer_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public Member_Type Member_Type
-        {
-            get
-            {
-                return this.member_TypeField;
-            }
-            set
-            {
-                this.member_TypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Member_TypeSpecified
-        {
-            get
-            {
-                return this.member_TypeFieldSpecified;
-            }
-            set
-            {
-                this.member_TypeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public string Section
-        {
-            get
-            {
-                return this.sectionField;
-            }
-            set
-            {
-                this.sectionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=12)]
-        public System.DateTime Registration_Date
-        {
-            get
-            {
-                return this.registration_DateField;
-            }
-            set
-            {
-                this.registration_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Registration_DateSpecified
-        {
-            get
-            {
-                return this.registration_DateFieldSpecified;
-            }
-            set
-            {
-                this.registration_DateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public decimal Registration_Fee_Paid
-        {
-            get
-            {
-                return this.registration_Fee_PaidField;
-            }
-            set
-            {
-                this.registration_Fee_PaidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Registration_Fee_PaidSpecified
-        {
-            get
-            {
-                return this.registration_Fee_PaidFieldSpecified;
-            }
-            set
-            {
-                this.registration_Fee_PaidFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public decimal Un_allocated_Funds
-        {
-            get
-            {
-                return this.un_allocated_FundsField;
-            }
-            set
-            {
-                this.un_allocated_FundsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Un_allocated_FundsSpecified
-        {
-            get
-            {
-                return this.un_allocated_FundsFieldSpecified;
-            }
-            set
-            {
-                this.un_allocated_FundsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
-        public decimal Outstanding_Balance
-        {
-            get
-            {
-                return this.outstanding_BalanceField;
-            }
-            set
-            {
-                this.outstanding_BalanceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Outstanding_BalanceSpecified
-        {
-            get
-            {
-                return this.outstanding_BalanceFieldSpecified;
-            }
-            set
-            {
-                this.outstanding_BalanceFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
-        public decimal Outstanding_Interest
-        {
-            get
-            {
-                return this.outstanding_InterestField;
-            }
-            set
-            {
-                this.outstanding_InterestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Outstanding_InterestSpecified
-        {
-            get
-            {
-                return this.outstanding_InterestFieldSpecified;
-            }
-            set
-            {
-                this.outstanding_InterestFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
-        public decimal Benevolent_Fund
-        {
-            get
-            {
-                return this.benevolent_FundField;
-            }
-            set
-            {
-                this.benevolent_FundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Benevolent_FundSpecified
-        {
-            get
-            {
-                return this.benevolent_FundFieldSpecified;
-            }
-            set
-            {
-                this.benevolent_FundFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
-        public decimal Current_Shares
-        {
-            get
-            {
-                return this.current_SharesField;
-            }
-            set
-            {
-                this.current_SharesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Current_SharesSpecified
-        {
-            get
-            {
-                return this.current_SharesFieldSpecified;
-            }
-            set
-            {
-                this.current_SharesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=19)]
-        public System.DateTime Last_Deposit_Date
-        {
-            get
-            {
-                return this.last_Deposit_DateField;
-            }
-            set
-            {
-                this.last_Deposit_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Last_Deposit_DateSpecified
-        {
-            get
-            {
-                return this.last_Deposit_DateFieldSpecified;
-            }
-            set
-            {
-                this.last_Deposit_DateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
-        public decimal Co_operative_Shares
-        {
-            get
-            {
-                return this.co_operative_SharesField;
-            }
-            set
-            {
-                this.co_operative_SharesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Co_operative_SharesSpecified
-        {
-            get
-            {
-                return this.co_operative_SharesFieldSpecified;
-            }
-            set
-            {
-                this.co_operative_SharesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
-        public decimal Shares_Retained
-        {
-            get
-            {
-                return this.shares_RetainedField;
-            }
-            set
-            {
-                this.shares_RetainedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Shares_RetainedSpecified
-        {
-            get
-            {
-                return this.shares_RetainedFieldSpecified;
-            }
-            set
-            {
-                this.shares_RetainedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
-        public decimal School_Fees_Contributions
-        {
-            get
-            {
-                return this.school_Fees_ContributionsField;
-            }
-            set
-            {
-                this.school_Fees_ContributionsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool School_Fees_ContributionsSpecified
-        {
-            get
-            {
-                return this.school_Fees_ContributionsFieldSpecified;
-            }
-            set
-            {
-                this.school_Fees_ContributionsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
         public Status Status
         {
             get
@@ -707,77 +219,63 @@ namespace Member
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
-        public string E_Mail_Personal
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string Pin
         {
             get
             {
-                return this.e_Mail_PersonalField;
+                return this.pinField;
             }
             set
             {
-                this.e_Mail_PersonalField = value;
+                this.pinField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
-        public string E_Mail
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string ID_No
         {
             get
             {
-                return this.e_MailField;
+                return this.iD_NoField;
             }
             set
             {
-                this.e_MailField = value;
+                this.iD_NoField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
-        public string Phone_No
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=8)]
+        public System.DateTime Registration_Date
         {
             get
             {
-                return this.phone_NoField;
+                return this.registration_DateField;
             }
             set
             {
-                this.phone_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
-        public decimal Dividend_Amount
-        {
-            get
-            {
-                return this.dividend_AmountField;
-            }
-            set
-            {
-                this.dividend_AmountField = value;
+                this.registration_DateField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Dividend_AmountSpecified
+        public bool Registration_DateSpecified
         {
             get
             {
-                return this.dividend_AmountFieldSpecified;
+                return this.registration_DateFieldSpecified;
             }
             set
             {
-                this.dividend_AmountFieldSpecified = value;
+                this.registration_DateFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Birth_Date>", DataType="date", Order=28)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=9)]
         public System.DateTime Birth_Date
         {
             get
@@ -805,203 +303,35 @@ namespace Member
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("<Gender>", Order=29)]
-        public Gender Gender
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string Payroll_Staff_No
         {
             get
             {
-                return this.genderField;
+                return this.payroll_Staff_NoField;
             }
             set
             {
-                this.genderField = value;
+                this.payroll_Staff_NoField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GenderSpecified
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string Phone_No
         {
             get
             {
-                return this.genderFieldSpecified;
+                return this.phone_NoField;
             }
             set
             {
-                this.genderFieldSpecified = value;
+                this.phone_NoField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
-        public string Location
-        {
-            get
-            {
-                return this.locationField;
-            }
-            set
-            {
-                this.locationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
-        public bool SpecialEMployment
-        {
-            get
-            {
-                return this.specialEMploymentField;
-            }
-            set
-            {
-                this.specialEMploymentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SpecialEMploymentSpecified
-        {
-            get
-            {
-                return this.specialEMploymentFieldSpecified;
-            }
-            set
-            {
-                this.specialEMploymentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
-        public string SpecialEmpDetails
-        {
-            get
-            {
-                return this.specialEmpDetailsField;
-            }
-            set
-            {
-                this.specialEmpDetailsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
-        public string House_Plot_No
-        {
-            get
-            {
-                return this.house_Plot_NoField;
-            }
-            set
-            {
-                this.house_Plot_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
-        public string Address_2
-        {
-            get
-            {
-                return this.address_2Field;
-            }
-            set
-            {
-                this.address_2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
-        public string Mobile_Phone_No
-        {
-            get
-            {
-                return this.mobile_Phone_NoField;
-            }
-            set
-            {
-                this.mobile_Phone_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
-        public bool Group_Account
-        {
-            get
-            {
-                return this.group_AccountField;
-            }
-            set
-            {
-                this.group_AccountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Group_AccountSpecified
-        {
-            get
-            {
-                return this.group_AccountFieldSpecified;
-            }
-            set
-            {
-                this.group_AccountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
-        public string Group_Account_Number
-        {
-            get
-            {
-                return this.group_Account_NumberField;
-            }
-            set
-            {
-                this.group_Account_NumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
-        public bool M_Loans_Status
-        {
-            get
-            {
-                return this.m_Loans_StatusField;
-            }
-            set
-            {
-                this.m_Loans_StatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool M_Loans_StatusSpecified
-        {
-            get
-            {
-                return this.m_Loans_StatusFieldSpecified;
-            }
-            set
-            {
-                this.m_Loans_StatusFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
         public bool Self_Gauanteed
         {
             get
@@ -1029,7 +359,7 @@ namespace Member
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
         public decimal Self_Guarantee_Amount
         {
             get
@@ -1055,103 +385,164 @@ namespace Member
                 this.self_Guarantee_AmountFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public decimal Current_Balance
+        {
+            get
+            {
+                return this.current_BalanceField;
+            }
+            set
+            {
+                this.current_BalanceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Current_BalanceSpecified
+        {
+            get
+            {
+                return this.current_BalanceFieldSpecified;
+            }
+            set
+            {
+                this.current_BalanceFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public decimal Available_Shares
+        {
+            get
+            {
+                return this.available_SharesField;
+            }
+            set
+            {
+                this.available_SharesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Available_SharesSpecified
+        {
+            get
+            {
+                return this.available_SharesFieldSpecified;
+            }
+            set
+            {
+                this.available_SharesFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public decimal Outstanding_Loans
+        {
+            get
+            {
+                return this.outstanding_LoansField;
+            }
+            set
+            {
+                this.outstanding_LoansField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Outstanding_LoansSpecified
+        {
+            get
+            {
+                return this.outstanding_LoansFieldSpecified;
+            }
+            set
+            {
+                this.outstanding_LoansFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=17)]
+        public System.DateTime Last_Transaction_Date
+        {
+            get
+            {
+                return this.last_Transaction_DateField;
+            }
+            set
+            {
+                this.last_Transaction_DateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Last_Transaction_DateSpecified
+        {
+            get
+            {
+                return this.last_Transaction_DateFieldSpecified;
+            }
+            set
+            {
+                this.last_Transaction_DateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public string Member_Category
+        {
+            get
+            {
+                return this.member_CategoryField;
+            }
+            set
+            {
+                this.member_CategoryField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
-    public enum Member_Type
-    {
-        
-        /// <remarks/>
-        Ordinary,
-        
-        /// <remarks/>
-        Board,
-        
-        /// <remarks/>
-        Staff,
-        
-        /// <remarks/>
-        Contributors,
-        
-        /// <remarks/>
-        Freelance,
-        
-        /// <remarks/>
-        Others,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
     public enum Status
     {
         
         /// <remarks/>
+        Not_Paid_Up,
+        
+        /// <remarks/>
         Active,
         
         /// <remarks/>
-        Non_Active,
-        
-        /// <remarks/>
-        Blocked,
+        Inactive,
         
         /// <remarks/>
         Dormant,
         
         /// <remarks/>
-        Re_instated,
+        Withdrawn,
         
         /// <remarks/>
         Deceased,
-        
-        /// <remarks/>
-        Withdrawal,
-        
-        /// <remarks/>
-        Retired,
-        
-        /// <remarks/>
-        Termination,
-        
-        /// <remarks/>
-        Resigned,
-        
-        /// <remarks/>
-        Ex_Company,
-        
-        /// <remarks/>
-        Casuals,
-        
-        /// <remarks/>
-        Family_Member,
-        
-        /// <remarks/>
-        Defaulter,
         
         /// <remarks/>
         Closed,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="<Gender>", Namespace="urn:microsoft-dynamics-schemas/page/members")]
-    public enum Gender
-    {
-        
-        /// <remarks/>
-        Male,
-        
-        /// <remarks/>
-        Female,
-        
-        /// <remarks/>
-        Others,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
     public partial class Members_Filter
@@ -1191,7 +582,7 @@ namespace Member
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
     public enum Members_Fields
     {
@@ -1200,13 +591,16 @@ namespace Member
         No,
         
         /// <remarks/>
-        Old_Account_No,
+        Group_Account_Number,
         
         /// <remarks/>
         Name,
         
         /// <remarks/>
-        Global_Dimension_2_Code,
+        E_Mail,
+        
+        /// <remarks/>
+        Status,
         
         /// <remarks/>
         Pin,
@@ -1215,110 +609,41 @@ namespace Member
         ID_No,
         
         /// <remarks/>
-        FOSA_Account,
+        Registration_Date,
+        
+        /// <remarks/>
+        Birth_Date,
         
         /// <remarks/>
         Payroll_Staff_No,
         
         /// <remarks/>
-        Employer_Code,
-        
-        /// <remarks/>
-        Member_Type,
-        
-        /// <remarks/>
-        Section,
-        
-        /// <remarks/>
-        Registration_Date,
-        
-        /// <remarks/>
-        Registration_Fee_Paid,
-        
-        /// <remarks/>
-        Un_allocated_Funds,
-        
-        /// <remarks/>
-        Outstanding_Balance,
-        
-        /// <remarks/>
-        Outstanding_Interest,
-        
-        /// <remarks/>
-        Benevolent_Fund,
-        
-        /// <remarks/>
-        Current_Shares,
-        
-        /// <remarks/>
-        Last_Deposit_Date,
-        
-        /// <remarks/>
-        Co_operative_Shares,
-        
-        /// <remarks/>
-        Shares_Retained,
-        
-        /// <remarks/>
-        School_Fees_Contributions,
-        
-        /// <remarks/>
-        Status,
-        
-        /// <remarks/>
-        E_Mail_Personal,
-        
-        /// <remarks/>
-        E_Mail,
-        
-        /// <remarks/>
         Phone_No,
-        
-        /// <remarks/>
-        Dividend_Amount,
-        
-        /// <remarks/>
-        _x003C_Birth_Date_x003E_,
-        
-        /// <remarks/>
-        _x003C_Gender_x003E_,
-        
-        /// <remarks/>
-        Location,
-        
-        /// <remarks/>
-        SpecialEMployment,
-        
-        /// <remarks/>
-        SpecialEmpDetails,
-        
-        /// <remarks/>
-        House_Plot_No,
-        
-        /// <remarks/>
-        Address_2,
-        
-        /// <remarks/>
-        Mobile_Phone_No,
-        
-        /// <remarks/>
-        Group_Account,
-        
-        /// <remarks/>
-        Group_Account_Number,
-        
-        /// <remarks/>
-        M_Loans_Status,
         
         /// <remarks/>
         Self_Gauanteed,
         
         /// <remarks/>
         Self_Guarantee_Amount,
+        
+        /// <remarks/>
+        Current_Balance,
+        
+        /// <remarks/>
+        Available_Shares,
+        
+        /// <remarks/>
+        Outstanding_Loans,
+        
+        /// <remarks/>
+        Last_Transaction_Date,
+        
+        /// <remarks/>
+        Member_Category,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class Read
@@ -1338,7 +663,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class Read_Result
@@ -1358,7 +683,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class ReadByRecId
@@ -1378,7 +703,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class ReadByRecId_Result
@@ -1398,7 +723,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class ReadMultiple
@@ -1427,7 +752,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class ReadMultiple_Result
@@ -1448,7 +773,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class IsUpdated
@@ -1468,7 +793,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class IsUpdated_Result
@@ -1488,7 +813,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class GetRecIdFromKey
@@ -1508,7 +833,7 @@ namespace Member
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/members", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
@@ -1527,13 +852,13 @@ namespace Member
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface Members_PortChannel : Member.Members_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class Members_PortClient : System.ServiceModel.ClientBase<Member.Members_Port>, Member.Members_Port
     {
         
@@ -1721,6 +1046,13 @@ namespace Member
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
             if ((endpointConfiguration == EndpointConfiguration.Members_Port))
@@ -1739,7 +1071,7 @@ namespace Member
         {
             if ((endpointConfiguration == EndpointConfiguration.Members_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://172.16.7.181:7052/test/WS/Nation Sacco/Page/Members");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:7047/BC260/WS/NATION/Page/Members");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

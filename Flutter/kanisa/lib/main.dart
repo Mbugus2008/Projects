@@ -1,42 +1,45 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:kanisa/Network/Apis.dart';
 import 'package:kanisa/controllers/dimension_controller.dart';
+import 'package:kanisa/controllers/payment_controller.dart';
+import 'package:kanisa/models/account_model.dart';
+import 'package:kanisa/screens/my_account_screen.dart';
+import 'package:kanisa/screens/payment_history_screen.dart';
+import 'package:kanisa/screens/payment_screen.dart';
+import 'package:kanisa/screens/registration_screen.dart';
 import 'package:kanisa/services/logger.dart';
 import 'package:kanisa/splash.dart';
-import 'package:kanisa/screens/my_account_screen.dart';
-import 'package:kanisa/screens/registration_screen.dart';
-import 'package:kanisa/Network/Apis.dart';
-import 'package:kanisa/models/account_model.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:dio/dio.dart';
-import 'package:open_filex/open_filex.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() {
-       Get.put(LoggerService(),permanent: true); 
-  Get.put(ImageSliderController()); 
-   Get.put(DimensionController()); 
-   Get.put(UpdateController());
+  Get.put(LoggerService(), permanent: true);
+  Get.put(ImageSliderController());
+  Get.put(DimensionController());
+  Get.put(PaymentController());
+  Get.put(UpdateController());
 
-if (Platform.isAndroid) {
-      [
-     
-       Permission.storage,
-      ].request().then((status) async {
-  runApp(MyApp());
-   // After app starts, check for updates
-  Future.delayed(const Duration(seconds: 2), () {
-    Get.find<UpdateController>().checkForUpdate();
-  });
-  });
-}}
+  if (Platform.isAndroid) {
+    [
+      Permission.storage,
+    ].request().then((status) async {
+      runApp(MyApp());
+      // After app starts, check for updates
+      Future.delayed(const Duration(seconds: 2), () {
+        Get.find<UpdateController>().checkForUpdate();
+      });
+    });
+  }
+}
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -44,9 +47,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-
-     return GetMaterialApp(
+    return GetMaterialApp(
       title: 'Kanisa',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -57,11 +58,16 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-     
       home: Welcome(),
       getPages: [
-        GetPage(name: '/myaccount', page: () => MyAccountScreen(cust: Customer())),
+        GetPage(
+            name: '/myaccount', page: () => MyAccountScreen(cust: Customer())),
         GetPage(name: '/register', page: () => RegistrationScreen()),
+        GetPage(
+            name: '/payments', page: () => PaymentScreen(customer: Customer())),
+        GetPage(
+            name: '/payment-history',
+            page: () => PaymentHistoryScreen(customer: Customer())),
       ],
     );
   }
@@ -70,11 +76,10 @@ class MyApp extends StatelessWidget {
     String? phoneNumber = await getPhoneNumber();
     if (phoneNumber != null) {
       Customer? isRegistered = await api.checkCustomerExists(phoneNumber);
-      if (isRegistered !=null) {
-      
+      if (isRegistered != null) {
         Get.to(() => MyAccountScreen(cust: isRegistered));
       } else {
-        Get.to(() =>  RegistrationScreen());
+        Get.to(() => RegistrationScreen());
       }
     } else {
       print("No phone number found in preferences.");
@@ -101,7 +106,8 @@ class UpdateController extends GetxController {
 
   Future<void> checkForUpdate() async {
     try {
-      final response = await http.get(Uri.parse("https://trimline.co.ke/apps/kanisa/update.json"));
+      final response = await http
+          .get(Uri.parse("https://trimline.co.ke/apps/kanisa/update.json"));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         latestVersion.value = data["latest_version"];
@@ -129,13 +135,15 @@ class UpdateController extends GetxController {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("Downloading update... ${progress.value.toStringAsFixed(0)}%"),
+                Text(
+                    "Downloading update... ${progress.value.toStringAsFixed(0)}%"),
                 const SizedBox(height: 10),
                 LinearProgressIndicator(value: progress.value / 100),
               ],
             );
           }
-          return Text("New version ${latestVersion.value} is available.\n\n${changelog.value}");
+          return Text(
+              "New version ${latestVersion.value} is available.\n\n${changelog.value}");
         }),
         actions: [
           Obx(() => !isDownloading.value
@@ -183,5 +191,3 @@ class UpdateController extends GetxController {
     }
   }
 }
-
-

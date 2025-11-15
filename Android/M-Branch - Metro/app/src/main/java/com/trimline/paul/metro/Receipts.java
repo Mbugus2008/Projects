@@ -109,7 +109,7 @@ if (headerTitle.Recovery !=null)
         if (headerTitle.Recovery)
             rl.setBackgroundResource(R.drawable.backgroundrecovery);
 
-        ImageView im = (ImageView) convertView.findViewById(R.id.groupheadericon);
+        //ImageView im = (ImageView) convertView.findViewById(R.id.down.groupheadericon);
 
         TextView lblgroupname = (TextView) convertView
                 .findViewById(R.id.lblListHeader);

@@ -11,18 +11,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
+
 namespace MpesaApi
 {
     public class MpesaApi
     {
-
-      public  Auth author;
+ public Auth author;
         Cust c;
-        public MpesaApi(Cust cc)
-        {
-           
-            author = auth(cc);
-
+        
+      public MpesaApi(Cust cc)
+   {
+    author = auth(cc);
         }
 
         public Auth auth(Cust c)
@@ -86,12 +85,12 @@ namespace MpesaApi
 
             // Create the request body
             var body = $@"
-{{
-    ""ShortCode"": ""{shortcode}"",
-    ""ResponseType"": ""Completed"",
-    ""ConfirmationURL"": ""{confirmationUrl}"",
-    ""ValidationURL"": ""{validationUrl}""
-}}";
+                        {{
+                            ""ShortCode"": ""{shortcode}"",
+                            ""ResponseType"": ""Completed"",
+                            ""ConfirmationURL"": ""{confirmationUrl}"",
+                            ""ValidationURL"": ""{validationUrl}""
+                        }}";
 
             // Create the HttpWebRequest
             var request = (HttpWebRequest)WebRequest.Create("https://api.safaricom.co.ke/mpesa/c2b/v2/registerurl");
@@ -166,17 +165,16 @@ namespace MpesaApi
             stkresponse a = new stkresponse();
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             HttpWebRequest client = (HttpWebRequest)System.Net.WebRequest.Create("https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest");
+
             try
             {
-                // client.KeepAlive = false;
-                //client.UserAgent = null;
                 client.Headers.Add(HttpRequestHeader.Authorization, "Bearer " + author.access_token);
                 client.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
-                // client.ClientCertificates.Add(cert);
                 client.Method = "POST";
                 client.ContentType = "application/json;charset=utf-8";
+
                 string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-                string passkey = push.passkey; //"bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+                string passkey = push.passkey;
 
                 push.TransactionType = "CustomerPayBillOnline";
                 string p = string.Format("{0}{1}{2}", push.BusinessShortCode, passkey, timestamp);
@@ -189,24 +187,26 @@ namespace MpesaApi
                 var data = System.Text.UTF8Encoding.UTF8.GetBytes(rowadata);
 
                 client.ContentLength = data.Length;
-
+              
                 using (var st = client.GetRequestStream())
                 {
                     st.Write(data, 0, data.Length);
                 }
 
                 HttpWebResponse response = (HttpWebResponse)client.GetResponse();
-
                 Stream stream = response.GetResponseStream();
-
                 string html = string.Empty;
 
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     html = reader.ReadToEnd();
                 }
+
                 a = JsonConvert.DeserializeObject<stkresponse>(html);
                 a.success = true;
+
+                // Log to database
+               // LogStkPushToDatabase(push, a, null);
             }
             catch (WebException ex)
             {
@@ -219,17 +219,18 @@ namespace MpesaApi
                     {
                         string text = new StreamReader(data).ReadToEnd();
                         Httperror e = JsonConvert.DeserializeObject<Httperror>(text);
-
                         a.httperror = e;
                     }
                 }
 
+                // Log error to database
+               // LogStkPushToDatabase(push, a, ex);
             }
-
 
             return a;
         }
 
+    
         public Response b2c(b2c B2c)
         {
             Response a = new Response();
@@ -344,6 +345,7 @@ namespace MpesaApi
         public Httperror httperror { get; set; }
         public bool success;
     }
+
     public class b2c
     {
         public string InitiatorName { get; set; }
@@ -387,5 +389,11 @@ namespace MpesaApi
     public string ResponseDescription { get; set; }
     public string Stacktrace { get; set; }
     public object Content { get; set; }
+    }
+
+    public class StkResponse
+    {
+        public string ResultCode = "0";
+        public string ResultDesc = "Validation Service request accepted succesfully";
     }
 }

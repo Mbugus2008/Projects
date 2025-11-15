@@ -52,5 +52,36 @@ namespace Kanisa.Properties {
                 return ((string)(this["Kanisa_MemberGroups_Member_Groups_Service"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Vote_Heads")]
+        public string Kanisa_VoteHeads_Vote_Heads_Service {
+            get {
+                return ((string)(this["Kanisa_VoteHeads_Vote_Heads_Service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Payments")]
+        public string Kanisa_Payments_Payments_Service {
+            get {
+                return ((string)(this["Kanisa_Payments_Payments_Service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Payment_Det" +
+            "ails")]
+        public string Kanisa_PaymentDetails_Payment_Details_Service {
+            get {
+                return ((string)(this["Kanisa_PaymentDetails_Payment_Details_Service"]));
+            }
+        }
     }
 }

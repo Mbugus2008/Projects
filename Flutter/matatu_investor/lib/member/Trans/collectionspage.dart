@@ -28,13 +28,13 @@ class collectionspage extends StatelessWidget {
             ),
             centerTitle: true,
           ),
-          body: controller.collections.value.length > 0
+          body: controller.collections.length > 0
               ? SfDataGridTheme(
                   data:
                       SfDataGridThemeData(headerColor: const Color(0xff009889)),
                   child: SfDataGrid(
                     source: collDataSource(
-                      controller.collections.value,
+                      controller.collections,
                     ),
                     onQueryRowHeight: (details) {
                       return 30;
@@ -95,6 +95,5 @@ class collectionspage extends StatelessWidget {
                 )
               : Center(child: CircularProgressIndicator()));
     });
-    ;
   }
 }

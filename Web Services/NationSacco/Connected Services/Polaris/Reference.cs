@@ -11,105 +11,102 @@ namespace Polaris
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", ConfigurationName="Polaris.PolarisIntegration_Port")]
     public interface PolarisIntegration_Port
     {
         
-        // CODEGEN: Generating message contract since the wrapper name (GetAccountBal_Result) of message GetAccountBal_Result does not match the default value (GetAccountBal)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetAccountBal", ReplyAction="*")]
-        Polaris.GetAccountBal_Result GetAccountBal(Polaris.GetAccountBal request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetAccountBal", ReplyAction="*")]
-        System.Threading.Tasks.Task<Polaris.GetAccountBal_Result> GetAccountBalAsync(Polaris.GetAccountBal request);
-        
         // CODEGEN: Generating message contract since the wrapper name (CheckGuarantor_Result) of message CheckGuarantor_Result does not match the default value (CheckGuarantor)
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:CheckGuarantor", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Polaris.CheckGuarantor_Result CheckGuarantor(Polaris.CheckGuarantor request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:CheckGuarantor", ReplyAction="*")]
         System.Threading.Tasks.Task<Polaris.CheckGuarantor_Result> CheckGuarantorAsync(Polaris.CheckGuarantor request);
         
+        // CODEGEN: Generating message contract since the wrapper name (GetAccountBal_Result) of message GetAccountBal_Result does not match the default value (GetAccountBal)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetAccountBal", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Polaris.GetAccountBal_Result GetAccountBal(Polaris.GetAccountBal request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetAccountBal", ReplyAction="*")]
+        System.Threading.Tasks.Task<Polaris.GetAccountBal_Result> GetAccountBalAsync(Polaris.GetAccountBal request);
+        
         // CODEGEN: Generating message contract since the wrapper name (GetCharges_Result) of message GetCharges_Result does not match the default value (GetCharges)
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetCharges", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Polaris.GetCharges_Result GetCharges(Polaris.GetCharges request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetCharges", ReplyAction="*")]
         System.Threading.Tasks.Task<Polaris.GetCharges_Result> GetChargesAsync(Polaris.GetCharges request);
         
-        // CODEGEN: Generating message contract since the wrapper name (GetMobileLoanLimit_Result) of message GetMobileLoanLimit_Result does not match the default value (GetMobileLoanLimit)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetMobileLoanLimit", ReplyAction="*")]
-        Polaris.GetMobileLoanLimit_Result GetMobileLoanLimit(Polaris.GetMobileLoanLimit request);
+        // CODEGEN: Generating message contract since the wrapper name (GetNeSalary_Result) of message GetNeSalary_Result does not match the default value (GetNeSalary)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetNeSalary", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Polaris.GetNeSalary_Result GetNeSalary(Polaris.GetNeSalary request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetMobileLoanLimit", ReplyAction="*")]
-        System.Threading.Tasks.Task<Polaris.GetMobileLoanLimit_Result> GetMobileLoanLimitAsync(Polaris.GetMobileLoanLimit request);
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetNeSalary", ReplyAction="*")]
+        System.Threading.Tasks.Task<Polaris.GetNeSalary_Result> GetNeSalaryAsync(Polaris.GetNeSalary request);
         
-        // CODEGEN: Generating message contract since the wrapper name (GetNonSalaryRemmitanceFosa_Result) of message GetNonSalaryRemmitanceFosa_Result does not match the default value (GetNonSalaryRemmitanceFosa)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetNonSalaryRemmitance" +
-            "Fosa", ReplyAction="*")]
-        Polaris.GetNonSalaryRemmitanceFosa_Result GetNonSalaryRemmitanceFosa(Polaris.GetNonSalaryRemmitanceFosa request);
+        // CODEGEN: Generating message contract since the wrapper name (GetSTODeductions_Result) of message GetSTODeductions_Result does not match the default value (GetSTODeductions)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetSTODeductions", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Polaris.GetSTODeductions_Result GetSTODeductions(Polaris.GetSTODeductions request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetNonSalaryRemmitance" +
-            "Fosa", ReplyAction="*")]
-        System.Threading.Tasks.Task<Polaris.GetNonSalaryRemmitanceFosa_Result> GetNonSalaryRemmitanceFosaAsync(Polaris.GetNonSalaryRemmitanceFosa request);
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetSTODeductions", ReplyAction="*")]
+        System.Threading.Tasks.Task<Polaris.GetSTODeductions_Result> GetSTODeductionsAsync(Polaris.GetSTODeductions request);
         
         // CODEGEN: Generating message contract since the wrapper name (GetSalaryLoanDed_Result) of message GetSalaryLoanDed_Result does not match the default value (GetSalaryLoanDed)
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetSalaryLoanDed", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Polaris.GetSalaryLoanDed_Result GetSalaryLoanDed(Polaris.GetSalaryLoanDed request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetSalaryLoanDed", ReplyAction="*")]
         System.Threading.Tasks.Task<Polaris.GetSalaryLoanDed_Result> GetSalaryLoanDedAsync(Polaris.GetSalaryLoanDed request);
         
+        // CODEGEN: Generating message contract since the wrapper name (GetTotalContributions_Result) of message GetTotalContributions_Result does not match the default value (GetTotalContributions)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetTotalContributions", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Polaris.GetTotalContributions_Result GetTotalContributions(Polaris.GetTotalContributions request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:GetTotalContributions", ReplyAction="*")]
+        System.Threading.Tasks.Task<Polaris.GetTotalContributions_Result> GetTotalContributionsAsync(Polaris.GetTotalContributions request);
+        
         // CODEGEN: Generating message contract since the wrapper name (Post_Result) of message Post_Result does not match the default value (Post)
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:Post", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Polaris.Post_Result Post(Polaris.Post request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:Post", ReplyAction="*")]
         System.Threading.Tasks.Task<Polaris.Post_Result> PostAsync(Polaris.Post request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (PostMpesa_Result) of message PostMpesa_Result does not match the default value (PostMpesa)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:PostMpesa", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Polaris.PostMpesa_Result PostMpesa(Polaris.PostMpesa request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:PostMpesa", ReplyAction="*")]
+        System.Threading.Tasks.Task<Polaris.PostMpesa_Result> PostMpesaAsync(Polaris.PostMpesa request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (ReplaceString_Result) of message ReplaceString_Result does not match the default value (ReplaceString)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:ReplaceString", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Polaris.ReplaceString_Result ReplaceString(Polaris.ReplaceString request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:ReplaceString", ReplyAction="*")]
+        System.Threading.Tasks.Task<Polaris.ReplaceString_Result> ReplaceStringAsync(Polaris.ReplaceString request);
+        
+        // CODEGEN: Generating message contract since the wrapper name (SetImage_Result) of message SetImage_Result does not match the default value (SetImage)
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:SetImage", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        Polaris.SetImage_Result SetImage(Polaris.SetImage request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration:SetImage", ReplyAction="*")]
+        System.Threading.Tasks.Task<Polaris.SetImage_Result> SetImageAsync(Polaris.SetImage request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountBal", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
-    public partial class GetAccountBal
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
-        public string accounNo;
-        
-        public GetAccountBal()
-        {
-        }
-        
-        public GetAccountBal(string accounNo)
-        {
-            this.accounNo = accounNo;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountBal_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
-    public partial class GetAccountBal_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
-        public decimal return_value;
-        
-        public GetAccountBal_Result()
-        {
-        }
-        
-        public GetAccountBal_Result(decimal return_value)
-        {
-            this.return_value = return_value;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CheckGuarantor", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
     public partial class CheckGuarantor
@@ -129,7 +126,7 @@ namespace Polaris
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CheckGuarantor_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
     public partial class CheckGuarantor_Result
@@ -149,14 +146,54 @@ namespace Polaris
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountBal", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class GetAccountBal
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        public string accountNo;
+        
+        public GetAccountBal()
+        {
+        }
+        
+        public GetAccountBal(string accountNo)
+        {
+            this.accountNo = accountNo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetAccountBal_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class GetAccountBal_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        public decimal return_value;
+        
+        public GetAccountBal_Result()
+        {
+        }
+        
+        public GetAccountBal_Result(decimal return_value)
+        {
+            this.return_value = return_value;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetCharges", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
     public partial class GetCharges
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
-        public int transType;
+        public string transType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=1)]
         public decimal amount;
@@ -165,7 +202,7 @@ namespace Polaris
         {
         }
         
-        public GetCharges(int transType, decimal amount)
+        public GetCharges(string transType, decimal amount)
         {
             this.transType = transType;
             this.amount = amount;
@@ -173,7 +210,7 @@ namespace Polaris
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetCharges_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
     public partial class GetCharges_Result
@@ -193,95 +230,87 @@ namespace Polaris
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileLoanLimit", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
-    public partial class GetMobileLoanLimit
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
-        public int installments;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=1)]
-        public string accountNo;
-        
-        public GetMobileLoanLimit()
-        {
-        }
-        
-        public GetMobileLoanLimit(int installments, string accountNo)
-        {
-            this.installments = installments;
-            this.accountNo = accountNo;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMobileLoanLimit_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
-    public partial class GetMobileLoanLimit_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
-        public decimal return_value;
-        
-        public GetMobileLoanLimit_Result()
-        {
-        }
-        
-        public GetMobileLoanLimit_Result(decimal return_value)
-        {
-            this.return_value = return_value;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNonSalaryRemmitanceFosa", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
-    public partial class GetNonSalaryRemmitanceFosa
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNeSalary", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class GetNeSalary
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
         public string accNo;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=1)]
-        public int noOfMonths;
-        
-        public GetNonSalaryRemmitanceFosa()
+        public GetNeSalary()
         {
         }
         
-        public GetNonSalaryRemmitanceFosa(string accNo, int noOfMonths)
+        public GetNeSalary(string accNo)
         {
             this.accNo = accNo;
-            this.noOfMonths = noOfMonths;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNonSalaryRemmitanceFosa_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
-    public partial class GetNonSalaryRemmitanceFosa_Result
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetNeSalary_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class GetNeSalary_Result
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
         public decimal return_value;
         
-        public GetNonSalaryRemmitanceFosa_Result()
+        public GetNeSalary_Result()
         {
         }
         
-        public GetNonSalaryRemmitanceFosa_Result(decimal return_value)
+        public GetNeSalary_Result(decimal return_value)
         {
             this.return_value = return_value;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSTODeductions", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class GetSTODeductions
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        public string accNo;
+        
+        public GetSTODeductions()
+        {
+        }
+        
+        public GetSTODeductions(string accNo)
+        {
+            this.accNo = accNo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetSTODeductions_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class GetSTODeductions_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        public decimal return_value;
+        
+        public GetSTODeductions_Result()
+        {
+        }
+        
+        public GetSTODeductions_Result(decimal return_value)
+        {
+            this.return_value = return_value;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetSalaryLoanDed", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
     public partial class GetSalaryLoanDed
@@ -301,7 +330,7 @@ namespace Polaris
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetSalaryLoanDed_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
     public partial class GetSalaryLoanDed_Result
@@ -321,7 +350,53 @@ namespace Polaris
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTotalContributions", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class GetTotalContributions
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime startDate;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime endDate;
+        
+        public GetTotalContributions()
+        {
+        }
+        
+        public GetTotalContributions(System.DateTime startDate, System.DateTime endDate)
+        {
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTotalContributions_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class GetTotalContributions_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        public decimal return_value;
+        
+        public GetTotalContributions_Result()
+        {
+        }
+        
+        public GetTotalContributions_Result(decimal return_value)
+        {
+            this.return_value = return_value;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Post", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
     public partial class Post
@@ -333,7 +408,7 @@ namespace Polaris
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Post_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
     public partial class Post_Result
@@ -344,13 +419,125 @@ namespace Polaris
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="PostMpesa", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class PostMpesa
+    {
+        
+        public PostMpesa()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="PostMpesa_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class PostMpesa_Result
+    {
+        
+        public PostMpesa_Result()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReplaceString", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class ReplaceString
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        public string _String;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=1)]
+        public string findWhat;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=2)]
+        public string replaceWith;
+        
+        public ReplaceString()
+        {
+        }
+        
+        public ReplaceString(string _String, string findWhat, string replaceWith)
+        {
+            this._String = _String;
+            this.findWhat = findWhat;
+            this.replaceWith = replaceWith;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReplaceString_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class ReplaceString_Result
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        public string return_value;
+        
+        public ReplaceString_Result()
+        {
+        }
+        
+        public ReplaceString_Result(string return_value)
+        {
+            this.return_value = return_value;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SetImage", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class SetImage
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=0)]
+        public string idNo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=1)]
+        public string picture;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", Order=2)]
+        public int imageType;
+        
+        public SetImage()
+        {
+        }
+        
+        public SetImage(string idNo, string picture, int imageType)
+        {
+            this.idNo = idNo;
+            this.picture = picture;
+            this.imageType = imageType;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SetImage_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/PolarisIntegration", IsWrapped=true)]
+    public partial class SetImage_Result
+    {
+        
+        public SetImage_Result()
+        {
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface PolarisIntegration_PortChannel : Polaris.PolarisIntegration_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class PolarisIntegration_PortClient : System.ServiceModel.ClientBase<Polaris.PolarisIntegration_Port>, Polaris.PolarisIntegration_Port
     {
         
@@ -395,33 +582,6 @@ namespace Polaris
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Polaris.GetAccountBal_Result Polaris.PolarisIntegration_Port.GetAccountBal(Polaris.GetAccountBal request)
-        {
-            return base.Channel.GetAccountBal(request);
-        }
-        
-        public decimal GetAccountBal(string accounNo)
-        {
-            Polaris.GetAccountBal inValue = new Polaris.GetAccountBal();
-            inValue.accounNo = accounNo;
-            Polaris.GetAccountBal_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).GetAccountBal(inValue);
-            return retVal.return_value;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Polaris.GetAccountBal_Result> Polaris.PolarisIntegration_Port.GetAccountBalAsync(Polaris.GetAccountBal request)
-        {
-            return base.Channel.GetAccountBalAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Polaris.GetAccountBal_Result> GetAccountBalAsync(string accounNo)
-        {
-            Polaris.GetAccountBal inValue = new Polaris.GetAccountBal();
-            inValue.accounNo = accounNo;
-            return ((Polaris.PolarisIntegration_Port)(this)).GetAccountBalAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Polaris.CheckGuarantor_Result Polaris.PolarisIntegration_Port.CheckGuarantor(Polaris.CheckGuarantor request)
         {
             return base.Channel.CheckGuarantor(request);
@@ -449,12 +609,39 @@ namespace Polaris
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Polaris.GetAccountBal_Result Polaris.PolarisIntegration_Port.GetAccountBal(Polaris.GetAccountBal request)
+        {
+            return base.Channel.GetAccountBal(request);
+        }
+        
+        public decimal GetAccountBal(string accountNo)
+        {
+            Polaris.GetAccountBal inValue = new Polaris.GetAccountBal();
+            inValue.accountNo = accountNo;
+            Polaris.GetAccountBal_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).GetAccountBal(inValue);
+            return retVal.return_value;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Polaris.GetAccountBal_Result> Polaris.PolarisIntegration_Port.GetAccountBalAsync(Polaris.GetAccountBal request)
+        {
+            return base.Channel.GetAccountBalAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Polaris.GetAccountBal_Result> GetAccountBalAsync(string accountNo)
+        {
+            Polaris.GetAccountBal inValue = new Polaris.GetAccountBal();
+            inValue.accountNo = accountNo;
+            return ((Polaris.PolarisIntegration_Port)(this)).GetAccountBalAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Polaris.GetCharges_Result Polaris.PolarisIntegration_Port.GetCharges(Polaris.GetCharges request)
         {
             return base.Channel.GetCharges(request);
         }
         
-        public decimal GetCharges(int transType, decimal amount)
+        public decimal GetCharges(string transType, decimal amount)
         {
             Polaris.GetCharges inValue = new Polaris.GetCharges();
             inValue.transType = transType;
@@ -469,7 +656,7 @@ namespace Polaris
             return base.Channel.GetChargesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Polaris.GetCharges_Result> GetChargesAsync(int transType, decimal amount)
+        public System.Threading.Tasks.Task<Polaris.GetCharges_Result> GetChargesAsync(string transType, decimal amount)
         {
             Polaris.GetCharges inValue = new Polaris.GetCharges();
             inValue.transType = transType;
@@ -478,61 +665,57 @@ namespace Polaris
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Polaris.GetMobileLoanLimit_Result Polaris.PolarisIntegration_Port.GetMobileLoanLimit(Polaris.GetMobileLoanLimit request)
+        Polaris.GetNeSalary_Result Polaris.PolarisIntegration_Port.GetNeSalary(Polaris.GetNeSalary request)
         {
-            return base.Channel.GetMobileLoanLimit(request);
+            return base.Channel.GetNeSalary(request);
         }
         
-        public decimal GetMobileLoanLimit(int installments, string accountNo)
+        public decimal GetNeSalary(string accNo)
         {
-            Polaris.GetMobileLoanLimit inValue = new Polaris.GetMobileLoanLimit();
-            inValue.installments = installments;
-            inValue.accountNo = accountNo;
-            Polaris.GetMobileLoanLimit_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).GetMobileLoanLimit(inValue);
+            Polaris.GetNeSalary inValue = new Polaris.GetNeSalary();
+            inValue.accNo = accNo;
+            Polaris.GetNeSalary_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).GetNeSalary(inValue);
             return retVal.return_value;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Polaris.GetMobileLoanLimit_Result> Polaris.PolarisIntegration_Port.GetMobileLoanLimitAsync(Polaris.GetMobileLoanLimit request)
+        System.Threading.Tasks.Task<Polaris.GetNeSalary_Result> Polaris.PolarisIntegration_Port.GetNeSalaryAsync(Polaris.GetNeSalary request)
         {
-            return base.Channel.GetMobileLoanLimitAsync(request);
+            return base.Channel.GetNeSalaryAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Polaris.GetMobileLoanLimit_Result> GetMobileLoanLimitAsync(int installments, string accountNo)
+        public System.Threading.Tasks.Task<Polaris.GetNeSalary_Result> GetNeSalaryAsync(string accNo)
         {
-            Polaris.GetMobileLoanLimit inValue = new Polaris.GetMobileLoanLimit();
-            inValue.installments = installments;
-            inValue.accountNo = accountNo;
-            return ((Polaris.PolarisIntegration_Port)(this)).GetMobileLoanLimitAsync(inValue);
+            Polaris.GetNeSalary inValue = new Polaris.GetNeSalary();
+            inValue.accNo = accNo;
+            return ((Polaris.PolarisIntegration_Port)(this)).GetNeSalaryAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Polaris.GetNonSalaryRemmitanceFosa_Result Polaris.PolarisIntegration_Port.GetNonSalaryRemmitanceFosa(Polaris.GetNonSalaryRemmitanceFosa request)
+        Polaris.GetSTODeductions_Result Polaris.PolarisIntegration_Port.GetSTODeductions(Polaris.GetSTODeductions request)
         {
-            return base.Channel.GetNonSalaryRemmitanceFosa(request);
+            return base.Channel.GetSTODeductions(request);
         }
         
-        public decimal GetNonSalaryRemmitanceFosa(string accNo, int noOfMonths)
+        public decimal GetSTODeductions(string accNo)
         {
-            Polaris.GetNonSalaryRemmitanceFosa inValue = new Polaris.GetNonSalaryRemmitanceFosa();
+            Polaris.GetSTODeductions inValue = new Polaris.GetSTODeductions();
             inValue.accNo = accNo;
-            inValue.noOfMonths = noOfMonths;
-            Polaris.GetNonSalaryRemmitanceFosa_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).GetNonSalaryRemmitanceFosa(inValue);
+            Polaris.GetSTODeductions_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).GetSTODeductions(inValue);
             return retVal.return_value;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Polaris.GetNonSalaryRemmitanceFosa_Result> Polaris.PolarisIntegration_Port.GetNonSalaryRemmitanceFosaAsync(Polaris.GetNonSalaryRemmitanceFosa request)
+        System.Threading.Tasks.Task<Polaris.GetSTODeductions_Result> Polaris.PolarisIntegration_Port.GetSTODeductionsAsync(Polaris.GetSTODeductions request)
         {
-            return base.Channel.GetNonSalaryRemmitanceFosaAsync(request);
+            return base.Channel.GetSTODeductionsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Polaris.GetNonSalaryRemmitanceFosa_Result> GetNonSalaryRemmitanceFosaAsync(string accNo, int noOfMonths)
+        public System.Threading.Tasks.Task<Polaris.GetSTODeductions_Result> GetSTODeductionsAsync(string accNo)
         {
-            Polaris.GetNonSalaryRemmitanceFosa inValue = new Polaris.GetNonSalaryRemmitanceFosa();
+            Polaris.GetSTODeductions inValue = new Polaris.GetSTODeductions();
             inValue.accNo = accNo;
-            inValue.noOfMonths = noOfMonths;
-            return ((Polaris.PolarisIntegration_Port)(this)).GetNonSalaryRemmitanceFosaAsync(inValue);
+            return ((Polaris.PolarisIntegration_Port)(this)).GetSTODeductionsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -563,6 +746,35 @@ namespace Polaris
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Polaris.GetTotalContributions_Result Polaris.PolarisIntegration_Port.GetTotalContributions(Polaris.GetTotalContributions request)
+        {
+            return base.Channel.GetTotalContributions(request);
+        }
+        
+        public decimal GetTotalContributions(System.DateTime startDate, System.DateTime endDate)
+        {
+            Polaris.GetTotalContributions inValue = new Polaris.GetTotalContributions();
+            inValue.startDate = startDate;
+            inValue.endDate = endDate;
+            Polaris.GetTotalContributions_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).GetTotalContributions(inValue);
+            return retVal.return_value;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Polaris.GetTotalContributions_Result> Polaris.PolarisIntegration_Port.GetTotalContributionsAsync(Polaris.GetTotalContributions request)
+        {
+            return base.Channel.GetTotalContributionsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Polaris.GetTotalContributions_Result> GetTotalContributionsAsync(System.DateTime startDate, System.DateTime endDate)
+        {
+            Polaris.GetTotalContributions inValue = new Polaris.GetTotalContributions();
+            inValue.startDate = startDate;
+            inValue.endDate = endDate;
+            return ((Polaris.PolarisIntegration_Port)(this)).GetTotalContributionsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         Polaris.Post_Result Polaris.PolarisIntegration_Port.Post(Polaris.Post request)
         {
             return base.Channel.Post(request);
@@ -586,10 +798,102 @@ namespace Polaris
             return ((Polaris.PolarisIntegration_Port)(this)).PostAsync(inValue);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Polaris.PostMpesa_Result Polaris.PolarisIntegration_Port.PostMpesa(Polaris.PostMpesa request)
+        {
+            return base.Channel.PostMpesa(request);
+        }
+        
+        public void PostMpesa()
+        {
+            Polaris.PostMpesa inValue = new Polaris.PostMpesa();
+            Polaris.PostMpesa_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).PostMpesa(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Polaris.PostMpesa_Result> Polaris.PolarisIntegration_Port.PostMpesaAsync(Polaris.PostMpesa request)
+        {
+            return base.Channel.PostMpesaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Polaris.PostMpesa_Result> PostMpesaAsync()
+        {
+            Polaris.PostMpesa inValue = new Polaris.PostMpesa();
+            return ((Polaris.PolarisIntegration_Port)(this)).PostMpesaAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Polaris.ReplaceString_Result Polaris.PolarisIntegration_Port.ReplaceString(Polaris.ReplaceString request)
+        {
+            return base.Channel.ReplaceString(request);
+        }
+        
+        public string ReplaceString(string _String, string findWhat, string replaceWith)
+        {
+            Polaris.ReplaceString inValue = new Polaris.ReplaceString();
+            inValue._String = _String;
+            inValue.findWhat = findWhat;
+            inValue.replaceWith = replaceWith;
+            Polaris.ReplaceString_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).ReplaceString(inValue);
+            return retVal.return_value;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Polaris.ReplaceString_Result> Polaris.PolarisIntegration_Port.ReplaceStringAsync(Polaris.ReplaceString request)
+        {
+            return base.Channel.ReplaceStringAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Polaris.ReplaceString_Result> ReplaceStringAsync(string _String, string findWhat, string replaceWith)
+        {
+            Polaris.ReplaceString inValue = new Polaris.ReplaceString();
+            inValue._String = _String;
+            inValue.findWhat = findWhat;
+            inValue.replaceWith = replaceWith;
+            return ((Polaris.PolarisIntegration_Port)(this)).ReplaceStringAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Polaris.SetImage_Result Polaris.PolarisIntegration_Port.SetImage(Polaris.SetImage request)
+        {
+            return base.Channel.SetImage(request);
+        }
+        
+        public void SetImage(string idNo, string picture, int imageType)
+        {
+            Polaris.SetImage inValue = new Polaris.SetImage();
+            inValue.idNo = idNo;
+            inValue.picture = picture;
+            inValue.imageType = imageType;
+            Polaris.SetImage_Result retVal = ((Polaris.PolarisIntegration_Port)(this)).SetImage(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Polaris.SetImage_Result> Polaris.PolarisIntegration_Port.SetImageAsync(Polaris.SetImage request)
+        {
+            return base.Channel.SetImageAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Polaris.SetImage_Result> SetImageAsync(string idNo, string picture, int imageType)
+        {
+            Polaris.SetImage inValue = new Polaris.SetImage();
+            inValue.idNo = idNo;
+            inValue.picture = picture;
+            inValue.imageType = imageType;
+            return ((Polaris.PolarisIntegration_Port)(this)).SetImageAsync(inValue);
+        }
+        
         public virtual System.Threading.Tasks.Task OpenAsync()
         {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
+        
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
@@ -609,8 +913,7 @@ namespace Polaris
         {
             if ((endpointConfiguration == EndpointConfiguration.PolarisIntegration_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Codeunit/PolarisIn" +
-                        "tegration");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:46047/BC260/WS/NATION/Codeunit/PolarisIntegration");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

@@ -1,26 +1,19 @@
 ﻿using DeportnFuel;
+using Entries;
+using Loan;
 using Logging;
 using MatatuCore.Controllers;
 using MatatuCore.Models.Database;
 using MatatuCore.Services.Clients;
 using Member;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
+using MemberAccounts;
 using NRODefect;
-using System;
-using System;
-using System.IO;
-using System.IO;
-using System.Security.Cryptography;
+using Parcels;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Transactions;
 using Vbasics;
 using Vcrews;
 
@@ -60,7 +53,14 @@ namespace MatatuCore.Services
         Member.Members_PortClient members_service { get; set; }    
         Vbasics.VehiclesBasics_PortClient vehicle_service { get; set; } 
         VehicleCrews_PortClient vcrew_service { get; set; }
+        Parcels.Parcel_PortClient parcel_service { get; set; }
+      
 
+        ParcelDetails.Parcel_Details_PortClient parceldetails_service { get; set; }
+        Location.Locations_PortClient location_service { get; set; }
+       MemberAccounts. Accounts_PortClient accounts_service { get; set; }
+        Loan. Loans_PortClient loans_service { get; set; }
+         AccountEntries_PortClient entries_service { get; set; }
 
 
 
@@ -79,15 +79,28 @@ namespace MatatuCore.Services
         Reversal.Reversals setreversals(Reversal.Reversals request);
         Reversal.Reversals[] getreversals(string agent);
         Ttypes.Transtypes[] gettypes();
+        Location.Locations[] getlocations();
         TransAmounts.Tamounts[] getamounts(ClientRequest request);
         // This method is used to get daily transactions for vehicles based on the provided request parameters.
         VehicleCollection.Vehicle_Daily_Collection[] Dailytrans(Request request);
         DeportnFuel.Deport_n_Fuel[] deportdata(Request request);
        DeportnFuel.Deport_n_Fuel setdeportdata      (Deport_n_Fuel request);
         Member.Members[] getmembers(ClientRequest request);
+        // Get a single member by No, phone, or vehicle
+        Member.Members getmember(ClientRequest request);
         Members updatecrew(Members members);
         VehiclesBasics[] getvehicles(ClientRequest request);
         VehicleCrews[] getvehicleCrews(ClientRequest request);
+        Parcels.Parcel[] getparcels(Request request);
+        Parcels.Parcel Addeditparcel(Parcel parcel);
+        // Get member loans by member identifier (No, phone, or vehicle)
+        Loan.Loans[] getmemberloans(ClientRequest request);
+        
+        // Get member accounts by member identifier (No, phone, or vehicle)
+        Accounts[] getmemberaccounts(ClientRequest request);
+        AccountEntries[] getaccountentries(ClientRequest request);
+        VehiclesBasics[] getmembervehicles(ClientRequest request);
+        AccountEntries[] getloanentries(ClientRequest request);
     }
 
     public class client {
@@ -135,13 +148,18 @@ namespace MatatuCore.Services
                     cl.vehicle_collection_service = InitializeClient<VehicleCollection.Vehicle_Daily_Collection>(client);
                     cl.vehicle_service = InitializeClient<Vbasics.VehiclesBasics>(client);
                     cl.types_service = InitializeClient<Ttypes.Transtypes>(client);
+                    cl.parceldetails_service = InitializeClient<ParcelDetails.Parcel_Details>(client);
+                    cl.parcel_service = InitializeClient<Parcels.Parcel>(client);
+                    cl.location_service = InitializeClient<Location.Locations>(client);
+                    cl.tamounts_service = InitializeClient<TransAmounts.Tamounts>(client);
+                    cl.loans_service = InitializeClient<Loans>(client);
+                    cl.accounts_service = InitializeClient<Accounts>(client);
+                    cl.entries_service = InitializeClient<AccountEntries>(client);
                 }
                 else
                     return null;
             }
             return cl;
-
-
 
         }
         public dynamic InitializeClient<T>(Client cl)
@@ -259,7 +277,6 @@ public class AesEncryption
             }
         }
     }
-
 
     public class CustomDateTimeConverter : JsonConverter<DateTime>
     {

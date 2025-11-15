@@ -1,7 +1,7 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://172.16.7.181:7052/test/WS/Nation Sacco/Page/Loans_Topup"
+      "http://157.173.123.120:7047/BC260/WS/NATION/Page/Loans_Topup"
     ],
     "collectionTypes": [
       "System.Array",

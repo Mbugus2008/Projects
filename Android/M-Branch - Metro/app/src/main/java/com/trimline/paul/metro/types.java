@@ -10,6 +10,11 @@ public class types {
   public boolean Attach_to_vehicle;
   public int Order;
   public int Type;
+
+  public String getType() {
+    return Code;
+  }
+
   @Override
   public String toString() {
     return this.Name;

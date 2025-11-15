@@ -9,7 +9,7 @@
       <Value Profile="(Default)">http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Users</Value>
     </Setting>
     <Setting Name="Collection_Members_Members_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://5.189.167.52:2356/Lophaservice/WS/Lopha%20Live/Page/Members</Value>
+      <Value Profile="(Default)">http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Members</Value>
     </Setting>
     <Setting Name="Collection_Transtypes_Transtypes_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Transtypes</Value>
@@ -18,7 +18,7 @@
       <Value Profile="(Default)">http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Codeunit/MBranch</Value>
     </Setting>
     <Setting Name="Collection_Vehicles_Vehicles_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://5.189.167.52:888/Embaservice/WS/EMBASSAVA%20SACCO%20LTD/Page/Vehicles</Value>
+      <Value Profile="(Default)">http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Vehicles</Value>
     </Setting>
     <Setting Name="Collection_Credits_Credits_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://desktop-elbbejj:4002/emba/WS/EMBASSAVA%20SACCO%20LTD/Page/Credits</Value>

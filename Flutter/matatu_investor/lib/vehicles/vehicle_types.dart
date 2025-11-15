@@ -1,4 +1,3 @@
-
 enum Vehicle_type {
   /// <remarks/>
   _x0031_4_Seater,
@@ -39,8 +38,6 @@ extension vehicle_types on Vehicle_type {
         return "33 seater";
       case Vehicle_type._x0031_4_Seater:
         return "14 seater";
-      default:
-        return "";
     }
   }
 }
@@ -65,9 +62,6 @@ extension vehicle_status on vehicle_Status {
         return "Dormant";
       case vehicle_Status.Left:
         return "Left";
-
-      default:
-        return "";
     }
   }
 }

@@ -11,7 +11,7 @@ namespace MemberAccounts
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts", ConfigurationName="MemberAccounts.Accounts_Port")]
     public interface Accounts_Port
     {
@@ -74,7 +74,7 @@ namespace MemberAccounts
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts")]
     public partial class Accounts
@@ -82,15 +82,25 @@ namespace MemberAccounts
         
         private string keyField;
         
+        private System.DateTime date_FilterField;
+        
+        private bool date_FilterFieldSpecified;
+        
         private string noField;
         
         private string old_Account_NoField;
         
         private string nameField;
         
+        private Status statusField;
+        
+        private bool statusFieldSpecified;
+        
         private string search_NameField;
         
-        private string account_TypeField;
+        private Account_Type account_TypeField;
+        
+        private bool account_TypeFieldSpecified;
         
         private string mPESA_Mobile_NoField;
         
@@ -124,10 +134,6 @@ namespace MemberAccounts
         
         private string aTM_NoField;
         
-        private decimal balanceField;
-        
-        private bool balanceFieldSpecified;
-        
         private System.DateTime last_Transaction_DateField;
         
         private bool last_Transaction_DateFieldSpecified;
@@ -135,10 +141,6 @@ namespace MemberAccounts
         private Blocked blockedField;
         
         private bool blockedFieldSpecified;
-        
-        private Status statusField;
-        
-        private bool statusFieldSpecified;
         
         private bool disable_ATM_CardField;
         
@@ -158,17 +160,13 @@ namespace MemberAccounts
         
         private string phone_NoField;
         
-        private decimal untranfered_InterestField;
+        private decimal untransfered_InterestField;
         
-        private bool untranfered_InterestFieldSpecified;
+        private bool untransfered_InterestFieldSpecified;
         
         private decimal interest_EarnedField;
         
         private bool interest_EarnedFieldSpecified;
-        
-        private bool priority_AccountField;
-        
-        private bool priority_AccountFieldSpecified;
         
         private decimal net_SalaryField;
         
@@ -176,21 +174,17 @@ namespace MemberAccounts
         
         private string reason_For_Disabling_ATM_CardField;
         
-        private decimal getNetSalaryField;
-        
-        private bool getNetSalaryFieldSpecified;
-        
-        private System.DateTime date_FilterField;
-        
-        private bool date_FilterFieldSpecified;
-        
         private decimal mobile_AmountsField;
         
         private bool mobile_AmountsFieldSpecified;
         
-        private Transaction_Type transaction_TypeField;
+        private string transaction_TypeField;
         
-        private bool transaction_TypeFieldSpecified;
+        private decimal getNetSalaryField;
+        
+        private bool getNetSalaryFieldSpecified;
+        
+        private string member_NoField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -207,7 +201,35 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=1)]
+        public System.DateTime Date_Filter
+        {
+            get
+            {
+                return this.date_FilterField;
+            }
+            set
+            {
+                this.date_FilterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Date_FilterSpecified
+        {
+            get
+            {
+                return this.date_FilterFieldSpecified;
+            }
+            set
+            {
+                this.date_FilterFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
         public string No
         {
             get
@@ -221,7 +243,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string Old_Account_No
         {
             get
@@ -235,7 +257,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public string Name
         {
             get
@@ -249,7 +271,35 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public Status Status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool StatusSpecified
+        {
+            get
+            {
+                return this.statusFieldSpecified;
+            }
+            set
+            {
+                this.statusFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string Search_Name
         {
             get
@@ -263,8 +313,8 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string Account_Type
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public Account_Type Account_Type
         {
             get
             {
@@ -277,7 +327,21 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Account_TypeSpecified
+        {
+            get
+            {
+                return this.account_TypeFieldSpecified;
+            }
+            set
+            {
+                this.account_TypeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
         public string MPESA_Mobile_No
         {
             get
@@ -291,7 +355,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
         public bool Salary_Processing
         {
             get
@@ -319,7 +383,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
         public string Global_Dimension_2_Code
         {
             get
@@ -333,7 +397,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
         public string Vendor_Posting_Group
         {
             get
@@ -347,7 +411,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
         public string Staff_No
         {
             get
@@ -361,7 +425,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
         public string ID_No
         {
             get
@@ -375,7 +439,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=12)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=14)]
         public System.DateTime Date_of_Birth
         {
             get
@@ -403,7 +467,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
         public string Passport_No
         {
             get
@@ -417,7 +481,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=14)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=16)]
         public System.DateTime Registration_Date
         {
             get
@@ -445,7 +509,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
         public string Staff_No_2
         {
             get
@@ -459,7 +523,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
         public string BOSA_Account_No
         {
             get
@@ -473,7 +537,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
         public string Company_Code
         {
             get
@@ -487,7 +551,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
         public string ATM_No
         {
             get
@@ -501,35 +565,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
-        public decimal Balance
-        {
-            get
-            {
-                return this.balanceField;
-            }
-            set
-            {
-                this.balanceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BalanceSpecified
-        {
-            get
-            {
-                return this.balanceFieldSpecified;
-            }
-            set
-            {
-                this.balanceFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=20)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=21)]
         public System.DateTime Last_Transaction_Date
         {
             get
@@ -557,7 +593,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
         public Blocked Blocked
         {
             get
@@ -581,34 +617,6 @@ namespace MemberAccounts
             set
             {
                 this.blockedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
-        public Status Status
-        {
-            get
-            {
-                return this.statusField;
-            }
-            set
-            {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified
-        {
-            get
-            {
-                return this.statusFieldSpecified;
-            }
-            set
-            {
-                this.statusFieldSpecified = value;
             }
         }
         
@@ -740,29 +748,29 @@ namespace MemberAccounts
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=29)]
-        public decimal Untranfered_Interest
+        public decimal Untransfered_Interest
         {
             get
             {
-                return this.untranfered_InterestField;
+                return this.untransfered_InterestField;
             }
             set
             {
-                this.untranfered_InterestField = value;
+                this.untransfered_InterestField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Untranfered_InterestSpecified
+        public bool Untransfered_InterestSpecified
         {
             get
             {
-                return this.untranfered_InterestFieldSpecified;
+                return this.untransfered_InterestFieldSpecified;
             }
             set
             {
-                this.untranfered_InterestFieldSpecified = value;
+                this.untransfered_InterestFieldSpecified = value;
             }
         }
         
@@ -796,34 +804,6 @@ namespace MemberAccounts
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=31)]
-        public bool Priority_Account
-        {
-            get
-            {
-                return this.priority_AccountField;
-            }
-            set
-            {
-                this.priority_AccountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Priority_AccountSpecified
-        {
-            get
-            {
-                return this.priority_AccountFieldSpecified;
-            }
-            set
-            {
-                this.priority_AccountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
         public decimal Net_Salary
         {
             get
@@ -851,7 +831,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
         public string Reason_For_Disabling_ATM_Card
         {
             get
@@ -865,63 +845,7 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
-        public decimal GetNetSalary
-        {
-            get
-            {
-                return this.getNetSalaryField;
-            }
-            set
-            {
-                this.getNetSalaryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GetNetSalarySpecified
-        {
-            get
-            {
-                return this.getNetSalaryFieldSpecified;
-            }
-            set
-            {
-                this.getNetSalaryFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=35)]
-        public System.DateTime Date_Filter
-        {
-            get
-            {
-                return this.date_FilterField;
-            }
-            set
-            {
-                this.date_FilterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Date_FilterSpecified
-        {
-            get
-            {
-                return this.date_FilterFieldSpecified;
-            }
-            set
-            {
-                this.date_FilterFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
         public decimal Mobile_Amounts
         {
             get
@@ -949,8 +873,8 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
-        public Transaction_Type Transaction_Type
+        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
+        public string Transaction_Type
         {
             get
             {
@@ -963,22 +887,124 @@ namespace MemberAccounts
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Transaction_TypeSpecified
+        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
+        public decimal GetNetSalary
         {
             get
             {
-                return this.transaction_TypeFieldSpecified;
+                return this.getNetSalaryField;
             }
             set
             {
-                this.transaction_TypeFieldSpecified = value;
+                this.getNetSalaryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool GetNetSalarySpecified
+        {
+            get
+            {
+                return this.getNetSalaryFieldSpecified;
+            }
+            set
+            {
+                this.getNetSalaryFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
+        public string Member_No
+        {
+            get
+            {
+                return this.member_NoField;
+            }
+            set
+            {
+                this.member_NoField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts")]
+    public enum Status
+    {
+        
+        /// <remarks/>
+        Not_Paid_Up,
+        
+        /// <remarks/>
+        Active,
+        
+        /// <remarks/>
+        Inactive,
+        
+        /// <remarks/>
+        Dormant,
+        
+        /// <remarks/>
+        Withdrawn,
+        
+        /// <remarks/>
+        Deceased,
+        
+        /// <remarks/>
+        Closed,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts")]
+    public enum Account_Type
+    {
+        
+        /// <remarks/>
+        _blank_,
+        
+        /// <remarks/>
+        Withdrawable_Deposit,
+        
+        /// <remarks/>
+        Non_Withdrawable_Deposit,
+        
+        /// <remarks/>
+        Junior_Account,
+        
+        /// <remarks/>
+        Share_Capital_Account,
+        
+        /// <remarks/>
+        Fixed_Deposit_Account,
+        
+        /// <remarks/>
+        Loan_Account,
+        
+        /// <remarks/>
+        Investments_Account,
+        
+        /// <remarks/>
+        Holding_Account,
+        
+        /// <remarks/>
+        Holiday_Account,
+        
+        /// <remarks/>
+        Share_Trading_Account,
+        
+        /// <remarks/>
+        Benevolent_Account,
+        
+        /// <remarks/>
+        School_Fee_Account,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts")]
     public enum Blocked
     {
@@ -994,126 +1020,7 @@ namespace MemberAccounts
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts")]
-    public enum Status
-    {
-        
-        /// <remarks/>
-        Active,
-        
-        /// <remarks/>
-        Frozen,
-        
-        /// <remarks/>
-        Closed,
-        
-        /// <remarks/>
-        Archived,
-        
-        /// <remarks/>
-        New,
-        
-        /// <remarks/>
-        Dormant,
-        
-        /// <remarks/>
-        Deceased,
-        
-        /// <remarks/>
-        Suspended,
-        
-        /// <remarks/>
-        Flagged,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts")]
-    public enum Transaction_Type
-    {
-        
-        /// <remarks/>
-        _blank_,
-        
-        /// <remarks/>
-        Mpesa_Withdrawal,
-        
-        /// <remarks/>
-        Mpesa_Deposit,
-        
-        /// <remarks/>
-        Utility_Payment,
-        
-        /// <remarks/>
-        Loan_Repayment_MPESA,
-        
-        /// <remarks/>
-        Loan_Disbursement_Mobile_Ovedraft,
-        
-        /// <remarks/>
-        Loan_Disbursement_for_FOSA,
-        
-        /// <remarks/>
-        _BOSA__x0026__Business_loans,
-        
-        /// <remarks/>
-        Member_Onboarding_with_IPRS_AI,
-        
-        /// <remarks/>
-        Intra_Account_Transfer,
-        
-        /// <remarks/>
-        Inter_Account_Transfer,
-        
-        /// <remarks/>
-        Balance_Enquiry,
-        
-        /// <remarks/>
-        _x000A_,
-        
-        /// <remarks/>
-        Mini_Statement,
-        
-        /// <remarks/>
-        Loan_Origination,
-        
-        /// <remarks/>
-        Pay_Loan_From_Account,
-        
-        /// <remarks/>
-        Paybill_Member_Deposit,
-        
-        /// <remarks/>
-        Mobile_App_Login,
-        
-        /// <remarks/>
-        Bank_Transfer,
-        
-        /// <remarks/>
-        Airtime,
-        
-        /// <remarks/>
-        Bank_Deposit,
-        
-        /// <remarks/>
-        Bank_Agent_Deposit,
-        
-        /// <remarks/>
-        Paybill_to_paybill_transactions,
-        
-        /// <remarks/>
-        Remittances_from_Abroad,
-        
-        /// <remarks/>
-        Transfer_to_Deposit,
-        
-        /// <remarks/>
-        Transfer_to_FOSA,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts")]
     public partial class Accounts_Filter
@@ -1153,10 +1060,13 @@ namespace MemberAccounts
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/accounts")]
     public enum Accounts_Fields
     {
+        
+        /// <remarks/>
+        Date_Filter,
         
         /// <remarks/>
         No,
@@ -1166,6 +1076,9 @@ namespace MemberAccounts
         
         /// <remarks/>
         Name,
+        
+        /// <remarks/>
+        Status,
         
         /// <remarks/>
         Search_Name,
@@ -1213,16 +1126,10 @@ namespace MemberAccounts
         ATM_No,
         
         /// <remarks/>
-        Balance,
-        
-        /// <remarks/>
         Last_Transaction_Date,
         
         /// <remarks/>
         Blocked,
-        
-        /// <remarks/>
-        Status,
         
         /// <remarks/>
         Disable_ATM_Card,
@@ -1243,13 +1150,10 @@ namespace MemberAccounts
         Phone_No,
         
         /// <remarks/>
-        Untranfered_Interest,
+        Untransfered_Interest,
         
         /// <remarks/>
         Interest_Earned,
-        
-        /// <remarks/>
-        Priority_Account,
         
         /// <remarks/>
         Net_Salary,
@@ -1258,20 +1162,20 @@ namespace MemberAccounts
         Reason_For_Disabling_ATM_Card,
         
         /// <remarks/>
-        GetNetSalary,
-        
-        /// <remarks/>
-        Date_Filter,
-        
-        /// <remarks/>
         Mobile_Amounts,
         
         /// <remarks/>
         Transaction_Type,
+        
+        /// <remarks/>
+        GetNetSalary,
+        
+        /// <remarks/>
+        Member_No,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class Read
@@ -1291,7 +1195,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class Read_Result
@@ -1311,7 +1215,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class ReadByRecId
@@ -1331,7 +1235,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class ReadByRecId_Result
@@ -1351,7 +1255,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class ReadMultiple
@@ -1380,7 +1284,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class ReadMultiple_Result
@@ -1401,7 +1305,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class IsUpdated
@@ -1421,7 +1325,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class IsUpdated_Result
@@ -1441,7 +1345,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class GetRecIdFromKey
@@ -1461,7 +1365,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
@@ -1481,7 +1385,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class Update
     {
@@ -1500,7 +1404,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class Update_Result
     {
@@ -1519,7 +1423,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class UpdateMultiple
     {
@@ -1539,7 +1443,7 @@ namespace MemberAccounts
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/accounts", IsWrapped=true)]
     public partial class UpdateMultiple_Result
     {
@@ -1558,13 +1462,13 @@ namespace MemberAccounts
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface Accounts_PortChannel : MemberAccounts.Accounts_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class Accounts_PortClient : System.ServiceModel.ClientBase<MemberAccounts.Accounts_Port>, MemberAccounts.Accounts_Port
     {
         
@@ -1790,6 +1694,13 @@ namespace MemberAccounts
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
             if ((endpointConfiguration == EndpointConfiguration.Accounts_Port))
@@ -1808,7 +1719,7 @@ namespace MemberAccounts
         {
             if ((endpointConfiguration == EndpointConfiguration.Accounts_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://172.16.7.181:7052/test/WS/Nation Sacco/Page/Accounts");
+                return new System.ServiceModel.EndpointAddress("http://172.16.7.172:9047/Mobile/WS/NATION/Page/Accounts");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

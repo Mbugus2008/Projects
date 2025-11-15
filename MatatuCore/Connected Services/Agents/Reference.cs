@@ -352,6 +352,9 @@ namespace Agents
         
         /// <remarks/>
         Fuel,
+        
+        /// <remarks/>
+        Parcel,
     }
     
     /// <remarks/>

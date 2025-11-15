@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:trimline_parcel/pages/parcel_dashboard_page.dart';
 import 'package:trimline_parcel/pages/parcellist.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -71,7 +72,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {Get.to(() => const ParcelListPage());},
+                  onPressed: () {Get.to(() => const ParcelDashboardPage());},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     padding: const EdgeInsets.symmetric(vertical: 16),

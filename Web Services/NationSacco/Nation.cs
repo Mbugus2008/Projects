@@ -17,7 +17,7 @@ namespace NationSacco
         private readonly ILogger<Worker> _logger;
         private IConfiguration _configuration;
         MemberLoans.Loans_PortClient loans;
-        Memberapp.Member_Application_PortClient Member_Application;
+        Memberapp.MemberApplication_PortClient Member_Application;
         Polaris.PolarisIntegration_PortClient polaris;
         MobileTransactions.Transactions_PortClient transactions;
         Nav? ss;
@@ -34,7 +34,7 @@ namespace NationSacco
          .Build();
             ss = setting(_configuration);
             loans = InitializeClient<MemberLoans.Loans>();
-            Member_Application = InitializeClient<Memberapp.Member_Application>();
+            Member_Application = InitializeClient<Memberapp.MemberApplication>();
             transactions = InitializeClient<MobileTransactions.Transactions>();
             polaris = new Polaris.PolarisIntegration_PortClient( binding(), new EndpointAddress(basecodeuniturl() + "PolarisIntegration"));
             polaris.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Delegation;
@@ -198,48 +198,50 @@ namespace NationSacco
         {
             try
             {
-                var ma = Member_Application.ReadMultiple([
-                    new  Memberapp.Member_Application_Filter { Criteria = "<>Open", Field = Memberapp.Member_Application_Fields.Status }, 
-                    new  Memberapp.Member_Application_Filter { Criteria = ss.Username, Field = Memberapp.Member_Application_Fields.Created_By }, 
-                    new  Memberapp.Member_Application_Filter { Criteria = "No", Field = Memberapp.Member_Application_Fields.Call_Back_updated } 
-                
-                ], null, 10);
-                _logger.LogInformation($"{ma.Length} Changed applications");
-                foreach (var ln in ma)
-                { 
-                    Memberapp.Member_Application l = ln;
-                    if (!string.IsNullOrEmpty(ln.Call_Back_Url)) { 
-                    Application_callback callback = new ();
-                    callback.MemberNO = l.No;
-                    callback.Status = l.Status;
-                    callback.remarks = "";
-                        _logger.LogInformation(String.Format("Application No {0}-{1}: Sending", ln.No, ln.Status.ToString()));
 
-                        var (statusCode, response) = await _apiService.PostDataAsync(l.Call_Back_Url, callback);
-                        _logger.LogInformation(statusCode, response);
-                        if (statusCode == 200)
-                    {
-                        l.Call_Back_updated = true;
-                        l.Call_Back_updatedSpecified = true;
-                        Member_Application.Update(ref l);
-                    }
-                    else
-                    {
-                        _logger.LogError(response);
-                            l.Call_Back_updated = true;
-                            l.Call_Back_updatedSpecified = true;
-                            Member_Application.Update(ref l);
-                        }
-                }
-                    else
-                    {
-                        _logger.LogInformation(String.Format("Application No {0}: Call Back url Missing", ln.No));
-                        l.Call_Back_updated = true;
-                        l.Call_Back_updatedSpecified = true;
-                        Member_Application.Update(ref l);
-                    }
+                return;
+                //var ma = Member_Application.ReadMultiple([
+                   
+                //    new  Memberapp.MemberApplication_Filter { Criteria = ss.Username, Field = Memberapp.MemberApplication_Fields.Created_By }, 
+                //    new  Memberapp.MemberApplication_Filter { Criteria = "No", Field = Memberapp.MemberApplication_Fields.Call_Back_updated } 
+                //], null, 10);
 
-                }
+                //_logger.LogInformation($"{ma.Length} Changed applications");
+                //foreach (var ln in ma)
+                //{
+                //    Memberapp.MemberApplication l = ln;
+                //    if (!string.IsNullOrEmpty(ln.Call_Back_URL)) { 
+                //    Application_callback callback = new ();
+                //    callback.MemberNO = l.No;
+                //    callback.Status = l.Status;
+                //    callback.remarks = "";
+                //        _logger.LogInformation(String.Format("Application No {0}-{1}: Sending", ln.No, ln.Status.ToString()));
+
+                //        var (statusCode, response) = await _apiService.PostDataAsync(l.Call_Back_Url, callback);
+                //        _logger.LogInformation(statusCode, response);
+                //        if (statusCode == 200)
+                //    {
+                //        l.Call_Back_updated = true;
+                //        l.Call_Back_updatedSpecified = true;
+                //        Member_Application.Update(ref l);
+                //    }
+                //    else
+                //    {
+                //        _logger.LogError(response);
+                //            l.Call_Back_updated = true;
+                //            l.Call_Back_updatedSpecified = true;
+                //            Member_Application.Update(ref l);
+                //        }
+                //}
+                //    else
+                //    {
+                //        _logger.LogInformation(String.Format("Application No {0}: Call Back url Missing", ln.No));
+                //        l.Call_Back_updated = true;
+                //        l.Call_Back_updatedSpecified = true;
+                //        Member_Application.Update(ref l);
+                //    }
+
+                //}
             }
             catch (Exception ex)
             {
@@ -268,7 +270,7 @@ namespace NationSacco
     {
         public string MemberNO { get; set; }
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public Memberapp.Status Status { get; set; }
+       // public Memberapp.Status Status { get; set; }
         public string remarks { get; set; }
 
     }

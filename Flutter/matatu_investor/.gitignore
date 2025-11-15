@@ -45,3 +45,15 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment files (contains sensitive information)
+.env
+.env.local
+.env.production
+.env.staging
+
+# Security and sensitive files
+*.key
+*.pem
+*.p12
+keystore.properties

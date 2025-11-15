@@ -470,7 +470,42 @@ public class DB extends SQLiteOpenHelper {
         }
         return true;
     }
-
+    public ArrayList<transaction> getalltransactions() {
+        ArrayList<transaction> array_list = new ArrayList<transaction>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + t.Transactions_TABLE_NAME, null);
+        res.moveToFirst();
+        while (res.isAfterLast() == false) {
+            transaction f = new transaction();
+            f.Account_No = res.getString(res.getColumnIndex(t.Account_No));
+            f.Account_Name = res.getString(res.getColumnIndex(t.Account_Name));
+            f.Telephone = res.getString(res.getColumnIndex(t.Telephone));
+            f.Transaction_Type = res.getInt(res.getColumnIndex(t.Transaction_Type));
+            f.sent = (res.getInt(res.getColumnIndex(t.sent)) != 0);
+            f.Recovery = (res.getInt(res.getColumnIndex(t.Recovery)) != 0);
+            f.setAmount(res.getDouble(res.getColumnIndex(t.Amount)));
+            f.Document_No = res.getString(res.getColumnIndex(t.Document_No));
+            f.Loan_No = res.getString(res.getColumnIndex(t.Loan_No));
+            f.Date = res.getString(res.getColumnIndex(t.Date));
+            f.Time = res.getString(res.getColumnIndex(t.Time));
+            f.Id_No = res.getString(res.getColumnIndex(t.Id_No));
+            f.OTTN = res.getString(res.getColumnIndex(t.OTTN));
+            f.Agent_Code = res.getString(res.getColumnIndex(t.Agent_Code));
+            f.Constituency = res.getString(res.getColumnIndex(t.Constituency));
+            f.Ward = res.getString(res.getColumnIndex(t.Ward));
+            f.Type = res.getString(res.getColumnIndex(t.Type));
+            f.Group = res.getString(res.getColumnIndex(t.Group));
+            types d = gettype(f.Type);
+            if (d != null)
+                f.typename = d.Name;
+            f.Gender = res.getInt(res.getColumnIndex(t.Gender));
+            f.Marital = res.getInt(res.getColumnIndex(t.Marital));
+            array_list.add(f);
+            res.moveToNext();
+        }
+        res.close();
+        return array_list;
+    }
     public boolean updatetrans(transaction f) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -530,7 +565,7 @@ public class DB extends SQLiteOpenHelper {
     public transaction gettransbydocument(String doc) {
         transaction array_list = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + t.Transactions_TABLE_NAME + " Where " + t.Document_No + " =?", new String[]{doc + ""});
+        Cursor res = db.rawQuery("select * from " + t.Transactions_TABLE_NAME + " Where " + t.Document_No + " =?", new String[]{doc });
         if (res.getCount() > 0) {
             res.moveToFirst();
             transaction f = new transaction();
@@ -838,11 +873,11 @@ public class DB extends SQLiteOpenHelper {
             f.Document_No = res.getString(res.getColumnIndex(t.Document_No));
             f.Date = res.getString(res.getColumnIndex(t.Date));
             f.Time = res.getString(res.getColumnIndex(t.Time));
+            f.Id_No = res.getString(res.getColumnIndex(t.Id_No));
             f.OTTN = res.getString(res.getColumnIndex(t.OTTN));
+            f.Agent_Code = res.getString(res.getColumnIndex(t.Agent_Code));
             f.Constituency = res.getString(res.getColumnIndex(t.Constituency));
             f.Ward = res.getString(res.getColumnIndex(t.Ward));
-            f.Id_No = res.getString(res.getColumnIndex(t.Id_No));
-            f.Agent_Code = res.getString(res.getColumnIndex(t.Agent_Code));
             f.Gender = res.getInt(res.getColumnIndex(t.Gender));
             f.Marital = res.getInt(res.getColumnIndex(t.Marital));
             f.Type = res.getString(res.getColumnIndex(t.Type));

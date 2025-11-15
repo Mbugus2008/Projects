@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:kanisa/models/sermon.dart';
 
 class SermonsDetailScreen extends StatelessWidget {
-  const SermonsDetailScreen({Key? key}) : super(key: key);
+  const SermonsDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,8 @@ class SermonsDetailScreen extends StatelessWidget {
                     preacher: 'Pastor John Doe',
                     date: DateTime.now().subtract(Duration(days: index)),
                     duration: '45 minutes',
-                    thumbnailUrl: 'https://picsum.photos/seed/${index + 1}/300/200',
+                    thumbnailUrl:
+                        'https://picsum.photos/seed/${index + 1}/300/200',
                   ),
                 );
               },
@@ -62,14 +63,13 @@ class SermonsDetailScreen extends StatelessWidget {
   }
 }
 
-
 class SermonCard extends StatelessWidget {
   final Sermon sermon;
 
   const SermonCard({
-    Key? key,
+    super.key,
     required this.sermon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,6 @@ class SermonCard extends StatelessWidget {
               },
             ),
           ),
-          
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -111,11 +110,13 @@ class SermonCard extends StatelessWidget {
                   children: [
                     Icon(Icons.person, size: 16, color: Colors.grey),
                     SizedBox(width: 4),
-                    Text(sermon.preacher ?? '', style: TextStyle(color: Colors.grey)),
+                    Text(sermon.preacher ?? '',
+                        style: TextStyle(color: Colors.grey)),
                     Spacer(),
                     Icon(Icons.calendar_today, size: 16, color: Colors.grey),
                     SizedBox(width: 4),
-                    Text(sermon.date?.toString() ?? '', style: TextStyle(color: Colors.grey)),
+                    Text(sermon.date?.toString() ?? '',
+                        style: TextStyle(color: Colors.grey)),
                   ],
                 ),
                 SizedBox(height: 4),
@@ -123,7 +124,8 @@ class SermonCard extends StatelessWidget {
                   children: [
                     Icon(Icons.access_time, size: 16, color: Colors.grey),
                     SizedBox(width: 4),
-                    Text(sermon.duration ?? '', style: TextStyle(color: Colors.grey)),
+                    Text(sermon.duration ?? '',
+                        style: TextStyle(color: Colors.grey)),
                   ],
                 ),
                 SizedBox(height: 16),

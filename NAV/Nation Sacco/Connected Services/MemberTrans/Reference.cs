@@ -11,7 +11,7 @@ namespace MemberTrans
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/membertransactions", ConfigurationName="MemberTrans.MemberTransactions_Port")]
     public interface MemberTransactions_Port
     {
@@ -58,7 +58,7 @@ namespace MemberTrans
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/membertransactions")]
     public partial class MemberTransactions
@@ -66,13 +66,31 @@ namespace MemberTrans
         
         private string keyField;
         
+        private int entry_NoField;
+        
+        private bool entry_NoFieldSpecified;
+        
+        private int vendor_Ledger_Entry_NoField;
+        
+        private bool vendor_Ledger_Entry_NoFieldSpecified;
+        
+        private Entry_Type entry_TypeField;
+        
+        private bool entry_TypeFieldSpecified;
+        
+        private Sacco_Transaction_Type sacco_Transaction_TypeField;
+        
+        private bool sacco_Transaction_TypeFieldSpecified;
+        
         private System.DateTime posting_DateField;
         
         private bool posting_DateFieldSpecified;
         
-        private Transaction_Type transaction_TypeField;
+        private string loan_Product_NameField;
         
-        private bool transaction_TypeFieldSpecified;
+        private string descriptionField;
+        
+        private string loan_Product_CodeField;
         
         private Document_Type document_TypeField;
         
@@ -80,43 +98,7 @@ namespace MemberTrans
         
         private string document_NoField;
         
-        private string loan_NoField;
-        
-        private string loan_TypeField;
-        
-        private string customer_NoField;
-        
-        private string descriptionField;
-        
-        private decimal credit_AmountField;
-        
-        private bool credit_AmountFieldSpecified;
-        
-        private decimal debit_AmountField;
-        
-        private bool debit_AmountFieldSpecified;
-        
-        private System.DateTime prepayment_DateField;
-        
-        private bool prepayment_DateFieldSpecified;
-        
-        private string global_Dimension_1_CodeField;
-        
-        private string global_Dimension_2_CodeField;
-        
-        private string iC_Partner_CodeField;
-        
-        private string salesperson_CodeField;
-        
-        private string currency_CodeField;
-        
-        private decimal original_AmountField;
-        
-        private bool original_AmountFieldSpecified;
-        
-        private decimal original_Amt_LCYField;
-        
-        private bool original_Amt_LCYFieldSpecified;
+        private string vendor_NoField;
         
         private decimal amountField;
         
@@ -126,71 +108,41 @@ namespace MemberTrans
         
         private bool amount_LCYFieldSpecified;
         
-        private decimal remaining_AmountField;
+        private decimal debit_AmountField;
         
-        private bool remaining_AmountFieldSpecified;
+        private bool debit_AmountFieldSpecified;
         
-        private decimal remaining_Amt_LCYField;
+        private decimal credit_AmountField;
         
-        private bool remaining_Amt_LCYFieldSpecified;
+        private bool credit_AmountFieldSpecified;
         
-        private Bal_Account_Type bal_Account_TypeField;
+        private decimal debit_Amount_LCYField;
         
-        private bool bal_Account_TypeFieldSpecified;
+        private bool debit_Amount_LCYFieldSpecified;
         
-        private string bal_Account_NoField;
+        private decimal credit_Amount_LCYField;
         
-        private System.DateTime due_DateField;
+        private bool credit_Amount_LCYFieldSpecified;
         
-        private bool due_DateFieldSpecified;
-        
-        private System.DateTime pmt_Discount_DateField;
-        
-        private bool pmt_Discount_DateFieldSpecified;
-        
-        private System.DateTime pmt_Disc_Tolerance_DateField;
-        
-        private bool pmt_Disc_Tolerance_DateFieldSpecified;
-        
-        private decimal original_Pmt_Disc_PossibleField;
-        
-        private bool original_Pmt_Disc_PossibleFieldSpecified;
-        
-        private decimal remaining_Pmt_Disc_PossibleField;
-        
-        private bool remaining_Pmt_Disc_PossibleFieldSpecified;
-        
-        private decimal max_Payment_ToleranceField;
-        
-        private bool max_Payment_ToleranceFieldSpecified;
-        
-        private bool openField;
-        
-        private bool openFieldSpecified;
-        
-        private string on_HoldField;
+        private string currency_CodeField;
         
         private string user_IDField;
         
-        private string source_CodeField;
+        private string initial_Entry_Global_Dim_1Field;
         
-        private string reason_CodeField;
+        private string initial_Entry_Global_Dim_2Field;
         
-        private bool reversedField;
+        private int transaction_NoField;
         
-        private bool reversedFieldSpecified;
+        private bool transaction_NoFieldSpecified;
         
-        private int reversed_by_Entry_NoField;
+        private string member_NoField;
         
-        private bool reversed_by_Entry_NoFieldSpecified;
+        private string loan_NoField;
         
-        private int reversed_Entry_NoField;
+        private Product_Posting_Type product_Posting_TypeField;
         
-        private bool reversed_Entry_NoFieldSpecified;
-        
-        private int entry_NoField;
-        
-        private bool entry_NoFieldSpecified;
+        private bool product_Posting_TypeFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -207,7 +159,119 @@ namespace MemberTrans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public int Entry_No
+        {
+            get
+            {
+                return this.entry_NoField;
+            }
+            set
+            {
+                this.entry_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Entry_NoSpecified
+        {
+            get
+            {
+                return this.entry_NoFieldSpecified;
+            }
+            set
+            {
+                this.entry_NoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public int Vendor_Ledger_Entry_No
+        {
+            get
+            {
+                return this.vendor_Ledger_Entry_NoField;
+            }
+            set
+            {
+                this.vendor_Ledger_Entry_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Vendor_Ledger_Entry_NoSpecified
+        {
+            get
+            {
+                return this.vendor_Ledger_Entry_NoFieldSpecified;
+            }
+            set
+            {
+                this.vendor_Ledger_Entry_NoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public Entry_Type Entry_Type
+        {
+            get
+            {
+                return this.entry_TypeField;
+            }
+            set
+            {
+                this.entry_TypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Entry_TypeSpecified
+        {
+            get
+            {
+                return this.entry_TypeFieldSpecified;
+            }
+            set
+            {
+                this.entry_TypeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public Sacco_Transaction_Type Sacco_Transaction_Type
+        {
+            get
+            {
+                return this.sacco_Transaction_TypeField;
+            }
+            set
+            {
+                this.sacco_Transaction_TypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Sacco_Transaction_TypeSpecified
+        {
+            get
+            {
+                return this.sacco_Transaction_TypeFieldSpecified;
+            }
+            set
+            {
+                this.sacco_Transaction_TypeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=5)]
         public System.DateTime Posting_Date
         {
             get
@@ -235,35 +299,49 @@ namespace MemberTrans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public Transaction_Type Transaction_Type
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string Loan_Product_Name
         {
             get
             {
-                return this.transaction_TypeField;
+                return this.loan_Product_NameField;
             }
             set
             {
-                this.transaction_TypeField = value;
+                this.loan_Product_NameField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Transaction_TypeSpecified
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string Description
         {
             get
             {
-                return this.transaction_TypeFieldSpecified;
+                return this.descriptionField;
             }
             set
             {
-                this.transaction_TypeFieldSpecified = value;
+                this.descriptionField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string Loan_Product_Code
+        {
+            get
+            {
+                return this.loan_Product_CodeField;
+            }
+            set
+            {
+                this.loan_Product_CodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
         public Document_Type Document_Type
         {
             get
@@ -291,7 +369,7 @@ namespace MemberTrans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
         public string Document_No
         {
             get
@@ -305,273 +383,21 @@ namespace MemberTrans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string Loan_No
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string Vendor_No
         {
             get
             {
-                return this.loan_NoField;
+                return this.vendor_NoField;
             }
             set
             {
-                this.loan_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string Loan_Type
-        {
-            get
-            {
-                return this.loan_TypeField;
-            }
-            set
-            {
-                this.loan_TypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public string Customer_No
-        {
-            get
-            {
-                return this.customer_NoField;
-            }
-            set
-            {
-                this.customer_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string Description
-        {
-            get
-            {
-                return this.descriptionField;
-            }
-            set
-            {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public decimal Credit_Amount
-        {
-            get
-            {
-                return this.credit_AmountField;
-            }
-            set
-            {
-                this.credit_AmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Credit_AmountSpecified
-        {
-            get
-            {
-                return this.credit_AmountFieldSpecified;
-            }
-            set
-            {
-                this.credit_AmountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public decimal Debit_Amount
-        {
-            get
-            {
-                return this.debit_AmountField;
-            }
-            set
-            {
-                this.debit_AmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Debit_AmountSpecified
-        {
-            get
-            {
-                return this.debit_AmountFieldSpecified;
-            }
-            set
-            {
-                this.debit_AmountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=11)]
-        public System.DateTime Prepayment_Date
-        {
-            get
-            {
-                return this.prepayment_DateField;
-            }
-            set
-            {
-                this.prepayment_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Prepayment_DateSpecified
-        {
-            get
-            {
-                return this.prepayment_DateFieldSpecified;
-            }
-            set
-            {
-                this.prepayment_DateFieldSpecified = value;
+                this.vendor_NoField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string Global_Dimension_1_Code
-        {
-            get
-            {
-                return this.global_Dimension_1_CodeField;
-            }
-            set
-            {
-                this.global_Dimension_1_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public string Global_Dimension_2_Code
-        {
-            get
-            {
-                return this.global_Dimension_2_CodeField;
-            }
-            set
-            {
-                this.global_Dimension_2_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public string IC_Partner_Code
-        {
-            get
-            {
-                return this.iC_Partner_CodeField;
-            }
-            set
-            {
-                this.iC_Partner_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
-        public string Salesperson_Code
-        {
-            get
-            {
-                return this.salesperson_CodeField;
-            }
-            set
-            {
-                this.salesperson_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
-        public string Currency_Code
-        {
-            get
-            {
-                return this.currency_CodeField;
-            }
-            set
-            {
-                this.currency_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
-        public decimal Original_Amount
-        {
-            get
-            {
-                return this.original_AmountField;
-            }
-            set
-            {
-                this.original_AmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Original_AmountSpecified
-        {
-            get
-            {
-                return this.original_AmountFieldSpecified;
-            }
-            set
-            {
-                this.original_AmountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
-        public decimal Original_Amt_LCY
-        {
-            get
-            {
-                return this.original_Amt_LCYField;
-            }
-            set
-            {
-                this.original_Amt_LCYField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Original_Amt_LCYSpecified
-        {
-            get
-            {
-                return this.original_Amt_LCYFieldSpecified;
-            }
-            set
-            {
-                this.original_Amt_LCYFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
         public decimal Amount
         {
             get
@@ -599,7 +425,7 @@ namespace MemberTrans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
         public decimal Amount_LCY
         {
             get
@@ -627,315 +453,133 @@ namespace MemberTrans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
-        public decimal Remaining_Amount
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public decimal Debit_Amount
         {
             get
             {
-                return this.remaining_AmountField;
+                return this.debit_AmountField;
             }
             set
             {
-                this.remaining_AmountField = value;
+                this.debit_AmountField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Remaining_AmountSpecified
+        public bool Debit_AmountSpecified
         {
             get
             {
-                return this.remaining_AmountFieldSpecified;
+                return this.debit_AmountFieldSpecified;
             }
             set
             {
-                this.remaining_AmountFieldSpecified = value;
+                this.debit_AmountFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
-        public decimal Remaining_Amt_LCY
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public decimal Credit_Amount
         {
             get
             {
-                return this.remaining_Amt_LCYField;
+                return this.credit_AmountField;
             }
             set
             {
-                this.remaining_Amt_LCYField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Remaining_Amt_LCYSpecified
-        {
-            get
-            {
-                return this.remaining_Amt_LCYFieldSpecified;
-            }
-            set
-            {
-                this.remaining_Amt_LCYFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
-        public Bal_Account_Type Bal_Account_Type
-        {
-            get
-            {
-                return this.bal_Account_TypeField;
-            }
-            set
-            {
-                this.bal_Account_TypeField = value;
+                this.credit_AmountField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Bal_Account_TypeSpecified
+        public bool Credit_AmountSpecified
         {
             get
             {
-                return this.bal_Account_TypeFieldSpecified;
+                return this.credit_AmountFieldSpecified;
             }
             set
             {
-                this.bal_Account_TypeFieldSpecified = value;
+                this.credit_AmountFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
-        public string Bal_Account_No
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public decimal Debit_Amount_LCY
         {
             get
             {
-                return this.bal_Account_NoField;
+                return this.debit_Amount_LCYField;
             }
             set
             {
-                this.bal_Account_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=25)]
-        public System.DateTime Due_Date
-        {
-            get
-            {
-                return this.due_DateField;
-            }
-            set
-            {
-                this.due_DateField = value;
+                this.debit_Amount_LCYField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Due_DateSpecified
+        public bool Debit_Amount_LCYSpecified
         {
             get
             {
-                return this.due_DateFieldSpecified;
+                return this.debit_Amount_LCYFieldSpecified;
             }
             set
             {
-                this.due_DateFieldSpecified = value;
+                this.debit_Amount_LCYFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=26)]
-        public System.DateTime Pmt_Discount_Date
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public decimal Credit_Amount_LCY
         {
             get
             {
-                return this.pmt_Discount_DateField;
+                return this.credit_Amount_LCYField;
             }
             set
             {
-                this.pmt_Discount_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Pmt_Discount_DateSpecified
-        {
-            get
-            {
-                return this.pmt_Discount_DateFieldSpecified;
-            }
-            set
-            {
-                this.pmt_Discount_DateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=27)]
-        public System.DateTime Pmt_Disc_Tolerance_Date
-        {
-            get
-            {
-                return this.pmt_Disc_Tolerance_DateField;
-            }
-            set
-            {
-                this.pmt_Disc_Tolerance_DateField = value;
+                this.credit_Amount_LCYField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Pmt_Disc_Tolerance_DateSpecified
+        public bool Credit_Amount_LCYSpecified
         {
             get
             {
-                return this.pmt_Disc_Tolerance_DateFieldSpecified;
+                return this.credit_Amount_LCYFieldSpecified;
             }
             set
             {
-                this.pmt_Disc_Tolerance_DateFieldSpecified = value;
+                this.credit_Amount_LCYFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
-        public decimal Original_Pmt_Disc_Possible
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public string Currency_Code
         {
             get
             {
-                return this.original_Pmt_Disc_PossibleField;
+                return this.currency_CodeField;
             }
             set
             {
-                this.original_Pmt_Disc_PossibleField = value;
+                this.currency_CodeField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Original_Pmt_Disc_PossibleSpecified
-        {
-            get
-            {
-                return this.original_Pmt_Disc_PossibleFieldSpecified;
-            }
-            set
-            {
-                this.original_Pmt_Disc_PossibleFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
-        public decimal Remaining_Pmt_Disc_Possible
-        {
-            get
-            {
-                return this.remaining_Pmt_Disc_PossibleField;
-            }
-            set
-            {
-                this.remaining_Pmt_Disc_PossibleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Remaining_Pmt_Disc_PossibleSpecified
-        {
-            get
-            {
-                return this.remaining_Pmt_Disc_PossibleFieldSpecified;
-            }
-            set
-            {
-                this.remaining_Pmt_Disc_PossibleFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
-        public decimal Max_Payment_Tolerance
-        {
-            get
-            {
-                return this.max_Payment_ToleranceField;
-            }
-            set
-            {
-                this.max_Payment_ToleranceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Max_Payment_ToleranceSpecified
-        {
-            get
-            {
-                return this.max_Payment_ToleranceFieldSpecified;
-            }
-            set
-            {
-                this.max_Payment_ToleranceFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
-        public bool Open
-        {
-            get
-            {
-                return this.openField;
-            }
-            set
-            {
-                this.openField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool OpenSpecified
-        {
-            get
-            {
-                return this.openFieldSpecified;
-            }
-            set
-            {
-                this.openFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
-        public string On_Hold
-        {
-            get
-            {
-                return this.on_HoldField;
-            }
-            set
-            {
-                this.on_HoldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
         public string User_ID
         {
             get
@@ -949,166 +593,200 @@ namespace MemberTrans
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
-        public string Source_Code
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public string Initial_Entry_Global_Dim_1
         {
             get
             {
-                return this.source_CodeField;
+                return this.initial_Entry_Global_Dim_1Field;
             }
             set
             {
-                this.source_CodeField = value;
+                this.initial_Entry_Global_Dim_1Field = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
-        public string Reason_Code
+        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
+        public string Initial_Entry_Global_Dim_2
         {
             get
             {
-                return this.reason_CodeField;
+                return this.initial_Entry_Global_Dim_2Field;
             }
             set
             {
-                this.reason_CodeField = value;
+                this.initial_Entry_Global_Dim_2Field = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
-        public bool Reversed
+        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
+        public int Transaction_No
         {
             get
             {
-                return this.reversedField;
+                return this.transaction_NoField;
             }
             set
             {
-                this.reversedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ReversedSpecified
-        {
-            get
-            {
-                return this.reversedFieldSpecified;
-            }
-            set
-            {
-                this.reversedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
-        public int Reversed_by_Entry_No
-        {
-            get
-            {
-                return this.reversed_by_Entry_NoField;
-            }
-            set
-            {
-                this.reversed_by_Entry_NoField = value;
+                this.transaction_NoField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Reversed_by_Entry_NoSpecified
+        public bool Transaction_NoSpecified
         {
             get
             {
-                return this.reversed_by_Entry_NoFieldSpecified;
+                return this.transaction_NoFieldSpecified;
             }
             set
             {
-                this.reversed_by_Entry_NoFieldSpecified = value;
+                this.transaction_NoFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
-        public int Reversed_Entry_No
+        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
+        public string Member_No
         {
             get
             {
-                return this.reversed_Entry_NoField;
+                return this.member_NoField;
             }
             set
             {
-                this.reversed_Entry_NoField = value;
+                this.member_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
+        public string Loan_No
+        {
+            get
+            {
+                return this.loan_NoField;
+            }
+            set
+            {
+                this.loan_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
+        public Product_Posting_Type Product_Posting_Type
+        {
+            get
+            {
+                return this.product_Posting_TypeField;
+            }
+            set
+            {
+                this.product_Posting_TypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Reversed_Entry_NoSpecified
+        public bool Product_Posting_TypeSpecified
         {
             get
             {
-                return this.reversed_Entry_NoFieldSpecified;
+                return this.product_Posting_TypeFieldSpecified;
             }
             set
             {
-                this.reversed_Entry_NoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
-        public int Entry_No
-        {
-            get
-            {
-                return this.entry_NoField;
-            }
-            set
-            {
-                this.entry_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Entry_NoSpecified
-        {
-            get
-            {
-                return this.entry_NoFieldSpecified;
-            }
-            set
-            {
-                this.entry_NoFieldSpecified = value;
+                this.product_Posting_TypeFieldSpecified = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/membertransactions")]
-    public enum Transaction_Type
+    public enum Entry_Type
     {
         
         /// <remarks/>
-        _blank_,
+        [System.Xml.Serialization.XmlEnumAttribute("")]
+        Item,
         
         /// <remarks/>
-        Registration_Fee,
+        Initial_Entry,
         
         /// <remarks/>
-        Loan,
+        Application,
         
         /// <remarks/>
-        Repayment,
+        Unrealized_Loss,
         
         /// <remarks/>
-        Withdrawal,
+        Unrealized_Gain,
+        
+        /// <remarks/>
+        Realized_Loss,
+        
+        /// <remarks/>
+        Realized_Gain,
+        
+        /// <remarks/>
+        Payment_Discount,
+        
+        /// <remarks/>
+        Payment_Discount_VAT_Excl,
+        
+        /// <remarks/>
+        Payment_Discount_VAT_Adjustment,
+        
+        /// <remarks/>
+        Appln_Rounding,
+        
+        /// <remarks/>
+        Correction_of_Remaining_Amount,
+        
+        /// <remarks/>
+        Payment_Tolerance,
+        
+        /// <remarks/>
+        Payment_Discount_Tolerance,
+        
+        /// <remarks/>
+        Payment_Tolerance_VAT_Excl,
+        
+        /// <remarks/>
+        Payment_Tolerance_VAT_Adjustment,
+        
+        /// <remarks/>
+        Payment_Discount_Tolerance_VAT_Excl,
+        
+        /// <remarks/>
+        Payment_Discount_Tolerance_VAT_Adjustment,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/membertransactions")]
+    public enum Sacco_Transaction_Type
+    {
+        
+        /// <remarks/>
+        General,
+        
+        /// <remarks/>
+        Cash_Deposit,
+        
+        /// <remarks/>
+        Cash_Withdrawal,
+        
+        /// <remarks/>
+        ATM,
+        
+        /// <remarks/>
+        Loan_Disbursal,
         
         /// <remarks/>
         Interest_Due,
@@ -1117,71 +795,56 @@ namespace MemberTrans
         Interest_Paid,
         
         /// <remarks/>
-        Benevolent_Fund,
+        Principle_Paid,
         
         /// <remarks/>
-        Deposit_Contribution,
+        Acc_Transfer,
         
         /// <remarks/>
-        Penalty_Charged,
+        Cheque_Deposit,
         
         /// <remarks/>
-        Application_Fee,
+        Bankers_Cheque,
         
         /// <remarks/>
-        Appraisal_Fee,
+        Fixed_Deposit,
         
         /// <remarks/>
-        Investment,
+        End_Month_Salary,
         
         /// <remarks/>
-        Unallocated_Funds,
+        Checkoff_Pay,
         
         /// <remarks/>
-        Shares_Capital,
+        Teller_Treasury,
         
         /// <remarks/>
-        Loan_Adjustment,
+        Disb_Rec,
         
         /// <remarks/>
-        Dividend,
-        
-        /// <remarks/>
-        Withholding_Tax,
-        
-        /// <remarks/>
-        Administration_Fee,
-        
-        /// <remarks/>
-        Insurance_Contribution,
-        
-        /// <remarks/>
-        Prepayment,
-        
-        /// <remarks/>
-        Withdrawable_Deposits,
-        
-        /// <remarks/>
-        Xmas_Contribution,
+        Penalty_Due,
         
         /// <remarks/>
         Penalty_Paid,
         
         /// <remarks/>
-        Dev_Shares,
+        Divinded_Processing,
         
         /// <remarks/>
-        Co_op_Shares,
+        Charge,
         
         /// <remarks/>
-        School_Fee,
+        Registration_Fee,
         
         /// <remarks/>
-        Idd_Fitr,
+        Standing_Order,
+        
+        /// <remarks/>
+        Benevolent_Fund,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/membertransactions")]
     public enum Document_Type
     {
@@ -1209,38 +872,53 @@ namespace MemberTrans
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/membertransactions")]
-    public enum Bal_Account_Type
+    public enum Product_Posting_Type
     {
         
         /// <remarks/>
-        G_L_Account,
+        _blank_,
         
         /// <remarks/>
-        Customer,
+        Withdrawable_Deposit,
         
         /// <remarks/>
-        Vendor,
+        Non_Withdrawable_Deposit,
         
         /// <remarks/>
-        Bank_Account,
+        Junior_Account,
         
         /// <remarks/>
-        Fixed_Asset,
+        Share_Capital_Account,
         
         /// <remarks/>
-        Member,
+        Fixed_Deposit_Account,
         
         /// <remarks/>
-        None,
+        Loan_Account,
         
         /// <remarks/>
-        Staff,
+        Investments_Account,
+        
+        /// <remarks/>
+        Holding_Account,
+        
+        /// <remarks/>
+        Holiday_Account,
+        
+        /// <remarks/>
+        Share_Trading_Account,
+        
+        /// <remarks/>
+        Benevolent_Account,
+        
+        /// <remarks/>
+        School_Fee_Account,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/membertransactions")]
     public partial class MemberTransactions_Filter
@@ -1280,16 +958,34 @@ namespace MemberTrans
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/membertransactions")]
     public enum MemberTransactions_Fields
     {
         
         /// <remarks/>
+        Entry_No,
+        
+        /// <remarks/>
+        Vendor_Ledger_Entry_No,
+        
+        /// <remarks/>
+        Entry_Type,
+        
+        /// <remarks/>
+        Sacco_Transaction_Type,
+        
+        /// <remarks/>
         Posting_Date,
         
         /// <remarks/>
-        Transaction_Type,
+        Loan_Product_Name,
+        
+        /// <remarks/>
+        Description,
+        
+        /// <remarks/>
+        Loan_Product_Code,
         
         /// <remarks/>
         Document_Type,
@@ -1298,46 +994,7 @@ namespace MemberTrans
         Document_No,
         
         /// <remarks/>
-        Loan_No,
-        
-        /// <remarks/>
-        Loan_Type,
-        
-        /// <remarks/>
-        Customer_No,
-        
-        /// <remarks/>
-        Description,
-        
-        /// <remarks/>
-        Credit_Amount,
-        
-        /// <remarks/>
-        Debit_Amount,
-        
-        /// <remarks/>
-        Prepayment_Date,
-        
-        /// <remarks/>
-        Global_Dimension_1_Code,
-        
-        /// <remarks/>
-        Global_Dimension_2_Code,
-        
-        /// <remarks/>
-        IC_Partner_Code,
-        
-        /// <remarks/>
-        Salesperson_Code,
-        
-        /// <remarks/>
-        Currency_Code,
-        
-        /// <remarks/>
-        Original_Amount,
-        
-        /// <remarks/>
-        Original_Amt_LCY,
+        Vendor_No,
         
         /// <remarks/>
         Amount,
@@ -1346,65 +1003,44 @@ namespace MemberTrans
         Amount_LCY,
         
         /// <remarks/>
-        Remaining_Amount,
+        Debit_Amount,
         
         /// <remarks/>
-        Remaining_Amt_LCY,
+        Credit_Amount,
         
         /// <remarks/>
-        Bal_Account_Type,
+        Debit_Amount_LCY,
         
         /// <remarks/>
-        Bal_Account_No,
+        Credit_Amount_LCY,
         
         /// <remarks/>
-        Due_Date,
-        
-        /// <remarks/>
-        Pmt_Discount_Date,
-        
-        /// <remarks/>
-        Pmt_Disc_Tolerance_Date,
-        
-        /// <remarks/>
-        Original_Pmt_Disc_Possible,
-        
-        /// <remarks/>
-        Remaining_Pmt_Disc_Possible,
-        
-        /// <remarks/>
-        Max_Payment_Tolerance,
-        
-        /// <remarks/>
-        Open,
-        
-        /// <remarks/>
-        On_Hold,
+        Currency_Code,
         
         /// <remarks/>
         User_ID,
         
         /// <remarks/>
-        Source_Code,
+        Initial_Entry_Global_Dim_1,
         
         /// <remarks/>
-        Reason_Code,
+        Initial_Entry_Global_Dim_2,
         
         /// <remarks/>
-        Reversed,
+        Transaction_No,
         
         /// <remarks/>
-        Reversed_by_Entry_No,
+        Member_No,
         
         /// <remarks/>
-        Reversed_Entry_No,
+        Loan_No,
         
         /// <remarks/>
-        Entry_No,
+        Product_Posting_Type,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class Read
@@ -1424,7 +1060,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class Read_Result
@@ -1444,7 +1080,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class ReadByRecId
@@ -1464,7 +1100,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class ReadByRecId_Result
@@ -1484,7 +1120,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class ReadMultiple
@@ -1513,7 +1149,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class ReadMultiple_Result
@@ -1534,7 +1170,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class IsUpdated
@@ -1554,7 +1190,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class IsUpdated_Result
@@ -1574,7 +1210,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class GetRecIdFromKey
@@ -1594,7 +1230,7 @@ namespace MemberTrans
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/membertransactions", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
@@ -1613,13 +1249,13 @@ namespace MemberTrans
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public interface MemberTransactions_PortChannel : MemberTrans.MemberTransactions_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     public partial class MemberTransactions_PortClient : System.ServiceModel.ClientBase<MemberTrans.MemberTransactions_Port>, MemberTrans.MemberTransactions_Port
     {
         
@@ -1807,6 +1443,13 @@ namespace MemberTrans
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
             if ((endpointConfiguration == EndpointConfiguration.MemberTransactions_Port))
@@ -1825,8 +1468,7 @@ namespace MemberTrans
         {
             if ((endpointConfiguration == EndpointConfiguration.MemberTransactions_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Page/MemberTransac" +
-                        "tions");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:7047/BC260/WS/NATION/Page/MemberTransactions");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

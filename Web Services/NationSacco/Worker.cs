@@ -24,10 +24,11 @@ namespace NationSacco
                 {
                     _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 }
+                await nation.Post();
                 await nation.loancallbacksAsync();
                 await nation.applicationcallbacksAsync();
                 await nation.mobilecallbacksAsync();
-                await nation.Post();
+                
                 await Task.Delay(10000, stoppingToken);
             }
         }

@@ -180,6 +180,8 @@ namespace MobileTransactions
         
         private string call_Back_UrlField;
         
+        private string document_No_InitialField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string Key
@@ -767,6 +769,20 @@ namespace MobileTransactions
                 this.call_Back_UrlField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        public string Document_No_Initial
+        {
+            get
+            {
+                return this.document_No_InitialField;
+            }
+            set
+            {
+                this.document_No_InitialField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -813,10 +829,7 @@ namespace MobileTransactions
         Loan_Disbursement_Mobile_Ovedraft,
         
         /// <remarks/>
-        Loan_Disbursement_for_FOSA,
-        
-        /// <remarks/>
-        _BOSA__x0026__Business_loans,
+        Loan_Disbursement_for_FOSA_BOSA__x0026__Business_loans,
         
         /// <remarks/>
         Member_Onboarding_with_IPRS_AI,
@@ -831,7 +844,7 @@ namespace MobileTransactions
         Balance_Enquiry,
         
         /// <remarks/>
-        _x000A_Mini_Statement,
+        Mini_Statement,
         
         /// <remarks/>
         Loan_Origination,
@@ -871,6 +884,9 @@ namespace MobileTransactions
         
         /// <remarks/>
         Reversal,
+        
+        /// <remarks/>
+        Till_Payment,
     }
     
     /// <remarks/>
@@ -1047,6 +1063,9 @@ namespace MobileTransactions
         
         /// <remarks/>
         Call_Back_Url,
+        
+        /// <remarks/>
+        Document_No_Initial,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1057,19 +1076,15 @@ namespace MobileTransactions
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/transactions", Order=0)]
-        public string Document_No;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/transactions", Order=1)]
-        public string Transaction_Type;
+        public int Entry_No;
         
         public Read()
         {
         }
         
-        public Read(string Document_No, string Transaction_Type)
+        public Read(int Entry_No)
         {
-            this.Document_No = Document_No;
-            this.Transaction_Type = Transaction_Type;
+            this.Entry_No = Entry_No;
         }
     }
     
@@ -1475,11 +1490,10 @@ namespace MobileTransactions
             return base.Channel.Read(request);
         }
         
-        public MobileTransactions.Transactions Read(string Document_No, string Transaction_Type)
+        public MobileTransactions.Transactions Read(int Entry_No)
         {
             MobileTransactions.Read inValue = new MobileTransactions.Read();
-            inValue.Document_No = Document_No;
-            inValue.Transaction_Type = Transaction_Type;
+            inValue.Entry_No = Entry_No;
             MobileTransactions.Read_Result retVal = ((MobileTransactions.Transactions_Port)(this)).Read(inValue);
             return retVal.Transactions;
         }
@@ -1490,11 +1504,10 @@ namespace MobileTransactions
             return base.Channel.ReadAsync(request);
         }
         
-        public System.Threading.Tasks.Task<MobileTransactions.Read_Result> ReadAsync(string Document_No, string Transaction_Type)
+        public System.Threading.Tasks.Task<MobileTransactions.Read_Result> ReadAsync(int Entry_No)
         {
             MobileTransactions.Read inValue = new MobileTransactions.Read();
-            inValue.Document_No = Document_No;
-            inValue.Transaction_Type = Transaction_Type;
+            inValue.Entry_No = Entry_No;
             return ((MobileTransactions.Transactions_Port)(this)).ReadAsync(inValue);
         }
         
@@ -1716,7 +1729,7 @@ namespace MobileTransactions
         {
             if ((endpointConfiguration == EndpointConfiguration.Transactions_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://172.16.7.181:7052/test/WS/Nation Sacco/Page/Transactions");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:46047/BC260/WS/NATION/Page/Transactions");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

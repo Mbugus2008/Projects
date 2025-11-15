@@ -77,6 +77,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\PaymentDetails\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Payments\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\VoteHeads\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -146,6 +161,30 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\PaymentDetails\Payment_Details.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PaymentDetails\Payment_Details.wsdl" />
+    <None Include="Web References\PaymentDetails\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Payments\Payments.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Payments\Payments.wsdl" />
+    <None Include="Web References\Payments\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VoteHeads\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VoteHeads\Vote_Heads.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\VoteHeads\Vote_Heads.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AllEvents\" />
@@ -205,6 +244,39 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Kanisa_MemberGroups_Member_Groups_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%2520PCEA/Page/Payments">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Payments\</RelPath>
+      <UpdateFromURL>http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%2520PCEA/Page/Payments</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Kanisa_Payments_Payments_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%2520PCEA/Page/Payment_Details">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PaymentDetails\</RelPath>
+      <UpdateFromURL>http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%2520PCEA/Page/Payment_Details</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Kanisa_PaymentDetails_Payment_Details_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%2520PCEA/Page/Vote_Heads">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VoteHeads\</RelPath>
+      <UpdateFromURL>http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%2520PCEA/Page/Vote_Heads</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Kanisa_VoteHeads_Vote_Heads_Service</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>

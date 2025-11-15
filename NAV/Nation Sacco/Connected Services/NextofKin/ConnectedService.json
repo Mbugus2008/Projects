@@ -1,7 +1,7 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Page/NofKin"
+      "http://157.173.123.120:7047/BC260/WS/NATION/Page/NofKin"
     ],
     "collectionTypes": [
       "System.Array",
@@ -12,7 +12,7 @@
       "*, NextofKin"
     ],
     "sync": true,
-    "targetFramework": "net8.0",
+    "targetFramework": "net10.0",
     "typeReuseMode": "None"
   }
 }

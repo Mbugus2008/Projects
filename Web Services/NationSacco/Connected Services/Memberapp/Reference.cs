@@ -11,324 +11,104 @@ namespace Memberapp
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", ConfigurationName="Memberapp.Member_Application_Port")]
-    public interface Member_Application_Port
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", ConfigurationName="Memberapp.MemberApplication_Port")]
+    public interface MemberApplication_Port
     {
         
         // CODEGEN: Generating message contract since the wrapper name (Read_Result) of message Read_Result does not match the default value (Read)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:Read", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:Read", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Memberapp.Read_Result Read(Memberapp.Read request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:Read", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:Read", ReplyAction="*")]
         System.Threading.Tasks.Task<Memberapp.Read_Result> ReadAsync(Memberapp.Read request);
         
         // CODEGEN: Generating message contract since the wrapper name (ReadByRecId_Result) of message ReadByRecId_Result does not match the default value (ReadByRecId)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:ReadByRecId", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:ReadByRecId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Memberapp.ReadByRecId_Result ReadByRecId(Memberapp.ReadByRecId request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:ReadByRecId", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:ReadByRecId", ReplyAction="*")]
         System.Threading.Tasks.Task<Memberapp.ReadByRecId_Result> ReadByRecIdAsync(Memberapp.ReadByRecId request);
         
         // CODEGEN: Generating message contract since the wrapper name (ReadMultiple_Result) of message ReadMultiple_Result does not match the default value (ReadMultiple)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:ReadMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:ReadMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Memberapp.ReadMultiple_Result ReadMultiple(Memberapp.ReadMultiple request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:ReadMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:ReadMultiple", ReplyAction="*")]
         System.Threading.Tasks.Task<Memberapp.ReadMultiple_Result> ReadMultipleAsync(Memberapp.ReadMultiple request);
         
         // CODEGEN: Generating message contract since the wrapper name (IsUpdated_Result) of message IsUpdated_Result does not match the default value (IsUpdated)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:IsUpdated", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:IsUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Memberapp.IsUpdated_Result IsUpdated(Memberapp.IsUpdated request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:IsUpdated", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:IsUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<Memberapp.IsUpdated_Result> IsUpdatedAsync(Memberapp.IsUpdated request);
         
         // CODEGEN: Generating message contract since the wrapper name (GetRecIdFromKey_Result) of message GetRecIdFromKey_Result does not match the default value (GetRecIdFromKey)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:GetRecIdFromKey", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:GetRecIdFromKey", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         Memberapp.GetRecIdFromKey_Result GetRecIdFromKey(Memberapp.GetRecIdFromKey request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:GetRecIdFromKey", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/memberapplication:GetRecIdFromKey", ReplyAction="*")]
         System.Threading.Tasks.Task<Memberapp.GetRecIdFromKey_Result> GetRecIdFromKeyAsync(Memberapp.GetRecIdFromKey request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:Create", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Memberapp.Create_Result Create(Memberapp.Create request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:Create", ReplyAction="*")]
-        System.Threading.Tasks.Task<Memberapp.Create_Result> CreateAsync(Memberapp.Create request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:CreateMultiple", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Memberapp.CreateMultiple_Result CreateMultiple(Memberapp.CreateMultiple request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:CreateMultiple", ReplyAction="*")]
-        System.Threading.Tasks.Task<Memberapp.CreateMultiple_Result> CreateMultipleAsync(Memberapp.CreateMultiple request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:Update", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Memberapp.Update_Result Update(Memberapp.Update request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:Update", ReplyAction="*")]
-        System.Threading.Tasks.Task<Memberapp.Update_Result> UpdateAsync(Memberapp.Update request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:UpdateMultiple", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Memberapp.UpdateMultiple_Result UpdateMultiple(Memberapp.UpdateMultiple request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:UpdateMultiple", ReplyAction="*")]
-        System.Threading.Tasks.Task<Memberapp.UpdateMultiple_Result> UpdateMultipleAsync(Memberapp.UpdateMultiple request);
-        
-        // CODEGEN: Generating message contract since the wrapper name (Delete_Result) of message Delete_Result does not match the default value (Delete)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:Delete", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        Memberapp.Delete_Result Delete(Memberapp.Delete request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/member_application:Delete", ReplyAction="*")]
-        System.Threading.Tasks.Task<Memberapp.Delete_Result> DeleteAsync(Memberapp.Delete request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public partial class Member_Application
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication")]
+    public partial class MemberApplication
     {
         
         private string keyField;
         
         private string noField;
         
-        private string nameField;
+        private string categoryField;
         
-        private string search_NameField;
+        private string full_NameField;
         
-        private string name_2Field;
+        private string identification_NoField;
         
-        private string addressField;
+        private string mobile_Phone_NoField;
         
-        private string address_2Field;
+        private string mobile_Transacting_NoField;
         
-        private string phone_NoField;
-        
-        private string global_Dimension_1_CodeField;
-        
-        private string global_Dimension_2_CodeField;
-        
-        private string customer_Posting_GroupField;
-        
-        private string currency_CodeField;
-        
-        private string customer_Price_GroupField;
-        
-        private bool special_EmploymentField;
-        
-        private bool special_EmploymentFieldSpecified;
-        
-        private string special_Employment_DetailsField;
-        
-        private string employer_NameField;
-        
-        private Customer_Type customer_TypeField;
-        
-        private bool customer_TypeFieldSpecified;
-        
-        private System.DateTime registration_DateField;
-        
-        private bool registration_DateFieldSpecified;
-        
-        private Status statusField;
-        
-        private bool statusFieldSpecified;
-        
-        private string employer_CodeField;
+        private string e_MailField;
         
         private System.DateTime date_of_BirthField;
         
         private bool date_of_BirthFieldSpecified;
         
-        private string e_Mail_PersonalField;
+        private string employer_CodeField;
         
-        private string station_DepartmentField;
+        private string kRA_PINField;
         
-        private string home_AddressField;
+        private bool mobileField;
         
-        private string locationField;
+        private bool mobileFieldSpecified;
         
-        private string sub_LocationField;
+        private bool aTMField;
         
-        private string districtField;
-        
-        private string payroll_Staff_NoField;
-        
-        private string iD_No_Group_Registration_NoField;
-        
-        private string mobile_Phone_NoField;
-        
-        private Marital_Status marital_StatusField;
-        
-        private bool marital_StatusFieldSpecified;
-        
-        private string passport_NoField;
-        
-        private Gender genderField;
-        
-        private bool genderFieldSpecified;
-        
-        private decimal monthly_ContributionField;
-        
-        private bool monthly_ContributionFieldSpecified;
-        
-        private decimal investment_B_FField;
-        
-        private bool investment_B_FFieldSpecified;
-        
-        private decimal dividend_AmountField;
-        
-        private bool dividend_AmountFieldSpecified;
-        
-        private string name_of_ChiefField;
-        
-        private string office_Telephone_NoField;
-        
-        private string extension_NoField;
-        
-        private decimal insurance_ContributionField;
-        
-        private bool insurance_ContributionFieldSpecified;
-        
-        private string provinceField;
-        
-        private string current_File_LocationField;
-        
-        private string permanent_AddressField;
-        
-        private string file_Movement_RemarksField;
-        
-        private string office_BranchField;
-        
-        private string departmentField;
-        
-        private string sectionField;
-        
-        private string no_SeriesField;
-        
-        private string occupationField;
-        
-        private string designationField;
-        
-        private Terms_of_Employment terms_of_EmploymentField;
-        
-        private bool terms_of_EmploymentFieldSpecified;
-        
-        private string categoryField;
-        
-        private string post_CodeField;
-        
-        private string cityField;
-        
-        private string contact_PersonField;
-        
-        private string approved_ByField;
-        
-        private string sent_for_Approval_ByField;
-        
-        private string responsibility_CentreField;
-        
-        private string country_Region_CodeField;
-        
-        private string countyField;
-        
-        private string bank_CodeField;
-        
-        private string bank_NameField;
-        
-        private string bank_Account_NoField;
-        
-        private string contact_Person_PhoneField;
-        
-        private string contactPerson_RelationField;
-        
-        private string recruited_ByField;
-        
-        private string contactPerson_OccupationField;
-        
-        private string force_NoField;
-        
-        private string salesperson_CodeField;
-        
-        private Account_Category account_CategoryField;
-        
-        private bool account_CategoryFieldSpecified;
-        
-        private Member_Type member_TypeField;
-        
-        private bool member_TypeFieldSpecified;
-        
-        private string mPESA_Mobile_NoField;
-        
-        private string mPESA_Corporate_NoField;
-        
-        private Source_Of_Funds source_Of_FundsField;
-        
-        private bool source_Of_FundsFieldSpecified;
-        
-        private decimal share_Capital_ContributionField;
-        
-        private bool share_Capital_ContributionFieldSpecified;
-        
-        private string pinField;
-        
-        private bool tax_ExemptedField;
-        
-        private bool tax_ExemptedFieldSpecified;
-        
-        private Type_Of_Organisation type_Of_OrganisationField;
-        
-        private bool type_Of_OrganisationFieldSpecified;
-        
-        private bool group_AccountField;
-        
-        private bool group_AccountFieldSpecified;
-        
-        private string group_Account_NumberField;
-        
-        private string group_Account_NameField;
-        
-        private string house_Plot_NoField;
-        
-        private string road_Street_NoField;
-        
-        private string e_Mail_EmployerField;
-        
-        private string current_AddressField;
-        
-        private string account_TypeField;
-        
-        private string organisation_TypeField;
-        
-        private string staff_No_2Field;
-        
-        private bool skip_Validate_Phone_NoField;
-        
-        private bool skip_Validate_Phone_NoFieldSpecified;
+        private bool aTMFieldSpecified;
         
         private bool call_Back_updatedField;
         
         private bool call_Back_updatedFieldSpecified;
         
-        private string call_Back_UrlField;
+        private string payment_Ref_CodeField;
+        
+        private System.DateTime created_OnField;
+        
+        private bool created_OnFieldSpecified;
         
         private string created_ByField;
+        
+        private string call_Back_URLField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -360,314 +140,90 @@ namespace Memberapp
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Name
+        public string Category
         {
             get
             {
-                return this.nameField;
+                return this.categoryField;
             }
             set
             {
-                this.nameField = value;
+                this.categoryField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string Search_Name
+        public string Full_Name
         {
             get
             {
-                return this.search_NameField;
+                return this.full_NameField;
             }
             set
             {
-                this.search_NameField = value;
+                this.full_NameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string Name_2
+        public string Identification_No
         {
             get
             {
-                return this.name_2Field;
+                return this.identification_NoField;
             }
             set
             {
-                this.name_2Field = value;
+                this.identification_NoField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string Address
+        public string Mobile_Phone_No
         {
             get
             {
-                return this.addressField;
+                return this.mobile_Phone_NoField;
             }
             set
             {
-                this.addressField = value;
+                this.mobile_Phone_NoField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string Address_2
+        public string Mobile_Transacting_No
         {
             get
             {
-                return this.address_2Field;
+                return this.mobile_Transacting_NoField;
             }
             set
             {
-                this.address_2Field = value;
+                this.mobile_Transacting_NoField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public string Phone_No
+        public string E_Mail
         {
             get
             {
-                return this.phone_NoField;
+                return this.e_MailField;
             }
             set
             {
-                this.phone_NoField = value;
+                this.e_MailField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string Global_Dimension_1_Code
-        {
-            get
-            {
-                return this.global_Dimension_1_CodeField;
-            }
-            set
-            {
-                this.global_Dimension_1_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public string Global_Dimension_2_Code
-        {
-            get
-            {
-                return this.global_Dimension_2_CodeField;
-            }
-            set
-            {
-                this.global_Dimension_2_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public string Customer_Posting_Group
-        {
-            get
-            {
-                return this.customer_Posting_GroupField;
-            }
-            set
-            {
-                this.customer_Posting_GroupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
-        public string Currency_Code
-        {
-            get
-            {
-                return this.currency_CodeField;
-            }
-            set
-            {
-                this.currency_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public string Customer_Price_Group
-        {
-            get
-            {
-                return this.customer_Price_GroupField;
-            }
-            set
-            {
-                this.customer_Price_GroupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
-        public bool Special_Employment
-        {
-            get
-            {
-                return this.special_EmploymentField;
-            }
-            set
-            {
-                this.special_EmploymentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Special_EmploymentSpecified
-        {
-            get
-            {
-                return this.special_EmploymentFieldSpecified;
-            }
-            set
-            {
-                this.special_EmploymentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
-        public string Special_Employment_Details
-        {
-            get
-            {
-                return this.special_Employment_DetailsField;
-            }
-            set
-            {
-                this.special_Employment_DetailsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
-        public string Employer_Name
-        {
-            get
-            {
-                return this.employer_NameField;
-            }
-            set
-            {
-                this.employer_NameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
-        public Customer_Type Customer_Type
-        {
-            get
-            {
-                return this.customer_TypeField;
-            }
-            set
-            {
-                this.customer_TypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Customer_TypeSpecified
-        {
-            get
-            {
-                return this.customer_TypeFieldSpecified;
-            }
-            set
-            {
-                this.customer_TypeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=17)]
-        public System.DateTime Registration_Date
-        {
-            get
-            {
-                return this.registration_DateField;
-            }
-            set
-            {
-                this.registration_DateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Registration_DateSpecified
-        {
-            get
-            {
-                return this.registration_DateFieldSpecified;
-            }
-            set
-            {
-                this.registration_DateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
-        public Status Status
-        {
-            get
-            {
-                return this.statusField;
-            }
-            set
-            {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified
-        {
-            get
-            {
-                return this.statusFieldSpecified;
-            }
-            set
-            {
-                this.statusFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
-        public string Employer_Code
-        {
-            get
-            {
-                return this.employer_CodeField;
-            }
-            set
-            {
-                this.employer_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=20)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=8)]
         public System.DateTime Date_of_Birth
         {
             get
@@ -695,1169 +251,91 @@ namespace Memberapp
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=21)]
-        public string E_Mail_Personal
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string Employer_Code
         {
             get
             {
-                return this.e_Mail_PersonalField;
+                return this.employer_CodeField;
             }
             set
             {
-                this.e_Mail_PersonalField = value;
+                this.employer_CodeField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=22)]
-        public string Station_Department
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string KRA_PIN
         {
             get
             {
-                return this.station_DepartmentField;
+                return this.kRA_PINField;
             }
             set
             {
-                this.station_DepartmentField = value;
+                this.kRA_PINField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=23)]
-        public string Home_Address
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public bool Mobile
         {
             get
             {
-                return this.home_AddressField;
+                return this.mobileField;
             }
             set
             {
-                this.home_AddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=24)]
-        public string Location
-        {
-            get
-            {
-                return this.locationField;
-            }
-            set
-            {
-                this.locationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=25)]
-        public string Sub_Location
-        {
-            get
-            {
-                return this.sub_LocationField;
-            }
-            set
-            {
-                this.sub_LocationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=26)]
-        public string District
-        {
-            get
-            {
-                return this.districtField;
-            }
-            set
-            {
-                this.districtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
-        public string Payroll_Staff_No
-        {
-            get
-            {
-                return this.payroll_Staff_NoField;
-            }
-            set
-            {
-                this.payroll_Staff_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
-        public string ID_No_Group_Registration_No
-        {
-            get
-            {
-                return this.iD_No_Group_Registration_NoField;
-            }
-            set
-            {
-                this.iD_No_Group_Registration_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
-        public string Mobile_Phone_No
-        {
-            get
-            {
-                return this.mobile_Phone_NoField;
-            }
-            set
-            {
-                this.mobile_Phone_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
-        public Marital_Status Marital_Status
-        {
-            get
-            {
-                return this.marital_StatusField;
-            }
-            set
-            {
-                this.marital_StatusField = value;
+                this.mobileField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Marital_StatusSpecified
+        public bool MobileSpecified
         {
             get
             {
-                return this.marital_StatusFieldSpecified;
+                return this.mobileFieldSpecified;
             }
             set
             {
-                this.marital_StatusFieldSpecified = value;
+                this.mobileFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
-        public string Passport_No
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public bool ATM
         {
             get
             {
-                return this.passport_NoField;
+                return this.aTMField;
             }
             set
             {
-                this.passport_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
-        public Gender Gender
-        {
-            get
-            {
-                return this.genderField;
-            }
-            set
-            {
-                this.genderField = value;
+                this.aTMField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GenderSpecified
+        public bool ATMSpecified
         {
             get
             {
-                return this.genderFieldSpecified;
+                return this.aTMFieldSpecified;
             }
             set
             {
-                this.genderFieldSpecified = value;
+                this.aTMFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
-        public decimal Monthly_Contribution
-        {
-            get
-            {
-                return this.monthly_ContributionField;
-            }
-            set
-            {
-                this.monthly_ContributionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Monthly_ContributionSpecified
-        {
-            get
-            {
-                return this.monthly_ContributionFieldSpecified;
-            }
-            set
-            {
-                this.monthly_ContributionFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
-        public decimal Investment_B_F
-        {
-            get
-            {
-                return this.investment_B_FField;
-            }
-            set
-            {
-                this.investment_B_FField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Investment_B_FSpecified
-        {
-            get
-            {
-                return this.investment_B_FFieldSpecified;
-            }
-            set
-            {
-                this.investment_B_FFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
-        public decimal Dividend_Amount
-        {
-            get
-            {
-                return this.dividend_AmountField;
-            }
-            set
-            {
-                this.dividend_AmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Dividend_AmountSpecified
-        {
-            get
-            {
-                return this.dividend_AmountFieldSpecified;
-            }
-            set
-            {
-                this.dividend_AmountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
-        public string Name_of_Chief
-        {
-            get
-            {
-                return this.name_of_ChiefField;
-            }
-            set
-            {
-                this.name_of_ChiefField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
-        public string Office_Telephone_No
-        {
-            get
-            {
-                return this.office_Telephone_NoField;
-            }
-            set
-            {
-                this.office_Telephone_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
-        public string Extension_No
-        {
-            get
-            {
-                return this.extension_NoField;
-            }
-            set
-            {
-                this.extension_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
-        public decimal Insurance_Contribution
-        {
-            get
-            {
-                return this.insurance_ContributionField;
-            }
-            set
-            {
-                this.insurance_ContributionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Insurance_ContributionSpecified
-        {
-            get
-            {
-                return this.insurance_ContributionFieldSpecified;
-            }
-            set
-            {
-                this.insurance_ContributionFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
-        public string Province
-        {
-            get
-            {
-                return this.provinceField;
-            }
-            set
-            {
-                this.provinceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=41)]
-        public string Current_File_Location
-        {
-            get
-            {
-                return this.current_File_LocationField;
-            }
-            set
-            {
-                this.current_File_LocationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=42)]
-        public string Permanent_Address
-        {
-            get
-            {
-                return this.permanent_AddressField;
-            }
-            set
-            {
-                this.permanent_AddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=43)]
-        public string File_Movement_Remarks
-        {
-            get
-            {
-                return this.file_Movement_RemarksField;
-            }
-            set
-            {
-                this.file_Movement_RemarksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=44)]
-        public string Office_Branch
-        {
-            get
-            {
-                return this.office_BranchField;
-            }
-            set
-            {
-                this.office_BranchField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=45)]
-        public string Department
-        {
-            get
-            {
-                return this.departmentField;
-            }
-            set
-            {
-                this.departmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=46)]
-        public string Section
-        {
-            get
-            {
-                return this.sectionField;
-            }
-            set
-            {
-                this.sectionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=47)]
-        public string No_Series
-        {
-            get
-            {
-                return this.no_SeriesField;
-            }
-            set
-            {
-                this.no_SeriesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=48)]
-        public string Occupation
-        {
-            get
-            {
-                return this.occupationField;
-            }
-            set
-            {
-                this.occupationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=49)]
-        public string Designation
-        {
-            get
-            {
-                return this.designationField;
-            }
-            set
-            {
-                this.designationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=50)]
-        public Terms_of_Employment Terms_of_Employment
-        {
-            get
-            {
-                return this.terms_of_EmploymentField;
-            }
-            set
-            {
-                this.terms_of_EmploymentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Terms_of_EmploymentSpecified
-        {
-            get
-            {
-                return this.terms_of_EmploymentFieldSpecified;
-            }
-            set
-            {
-                this.terms_of_EmploymentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=51)]
-        public string Category
-        {
-            get
-            {
-                return this.categoryField;
-            }
-            set
-            {
-                this.categoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=52)]
-        public string Post_Code
-        {
-            get
-            {
-                return this.post_CodeField;
-            }
-            set
-            {
-                this.post_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=53)]
-        public string City
-        {
-            get
-            {
-                return this.cityField;
-            }
-            set
-            {
-                this.cityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=54)]
-        public string Contact_Person
-        {
-            get
-            {
-                return this.contact_PersonField;
-            }
-            set
-            {
-                this.contact_PersonField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=55)]
-        public string Approved_By
-        {
-            get
-            {
-                return this.approved_ByField;
-            }
-            set
-            {
-                this.approved_ByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=56)]
-        public string Sent_for_Approval_By
-        {
-            get
-            {
-                return this.sent_for_Approval_ByField;
-            }
-            set
-            {
-                this.sent_for_Approval_ByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=57)]
-        public string Responsibility_Centre
-        {
-            get
-            {
-                return this.responsibility_CentreField;
-            }
-            set
-            {
-                this.responsibility_CentreField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=58)]
-        public string Country_Region_Code
-        {
-            get
-            {
-                return this.country_Region_CodeField;
-            }
-            set
-            {
-                this.country_Region_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=59)]
-        public string County
-        {
-            get
-            {
-                return this.countyField;
-            }
-            set
-            {
-                this.countyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=60)]
-        public string Bank_Code
-        {
-            get
-            {
-                return this.bank_CodeField;
-            }
-            set
-            {
-                this.bank_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=61)]
-        public string Bank_Name
-        {
-            get
-            {
-                return this.bank_NameField;
-            }
-            set
-            {
-                this.bank_NameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=62)]
-        public string Bank_Account_No
-        {
-            get
-            {
-                return this.bank_Account_NoField;
-            }
-            set
-            {
-                this.bank_Account_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=63)]
-        public string Contact_Person_Phone
-        {
-            get
-            {
-                return this.contact_Person_PhoneField;
-            }
-            set
-            {
-                this.contact_Person_PhoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=64)]
-        public string ContactPerson_Relation
-        {
-            get
-            {
-                return this.contactPerson_RelationField;
-            }
-            set
-            {
-                this.contactPerson_RelationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=65)]
-        public string Recruited_By
-        {
-            get
-            {
-                return this.recruited_ByField;
-            }
-            set
-            {
-                this.recruited_ByField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=66)]
-        public string ContactPerson_Occupation
-        {
-            get
-            {
-                return this.contactPerson_OccupationField;
-            }
-            set
-            {
-                this.contactPerson_OccupationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=67)]
-        public string Force_No
-        {
-            get
-            {
-                return this.force_NoField;
-            }
-            set
-            {
-                this.force_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=68)]
-        public string Salesperson_Code
-        {
-            get
-            {
-                return this.salesperson_CodeField;
-            }
-            set
-            {
-                this.salesperson_CodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=69)]
-        public Account_Category Account_Category
-        {
-            get
-            {
-                return this.account_CategoryField;
-            }
-            set
-            {
-                this.account_CategoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Account_CategorySpecified
-        {
-            get
-            {
-                return this.account_CategoryFieldSpecified;
-            }
-            set
-            {
-                this.account_CategoryFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=70)]
-        public Member_Type Member_Type
-        {
-            get
-            {
-                return this.member_TypeField;
-            }
-            set
-            {
-                this.member_TypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Member_TypeSpecified
-        {
-            get
-            {
-                return this.member_TypeFieldSpecified;
-            }
-            set
-            {
-                this.member_TypeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=71)]
-        public string MPESA_Mobile_No
-        {
-            get
-            {
-                return this.mPESA_Mobile_NoField;
-            }
-            set
-            {
-                this.mPESA_Mobile_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=72)]
-        public string MPESA_Corporate_No
-        {
-            get
-            {
-                return this.mPESA_Corporate_NoField;
-            }
-            set
-            {
-                this.mPESA_Corporate_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=73)]
-        public Source_Of_Funds Source_Of_Funds
-        {
-            get
-            {
-                return this.source_Of_FundsField;
-            }
-            set
-            {
-                this.source_Of_FundsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Source_Of_FundsSpecified
-        {
-            get
-            {
-                return this.source_Of_FundsFieldSpecified;
-            }
-            set
-            {
-                this.source_Of_FundsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=74)]
-        public decimal Share_Capital_Contribution
-        {
-            get
-            {
-                return this.share_Capital_ContributionField;
-            }
-            set
-            {
-                this.share_Capital_ContributionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Share_Capital_ContributionSpecified
-        {
-            get
-            {
-                return this.share_Capital_ContributionFieldSpecified;
-            }
-            set
-            {
-                this.share_Capital_ContributionFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=75)]
-        public string Pin
-        {
-            get
-            {
-                return this.pinField;
-            }
-            set
-            {
-                this.pinField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=76)]
-        public bool Tax_Exempted
-        {
-            get
-            {
-                return this.tax_ExemptedField;
-            }
-            set
-            {
-                this.tax_ExemptedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Tax_ExemptedSpecified
-        {
-            get
-            {
-                return this.tax_ExemptedFieldSpecified;
-            }
-            set
-            {
-                this.tax_ExemptedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=77)]
-        public Type_Of_Organisation Type_Of_Organisation
-        {
-            get
-            {
-                return this.type_Of_OrganisationField;
-            }
-            set
-            {
-                this.type_Of_OrganisationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Type_Of_OrganisationSpecified
-        {
-            get
-            {
-                return this.type_Of_OrganisationFieldSpecified;
-            }
-            set
-            {
-                this.type_Of_OrganisationFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=78)]
-        public bool Group_Account
-        {
-            get
-            {
-                return this.group_AccountField;
-            }
-            set
-            {
-                this.group_AccountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Group_AccountSpecified
-        {
-            get
-            {
-                return this.group_AccountFieldSpecified;
-            }
-            set
-            {
-                this.group_AccountFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=79)]
-        public string Group_Account_Number
-        {
-            get
-            {
-                return this.group_Account_NumberField;
-            }
-            set
-            {
-                this.group_Account_NumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=80)]
-        public string Group_Account_Name
-        {
-            get
-            {
-                return this.group_Account_NameField;
-            }
-            set
-            {
-                this.group_Account_NameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=81)]
-        public string House_Plot_No
-        {
-            get
-            {
-                return this.house_Plot_NoField;
-            }
-            set
-            {
-                this.house_Plot_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=82)]
-        public string Road_Street_No
-        {
-            get
-            {
-                return this.road_Street_NoField;
-            }
-            set
-            {
-                this.road_Street_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=83)]
-        public string E_Mail_Employer
-        {
-            get
-            {
-                return this.e_Mail_EmployerField;
-            }
-            set
-            {
-                this.e_Mail_EmployerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=84)]
-        public string Current_Address
-        {
-            get
-            {
-                return this.current_AddressField;
-            }
-            set
-            {
-                this.current_AddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=85)]
-        public string Account_Type
-        {
-            get
-            {
-                return this.account_TypeField;
-            }
-            set
-            {
-                this.account_TypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=86)]
-        public string Organisation_Type
-        {
-            get
-            {
-                return this.organisation_TypeField;
-            }
-            set
-            {
-                this.organisation_TypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=87)]
-        public string Staff_No_2
-        {
-            get
-            {
-                return this.staff_No_2Field;
-            }
-            set
-            {
-                this.staff_No_2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=88)]
-        public bool Skip_Validate_Phone_No
-        {
-            get
-            {
-                return this.skip_Validate_Phone_NoField;
-            }
-            set
-            {
-                this.skip_Validate_Phone_NoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Skip_Validate_Phone_NoSpecified
-        {
-            get
-            {
-                return this.skip_Validate_Phone_NoFieldSpecified;
-            }
-            set
-            {
-                this.skip_Validate_Phone_NoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=89)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
         public bool Call_Back_updated
         {
             get
@@ -1885,21 +363,49 @@ namespace Memberapp
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=90)]
-        public string Call_Back_Url
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public string Payment_Ref_Code
         {
             get
             {
-                return this.call_Back_UrlField;
+                return this.payment_Ref_CodeField;
             }
             set
             {
-                this.call_Back_UrlField = value;
+                this.payment_Ref_CodeField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=91)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public System.DateTime Created_On
+        {
+            get
+            {
+                return this.created_OnField;
+            }
+            set
+            {
+                this.created_OnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Created_OnSpecified
+        {
+            get
+            {
+                return this.created_OnFieldSpecified;
+            }
+            set
+            {
+                this.created_OnFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
         public string Created_By
         {
             get
@@ -1911,241 +417,36 @@ namespace Memberapp
                 this.created_ByField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public string Call_Back_URL
+        {
+            get
+            {
+                return this.call_Back_URLField;
+            }
+            set
+            {
+                this.call_Back_URLField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Customer_Type
-    {
-        
-        /// <remarks/>
-        _blank_,
-        
-        /// <remarks/>
-        Member,
-        
-        /// <remarks/>
-        FOSA,
-        
-        /// <remarks/>
-        Investments,
-        
-        /// <remarks/>
-        Property,
-        
-        /// <remarks/>
-        Group,
-        
-        /// <remarks/>
-        Non_Members,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Status
-    {
-        
-        /// <remarks/>
-        Open,
-        
-        /// <remarks/>
-        Pending,
-        
-        /// <remarks/>
-        Approved,
-        
-        /// <remarks/>
-        Rejected,
-        
-        /// <remarks/>
-        Converted,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Marital_Status
-    {
-        
-        /// <remarks/>
-        _blank_,
-        
-        /// <remarks/>
-        Single,
-        
-        /// <remarks/>
-        Married,
-        
-        /// <remarks/>
-        Divorced,
-        
-        /// <remarks/>
-        Widower,
-        
-        /// <remarks/>
-        Widow,
-        
-        /// <remarks/>
-        Others,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Gender
-    {
-        
-        /// <remarks/>
-        Male,
-        
-        /// <remarks/>
-        Female,
-        
-        /// <remarks/>
-        Others,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Terms_of_Employment
-    {
-        
-        /// <remarks/>
-        _blank_,
-        
-        /// <remarks/>
-        Permanent__x0026__Pensionable,
-        
-        /// <remarks/>
-        Temporary,
-        
-        /// <remarks/>
-        Contract,
-        
-        /// <remarks/>
-        Others,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Account_Category
-    {
-        
-        /// <remarks/>
-        _blank_,
-        
-        /// <remarks/>
-        Single,
-        
-        /// <remarks/>
-        Corporate,
-        
-        /// <remarks/>
-        Group,
-        
-        /// <remarks/>
-        Non_Member,
-        
-        /// <remarks/>
-        Business,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Member_Type
-    {
-        
-        /// <remarks/>
-        Ordinary,
-        
-        /// <remarks/>
-        Board,
-        
-        /// <remarks/>
-        Staff,
-        
-        /// <remarks/>
-        Contributors,
-        
-        /// <remarks/>
-        Freelance,
-        
-        /// <remarks/>
-        Others,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Source_Of_Funds
-    {
-        
-        /// <remarks/>
-        _blank_,
-        
-        /// <remarks/>
-        Business_Receipts,
-        
-        /// <remarks/>
-        Income_from_Investment,
-        
-        /// <remarks/>
-        Salary,
-        
-        /// <remarks/>
-        Other,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Type_Of_Organisation
-    {
-        
-        /// <remarks/>
-        _blank_,
-        
-        /// <remarks/>
-        Club,
-        
-        /// <remarks/>
-        Association,
-        
-        /// <remarks/>
-        Partnership,
-        
-        /// <remarks/>
-        Investment,
-        
-        /// <remarks/>
-        Merry_go_round,
-        
-        /// <remarks/>
-        Other,
-        
-        /// <remarks/>
-        Group,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public partial class Member_Application_Filter
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication")]
+    public partial class MemberApplication_Filter
     {
         
-        private Member_Application_Fields fieldField;
+        private MemberApplication_Fields fieldField;
         
         private string criteriaField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Member_Application_Fields Field
+        public MemberApplication_Fields Field
         {
             get
             {
@@ -2173,293 +474,71 @@ namespace Memberapp
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application")]
-    public enum Member_Application_Fields
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication")]
+    public enum MemberApplication_Fields
     {
         
         /// <remarks/>
         No,
         
         /// <remarks/>
-        Name,
+        Category,
         
         /// <remarks/>
-        Search_Name,
+        Full_Name,
         
         /// <remarks/>
-        Name_2,
-        
-        /// <remarks/>
-        Address,
-        
-        /// <remarks/>
-        Address_2,
-        
-        /// <remarks/>
-        Phone_No,
-        
-        /// <remarks/>
-        Global_Dimension_1_Code,
-        
-        /// <remarks/>
-        Global_Dimension_2_Code,
-        
-        /// <remarks/>
-        Customer_Posting_Group,
-        
-        /// <remarks/>
-        Currency_Code,
-        
-        /// <remarks/>
-        Customer_Price_Group,
-        
-        /// <remarks/>
-        Special_Employment,
-        
-        /// <remarks/>
-        Special_Employment_Details,
-        
-        /// <remarks/>
-        Employer_Name,
-        
-        /// <remarks/>
-        Customer_Type,
-        
-        /// <remarks/>
-        Registration_Date,
-        
-        /// <remarks/>
-        Status,
-        
-        /// <remarks/>
-        Employer_Code,
-        
-        /// <remarks/>
-        Date_of_Birth,
-        
-        /// <remarks/>
-        E_Mail_Personal,
-        
-        /// <remarks/>
-        Station_Department,
-        
-        /// <remarks/>
-        Home_Address,
-        
-        /// <remarks/>
-        Location,
-        
-        /// <remarks/>
-        Sub_Location,
-        
-        /// <remarks/>
-        District,
-        
-        /// <remarks/>
-        Payroll_Staff_No,
-        
-        /// <remarks/>
-        ID_No_Group_Registration_No,
+        Identification_No,
         
         /// <remarks/>
         Mobile_Phone_No,
         
         /// <remarks/>
-        Marital_Status,
+        Mobile_Transacting_No,
         
         /// <remarks/>
-        Passport_No,
+        E_Mail,
         
         /// <remarks/>
-        Gender,
+        Date_of_Birth,
         
         /// <remarks/>
-        Monthly_Contribution,
+        Employer_Code,
         
         /// <remarks/>
-        Investment_B_F,
+        KRA_PIN,
         
         /// <remarks/>
-        Dividend_Amount,
+        Mobile,
         
         /// <remarks/>
-        Name_of_Chief,
-        
-        /// <remarks/>
-        Office_Telephone_No,
-        
-        /// <remarks/>
-        Extension_No,
-        
-        /// <remarks/>
-        Insurance_Contribution,
-        
-        /// <remarks/>
-        Province,
-        
-        /// <remarks/>
-        Current_File_Location,
-        
-        /// <remarks/>
-        Permanent_Address,
-        
-        /// <remarks/>
-        File_Movement_Remarks,
-        
-        /// <remarks/>
-        Office_Branch,
-        
-        /// <remarks/>
-        Department,
-        
-        /// <remarks/>
-        Section,
-        
-        /// <remarks/>
-        No_Series,
-        
-        /// <remarks/>
-        Occupation,
-        
-        /// <remarks/>
-        Designation,
-        
-        /// <remarks/>
-        Terms_of_Employment,
-        
-        /// <remarks/>
-        Category,
-        
-        /// <remarks/>
-        Post_Code,
-        
-        /// <remarks/>
-        City,
-        
-        /// <remarks/>
-        Contact_Person,
-        
-        /// <remarks/>
-        Approved_By,
-        
-        /// <remarks/>
-        Sent_for_Approval_By,
-        
-        /// <remarks/>
-        Responsibility_Centre,
-        
-        /// <remarks/>
-        Country_Region_Code,
-        
-        /// <remarks/>
-        County,
-        
-        /// <remarks/>
-        Bank_Code,
-        
-        /// <remarks/>
-        Bank_Name,
-        
-        /// <remarks/>
-        Bank_Account_No,
-        
-        /// <remarks/>
-        Contact_Person_Phone,
-        
-        /// <remarks/>
-        ContactPerson_Relation,
-        
-        /// <remarks/>
-        Recruited_By,
-        
-        /// <remarks/>
-        ContactPerson_Occupation,
-        
-        /// <remarks/>
-        Force_No,
-        
-        /// <remarks/>
-        Salesperson_Code,
-        
-        /// <remarks/>
-        Account_Category,
-        
-        /// <remarks/>
-        Member_Type,
-        
-        /// <remarks/>
-        MPESA_Mobile_No,
-        
-        /// <remarks/>
-        MPESA_Corporate_No,
-        
-        /// <remarks/>
-        Source_Of_Funds,
-        
-        /// <remarks/>
-        Share_Capital_Contribution,
-        
-        /// <remarks/>
-        Pin,
-        
-        /// <remarks/>
-        Tax_Exempted,
-        
-        /// <remarks/>
-        Type_Of_Organisation,
-        
-        /// <remarks/>
-        Group_Account,
-        
-        /// <remarks/>
-        Group_Account_Number,
-        
-        /// <remarks/>
-        Group_Account_Name,
-        
-        /// <remarks/>
-        House_Plot_No,
-        
-        /// <remarks/>
-        Road_Street_No,
-        
-        /// <remarks/>
-        E_Mail_Employer,
-        
-        /// <remarks/>
-        Current_Address,
-        
-        /// <remarks/>
-        Account_Type,
-        
-        /// <remarks/>
-        Organisation_Type,
-        
-        /// <remarks/>
-        Staff_No_2,
-        
-        /// <remarks/>
-        Skip_Validate_Phone_No,
+        ATM,
         
         /// <remarks/>
         Call_Back_updated,
         
         /// <remarks/>
-        Call_Back_Url,
+        Payment_Ref_Code,
+        
+        /// <remarks/>
+        Created_On,
         
         /// <remarks/>
         Created_By,
+        
+        /// <remarks/>
+        Call_Back_URL,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class Read
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
         public string No;
         
         public Read()
@@ -2473,33 +552,33 @@ namespace Memberapp
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class Read_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        public Memberapp.Member_Application Member_Application;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
+        public Memberapp.MemberApplication MemberApplication;
         
         public Read_Result()
         {
         }
         
-        public Read_Result(Memberapp.Member_Application Member_Application)
+        public Read_Result(Memberapp.MemberApplication MemberApplication)
         {
-            this.Member_Application = Member_Application;
+            this.MemberApplication = MemberApplication;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class ReadByRecId
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
         public string recId;
         
         public ReadByRecId()
@@ -2513,47 +592,47 @@ namespace Memberapp
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class ReadByRecId_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        public Memberapp.Member_Application Member_Application;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
+        public Memberapp.MemberApplication MemberApplication;
         
         public ReadByRecId_Result()
         {
         }
         
-        public ReadByRecId_Result(Memberapp.Member_Application Member_Application)
+        public ReadByRecId_Result(Memberapp.MemberApplication MemberApplication)
         {
-            this.Member_Application = Member_Application;
+            this.MemberApplication = MemberApplication;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class ReadMultiple
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("filter")]
-        public Memberapp.Member_Application_Filter[] filter;
+        public Memberapp.MemberApplication_Filter[] filter;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=1)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=1)]
         public string bookmarkKey;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=2)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=2)]
         public int setSize;
         
         public ReadMultiple()
         {
         }
         
-        public ReadMultiple(Memberapp.Member_Application_Filter[] filter, string bookmarkKey, int setSize)
+        public ReadMultiple(Memberapp.MemberApplication_Filter[] filter, string bookmarkKey, int setSize)
         {
             this.filter = filter;
             this.bookmarkKey = bookmarkKey;
@@ -2562,34 +641,34 @@ namespace Memberapp
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class ReadMultiple_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadMultiple_Result", Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadMultiple_Result", Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Memberapp.Member_Application[] ReadMultiple_Result1;
+        public Memberapp.MemberApplication[] ReadMultiple_Result1;
         
         public ReadMultiple_Result()
         {
         }
         
-        public ReadMultiple_Result(Memberapp.Member_Application[] ReadMultiple_Result1)
+        public ReadMultiple_Result(Memberapp.MemberApplication[] ReadMultiple_Result1)
         {
             this.ReadMultiple_Result1 = ReadMultiple_Result1;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class IsUpdated
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
         public string Key;
         
         public IsUpdated()
@@ -2603,13 +682,13 @@ namespace Memberapp
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class IsUpdated_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUpdated_Result", Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUpdated_Result", Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
         public bool IsUpdated_Result1;
         
         public IsUpdated_Result()
@@ -2623,13 +702,13 @@ namespace Memberapp
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class GetRecIdFromKey
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
         public string Key;
         
         public GetRecIdFromKey()
@@ -2643,13 +722,13 @@ namespace Memberapp
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/memberapplication", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetRecIdFromKey_Result", Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetRecIdFromKey_Result", Namespace="urn:microsoft-dynamics-schemas/page/memberapplication", Order=0)]
         public string GetRecIdFromKey_Result1;
         
         public GetRecIdFromKey_Result()
@@ -2662,210 +741,14 @@ namespace Memberapp
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class Create
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        public Memberapp.Member_Application Member_Application;
-        
-        public Create()
-        {
-        }
-        
-        public Create(Memberapp.Member_Application Member_Application)
-        {
-            this.Member_Application = Member_Application;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class Create_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        public Memberapp.Member_Application Member_Application;
-        
-        public Create_Result()
-        {
-        }
-        
-        public Create_Result(Memberapp.Member_Application Member_Application)
-        {
-            this.Member_Application = Member_Application;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class CreateMultiple
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Memberapp.Member_Application[] Member_Application_List;
-        
-        public CreateMultiple()
-        {
-        }
-        
-        public CreateMultiple(Memberapp.Member_Application[] Member_Application_List)
-        {
-            this.Member_Application_List = Member_Application_List;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class CreateMultiple_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Memberapp.Member_Application[] Member_Application_List;
-        
-        public CreateMultiple_Result()
-        {
-        }
-        
-        public CreateMultiple_Result(Memberapp.Member_Application[] Member_Application_List)
-        {
-            this.Member_Application_List = Member_Application_List;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class Update
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        public Memberapp.Member_Application Member_Application;
-        
-        public Update()
-        {
-        }
-        
-        public Update(Memberapp.Member_Application Member_Application)
-        {
-            this.Member_Application = Member_Application;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class Update_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        public Memberapp.Member_Application Member_Application;
-        
-        public Update_Result()
-        {
-        }
-        
-        public Update_Result(Memberapp.Member_Application Member_Application)
-        {
-            this.Member_Application = Member_Application;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class UpdateMultiple
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Memberapp.Member_Application[] Member_Application_List;
-        
-        public UpdateMultiple()
-        {
-        }
-        
-        public UpdateMultiple(Memberapp.Member_Application[] Member_Application_List)
-        {
-            this.Member_Application_List = Member_Application_List;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class UpdateMultiple_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public Memberapp.Member_Application[] Member_Application_List;
-        
-        public UpdateMultiple_Result()
-        {
-        }
-        
-        public UpdateMultiple_Result(Memberapp.Member_Application[] Member_Application_List)
-        {
-            this.Member_Application_List = Member_Application_List;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class Delete
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        public string Key;
-        
-        public Delete()
-        {
-        }
-        
-        public Delete(string Key)
-        {
-            this.Key = Key;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/member_application", IsWrapped=true)]
-    public partial class Delete_Result
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="Delete_Result", Namespace="urn:microsoft-dynamics-schemas/page/member_application", Order=0)]
-        public bool Delete_Result1;
-        
-        public Delete_Result()
-        {
-        }
-        
-        public Delete_Result(bool Delete_Result1)
-        {
-            this.Delete_Result1 = Delete_Result1;
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface Member_Application_PortChannel : Memberapp.Member_Application_Port, System.ServiceModel.IClientChannel
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    public interface MemberApplication_PortChannel : Memberapp.MemberApplication_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class Member_Application_PortClient : System.ServiceModel.ClientBase<Memberapp.Member_Application_Port>, Memberapp.Member_Application_Port
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    public partial class MemberApplication_PortClient : System.ServiceModel.ClientBase<Memberapp.MemberApplication_Port>, Memberapp.MemberApplication_Port
     {
         
         /// <summary>
@@ -2875,55 +758,55 @@ namespace Memberapp
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public Member_Application_PortClient() : 
-                base(Member_Application_PortClient.GetDefaultBinding(), Member_Application_PortClient.GetDefaultEndpointAddress())
+        public MemberApplication_PortClient() : 
+                base(MemberApplication_PortClient.GetDefaultBinding(), MemberApplication_PortClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.Member_Application_Port.ToString();
+            this.Endpoint.Name = EndpointConfiguration.MemberApplication_Port.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Member_Application_PortClient(EndpointConfiguration endpointConfiguration) : 
-                base(Member_Application_PortClient.GetBindingForEndpoint(endpointConfiguration), Member_Application_PortClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public Member_Application_PortClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(Member_Application_PortClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public MemberApplication_PortClient(EndpointConfiguration endpointConfiguration) : 
+                base(MemberApplication_PortClient.GetBindingForEndpoint(endpointConfiguration), MemberApplication_PortClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Member_Application_PortClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(Member_Application_PortClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public MemberApplication_PortClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(MemberApplication_PortClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Member_Application_PortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MemberApplication_PortClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(MemberApplication_PortClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public MemberApplication_PortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.Read_Result Memberapp.Member_Application_Port.Read(Memberapp.Read request)
+        Memberapp.Read_Result Memberapp.MemberApplication_Port.Read(Memberapp.Read request)
         {
             return base.Channel.Read(request);
         }
         
-        public Memberapp.Member_Application Read(string No)
+        public Memberapp.MemberApplication Read(string No)
         {
             Memberapp.Read inValue = new Memberapp.Read();
             inValue.No = No;
-            Memberapp.Read_Result retVal = ((Memberapp.Member_Application_Port)(this)).Read(inValue);
-            return retVal.Member_Application;
+            Memberapp.Read_Result retVal = ((Memberapp.MemberApplication_Port)(this)).Read(inValue);
+            return retVal.MemberApplication;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Memberapp.Read_Result> Memberapp.Member_Application_Port.ReadAsync(Memberapp.Read request)
+        System.Threading.Tasks.Task<Memberapp.Read_Result> Memberapp.MemberApplication_Port.ReadAsync(Memberapp.Read request)
         {
             return base.Channel.ReadAsync(request);
         }
@@ -2932,25 +815,25 @@ namespace Memberapp
         {
             Memberapp.Read inValue = new Memberapp.Read();
             inValue.No = No;
-            return ((Memberapp.Member_Application_Port)(this)).ReadAsync(inValue);
+            return ((Memberapp.MemberApplication_Port)(this)).ReadAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.ReadByRecId_Result Memberapp.Member_Application_Port.ReadByRecId(Memberapp.ReadByRecId request)
+        Memberapp.ReadByRecId_Result Memberapp.MemberApplication_Port.ReadByRecId(Memberapp.ReadByRecId request)
         {
             return base.Channel.ReadByRecId(request);
         }
         
-        public Memberapp.Member_Application ReadByRecId(string recId)
+        public Memberapp.MemberApplication ReadByRecId(string recId)
         {
             Memberapp.ReadByRecId inValue = new Memberapp.ReadByRecId();
             inValue.recId = recId;
-            Memberapp.ReadByRecId_Result retVal = ((Memberapp.Member_Application_Port)(this)).ReadByRecId(inValue);
-            return retVal.Member_Application;
+            Memberapp.ReadByRecId_Result retVal = ((Memberapp.MemberApplication_Port)(this)).ReadByRecId(inValue);
+            return retVal.MemberApplication;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Memberapp.ReadByRecId_Result> Memberapp.Member_Application_Port.ReadByRecIdAsync(Memberapp.ReadByRecId request)
+        System.Threading.Tasks.Task<Memberapp.ReadByRecId_Result> Memberapp.MemberApplication_Port.ReadByRecIdAsync(Memberapp.ReadByRecId request)
         {
             return base.Channel.ReadByRecIdAsync(request);
         }
@@ -2959,42 +842,42 @@ namespace Memberapp
         {
             Memberapp.ReadByRecId inValue = new Memberapp.ReadByRecId();
             inValue.recId = recId;
-            return ((Memberapp.Member_Application_Port)(this)).ReadByRecIdAsync(inValue);
+            return ((Memberapp.MemberApplication_Port)(this)).ReadByRecIdAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.ReadMultiple_Result Memberapp.Member_Application_Port.ReadMultiple(Memberapp.ReadMultiple request)
+        Memberapp.ReadMultiple_Result Memberapp.MemberApplication_Port.ReadMultiple(Memberapp.ReadMultiple request)
         {
             return base.Channel.ReadMultiple(request);
         }
         
-        public Memberapp.Member_Application[] ReadMultiple(Memberapp.Member_Application_Filter[] filter, string bookmarkKey, int setSize)
+        public Memberapp.MemberApplication[] ReadMultiple(Memberapp.MemberApplication_Filter[] filter, string bookmarkKey, int setSize)
         {
             Memberapp.ReadMultiple inValue = new Memberapp.ReadMultiple();
             inValue.filter = filter;
             inValue.bookmarkKey = bookmarkKey;
             inValue.setSize = setSize;
-            Memberapp.ReadMultiple_Result retVal = ((Memberapp.Member_Application_Port)(this)).ReadMultiple(inValue);
+            Memberapp.ReadMultiple_Result retVal = ((Memberapp.MemberApplication_Port)(this)).ReadMultiple(inValue);
             return retVal.ReadMultiple_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Memberapp.ReadMultiple_Result> Memberapp.Member_Application_Port.ReadMultipleAsync(Memberapp.ReadMultiple request)
+        System.Threading.Tasks.Task<Memberapp.ReadMultiple_Result> Memberapp.MemberApplication_Port.ReadMultipleAsync(Memberapp.ReadMultiple request)
         {
             return base.Channel.ReadMultipleAsync(request);
         }
         
-        public System.Threading.Tasks.Task<Memberapp.ReadMultiple_Result> ReadMultipleAsync(Memberapp.Member_Application_Filter[] filter, string bookmarkKey, int setSize)
+        public System.Threading.Tasks.Task<Memberapp.ReadMultiple_Result> ReadMultipleAsync(Memberapp.MemberApplication_Filter[] filter, string bookmarkKey, int setSize)
         {
             Memberapp.ReadMultiple inValue = new Memberapp.ReadMultiple();
             inValue.filter = filter;
             inValue.bookmarkKey = bookmarkKey;
             inValue.setSize = setSize;
-            return ((Memberapp.Member_Application_Port)(this)).ReadMultipleAsync(inValue);
+            return ((Memberapp.MemberApplication_Port)(this)).ReadMultipleAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.IsUpdated_Result Memberapp.Member_Application_Port.IsUpdated(Memberapp.IsUpdated request)
+        Memberapp.IsUpdated_Result Memberapp.MemberApplication_Port.IsUpdated(Memberapp.IsUpdated request)
         {
             return base.Channel.IsUpdated(request);
         }
@@ -3003,12 +886,12 @@ namespace Memberapp
         {
             Memberapp.IsUpdated inValue = new Memberapp.IsUpdated();
             inValue.Key = Key;
-            Memberapp.IsUpdated_Result retVal = ((Memberapp.Member_Application_Port)(this)).IsUpdated(inValue);
+            Memberapp.IsUpdated_Result retVal = ((Memberapp.MemberApplication_Port)(this)).IsUpdated(inValue);
             return retVal.IsUpdated_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Memberapp.IsUpdated_Result> Memberapp.Member_Application_Port.IsUpdatedAsync(Memberapp.IsUpdated request)
+        System.Threading.Tasks.Task<Memberapp.IsUpdated_Result> Memberapp.MemberApplication_Port.IsUpdatedAsync(Memberapp.IsUpdated request)
         {
             return base.Channel.IsUpdatedAsync(request);
         }
@@ -3017,11 +900,11 @@ namespace Memberapp
         {
             Memberapp.IsUpdated inValue = new Memberapp.IsUpdated();
             inValue.Key = Key;
-            return ((Memberapp.Member_Application_Port)(this)).IsUpdatedAsync(inValue);
+            return ((Memberapp.MemberApplication_Port)(this)).IsUpdatedAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.GetRecIdFromKey_Result Memberapp.Member_Application_Port.GetRecIdFromKey(Memberapp.GetRecIdFromKey request)
+        Memberapp.GetRecIdFromKey_Result Memberapp.MemberApplication_Port.GetRecIdFromKey(Memberapp.GetRecIdFromKey request)
         {
             return base.Channel.GetRecIdFromKey(request);
         }
@@ -3030,12 +913,12 @@ namespace Memberapp
         {
             Memberapp.GetRecIdFromKey inValue = new Memberapp.GetRecIdFromKey();
             inValue.Key = Key;
-            Memberapp.GetRecIdFromKey_Result retVal = ((Memberapp.Member_Application_Port)(this)).GetRecIdFromKey(inValue);
+            Memberapp.GetRecIdFromKey_Result retVal = ((Memberapp.MemberApplication_Port)(this)).GetRecIdFromKey(inValue);
             return retVal.GetRecIdFromKey_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Memberapp.GetRecIdFromKey_Result> Memberapp.Member_Application_Port.GetRecIdFromKeyAsync(Memberapp.GetRecIdFromKey request)
+        System.Threading.Tasks.Task<Memberapp.GetRecIdFromKey_Result> Memberapp.MemberApplication_Port.GetRecIdFromKeyAsync(Memberapp.GetRecIdFromKey request)
         {
             return base.Channel.GetRecIdFromKeyAsync(request);
         }
@@ -3044,110 +927,7 @@ namespace Memberapp
         {
             Memberapp.GetRecIdFromKey inValue = new Memberapp.GetRecIdFromKey();
             inValue.Key = Key;
-            return ((Memberapp.Member_Application_Port)(this)).GetRecIdFromKeyAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.Create_Result Memberapp.Member_Application_Port.Create(Memberapp.Create request)
-        {
-            return base.Channel.Create(request);
-        }
-        
-        public void Create(ref Memberapp.Member_Application Member_Application)
-        {
-            Memberapp.Create inValue = new Memberapp.Create();
-            inValue.Member_Application = Member_Application;
-            Memberapp.Create_Result retVal = ((Memberapp.Member_Application_Port)(this)).Create(inValue);
-            Member_Application = retVal.Member_Application;
-        }
-        
-        public System.Threading.Tasks.Task<Memberapp.Create_Result> CreateAsync(Memberapp.Create request)
-        {
-            return base.Channel.CreateAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.CreateMultiple_Result Memberapp.Member_Application_Port.CreateMultiple(Memberapp.CreateMultiple request)
-        {
-            return base.Channel.CreateMultiple(request);
-        }
-        
-        public void CreateMultiple(ref Memberapp.Member_Application[] Member_Application_List)
-        {
-            Memberapp.CreateMultiple inValue = new Memberapp.CreateMultiple();
-            inValue.Member_Application_List = Member_Application_List;
-            Memberapp.CreateMultiple_Result retVal = ((Memberapp.Member_Application_Port)(this)).CreateMultiple(inValue);
-            Member_Application_List = retVal.Member_Application_List;
-        }
-        
-        public System.Threading.Tasks.Task<Memberapp.CreateMultiple_Result> CreateMultipleAsync(Memberapp.CreateMultiple request)
-        {
-            return base.Channel.CreateMultipleAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.Update_Result Memberapp.Member_Application_Port.Update(Memberapp.Update request)
-        {
-            return base.Channel.Update(request);
-        }
-        
-        public void Update(ref Memberapp.Member_Application Member_Application)
-        {
-            Memberapp.Update inValue = new Memberapp.Update();
-            inValue.Member_Application = Member_Application;
-            Memberapp.Update_Result retVal = ((Memberapp.Member_Application_Port)(this)).Update(inValue);
-            Member_Application = retVal.Member_Application;
-        }
-        
-        public System.Threading.Tasks.Task<Memberapp.Update_Result> UpdateAsync(Memberapp.Update request)
-        {
-            return base.Channel.UpdateAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.UpdateMultiple_Result Memberapp.Member_Application_Port.UpdateMultiple(Memberapp.UpdateMultiple request)
-        {
-            return base.Channel.UpdateMultiple(request);
-        }
-        
-        public void UpdateMultiple(ref Memberapp.Member_Application[] Member_Application_List)
-        {
-            Memberapp.UpdateMultiple inValue = new Memberapp.UpdateMultiple();
-            inValue.Member_Application_List = Member_Application_List;
-            Memberapp.UpdateMultiple_Result retVal = ((Memberapp.Member_Application_Port)(this)).UpdateMultiple(inValue);
-            Member_Application_List = retVal.Member_Application_List;
-        }
-        
-        public System.Threading.Tasks.Task<Memberapp.UpdateMultiple_Result> UpdateMultipleAsync(Memberapp.UpdateMultiple request)
-        {
-            return base.Channel.UpdateMultipleAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Memberapp.Delete_Result Memberapp.Member_Application_Port.Delete(Memberapp.Delete request)
-        {
-            return base.Channel.Delete(request);
-        }
-        
-        public bool Delete(string Key)
-        {
-            Memberapp.Delete inValue = new Memberapp.Delete();
-            inValue.Key = Key;
-            Memberapp.Delete_Result retVal = ((Memberapp.Member_Application_Port)(this)).Delete(inValue);
-            return retVal.Delete_Result1;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Memberapp.Delete_Result> Memberapp.Member_Application_Port.DeleteAsync(Memberapp.Delete request)
-        {
-            return base.Channel.DeleteAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<Memberapp.Delete_Result> DeleteAsync(string Key)
-        {
-            Memberapp.Delete inValue = new Memberapp.Delete();
-            inValue.Key = Key;
-            return ((Memberapp.Member_Application_Port)(this)).DeleteAsync(inValue);
+            return ((Memberapp.MemberApplication_Port)(this)).GetRecIdFromKeyAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -3155,9 +935,16 @@ namespace Memberapp
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.Member_Application_Port))
+            if ((endpointConfiguration == EndpointConfiguration.MemberApplication_Port))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -3171,27 +958,27 @@ namespace Memberapp
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.Member_Application_Port))
+            if ((endpointConfiguration == EndpointConfiguration.MemberApplication_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://172.16.7.181:7052/test/WS/Nation Sacco/Page/Member_Application");
+                return new System.ServiceModel.EndpointAddress("http://172.16.7.172:9047/Mobile/WS/NATION/Page/MemberApplication");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return Member_Application_PortClient.GetBindingForEndpoint(EndpointConfiguration.Member_Application_Port);
+            return MemberApplication_PortClient.GetBindingForEndpoint(EndpointConfiguration.MemberApplication_Port);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return Member_Application_PortClient.GetEndpointAddress(EndpointConfiguration.Member_Application_Port);
+            return MemberApplication_PortClient.GetEndpointAddress(EndpointConfiguration.MemberApplication_Port);
         }
         
         public enum EndpointConfiguration
         {
             
-            Member_Application_Port,
+            MemberApplication_Port,
         }
     }
 }

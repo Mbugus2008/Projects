@@ -6,7 +6,7 @@ import 'package:kanisa/models/event.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EventsDetailScreen extends StatefulWidget {
-  const EventsDetailScreen({Key? key}) : super(key: key);
+  const EventsDetailScreen({super.key});
 
   @override
   _EventsDetailScreenState createState() => _EventsDetailScreenState();
@@ -14,7 +14,7 @@ class EventsDetailScreen extends StatefulWidget {
 
 class _EventsDetailScreenState extends State<EventsDetailScreen> {
   EventCategory _selectedCategory = EventCategory.Church;
-  
+
   // Sample data - replace with your actual data source
   final List<Event> _allEvents = [
     Event(
@@ -24,7 +24,8 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
       location: 'Main Sanctuary',
       category: EventCategory.Church,
       imageUrl: 'https://source.unsplash.com/random/800x600/?church,service',
-      description: 'Join us for our weekly Sunday service with worship and the word.',
+      description:
+          'Join us for our weekly Sunday service with worship and the word.',
     ),
     Event(
       title: 'Bible Study Group',
@@ -41,7 +42,8 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
       time: TimeOfDay(hour: 19, minute: 0),
       location: 'Conference Hall',
       category: EventCategory.MyDistricts,
-      imageUrl: 'https://source.unsplash.com/random/800x600/?meeting,conference',
+      imageUrl:
+          'https://source.unsplash.com/random/800x600/?meeting,conference',
       description: 'Quarterly district meeting for all church leaders.',
     ),
     Event(
@@ -63,23 +65,26 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
       description: 'Join us for a time of prayer and intercession.',
     ),
   ];
-  
-  List<Event> get _filteredEvents => _allEvents
-      .where((event) => event.category == _selectedCategory)
-      .toList();
+
+  List<Event> get _filteredEvents =>
+      _allEvents.where((event) => event.category == _selectedCategory).toList();
 
   Widget _buildCategoryTab(EventCategory category) {
     final isSelected = _selectedCategory == category;
     final icon = _getCategoryIcon(category);
-    
+
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
       decoration: BoxDecoration(
-        color: isSelected ? Theme.of(context).primaryColor.withOpacity(0.1) : Colors.transparent,
+        color: isSelected
+            ? Theme.of(context).primaryColor.withOpacity(0.1)
+            : Colors.transparent,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: isSelected ? Theme.of(context).primaryColor : Colors.grey.shade300,
+          color: isSelected
+              ? Theme.of(context).primaryColor
+              : Colors.grey.shade300,
           width: 1.5,
         ),
       ),
@@ -100,8 +105,8 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                 Icon(
                   icon,
                   size: 20,
-                  color: isSelected 
-                      ? Theme.of(context).primaryColor 
+                  color: isSelected
+                      ? Theme.of(context).primaryColor
                       : Colors.grey.shade600,
                 ),
                 SizedBox(width: 8),
@@ -110,8 +115,8 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                    color: isSelected 
-                        ? Theme.of(context).primaryColor 
+                    color: isSelected
+                        ? Theme.of(context).primaryColor
                         : Colors.grey.shade700,
                   ),
                 ),
@@ -122,7 +127,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
       ),
     );
   }
-  
+
   IconData _getCategoryIcon(EventCategory category) {
     switch (category) {
       case EventCategory.Church:
@@ -317,7 +322,8 @@ class _ImageLoader extends StatelessWidget {
           debugPrint('Error loading image: $error');
           return placeholder;
         },
-        memCacheHeight: (height * MediaQuery.of(context).devicePixelRatio).round(),
+        memCacheHeight:
+            (height * MediaQuery.of(context).devicePixelRatio).round(),
         maxHeightDiskCache: (height * 2).round(),
         progressIndicatorBuilder: (context, url, progress) {
           // Show a simple loading indicator without percentage
@@ -440,7 +446,8 @@ class EventCard extends StatelessWidget {
                         vertical: 3,
                       ),
                       decoration: BoxDecoration(
-                        color: _getCategoryColor(event.category).withOpacity(0.9),
+                        color:
+                            _getCategoryColor(event.category).withOpacity(0.9),
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
@@ -485,7 +492,8 @@ class EventCard extends StatelessWidget {
                     // Date and Time
                     Row(
                       children: [
-                        const Icon(Icons.calendar_today, size: 14, color: Colors.grey),
+                        const Icon(Icons.calendar_today,
+                            size: 14, color: Colors.grey),
                         const SizedBox(width: 6),
                         Text(
                           event.formattedDate,
@@ -495,7 +503,8 @@ class EventCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const Icon(Icons.access_time, size: 14, color: Colors.grey),
+                        const Icon(Icons.access_time,
+                            size: 14, color: Colors.grey),
                         const SizedBox(width: 6),
                         Text(
                           event.formattedTime,
@@ -506,12 +515,14 @@ class EventCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    
-                    if (event.location != null && event.location!.isNotEmpty) ...[
+
+                    if (event.location != null &&
+                        event.location!.isNotEmpty) ...[
                       const SizedBox(height: 6),
                       Row(
                         children: [
-                          const Icon(Icons.location_on, size: 14, color: Colors.grey),
+                          const Icon(Icons.location_on,
+                              size: 14, color: Colors.grey),
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
@@ -527,8 +538,9 @@ class EventCard extends StatelessWidget {
                         ],
                       ),
                     ],
-                    
-                    if (event.description != null && event.description!.isNotEmpty) ...[
+
+                    if (event.description != null &&
+                        event.description!.isNotEmpty) ...[
                       const SizedBox(height: 6),
                       Text(
                         event.description!,
@@ -556,14 +568,16 @@ class EventCard extends StatelessWidget {
                           onPressed: () {
                             // Handle reminder
                           },
-                          icon: const Icon(Icons.notifications_none_rounded, size: 16),
+                          icon: const Icon(Icons.notifications_none_rounded,
+                              size: 16),
                           label: const Text(
                             'Remind Me',
                             style: TextStyle(fontSize: 13),
                           ),
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 6),
-                            side: BorderSide(color: Theme.of(context).primaryColor),
+                            side: BorderSide(
+                                color: Theme.of(context).primaryColor),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),

@@ -23,7 +23,7 @@ namespace Collection.Members {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="Members_Binding", Namespace="urn:microsoft-dynamics-schemas/page/members")]
@@ -473,7 +473,7 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -500,49 +500,11 @@ namespace Collection.Members {
         
         private bool statusFieldSpecified;
         
-        private decimal outstanding_PenaltyField;
+        private string passwordField;
         
-        private bool outstanding_PenaltyFieldSpecified;
+        private bool password_ChangedField;
         
-        private decimal dailyrepaymentField;
-        
-        private bool dailyrepaymentFieldSpecified;
-        
-        private decimal savingsField;
-        
-        private bool savingsFieldSpecified;
-        
-        private decimal xmasField;
-        
-        private bool xmasFieldSpecified;
-        
-        private System.DateTime last_update_savingsField;
-        
-        private bool last_update_savingsFieldSpecified;
-        
-        private System.DateTime last_update_xmasField;
-        
-        private bool last_update_xmasFieldSpecified;
-        
-        private System.DateTime last_update_LoanField;
-        
-        private bool last_update_LoanFieldSpecified;
-        
-        private System.DateTime last_Date_ModifiedField;
-        
-        private bool last_Date_ModifiedFieldSpecified;
-        
-        private decimal depositField;
-        
-        private bool depositFieldSpecified;
-        
-        private decimal welfareField;
-        
-        private bool welfareFieldSpecified;
-        
-        private decimal parkingBalField;
-        
-        private bool parkingBalFieldSpecified;
+        private bool password_ChangedFieldSpecified;
         
         private Vehicles_Details_Mbranch[] vehiclesField;
         
@@ -649,237 +611,33 @@ namespace Collection.Members {
         }
         
         /// <remarks/>
-        public decimal Outstanding_Penalty {
+        public string Password {
             get {
-                return this.outstanding_PenaltyField;
+                return this.passwordField;
             }
             set {
-                this.outstanding_PenaltyField = value;
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Password_Changed {
+            get {
+                return this.password_ChangedField;
+            }
+            set {
+                this.password_ChangedField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Outstanding_PenaltySpecified {
+        public bool Password_ChangedSpecified {
             get {
-                return this.outstanding_PenaltyFieldSpecified;
+                return this.password_ChangedFieldSpecified;
             }
             set {
-                this.outstanding_PenaltyFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal dailyrepayment {
-            get {
-                return this.dailyrepaymentField;
-            }
-            set {
-                this.dailyrepaymentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool dailyrepaymentSpecified {
-            get {
-                return this.dailyrepaymentFieldSpecified;
-            }
-            set {
-                this.dailyrepaymentFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Savings {
-            get {
-                return this.savingsField;
-            }
-            set {
-                this.savingsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SavingsSpecified {
-            get {
-                return this.savingsFieldSpecified;
-            }
-            set {
-                this.savingsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Xmas {
-            get {
-                return this.xmasField;
-            }
-            set {
-                this.xmasField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool XmasSpecified {
-            get {
-                return this.xmasFieldSpecified;
-            }
-            set {
-                this.xmasFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Last_update_savings {
-            get {
-                return this.last_update_savingsField;
-            }
-            set {
-                this.last_update_savingsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Last_update_savingsSpecified {
-            get {
-                return this.last_update_savingsFieldSpecified;
-            }
-            set {
-                this.last_update_savingsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Last_update_xmas {
-            get {
-                return this.last_update_xmasField;
-            }
-            set {
-                this.last_update_xmasField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Last_update_xmasSpecified {
-            get {
-                return this.last_update_xmasFieldSpecified;
-            }
-            set {
-                this.last_update_xmasFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Last_update_Loan {
-            get {
-                return this.last_update_LoanField;
-            }
-            set {
-                this.last_update_LoanField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Last_update_LoanSpecified {
-            get {
-                return this.last_update_LoanFieldSpecified;
-            }
-            set {
-                this.last_update_LoanFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Last_Date_Modified {
-            get {
-                return this.last_Date_ModifiedField;
-            }
-            set {
-                this.last_Date_ModifiedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool Last_Date_ModifiedSpecified {
-            get {
-                return this.last_Date_ModifiedFieldSpecified;
-            }
-            set {
-                this.last_Date_ModifiedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Deposit {
-            get {
-                return this.depositField;
-            }
-            set {
-                this.depositField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DepositSpecified {
-            get {
-                return this.depositFieldSpecified;
-            }
-            set {
-                this.depositFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Welfare {
-            get {
-                return this.welfareField;
-            }
-            set {
-                this.welfareField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool WelfareSpecified {
-            get {
-                return this.welfareFieldSpecified;
-            }
-            set {
-                this.welfareFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ParkingBal {
-            get {
-                return this.parkingBalField;
-            }
-            set {
-                this.parkingBalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ParkingBalSpecified {
-            get {
-                return this.parkingBalFieldSpecified;
-            }
-            set {
-                this.parkingBalFieldSpecified = value;
+                this.password_ChangedFieldSpecified = value;
             }
         }
         
@@ -896,7 +654,7 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
     public enum Gender {
@@ -909,7 +667,7 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
     public enum Status {
@@ -922,7 +680,7 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -949,17 +707,11 @@ namespace Collection.Members {
         
         private string id_NumberField;
         
-        private decimal arrearsField;
+        private string fleet_NoField;
         
-        private bool arrearsFieldSpecified;
+        private System.DateTime last_ModificationField;
         
-        private decimal penaltyField;
-        
-        private bool penaltyFieldSpecified;
-        
-        private decimal parkingField;
-        
-        private bool parkingFieldSpecified;
+        private bool last_ModificationFieldSpecified;
         
         /// <remarks/>
         public string Key {
@@ -1066,71 +818,40 @@ namespace Collection.Members {
         }
         
         /// <remarks/>
-        public decimal Arrears {
+        public string Fleet_No {
             get {
-                return this.arrearsField;
+                return this.fleet_NoField;
             }
             set {
-                this.arrearsField = value;
+                this.fleet_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime Last_Modification {
+            get {
+                return this.last_ModificationField;
+            }
+            set {
+                this.last_ModificationField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ArrearsSpecified {
+        public bool Last_ModificationSpecified {
             get {
-                return this.arrearsFieldSpecified;
+                return this.last_ModificationFieldSpecified;
             }
             set {
-                this.arrearsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Penalty {
-            get {
-                return this.penaltyField;
-            }
-            set {
-                this.penaltyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PenaltySpecified {
-            get {
-                return this.penaltyFieldSpecified;
-            }
-            set {
-                this.penaltyFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Parking {
-            get {
-                return this.parkingField;
-            }
-            set {
-                this.parkingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ParkingSpecified {
-            get {
-                return this.parkingFieldSpecified;
-            }
-            set {
-                this.parkingFieldSpecified = value;
+                this.last_ModificationFieldSpecified = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
     public enum Vehicle_Type {
@@ -1158,7 +879,7 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1191,7 +912,7 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
     public enum Members_Fields {
@@ -1218,45 +939,18 @@ namespace Collection.Members {
         Status,
         
         /// <remarks/>
-        Outstanding_Penalty,
+        Password,
         
         /// <remarks/>
-        dailyrepayment,
-        
-        /// <remarks/>
-        Savings,
-        
-        /// <remarks/>
-        Xmas,
-        
-        /// <remarks/>
-        Last_update_savings,
-        
-        /// <remarks/>
-        Last_update_xmas,
-        
-        /// <remarks/>
-        Last_update_Loan,
-        
-        /// <remarks/>
-        Last_Date_Modified,
-        
-        /// <remarks/>
-        Deposit,
-        
-        /// <remarks/>
-        Welfare,
-        
-        /// <remarks/>
-        ParkingBal,
+        Password_Changed,
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void ReadCompletedEventHandler(object sender, ReadCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ReadCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1278,11 +972,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void ReadByRecIdCompletedEventHandler(object sender, ReadByRecIdCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ReadByRecIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1304,11 +998,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void ReadMultipleCompletedEventHandler(object sender, ReadMultipleCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ReadMultipleCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1330,11 +1024,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void IsUpdatedCompletedEventHandler(object sender, IsUpdatedCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class IsUpdatedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1356,11 +1050,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void GetRecIdFromKeyCompletedEventHandler(object sender, GetRecIdFromKeyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetRecIdFromKeyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1382,11 +1076,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void CreateCompletedEventHandler(object sender, CreateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1408,11 +1102,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void CreateMultipleCompletedEventHandler(object sender, CreateMultipleCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreateMultipleCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1434,11 +1128,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void UpdateCompletedEventHandler(object sender, UpdateCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1460,11 +1154,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void UpdateMultipleCompletedEventHandler(object sender, UpdateMultipleCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UpdateMultipleCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1486,11 +1180,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void DeleteCompletedEventHandler(object sender, DeleteCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class DeleteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1512,11 +1206,11 @@ namespace Collection.Members {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void Delete_vehiclesCompletedEventHandler(object sender, Delete_vehiclesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class Delete_vehiclesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

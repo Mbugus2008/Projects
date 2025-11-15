@@ -12,6 +12,8 @@
         <EntityTypeShape EntityType="MobileModel.Sms_keyword" Width="1.5" PointX="4.625" PointY="5" />
         <EntityTypeShape EntityType="MobileModel.MPESA_Transaction" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="MobileModel.Client_Paybill" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="MobileModel.StkPushTransaction" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="MobileModel.Customer_Mobile_Setup" Width="1.5" PointX="0.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

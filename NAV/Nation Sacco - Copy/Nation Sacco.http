@@ -1,0 +1,6 @@
+@Nation_Sacco_HostAddress = http://localhost:5201
+
+GET {{Nation_Sacco_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

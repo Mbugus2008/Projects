@@ -2,12 +2,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:telephony/telephony.dart';
 import 'package:trimline_sms_reader/Apis.dart';
-import 'package:trimline_sms_reader/Controller.dart';
+import 'package:trimline_sms_reader/Controller.dart' hide SmsMessage;
 import 'package:trimline_sms_reader/client/client.dart';
 import 'package:trimline_sms_reader/t__results.dart';
 import 'package:trimline_sms_reader/transaction.dart';
 
 class Kcb extends SmsClients {
+  final Telephony telephony = Telephony.instance;
   @override
   Future<void> getsms() async {
     List<SmsMessage> messages = await telephony.getInboxSms(

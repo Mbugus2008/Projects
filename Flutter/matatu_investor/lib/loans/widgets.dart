@@ -9,9 +9,9 @@ class Loans_summary extends StatelessWidget {
   Loans_summary({
     Key? key,
   }) : super(key: key);
-  MemberController loans = Get.find();
-  //final List<Loan>? loans;
+  final MemberController loans = Get.find();
   final double w = 90;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -56,10 +56,6 @@ class Loans_summary extends StatelessWidget {
   }
 
   SizedBox todays(BuildContext context) {
-    var le = (loans.loan.value
-        .map((item) => item.Monthly_Repayment)
-        .reduce((value, element) => value! + element!));
-
     return SizedBox(
       width: w,
       child: Column(
@@ -70,7 +66,7 @@ class Loans_summary extends StatelessWidget {
           ),
           if (loans.loan.isNotEmpty)
             Text(
-              '(${utilities.formatcurrency.format(((loans.loan.value.map((item) => item.Monthly_Repayment).reduce((value, element) => value! + element!)) ?? 0) / 30)})',
+              '(${utilities.formatcurrency.format(((loans.loan.map((item) => (item.Monthly_Installment ?? item.Monthly_Repayment ?? 0)).reduce((value, element) => value + element)) / 30))})',
               style: Theme.of(context).textTheme.vamounts,
             )
           else
@@ -109,16 +105,17 @@ class Loans_widgets extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              '${loans?.Credit_Number}',
+              '${loans?.Loan_No ?? loans?.Credit_Number ?? 'N/A'}',
               style: Theme.of(context).textTheme.vamounts,
             ),
             Text(
-              '${loans?.Product_Name}',
+              '${loans?.Product_Name ?? 'N/A'}',
               style: TextStyle(fontSize: 10),
             ),
             Text(
-              utilities.formatter
-                  .format(loans?.Credit_Application_Date as DateTime),
+              utilities.formatter.format(loans?.Repayment_Start_Date ??
+                  loans?.Credit_Application_Date ??
+                  DateTime(2019, 1, 1)),
               style: TextStyle(fontSize: 10),
             ),
           ],
@@ -154,7 +151,7 @@ class Loans_widgets extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: Text(
-            utilities.formatcurrency.format(loans?.Amount_In_Arreares),
+            utilities.formatcurrency.format(loans?.Amount_In_Arreares ?? 0),
             style: Theme.of(context).textTheme.vamounts,
           ),
         ),
@@ -164,14 +161,14 @@ class Loans_widgets extends StatelessWidget {
   }
 
   Column today(BuildContext context) {
-    double? mp = loans?.Monthly_Repayment;
+    double mp = loans?.Monthly_Installment ?? loans?.Monthly_Repayment ?? 0;
     return Column(
       children: [
         Spacer(),
         Align(
           alignment: Alignment.centerRight,
           child: Text(
-            utilities.formatcurrency.format(loans?.Amount_Paid_Today),
+            utilities.formatcurrency.format(loans?.Amount_Paid_Today ?? 0),
             style: Theme.of(context).textTheme.vamounts,
           ),
         ),
@@ -179,7 +176,7 @@ class Loans_widgets extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: Text(
-            '/ ${utilities.formatcurrency.format(mp! / 30)}',
+            '/ ${utilities.formatcurrency.format(mp / 30)}',
             style: Theme.of(context).textTheme.vamounts,
           ),
         ),
@@ -231,14 +228,14 @@ class Loans_Totals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var l = loans
-        ?.map((item) => item.Amount_Paid_Today)
-        .reduce((value, element) => value! + element!);
+        ?.map((item) => item.Amount_Paid_Today ?? 0)
+        .reduce((value, element) => value + element);
     var le = (loans
-        ?.map((item) => item.Monthly_Repayment)
-        .reduce((value, element) => value! + element!));
+        ?.map((item) => item.Monthly_Installment ?? item.Monthly_Repayment ?? 0)
+        .reduce((value, element) => value + element));
     var amountpaid = 0.0;
-    if (l != null) {
-      amountpaid = (l - (le! / 30));
+    if (l != null && le != null) {
+      amountpaid = (l - (le / 30));
     }
     return Container(
       color: amountpaid < 0 ? Colors.red : Colors.transparent,
@@ -260,8 +257,8 @@ class Loans_Totals extends StatelessWidget {
 
   Column arrears(BuildContext context) {
     var l = loans
-        ?.map((item) => item.Amount_In_Arreares)
-        .reduce((value, element) => value! + element!);
+        ?.map((item) => item.Amount_In_Arreares ?? 0)
+        .reduce((value, element) => value + element);
     return Column(
       children: [
         Align(
@@ -276,8 +273,8 @@ class Loans_Totals extends StatelessWidget {
 
   Column balance(BuildContext context) {
     var l = loans
-        ?.map((item) => item.loan_balance)
-        .reduce((value, element) => value! + element!);
+        ?.map((item) => item.loan_balance ?? 0)
+        .reduce((value, element) => value + element);
     return Column(
       children: [
         Align(
@@ -292,14 +289,14 @@ class Loans_Totals extends StatelessWidget {
 
   Column todays(BuildContext context) {
     var l = loans
-        ?.map((item) => item.Amount_Paid_Today)
-        .reduce((value, element) => value! + element!);
+        ?.map((item) => item.Amount_Paid_Today ?? 0)
+        .reduce((value, element) => value + element);
     var le = (loans
-        ?.map((item) => item.Monthly_Repayment)
-        .reduce((value, element) => value! + element!));
+        ?.map((item) => item.Monthly_Installment ?? item.Monthly_Repayment ?? 0)
+        .reduce((value, element) => value + element));
     var amount = 0.0;
-    if (l != null) {
-      amount = l - (le! / 30);
+    if (l != null && le != null) {
+      amount = l - (le / 30);
     }
     return Column(
       children: [
@@ -321,7 +318,7 @@ class Loans_Totals extends StatelessWidget {
     return Column(
       children: [
         Text(
-            '${(loans == null ? 0 : loans?.where((e) => e.Credit_Balance! > 0).length)}',
+            '${(loans == null ? 0 : loans?.where((e) => (e.Loan_Balance ?? e.Credit_Balance ?? 0) > 0).length)}',
             style: Theme.of(context).textTheme.bodyLarge),
       ],
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LiveFeedScreen extends StatelessWidget {
-  const LiveFeedScreen({Key? key}) : super(key: key);
+  const LiveFeedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,8 @@ class LiveFeedScreen extends StatelessWidget {
                       SizedBox(height: 30),
                       Text(
                         'Live Stream Coming Soon!',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 20),
                       Text(
@@ -56,7 +57,8 @@ class LiveFeedScreen extends StatelessWidget {
                         label: Text('Get Notified'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue.shade700,
-                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),

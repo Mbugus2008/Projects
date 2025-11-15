@@ -18,18 +18,19 @@ class Results<T> {
       'Desc': Desc,
       'Contents': Contents is List<Tomaps>
           ? (Contents as List<Tomaps>).map((e) => e.toMap()).toList()
-          : (Contents as Tomaps)?.toMap(),
+          : (Contents as Tomaps).toMap(),
     };
   }
 
-  factory Results.fromMap(Map<String, dynamic> map, T Function(dynamic) fromJsonT) {
+  factory Results.fromMap(
+      Map<String, dynamic> map, T Function(dynamic) fromJsonT) {
     var contents = map['Contents'];
     return Results(
       Code: map['Code'] as int?,
       Desc: map['Desc'] as String?,
       Contents: contents != null
           ? (contents is List
-              ? (contents as List).map((item) => fromJsonT(item)).toList() as T
+              ? (contents).map((item) => fromJsonT(item)).toList() as T
               : fromJsonT(contents))
           : null,
     );
@@ -40,6 +41,7 @@ class Results<T> {
   factory Results.fromJson(String source, T Function(dynamic) fromJsonT) =>
       Results.fromMap(json.decode(source), fromJsonT);
 }
+
 class ListResults<T extends Tomaps> {
   int? Code = 0;
   String? Desc = "Successful";

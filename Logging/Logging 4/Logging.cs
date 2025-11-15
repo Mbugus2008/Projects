@@ -265,8 +265,14 @@ namespace Logging
         public Header header { get; set; }
         public Object body { get; set; }
         public string bookmark { get; set; }
-        public int size { set; get; } = 0;      
-
+        public int size { set; get; } = 0;
+        // Properties for single member lookup
+        public string No { get; set; }
+        public string phone { get; set; }
+        public string vehicle { get; set; }
+        public string Account { get; set; }
+        public string Member { get; set; }
+        public string loanNo { get; set; }
     }
 
     public partial class EligibilityRequest

@@ -1,10 +1,13 @@
-﻿using S_Mobile.Controllers.Clients;
+﻿using Newtonsoft.Json;
+using S_Mobile.Controllers.Clients;
 using S_Mobile.Models;
 using S_Mobile.Models.Paybill;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace S_Mobile.Controllers
 {
@@ -121,7 +124,34 @@ namespace S_Mobile.Controllers
             catch (Exception ex) { Logging.Logging.ReportError(ex); }
             return new MpesaResponse() { ResultCode = 0, ResultDesc = "Accepted" };
         }
+        [HttpPost]
+        [Route("api/stkpush")]
+        public MpesaResponse stkpush(MpesaApi.StkCallbackWrapper request)
+        {
+           
+                Logging.Logging.LogEntryOnFile("stk " + request);
 
+            using(var context = new MobileEntities())
+            {
+                var stk = context.StkPushTransactions.Where(s => s.CheckoutRequestID == request.Body.stkCallback.CheckoutRequestID).FirstOrDefault();
+                if (stk != null)
+                {
+                    stk.ResponseCode = request.Body.stkCallback.ResultCode.ToString();
+                    stk.ResponseDescription = request.Body.stkCallback.ResultDesc;
+                    stk.Mpesacode = request.Body.stkCallback.CallbackMetadata.Item.FirstOrDefault(o=> o.Name == "MpesaReceiptNumber").Value.ToString();
+                   
+                    
+                    context.SaveChanges();
+                }
+
+
+            }
+
+
+
+                return  new MpesaResponse() { ResultCode = 0, ResultDesc = "Accepted" }; ;
+            
+        }
         [HttpPost]
         [Route("api/results")]
         public MpesaResponse Results(Results request)

@@ -11,106 +11,106 @@ namespace SubSector_I
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", ConfigurationName="SubSector_I.Sub_Sector_I_Port")]
-    public interface Sub_Sector_I_Port
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", ConfigurationName="SubSector_I.EconomicSubSectors_Port")]
+    public interface EconomicSubSectors_Port
     {
         
         // CODEGEN: Generating message contract since the wrapper name (Read_Result) of message Read_Result does not match the default value (Read)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:Read", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:Read", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.Read_Result Read(SubSector_I.Read request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:Read", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:Read", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.Read_Result> ReadAsync(SubSector_I.Read request);
         
         // CODEGEN: Generating message contract since the wrapper name (ReadByRecId_Result) of message ReadByRecId_Result does not match the default value (ReadByRecId)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:ReadByRecId", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:ReadByRecId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.ReadByRecId_Result ReadByRecId(SubSector_I.ReadByRecId request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:ReadByRecId", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:ReadByRecId", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.ReadByRecId_Result> ReadByRecIdAsync(SubSector_I.ReadByRecId request);
         
         // CODEGEN: Generating message contract since the wrapper name (ReadMultiple_Result) of message ReadMultiple_Result does not match the default value (ReadMultiple)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:ReadMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:ReadMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.ReadMultiple_Result ReadMultiple(SubSector_I.ReadMultiple request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:ReadMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:ReadMultiple", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.ReadMultiple_Result> ReadMultipleAsync(SubSector_I.ReadMultiple request);
         
         // CODEGEN: Generating message contract since the wrapper name (IsUpdated_Result) of message IsUpdated_Result does not match the default value (IsUpdated)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:IsUpdated", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:IsUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.IsUpdated_Result IsUpdated(SubSector_I.IsUpdated request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:IsUpdated", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:IsUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.IsUpdated_Result> IsUpdatedAsync(SubSector_I.IsUpdated request);
         
         // CODEGEN: Generating message contract since the wrapper name (GetRecIdFromKey_Result) of message GetRecIdFromKey_Result does not match the default value (GetRecIdFromKey)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:GetRecIdFromKey", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:GetRecIdFromKey", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.GetRecIdFromKey_Result GetRecIdFromKey(SubSector_I.GetRecIdFromKey request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:GetRecIdFromKey", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:GetRecIdFromKey", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.GetRecIdFromKey_Result> GetRecIdFromKeyAsync(SubSector_I.GetRecIdFromKey request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:Create", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:Create", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.Create_Result Create(SubSector_I.Create request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:Create", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:Create", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.Create_Result> CreateAsync(SubSector_I.Create request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:CreateMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:CreateMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.CreateMultiple_Result CreateMultiple(SubSector_I.CreateMultiple request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:CreateMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:CreateMultiple", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.CreateMultiple_Result> CreateMultipleAsync(SubSector_I.CreateMultiple request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:Update", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:Update", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.Update_Result Update(SubSector_I.Update request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:Update", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:Update", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.Update_Result> UpdateAsync(SubSector_I.Update request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:UpdateMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:UpdateMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.UpdateMultiple_Result UpdateMultiple(SubSector_I.UpdateMultiple request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:UpdateMultiple", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:UpdateMultiple", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.UpdateMultiple_Result> UpdateMultipleAsync(SubSector_I.UpdateMultiple request);
         
         // CODEGEN: Generating message contract since the wrapper name (Delete_Result) of message Delete_Result does not match the default value (Delete)
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:Delete", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:Delete", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         SubSector_I.Delete_Result Delete(SubSector_I.Delete request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/sub_sector_i:Delete", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/page/economicsubsectors:Delete", ReplyAction="*")]
         System.Threading.Tasks.Task<SubSector_I.Delete_Result> DeleteAsync(SubSector_I.Delete request);
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i")]
-    public partial class Sub_Sector_I
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors")]
+    public partial class EconomicSubSectors
     {
         
         private string keyField;
         
-        private string sasra_Sub_Sector_IField;
+        private string sector_CodeField;
         
-        private string detailsField;
+        private string sub_Sector_CodeField;
         
-        private string sasra_MainField;
+        private string sub_Sector_NameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -128,61 +128,61 @@ namespace SubSector_I
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Sasra_Sub_Sector_I
+        public string Sector_Code
         {
             get
             {
-                return this.sasra_Sub_Sector_IField;
+                return this.sector_CodeField;
             }
             set
             {
-                this.sasra_Sub_Sector_IField = value;
+                this.sector_CodeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Details
+        public string Sub_Sector_Code
         {
             get
             {
-                return this.detailsField;
+                return this.sub_Sector_CodeField;
             }
             set
             {
-                this.detailsField = value;
+                this.sub_Sector_CodeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string Sasra_Main
+        public string Sub_Sector_Name
         {
             get
             {
-                return this.sasra_MainField;
+                return this.sub_Sector_NameField;
             }
             set
             {
-                this.sasra_MainField = value;
+                this.sub_Sector_NameField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i")]
-    public partial class Sub_Sector_I_Filter
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors")]
+    public partial class EconomicSubSectors_Filter
     {
         
-        private Sub_Sector_I_Fields fieldField;
+        private EconomicSubSectors_Fields fieldField;
         
         private string criteriaField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public Sub_Sector_I_Fields Field
+        public EconomicSubSectors_Fields Field
         {
             get
             {
@@ -210,77 +210,73 @@ namespace SubSector_I
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i")]
-    public enum Sub_Sector_I_Fields
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors")]
+    public enum EconomicSubSectors_Fields
     {
         
         /// <remarks/>
-        Sasra_Sub_Sector_I,
+        Sector_Code,
         
         /// <remarks/>
-        Details,
+        Sub_Sector_Code,
         
         /// <remarks/>
-        Sasra_Main,
+        Sub_Sector_Name,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Read", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class Read
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
-        public string Sasra_Main;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
+        public string Sector_Code;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=1)]
-        public string Sasra_Sub_Sector_I;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=2)]
-        public string Details;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=1)]
+        public string Sub_Sector_Code;
         
         public Read()
         {
         }
         
-        public Read(string Sasra_Main, string Sasra_Sub_Sector_I, string Details)
+        public Read(string Sector_Code, string Sub_Sector_Code)
         {
-            this.Sasra_Main = Sasra_Main;
-            this.Sasra_Sub_Sector_I = Sasra_Sub_Sector_I;
-            this.Details = Details;
+            this.Sector_Code = Sector_Code;
+            this.Sub_Sector_Code = Sub_Sector_Code;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Read_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class Read_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
-        public SubSector_I.Sub_Sector_I Sub_Sector_I;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
+        public SubSector_I.EconomicSubSectors EconomicSubSectors;
         
         public Read_Result()
         {
         }
         
-        public Read_Result(SubSector_I.Sub_Sector_I Sub_Sector_I)
+        public Read_Result(SubSector_I.EconomicSubSectors EconomicSubSectors)
         {
-            this.Sub_Sector_I = Sub_Sector_I;
+            this.EconomicSubSectors = EconomicSubSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class ReadByRecId
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         public string recId;
         
         public ReadByRecId()
@@ -294,47 +290,47 @@ namespace SubSector_I
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadByRecId_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class ReadByRecId_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
-        public SubSector_I.Sub_Sector_I Sub_Sector_I;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
+        public SubSector_I.EconomicSubSectors EconomicSubSectors;
         
         public ReadByRecId_Result()
         {
         }
         
-        public ReadByRecId_Result(SubSector_I.Sub_Sector_I Sub_Sector_I)
+        public ReadByRecId_Result(SubSector_I.EconomicSubSectors EconomicSubSectors)
         {
-            this.Sub_Sector_I = Sub_Sector_I;
+            this.EconomicSubSectors = EconomicSubSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class ReadMultiple
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("filter")]
-        public SubSector_I.Sub_Sector_I_Filter[] filter;
+        public SubSector_I.EconomicSubSectors_Filter[] filter;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=1)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=1)]
         public string bookmarkKey;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=2)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=2)]
         public int setSize;
         
         public ReadMultiple()
         {
         }
         
-        public ReadMultiple(SubSector_I.Sub_Sector_I_Filter[] filter, string bookmarkKey, int setSize)
+        public ReadMultiple(SubSector_I.EconomicSubSectors_Filter[] filter, string bookmarkKey, int setSize)
         {
             this.filter = filter;
             this.bookmarkKey = bookmarkKey;
@@ -343,34 +339,34 @@ namespace SubSector_I
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ReadMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class ReadMultiple_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadMultiple_Result", Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadMultiple_Result", Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public SubSector_I.Sub_Sector_I[] ReadMultiple_Result1;
+        public SubSector_I.EconomicSubSectors[] ReadMultiple_Result1;
         
         public ReadMultiple_Result()
         {
         }
         
-        public ReadMultiple_Result(SubSector_I.Sub_Sector_I[] ReadMultiple_Result1)
+        public ReadMultiple_Result(SubSector_I.EconomicSubSectors[] ReadMultiple_Result1)
         {
             this.ReadMultiple_Result1 = ReadMultiple_Result1;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class IsUpdated
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         public string Key;
         
         public IsUpdated()
@@ -384,13 +380,13 @@ namespace SubSector_I
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IsUpdated_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class IsUpdated_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUpdated_Result", Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="IsUpdated_Result", Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         public bool IsUpdated_Result1;
         
         public IsUpdated_Result()
@@ -404,13 +400,13 @@ namespace SubSector_I
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class GetRecIdFromKey
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         public string Key;
         
         public GetRecIdFromKey()
@@ -424,13 +420,13 @@ namespace SubSector_I
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRecIdFromKey_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class GetRecIdFromKey_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetRecIdFromKey_Result", Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetRecIdFromKey_Result", Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         public string GetRecIdFromKey_Result1;
         
         public GetRecIdFromKey_Result()
@@ -444,169 +440,169 @@ namespace SubSector_I
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Create", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class Create
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
-        public SubSector_I.Sub_Sector_I Sub_Sector_I;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
+        public SubSector_I.EconomicSubSectors EconomicSubSectors;
         
         public Create()
         {
         }
         
-        public Create(SubSector_I.Sub_Sector_I Sub_Sector_I)
+        public Create(SubSector_I.EconomicSubSectors EconomicSubSectors)
         {
-            this.Sub_Sector_I = Sub_Sector_I;
+            this.EconomicSubSectors = EconomicSubSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Create_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class Create_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
-        public SubSector_I.Sub_Sector_I Sub_Sector_I;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
+        public SubSector_I.EconomicSubSectors EconomicSubSectors;
         
         public Create_Result()
         {
         }
         
-        public Create_Result(SubSector_I.Sub_Sector_I Sub_Sector_I)
+        public Create_Result(SubSector_I.EconomicSubSectors EconomicSubSectors)
         {
-            this.Sub_Sector_I = Sub_Sector_I;
+            this.EconomicSubSectors = EconomicSubSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class CreateMultiple
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public SubSector_I.Sub_Sector_I[] Sub_Sector_I_List;
+        public SubSector_I.EconomicSubSectors[] EconomicSubSectors_List;
         
         public CreateMultiple()
         {
         }
         
-        public CreateMultiple(SubSector_I.Sub_Sector_I[] Sub_Sector_I_List)
+        public CreateMultiple(SubSector_I.EconomicSubSectors[] EconomicSubSectors_List)
         {
-            this.Sub_Sector_I_List = Sub_Sector_I_List;
+            this.EconomicSubSectors_List = EconomicSubSectors_List;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class CreateMultiple_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public SubSector_I.Sub_Sector_I[] Sub_Sector_I_List;
+        public SubSector_I.EconomicSubSectors[] EconomicSubSectors_List;
         
         public CreateMultiple_Result()
         {
         }
         
-        public CreateMultiple_Result(SubSector_I.Sub_Sector_I[] Sub_Sector_I_List)
+        public CreateMultiple_Result(SubSector_I.EconomicSubSectors[] EconomicSubSectors_List)
         {
-            this.Sub_Sector_I_List = Sub_Sector_I_List;
+            this.EconomicSubSectors_List = EconomicSubSectors_List;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Update", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class Update
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
-        public SubSector_I.Sub_Sector_I Sub_Sector_I;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
+        public SubSector_I.EconomicSubSectors EconomicSubSectors;
         
         public Update()
         {
         }
         
-        public Update(SubSector_I.Sub_Sector_I Sub_Sector_I)
+        public Update(SubSector_I.EconomicSubSectors EconomicSubSectors)
         {
-            this.Sub_Sector_I = Sub_Sector_I;
+            this.EconomicSubSectors = EconomicSubSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Update_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class Update_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
-        public SubSector_I.Sub_Sector_I Sub_Sector_I;
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
+        public SubSector_I.EconomicSubSectors EconomicSubSectors;
         
         public Update_Result()
         {
         }
         
-        public Update_Result(SubSector_I.Sub_Sector_I Sub_Sector_I)
+        public Update_Result(SubSector_I.EconomicSubSectors EconomicSubSectors)
         {
-            this.Sub_Sector_I = Sub_Sector_I;
+            this.EconomicSubSectors = EconomicSubSectors;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class UpdateMultiple
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public SubSector_I.Sub_Sector_I[] Sub_Sector_I_List;
+        public SubSector_I.EconomicSubSectors[] EconomicSubSectors_List;
         
         public UpdateMultiple()
         {
         }
         
-        public UpdateMultiple(SubSector_I.Sub_Sector_I[] Sub_Sector_I_List)
+        public UpdateMultiple(SubSector_I.EconomicSubSectors[] EconomicSubSectors_List)
         {
-            this.Sub_Sector_I_List = Sub_Sector_I_List;
+            this.EconomicSubSectors_List = EconomicSubSectors_List;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="UpdateMultiple_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class UpdateMultiple_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public SubSector_I.Sub_Sector_I[] Sub_Sector_I_List;
+        public SubSector_I.EconomicSubSectors[] EconomicSubSectors_List;
         
         public UpdateMultiple_Result()
         {
         }
         
-        public UpdateMultiple_Result(SubSector_I.Sub_Sector_I[] Sub_Sector_I_List)
+        public UpdateMultiple_Result(SubSector_I.EconomicSubSectors[] EconomicSubSectors_List)
         {
-            this.Sub_Sector_I_List = Sub_Sector_I_List;
+            this.EconomicSubSectors_List = EconomicSubSectors_List;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class Delete
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         public string Key;
         
         public Delete()
@@ -620,13 +616,13 @@ namespace SubSector_I
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Delete_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", IsWrapped=true)]
     public partial class Delete_Result
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="Delete_Result", Namespace="urn:microsoft-dynamics-schemas/page/sub_sector_i", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="Delete_Result", Namespace="urn:microsoft-dynamics-schemas/page/economicsubsectors", Order=0)]
         public bool Delete_Result1;
         
         public Delete_Result()
@@ -639,14 +635,14 @@ namespace SubSector_I
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface Sub_Sector_I_PortChannel : SubSector_I.Sub_Sector_I_Port, System.ServiceModel.IClientChannel
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    public interface EconomicSubSectors_PortChannel : SubSector_I.EconomicSubSectors_Port, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class Sub_Sector_I_PortClient : System.ServiceModel.ClientBase<SubSector_I.Sub_Sector_I_Port>, SubSector_I.Sub_Sector_I_Port
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    public partial class EconomicSubSectors_PortClient : System.ServiceModel.ClientBase<SubSector_I.EconomicSubSectors_Port>, SubSector_I.EconomicSubSectors_Port
     {
         
         /// <summary>
@@ -656,86 +652,84 @@ namespace SubSector_I
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public Sub_Sector_I_PortClient() : 
-                base(Sub_Sector_I_PortClient.GetDefaultBinding(), Sub_Sector_I_PortClient.GetDefaultEndpointAddress())
+        public EconomicSubSectors_PortClient() : 
+                base(EconomicSubSectors_PortClient.GetDefaultBinding(), EconomicSubSectors_PortClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.Sub_Sector_I_Port.ToString();
+            this.Endpoint.Name = EndpointConfiguration.EconomicSubSectors_Port.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Sub_Sector_I_PortClient(EndpointConfiguration endpointConfiguration) : 
-                base(Sub_Sector_I_PortClient.GetBindingForEndpoint(endpointConfiguration), Sub_Sector_I_PortClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public Sub_Sector_I_PortClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(Sub_Sector_I_PortClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public EconomicSubSectors_PortClient(EndpointConfiguration endpointConfiguration) : 
+                base(EconomicSubSectors_PortClient.GetBindingForEndpoint(endpointConfiguration), EconomicSubSectors_PortClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Sub_Sector_I_PortClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(Sub_Sector_I_PortClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public EconomicSubSectors_PortClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(EconomicSubSectors_PortClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Sub_Sector_I_PortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public EconomicSubSectors_PortClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(EconomicSubSectors_PortClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public EconomicSubSectors_PortClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.Read_Result SubSector_I.Sub_Sector_I_Port.Read(SubSector_I.Read request)
+        SubSector_I.Read_Result SubSector_I.EconomicSubSectors_Port.Read(SubSector_I.Read request)
         {
             return base.Channel.Read(request);
         }
         
-        public SubSector_I.Sub_Sector_I Read(string Sasra_Main, string Sasra_Sub_Sector_I, string Details)
+        public SubSector_I.EconomicSubSectors Read(string Sector_Code, string Sub_Sector_Code)
         {
             SubSector_I.Read inValue = new SubSector_I.Read();
-            inValue.Sasra_Main = Sasra_Main;
-            inValue.Sasra_Sub_Sector_I = Sasra_Sub_Sector_I;
-            inValue.Details = Details;
-            SubSector_I.Read_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).Read(inValue);
-            return retVal.Sub_Sector_I;
+            inValue.Sector_Code = Sector_Code;
+            inValue.Sub_Sector_Code = Sub_Sector_Code;
+            SubSector_I.Read_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).Read(inValue);
+            return retVal.EconomicSubSectors;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SubSector_I.Read_Result> SubSector_I.Sub_Sector_I_Port.ReadAsync(SubSector_I.Read request)
+        System.Threading.Tasks.Task<SubSector_I.Read_Result> SubSector_I.EconomicSubSectors_Port.ReadAsync(SubSector_I.Read request)
         {
             return base.Channel.ReadAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SubSector_I.Read_Result> ReadAsync(string Sasra_Main, string Sasra_Sub_Sector_I, string Details)
+        public System.Threading.Tasks.Task<SubSector_I.Read_Result> ReadAsync(string Sector_Code, string Sub_Sector_Code)
         {
             SubSector_I.Read inValue = new SubSector_I.Read();
-            inValue.Sasra_Main = Sasra_Main;
-            inValue.Sasra_Sub_Sector_I = Sasra_Sub_Sector_I;
-            inValue.Details = Details;
-            return ((SubSector_I.Sub_Sector_I_Port)(this)).ReadAsync(inValue);
+            inValue.Sector_Code = Sector_Code;
+            inValue.Sub_Sector_Code = Sub_Sector_Code;
+            return ((SubSector_I.EconomicSubSectors_Port)(this)).ReadAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.ReadByRecId_Result SubSector_I.Sub_Sector_I_Port.ReadByRecId(SubSector_I.ReadByRecId request)
+        SubSector_I.ReadByRecId_Result SubSector_I.EconomicSubSectors_Port.ReadByRecId(SubSector_I.ReadByRecId request)
         {
             return base.Channel.ReadByRecId(request);
         }
         
-        public SubSector_I.Sub_Sector_I ReadByRecId(string recId)
+        public SubSector_I.EconomicSubSectors ReadByRecId(string recId)
         {
             SubSector_I.ReadByRecId inValue = new SubSector_I.ReadByRecId();
             inValue.recId = recId;
-            SubSector_I.ReadByRecId_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).ReadByRecId(inValue);
-            return retVal.Sub_Sector_I;
+            SubSector_I.ReadByRecId_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).ReadByRecId(inValue);
+            return retVal.EconomicSubSectors;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SubSector_I.ReadByRecId_Result> SubSector_I.Sub_Sector_I_Port.ReadByRecIdAsync(SubSector_I.ReadByRecId request)
+        System.Threading.Tasks.Task<SubSector_I.ReadByRecId_Result> SubSector_I.EconomicSubSectors_Port.ReadByRecIdAsync(SubSector_I.ReadByRecId request)
         {
             return base.Channel.ReadByRecIdAsync(request);
         }
@@ -744,42 +738,42 @@ namespace SubSector_I
         {
             SubSector_I.ReadByRecId inValue = new SubSector_I.ReadByRecId();
             inValue.recId = recId;
-            return ((SubSector_I.Sub_Sector_I_Port)(this)).ReadByRecIdAsync(inValue);
+            return ((SubSector_I.EconomicSubSectors_Port)(this)).ReadByRecIdAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.ReadMultiple_Result SubSector_I.Sub_Sector_I_Port.ReadMultiple(SubSector_I.ReadMultiple request)
+        SubSector_I.ReadMultiple_Result SubSector_I.EconomicSubSectors_Port.ReadMultiple(SubSector_I.ReadMultiple request)
         {
             return base.Channel.ReadMultiple(request);
         }
         
-        public SubSector_I.Sub_Sector_I[] ReadMultiple(SubSector_I.Sub_Sector_I_Filter[] filter, string bookmarkKey, int setSize)
+        public SubSector_I.EconomicSubSectors[] ReadMultiple(SubSector_I.EconomicSubSectors_Filter[] filter, string bookmarkKey, int setSize)
         {
             SubSector_I.ReadMultiple inValue = new SubSector_I.ReadMultiple();
             inValue.filter = filter;
             inValue.bookmarkKey = bookmarkKey;
             inValue.setSize = setSize;
-            SubSector_I.ReadMultiple_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).ReadMultiple(inValue);
+            SubSector_I.ReadMultiple_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).ReadMultiple(inValue);
             return retVal.ReadMultiple_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SubSector_I.ReadMultiple_Result> SubSector_I.Sub_Sector_I_Port.ReadMultipleAsync(SubSector_I.ReadMultiple request)
+        System.Threading.Tasks.Task<SubSector_I.ReadMultiple_Result> SubSector_I.EconomicSubSectors_Port.ReadMultipleAsync(SubSector_I.ReadMultiple request)
         {
             return base.Channel.ReadMultipleAsync(request);
         }
         
-        public System.Threading.Tasks.Task<SubSector_I.ReadMultiple_Result> ReadMultipleAsync(SubSector_I.Sub_Sector_I_Filter[] filter, string bookmarkKey, int setSize)
+        public System.Threading.Tasks.Task<SubSector_I.ReadMultiple_Result> ReadMultipleAsync(SubSector_I.EconomicSubSectors_Filter[] filter, string bookmarkKey, int setSize)
         {
             SubSector_I.ReadMultiple inValue = new SubSector_I.ReadMultiple();
             inValue.filter = filter;
             inValue.bookmarkKey = bookmarkKey;
             inValue.setSize = setSize;
-            return ((SubSector_I.Sub_Sector_I_Port)(this)).ReadMultipleAsync(inValue);
+            return ((SubSector_I.EconomicSubSectors_Port)(this)).ReadMultipleAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.IsUpdated_Result SubSector_I.Sub_Sector_I_Port.IsUpdated(SubSector_I.IsUpdated request)
+        SubSector_I.IsUpdated_Result SubSector_I.EconomicSubSectors_Port.IsUpdated(SubSector_I.IsUpdated request)
         {
             return base.Channel.IsUpdated(request);
         }
@@ -788,12 +782,12 @@ namespace SubSector_I
         {
             SubSector_I.IsUpdated inValue = new SubSector_I.IsUpdated();
             inValue.Key = Key;
-            SubSector_I.IsUpdated_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).IsUpdated(inValue);
+            SubSector_I.IsUpdated_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).IsUpdated(inValue);
             return retVal.IsUpdated_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SubSector_I.IsUpdated_Result> SubSector_I.Sub_Sector_I_Port.IsUpdatedAsync(SubSector_I.IsUpdated request)
+        System.Threading.Tasks.Task<SubSector_I.IsUpdated_Result> SubSector_I.EconomicSubSectors_Port.IsUpdatedAsync(SubSector_I.IsUpdated request)
         {
             return base.Channel.IsUpdatedAsync(request);
         }
@@ -802,11 +796,11 @@ namespace SubSector_I
         {
             SubSector_I.IsUpdated inValue = new SubSector_I.IsUpdated();
             inValue.Key = Key;
-            return ((SubSector_I.Sub_Sector_I_Port)(this)).IsUpdatedAsync(inValue);
+            return ((SubSector_I.EconomicSubSectors_Port)(this)).IsUpdatedAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.GetRecIdFromKey_Result SubSector_I.Sub_Sector_I_Port.GetRecIdFromKey(SubSector_I.GetRecIdFromKey request)
+        SubSector_I.GetRecIdFromKey_Result SubSector_I.EconomicSubSectors_Port.GetRecIdFromKey(SubSector_I.GetRecIdFromKey request)
         {
             return base.Channel.GetRecIdFromKey(request);
         }
@@ -815,12 +809,12 @@ namespace SubSector_I
         {
             SubSector_I.GetRecIdFromKey inValue = new SubSector_I.GetRecIdFromKey();
             inValue.Key = Key;
-            SubSector_I.GetRecIdFromKey_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).GetRecIdFromKey(inValue);
+            SubSector_I.GetRecIdFromKey_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).GetRecIdFromKey(inValue);
             return retVal.GetRecIdFromKey_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SubSector_I.GetRecIdFromKey_Result> SubSector_I.Sub_Sector_I_Port.GetRecIdFromKeyAsync(SubSector_I.GetRecIdFromKey request)
+        System.Threading.Tasks.Task<SubSector_I.GetRecIdFromKey_Result> SubSector_I.EconomicSubSectors_Port.GetRecIdFromKeyAsync(SubSector_I.GetRecIdFromKey request)
         {
             return base.Channel.GetRecIdFromKeyAsync(request);
         }
@@ -829,21 +823,21 @@ namespace SubSector_I
         {
             SubSector_I.GetRecIdFromKey inValue = new SubSector_I.GetRecIdFromKey();
             inValue.Key = Key;
-            return ((SubSector_I.Sub_Sector_I_Port)(this)).GetRecIdFromKeyAsync(inValue);
+            return ((SubSector_I.EconomicSubSectors_Port)(this)).GetRecIdFromKeyAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.Create_Result SubSector_I.Sub_Sector_I_Port.Create(SubSector_I.Create request)
+        SubSector_I.Create_Result SubSector_I.EconomicSubSectors_Port.Create(SubSector_I.Create request)
         {
             return base.Channel.Create(request);
         }
         
-        public void Create(ref SubSector_I.Sub_Sector_I Sub_Sector_I)
+        public void Create(ref SubSector_I.EconomicSubSectors EconomicSubSectors)
         {
             SubSector_I.Create inValue = new SubSector_I.Create();
-            inValue.Sub_Sector_I = Sub_Sector_I;
-            SubSector_I.Create_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).Create(inValue);
-            Sub_Sector_I = retVal.Sub_Sector_I;
+            inValue.EconomicSubSectors = EconomicSubSectors;
+            SubSector_I.Create_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).Create(inValue);
+            EconomicSubSectors = retVal.EconomicSubSectors;
         }
         
         public System.Threading.Tasks.Task<SubSector_I.Create_Result> CreateAsync(SubSector_I.Create request)
@@ -852,17 +846,17 @@ namespace SubSector_I
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.CreateMultiple_Result SubSector_I.Sub_Sector_I_Port.CreateMultiple(SubSector_I.CreateMultiple request)
+        SubSector_I.CreateMultiple_Result SubSector_I.EconomicSubSectors_Port.CreateMultiple(SubSector_I.CreateMultiple request)
         {
             return base.Channel.CreateMultiple(request);
         }
         
-        public void CreateMultiple(ref SubSector_I.Sub_Sector_I[] Sub_Sector_I_List)
+        public void CreateMultiple(ref SubSector_I.EconomicSubSectors[] EconomicSubSectors_List)
         {
             SubSector_I.CreateMultiple inValue = new SubSector_I.CreateMultiple();
-            inValue.Sub_Sector_I_List = Sub_Sector_I_List;
-            SubSector_I.CreateMultiple_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).CreateMultiple(inValue);
-            Sub_Sector_I_List = retVal.Sub_Sector_I_List;
+            inValue.EconomicSubSectors_List = EconomicSubSectors_List;
+            SubSector_I.CreateMultiple_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).CreateMultiple(inValue);
+            EconomicSubSectors_List = retVal.EconomicSubSectors_List;
         }
         
         public System.Threading.Tasks.Task<SubSector_I.CreateMultiple_Result> CreateMultipleAsync(SubSector_I.CreateMultiple request)
@@ -871,17 +865,17 @@ namespace SubSector_I
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.Update_Result SubSector_I.Sub_Sector_I_Port.Update(SubSector_I.Update request)
+        SubSector_I.Update_Result SubSector_I.EconomicSubSectors_Port.Update(SubSector_I.Update request)
         {
             return base.Channel.Update(request);
         }
         
-        public void Update(ref SubSector_I.Sub_Sector_I Sub_Sector_I)
+        public void Update(ref SubSector_I.EconomicSubSectors EconomicSubSectors)
         {
             SubSector_I.Update inValue = new SubSector_I.Update();
-            inValue.Sub_Sector_I = Sub_Sector_I;
-            SubSector_I.Update_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).Update(inValue);
-            Sub_Sector_I = retVal.Sub_Sector_I;
+            inValue.EconomicSubSectors = EconomicSubSectors;
+            SubSector_I.Update_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).Update(inValue);
+            EconomicSubSectors = retVal.EconomicSubSectors;
         }
         
         public System.Threading.Tasks.Task<SubSector_I.Update_Result> UpdateAsync(SubSector_I.Update request)
@@ -890,17 +884,17 @@ namespace SubSector_I
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.UpdateMultiple_Result SubSector_I.Sub_Sector_I_Port.UpdateMultiple(SubSector_I.UpdateMultiple request)
+        SubSector_I.UpdateMultiple_Result SubSector_I.EconomicSubSectors_Port.UpdateMultiple(SubSector_I.UpdateMultiple request)
         {
             return base.Channel.UpdateMultiple(request);
         }
         
-        public void UpdateMultiple(ref SubSector_I.Sub_Sector_I[] Sub_Sector_I_List)
+        public void UpdateMultiple(ref SubSector_I.EconomicSubSectors[] EconomicSubSectors_List)
         {
             SubSector_I.UpdateMultiple inValue = new SubSector_I.UpdateMultiple();
-            inValue.Sub_Sector_I_List = Sub_Sector_I_List;
-            SubSector_I.UpdateMultiple_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).UpdateMultiple(inValue);
-            Sub_Sector_I_List = retVal.Sub_Sector_I_List;
+            inValue.EconomicSubSectors_List = EconomicSubSectors_List;
+            SubSector_I.UpdateMultiple_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).UpdateMultiple(inValue);
+            EconomicSubSectors_List = retVal.EconomicSubSectors_List;
         }
         
         public System.Threading.Tasks.Task<SubSector_I.UpdateMultiple_Result> UpdateMultipleAsync(SubSector_I.UpdateMultiple request)
@@ -909,7 +903,7 @@ namespace SubSector_I
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SubSector_I.Delete_Result SubSector_I.Sub_Sector_I_Port.Delete(SubSector_I.Delete request)
+        SubSector_I.Delete_Result SubSector_I.EconomicSubSectors_Port.Delete(SubSector_I.Delete request)
         {
             return base.Channel.Delete(request);
         }
@@ -918,12 +912,12 @@ namespace SubSector_I
         {
             SubSector_I.Delete inValue = new SubSector_I.Delete();
             inValue.Key = Key;
-            SubSector_I.Delete_Result retVal = ((SubSector_I.Sub_Sector_I_Port)(this)).Delete(inValue);
+            SubSector_I.Delete_Result retVal = ((SubSector_I.EconomicSubSectors_Port)(this)).Delete(inValue);
             return retVal.Delete_Result1;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SubSector_I.Delete_Result> SubSector_I.Sub_Sector_I_Port.DeleteAsync(SubSector_I.Delete request)
+        System.Threading.Tasks.Task<SubSector_I.Delete_Result> SubSector_I.EconomicSubSectors_Port.DeleteAsync(SubSector_I.Delete request)
         {
             return base.Channel.DeleteAsync(request);
         }
@@ -932,7 +926,7 @@ namespace SubSector_I
         {
             SubSector_I.Delete inValue = new SubSector_I.Delete();
             inValue.Key = Key;
-            return ((SubSector_I.Sub_Sector_I_Port)(this)).DeleteAsync(inValue);
+            return ((SubSector_I.EconomicSubSectors_Port)(this)).DeleteAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -940,9 +934,16 @@ namespace SubSector_I
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
         }
         
+        #if !NET6_0_OR_GREATER
+        public virtual System.Threading.Tasks.Task CloseAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
+        }
+        #endif
+        
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.Sub_Sector_I_Port))
+            if ((endpointConfiguration == EndpointConfiguration.EconomicSubSectors_Port))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -956,27 +957,27 @@ namespace SubSector_I
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.Sub_Sector_I_Port))
+            if ((endpointConfiguration == EndpointConfiguration.EconomicSubSectors_Port))
             {
-                return new System.ServiceModel.EndpointAddress("http://2.2.2.2:7047/DynamicsNAV80/WS/CRONUS International Ltd./Page/Sub_Sector_I");
+                return new System.ServiceModel.EndpointAddress("http://157.173.123.120:7047/BC260/WS/NATION/Page/EconomicSubSectors");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return Sub_Sector_I_PortClient.GetBindingForEndpoint(EndpointConfiguration.Sub_Sector_I_Port);
+            return EconomicSubSectors_PortClient.GetBindingForEndpoint(EndpointConfiguration.EconomicSubSectors_Port);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return Sub_Sector_I_PortClient.GetEndpointAddress(EndpointConfiguration.Sub_Sector_I_Port);
+            return EconomicSubSectors_PortClient.GetEndpointAddress(EndpointConfiguration.EconomicSubSectors_Port);
         }
         
         public enum EndpointConfiguration
         {
             
-            Sub_Sector_I_Port,
+            EconomicSubSectors_Port,
         }
     }
 }

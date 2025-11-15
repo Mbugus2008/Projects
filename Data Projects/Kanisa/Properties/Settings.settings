@@ -11,5 +11,14 @@
     <Setting Name="Kanisa_MemberGroups_Member_Groups_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://195.26.249.217:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Member_Groups</Value>
     </Setting>
+    <Setting Name="Kanisa_VoteHeads_Vote_Heads_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Vote_Heads</Value>
+    </Setting>
+    <Setting Name="Kanisa_Payments_Payments_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Payments</Value>
+    </Setting>
+    <Setting Name="Kanisa_PaymentDetails_Payment_Details_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nav.trimline.co.ke:20248/KanisaService/WS/Kirigiti%20PCEA/Page/Payment_Details</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
