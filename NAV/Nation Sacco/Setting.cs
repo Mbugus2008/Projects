@@ -38,7 +38,7 @@ namespace Nation_Sacco
         }
         public static string baseurl(IConfiguration configuration) {
         settings ss = setting(configuration);;  
-            return String.Format("http://{0}:{1}/{2}/WS/{3}/Page/",ss.navsettings.Server,ss.navsettings.Port,ss.navsettings.Instance,ss.navsettings.Companyname);
+            return String.Format("https://{0}:{1}/{2}/WS/{3}/Page/",ss.navsettings.Server,ss.navsettings.Port,ss.navsettings.Instance,ss.navsettings.Companyname);
         }
         public static string baseurl_codeunit(IConfiguration configuration)
         {
