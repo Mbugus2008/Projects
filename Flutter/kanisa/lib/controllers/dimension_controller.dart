@@ -6,7 +6,7 @@ class DimensionController extends GetxController {
   var isLoading = false.obs;
   var districtDimensions = <Dimension>[].obs;
   var groupDimensions = <Dimension>[].obs;
-  
+
   // Observable properties for selected dimensions
   var selectedDistrictDimension = Rx<Dimension?>(null);
   var selectedGroupDimension = Rx<Dimension?>(null);
@@ -18,15 +18,19 @@ class DimensionController extends GetxController {
     super.onInit();
     fetchDimensions();
   }
+
   void fetchDimensions() async {
     isLoading(true);
     try {
       var fetchedDimensions = await ApiClient().fetchDimensions();
       if (fetchedDimensions.isNotEmpty) {
-       
         // Filter out dimensions with the code "LCC"
-        var filteredDistricts = fetchedDimensions.where((d) => d.Dimension_Code == 'DISTRICT' && d.Code != 'LCC').toList();
-        var filteredGroups = fetchedDimensions.where((d) => d.Dimension_Code == 'GROUPS' && d.Code != 'LCC').toList();
+        var filteredDistricts = fetchedDimensions
+            .where((d) => d.Dimension_Code == 'DISTRICT' && d.Code != 'LCC')
+            .toList();
+        var filteredGroups = fetchedDimensions
+            .where((d) => d.Dimension_Code == 'GROUPS' && d.Code != 'LCC')
+            .toList();
         districtDimensions.assignAll(filteredDistricts);
         groupDimensions.assignAll(filteredGroups);
       }
@@ -34,4 +38,4 @@ class DimensionController extends GetxController {
       isLoading(false);
     }
   }
-} 
+}

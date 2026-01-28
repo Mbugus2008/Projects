@@ -71,6 +71,27 @@ class ApiClient extends ChangeNotifier {
     return data.Contents;
   }
 
+  // Method to fetch household members (children/spouse) for a primary member
+  Future<List<Customer>> getHouseholdMembers(String primaryNo) async {
+    try {
+      logger.info('Fetching household members for primary: $primaryNo');
+      var response = await postdata('/household-members?primaryNo=$primaryNo',
+          data: null, isPost: false);
+
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        ListResults<Customer> results = ListResults<Customer>.fromJson(
+            response.body,
+            (item) => Customer.fromJson(item as Map<String, dynamic>));
+        logger.info('Found ${results.Contents?.length ?? 0} household members');
+        return results.Contents ?? [];
+      }
+      return [];
+    } catch (e) {
+      logger.error('Error fetching household members: $e');
+      return [];
+    }
+  }
+
   Future<List<Dimension>> fetchDimensions() async {
     try {
       logger.info('Fetching dimensions from /dimensions endpoint');

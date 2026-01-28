@@ -357,7 +357,7 @@ class PaymentController extends GetxController {
       final paymentDocument = PaymentDocument(
         paymentDetailsList: paymentDetailsList,
         key: '',
-        documentNo: payment.mpesaReceiptNumber ?? payment.reference ?? '',
+        documentNo: payment.reference ?? '',
         memberNo: memberNo,
         date: DateTime.now(),
         dateSpecified: true,

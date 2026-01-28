@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kanisa/controllers/dimension_controller.dart';
 import 'package:kanisa/controllers/registration_controller.dart';
-import 'package:kanisa/models/dimensions.dart';
 import 'package:kanisa/models/account_model.dart';
+import 'package:kanisa/models/dimensions.dart';
 
 class RegistrationScreen extends StatelessWidget {
   final Customer? customer;
@@ -30,30 +30,63 @@ class RegistrationScreen extends StatelessWidget {
         title: Obx(() => Text(_resolveTitle())),
         backgroundColor: Theme.of(context).primaryColor,
         actions: [
-          if (controller.canCreateDescendant)
-            PopupMenuButton<customerRole>(
-              tooltip: 'Add descendant',
-              icon: const Icon(Icons.family_restroom_outlined),
-              onSelected: (role) => _handleAddDescendant(context, role),
-              itemBuilder: (ctx) => const [
-                PopupMenuItem(
-                  value: customerRole.spouse,
-                  child: Text('Add Spouse'),
-                ),
-                PopupMenuItem(
-                  value: customerRole.child,
-                  child: Text('Add Child'),
-                ),
-              ],
-            ),
+          Obx(() => controller.canCreateDescendantObs.value
+              ? IconButton(
+                  tooltip: 'Add Child',
+                  icon: const Icon(Icons.child_care),
+                  onPressed: () =>
+                      _handleAddDescendant(context, customerRole.child),
+                )
+              : const SizedBox.shrink()),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           Customer? result = await controller.submitForm();
 
+          debugPrint('=== Submit Result ===');
+          debugPrint('result: $result');
+          debugPrint('result?.No: ${result?.No}');
+          debugPrint('result?.Name: ${result?.Name}');
+
           if (result != null) {
-            Get.back(result: result); // Return customer when closing the screen
+            // Update controller with registered customer data
+            controller.updateAfterRegistration(result);
+
+            debugPrint('After updateAfterRegistration:');
+            debugPrint(
+                'controller.canCreateDescendant: ${controller.canCreateDescendant}');
+            debugPrint(
+                'controller.relationship.value: ${controller.relationship.value}');
+            debugPrint('=== END Submit Result ===');
+
+            // Show success dialog with options
+            await Get.dialog(
+              AlertDialog(
+                title: const Text('Registration Successful'),
+                content:
+                    Text('${result.Name} has been registered successfully.'),
+                actions: [
+                  if (controller.canCreateDescendant &&
+                      controller.relationship.value == customerRole.primary)
+                    TextButton(
+                      onPressed: () {
+                        Get.back(); // Close dialog
+                        _handleAddDescendant(context, customerRole.child);
+                      },
+                      child: const Text('Add Child'),
+                    ),
+                  TextButton(
+                    onPressed: () {
+                      Get.back(); // Close dialog
+                      Get.back(result: result); // Return to previous screen
+                    },
+                    child: const Text('Done'),
+                  ),
+                ],
+              ),
+              barrierDismissible: false,
+            );
           }
         },
         label: Text('Submit'),
@@ -67,6 +100,55 @@ class RegistrationScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Show relationship banner for spouse/child
+            Obx(() {
+              final role = controller.relationship.value;
+              if (role == customerRole.spouse || role == customerRole.child) {
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: role == customerRole.spouse
+                        ? Colors.pink.shade50
+                        : Colors.blue.shade50,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: role == customerRole.spouse
+                          ? Colors.pink.shade200
+                          : Colors.blue.shade200,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        role == customerRole.spouse
+                            ? Icons.favorite
+                            : Icons.child_care,
+                        color: role == customerRole.spouse
+                            ? Colors.pink
+                            : Colors.blue,
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          role == customerRole.spouse
+                              ? 'Adding spouse to household'
+                              : 'Adding child to household',
+                          style: TextStyle(
+                            color: role == customerRole.spouse
+                                ? Colors.pink.shade700
+                                : Colors.blue.shade700,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              return const SizedBox.shrink();
+            }),
+
             _buildTextField(context, 'Name', Icons.person_outline,
                 controller.nameController,
                 required: true),
@@ -81,8 +163,11 @@ class RegistrationScreen extends StatelessWidget {
             _buildTextField(
                 context, 'Email', Icons.email, controller.emailController),
 
-            _buildTextField(context, 'Occupation', Icons.work_outline,
-                controller.occupationController),
+            // Hide occupation for children
+            Obx(() => controller.relationship.value != customerRole.child
+                ? _buildTextField(context, 'Occupation', Icons.work_outline,
+                    controller.occupationController)
+                : const SizedBox.shrink()),
 
             _buildDatePicker(context, 'Date of Birth', Icons.calendar_today,
                 controller.dateOfBirthController,
@@ -777,7 +862,6 @@ class RegistrationScreen extends StatelessWidget {
         'Save the main account before adding descendants.',
         backgroundColor: Colors.orangeAccent,
       );
-
       return;
     }
 
@@ -792,14 +876,19 @@ class RegistrationScreen extends StatelessWidget {
         'Unable to determine the household reference for the descendant.',
         backgroundColor: Colors.red,
       );
-
       return;
     }
 
-    await Get.to(() => RegistrationScreen(
+    final newController = RegistrationController(initialCustomer: draft);
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RegistrationScreen(
           customer: draft,
-          providedController: RegistrationController(initialCustomer: draft),
-        ));
+          providedController: newController,
+        ),
+      ),
+    );
   }
 
   Widget _buildDropdown(BuildContext context, String hint,

@@ -7,7 +7,7 @@ import 'package:kanisa/controllers/dimension_controller.dart';
 import 'package:kanisa/models/account_model.dart';
 
 class RegistrationController extends GetxController {
-  final Customer? initialCustomer;
+  Customer? initialCustomer;
 
   // Form controllers
   final TextEditingController nameController = TextEditingController();
@@ -27,19 +27,23 @@ class RegistrationController extends GetxController {
   final RxBool isBaptized = false.obs;
   final Rx<gender?> selectedGender = Rx<gender?>(null);
   final Rx<customerRole> relationship = customerRole.primary.obs;
+  final RxBool canCreateDescendantObs = false.obs;
 
   String? householdPrimaryNo;
 
   RegistrationController({this.initialCustomer}) {
     relationship.value = initialCustomer?.Relationship ?? customerRole.primary;
     householdPrimaryNo = initialCustomer?.Household_Primary_No;
+    // Treat null Relationship as primary (existing members without relationship set are head of household)
     if (householdPrimaryNo == null &&
-        initialCustomer?.Relationship == customerRole.primary) {
+        (initialCustomer?.Relationship == null ||
+            initialCustomer?.Relationship == customerRole.primary)) {
       householdPrimaryNo = initialCustomer?.No;
     }
     if (initialCustomer != null) {
       loadCustomerData(initialCustomer!);
     }
+    updateCanCreateDescendant();
   }
 
   @override
@@ -133,26 +137,52 @@ class RegistrationController extends GetxController {
     return initialCustomer?.Household_Primary_No;
   }
 
-  bool get canCreateDescendant =>
-      householdAnchor != null && householdAnchor!.isNotEmpty;
+  bool get canCreateDescendant {
+    // Children cannot add other children - only primary and spouse can
+    if (relationship.value == customerRole.child) {
+      return false;
+    }
+    return householdAnchor != null && householdAnchor!.isNotEmpty;
+  }
+
+  void updateCanCreateDescendant() {
+    canCreateDescendantObs.value = canCreateDescendant;
+  }
+
+  void updateAfterRegistration(Customer registeredCustomer) {
+    initialCustomer = registeredCustomer;
+    if (registeredCustomer.Relationship == customerRole.primary) {
+      householdPrimaryNo = registeredCustomer.No;
+    }
+    updateCanCreateDescendant();
+  }
 
   Customer buildDescendantDraft(customerRole role) {
     final anchor = householdAnchor;
     final dimensionController = Get.find<DimensionController>();
-    final selectedGroups = dimensionController.selectedGroupDimensions
-        .map((dimension) =>
-            MemberGroups(Global_Dimension_2_Code: dimension.Code))
-        .toList();
+
+    // For children: use primary's phone, empty groups
+    // For spouse: inherit groups from primary
+    final selectedGroups = role == customerRole.child
+        ? <MemberGroups>[]
+        : dimensionController.selectedGroupDimensions
+            .map((dimension) =>
+                MemberGroups(Global_Dimension_2_Code: dimension.Code))
+            .toList();
 
     return Customer(
       Relationship: role,
       Household_Primary_No: anchor,
+      // For children, use the primary's phone number
+      Phone_No: role == customerRole.child ? initialCustomer?.Phone_No : null,
       Global_Dimension_1_Code:
           dimensionController.selectedDistrictDimension.value?.Code ??
               initialCustomer?.Global_Dimension_1_Code,
-      MembersGroups: selectedGroups.isNotEmpty
-          ? selectedGroups
-          : initialCustomer?.MembersGroups,
+      MembersGroups: role == customerRole.child
+          ? []
+          : (selectedGroups.isNotEmpty
+              ? selectedGroups
+              : initialCustomer?.MembersGroups),
     );
   }
 
