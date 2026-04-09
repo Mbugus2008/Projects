@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Matatu Dashboard</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Matatu Dashboard.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @{
+        var action = ViewContext.RouteData.Values["action"]?.ToString();
+        var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+        var isHome = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase) && string.Equals(action, "Index", StringComparison.OrdinalIgnoreCase);
+        var isFuel = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase) && string.Equals(action, "Fuel", StringComparison.OrdinalIgnoreCase);
+        var isPrivacy = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase) && string.Equals(action, "Privacy", StringComparison.OrdinalIgnoreCase);
+    }
+
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <div class="sidebar-brand">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="sidebar-brand-link">
+                    <span class="brand-mark">M</span>
+                    <span>
+                        <strong>Matatu Dashboard</strong>
+                        <small>BC insights</small>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="sidebar-nav-title">Navigation</div>
+                <a class="sidebar-link @(isHome ? "active" : null)" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="sidebar-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 10.5 12 3l9 7.5"></path>
+                            <path d="M5 9.5V21h14V9.5"></path>
+                        </svg>
+                    </span>
+                    Dashboard
+                </a>
+                <a class="sidebar-link @(isFuel ? "active" : null)" asp-area="" asp-controller="Home" asp-action="Fuel">
+                    <span class="sidebar-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 3h4"></path>
+                            <path d="M9 3h6v5l4.5 7.5A4 4 0 0 1 16.1 21H7.9a4 4 0 0 1-3.4-5.5L9 8V3Z"></path>
+                            <path d="M8 14h8"></path>
+                        </svg>
+                    </span>
+                    Depot Fuel
+                </a>
+                <a class="sidebar-link @(isPrivacy ? "active" : null)" asp-area="" asp-controller="Home" asp-action="Privacy">
+                    <span class="sidebar-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3 4 7v5c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V7l-8-4Z"></path>
+                            <path d="M9.5 12.5 11 14l3.5-3.5"></path>
+                        </svg>
+                    </span>
+                    Privacy
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-card">
+                    <div class="sidebar-footer-title">Sneat-style UI</div>
+                    <div class="sidebar-footer-text">Applied as a custom admin shell for the Matatu dashboard.</div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-topbar">
+                <div>
+                    <div class="topbar-title">@ViewData["Title"]</div>
+                    <div class="topbar-subtitle">Business Central transactions and depot fuel analytics</div>
+                </div>
+                <div class="topbar-actions">
+                    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+                        <span class="theme-toggle-icon theme-toggle-icon-sun" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+                            </svg>
+                        </span>
+                        <span class="theme-toggle-icon theme-toggle-icon-moon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+                            </svg>
+                        </span>
+                        <span class="theme-toggle-label">Theme</span>
+                    </button>
+
+                    <div class="topbar-profile">
+                        <div class="profile-badge">MT</div>
+                        <div>
+                            <div class="profile-name">Trimline Matatu</div>
+                            <div class="profile-role">Admin dashboard</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main role="main" class="admin-content">
+                @RenderBody()
+            </main>
+
+            <footer class="admin-footer">
+                <span>&copy; 2026 - Matatu Dashboard</span>
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

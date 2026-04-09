@@ -1,0 +1,1366 @@
+@using System.Text.Json
+@model Matatu_Dashboard.Models.BusinessCentralDashboardViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Matatu Management Dashboard";
+
+    var transactions = Model.Sections.FirstOrDefault(section => string.Equals(section.Title, "Transactions", StringComparison.OrdinalIgnoreCase));
+    var management = transactions?.Management;
+    var overview = management?.Overview ?? [];
+    var heroChart = management?.CollectionsTrendChart
+        ?? management?.TopMatatusChart
+        ?? management?.AgentPerformanceChart
+        ?? management?.TypeMixChart;
+    var widgetCharts = new[]
+        {
+            management?.TopMatatusChart,
+            management?.AgentPerformanceChart,
+            management?.TypeMixChart
+        }
+        .Where(chart => chart is not null && !string.Equals(chart!.Id, heroChart?.Id, StringComparison.OrdinalIgnoreCase))
+        .Select(chart => chart!)
+        .ToList();
+    var chartsToRender = new[] { heroChart }
+        .Where(chart => chart is not null)
+        .Select(chart => chart!)
+        .Concat(widgetCharts)
+        .ToList();
+    var typeMixBreakdown = management?.TypeMixChart is null
+        ? []
+        : management.TypeMixChart.Labels
+            .Zip(management.TypeMixChart.Values, (label, value) => new { Label = label, Value = value })
+            .OrderByDescending(item => item.Value)
+            .Take(4)
+            .ToList();
+    var recentTransactions = management?.RecentTransactions ?? [];
+    var exceptionCount = management?.Exceptions.Count ?? 0;
+    var pathBase = Context.Request.PathBase.HasValue ? Context.Request.PathBase.Value! : string.Empty;
+    var transactionsBasePath = string.IsNullOrWhiteSpace(pathBase) ? "/d" : pathBase;
+    var fuelBasePath = string.IsNullOrWhiteSpace(pathBase) ? "/fuel" : $"{pathBase}/fuel";
+    static string BuildRangeLink(string basePath, string? range) => range switch
+    {
+        "yesterday" => $"{basePath}/yesterday",
+        "week" => $"{basePath}/week",
+        "month" => $"{basePath}/month",
+        _ => $"{basePath}/today"
+    };
+    var transactionsPageLink = BuildRangeLink(transactionsBasePath, Model.SelectedRange);
+    var fuelPageLink = BuildRangeLink(fuelBasePath, Model.SelectedRange);
+    var transactionsTodayLink = BuildRangeLink(transactionsBasePath, "today");
+    var transactionsYesterdayLink = BuildRangeLink(transactionsBasePath, "yesterday");
+    var transactionsWeekLink = BuildRangeLink(transactionsBasePath, "week");
+    var transactionsMonthLink = BuildRangeLink(transactionsBasePath, "month");
+    var supportingSections = Model.Sections
+        .Where(section => !string.Equals(section.Title, "Transactions", StringComparison.OrdinalIgnoreCase))
+        .ToList();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f4f8fb;
+            --bg-accent: radial-gradient(circle at top left, rgba(239, 125, 87, 0.16), transparent 28%), radial-gradient(circle at top right, rgba(29, 78, 216, 0.18), transparent 24%), linear-gradient(180deg, #fcfffe 0%, #eff5f8 100%);
+            --panel: rgba(255, 255, 255, 0.94);
+            --panel-strong: #ffffff;
+            --border: rgba(20, 33, 61, 0.08);
+            --text: #132238;
+            --muted: #5f6c7b;
+            --primary: #ef7d57;
+            --teal: #0f766e;
+            --blue: #1d4ed8;
+            --accent: #f4b400;
+            --shadow: 0 22px 48px rgba(19, 34, 56, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "DM Sans", sans-serif;
+            background: var(--bg-accent);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .shell {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .masthead {
+            position: relative;
+            overflow: hidden;
+            padding: 26px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ef7d57 0%, #f29b55 28%, #0f766e 64%, #1d4ed8 100%);
+            color: #fff;
+            box-shadow: 0 28px 64px rgba(29, 78, 216, 0.22);
+            margin-bottom: 18px;
+        }
+
+        .masthead::before,
+        .masthead::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .masthead::before {
+            width: 220px;
+            height: 220px;
+            right: -42px;
+            top: -70px;
+        }
+
+        .masthead::after {
+            width: 180px;
+            height: 180px;
+            left: 56%;
+            bottom: -62px;
+            background: rgba(15, 118, 110, 0.18);
+        }
+
+        .masthead-grid,
+        .overview-grid,
+        .layout-grid,
+        .hero-side,
+        .agent-grid,
+        .mix-list,
+        .exception-grid,
+        .support-grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .masthead-grid {
+            position: relative;
+            z-index: 1;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: end;
+            gap: 18px;
+        }
+
+        .eyebrow,
+        .panel-tag,
+        .metric-label,
+        .small-label,
+        .table-label,
+        .support-note,
+        .empty-state {
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .eyebrow {
+            color: rgba(255, 255, 255, 0.82);
+            margin-bottom: 10px;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        h1,
+        h2,
+        .panel-title,
+        .metric-value,
+        .ranking-value,
+        .support-value {
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        h1 {
+            font-size: 40px;
+            line-height: 0.98;
+            max-width: 10ch;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            max-width: 56ch;
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .updated {
+            margin-top: 14px;
+            color: rgba(255, 255, 255, 0.74);
+            font-size: 13px;
+        }
+
+        .nav-stack {
+            display: grid;
+            gap: 8px;
+            margin-top: 18px;
+            max-width: 100%;
+        }
+
+        .nav-stack .filters {
+            margin-top: 0;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .filters a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 88px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .filters a.active {
+            background: #fff;
+            border-color: #fff;
+            color: var(--primary);
+        }
+
+        .headline-card {
+            position: relative;
+            z-index: 1;
+            min-height: 216px;
+            border-radius: 24px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .headline-card h2 {
+            font-size: 22px;
+            margin-top: 6px;
+            margin-bottom: 4px;
+        }
+
+        .headline-card p {
+            color: rgba(255, 255, 255, 0.76);
+            font-size: 13px;
+        }
+
+        .headline-kpi {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .headline-kpi article {
+            border-radius: 18px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
+        .headline-kpi strong {
+            display: block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 26px;
+            margin-top: 4px;
+        }
+
+        .overview-grid {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            margin: 18px 0;
+        }
+
+        .metric-card,
+        .panel,
+        .support-card,
+        .recent-table {
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: var(--panel);
+            box-shadow: var(--shadow);
+        }
+
+        .metric-card {
+            min-height: 132px;
+            padding: 16px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 249, 251, 0.96));
+        }
+
+        .metric-card:nth-child(1) {
+            background: linear-gradient(135deg, rgba(239, 125, 87, 0.14), rgba(255, 255, 255, 0.98));
+        }
+
+        .metric-card:nth-child(2) {
+            background: linear-gradient(135deg, rgba(29, 78, 216, 0.12), rgba(255, 255, 255, 0.98));
+        }
+
+        .metric-card:nth-child(3) {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.13), rgba(255, 255, 255, 0.98));
+        }
+
+        .metric-card:nth-child(4) {
+            background: linear-gradient(135deg, rgba(244, 180, 0, 0.16), rgba(255, 255, 255, 0.98));
+        }
+
+        .metric-label {
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            line-height: 1.02;
+        }
+
+        .metric-value,
+        .ranking-label,
+        .panel-title,
+        .support-value,
+        .exception-value {
+            overflow-wrap: anywhere;
+        }
+
+        .metric-note {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .layout-grid {
+            grid-template-columns: 1.35fr 0.95fr;
+            gap: 16px;
+        }
+
+        .panel {
+            padding: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.95));
+        }
+
+        .panel-hero {
+            min-height: 440px;
+        }
+
+        .panel-agent {
+            min-height: 420px;
+        }
+
+        .panel-exceptions,
+        .panel-recent,
+        .panel-support {
+            grid-column: 1 / -1;
+        }
+
+        .panel-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .panel-tag {
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .panel-title {
+            font-size: 25px;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .panel-copy {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.55;
+            max-width: 54ch;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: rgba(239, 125, 87, 0.08);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .chart-canvas,
+        .chart-canvas-large,
+        .chart-canvas-medium,
+        .chart-canvas-small {
+            width: 100%;
+        }
+
+        .chart-canvas-large {
+            min-height: 320px;
+        }
+
+        .chart-canvas-medium {
+            min-height: 280px;
+        }
+
+        .chart-canvas-small {
+            min-height: 240px;
+        }
+
+        .hero-side {
+            grid-template-columns: 1fr 1fr;
+            margin-top: 16px;
+        }
+
+        .ranking-card {
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--panel-strong);
+            padding: 14px;
+        }
+
+        .ranking-card h3,
+        .mix-card h3,
+        .recent-table h3,
+        .exception-card h3,
+        .support-card h3 {
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        .ranking-list,
+        .mix-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ranking-list li,
+        .mix-list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(20, 33, 61, 0.06);
+        }
+
+        .ranking-list li:last-child,
+        .mix-list li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .ranking-label {
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .ranking-meta,
+        .mix-share,
+        .table-subtle,
+        .support-note,
+        .exception-detail {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .ranking-value {
+            font-size: 18px;
+            text-align: right;
+        }
+
+        .agent-grid {
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: start;
+        }
+
+        .agent-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .agent-table th,
+        .agent-table td {
+            text-align: left;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(20, 33, 61, 0.06);
+        }
+
+        .agent-table th {
+            color: var(--muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .agent-table td:last-child,
+        .agent-table th:last-child {
+            text-align: right;
+        }
+
+        .mix-card {
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 14px;
+            background: var(--panel-strong);
+            height: 100%;
+        }
+
+        .exception-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .exception-card {
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 14px;
+            background: var(--panel-strong);
+            min-height: 148px;
+        }
+
+        .exception-card.high {
+            background: linear-gradient(135deg, rgba(239, 125, 87, 0.14), rgba(255, 255, 255, 0.98));
+        }
+
+        .exception-card.medium {
+            background: linear-gradient(135deg, rgba(244, 180, 0, 0.16), rgba(255, 255, 255, 0.98));
+        }
+
+        .exception-card.low {
+            background: linear-gradient(135deg, rgba(29, 78, 216, 0.12), rgba(255, 255, 255, 0.98));
+        }
+
+        .severity {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 9px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+        }
+
+        .exception-value,
+        .support-value {
+            font-size: 28px;
+            line-height: 1;
+            margin: 8px 0 10px;
+        }
+
+        .recent-table {
+            overflow: hidden;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 880px;
+        }
+
+        table.data-table th,
+        table.data-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(20, 33, 61, 0.06);
+            text-align: left;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        table.data-table th {
+            color: var(--muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: rgba(242, 247, 243, 0.88);
+        }
+
+        .agent-table td::before,
+        table.data-table td::before {
+            display: none;
+        }
+
+        .panel-support {
+            padding: 0;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+
+        .support-grid {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .support-card {
+            padding: 16px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 252, 0.96));
+        }
+
+        .support-metrics {
+            display: grid;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .support-metric {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: baseline;
+        }
+
+        .empty-state,
+        .error {
+            border-radius: 20px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.94);
+        }
+
+        .error {
+            color: #b91c1c;
+            background: #fff3f2;
+            border-color: rgba(185, 28, 28, 0.18);
+            margin-bottom: 16px;
+        }
+
+        @@media (max-width: 1120px) {
+            .overview-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .exception-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @@media (max-width: 920px) {
+            .masthead-grid,
+            .layout-grid,
+            .hero-side,
+            .agent-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            h1 {
+                font-size: 31px;
+            }
+
+            .headline-card,
+            .panel-hero,
+            .panel-agent {
+                min-height: auto;
+            }
+        }
+
+        @@media (max-width: 760px) {
+            .nav-stack {
+                width: 100%;
+            }
+
+            .filters {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                width: 100%;
+            }
+
+            .page-links {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .range-links {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .filters a {
+                min-width: 0;
+                width: 100%;
+                min-height: 46px;
+                padding: 10px 8px;
+            }
+
+            .chart-canvas-large {
+                min-height: 280px;
+            }
+
+            .chart-canvas-medium {
+                min-height: 252px;
+            }
+
+            .chart-canvas-small {
+                min-height: 220px;
+            }
+
+            .table-wrap {
+                overflow: visible;
+            }
+
+            .agent-table,
+            table.data-table {
+                min-width: 0;
+            }
+
+            .agent-table thead,
+            table.data-table thead {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                border: 0;
+            }
+
+            .agent-table,
+            .agent-table tbody,
+            .agent-table tr,
+            .agent-table td,
+            table.data-table,
+            table.data-table tbody,
+            table.data-table tr,
+            table.data-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .agent-table tr,
+            table.data-table tr {
+                border: 1px solid rgba(20, 33, 61, 0.08);
+                border-radius: 18px;
+                padding: 12px 14px;
+                margin-bottom: 10px;
+                background: rgba(255, 255, 255, 0.94);
+            }
+
+            .agent-table tr:last-child,
+            table.data-table tr:last-child {
+                margin-bottom: 0;
+            }
+
+            .agent-table td,
+            table.data-table td {
+                display: grid;
+                grid-template-columns: 84px minmax(0, 1fr);
+                gap: 10px;
+                padding: 8px 0;
+                border-bottom: 1px solid rgba(20, 33, 61, 0.06);
+                white-space: normal;
+                text-align: left;
+            }
+
+            .agent-table td:last-child,
+            table.data-table td:last-child {
+                border-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .agent-table td::before,
+            table.data-table td::before {
+                content: attr(data-label);
+                display: block;
+                color: var(--muted);
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+        }
+
+        @@media (max-width: 600px) {
+            .shell {
+                padding: 10px;
+            }
+
+            .masthead,
+            .panel,
+            .metric-card,
+            .support-card,
+            .recent-table {
+                border-radius: 20px;
+            }
+
+            .masthead,
+            .panel,
+            .metric-card,
+            .support-card {
+                padding: 16px;
+            }
+
+            .overview-grid,
+            .exception-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-head {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            h1 {
+                font-size: 27px;
+                max-width: none;
+            }
+
+            .panel-title {
+                font-size: 22px;
+            }
+
+            .subtitle,
+            .panel-copy {
+                font-size: 13px;
+            }
+
+            .headline-kpi {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .metric-value {
+                font-size: 22px;
+            }
+
+            .exception-value,
+            .support-value {
+                font-size: 24px;
+            }
+
+            .pill {
+                align-self: flex-start;
+                max-width: 100%;
+                white-space: normal;
+            }
+
+            .agent-table td,
+            table.data-table td {
+                grid-template-columns: 72px minmax(0, 1fr);
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <section class="masthead">
+            <div class="masthead-grid">
+                <div>
+                    <div class="eyebrow">Management Decision View</div>
+                    <h1>Collections, matatus, agents, and exceptions in one operating board.</h1>
+                    <p class="subtitle">This layout prioritizes pace, concentration, accountability, and weak signals from the Transactions feed so management can act without digging through raw rows.</p>
+                    <div class="updated">Updated @Model.RetrievedAt.ToString("dd MMM yyyy HH:mm")</div>
+                    <div class="nav-stack">
+                        <nav class="filters page-links" aria-label="Page links">
+                            <a href="@transactionsPageLink" class="active">Transactions</a>
+                            <a href="@fuelPageLink">Depot Fuel</a>
+                        </nav>
+                        <nav class="filters range-links" aria-label="Date range">
+                            <a href="@transactionsTodayLink" class="@(Model.SelectedRange == "today" ? "active" : null)">Today</a>
+                            <a href="@transactionsYesterdayLink" class="@(Model.SelectedRange == "yesterday" ? "active" : null)">Yesterday</a>
+                            <a href="@transactionsWeekLink" class="@(Model.SelectedRange == "week" ? "active" : null)">Week</a>
+                            <a href="@transactionsMonthLink" class="@(Model.SelectedRange == "month" ? "active" : null)">Month</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="headline-card">
+                    <div>
+                        <div class="eyebrow">Fast Read</div>
+                        <h2>Management priorities</h2>
+                        <p>Lead with collection pace, validate who is performing, and surface anomalies before they become daily leakage.</p>
+                    </div>
+                    <div class="headline-kpi">
+                        <article>
+                            <span class="small-label">Transactions</span>
+                            <strong>@(transactions?.TotalRecords.ToString("N0") ?? "0")</strong>
+                        </article>
+                        <article>
+                            <span class="small-label">Widgets</span>
+                            <strong>5</strong>
+                        </article>
+                        <article>
+                            <span class="small-label">Signals</span>
+                            <strong>@exceptionCount</strong>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="error">@Model.ErrorMessage</div>
+        }
+
+        @if (transactions is not null && management is not null)
+        {
+            <section class="overview-grid">
+                @foreach (var metric in overview)
+                {
+                    <article class="metric-card">
+                        <div class="metric-label">@metric.Label</div>
+                        <div class="metric-value">@metric.Value</div>
+                        @if (!string.IsNullOrWhiteSpace(metric.Note))
+                        {
+                            <div class="metric-note">@metric.Note</div>
+                        }
+                    </article>
+                }
+            </section>
+
+            <section class="layout-grid">
+                <article class="panel panel-hero">
+                    <div class="panel-head">
+                        <div>
+                            <div class="panel-tag">Widget 1</div>
+                            <h2 class="panel-title">Collections Pace</h2>
+                            <p class="panel-copy">Use the pace view as the operating heartbeat. When this line softens, management should immediately inspect agent performance and low-activity matatus.</p>
+                        </div>
+                        @if (!string.IsNullOrWhiteSpace(transactions.FilterDescription))
+                        {
+                            <div class="pill">@transactions.FilterDescription</div>
+                        }
+                    </div>
+
+                    @if (heroChart is not null)
+                    {
+                        <div id="@heroChart.Id" class="chart-canvas-large"></div>
+                    }
+                    else
+                    {
+                        <div class="empty-state">No trend chart is available for the current transaction slice.</div>
+                    }
+                </article>
+
+                <article class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="panel-tag">Widget 2</div>
+                            <h2 class="panel-title">Matatu Performance</h2>
+                            <p class="panel-copy">Separate leaders from watchlist matatus to show where collections are concentrating and where dispatch or supervision may need attention.</p>
+                        </div>
+                    </div>
+
+                    <div class="hero-side">
+                        <section class="ranking-card">
+                            <h3>Top Matatus</h3>
+                            <ul class="ranking-list">
+                                @foreach (var item in management.TopMatatus)
+                                {
+                                    <li>
+                                        <div>
+                                            <div class="ranking-label">@item.Label</div>
+                                            <div class="ranking-meta">@item.Note</div>
+                                        </div>
+                                        <div class="ranking-value">@item.Value</div>
+                                    </li>
+                                }
+                            </ul>
+                        </section>
+
+                        <section class="ranking-card">
+                            <h3>Watchlist Matatus</h3>
+                            <ul class="ranking-list">
+                                @foreach (var item in management.BottomMatatus)
+                                {
+                                    <li>
+                                        <div>
+                                            <div class="ranking-label">@item.Label</div>
+                                            <div class="ranking-meta">@item.Note</div>
+                                        </div>
+                                        <div class="ranking-value">@item.Value</div>
+                                    </li>
+                                }
+                            </ul>
+                        </section>
+                    </div>
+                </article>
+
+                <article class="panel panel-agent">
+                    <div class="panel-head">
+                        <div>
+                            <div class="panel-tag">Widget 3</div>
+                            <h2 class="panel-title">Agent Performance</h2>
+                            <p class="panel-copy">Management needs both the chart and the table. Volume alone is incomplete; transaction count and average ticket size expose how each agent is actually contributing.</p>
+                        </div>
+                    </div>
+
+                    <div class="agent-grid">
+                        <div>
+                            @if (management.AgentPerformanceChart is not null && !string.Equals(management.AgentPerformanceChart.Id, heroChart?.Id, StringComparison.OrdinalIgnoreCase))
+                            {
+                                <div id="@management.AgentPerformanceChart.Id" class="chart-canvas-medium"></div>
+                            }
+                            else
+                            {
+                                <div class="empty-state">No agent chart is available for the current slice.</div>
+                            }
+                        </div>
+
+                        <div class="ranking-card">
+                            <h3>Top 5 Agents</h3>
+                            <table class="agent-table">
+                                <thead>
+                                    <tr>
+                                        <th>Agent</th>
+                                        <th>Txns</th>
+                                        <th>Total</th>
+                                        <th>Avg</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in management.AgentPerformance)
+                                    {
+                                        <tr>
+                                            <td data-label="Agent">@item.Agent</td>
+                                            <td data-label="Txns">@item.TransactionCount</td>
+                                            <td data-label="Total">@item.TotalAmount</td>
+                                            <td data-label="Avg">@item.AverageTicket</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="panel-tag">Widget 4</div>
+                            <h2 class="panel-title">Collection Mix</h2>
+                            <p class="panel-copy">The type mix shows whether revenue quality is shifting. Management should not only ask how much came in, but what kind of collections are dominating the day.</p>
+                        </div>
+                    </div>
+
+                    <div class="mix-card">
+                        @if (management.TypeMixChart is not null && !string.Equals(management.TypeMixChart.Id, heroChart?.Id, StringComparison.OrdinalIgnoreCase))
+                        {
+                            <div id="@management.TypeMixChart.Id" class="chart-canvas-small"></div>
+                        }
+                        else
+                        {
+                            <div class="empty-state">No mix chart is available for the current slice.</div>
+                        }
+
+                        @if (typeMixBreakdown.Count > 0)
+                        {
+                            <ul class="mix-list">
+                                @foreach (var item in typeMixBreakdown)
+                                {
+                                    <li>
+                                        <span class="ranking-label">@item.Label</span>
+                                        <span class="mix-share">@item.Value.ToString("N0")</span>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                </article>
+
+                <article class="panel panel-exceptions">
+                    <div class="panel-head">
+                        <div>
+                            <div class="panel-tag">Widget 5</div>
+                            <h2 class="panel-title">Exception Center</h2>
+                            <p class="panel-copy">This is the management control rail for duplicates, missing attribution, unusual ticket values, and concentration risk.</p>
+                        </div>
+                    </div>
+
+                    @if (management.Exceptions.Count > 0)
+                    {
+                        <div class="exception-grid">
+                            @foreach (var item in management.Exceptions)
+                            {
+                                <article class="exception-card @item.Severity">
+                                    <div class="severity">@item.Severity</div>
+                                    <h3>@item.Title</h3>
+                                    <div class="exception-value">@item.Value</div>
+                                    <div class="exception-detail">@item.Detail</div>
+                                </article>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state">No exception patterns were found in the current filtered data.</div>
+                    }
+                </article>
+
+                <article class="panel panel-recent recent-table">
+                    <div class="panel-head">
+                        <div>
+                            <div class="panel-tag">Recent Activity</div>
+                            <h2 class="panel-title">Recent Transactions</h2>
+                            <p class="panel-copy">Keep the raw transactions below the decision widgets. The table is for verification and drill-through, not for primary management reading.</p>
+                        </div>
+                        <div class="pill">@recentTransactions.Count row(s)</div>
+                    </div>
+
+                    @if (recentTransactions.Count > 0)
+                    {
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Matatu</th>
+                                        <th>Agent</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                        <th>Account</th>
+                                        <th>Document</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var row in recentTransactions)
+                                    {
+                                        <tr>
+                                            <td data-label="Date">@row["Date"]</td>
+                                            <td data-label="Matatu">@row["Matatu"]</td>
+                                            <td data-label="Agent">@row["Agent"]</td>
+                                            <td data-label="Type">@row["Type"]</td>
+                                            <td data-label="Amount">@row["Amount"]</td>
+                                            <td data-label="Account">@row["Account"]</td>
+                                            <td data-label="Document">@row["Document"]</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state">No recent transaction rows are available.</div>
+                    }
+                </article>
+            </section>
+        }
+        else
+        {
+            <div class="empty-state">The transactions management view could not be prepared from the current data response.</div>
+        }
+
+        @if (supportingSections.Count > 0)
+        {
+            <section class="panel panel-support">
+                <div class="panel-head" style="padding: 0 0 4px;">
+                    <div>
+                        <div class="panel-tag">Supporting Feeds</div>
+                        <h2 class="panel-title">Other Operational Sections</h2>
+                        <p class="panel-copy">These feeds remain available below the main management board, but they are deliberately secondary to the transactions view.</p>
+                    </div>
+                </div>
+
+                <div class="support-grid">
+                    @foreach (var supportingSection in supportingSections)
+                    {
+                        <article class="support-card">
+                            <div class="panel-tag">@supportingSection.Title</div>
+                            <h3>@supportingSection.TotalRecords.ToString("N0") records</h3>
+                            @if (!string.IsNullOrWhiteSpace(supportingSection.FilterDescription))
+                            {
+                                <div class="support-note">@supportingSection.FilterDescription</div>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(supportingSection.ErrorMessage))
+                            {
+                                <div class="error" style="margin-top: 12px;">@supportingSection.ErrorMessage</div>
+                            }
+                            else
+                            {
+                                <div class="support-metrics">
+                                    @foreach (var metric in supportingSection.Metrics.Take(4))
+                                    {
+                                        <div class="support-metric">
+                                            <span class="support-note">@metric.Label</span>
+                                            <span class="support-value" style="font-size: 20px;">@metric.Value</span>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </article>
+                    }
+                </div>
+            </section>
+        }
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        (() => {
+            const charts = @Html.Raw(JsonSerializer.Serialize(chartsToRender));
+            const palette = ["#ef7d57", "#0f766e", "#1d4ed8", "#f4b400", "#14b8a6", "#7c3aed"];
+
+            charts.forEach((chart) => {
+                const container = document.getElementById(chart.Id);
+                if (!container) {
+                    return;
+                }
+
+                const colors = chart.Labels.map((_, index) => palette[index % palette.length]);
+                const base = {
+                    chart: {
+                        fontFamily: 'DM Sans, sans-serif',
+                        toolbar: { show: false },
+                        animations: { easing: 'easeinout', speed: 500 }
+                    },
+                    colors,
+                    dataLabels: { enabled: false },
+                    legend: { show: false },
+                    tooltip: { theme: 'light' }
+                };
+
+                let options;
+
+                if (chart.Type === 'bar') {
+                    options = {
+                        ...base,
+                        chart: { ...base.chart, type: 'bar', height: container.classList.contains('chart-canvas-large') ? 320 : 280 },
+                        series: [{ name: chart.Title, data: chart.Values }],
+                        xaxis: {
+                            categories: chart.Labels,
+                            labels: { style: { colors: '#5f6c7b', fontSize: '11px' } }
+                        },
+                        yaxis: {
+                            labels: { style: { colors: '#5f6c7b' } }
+                        },
+                        grid: {
+                            borderColor: 'rgba(20, 33, 61, 0.08)',
+                            strokeDashArray: 4
+                        },
+                        plotOptions: {
+                            bar: {
+                                horizontal: true,
+                                borderRadius: 10,
+                                distributed: true,
+                                barHeight: '58%'
+                            }
+                        },
+                        responsive: [{
+                            breakpoint: 760,
+                            options: {
+                                chart: { height: container.classList.contains('chart-canvas-large') ? 280 : 252 },
+                                xaxis: { labels: { style: { fontSize: '10px' } } },
+                                plotOptions: { bar: { barHeight: '50%' } }
+                            }
+                        }]
+                    };
+                } else if (chart.Type === 'line') {
+                    options = {
+                        ...base,
+                        chart: { ...base.chart, type: 'area', height: 320 },
+                        series: [{ name: chart.Title, data: chart.Values }],
+                        xaxis: {
+                            categories: chart.Labels,
+                            labels: { style: { colors: '#5f6c7b', fontSize: '11px' } }
+                        },
+                        yaxis: {
+                            labels: { style: { colors: '#5f6c7b' } }
+                        },
+                        stroke: {
+                            curve: 'smooth',
+                            width: 4
+                        },
+                        markers: {
+                            size: 4,
+                            hover: { size: 6 }
+                        },
+                        fill: {
+                            type: 'gradient',
+                            gradient: {
+                                shadeIntensity: 1,
+                                opacityFrom: 0.34,
+                                opacityTo: 0.04,
+                                stops: [0, 92, 100]
+                            }
+                        },
+                        grid: {
+                            borderColor: 'rgba(20, 33, 61, 0.08)',
+                            strokeDashArray: 4
+                        },
+                        responsive: [{
+                            breakpoint: 760,
+                            options: {
+                                chart: { height: 280 },
+                                markers: { size: 3, hover: { size: 5 } },
+                                xaxis: { labels: { style: { fontSize: '10px' } } }
+                            }
+                        }]
+                    };
+                } else {
+                    options = {
+                        ...base,
+                        chart: { ...base.chart, type: 'donut', height: 260 },
+                        labels: chart.Labels,
+                        series: chart.Values,
+                        legend: {
+                            show: true,
+                            position: 'bottom',
+                            fontSize: '12px'
+                        },
+                        stroke: { width: 0 },
+                        plotOptions: {
+                            pie: {
+                                donut: { size: '70%' }
+                            }
+                        },
+                        responsive: [{
+                            breakpoint: 760,
+                            options: {
+                                chart: { height: 220 },
+                                legend: { show: true, position: 'bottom', fontSize: '11px' }
+                            }
+                        }]
+                    };
+                }
+
+                new ApexCharts(container, options).render();
+            });
+        })();
+    </script>
+</body>
+</html>
