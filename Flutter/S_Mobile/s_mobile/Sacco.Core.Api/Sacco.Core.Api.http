@@ -1,0 +1,50 @@
+@Sacco.Core.Api_HostAddress = http://localhost:5159
+@ClientId = BarakaYetu
+
+POST {{Sacco.Core.Api_HostAddress}}/api/member
+Accept: application/json
+Content-Type: application/json
+X-Client-Identifier: {{ClientId}}
+
+{
+	"phone": "+254700000001"
+}
+
+###
+
+POST {{Sacco.Core.Api_HostAddress}}/api/accounts
+Accept: application/json
+Content-Type: application/json
+X-Client-Identifier: {{ClientId}}
+
+{
+	"phone": "+254700000001"
+}
+
+###
+
+POST {{Sacco.Core.Api_HostAddress}}/api/loans
+Accept: application/json
+Content-Type: application/json
+X-Client-Identifier: {{ClientId}}
+
+{
+	"phone": "+254700000001"
+}
+
+###
+
+POST {{Sacco.Core.Api_HostAddress}}/api/transaction
+Accept: application/json
+Content-Type: application/json
+X-Client-Identifier: {{ClientId}}
+
+{
+	"documentNo": "TX-001",
+	"accountNo": "SAV001",
+	"transactionType": "Deposit",
+	"amount": 1000,
+	"source": "Mobile"
+}
+
+###

@@ -172,6 +172,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Web References\AccountEntries\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\Alternate\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -208,6 +213,31 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\Members\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Payments\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Registration\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\NextOfKin\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\RepaymentSchedule\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\tarrifs\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -282,6 +312,14 @@
     <Content Include="Web References\Loans\Loans.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\AccountEntries\AccountEntries.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\AccountEntries\AccountEntries.wsdl" />
+    <None Include="Web References\AccountEntries\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\Alternate\Alternate.wsdl" />
     <None Include="Web References\Alternate\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -340,11 +378,51 @@
     <Content Include="Web References\Transactions\MobileTransactions.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\tarrifs\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\tarrifs\Tarrifs.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\Payments\Payments.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Payments\Payments.wsdl" />
+    <Content Include="Web References\Payments\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\RepaymentSchedule\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\RepaymentSchedule\RepaymentSchedule.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\RepaymentSchedule\RepaymentSchedule.wsdl" />
+    <None Include="Web References\tarrifs\Tarrifs.wsdl" />
     <None Include="Web References\Transactions\MobileTransactions.wsdl" />
     <None Include="Web References\Transactions\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Web References\Registration\Registration.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Registration\Registration.wsdl" />
+    <Content Include="Web References\Registration\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\NextOfKin\NextOfKin.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\NextOfKin\NextOfKin.wsdl" />
+    <Content Include="Web References\NextOfKin\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,6 +479,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Client_Service_Loan_Eligibility_Loan_Eligibility_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/AccountEntries">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AccountEntries\</RelPath>
+      <UpdateFromURL>http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/AccountEntries</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Client_Service_AccountEntries_AccountEntries_Service</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Memberslist">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -468,6 +557,39 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Client_Service_Members_Members_Service</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Payments">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Payments\</RelPath>
+      <UpdateFromURL>http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Payments</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Client_Service_Payments_Payments_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/RepaymentSchedule">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RepaymentSchedule\</RelPath>
+      <UpdateFromURL>http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/RepaymentSchedule</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Client_Service_RepaymentSchedule_RepaymentSchedule_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Tarrifs">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\tarrifs\</RelPath>
+      <UpdateFromURL>http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Tarrifs</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Client_Service_tarrifs_Tarrifs_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://paulo:6021/Baraka/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/MobileApplications">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Applications\</RelPath>
@@ -489,6 +611,28 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Client_Service_Transactions_MobileTransactions_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Registration">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Registration\</RelPath>
+      <UpdateFromURL>http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Registration</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Client_Service_Registration_Registration_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/NextOfKin">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\NextOfKin\</RelPath>
+      <UpdateFromURL>http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/NextOfKin</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Client_Service_NextOfKin_NextOfKin_Service</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

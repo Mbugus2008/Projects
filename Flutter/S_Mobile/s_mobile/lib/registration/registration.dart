@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:s_mobile/common/Results.dart';
 import 'package:s_mobile/common/utilities.dart';
 import 'package:s_mobile/members/member.dart';
+import 'package:s_mobile/registration/next_of_kin.dart';
 
 import '../common/Apis.dart';
 import '../common/widgets.dart';
@@ -123,7 +124,7 @@ class registration {
       'Home_Address': Home_Address,
       'Mobile_Phone_No': Mobile_Phone_No,
       'P_I_N_Number': P_I_N_Number,
-      'E_Mail': E_Mail,
+      'E_Mail_Personal': E_Mail,
       'Gender': Gender?.index,
       'Marital_Status': Marital_Status?.index,
       'Box_No': Box_No,
@@ -428,7 +429,15 @@ class reg extends State<Registration_widget> {
         Results rr = Results.fromJson(value.body);
         if (rr.Code == 0) {
           utilities().Otp(context, otpc.toString()).then((value) {
-            ApiClient().postdata("Registration", widget.newreg!.toJson());
+            ApiClient().postdata("register", widget.newreg!.toJson()).then((regResponse) {
+              if (regResponse.statusCode == 200) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => NextOfKin_widget(
+                    accountNo: widget.newreg?.No,
+                  ),
+                ));
+              }
+            });
           });
         }
       }

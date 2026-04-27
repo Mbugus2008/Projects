@@ -1,7 +1,11 @@
-﻿using Client_Service.Loan_Eligibility;
+﻿using Client_Service.AccountEntries;
+using Client_Service.Loan_Eligibility;
 using Client_Service.Loans;
 using Client_Service.Members;
 using Client_Service.Memberslist;
+using Client_Service.NextOfKin;
+using Client_Service.Registration;
+using Client_Service.RepaymentSchedule;
 using Client_Service.Transactions;
 using Logging;
 using Newtonsoft.Json;
@@ -32,7 +36,13 @@ namespace Client_Service.Controllers
         public static Applications.MobileApplications_Service Applications_Service = new Applications.MobileApplications_Service();
         public static Loan_Products.Loan_Products_Service Loan_Products = new Loan_Products.Loan_Products_Service();
         public static Loan_Eligibility.Loan_Eligibility_Service Loan_Eligibility = new Client_Service.Loan_Eligibility.Loan_Eligibility_Service();
+        public static tarrifs.Tarrifs_Service tarrifs_Service = new tarrifs.Tarrifs_Service();
+        public static AccountEntries.AccountEntries_Service AccountEntries_Service = new AccountEntries.AccountEntries_Service();
+        public static RepaymentSchedule.RepaymentSchedule_Service RepaymentSchedule_Service = new RepaymentSchedule.RepaymentSchedule_Service();
+        public static Payments.Payments_Service PaymentsService = new Payments.Payments_Service();
         Alternate.Alternate alternate = new Alternate.Alternate();
+        public static Registration.Registration_Service Registration_Service = new Registration.Registration_Service();
+        public static NextOfKin.NextOfKin_Service NextOfKin_Service = new NextOfKin.NextOfKin_Service();
 
         public clientController()
         {
@@ -49,8 +59,13 @@ namespace Client_Service.Controllers
                 Applications_Service = new Applications.MobileApplications_Service { Url = misc.geturl(s, Applications_Service.Url), Credentials = cd, PreAuthenticate = true };
                 Loan_Products = new Loan_Products.Loan_Products_Service { Url = misc.geturl(s, Loan_Products.Url), Credentials = cd, PreAuthenticate = true };
                 Loan_Eligibility = new Loan_Eligibility.Loan_Eligibility_Service { Url = misc.geturl(s, Loan_Eligibility.Url), Credentials = cd, PreAuthenticate = true };
-
+                tarrifs_Service = new tarrifs.Tarrifs_Service { Url = misc.geturl(s, tarrifs_Service.Url), Credentials = cd, PreAuthenticate = true };
+                AccountEntries_Service = new AccountEntries.AccountEntries_Service { Url = misc.geturl(s, AccountEntries_Service.Url), Credentials = cd, PreAuthenticate = true };
+                RepaymentSchedule_Service = new RepaymentSchedule.RepaymentSchedule_Service { Url = misc.geturl(s, RepaymentSchedule_Service.Url), Credentials = cd, PreAuthenticate = true };
+                PaymentsService = new Payments.Payments_Service { Url = misc.geturl(s, PaymentsService.Url), Credentials = cd, PreAuthenticate = true };
                 alternate = new Alternate.Alternate { Url = misc.geturl(s, alternate.Url), Credentials = cd, PreAuthenticate = true };
+                Registration_Service = new Registration.Registration_Service { Url = misc.geturl(s, Registration_Service.Url), Credentials = cd, PreAuthenticate = true };
+                NextOfKin_Service = new NextOfKin.NextOfKin_Service { Url = misc.geturl(s, NextOfKin_Service.Url), Credentials = cd, PreAuthenticate = true };
 
             }
             catch (Exception ex
@@ -125,7 +140,7 @@ namespace Client_Service.Controllers
         [Route("api/member2")]
         public Results member2(ClientRequest request)
         {
-            var phone = request.body.ToString();
+            var phone = request.phone.ToString();
             Results r = new Results();
             try
             {
@@ -166,6 +181,9 @@ namespace Client_Service.Controllers
                 a.Name = "Mobile Money";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Mobile_Money;
+                a.Direction = Depositaccounts.direction.Both;
+                a.transaction_Type = AccountEntries.Transaction_Type.Mobile_Money;
+                
 
               
 
@@ -175,7 +193,8 @@ namespace Client_Service.Controllers
                 a.Name = "Deposit";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Current_Shares;
-
+                a.Direction = Depositaccounts.direction.Deposit;
+                a.transaction_Type = AccountEntries.Transaction_Type.Deposit_Contribution;
                 if (keywords.Count() > 0)
                 {
                     var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Deposit_Contribution);
@@ -187,9 +206,11 @@ namespace Client_Service.Controllers
 
                 a = new Depositaccounts();
                 a.Account = "Toto";
-                a.Name = "Toto";
+                a.Name = "Toto";    
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Toto_savings;
+                a.Direction = Depositaccounts.direction.Deposit;
+                a.transaction_Type = AccountEntries.Transaction_Type.Toto_Savings;
                 if (keywords.Count() > 0)
                 {
                     var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Toto_Savings);
@@ -203,6 +224,8 @@ namespace Client_Service.Controllers
                 a.Name = "Share capital";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Shares_Capital;
+                a.Direction = Depositaccounts.direction.Deposit;
+                a.transaction_Type = AccountEntries.Transaction_Type.Shares_Capital;
                 if (keywords.Count() > 0)
                 {
                     var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Shares_Capital);
@@ -216,6 +239,8 @@ namespace Client_Service.Controllers
                 a.Name = "Christmas savings";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (double)m.Chrismas_Contribution;
+                a.Direction = Depositaccounts.direction.Deposit;
+                a.transaction_Type = AccountEntries.Transaction_Type.Xmas_Contribution;
                 if (keywords.Count() > 0)
                 {
                     var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Chrismas_savings);
@@ -229,6 +254,8 @@ namespace Client_Service.Controllers
                 a.Name = "Plaza contribution";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Plaza_Savings;
+                a.Direction = Depositaccounts.direction.Deposit;
+                a.transaction_Type = AccountEntries.Transaction_Type.Plaza_Savings;
                 if (keywords.Count() > 0)
                 {
                     var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Plaza_Contribution);
@@ -241,6 +268,8 @@ namespace Client_Service.Controllers
                 a.Name = "Dabo Dabo";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Deposit_Drive;
+                a.Direction = Depositaccounts.direction.Deposit;
+                a.transaction_Type = AccountEntries.Transaction_Type.Savings_Drive;
                 if (keywords.Count() > 0)
                 {
                     var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Savings_Drive);
@@ -254,6 +283,8 @@ namespace Client_Service.Controllers
                 a.Name = "Burial Benovolent Fund";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Benevolent_Fund;
+                a.Direction = Depositaccounts.direction.Deposit;
+                a.transaction_Type = AccountEntries.Transaction_Type.Benevolent_Fund;
                 if (keywords.Count() > 0)
                 {
                     var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.BBF);
@@ -271,6 +302,8 @@ namespace Client_Service.Controllers
                         a.Name = loan.Loan_Product_Type;
                         a.Type = Depositaccounts.status.loans;
                         a.Balance = (double)(loan.Total_Balance);
+                        a.Direction = Depositaccounts.direction.Deposit;
+                        a.transaction_Type = AccountEntries.Transaction_Type.Loan;
                         if (keywords.Count() > 0)
                         {
                             var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Loan_Repayment && o.Loan_Code == loan.Loan_Product_Type);
@@ -324,15 +357,37 @@ namespace Client_Service.Controllers
             }
             return r;
         }
-        [HttpGet]
+        [HttpPost]
         [Route("api/Tcharges")]
-        public Results Tcharges()
+        public Results<double> Tcharges(Request request)
         {
-            Results r = new Results();
+            Results<double> r = new Results<double>();
             try
             {
+                string transactionType = "";
+                switch (request.Transaction_Type)
+                {
+                    case 1:
+                        transactionType = "WITHDRAWAL|WITHSACCO";
+                        break;
+                    default:
+                        break;
+                }
+                var tar = tarrifs_Service.ReadMultiple(new tarrifs.Tarrifs_Filter[] {
+                   new tarrifs.Tarrifs_Filter { Criteria = transactionType, Field = tarrifs.Tarrifs_Fields.Code },
+                   new tarrifs.Tarrifs_Filter { Criteria = $">={request.Amount}", Field = tarrifs.Tarrifs_Fields.Upper_Limit },
+                   new tarrifs.Tarrifs_Filter { Criteria = $"<={request.Amount}", Field = tarrifs.Tarrifs_Fields.Lower_Limit }
+                }, null, 0);
+                double charge = 0;
+                if (tar.Any())
+                    foreach (var item in tar)
+                    {
+                        charge += (double)(item.Charge_Amount + item.Sacco_Commition + item.Safaricom_Commission);
+                    }
 
-                r.content = 0;
+                r.Contents = charge;
+
+
             }
             catch (Exception ex)
             {
@@ -651,6 +706,84 @@ namespace Client_Service.Controllers
                 r.Desc = ex.Message;
             }
             return r;
+        } 
+        [HttpPost]
+        [Route("api/Getacctrans")]
+        public Results<List<AccountEntries.AccountEntries>> getacctrans(Request request)
+        {
+
+            Results<List<AccountEntries.AccountEntries>> r = new Results<List<AccountEntries.AccountEntries>>();
+            try
+            {
+                r.Contents = AccountEntries_Service.ReadMultiple(new AccountEntries_Filter[] { new AccountEntries_Filter { Criteria = request.Account, Field = AccountEntries_Fields.Customer_No }, new AccountEntries_Filter { Criteria = request.Transaction_Type.ToString(), Field = AccountEntries_Fields.Transaction_Type }}, request.bookmark, request.size).ToList();
+
+
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }      
+        [HttpPost]
+        [Route("api/Getschedule")]
+        public Results<List<RepaymentSchedule.RepaymentSchedule>> getschedule(Request request)
+        {
+
+            Results<List<RepaymentSchedule.RepaymentSchedule>> r = new Results<List<RepaymentSchedule.RepaymentSchedule>>();
+            try
+            {
+                r.Contents = RepaymentSchedule_Service.ReadMultiple(new RepaymentSchedule_Filter[] { new RepaymentSchedule_Filter { Criteria = request.loanNo, Field = RepaymentSchedule_Fields.Loan_No }}, request.bookmark, request.size).ToList();
+
+
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
+        [HttpPost]
+        [Route("api/register")]
+        public Results<Registration.Registration> register(Registration.Registration registration)
+        {
+            Results<Registration.Registration> r = new Results<Registration.Registration>();
+            try
+            {
+                Registration_Service.Create(ref registration);
+                r.Contents = registration;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
+        [HttpPost]
+        [Route("api/nextofkin")]
+        public Results<NextOfKin.NextOfKin> nextofkin(NextOfKin.NextOfKin nextOfKin)
+        {
+            Results<NextOfKin.NextOfKin> r = new Results<NextOfKin.NextOfKin>();
+            try
+            {
+                NextOfKin_Service.Create(ref nextOfKin);
+                r.Contents = nextOfKin;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
         }
     }
 }
@@ -684,6 +817,8 @@ namespace Client_Service.Members
         public string keyword { get; set; }
         public status Type { get; set; }
         public double Balance { get; set; }
+        public AccountEntries.Transaction_Type transaction_Type { get; set; }
+        public direction Direction { get; set; }
 
         public enum status
         {
@@ -691,7 +826,12 @@ namespace Client_Service.Members
             savings,
             loans
         }
-
+        public enum direction
+        {
+            Withdrawable,
+            Deposit,
+            Both
+        }
     }
     public partial class Members
     {
@@ -709,6 +849,8 @@ namespace Client_Service.Members
                     a.Name = "Mobile Money";
                     a.Type = Depositaccounts.status.savings;
                     a.Balance = (Double)Mobile_Money;
+                    a.Direction = Depositaccounts.direction.Both;
+                    a.transaction_Type = AccountEntries.Transaction_Type.Mobile_Money;
                     acc.Add(a);
                     
                     a = new Depositaccounts();
@@ -716,6 +858,8 @@ namespace Client_Service.Members
                     a.Name = "Wallet";
                     a.Type = Depositaccounts.status.savings;
                     a.Balance = (Double)Wallet;
+                    a.Direction = Depositaccounts.direction.Both;
+                    a.transaction_Type = AccountEntries.Transaction_Type.Wallet;
                     acc.Add(a);
 
                     a = new Depositaccounts();
@@ -723,6 +867,8 @@ namespace Client_Service.Members
                     a.Name = "Deposit";
                     a.Type = Depositaccounts.status.savings;
                     a.Balance = (Double)Current_Shares;
+                    a.Direction = Depositaccounts.direction.Deposit;
+                    a.transaction_Type = AccountEntries.Transaction_Type.Deposit_Contribution;
                     if (keywords.Count() > 0)
                     {
                         var k = keywords.FirstOrDefault(o => o.Destination_Type == Destination_Type.Deposit_Contribution);
@@ -737,6 +883,8 @@ namespace Client_Service.Members
                     a.Name = "Toto";
                     a.Type = Depositaccounts.status.savings;
                     a.Balance = (Double)Toto_savings;
+                    a.Direction = Depositaccounts.direction.Deposit;
+                    a.transaction_Type = AccountEntries.Transaction_Type.Toto_Savings;
                     if (keywords.Count() > 0)
                     {
                         var k = keywords.FirstOrDefault(o => o.Destination_Type == Destination_Type.Toto_Savings);
@@ -750,6 +898,8 @@ namespace Client_Service.Members
                     a.Name = "Share capital";
                     a.Type = Depositaccounts.status.savings;
                     a.Balance = (Double)Shares_Capital;
+                    a.Direction = Depositaccounts.direction.Deposit;
+                    a.transaction_Type = AccountEntries.Transaction_Type.Shares_Capital;
                     if (keywords.Count() > 0)
                     {
                         var k = keywords.FirstOrDefault(o => o.Destination_Type == Destination_Type.Shares_Capital);
@@ -763,6 +913,8 @@ namespace Client_Service.Members
                     a.Name = "Christmas savings";
                     a.Type = Depositaccounts.status.savings;
                     a.Balance = (double)Chrismas_Contribution;
+                    a.Direction = Depositaccounts.direction.Deposit;
+                    a.transaction_Type = AccountEntries.Transaction_Type.Xmas_Contribution;
                     if (keywords.Count() > 0)
                     {
                         var k = keywords.FirstOrDefault(o => o.Destination_Type == Destination_Type.Chrismas_savings);
@@ -776,6 +928,8 @@ namespace Client_Service.Members
                     a.Name = "Plaza contribution";
                     a.Type = Depositaccounts.status.savings;
                     a.Balance = (Double)Plaza_Savings;
+                    a.Direction = Depositaccounts.direction.Deposit;
+                    a.transaction_Type = AccountEntries.Transaction_Type.Plaza_Savings;
                     if (keywords.Count() > 0)
                     {
                         var k = keywords.FirstOrDefault(o => o.Destination_Type == Destination_Type.Plaza_Contribution);
@@ -784,11 +938,13 @@ namespace Client_Service.Members
                     }
                     acc.Add(a);
 
- a = new Depositaccounts();
+                    a = new Depositaccounts();
                     a.Account = "BBF";
                     a.Name = "Burial Benovolent Fund";
                     a.Type = Depositaccounts.status.savings;
                     a.Balance = (Double)Benevolent_Fund;
+                    a.Direction = Depositaccounts.direction.Deposit;
+                    a.transaction_Type = AccountEntries.Transaction_Type.Benevolent_Fund;
                     if (keywords.Count() > 0)
                     {
                         var k = keywords.FirstOrDefault(o => o.Destination_Type == Destination_Type.BBF);
@@ -805,6 +961,8 @@ namespace Client_Service.Members
                             a.Name = loan.Loan_Product_Type;
                             a.Type = Depositaccounts.status.loans;
                             a.Balance = (double)(loan.Total_Balance);
+                            a.Direction = Depositaccounts.direction.Deposit;
+                            a.transaction_Type = AccountEntries.Transaction_Type.Loan;
                             if (keywords.Count() > 0)
                             {
                                 var k = keywords.FirstOrDefault(o => o.Destination_Type == Destination_Type.Loan_Repayment && o.Loan_Code == loan.Loan_Product_Type);
@@ -843,6 +1001,7 @@ namespace Logging
     {
         public string Account { get; set; }
         public int Transaction_Type { get; set; }
+     public decimal Amount { get; set; }
     }
 }
 namespace Client_Service.Loan_Products

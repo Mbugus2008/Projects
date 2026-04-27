@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GenericObjectDataSource DisplayName="NextOfKin" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+  <TypeInfo>Client_Service.NextOfKin.NextOfKin, Client_Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=</TypeInfo>
+</GenericObjectDataSource>
