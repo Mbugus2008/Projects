@@ -2,8 +2,6 @@
 using System.IO;
 using System.Collections.ObjectModel;
 using System.Threading;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Text;
@@ -64,7 +62,6 @@ namespace Logging
         }
         public static void ReportError(Exception ex)
         {
-            // throw ex;
             try
             {
                 LogEntryOnFile(String.Format("{0}:{1}", DateTime.Now, ex.StackTrace));
@@ -80,32 +77,9 @@ namespace Logging
                         LogEntryOnFile(String.Format("{0}:{1}", DateTime.Now, ex.InnerException.InnerException.StackTrace));
                     }
                 }
-                try
-                {
-                    throw ex;
-
-                }
-                catch (DbEntityValidationException ee)
-                {
-                    foreach (var eve in ee.EntityValidationErrors)
-                    {
-                        LogEntryOnFile(string.Format("Entity of type {0} in state {1} has the following validation errors:",
-                             eve.Entry.Entity.GetType().Name, eve.Entry.State));
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            LogEntryOnFile(string.Format("- Property: {0}, Error: {1}",
-                                ve.PropertyName, ve.ErrorMessage));
-                        }
-                    }
-
-                }
-
-
                 LogEntryOnFile(String.Format("{0}:{1}", DateTime.Now, ex.StackTrace));
                 LogEntryOnFile(String.Format("{0}:{1}", DateTime.Now, ex.Source));
             }
-
-
             catch (Exception e) { }
 
         }

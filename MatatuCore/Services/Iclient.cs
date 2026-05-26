@@ -9,6 +9,7 @@ using Member;
 using MemberAccounts;
 using NRODefect;
 using Parcels;
+using Reversal;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
@@ -155,6 +156,7 @@ namespace MatatuCore.Services
                     cl.loans_service = InitializeClient<Loans>(client);
                     cl.accounts_service = InitializeClient<Accounts>(client);
                     cl.entries_service = InitializeClient<AccountEntries>(client);
+                    cl.reversal_service = InitializeClient<Reversals>(client);
                 }
                 else
                     return null;
@@ -289,7 +291,28 @@ public class AesEncryption
 
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return DateTime.Parse(reader.GetString());
+            if (reader.TokenType == JsonTokenType.Null)
+            {
+                return default;
+            }
+
+            var value = reader.GetString();
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return default;
+            }
+
+            if (DateTime.TryParseExact(value, _format, null, System.Globalization.DateTimeStyles.None, out var parsedExact))
+            {
+                return parsedExact;
+            }
+
+            if (DateTime.TryParse(value, out var parsed))
+            {
+                return parsed;
+            }
+
+            throw new JsonException($"Invalid DateTime value '{value}'.");
         }
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)

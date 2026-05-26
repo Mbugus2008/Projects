@@ -51,7 +51,7 @@ var clientId = _httpContextAccessor.HttpContext?.Items["X-Client-Identifier"]?.T
 
                 if (System.IO.File.Exists(configPath))
                 {
-                   logger.LogInformation($"✅ Found appsettings.json at {configPath}");
+                   logger.LogInformation($"✅ Found appsettings.json ");
                 }
                 else
                 {
