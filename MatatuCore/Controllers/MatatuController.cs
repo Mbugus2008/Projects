@@ -45,7 +45,7 @@ var clientId = _httpContextAccessor.HttpContext?.Items["X-Client-Identifier"]?.T
             });
 
             logger = loggerFactory.CreateLogger("MatatuLogger");
-   logger.LogInformation($"Base {AppContext.BaseDirectory}");
+                logger.LogInformation($"Base {AppContext.BaseDirectory}");
                 var baseDir = AppContext.BaseDirectory;
                 var configPath = Path.Combine(baseDir, "appsettings.json");
 
