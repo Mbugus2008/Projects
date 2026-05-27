@@ -13,7 +13,7 @@ import 'package:trimline_parcel/utilities/logger.dart';
 
 class ApiClient extends ChangeNotifier {
   final LoggerService logger = Get.find();
-  String baseUrl = "http://nav.trimline.co.ke:4010/api/Matatu/";
+  String baseUrl = "http://nav.trimline.co.ke:4012/api/Parcel/";
 
   Future<http.Response> postdata(String url, String? data) async {
     http.Response? r = http.Response("", 200);
