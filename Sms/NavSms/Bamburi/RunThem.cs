@@ -323,6 +323,8 @@ namespace RunCodunit
                         {
                             logs.ReportError(ex);
                             s.Comments = ex.Message.Substring(0, ex.Message.Length > 200 ? 200 : ex.Message.Length);
+                            s.Sent_To_Server = Sms.Sent_To_Server.Failed;
+                            s.Sent_To_ServerSpecified = true;
                             nav.Sservice.Update(ref s);
 
                         }
