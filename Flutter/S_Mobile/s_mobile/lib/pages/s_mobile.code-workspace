@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../Client_Service"
+		}
+	],
+	"settings": {
+		"powershell.cwd": "Client_Service"
+	}
+}

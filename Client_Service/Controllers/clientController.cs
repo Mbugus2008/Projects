@@ -665,7 +665,7 @@ namespace Client_Service.Controllers
 
                     trans.AmountSpecified = true;
                     trans.StatusSpecified = true;
-                    trans.Status = Status.Pending_Posting;
+                    trans.Status = Transactions.Status.Pending_Posting;
                     trans.Transaction_DateSpecified = true;
                     trans.Transaction_TypeSpecified = true;
                     trans.Transaction_TimeSpecified = true;

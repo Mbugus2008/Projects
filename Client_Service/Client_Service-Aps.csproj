@@ -312,14 +312,11 @@
     <Content Include="Web References\Loans\Loans.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\AccountEntries\AccountEntries.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
     <None Include="Web References\AccountEntries\AccountEntries.wsdl" />
-    <None Include="Web References\AccountEntries\Reference.map">
+    <Content Include="Web References\AccountEntries\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    </Content>
     <None Include="Web References\Alternate\Alternate.wsdl" />
     <None Include="Web References\Alternate\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -378,29 +375,20 @@
     <Content Include="Web References\Transactions\MobileTransactions.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\tarrifs\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
-    <Content Include="Web References\tarrifs\Tarrifs.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
-    <Content Include="Web References\Payments\Payments.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
     <None Include="Web References\Payments\Payments.wsdl" />
     <Content Include="Web References\Payments\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
-    <None Include="Web References\RepaymentSchedule\Reference.map">
+    <Content Include="Web References\RepaymentSchedule\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Web References\RepaymentSchedule\RepaymentSchedule.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\RepaymentSchedule\RepaymentSchedule.wsdl" />
+    <Content Include="Web References\tarrifs\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web References\tarrifs\Tarrifs.wsdl" />
     <None Include="Web References\Transactions\MobileTransactions.wsdl" />
     <None Include="Web References\Transactions\Reference.map">

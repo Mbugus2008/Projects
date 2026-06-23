@@ -21,7 +21,8 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 class ApiClient<T extends investor> extends ChangeNotifier {
-  String baseUrl = "http://192.168.54.119/S_Mobile/api";
+  String baseUrl = "http://192.168.8.247/S_MobileSwitch/api";
+  //String baseUrl = "http://192.168.8.247/S_Mobile/api";
   //String baseUrl = "http://192.168.28.105/S_Mobile/api";
   //String baseUrl = "http://192.168.1.106/S_Mobile/api";
   Future<Response> postdata(String url, String data) async {

@@ -90,7 +90,7 @@ class Schedule {
       'Member_Name': Member_Name,
       'Monthly_Interest': Monthly_Interest,
       'Amount_Repayed': Amount_Repayed,
-      'Repayment_Date': Repayment_Date?.millisecondsSinceEpoch,
+      'Repayment_Date': Repayment_Date?.toIso8601String(),
       'Principal_Repayment': Principal_Repayment,
       'Paid': Paid,
       'Remaining_Debt': Remaining_Debt,
@@ -112,7 +112,7 @@ class Schedule {
       'Less_Amount': Less_Amount,
       'Deduct_Less_Amount': Deduct_Less_Amount,
       'Ommitted': Ommitted,
-      'Application_Date': Application_Date?.millisecondsSinceEpoch,
+      'Application_Date': Application_Date?.toIso8601String(),
     };
   }
 

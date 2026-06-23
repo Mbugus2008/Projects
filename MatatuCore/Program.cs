@@ -1,5 +1,6 @@
 using MatatuCore.Controllers;
 using MatatuCore.Controllers.Helpers;
+using MatatuCore.Helpers;
 using MatatuCore.Models.Database;
 using MatatuCore.Services;
 using Microsoft.AspNetCore.Builder;
@@ -29,8 +30,41 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
     c.OperationFilter<AddClientIdHeaderParameter>();
     c.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
+    // API Key security definition
+    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.ApiKey,
+        Name = "X-Api-Key",
+        In = ParameterLocation.Header,
+        Description = "API key required for protected endpoints."
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "ApiKey" }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 builder.Services.AddHttpContextAccessor();
+
+// API Key Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+})
+.AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(
+    ApiKeyAuthenticationOptions.DefaultScheme, null);
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ApiKey", policy =>
+        policy.AddAuthenticationSchemes(ApiKeyAuthenticationOptions.DefaultScheme)
+              .RequireAuthenticatedUser());
+});
 
 var app = builder.Build();
 

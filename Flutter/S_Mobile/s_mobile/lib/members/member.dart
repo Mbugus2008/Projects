@@ -66,7 +66,7 @@ class Member implements Tomaps {
       'Mobile_Phone_No': Mobile_Phone_No,
       'Gender': Gender?.index,
       'ID_No': ID_No,
-      'Date_of_Birth': Date_of_Birth?.millisecondsSinceEpoch,
+      'Date_of_Birth': Date_of_Birth?.toIso8601String(),
       'Blocked': Blocked?.index,
       'Status': Status?.index,
       'Group_Account': Group_Account,

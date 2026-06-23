@@ -53,6 +53,30 @@ class NextOfKin {
   }
 
   String toJson() => json.encode(toMap());
+
+  factory NextOfKin.fromMap(Map<String, dynamic> map) {
+    return NextOfKin(
+      Key: map['Key'] != null ? map['Key'] as String : null,
+      Account_No: map['Account_No'] != null ? map['Account_No'] as String : null,
+      Type: map['Type'] != null
+          ? NextOfKinType.values[(map['Type'] as int?)!]
+          : null,
+      Name: map['Name'] != null ? map['Name'] as String : null,
+      Relationship: map['Relationship'] != null ? map['Relationship'] as String : null,
+      Beneficiary: map['Beneficiary'] != null ? map['Beneficiary'] as bool : null,
+      Date_of_Birth: map['Date_of_Birth'] != null
+          ? DateTime.tryParse(map['Date_of_Birth'] as String)
+          : null,
+      Address: map['Address'] != null ? map['Address'] as String : null,
+      Telephone: map['Telephone'] != null ? map['Telephone'] as String : null,
+      Email: map['Email'] != null ? map['Email'] as String : null,
+      ID_No: map['ID_No'] != null ? map['ID_No'] as String : null,
+      PercentAllocation: map['PercentAllocation'] != null ? map['PercentAllocation'] as int : null,
+    );
+  }
+
+  factory NextOfKin.fromJson(String source) =>
+      NextOfKin.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 enum NextOfKinType {

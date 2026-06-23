@@ -222,6 +222,20 @@ var clientId = _httpContextAccessor.HttpContext?.Items["X-Client-Identifier"]?.T
             }
         }
 
+        [HttpPost("changepassword")]
+        public Results<Agents.Users> changepassword(Agents.Users user)
+        {
+            try
+            {
+                return new Results<Agents.Users>() { Contents = client.changepassword(user) };
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Error in changepassword");
+                return new Results<Agents.Users>() { Code = -1, Desc = e.Message };
+            }
+        }
+
      
 
     }

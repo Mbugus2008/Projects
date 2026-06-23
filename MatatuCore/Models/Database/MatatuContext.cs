@@ -17,6 +17,8 @@ public partial class MatatuContext : DbContext
 
     public virtual DbSet<Client> Clients { get; set; }
 
+    public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 

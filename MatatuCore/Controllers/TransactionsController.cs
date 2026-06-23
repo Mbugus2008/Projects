@@ -1,11 +1,16 @@
 ﻿using DeportnFuel;
+using ExternalTrans;
 using Logging;
+using MatatuCore.Helpers;
 using Member;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Mtransaction;
 using Vbasics;
 using Vcrews;
 using VehicleCollection;
+using VehicleExpenses;
 
 namespace MatatuCore.Controllers
 {public partial class Request : ClientRequest
@@ -357,6 +362,71 @@ namespace MatatuCore.Controllers
             catch (Exception e)
             {
                 return new Results<VehiclesBasics[]>() { Code = -1, Desc = e.Message };
+            }
+        }
+
+        [HttpPost("getexpenses")]
+        public Results<VehicleExpenses.Vehicle_Expenses[]> getexpenses()
+        {
+            try
+            {
+                return new Results<VehicleExpenses.Vehicle_Expenses[]>()
+                {
+                    Contents = client.getvehicleexpenses()
+                };
+            }
+            catch (Exception e)
+            {
+                return new Results<VehicleExpenses.Vehicle_Expenses[]>() { Code = -1, Desc = e.Message };
+            }
+        }
+
+        [HttpPost("setexpenses")]
+        public Results<VehicleExpenses.Vehicle_Expenses> setexpenses(VehicleExpenses.Vehicle_Expenses request)
+        {
+            try
+            {
+                return new Results<VehicleExpenses.Vehicle_Expenses>()
+                {
+                    Contents = client.setvehicleexpenses(request)
+                };
+            }
+            catch (Exception e)
+            {
+                return new Results<VehicleExpenses.Vehicle_Expenses>() { Code = -1, Desc = e.Message };
+            }
+        }
+
+        [HttpPost("mtransactions")]
+        [Authorize(Policy = "ApiKey")]
+        public Results<Mtransaction.Mtransactions> setmtransactions(Mtransaction.Mtransactions request)
+        {
+            try
+            {
+                return new Results<Mtransaction.Mtransactions>()
+                {
+                    Contents = client.setmtransactions(request)
+                };
+            }
+            catch (Exception e)
+            {
+                return new Results<Mtransaction.Mtransactions>() { Code = -1, Desc = e.Message };
+            }
+        }
+
+        [HttpPost("vehiclecollection")]
+        public Results<Vehicle_Daily_Collection[]> vehiclecollection(Request request)
+        {
+            try
+            {
+                return new Results<Vehicle_Daily_Collection[]>()
+                {
+                    Contents = client.Dailytrans(request)
+                };
+            }
+            catch (Exception e)
+            {
+                return new Results<Vehicle_Daily_Collection[]>() { Code = -1, Desc = e.Message };
             }
         }
 

@@ -1,7 +1,11 @@
 ﻿using DeportnFuel;
 using Entries;
+using ExternalTrans;
 using Loan;
+using LoanShedules;
 using Logging;
+using Mtransaction;
+using VehicleExpenses;
 using MatatuCore.Controllers;
 using MatatuCore.Models.Database;
 using Member;
@@ -70,6 +74,10 @@ namespace MatatuCore.Services
         public virtual Accounts_PortClient accounts_service { get; set; } = new Accounts_PortClient();
 
         public virtual Entries.AccountEntries_PortClient entries_service { get; set; }
+
+        public virtual Mtransaction.Mtransactions_PortClient mtransaction_service { get; set; }
+
+        public virtual Vehicle_Expenses_PortClient vehicle_expenses_service { get; set; }
 
         public virtual Location.Locations_PortClient location_service { get; set; }
 
@@ -735,6 +743,97 @@ namespace MatatuCore.Services
             }
 
             return Array.Empty<AccountEntries>();
+        }
+
+        public virtual LoanSchedule[] getloanschedules(ClientRequest request)
+        {
+            // Loan schedules are retrieved from the NAV system.
+            // This requires a dedicated LoanSchedules_PortClient connected service.
+            // Returning empty for base implementation; override in specific client if needed.
+            return Array.Empty<LoanSchedule>();
+        }
+
+        public virtual Agents.Users changepassword(Agents.Users user)
+        {
+            if (string.IsNullOrEmpty(user.Agent_Code))
+                throw new Exception("Agent Code is required.");
+
+            var existing = user_service.Read(user.Agent_Code);
+            if (existing == null)
+                throw new Exception("User not found.");
+
+            existing.Password = user.Password;
+            user_service.Update(ref existing);
+            return existing;
+        }
+
+        public virtual VehicleExpenses.Vehicle_Expenses[] getvehicleexpenses()
+        {
+            return vehicle_expenses_service.ReadMultiple(
+                new Vehicle_Expenses_Filter[] { },
+                null, 0);
+        }
+
+        public virtual VehicleExpenses.Vehicle_Expenses setvehicleexpenses(VehicleExpenses.Vehicle_Expenses expense)
+        {
+            if (string.IsNullOrEmpty(expense.Code))
+                throw new Exception("Code is required.");
+
+            expense.DateSpecified = true;
+            expense.AmountSpecified = true;
+
+            var existing = vehicle_expenses_service.ReadMultiple(
+                new Vehicle_Expenses_Filter[]
+                {
+                    new Vehicle_Expenses_Filter
+                    {
+                        Criteria = expense.Code,
+                        Field = Vehicle_Expenses_Fields.Code
+                    }
+                }, null, 0).FirstOrDefault();
+
+            if (existing == null)
+            {
+                vehicle_expenses_service.Create(ref expense);
+            }
+            else
+            {
+                expense.Key = existing.Key;
+                vehicle_expenses_service.Update(ref expense);
+            }
+
+            return expense;
+        }
+
+        public virtual Mtransaction.Mtransactions setmtransactions(Mtransaction.Mtransactions trans)
+        {
+            if (string.IsNullOrEmpty(trans.Document_No))
+                throw new Exception("Document No is required.");
+
+            trans.Transaction_DateSpecified = true;
+            trans.AmountSpecified = true;
+
+            var existing = mtransaction_service.ReadMultiple(
+                new Mtransaction.Mtransactions_Filter[]
+                {
+                    new Mtransaction.Mtransactions_Filter
+                    {
+                        Criteria = trans.Document_No,
+                        Field = Mtransaction.Mtransactions_Fields.Document_No
+                    }
+                }, null, 0).FirstOrDefault();
+
+            if (existing == null)
+            {
+                mtransaction_service.Create(ref trans);
+            }
+            else
+            {
+                trans.Key = existing.Key;
+                mtransaction_service.Update(ref trans);
+            }
+
+            return trans;
         }
     }
 

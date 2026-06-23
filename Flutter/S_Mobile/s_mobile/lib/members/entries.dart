@@ -46,7 +46,7 @@ class entries  implements Tomaps  {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'Key': Key,
-      'Posting_Date': Posting_Date?.millisecondsSinceEpoch,
+      'Posting_Date': Posting_Date?.toIso8601String(),
       'Entry_No': Entry_No,
       'Document_No': Document_No,
       'Amount': Amount,

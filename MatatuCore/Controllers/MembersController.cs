@@ -1,4 +1,7 @@
-﻿using Logging;
+﻿using Entries;
+using Loan;
+using LoanShedules;
+using Logging;
 using MatatuCore.Controllers.Helpers;
 using MatatuCore.Models.Database;
 using MatatuCore.Services;
@@ -269,6 +272,32 @@ namespace MatatuCore.Controllers
             {
                 logger.LogError(e, "Error in GetLoanEntries");
                 return new Results<Entries.AccountEntries[]> { Code = -1, Desc = e.Message };
+            }
+        }
+
+        [HttpPost("GetLoanSchedules")]
+        public Results<LoanSchedule[]> GetLoanSchedules(ClientRequest request)
+        {
+            try
+            {
+                logger.LogInformation($"GetLoanSchedules called with request: {System.Text.Json.JsonSerializer.Serialize(request)}");
+
+                var schedules = client.getloanschedules(request);
+
+                if (schedules == null || schedules.Length == 0)
+                {
+                    logger.LogWarning("No loan schedules found");
+                    return new Results<LoanSchedule[]> { Contents = Array.Empty<LoanSchedule>(), Code = 0, Desc = "No loan schedules found" };
+                }
+
+                logger.LogInformation($"Retrieved {schedules.Length} loan schedule(s)");
+
+                return new Results<LoanSchedule[]> { Contents = schedules };
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Error in GetLoanSchedules");
+                return new Results<LoanSchedule[]> { Code = -1, Desc = e.Message };
             }
         }
 

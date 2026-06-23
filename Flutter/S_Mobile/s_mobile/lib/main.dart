@@ -17,13 +17,14 @@ class MyApp extends StatelessWidget {
       title: 'S_Mobile',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-       primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue,
         primaryColor: const Color.fromRGBO(164, 92, 113, 0.5),
       ),
       home: const Login(),
     );
   }
 }
+
 extension CustomStyles on TextTheme {
   TextStyle get vamounts => const TextStyle(
         fontSize: 10.0,
@@ -35,5 +36,5 @@ extension CustomStyles on TextTheme {
 }
 
 class Clients {
-  String get Name => "Tovu";
+  String get Name => "BarakaYetu";
 }

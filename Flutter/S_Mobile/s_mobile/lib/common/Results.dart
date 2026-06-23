@@ -49,7 +49,7 @@ class Results2<T extends Tomaps> {
     return <String, dynamic>{
       'Code': Code,
       'Desc': Desc,
-      'Contents': Contents!.toMap(), //
+      'Contents': Contents?.toMap(), //
     };
   }
 

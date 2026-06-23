@@ -36,7 +36,8 @@ class Account {
 
   List<TransactionType> get transTypes {
     List<TransactionType> types= [];
-    String? acc = No?.toUpperCase();
+    if (No == null) return types;
+    String? acc = No!.toUpperCase();
     switch(acc)
     {
    case 'DEPOSITS':

@@ -71,6 +71,25 @@ class _LoginState extends State<Login> {
     });
   }
 
+  void _showForgotPasswordDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Forgot Password'),
+        content: const Text(
+          'Please contact your SACCO administrator to reset your password.\n\n'
+          'You can also visit your nearest branch office for assistance.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   final space = const Padding(
     padding: EdgeInsets.all(10.0),
   );
@@ -299,7 +318,17 @@ class _LoginState extends State<Login> {
                           hintStyle: Theme.of(context).textTheme.bodyMedium),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (usernamec.text.trim().isEmpty) {
+                          MotionToast.warning(
+                            description: const Text(
+                                'Please enter your phone number first.'),
+                            title: const Text('Forgot Password'),
+                          ).show(context);
+                          return;
+                        }
+                        _showForgotPasswordDialog(context);
+                      },
                       child: const Text(
                         'Forgot Password',
                         style: TextStyle(color: Colors.blue, fontSize: 15),

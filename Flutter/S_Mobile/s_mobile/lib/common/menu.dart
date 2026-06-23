@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:s_mobile/Loans/Loan_Type.dart';
+import 'package:s_mobile/common/Apis.dart';
+import 'package:s_mobile/common/Results.dart';
 import 'package:s_mobile/common/utilities.dart';
 import 'package:s_mobile/common/widgets.dart';
 import 'package:s_mobile/master_page.dart';
@@ -35,7 +37,72 @@ class _menuState extends State<menu> {
   List<entries> ent = <entries>[];
 
   Future<void> trans(BuildContext context, Account source, Account dest,
-      double amount) async {}
+      double amount) async {
+    if (source.No == null || dest.No == null) {
+      MotionToast.warning(
+        description: const Text('Please select both source and destination accounts.'),
+        title: const Text('Transfer'),
+      ).show(context);
+      return;
+    }
+    if (amount <= 0) {
+      MotionToast.warning(
+        description: const Text('Please enter a valid amount.'),
+        title: const Text('Transfer'),
+      ).show(context);
+      return;
+    }
+
+    try {
+      final request = Params(
+        Acc: source.No,
+        CS_Number: dest.No,
+        text: amount.toString(),
+      );
+      final response = await ApiClient().postdata('transaction', request.toJson());
+
+      if (!context.mounted) return;
+
+      if (response.statusCode == 200) {
+        final result = Results.fromJson(response.body);
+        if (result.Code == 0) {
+          MotionToast.success(
+            description: Text(result.Desc ?? 'Transaction completed successfully.'),
+            title: const Text('Transfer'),
+          ).show(context);
+          // Refresh member data
+          final member = Get.find<MemberController>().currentCustomer.value;
+          final refreshReq = Params(Phone: member.Mobile_Phone_No);
+          final r = await ApiClient().postdata('member', refreshReq.toJson());
+          if (r.statusCode == 200) {
+            final memberResult = Results2<Member>.fromJson(r.body, Member.fromMap);
+            if (memberResult.Code == 0 && memberResult.Contents != null) {
+              Get.find<MemberController>().currentCustomer.value =
+                  memberResult.Contents!;
+            }
+          }
+          if (context.mounted) Navigator.of(context).pop();
+        } else {
+          MotionToast.error(
+            description: Text(result.Desc ?? 'Transaction failed.'),
+            title: const Text('Transfer'),
+          ).show(context);
+        }
+      } else {
+        MotionToast.error(
+          description: Text('Request failed (${response.statusCode}).'),
+          title: const Text('Transfer'),
+        ).show(context);
+      }
+    } catch (e) {
+      if (context.mounted) {
+        MotionToast.error(
+          description: Text(e.toString()),
+          title: const Text('Transfer'),
+        ).show(context);
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -249,12 +316,22 @@ class _menuState extends State<menu> {
                       MaterialButton(
                         color: Theme.of(context).primaryColor,
                         onPressed: () {
+                          if (_sourceacc == null || _destaccount == null) {
+                            MotionToast.warning(
+                              description: const Text(
+                                  'Please select both source and destination accounts.'),
+                              title: const Text('Transfer'),
+                            ).show(context);
+                            return;
+                          }
+                          if (Amount == null || Amount! <= 0) {
+                            MotionToast.warning(
+                              description: const Text('Please enter a valid amount.'),
+                              title: const Text('Transfer'),
+                            ).show(context);
+                            return;
+                          }
                           trans(context, _sourceacc!, _destaccount!, Amount!);
-                          if (!mounted) return;
-                          MotionToast.info(
-                            description: Text("Coming soon"),
-                            title: Text("Working on it"),
-                          ).show(context);
                         },
                         child: const Text(
                           'Transfer Funds',
@@ -349,15 +426,25 @@ class _menuState extends State<menu> {
                     MaterialButton(
                       color: Theme.of(context).primaryColor,
                       onPressed: () {
+                        if (_sourceacc == null || _destaccount == null) {
+                          MotionToast.warning(
+                            description: const Text(
+                                'Please select both source and destination accounts.'),
+                            title: const Text('Payment'),
+                          ).show(context);
+                          return;
+                        }
+                        if (Amount == null || Amount! <= 0) {
+                          MotionToast.warning(
+                            description: const Text('Please enter a valid amount.'),
+                            title: const Text('Payment'),
+                          ).show(context);
+                          return;
+                        }
                         trans(context, _sourceacc!, _destaccount!, Amount!);
-                        if (!mounted) return;
-                        MotionToast.info(
-                          description: Text("Coming soon"),
-                          title: Text("Working on it"),
-                        ).show(context);
                       },
                       child: const Text(
-                        'Transfer Funds',
+                        'Make Payment',
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),
@@ -422,13 +509,63 @@ class _menuState extends State<menu> {
                     ),
                     MaterialButton(
                       color: Theme.of(context).primaryColor,
-                      onPressed: () {
-                        trans(context, _sourceacc!, _destaccount!, Amount!);
-                        if (!mounted) return;
-                        MotionToast.info(
-                          description: Text("Coming soon"),
-                          title: Text("Working on it"),
-                        ).show(context);
+                      onPressed: () async {
+                        if (lsource == null) {
+                          MotionToast.warning(
+                            description: const Text('Please select a loan type.'),
+                            title: const Text('Loan Application'),
+                          ).show(context);
+                          return;
+                        }
+                        if (Amount == null || Amount! <= 0) {
+                          MotionToast.warning(
+                            description: const Text('Please enter a valid amount.'),
+                            title: const Text('Loan Application'),
+                          ).show(context);
+                          return;
+                        }
+
+                        try {
+                          final member = Get.find<MemberController>().currentCustomer.value;
+                          final request = Params(
+                            Application_No: member.No,
+                            Loan_Type: lsource!.Code,
+                            Acc: Amount.toString(),
+                            text: lsource!.Description,
+                          );
+                          final response = await ApiClient()
+                              .postdata('transaction', request.toJson());
+
+                          if (!context.mounted) return;
+
+                          if (response.statusCode == 200) {
+                            final result = Results.fromJson(response.body);
+                            if (result.Code == 0) {
+                              MotionToast.success(
+                                description: Text(result.Desc ?? 'Loan application submitted.'),
+                                title: const Text('Loan Application'),
+                              ).show(context);
+                              if (context.mounted) Navigator.of(context).pop();
+                            } else {
+                              MotionToast.error(
+                                description: Text(result.Desc ?? 'Application failed.'),
+                                title: const Text('Loan Application'),
+                              ).show(context);
+                            }
+                          } else {
+                            MotionToast.error(
+                              description: Text('Request failed (${response.statusCode}).'),
+                              title: const Text('Loan Application'),
+                            ).show(context);
+                          }
+                        } catch (e) {
+                          if (context.mounted) {
+                            MotionToast.error(
+                              description: Text(e.toString()),
+                              title: const Text('Loan Application'),
+                            ).show(context);
+                          }
+                        }
                       },
                       child: const Text(
                         'Apply Loan',
