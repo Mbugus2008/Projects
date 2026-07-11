@@ -80,7 +80,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<RequestResponseLoggingMiddleware>();
+app.UseMiddleware<ClientIdentifierMiddleware>();
 
 app.MapControllers();
-app.UseMiddleware<ClientIdentifierMiddleware>();
 app.Run();

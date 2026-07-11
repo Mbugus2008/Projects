@@ -57,13 +57,16 @@ class NextOfKin {
   factory NextOfKin.fromMap(Map<String, dynamic> map) {
     return NextOfKin(
       Key: map['Key'] != null ? map['Key'] as String : null,
-      Account_No: map['Account_No'] != null ? map['Account_No'] as String : null,
+      Account_No:
+          map['Account_No'] != null ? map['Account_No'] as String : null,
       Type: map['Type'] != null
           ? NextOfKinType.values[(map['Type'] as int?)!]
           : null,
       Name: map['Name'] != null ? map['Name'] as String : null,
-      Relationship: map['Relationship'] != null ? map['Relationship'] as String : null,
-      Beneficiary: map['Beneficiary'] != null ? map['Beneficiary'] as bool : null,
+      Relationship:
+          map['Relationship'] != null ? map['Relationship'] as String : null,
+      Beneficiary:
+          map['Beneficiary'] != null ? map['Beneficiary'] as bool : null,
       Date_of_Birth: map['Date_of_Birth'] != null
           ? DateTime.tryParse(map['Date_of_Birth'] as String)
           : null,
@@ -71,7 +74,9 @@ class NextOfKin {
       Telephone: map['Telephone'] != null ? map['Telephone'] as String : null,
       Email: map['Email'] != null ? map['Email'] as String : null,
       ID_No: map['ID_No'] != null ? map['ID_No'] as String : null,
-      PercentAllocation: map['PercentAllocation'] != null ? map['PercentAllocation'] as int : null,
+      PercentAllocation: map['PercentAllocation'] != null
+          ? map['PercentAllocation'] as int
+          : null,
     );
   }
 
@@ -115,8 +120,7 @@ class _NextOfKinState extends State<NextOfKin_widget> {
     setState(() => _loading = true);
 
     try {
-      final response =
-          await ApiClient().postdata('nextofkin', _data.toJson());
+      final response = await ApiClient().postdata('nextofkin', _data.toJson());
 
       if (!mounted) return;
 
@@ -139,8 +143,8 @@ class _NextOfKinState extends State<NextOfKin_widget> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(e.toString())));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.toString())));
       }
     } finally {
       if (mounted) setState(() => _loading = false);
@@ -168,7 +172,9 @@ class _NextOfKinState extends State<NextOfKin_widget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: const Color(0xFF2E7D32),
+        foregroundColor: Colors.white,
+        elevation: 0,
         title: const Text('Next of Kin'),
       ),
       body: SingleChildScrollView(
@@ -240,8 +246,7 @@ class _NextOfKinState extends State<NextOfKin_widget> {
                   StatefulBuilder(builder: (context, setSwState) {
                     return Switch(
                       value: _data.Beneficiary ?? false,
-                      onChanged: (v) =>
-                          setSwState(() => _data.Beneficiary = v),
+                      onChanged: (v) => setSwState(() => _data.Beneficiary = v),
                     );
                   }),
                 ],
@@ -261,7 +266,7 @@ class _NextOfKinState extends State<NextOfKin_widget> {
               _loading
                   ? const CircularProgressIndicator()
                   : MaterialButton(
-                      color: Theme.of(context).primaryColor,
+                      color: const Color(0xFF2E7D32),
                       onPressed: _submit,
                       child: const Text(
                         'Save Next of Kin',

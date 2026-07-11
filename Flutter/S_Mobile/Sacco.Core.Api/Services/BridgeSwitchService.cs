@@ -148,6 +148,16 @@ public sealed class BridgeSwitchService(
             ct);
     }
 
+    public async Task<ProxyResponse> EligibilityWithTopupAsync(HttpContext context, JsonNode? incoming, CancellationToken ct)
+    {
+        return await DispatchAsync(
+            context,
+            "api/eligibilitywithtopup",
+            static (handler, httpContext, incoming, token) => handler.EligibilityWithTopupAsync(httpContext, incoming, token),
+            incoming,
+            ct);
+    }
+
     public async Task<ProxyResponse> ScheduleAsync(HttpContext context, JsonNode? incoming, CancellationToken ct)
     {
         return await DispatchAsync(
@@ -214,6 +224,16 @@ public sealed class BridgeSwitchService(
             context,
             "api/nextofkin",
             static (handler, httpContext, incoming, token) => handler.NextOfKinAsync(httpContext, incoming, token),
+            incoming,
+            ct);
+    }
+
+    public async Task<ProxyResponse> GetTransactionsAsync(HttpContext context, JsonNode? incoming, CancellationToken ct)
+    {
+        return await DispatchAsync(
+            context,
+            "api/Gettransactions",
+            static (handler, httpContext, incoming, token) => handler.GetTransactionsAsync(httpContext, incoming, token),
             incoming,
             ct);
     }

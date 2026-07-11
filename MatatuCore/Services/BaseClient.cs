@@ -5,6 +5,7 @@ using Loan;
 using LoanShedules;
 using Logging;
 using Mtransaction;
+using VehicleDues;
 using VehicleExpenses;
 using MatatuCore.Controllers;
 using MatatuCore.Models.Database;
@@ -78,6 +79,8 @@ namespace MatatuCore.Services
         public virtual Mtransaction.Mtransactions_PortClient mtransaction_service { get; set; }
 
         public virtual Vehicle_Expenses_PortClient vehicle_expenses_service { get; set; }
+
+        public virtual Vehicle_Dues_PortClient vehicle_dues_service { get; set; }
 
         public virtual Location.Locations_PortClient location_service { get; set; }
 
@@ -835,6 +838,13 @@ namespace MatatuCore.Services
 
             return trans;
         }
+
+        public virtual VehicleDues.Vehicle_Dues[] getvehicledues(string vehicle)
+        {
+            var result = vehicle_dues_service.Read(vehicle);
+            return result != null ? new[] { result } : Array.Empty<VehicleDues.Vehicle_Dues>();
+        }
+
     }
 
      

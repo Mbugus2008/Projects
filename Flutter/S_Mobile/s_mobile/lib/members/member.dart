@@ -5,13 +5,11 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:s_mobile/Loans/Loan.dart';
 import 'package:s_mobile/members/accounts.dart';
 import 'package:s_mobile/members/entries.dart';
-
 import 'package:s_mobile/members/member_info.dart';
 import 'package:s_mobile/members/targetAccount.dart';
 
 import '../Loans/Loan_Type.dart';
 import '../common/Results.dart';
-import 'entries.dart';
 
 @JsonSerializable()
 class Member implements Tomaps {
@@ -111,48 +109,20 @@ class Member implements Tomaps {
       Member_info: map['Member_info'] != null
           ? member_info.fromMap(map['Member_info'] as Map<String, dynamic>)
           : null,
-      Loans: map['Loans'] != null
-          ? List<Loan>.from(
-              (map['Loans'] as List<dynamic>).map<Loan?>(
-                (x) => Loan.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      Accounts: map['Accounts'] != null
-          ? List<Account>.from(
-              (map['Accounts'] as List<dynamic>).map<Account?>(
-                (x) => Account.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      Source_accounts: map['Source_accounts'] != null
-          ? List<Account>.from(
-              (map['Source_accounts'] as List<dynamic>).map<Account?>(
-                (x) => Account.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      Dest_accounts: map['Dest_accounts'] != null
-          ? List<Account>.from(
-              (map['Dest_accounts'] as List<dynamic>).map<Account?>(
-                (x) => Account.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      LoanTypes: map['LoanTypes'] != null
-          ? List<Loan_Type>.from(
-              (map['LoanTypes'] as List<dynamic>).map<Loan_Type?>(
-                (x) => Loan_Type.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      TargetAccount: map['TargetAccount'] != null
-          ? List<targetAccount>.from(
-              (map['TargetAccount'] as List<dynamic>).map<targetAccount?>(
-                (x) => targetAccount.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
+      Loans: _tryParseList<Loan>(map['Loans'], Loan.fromMap),
+      Accounts: _tryParseList<Account>(
+              map['Accounts'] ?? map['DepositAccount'], Account.fromMap) ??
+          (map['DepositAccount'] != null
+              ? _tryParseList<Account>(map['DepositAccount'],
+                  Account.fromDepositMap)
+              : null),
+      Source_accounts:
+          _tryParseList<Account>(map['Source_accounts'], Account.fromMap),
+      Dest_accounts:
+          _tryParseList<Account>(map['Dest_accounts'], Account.fromMap),
+      LoanTypes: _tryParseList<Loan_Type>(map['LoanTypes'], Loan_Type.fromMap),
+      TargetAccount: _tryParseList<targetAccount>(
+          map['TargetAccount'], targetAccount.fromMap),
     );
   }
 
@@ -160,6 +130,13 @@ class Member implements Tomaps {
 
   factory Member.fromJson(String source) =>
       Member.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+List<T>? _tryParseList<T>(
+    dynamic json, T Function(Map<String, dynamic>) fromMap) {
+  if (json == null) return null;
+  if (json is! List) return null;
+  return json.whereType<Map<String, dynamic>>().map((e) => fromMap(e)).toList();
 }
 
 enum gender {

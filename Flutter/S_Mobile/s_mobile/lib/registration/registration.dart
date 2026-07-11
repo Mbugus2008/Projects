@@ -2,14 +2,11 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
 import 'package:s_mobile/common/Results.dart';
 import 'package:s_mobile/common/utilities.dart';
-import 'package:s_mobile/members/member.dart';
 import 'package:s_mobile/registration/next_of_kin.dart';
 
 import '../common/Apis.dart';
-import '../common/widgets.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class registration {
@@ -429,7 +426,9 @@ class reg extends State<Registration_widget> {
         Results rr = Results.fromJson(value.body);
         if (rr.Code == 0) {
           utilities().Otp(context, otpc.toString()).then((value) {
-            ApiClient().postdata("register", widget.newreg!.toJson()).then((regResponse) {
+            ApiClient()
+                .postdata("register", widget.newreg!.toJson())
+                .then((regResponse) {
               if (regResponse.statusCode == 200) {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => NextOfKin_widget(
@@ -463,17 +462,16 @@ class reg extends State<Registration_widget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          title: Text("Registration"),
+          backgroundColor: const Color(0xFF2E7D32),
+          foregroundColor: Colors.white,
+          elevation: 0,
+          title: const Text("Registration"),
         ),
         body: IntrinsicHeight(
-
           child: Form(
               key: _formKey,
               child: Card(
-                margin: EdgeInsets.all(20
-                ),
-
+                margin: EdgeInsets.all(20),
                 elevation: 20,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -481,7 +479,8 @@ class reg extends State<Registration_widget> {
                     children: [
                       TextFormField(
                         decoration: const InputDecoration(labelText: 'Name'),
-                        onFieldSubmitted: (value) => widget.newreg?.Name = value,
+                        onFieldSubmitted: (value) =>
+                            widget.newreg?.Name = value,
                       ),
                       TextFormField(
                         decoration: InputDecoration(labelText: 'E-Mail'),
@@ -526,14 +525,16 @@ class reg extends State<Registration_widget> {
                         onChanged: (value) => widget.newreg?.ID_No = value,
                       ),
                       TextField(
-                        decoration: const InputDecoration(labelText: 'Mobile No'),
+                        decoration:
+                            const InputDecoration(labelText: 'Mobile No'),
                         onChanged: (value) =>
                             widget.newreg?.Mobile_Phone_No = value,
                       ),
                       TextFormField(
                         controller: TextEditingController(
                             text: utilities.formatter.format(
-                                widget.newreg?.Date_of_Birth ?? DateTime.now())),
+                                widget.newreg?.Date_of_Birth ??
+                                    DateTime.now())),
                         decoration: InputDecoration(labelText: 'Date of birth'),
                         keyboardType: TextInputType.emailAddress,
                         readOnly: true,
@@ -546,13 +547,12 @@ class reg extends State<Registration_widget> {
                           }
                         },
                       ),
-
                       MaterialButton(
-                        color: Theme.of(context).primaryColor,
+                        color: const Color(0xFF2E7D32),
                         onPressed: _submit,
-                        child: Text("Register"),
+                        child: const Text("Register",
+                            style: TextStyle(color: Colors.white)),
                       ),
-
                     ],
                   ),
                 ),

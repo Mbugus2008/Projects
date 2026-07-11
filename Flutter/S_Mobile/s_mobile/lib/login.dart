@@ -105,13 +105,13 @@ class _LoginState extends State<Login> {
         switch (results.Code) {
           case 0:
             {
-            final SharedPreferences prefs = await _prefs;
+              final SharedPreferences prefs = await _prefs;
               prefs.setString('user', usernamec.text);
               if (mounted) {
                 Get.find<MemberController>().currentCustomer.value =
                     results.Contents!;
-                Get.to(MyHomePage(
-                    member: results.Contents));
+                Get.find<MemberController>().loginPhone = phone;
+                Get.to(MyHomePage(member: results.Contents));
                 // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(
@@ -285,14 +285,31 @@ class _LoginState extends State<Login> {
           child: mycard(
             context,
             Container(
-              height: 400,
-              width: 250,
+              height: 480,
+              width: 280,
               decoration: widgets().container1(context),
               child: Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    // Logo
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        'assets/baraka.jpg',
+                        height: 80,
+                        width: 80,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    const Text('Baraka Yetu',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF2E7D32))),
+                    const SizedBox(height: 16),
                     TextField(
                       controller: usernamec,
                       textAlign: TextAlign.center,
@@ -334,18 +351,20 @@ class _LoginState extends State<Login> {
                         style: TextStyle(color: Colors.blue, fontSize: 15),
                       ),
                     ),
-                    Obx(() =>
-                       Container(
+                    Obx(
+                      () => Container(
                         width: MediaQuery.of(context).size.width,
                         child: MaterialButton(
                           color: Theme.of(context).primaryColor,
                           onPressed: () {
                             login(context, usernamec.text);
                           },
-                          child: _isButtonDisabled?.value == false ?  Text(
-                            'Login',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ):CircularProgressIndicator(),
+                          child: _isButtonDisabled?.value == false
+                              ? Text(
+                                  'Login',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                )
+                              : CircularProgressIndicator(),
                         ),
                       ),
                     ),

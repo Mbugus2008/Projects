@@ -4,10 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
+import '../common/Apis.dart';
+import '../common/Results.dart';
 import '../common/utilities.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class Schedule {
+class Schedule implements Tomaps {
   String? Key;
   String? Loan_No;
   String? Member_No;
@@ -77,6 +79,7 @@ class Schedule {
     this.Application_Date,
   });
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'Key': Key,
@@ -123,10 +126,8 @@ class Schedule {
       Member_No: map['Member_No'] != null ? map['Member_No'] as String : null,
       Loan_Category:
           map['Loan_Category'] != null ? map['Loan_Category'] as String : null,
-      Closed_Date: map['Closed_Date'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (map['Closed_Date'] ?? 0) as int)
-          : null,
+      Closed_Date:
+          map['Closed_Date'] != null ? _parseDate(map['Closed_Date']) : null,
       Loan_Amount:
           map['Loan_Amount'] != null ? map['Loan_Amount'] as double : null,
       Interest_Rate:
@@ -155,8 +156,7 @@ class Schedule {
       Instalment_No:
           map['Instalment_No'] != null ? map['Instalment_No'] as int : null,
       Actual_Loan_Repayment_Date: map['Actual_Loan_Repayment_Date'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (map['Actual_Loan_Repayment_Date'] ?? 0) as int)
+          ? _parseDate(map['Actual_Loan_Repayment_Date'])
           : null,
       Repayment_Code: map['Repayment_Code'] != null
           ? map['Repayment_Code'] as String
@@ -182,9 +182,8 @@ class Schedule {
       Posted: map['Posted'] != null ? map['Posted'] as bool : null,
       Loan_Balance:
           map['Loan_Balance'] != null ? map['Loan_Balance'] as double : null,
-      Recover_in: map['Recover_in'] != null
-          ? DateTime.fromMillisecondsSinceEpoch((map['Recover_in'] ?? 0) as int)
-          : null,
+      Recover_in:
+          map['Recover_in'] != null ? _parseDate(map['Recover_in']) : null,
       Recovery_Month: map['Recovery_Month'] != null
           ? map['Recovery_Month'] as String
           : null,
@@ -204,28 +203,82 @@ class Schedule {
 
   factory Schedule.fromJson(String source) =>
       Schedule.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  /// Parse a date value that may be a String (ISO 8601) or int (ms since epoch).
+  static DateTime? _parseDate(dynamic value) {
+    if (value is DateTime) return value;
+    if (value is String) return DateTime.tryParse(value);
+    if (value is int) return DateTime.fromMillisecondsSinceEpoch(value);
+    return null;
+  }
+
+  /// Fetch the repayment schedule for a single loan.
+  /// Returns the list of schedule entries, or null on failure.
+  static Future<List<Schedule>?> fetchForLoan(String loanNo) async {
+    final request = Params(Loan_No: loanNo);
+    final r = await ApiClient().postdata('RepaymentSchedule', request.toJson());
+    if (r.statusCode == 200) {
+      final results = Results3<Schedule>.fromJson(r.body, Schedule.fromMap);
+      if (results.Code == 0) {
+        return results.Contents;
+      }
+    }
+    return null;
+  }
+
+  /// Deserialize a list of maps into Schedule objects.
+  static List<Schedule> fromMapList(List<dynamic> list) {
+    return list
+        .map((e) => Schedule.fromMap(Map<String, dynamic>.from(e as Map)))
+        .toList();
+  }
+
+  /// Calculate total arrears from a schedule list.
+  ///
+  /// Formula: sum of Principal_Repayment for all past-due installments
+  ///          minus (Approved_Amount - Outstanding_Balance).
+  /// Clamped to 0 if negative (i.e. overpaid or current).
+  static double calculateArrears(
+    List<Schedule>? schedules, {
+    double approvedAmount = 0,
+    double outstandingBalance = 0,
+  }) {
+    if (schedules == null || schedules.isEmpty) return 0;
+    final now = DateTime.now();
+    double totalPrincipalDue = 0;
+    for (final s in schedules) {
+      if (s.Repayment_Date == null) continue;
+      if (s.Repayment_Date!.isAfter(now)) continue;
+      totalPrincipalDue += s.Principal_Repayment ?? 0;
+    }
+    final principalPaid = approvedAmount - outstandingBalance;
+    final arrears = totalPrincipalDue - principalPaid;
+    return arrears < 0 ? 0 : arrears;
+  }
 }
+
 class ScheduleDataSource extends DataGridSource {
+  List<Schedule> _Entries = [];
 
-  List<Schedule> _Entries =[];
-
-  entriesDataSource({required List<Schedule> Entries}) {
-    dataGridRows =
-        Entries.map<DataGridRow>((dataGridRow) =>
-            DataGridRow(cells: [
+  entriesDataSource({required List<Schedule>? Entries}) {
+    final safe = Entries ?? [];
+    dataGridRows = safe
+        .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<DateTime>(
                   columnName: 'Date', value: dataGridRow.Repayment_Date),
               DataGridCell<String>(
-                  columnName: 'LoanAmount', value: '${dataGridRow.Loan_Amount}'),
+                  columnName: 'LoanAmount',
+                  value: '${dataGridRow.Loan_Amount}'),
               DataGridCell<double>(
-                  columnName: 'Repayment', value: dataGridRow.Monthly_Repayment),
+                  columnName: 'Repayment',
+                  value: dataGridRow.Monthly_Repayment),
               DataGridCell<double>(
-                  columnName: 'Principal  ', value: dataGridRow.Principal_Repayment),
+                  columnName: 'Principal  ',
+                  value: dataGridRow.Principal_Repayment),
               DataGridCell<double>(
                   columnName: 'Interest', value: dataGridRow.Monthly_Interest),
-
-            ])).toList();
-
+            ]))
+        .toList();
   }
 
   List<DataGridRow> dataGridRows = [];
@@ -248,19 +301,19 @@ class ScheduleDataSource extends DataGridSource {
     // }
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-
-          return Container(
-            alignment: (dataGridCell.columnName == 'LoanAmount' ||
-                dataGridCell.columnName == 'Principal'||
-                dataGridCell.columnName == 'Interest'||
+      return Container(
+        alignment: (dataGridCell.columnName == 'LoanAmount' ||
+                dataGridCell.columnName == 'Principal' ||
+                dataGridCell.columnName == 'Interest' ||
                 dataGridCell.columnName == 'Repayment')
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            padding: EdgeInsets.symmetric(horizontal: .0),
-            child: Edited(dataGridCell),
-                    );
-        }).toList());
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
+        padding: EdgeInsets.symmetric(horizontal: .0),
+        child: Edited(dataGridCell),
+      );
+    }).toList());
   }
+
   @override
   Widget? buildTableSummaryCellWidget(
       GridTableSummaryRow summaryRow,
@@ -269,15 +322,16 @@ class ScheduleDataSource extends DataGridSource {
       String summaryValue) {
     return Container(
       alignment: (summaryColumn?.columnName == 'LoanAmount' ||
-          summaryColumn?.columnName == 'Repayment'||
-          summaryColumn?.columnName == 'Interest'||
-          summaryColumn?.columnName == 'Principal')
+              summaryColumn?.columnName == 'Repayment' ||
+              summaryColumn?.columnName == 'Interest' ||
+              summaryColumn?.columnName == 'Principal')
           ? Alignment.centerRight
           : Alignment.centerLeft,
       padding: EdgeInsets.all(15.0),
       child: Text(summaryValue),
     );
   }
+
   Widget Edited(DataGridCell<dynamic> dataGridCell) {
     switch (dataGridCell.columnName) {
       case "Date":
@@ -298,7 +352,7 @@ class ScheduleDataSource extends DataGridSource {
       case "Balance":
         return Text(
           utilities.formatcurrency.format(dataGridCell.value ?? 0),
-          style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
           overflow: TextOverflow.ellipsis,
         );
       default:
@@ -309,6 +363,4 @@ class ScheduleDataSource extends DataGridSource {
         );
     }
   }
-
-
 }

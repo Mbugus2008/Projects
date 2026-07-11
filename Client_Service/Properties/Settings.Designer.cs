@@ -26,7 +26,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Members")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Members")]
         public string Client_Service_Members_Members_Service {
             get {
                 return ((string)(this["Client_Service_Members_Members_Service"]));
@@ -36,7 +36,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Loans")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Loans")]
         public string Client_Service_Loans_Loans_Service {
             get {
                 return ((string)(this["Client_Service_Loans_Loans_Service"]));
@@ -46,8 +46,8 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/MobileTransact" +
-            "ions")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/MobileTransac" +
+            "tions")]
         public string Client_Service_Transactions_MobileTransactions_Service {
             get {
                 return ((string)(this["Client_Service_Transactions_MobileTransactions_Service"]));
@@ -57,7 +57,8 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Codeunit/Alternate")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Codeunit/Alternate" +
+            "")]
         public string Client_Service_Alternate_Alternate {
             get {
                 return ((string)(this["Client_Service_Alternate_Alternate"]));
@@ -67,7 +68,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Keywords")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Keywords")]
         public string Client_Service_Keywords_Keywords_Service {
             get {
                 return ((string)(this["Client_Service_Keywords_Keywords_Service"]));
@@ -77,8 +78,8 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:6021/Baraka/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/MobileAppli" +
-            "cations")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:6021/Baraka/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/MobileAppl" +
+            "ications")]
         public string Client_Service_Applications_MobileApplications_Service {
             get {
                 return ((string)(this["Client_Service_Applications_MobileApplications_Service"]));
@@ -88,8 +89,8 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Loan" +
-            "_Products")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://desktop-fef2iq4:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Loa" +
+            "n_Products")]
         public string Client_Service_Loan_Products_Loan_Products_Service {
             get {
                 return ((string)(this["Client_Service_Loan_Products_Loan_Products_Service"]));
@@ -109,8 +110,8 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://desktop-fef2iq4:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Loan" +
-            "_Eligibility")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://desktop-fef2iq4:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Loa" +
+            "n_Eligibility")]
         public string Client_Service_Loan_Eligibility_Loan_Eligibility_Service {
             get {
                 return ((string)(this["Client_Service_Loan_Eligibility_Loan_Eligibility_Service"]));
@@ -120,7 +121,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Registration")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Registration")]
         public string Client_Service_Registration_Registration_Service {
             get {
                 return ((string)(this["Client_Service_Registration_Registration_Service"]));
@@ -130,7 +131,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/NextOfKin")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/NextOfKin")]
         public string Client_Service_NextOfKin_NextOfKin_Service {
             get {
                 return ((string)(this["Client_Service_NextOfKin_NextOfKin_Service"]));
@@ -140,8 +141,8 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/AccountEntries" +
-            "")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/AccountEntrie" +
+            "s")]
         public string Client_Service_AccountEntries_AccountEntries_Service {
             get {
                 return ((string)(this["Client_Service_AccountEntries_AccountEntries_Service"]));
@@ -151,7 +152,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Payments")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Payments")]
         public string Client_Service_Payments_Payments_Service {
             get {
                 return ((string)(this["Client_Service_Payments_Payments_Service"]));
@@ -161,8 +162,8 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/RepaymentSched" +
-            "ule")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/RepaymentSche" +
+            "dule")]
         public string Client_Service_RepaymentSchedule_RepaymentSchedule_Service {
             get {
                 return ((string)(this["Client_Service_RepaymentSchedule_RepaymentSchedule_Service"]));
@@ -172,7 +173,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Tarrifs")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Tarrifs")]
         public string Client_Service_tarrifs_Tarrifs_Service {
             get {
                 return ((string)(this["Client_Service_tarrifs_Tarrifs_Service"]));

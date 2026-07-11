@@ -12,7 +12,7 @@ import '../common/Apis.dart';
 import '../common/Results.dart';
 import 'controller.dart';
 
-class entries  implements Tomaps  {
+class entries implements Tomaps {
   String? Key;
   DateTime? Posting_Date;
   int? Entry_No;
@@ -21,28 +21,28 @@ class entries  implements Tomaps  {
   String? Customer_No;
   String? Description;
   double? Balance;
-  TransactionType? Transaction_Type ;
-  double? Credit ;
+  TransactionType? Transaction_Type;
+  double? Credit;
   double? Debit;
   String? Loan_No;
-  entries({
-    this.Key,
-    this.Posting_Date,
-    this.Entry_No,
-    this.Document_No,
-    this.Amount,
-    this.Customer_No,
-    this.Description,
-    this.Balance,
-  this.Transaction_Type,
-  this.Credit,
-  this.Debit,
-    this.Loan_No
-  });
+  entries(
+      {this.Key,
+      this.Posting_Date,
+      this.Entry_No,
+      this.Document_No,
+      this.Amount,
+      this.Customer_No,
+      this.Description,
+      this.Balance,
+      this.Transaction_Type,
+      this.Credit,
+      this.Debit,
+      this.Loan_No});
   @override
   String toString() {
     return '$Posting_Date $Document_No $Amount $Customer_No $Description $Balance $Transaction_Type';
   }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'Key': Key,
@@ -74,14 +74,17 @@ class entries  implements Tomaps  {
           map['Customer_No'] != null ? map['Customer_No'] as String : null,
       Description:
           map['Description'] != null ? map['Description'] as String : null,
-      Loan_No:
-          map['Loan_No'] != null ? map['Loan_No'] as String : null,
+      Loan_No: map['Loan_No'] != null ? map['Loan_No'] as String : null,
       Balance: map['Balance'] != null ? map['Balance'] as double : null,
       Transaction_Type: map['Transaction_Type'] != null
-          ? TransactionType.values[(map['Transaction_Type']) as int]
+          ? safeTransactionType((map['Transaction_Type']) as int)
           : null,
-      Credit: map['Credit'] != null ? map['Credit'] as double : null,
-      Debit: map['Debit'] != null ? map['Debit'] as double : null,
+      Credit: (map['Credit_Amount'] ??
+          map['Credit_AmountSpecified'] ??
+          map['Credit']) as double?,
+      Debit: (map['Debit_Amount'] ??
+          map['Debit_AmountSpecified'] ??
+          map['Debit']) as double?,
     );
   }
 
@@ -91,17 +94,42 @@ class entries  implements Tomaps  {
       entries.fromMap(json.decode(source) as Map<String, dynamic>);
 
   List<entries>? calculateRunningBalance(List<entries>? amounts) {
-    if (amounts == null)return amounts;
-    amounts.sort((a, b) => (a.Posting_Date ?? DateTime.fromMillisecondsSinceEpoch(0)) .compareTo(b.Posting_Date ?? DateTime.fromMillisecondsSinceEpoch(0)));
+    if (amounts == null) return amounts;
+    // Sort ascending to compute running balance correctly
+    amounts.sort((a, b) => (a.Posting_Date ??
+            DateTime.fromMillisecondsSinceEpoch(0))
+        .compareTo(b.Posting_Date ?? DateTime.fromMillisecondsSinceEpoch(0)));
     double currentBalance = 0;
     for (var amount in amounts) {
       currentBalance += amount.Credit ?? 0;
       currentBalance -= amount.Debit ?? 0;
       amount.Balance = currentBalance;
     }
-
-    return amounts;
+    // Return newest-first (descending)
+    return amounts.reversed.toList();
   }
+
+  /// Fetch entries for an account, optionally filtered by transaction type.
+  /// Returns the entries list (or null on failure).
+  Future<List<entries>?> fetchEntries({
+    required String account,
+    int? transactionType,
+  }) async {
+    final request = Params(
+      Acc: account,
+      Transaction_Type: transactionType,
+    );
+    final r = await ApiClient().postdata('Statement', request.toJson());
+    if (r.statusCode == 200) {
+      Results3<entries> results =
+          Results3<entries>.fromJson(r.body, entries.fromMap);
+      if (results.Code == 0) {
+        return results.Contents;
+      }
+    }
+    return null;
+  }
+
   Future<void>? Getentries(BuildContext context, String? account) async {
     List<entries>? ln;
     var request = Params(Acc: account.toString());
@@ -115,13 +143,12 @@ class entries  implements Tomaps  {
               print(value1.toString());
             }
             Get.find<MemberController>().currentstatement.value =
-            results.Contents!;
-
+                results.Contents!;
           }
           break;
         default:
           {
-            if (!context. mounted) return await Future.value(ln);
+            if (!context.mounted) return await Future.value(ln);
             MotionToast.error(
               description: Text(results.Desc.toString()),
               title: Text("Login"),
@@ -138,8 +165,16 @@ class entries  implements Tomaps  {
     return await Future.value();
   }
 }
- enum TransactionType {
 
+/// Safely resolve a transaction type index, returning null for out-of-range values.
+TransactionType? safeTransactionType(int index) {
+  if (index >= 0 && index < TransactionType.values.length) {
+    return TransactionType.values[index];
+  }
+  return null;
+}
+
+enum TransactionType {
   /// <remarks/>
   _blank_,
 
@@ -248,91 +283,121 @@ class entries  implements Tomaps  {
   /// <remarks/>
   Sms_Savings,
 }
+
 extension StatusDescription on TransactionType {
   String get description {
     switch (this) {
-      case TransactionType._blank_: return '';
-      case TransactionType.Application_Fee: return 'Application Fee';
-      case TransactionType.Appraisal_Fee: return 'Appraisal Fee';
-      case TransactionType.Benevolent_Fund: return 'Benevolent Fund';
-      case TransactionType.Co_op_Shares: return 'Co op Shares';
-      case TransactionType.Deposit_Contribution: return 'Deposit Contribution';
-      case TransactionType.Dividend: return 'Dividend';
-      case TransactionType.Exit_Fee: return 'Exit Fee';
-      case TransactionType.Idd_Fitr: return 'Idd Fitr';
-      case TransactionType.Insurance_Contribution: return 'Insurance Contribution';
-      case TransactionType.Interest_Due: return 'Interest Due';
-      case TransactionType.Interest_Paid: return 'Interest Paid';
-      case TransactionType.Loan: return 'Loan';
-      case TransactionType.Loan_Adjustment: return 'Loan Adjustment';
-      case TransactionType.Loan_Form_Fee: return 'Loan Form Fee';
-      case TransactionType.Pamoja_Savings: return 'Pamoja Savings';
-      case TransactionType.Pass_Book_Fee: return 'Pass Book Fee';
-      case TransactionType.Penalty_Charged: return 'Penalty Charged';
-      case TransactionType.Penalty_Paid: return 'Penalty Paid';
-      case TransactionType.Plaza_Savings: return 'Plaza Savings';
-      case TransactionType.Plaza_Shares: return 'Plaza Shares';
-      case TransactionType.Prepayment: return 'Prepayment';
-      case TransactionType.Registration_Fee: return 'Registration Fee';
-      case TransactionType.Repayment: return 'Repayment';
-      case TransactionType.Retirement: return 'Retirement';
-      case TransactionType.Sacco_ID_Fee: return 'Sacco ID Fee';
-      case TransactionType.Shares_Capital: return 'Shares Capital';
-      case TransactionType.Sms_Savings: return 'Sms Savings';
-      case TransactionType.T_Shirt_Fee: return 'T Shirt Fee';
-      case TransactionType.Toto_Savings: return 'Toto Savings';
-      case TransactionType.Unallocated_Funds: return 'Unallocated Funds';
-      case TransactionType.Welfare_Registration: return 'Welfare Registration';
-      case TransactionType.Withdrawal: return 'Withdrawal';
-      case TransactionType.Withholding_Tax: return 'Withholding Tax';
-      case TransactionType.Xmas_Contribution: return 'Xmas Contribution';
-      case TransactionType.Xmass_CardBook_Fee: return 'Xmass CardBook Feea';
-
+      case TransactionType._blank_:
+        return '';
+      case TransactionType.Application_Fee:
+        return 'Application Fee';
+      case TransactionType.Appraisal_Fee:
+        return 'Appraisal Fee';
+      case TransactionType.Benevolent_Fund:
+        return 'Benevolent Fund';
+      case TransactionType.Co_op_Shares:
+        return 'Co op Shares';
+      case TransactionType.Deposit_Contribution:
+        return 'Deposit Contribution';
+      case TransactionType.Dividend:
+        return 'Dividend';
+      case TransactionType.Exit_Fee:
+        return 'Exit Fee';
+      case TransactionType.Idd_Fitr:
+        return 'Idd Fitr';
+      case TransactionType.Insurance_Contribution:
+        return 'Insurance Contribution';
+      case TransactionType.Interest_Due:
+        return 'Interest Due';
+      case TransactionType.Interest_Paid:
+        return 'Interest Paid';
+      case TransactionType.Loan:
+        return 'Loan';
+      case TransactionType.Loan_Adjustment:
+        return 'Loan Adjustment';
+      case TransactionType.Loan_Form_Fee:
+        return 'Loan Form Fee';
+      case TransactionType.Pamoja_Savings:
+        return 'Pamoja Savings';
+      case TransactionType.Pass_Book_Fee:
+        return 'Pass Book Fee';
+      case TransactionType.Penalty_Charged:
+        return 'Penalty Charged';
+      case TransactionType.Penalty_Paid:
+        return 'Penalty Paid';
+      case TransactionType.Plaza_Savings:
+        return 'Plaza Savings';
+      case TransactionType.Plaza_Shares:
+        return 'Plaza Shares';
+      case TransactionType.Prepayment:
+        return 'Prepayment';
+      case TransactionType.Registration_Fee:
+        return 'Registration Fee';
+      case TransactionType.Repayment:
+        return 'Repayment';
+      case TransactionType.Retirement:
+        return 'Retirement';
+      case TransactionType.Sacco_ID_Fee:
+        return 'Sacco ID Fee';
+      case TransactionType.Shares_Capital:
+        return 'Shares Capital';
+      case TransactionType.Sms_Savings:
+        return 'Sms Savings';
+      case TransactionType.T_Shirt_Fee:
+        return 'T Shirt Fee';
+      case TransactionType.Toto_Savings:
+        return 'Toto Savings';
+      case TransactionType.Unallocated_Funds:
+        return 'Unallocated Funds';
+      case TransactionType.Welfare_Registration:
+        return 'Welfare Registration';
+      case TransactionType.Withdrawal:
+        return 'Withdrawal';
+      case TransactionType.Withholding_Tax:
+        return 'Withholding Tax';
+      case TransactionType.Xmas_Contribution:
+        return 'Xmas Contribution';
+      case TransactionType.Xmass_CardBook_Fee:
+        return 'Xmass CardBook Feea';
 
       default:
         return 'Unknown status';
     }
   }
-
-
 }
 
-
 class entriesDataSource extends DataGridSource {
+  List<entries> _Entries = [];
 
-  List<entries> _Entries =[];
-
-  entriesDataSource({required List<entries> Entries}) {
-    dataGridRows =
-        Entries.map<DataGridRow>((dataGridRow) =>
-            DataGridRow(cells: [
+  entriesDataSource({required List<entries>? Entries}) {
+    final safe = Entries ?? [];
+    dataGridRows = safe
+        .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<DateTime>(
                   columnName: 'Date', value: dataGridRow.Posting_Date),
-              DataGridCell<String>(
-                  columnName: 'Desc', value: dsc(dataGridRow)),//'${dataGridRow.Description}\n${dataGridRow.Transaction_Type?.description}'),
-              // DataGridCell<double>(
-              //     columnName: 'Debit', value: dataGridRow.Debit),
-              // DataGridCell<double>(
-              //     columnName: 'Credit', value: dataGridRow.Credit),
-              // DataGridCell<double>(
-              //     columnName: 'Balance', value: dataGridRow.Balance),
+              DataGridCell<String>(columnName: 'Name', value: dsc(dataGridRow)),
               DataGridCell<double>(
-                  columnName: 'Amount', value: dataGridRow.Amount, ),
-            ])).toList();
-
+                  columnName: 'Debit', value: dataGridRow.Debit),
+              DataGridCell<double>(
+                  columnName: 'Credit', value: dataGridRow.Credit),
+              DataGridCell<double>(
+                  columnName: 'Balance', value: dataGridRow.Balance),
+              DataGridCell<double>(
+                  columnName: 'Amount', value: dataGridRow.Amount),
+            ]))
+        .toList();
   }
-String? dsc (entries ent){
-    switch(ent.Transaction_Type){
-
+  String? dsc(entries ent) {
+    switch (ent.Transaction_Type) {
       case TransactionType._blank_:
         return ent.Description;
       default:
         return '${ent.Description}\n${ent.Transaction_Type?.description}';
-
     }
-}
+  }
+
   List<DataGridRow> dataGridRows = [];
-List<GridSummaryColumn> summaryrows = [];
+  List<GridSummaryColumn> summaryrows = [];
   @override
   List<DataGridRow> get rows => dataGridRows;
 
@@ -351,31 +416,30 @@ List<GridSummaryColumn> summaryrows = [];
     // }
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-
-          return Container(
-            alignment: (dataGridCell.columnName == 'Credit' ||
-                dataGridCell.columnName == 'Debit'||
+      return Container(
+        alignment: (dataGridCell.columnName == 'Credit' ||
+                dataGridCell.columnName == 'Debit' ||
                 dataGridCell.columnName == 'Amount')
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            padding: EdgeInsets.symmetric(horizontal: .0),
-            child: Edited(dataGridCell),
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
+        padding: EdgeInsets.symmetric(horizontal: .0),
+        child: Edited(dataGridCell),
 
-            // dataGridCell.columnName == "Date"?
-            // Text(//0722901237
-            //     DateFormat('dd-MMM-yy').format(dataGridCell.value),
-            //   style: TextStyle(fontSize: 12),
-            //   overflow: TextOverflow.ellipsis,
-            // ):
-            // Text(
-            // dataGridCell.value.toString(),
-            //   style: TextStyle(fontSize: 12),
-            //   overflow: TextOverflow.ellipsis,
-            // )
-
-          );
-        }).toList());
+        // dataGridCell.columnName == "Date"?
+        // Text(//0722901237
+        //     DateFormat('dd-MMM-yy').format(dataGridCell.value),
+        //   style: TextStyle(fontSize: 12),
+        //   overflow: TextOverflow.ellipsis,
+        // ):
+        // Text(
+        // dataGridCell.value.toString(),
+        //   style: TextStyle(fontSize: 12),
+        //   overflow: TextOverflow.ellipsis,
+        // )
+      );
+    }).toList());
   }
+
   @override
   Widget? buildTableSummaryCellWidget(
       GridTableSummaryRow summaryRow,
@@ -384,14 +448,15 @@ List<GridSummaryColumn> summaryrows = [];
       String summaryValue) {
     return Container(
       alignment: (summaryColumn?.columnName == 'Credit' ||
-          summaryColumn?.columnName == 'Debit'||
-          summaryColumn?.columnName == 'Amount')
+              summaryColumn?.columnName == 'Debit' ||
+              summaryColumn?.columnName == 'Amount')
           ? Alignment.centerRight
           : Alignment.centerLeft,
       padding: EdgeInsets.all(15.0),
       child: Text(summaryValue),
     );
   }
+
   Widget Edited(DataGridCell<dynamic> dataGridCell) {
     switch (dataGridCell.columnName) {
       case "Date":
@@ -403,23 +468,22 @@ List<GridSummaryColumn> summaryrows = [];
       case "Debit":
         return Text(
           utilities.formatcurrency.format(dataGridCell.value ?? 0),
-          style: TextStyle(fontSize: 12,color: Colors.red),
-
+          style: TextStyle(fontSize: 12, color: Colors.red),
           overflow: TextOverflow.ellipsis,
         );
-    case "Credit":
+      case "Credit":
         return Text(
           utilities.formatcurrency.format(dataGridCell.value ?? 0),
-          style: TextStyle(fontSize: 12,color: Colors.green),
+          style: TextStyle(fontSize: 12, color: Colors.green),
           overflow: TextOverflow.ellipsis,
         );
-        case "Balance":
-        case "Amount":
-      return Text(
-        utilities.formatcurrency.format(dataGridCell.value ?? 0),
-        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-        overflow: TextOverflow.ellipsis,
-      );
+      case "Balance":
+      case "Amount":
+        return Text(
+          utilities.formatcurrency.format(dataGridCell.value ?? 0),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          overflow: TextOverflow.ellipsis,
+        );
       default:
         return Text(
           dataGridCell.value.toString(),
@@ -428,8 +492,6 @@ List<GridSummaryColumn> summaryrows = [];
         );
     }
   }
-
-
 }
 
 class entries_Results {

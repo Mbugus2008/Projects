@@ -130,6 +130,36 @@ public sealed class BarakaYetuSwitchHandler(IBridgeProxyService proxyService) : 
         return ds;
     }
 
+    public override async Task<ProxyResponse> EligibilityWithTopupAsync(HttpContext context, JsonNode? incoming, CancellationToken ct)
+    {
+        var phone = ExtractPhone(incoming);
+        var code = ExtractString(incoming, "Code", "code", "Loan_Code");
+        var loanType = ExtractString(incoming, "Loan_Type", "loanType", "loantype");
+
+        if (phone is null || string.IsNullOrWhiteSpace(code))
+        {
+            return FailureResponse("Phone and Code are required for eligibility check.", 400);
+        }
+
+        var payload = new JsonObject
+        {
+            ["body"] = new JsonObject
+            {
+                ["phone"] = phone,
+                ["Code"] = code,
+                ["loantype"] = loanType ?? code,
+            }
+        };
+
+        var ds = await ProxyService.ForwardAsync(
+            context,
+            "api/eligibilitywithtopup",
+            ct,
+            requestBody: payload.ToJsonString(),
+            directRoutePath: "api/eligibilitywithtopup");
+        return ds;
+    }
+
     public override Task<ProxyResponse> LoanProductsAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
         ProxyService.ForwardAsync(context, "api/Loan_products", ct, directRoutePath: "api/loanproducts2", directMethod: HttpMethod.Get);
 
@@ -185,6 +215,34 @@ public sealed class BarakaYetuSwitchHandler(IBridgeProxyService proxyService) : 
     public override Task<ProxyResponse> RegisterAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
         base.RegisterAsync(context, incoming, ct);
 
+    public override async Task<ProxyResponse> GetTransactionsAsync(HttpContext context, JsonNode? incoming, CancellationToken ct)
+    {
+        try
+        {
+            var accountNo = ExtractString(incoming, "Account_No", "Account", "Acc", "account");
+            var transactionType = ExtractInt(incoming, "Transaction_Type", "transactionType");
+
+            var payload = new JsonObject { ["Account"] = accountNo ?? "" };
+            if (transactionType.HasValue)
+            {
+                payload["Transaction_Type"] = transactionType.Value;
+            }
+
+            var ds = await ProxyService.ForwardAsync(
+                context,
+                "api/Gettransactions",
+                ct,
+                requestBody: payload.ToJsonString(),
+                directRoutePath: "api/Gettransactions",
+                directMethod: HttpMethod.Post);
+            return ds;
+        }
+        catch (Exception ex)
+        {
+            return FailureResponse($"GetTransactions error: {ex.GetType().Name} - {ex.Message}", 500);
+        }
+    }
+
     public override Task<ProxyResponse> NextOfKinAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
         base.NextOfKinAsync(context, incoming, ct);
 
@@ -199,9 +257,9 @@ public sealed class BarakaYetuSwitchHandler(IBridgeProxyService proxyService) : 
         }
 
         var payload = new JsonObject { ["Account"] = accountNo.Trim() };
-        if (transactionType.HasValue)
+        if (!string.IsNullOrWhiteSpace(transactionType))
         {
-            payload["Transaction_Type"] = transactionType.Value;
+            payload["Transaction_Type"] = transactionType;
         }
         var ds = await ProxyService.ForwardAsync(
             context,

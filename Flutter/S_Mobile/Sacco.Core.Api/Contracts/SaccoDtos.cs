@@ -21,7 +21,7 @@ public sealed class Request
     public string? Loan_Type { get; init; }
     public string? Image { get; init; }
     public string? Loan_No { get; init; }
-    public int? Transaction_Type { get; init; }
+    public string? Transaction_Type { get; init; }
 }
 
 public sealed class AccountDto

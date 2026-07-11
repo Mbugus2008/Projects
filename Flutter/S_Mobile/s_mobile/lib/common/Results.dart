@@ -22,8 +22,8 @@ class Results {
 
   factory Results.fromMap(Map<String, dynamic> map) {
     return Results(
-      Code: map['Code'] != null ? map['Code'] as int : null,
-      Desc: map['Desc'] != null ? map['Desc'] as String : null,
+      Code: (map['Code'] ?? map['code']) as int? ?? 0,
+      Desc: (map['Desc'] ?? map['desc']) as String? ?? '',
     );
   }
 
@@ -56,9 +56,11 @@ class Results2<T extends Tomaps> {
   factory Results2.fromMap(
       Map<String, dynamic> map, T Function(Map<String, dynamic>) createT) {
     return Results2(
-        Code: map['Code'] != null ? map['Code'] as int : null,
-        Desc: map['Desc'] != null ? map['Desc'] as String : null,
-        Contents: map['Contents'] != null ? createT(map['Contents']) : null);
+        Code: (map['Code'] ?? map['code']) as int? ?? 0,
+        Desc: (map['Desc'] ?? map['desc']) as String? ?? '',
+        Contents: (map['Contents'] ?? map['contents']) != null
+            ? createT((map['Contents'] ?? map['contents']))
+            : null);
   }
 
   String toJson() => json.encode(toMap());
@@ -71,6 +73,7 @@ class Results2<T extends Tomaps> {
 abstract class Tomaps<T> {
   Map<String, dynamic> toMap();
 }
+
 class Results3<T extends Tomaps> {
   int? Code = 0;
   String? Desc = "Successful";
@@ -94,17 +97,19 @@ class Results3<T extends Tomaps> {
   factory Results3.fromMap(
       Map<String, dynamic> map, T Function(Map<String, dynamic>) createT) {
     return Results3(
-      Code: map['Code'] != null ? map['Code'] as int : null,
-      Desc: map['Desc'] != null ? map['Desc'] as String : null,
-      Contents: map['Contents'] != null
-          ? (map['Contents'] as List<dynamic>)
-          .map((x) => createT(x as Map<String, dynamic>))
-          .toList()
+      Code: (map['Code'] ?? map['code']) as int? ?? 0,
+      Desc: (map['Desc'] ?? map['desc']) as String? ?? '',
+      Contents: (map['Contents'] ?? map['contents']) != null
+          ? ((map['Contents'] ?? map['contents']) as List<dynamic>)
+              .map((x) => createT(x as Map<String, dynamic>))
+              .toList()
           : null,
     );
   }
+
   String toJson() => json.encode(toMap());
+
   factory Results3.fromJson(
-      String source, T Function(Map<String, dynamic>) createT) =>
+          String source, T Function(Map<String, dynamic>) createT) =>
       Results3.fromMap(json.decode(source) as Map<String, dynamic>, createT);
 }

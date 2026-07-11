@@ -113,21 +113,17 @@ class Loan {
           ? map['Approved_Amount'] as double
           : null,
       Telephone: map['Telephone'] != null ? map['Telephone'] as String : null,
-      Loan_Name: map['Loan_Name'] != null ? map['Loan_Name'] as String : null,
+      Loan_Name: (map['Loan_Name'] ?? map['Product_Name']) as String?,
       Installments:
           map['Installments'] != null ? map['Installments'] as int : null,
       Disbursement_Date: map['Disbursement_Date'] != null
           ? DateTime.tryParse((map['Disbursement_Date'] ?? 0))
           : null,
-      Loan_Product_Type_Name: map['Loan_Product_Type_Name'] != null
-          ? map['Loan_Product_Type_Name'] as String
-          : null,
-      Outstanding_Interest: map['Outstanding_Interest'] != null
-          ? map['Outstanding_Interest'] as double
-          : null,
+      Loan_Product_Type_Name: (map['Loan_Product_Type_Name'] ?? map['Product_Name']) as String?,
+      Outstanding_Interest: (map['Outstanding_Interest'] ?? map['Oustanding_Interest']) as double?,
       Client_Name:
           map['Client_Name'] != null ? map['Client_Name'] as String : null,
-      Repayment: map['Repayment'] != null ? map['Repayment'] as double : null,
+      Repayment: (map['Repayment'] ?? map['Total_Schedule_Repayment']) as double?,
       Loan_Account:
           map['Loan_Account'] != null ? map['Loan_Account'] as String : null,
       Posted: map['Posted'] != null ? map['Posted'] as bool : null,
@@ -195,27 +191,28 @@ enum loans_Category_SASRA {
   /// <remarks/>
   Closed_Account,
 }
+
 class LoansDataSource extends DataGridSource {
+  List<Loan> _Entries = [];
 
-  List<Loan> _Entries =[];
-
-  LoansDataSource({required List<Loan> Entries}) {
-    dataGridRows =
-        Entries.map<DataGridRow>((dataGridRow) =>
-            DataGridRow(cells: [
+  LoansDataSource({required List<Loan>? Entries}) {
+    final safe = Entries ?? [];
+    dataGridRows = safe
+        .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<DateTime>(
                   columnName: 'Date', value: dataGridRow.Application_Date),
               DataGridCell<String>(
                   columnName: 'Loan', value: '${dataGridRow.Loan_No}'),
               DataGridCell<String>(
-                  columnName: 'Type', value: dataGridRow.Loan_Name ),
+                  columnName: 'Type', value: dataGridRow.Loan_Name),
               DataGridCell<int>(
                   columnName: 'Installements', value: dataGridRow.Installments),
               DataGridCell<double>(
-                  columnName: 'Balance', value:  (dataGridRow.Outstanding_Balance ??0) + (dataGridRow.Outstanding_Interest ?? 0)),
-
-            ])).toList();
-
+                  columnName: 'Balance',
+                  value: (dataGridRow.Outstanding_Balance ?? 0) +
+                      (dataGridRow.Outstanding_Interest ?? 0)),
+            ]))
+        .toList();
   }
 
   List<DataGridRow> dataGridRows = [];
@@ -238,17 +235,17 @@ class LoansDataSource extends DataGridSource {
     // }
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-
-          return Container(
-            alignment: (dataGridCell.columnName == 'Installements' ||
+      return Container(
+        alignment: (dataGridCell.columnName == 'Installements' ||
                 dataGridCell.columnName == 'Balance')
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            padding: EdgeInsets.symmetric(horizontal: .0),
-            child: Edited(dataGridCell),
-          );
-        }).toList());
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
+        padding: EdgeInsets.symmetric(horizontal: .0),
+        child: Edited(dataGridCell),
+      );
+    }).toList());
   }
+
   @override
   Widget? buildTableSummaryCellWidget(
       GridTableSummaryRow summaryRow,
@@ -257,7 +254,7 @@ class LoansDataSource extends DataGridSource {
       String summaryValue) {
     return Container(
       alignment: (summaryColumn?.columnName == 'Installements' ||
-          summaryColumn?.columnName == 'Balance')
+              summaryColumn?.columnName == 'Balance')
           ? Alignment.centerRight
           : Alignment.centerLeft,
       padding: EdgeInsets.all(15.0),
@@ -282,7 +279,7 @@ class LoansDataSource extends DataGridSource {
       case "Balance":
         return Text(
           utilities.formatcurrency.format(dataGridCell.value ?? 0),
-          style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
           overflow: TextOverflow.ellipsis,
         );
       default:

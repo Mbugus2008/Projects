@@ -155,6 +155,12 @@ public sealed class SaccoBridgeController(
         return ExecuteAsync(request, ct, switchService.LoanProductsAsync);
     }
 
+    [HttpPost("EligibilityWithTopup")]
+    public Task<IActionResult> EligibilityWithTopup(JsonNode? request, CancellationToken ct)
+    {
+        return ExecuteAsync(request, ct, switchService.EligibilityWithTopupAsync);
+    }
+
     [HttpPost("Schedule")]
     public Task<IActionResult> Schedule(JsonNode? request, CancellationToken ct)
     {
@@ -195,6 +201,12 @@ public sealed class SaccoBridgeController(
     public Task<IActionResult> NextOfKin(JsonNode? request, CancellationToken ct)
     {
         return ExecuteAsync(request, ct, switchService.NextOfKinAsync);
+    }
+
+    [HttpPost("GetTransactions")]
+    public Task<IActionResult> GetTransactions(JsonNode? request, CancellationToken ct)
+    {
+        return ExecuteAsync(request, ct, switchService.GetTransactionsAsync);
     }
 
     private Task<IActionResult> ExecuteAsync<TRequest>(

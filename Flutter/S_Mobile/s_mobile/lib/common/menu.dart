@@ -36,11 +36,12 @@ class _menuState extends State<menu> {
   final double w = 90;
   List<entries> ent = <entries>[];
 
-  Future<void> trans(BuildContext context, Account source, Account dest,
-      double amount) async {
+  Future<void> trans(
+      BuildContext context, Account source, Account dest, double amount) async {
     if (source.No == null || dest.No == null) {
       MotionToast.warning(
-        description: const Text('Please select both source and destination accounts.'),
+        description:
+            const Text('Please select both source and destination accounts.'),
         title: const Text('Transfer'),
       ).show(context);
       return;
@@ -59,7 +60,8 @@ class _menuState extends State<menu> {
         CS_Number: dest.No,
         text: amount.toString(),
       );
-      final response = await ApiClient().postdata('transaction', request.toJson());
+      final response =
+          await ApiClient().postdata('transaction', request.toJson());
 
       if (!context.mounted) return;
 
@@ -67,7 +69,8 @@ class _menuState extends State<menu> {
         final result = Results.fromJson(response.body);
         if (result.Code == 0) {
           MotionToast.success(
-            description: Text(result.Desc ?? 'Transaction completed successfully.'),
+            description:
+                Text(result.Desc ?? 'Transaction completed successfully.'),
             title: const Text('Transfer'),
           ).show(context);
           // Refresh member data
@@ -75,7 +78,8 @@ class _menuState extends State<menu> {
           final refreshReq = Params(Phone: member.Mobile_Phone_No);
           final r = await ApiClient().postdata('member', refreshReq.toJson());
           if (r.statusCode == 200) {
-            final memberResult = Results2<Member>.fromJson(r.body, Member.fromMap);
+            final memberResult =
+                Results2<Member>.fromJson(r.body, Member.fromMap);
             if (memberResult.Code == 0 && memberResult.Contents != null) {
               Get.find<MemberController>().currentCustomer.value =
                   memberResult.Contents!;
@@ -103,6 +107,7 @@ class _menuState extends State<menu> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -246,7 +251,7 @@ class _menuState extends State<menu> {
       width: MediaQuery.of(context).size.width,
       child: Expanded(
         child: Card(
-          color: Theme.of(context).primaryColor,
+          color: const Color(0xFF2E7D32).withOpacity(0.08),
           elevation: 50,
           child: Column(
             children: [
@@ -314,7 +319,7 @@ class _menuState extends State<menu> {
                         onFieldSubmitted: (value) => Amount = value as double?,
                       ),
                       MaterialButton(
-                        color: Theme.of(context).primaryColor,
+                        color: const Color(0xFF2E7D32),
                         onPressed: () {
                           if (_sourceacc == null || _destaccount == null) {
                             MotionToast.warning(
@@ -326,7 +331,8 @@ class _menuState extends State<menu> {
                           }
                           if (Amount == null || Amount! <= 0) {
                             MotionToast.warning(
-                              description: const Text('Please enter a valid amount.'),
+                              description:
+                                  const Text('Please enter a valid amount.'),
                               title: const Text('Transfer'),
                             ).show(context);
                             return;
@@ -424,7 +430,7 @@ class _menuState extends State<menu> {
                       ),
                     ),
                     MaterialButton(
-                      color: Theme.of(context).primaryColor,
+                      color: const Color(0xFF2E7D32),
                       onPressed: () {
                         if (_sourceacc == null || _destaccount == null) {
                           MotionToast.warning(
@@ -436,7 +442,8 @@ class _menuState extends State<menu> {
                         }
                         if (Amount == null || Amount! <= 0) {
                           MotionToast.warning(
-                            description: const Text('Please enter a valid amount.'),
+                            description:
+                                const Text('Please enter a valid amount.'),
                             title: const Text('Payment'),
                           ).show(context);
                           return;
@@ -508,25 +515,29 @@ class _menuState extends State<menu> {
                       ),
                     ),
                     MaterialButton(
-                      color: Theme.of(context).primaryColor,
+                      color: const Color(0xFF2E7D32),
                       onPressed: () async {
                         if (lsource == null) {
                           MotionToast.warning(
-                            description: const Text('Please select a loan type.'),
+                            description:
+                                const Text('Please select a loan type.'),
                             title: const Text('Loan Application'),
                           ).show(context);
                           return;
                         }
                         if (Amount == null || Amount! <= 0) {
                           MotionToast.warning(
-                            description: const Text('Please enter a valid amount.'),
+                            description:
+                                const Text('Please enter a valid amount.'),
                             title: const Text('Loan Application'),
                           ).show(context);
                           return;
                         }
 
                         try {
-                          final member = Get.find<MemberController>().currentCustomer.value;
+                          final member = Get.find<MemberController>()
+                              .currentCustomer
+                              .value;
                           final request = Params(
                             Application_No: member.No,
                             Loan_Type: lsource!.Code,
@@ -542,19 +553,22 @@ class _menuState extends State<menu> {
                             final result = Results.fromJson(response.body);
                             if (result.Code == 0) {
                               MotionToast.success(
-                                description: Text(result.Desc ?? 'Loan application submitted.'),
+                                description: Text(result.Desc ??
+                                    'Loan application submitted.'),
                                 title: const Text('Loan Application'),
                               ).show(context);
                               if (context.mounted) Navigator.of(context).pop();
                             } else {
                               MotionToast.error(
-                                description: Text(result.Desc ?? 'Application failed.'),
+                                description:
+                                    Text(result.Desc ?? 'Application failed.'),
                                 title: const Text('Loan Application'),
                               ).show(context);
                             }
                           } else {
                             MotionToast.error(
-                              description: Text('Request failed (${response.statusCode}).'),
+                              description: Text(
+                                  'Request failed (${response.statusCode}).'),
                               title: const Text('Loan Application'),
                             ).show(context);
                           }

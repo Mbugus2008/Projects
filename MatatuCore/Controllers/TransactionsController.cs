@@ -10,6 +10,7 @@ using Mtransaction;
 using Vbasics;
 using Vcrews;
 using VehicleCollection;
+using VehicleDues;
 using VehicleExpenses;
 
 namespace MatatuCore.Controllers
@@ -411,6 +412,23 @@ namespace MatatuCore.Controllers
             catch (Exception e)
             {
                 return new Results<Mtransaction.Mtransactions>() { Code = -1, Desc = e.Message };
+            }
+        }
+
+        [HttpPost("getvehicledues")]
+        [Authorize(Policy = "ApiKey")]
+        public Results<VehicleDues.Vehicle_Dues[]> getvehicledues(Request request)
+        {
+            try
+            {
+                return new Results<VehicleDues.Vehicle_Dues[]>()
+                {
+                    Contents = client.getvehicledues(request.vehicle)
+                };
+            }
+            catch (Exception e)
+            {
+                return new Results<VehicleDues.Vehicle_Dues[]>() { Code = -1, Desc = e.Message };
             }
         }
 

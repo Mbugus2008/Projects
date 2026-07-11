@@ -185,8 +185,21 @@ namespace Client_Service.Controllers
                 a.transaction_Type = AccountEntries.Transaction_Type.Mobile_Money;
                 
 
-              
-
+                      acc.Add(a);
+                 a = new Depositaccounts();
+                a.Account = "Wallet";
+                a.Name = "Wallet";
+                a.Type = Depositaccounts.status.savings;
+                a.Balance = (Double)m.Wallet;
+                a.Direction = Depositaccounts.direction.Deposit;
+                a.transaction_Type = AccountEntries.Transaction_Type.Wallet;
+                if (keywords.Count() > 0)
+                {
+                    var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Deposit_Contribution);
+                    if (k != null)
+                        a.keyword = string.Format("{0}{1}", m.ID_No, k.Keyword);
+                }
+               
                 acc.Add(a);
                  a = new Depositaccounts();
                 a.Account = "Deposit";
@@ -365,13 +378,9 @@ namespace Client_Service.Controllers
             try
             {
                 string transactionType = "";
-                switch (request.Transaction_Type)
+                if (request.Transaction_Type == "1")
                 {
-                    case 1:
-                        transactionType = "WITHDRAWAL|WITHSACCO";
-                        break;
-                    default:
-                        break;
+                    transactionType = "WITHDRAWAL|WITHSACCO";
                 }
                 var tar = tarrifs_Service.ReadMultiple(new tarrifs.Tarrifs_Filter[] {
                    new tarrifs.Tarrifs_Filter { Criteria = transactionType, Field = tarrifs.Tarrifs_Fields.Code },
@@ -695,7 +704,7 @@ namespace Client_Service.Controllers
             Results<MobileTransactions> r = new Results<MobileTransactions>();
             try
             {
-                r.Contents = Transactions_Service.ReadMultiple(new MobileTransactions_Filter[] { new MobileTransactions_Filter { Criteria = request.Account, Field = MobileTransactions_Fields.Account_No }, new MobileTransactions_Filter { Criteria = request.Transaction_Type.ToString(), Field = MobileTransactions_Fields.Transaction_Type }, new MobileTransactions_Filter { Criteria = "Pending Posting|Sending Money", Field = MobileTransactions_Fields.Status } }, null, 0).FirstOrDefault();
+                r.Contents = Transactions_Service.ReadMultiple(new MobileTransactions_Filter[] { new MobileTransactions_Filter { Criteria = request.Account, Field = MobileTransactions_Fields.Account_No }, new MobileTransactions_Filter { Criteria = request.Transaction_Type ?? "", Field = MobileTransactions_Fields.Transaction_Type }, new MobileTransactions_Filter { Criteria = "Pending Posting|Sending Money", Field = MobileTransactions_Fields.Status } }, null, 0).FirstOrDefault();
 
 
             }
@@ -715,7 +724,7 @@ namespace Client_Service.Controllers
             Results<List<AccountEntries.AccountEntries>> r = new Results<List<AccountEntries.AccountEntries>>();
             try
             {
-                r.Contents = AccountEntries_Service.ReadMultiple(new AccountEntries_Filter[] { new AccountEntries_Filter { Criteria = request.Account, Field = AccountEntries_Fields.Customer_No }, new AccountEntries_Filter { Criteria = request.Transaction_Type.ToString(), Field = AccountEntries_Fields.Transaction_Type }}, request.bookmark, request.size).ToList();
+                r.Contents = AccountEntries_Service.ReadMultiple(new AccountEntries_Filter[] { new AccountEntries_Filter { Criteria = request.Account, Field = AccountEntries_Fields.Customer_No }, new AccountEntries_Filter { Criteria = request.Transaction_Type ?? "", Field = AccountEntries_Fields.Transaction_Type }}, request.bookmark, request.size).ToList();
 
 
             }
@@ -1000,7 +1009,7 @@ namespace Logging
     public class Request : ClientRequest
     {
         public string Account { get; set; }
-        public int Transaction_Type { get; set; }
+        public string Transaction_Type { get; set; }
      public decimal Amount { get; set; }
     }
 }

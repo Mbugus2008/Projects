@@ -5,9 +5,13 @@
 		},
 		{
 			"path": "../../../../../Client_Service"
+		},
+		{
+			"path": "../../../Sacco.Core.Api"
 		}
 	],
 	"settings": {
-		"powershell.cwd": "Client_Service"
+		"powershell.cwd": "Client_Service",
+		"liveServer.settings.multiRootWorkspaceName": "s_mobile"
 	}
 }

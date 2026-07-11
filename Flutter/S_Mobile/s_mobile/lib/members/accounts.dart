@@ -6,7 +6,6 @@ import 'package:s_mobile/members/entries.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../common/enums.dart';
-import '../common/utilities.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 @JsonSerializable()
@@ -32,20 +31,31 @@ class Account {
   String? E_Mail;
   String? Agent_Code;
 
-
+  /// From the API: "transaction_Type": 36
+  int? transaction_Type;
 
   List<TransactionType> get transTypes {
-    List<TransactionType> types= [];
+    // If API provided a transaction_Type, use it directly
+    if (transaction_Type != null && transaction_Type! > 0) {
+      final type = safeTransactionType(transaction_Type!);
+      if (type != null) return [type];
+    }
+    // Fallback to legacy hardcoded mapping
+    List<TransactionType> types = [];
     if (No == null) return types;
     String? acc = No!.toUpperCase();
-    switch(acc)
-    {
-   case 'DEPOSITS':
-          return [TransactionType.Deposit_Contribution];
+    switch (acc) {
+      case 'DEPOSITS':
+        return [TransactionType.Deposit_Contribution];
       case 'SHARES':
         return [TransactionType.Shares_Capital];
-        case 'LOANS':
-      return [TransactionType.Loan,TransactionType.Repayment,TransactionType.Interest_Due,TransactionType.Interest_Paid];
+      case 'LOANS':
+        return [
+          TransactionType.Loan,
+          TransactionType.Repayment,
+          TransactionType.Interest_Due,
+          TransactionType.Interest_Paid
+        ];
     }
     return types;
   }
@@ -68,7 +78,7 @@ class Account {
     this.Product_Category,
     this.E_Mail,
     this.Agent_Code,
-
+    this.transaction_Type,
   });
 
   Map<String, dynamic> toMap() {
@@ -96,7 +106,7 @@ class Account {
   factory Account.fromMap(Map<String, dynamic> map) {
     return Account(
       Key: map['Key'] != null ? map['Key'] as String : null,
-      No: map['No'] != null ? map['No'] as String : null,
+      No: (map['No'] ?? map['Account']) as String?,
       Name: map['Name'] != null ? map['Name'] as String : null,
       ID_No: map['ID_No'] != null ? map['ID_No'] as String : null,
       Blocked: map['Blocked'] != null
@@ -120,10 +130,14 @@ class Account {
           map['Employee_Code'] != null ? map['Employee_Code'] as String : null,
       Product_Category: map['Product_Category'] != null
           ? product_Category?.values[(map['Product_Category'] ?? 0) as int]
-          : null,
+          : (map['Type'] as int?) == 1
+              ? product_Category.Share_Capital
+              : null,
       E_Mail: map['E_Mail'] != null ? map['E_Mail'] as String : null,
       Agent_Code:
           map['Agent_Code'] != null ? map['Agent_Code'] as String : null,
+      transaction_Type:
+          map['transaction_Type'] as int? ?? map['transactionType'] as int?,
     );
   }
 
@@ -131,16 +145,30 @@ class Account {
 
   factory Account.fromJson(String source) =>
       Account.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  /// Parse NAV/Bridge DepositAccount format:
+  /// {"Account":"Mobile","Name":"Mobile Money","keyword":"...","Balance":0.88,...}
+  factory Account.fromDepositMap(Map<String, dynamic> map) {
+    return Account(
+      No: map['Account'] ?? map['No'],
+      Name: map['Name'],
+      Balance: (map['Balance'] as num?)?.toDouble(),
+      Product_Name: map['Name'],
+      Key: map['Key'] ?? map['keyword'],
+      transaction_Type:
+          map['transaction_Type'] as int? ?? map['transactionType'] as int?,
+      Product_Category:
+          (map['Type'] as int?) == 1 ? product_Category.Share_Capital : null,
+    );
+  }
 }
 
 class accountsDataSource extends DataGridSource {
   accountsDataSource({required List<Account> Entries}) {
     dataGridRows =
-        Entries.map<DataGridRow>((dataGridRow) =>
-            DataGridRow(cells: [
+        Entries.map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(columnName: 'Acc', value: dataGridRow.No),
-              DataGridCell<String>(
-                  columnName: 'Name', value: dataGridRow.Name),
+              DataGridCell<String>(columnName: 'Name', value: dataGridRow.Name),
               DataGridCell<double>(
                   columnName: 'Balance', value: dataGridRow.Balance),
             ])).toList();
@@ -155,15 +183,15 @@ class accountsDataSource extends DataGridSource {
   DataGridRowAdapter? buildRow(DataGridRow row) {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-          return Container(
-              alignment: (dataGridCell.columnName == 'Balance')
-                  ? Alignment.centerRight
-                  : Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(horizontal: .0),
-              child: Text(
-                dataGridCell.value.toString(),
-                overflow: TextOverflow.visible,
-              ));
-        }).toList());
+      return Container(
+          alignment: (dataGridCell.columnName == 'Balance')
+              ? Alignment.centerRight
+              : Alignment.centerLeft,
+          padding: EdgeInsets.symmetric(horizontal: .0),
+          child: Text(
+            dataGridCell.value.toString(),
+            overflow: TextOverflow.visible,
+          ));
+    }).toList());
   }
 }

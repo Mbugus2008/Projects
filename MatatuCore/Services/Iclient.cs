@@ -5,6 +5,7 @@ using Loan;
 using LoanShedules;
 using Logging;
 using Mtransaction;
+using VehicleDues;
 using VehicleExpenses;
 using MatatuCore.Controllers;
 using MatatuCore.Models.Database;
@@ -68,6 +69,7 @@ namespace MatatuCore.Services
          AccountEntries_PortClient entries_service { get; set; }
         Mtransactions_PortClient mtransaction_service { get; set; }
         Vehicle_Expenses_PortClient vehicle_expenses_service { get; set; }
+        Vehicle_Dues_PortClient vehicle_dues_service { get; set; }
 
 
 
@@ -115,6 +117,7 @@ namespace MatatuCore.Services
         VehicleExpenses.Vehicle_Expenses[] getvehicleexpenses();
         VehicleExpenses.Vehicle_Expenses setvehicleexpenses(VehicleExpenses.Vehicle_Expenses expense);
         Mtransaction.Mtransactions setmtransactions(Mtransaction.Mtransactions trans);
+        VehicleDues.Vehicle_Dues[] getvehicledues(string vehicle);
     }
 
     public class client {
@@ -172,6 +175,7 @@ namespace MatatuCore.Services
                     cl.reversal_service = InitializeClient<Reversals>(client);
                     cl.mtransaction_service = InitializeClient<Mtransaction.Mtransactions>(client);
                     cl.vehicle_expenses_service = InitializeClient<VehicleExpenses.Vehicle_Expenses>(client);
+                    cl.vehicle_dues_service = InitializeClient<VehicleDues.Vehicle_Dues>(client);
                 }
                 else
                     return null;

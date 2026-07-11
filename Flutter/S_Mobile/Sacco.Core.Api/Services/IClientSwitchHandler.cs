@@ -79,6 +79,11 @@ public interface IClientSwitchHandler
         JsonNode? incoming,
         CancellationToken ct);
 
+    Task<ProxyResponse> EligibilityWithTopupAsync(
+        HttpContext context,
+        JsonNode? incoming,
+        CancellationToken ct);
+
     Task<ProxyResponse> ScheduleAsync(
         HttpContext context,
         JsonNode? incoming,
@@ -110,6 +115,11 @@ public interface IClientSwitchHandler
         CancellationToken ct);
 
     Task<ProxyResponse> NextOfKinAsync(
+        HttpContext context,
+        JsonNode? incoming,
+        CancellationToken ct);
+
+    Task<ProxyResponse> GetTransactionsAsync(
         HttpContext context,
         JsonNode? incoming,
         CancellationToken ct);

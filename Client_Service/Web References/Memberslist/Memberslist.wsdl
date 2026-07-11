@@ -42,6 +42,7 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="Phone_No" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Deposit_Drive" type="xsd:decimal" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Benevolent_Fund" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Wallet" type="xsd:decimal" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Memberslist_List">
@@ -80,6 +81,7 @@
           <xsd:enumeration value="Phone_No" />
           <xsd:enumeration value="Deposit_Drive" />
           <xsd:enumeration value="Benevolent_Fund" />
+          <xsd:enumeration value="Wallet" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="Memberslist_Filter">

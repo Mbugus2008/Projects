@@ -11,6 +11,28 @@ import 'package:s_mobile/main.dart';
 
 import 'Interface.dart';
 
+// ── App Configuration ───────────────────────────────────────────
+class AppConfig {
+  // Toggle this to switch between environments
+  static const bool isProduction = false;
+
+  // Android emulator uses 10.0.2.2 to reach host localhost
+  // iOS simulator uses localhost directly
+  // Physical device uses your LAN IP (e.g., 192.168.x.x)
+  static String get baseUrl {
+    if (isProduction) {
+      return 'https://your-production-server.com/api';
+    }
+    // Development — change this to your local IP for physical device testing
+    // IIS-hosted Sacco.Core.Api on port 8088
+    return 'http://192.168.8.3:8088/api';
+    //return 'http://10.0.2.2:8088/api';
+  }
+
+  // Request timeout in seconds
+  static const int requestTimeoutSeconds = 30;
+}
+
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -21,40 +43,80 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 class ApiClient<T extends investor> extends ChangeNotifier {
-  String baseUrl = "http://192.168.8.247/S_MobileSwitch/api";
-  //String baseUrl = "http://192.168.8.247/S_Mobile/api";
-  //String baseUrl = "http://192.168.28.105/S_Mobile/api";
-  //String baseUrl = "http://192.168.1.106/S_Mobile/api";
+  String baseUrl = AppConfig.baseUrl;
+
   Future<Response> postdata(String url, String data) async {
-    Response? r = Response("", 200);
+    Response? r = Response('', 200);
     try {
-      print('$baseUrl/$url');
+      final fullUrl = '$baseUrl/$url';
+      print('🌐 POST $fullUrl');
       final header = {
         'Content-Type': 'application/json',
-        'X-Client-Identifier': Clients().Name, // Add your custom header here
+        'X-Client-Identifier': Clients().Name,
       };
 
-      print(header);
-      print(data);
+      print('📋 Headers: $header');
+      print('📦 Body: $data');
 
       var client = IOClient(
           HttpClient()..badCertificateCallback = (cert, host, port) => true);
-      r = await client.post(
-        Uri.parse('$baseUrl/$url'),
-        body: data,
-        headers: header,
-      );
-      print(r.statusCode);
-      print(r.body);
+      r = await client
+          .post(
+            Uri.parse(fullUrl),
+            body: data,
+            headers: header,
+          )
+          .timeout(Duration(seconds: AppConfig.requestTimeoutSeconds));
+
+      print('✅ Status: ${r.statusCode}');
+      print(
+          '📄 Response: ${r.body.length > 500 ? r.body.substring(0, 500) + '...' : r.body}');
+    } on TimeoutException {
+      print('⏱️ Request timed out');
+      r = Response(
+          '{"Code":-1,"Desc":"Request timed out. Please check your connection."}',
+          408);
+    } on SocketException catch (e) {
+      print('🔌 Socket exception: ${e.toString()}');
+      r = Response(
+          '{"Code":-2,"Desc":"Unable to connect to server. Please check your network."}',
+          503);
     } catch (e) {
-      if (e is SocketException) {
-        //treat SocketException
-      }
-      print("Socket exception: ${e.toString()}");
-      r = Response(e.toString(), 400);
+      print('❌ Unexpected error: ${e.toString()}');
+      r = Response('{"Code":-3,"Desc":"An unexpected error occurred."}', 500);
     }
     return await Future.value(r);
-    // Member.fromJson(jsonDecode(jsonEncode(results.content.toString())));
+  }
+
+  /// GET request helper
+  Future<Response> getdata(String url) async {
+    Response? r = Response('', 200);
+    try {
+      final fullUrl = '$baseUrl/$url';
+      print('🌐 GET $fullUrl');
+      final header = {
+        'Content-Type': 'application/json',
+        'X-Client-Identifier': Clients().Name,
+      };
+
+      var client = IOClient(
+          HttpClient()..badCertificateCallback = (cert, host, port) => true);
+      r = await client
+          .get(
+            Uri.parse(fullUrl),
+            headers: header,
+          )
+          .timeout(Duration(seconds: AppConfig.requestTimeoutSeconds));
+
+      print('✅ Status: ${r.statusCode}');
+    } on TimeoutException {
+      r = Response('{"Code":-1,"Desc":"Request timed out."}', 408);
+    } on SocketException {
+      r = Response('{"Code":-2,"Desc":"Unable to connect to server."}', 503);
+    } catch (e) {
+      r = Response('{"Code":-3,"Desc":"An unexpected error occurred."}', 500);
+    }
+    return await Future.value(r);
   }
 }
 
@@ -70,6 +132,7 @@ class Params {
   String? Loan_Type;
   String? Image;
   String? Loan_No;
+  int? Transaction_Type;
   Params({
     this.Phone,
     this.Acc,
@@ -81,6 +144,7 @@ class Params {
     this.Loan_Type,
     this.Image,
     this.Loan_No,
+    this.Transaction_Type,
   });
 
   Map<String, dynamic> toMap() {
@@ -95,6 +159,7 @@ class Params {
       'Loan_Type': Loan_Type,
       'Image': Image,
       'Loan_No': Loan_No,
+      'Transaction_Type': Transaction_Type,
     };
   }
 

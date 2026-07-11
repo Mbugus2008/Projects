@@ -33,6 +33,8 @@ public interface IBridgeSwitchService
 
     Task<ProxyResponse> LoanProductsAsync(HttpContext context, JsonNode? incoming, CancellationToken ct);
 
+    Task<ProxyResponse> EligibilityWithTopupAsync(HttpContext context, JsonNode? incoming, CancellationToken ct);
+
     Task<ProxyResponse> ScheduleAsync(HttpContext context, JsonNode? incoming, CancellationToken ct);
 
     Task<ProxyResponse> RepaymentScheduleAsync(HttpContext context, JsonNode? incoming, CancellationToken ct);
@@ -46,4 +48,6 @@ public interface IBridgeSwitchService
     Task<ProxyResponse> RegisterAsync(HttpContext context, JsonNode? incoming, CancellationToken ct);
 
     Task<ProxyResponse> NextOfKinAsync(HttpContext context, JsonNode? incoming, CancellationToken ct);
+
+    Task<ProxyResponse> GetTransactionsAsync(HttpContext context, JsonNode? incoming, CancellationToken ct);
 }

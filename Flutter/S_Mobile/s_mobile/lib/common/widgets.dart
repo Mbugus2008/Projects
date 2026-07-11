@@ -49,9 +49,9 @@ class widgets {
 
   BoxDecoration backgroundimage(BuildContext context) => const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/trimline.png"),
-          fit: BoxFit.scaleDown,
-          opacity: 0.1,
+          image: AssetImage("assets/baraka.jpg"),
+          fit: BoxFit.cover,
+          opacity: 0.08,
           filterQuality: FilterQuality.high,
         ),
       );

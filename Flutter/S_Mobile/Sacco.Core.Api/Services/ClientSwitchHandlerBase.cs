@@ -58,6 +58,9 @@ public abstract class ClientSwitchHandlerBase(IBridgeProxyService proxyService) 
     public virtual Task<ProxyResponse> LoanProductsAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
         ProxyService.ForwardAsync(context, "api/Loan_products", ct);
 
+    public virtual Task<ProxyResponse> EligibilityWithTopupAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
+        ProxyService.ForwardAsync(context, "api/eligibilitywithtopup", ct);
+
     public virtual Task<ProxyResponse> ScheduleAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
         ProxyService.ForwardAsync(context, "api/Schedule", ct);
 
@@ -78,4 +81,7 @@ public abstract class ClientSwitchHandlerBase(IBridgeProxyService proxyService) 
 
     public virtual Task<ProxyResponse> NextOfKinAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
         ProxyService.ForwardAsync(context, "api/nextofkin", ct);
+
+    public virtual Task<ProxyResponse> GetTransactionsAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
+        ProxyService.ForwardAsync(context, "api/Gettransactions", ct);
 }
