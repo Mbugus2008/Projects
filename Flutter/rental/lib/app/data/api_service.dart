@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../core/config/app_config.dart';
 
 class ApiService extends GetxService {
-  static const String baseUrl = 'https://192.168.0.100:7170/api';
   final String authToken;
   
   ApiService({required this.authToken});
@@ -19,7 +18,7 @@ class ApiService extends GetxService {
   Future<List<Map<String, dynamic>>> getProperties() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/properties'),
+        Uri.parse('${AppConfig.baseUrl}/properties'),
         headers: headers,
       );
       
@@ -38,7 +37,7 @@ class ApiService extends GetxService {
   Future<bool> addProperty(Map<String, dynamic> propertyData) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/properties'),
+        Uri.parse('${AppConfig.baseUrl}/properties'),
         headers: headers,
         body: jsonEncode(propertyData),
       );
@@ -54,7 +53,7 @@ class ApiService extends GetxService {
   Future<bool> updateProperty(int id, Map<String, dynamic> propertyData) async {
     try {
       final response = await http.put(
-        Uri.parse('$baseUrl/properties/$id'),
+        Uri.parse('${AppConfig.baseUrl}/properties/$id'),
         headers: headers,
         body: jsonEncode(propertyData),
       );
@@ -69,7 +68,7 @@ class ApiService extends GetxService {
   Future<bool> deleteProperty(int id) async {
     try {
       final response = await http.delete(
-        Uri.parse('$baseUrl/properties/$id'),
+        Uri.parse('${AppConfig.baseUrl}/properties/$id'),
         headers: headers,
       );
       
@@ -84,7 +83,7 @@ class ApiService extends GetxService {
   Future<List<Map<String, dynamic>>> getTenants() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/tenants'),
+        Uri.parse('${AppConfig.baseUrl}/tenants'),
         headers: headers,
       );
       
@@ -103,7 +102,7 @@ class ApiService extends GetxService {
   Future<bool> addTenant(Map<String, dynamic> tenantData) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/tenants'),
+        Uri.parse('${AppConfig.baseUrl}/tenants'),
         headers: headers,
         body: jsonEncode(tenantData),
       );
@@ -118,7 +117,7 @@ class ApiService extends GetxService {
   Future<bool> updateTenant(int id, Map<String, dynamic> tenantData) async {
     try {
       final response = await http.put(
-        Uri.parse('$baseUrl/tenants/$id'),
+        Uri.parse('${AppConfig.baseUrl}/tenants/$id'),
         headers: headers,
         body: jsonEncode(tenantData),
       );
@@ -133,7 +132,7 @@ class ApiService extends GetxService {
   Future<bool> deleteTenant(int id) async {
     try {
       final response = await http.delete(
-        Uri.parse('$baseUrl/tenants/$id'),
+        Uri.parse('${AppConfig.baseUrl}/tenants/$id'),
         headers: headers,
       );
       
@@ -148,7 +147,7 @@ class ApiService extends GetxService {
   Future<List<Map<String, dynamic>>> getLeases() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/leases'),
+        Uri.parse('${AppConfig.baseUrl}/leases'),
         headers: headers,
       );
       
@@ -167,7 +166,7 @@ class ApiService extends GetxService {
   Future<bool> addLease(Map<String, dynamic> leaseData) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/leases'),
+        Uri.parse('${AppConfig.baseUrl}/leases'),
         headers: headers,
         body: jsonEncode(leaseData),
       );
@@ -182,7 +181,7 @@ class ApiService extends GetxService {
   Future<bool> updateLease(int id, Map<String, dynamic> leaseData) async {
     try {
       final response = await http.put(
-        Uri.parse('$baseUrl/leases/$id'),
+        Uri.parse('${AppConfig.baseUrl}/leases/$id'),
         headers: headers,
         body: jsonEncode(leaseData),
       );
@@ -197,7 +196,7 @@ class ApiService extends GetxService {
   Future<bool> deleteLease(int id) async {
     try {
       final response = await http.delete(
-        Uri.parse('$baseUrl/leases/$id'),
+        Uri.parse('${AppConfig.baseUrl}/leases/$id'),
         headers: headers,
       );
       
@@ -212,7 +211,7 @@ class ApiService extends GetxService {
   Future<List<Map<String, dynamic>>> getTransactions() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/transactions'),
+        Uri.parse('${AppConfig.baseUrl}/transactions'),
         headers: headers,
       );
       
@@ -231,7 +230,7 @@ class ApiService extends GetxService {
   Future<bool> addTransaction(Map<String, dynamic> transactionData) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/transactions'),
+        Uri.parse('${AppConfig.baseUrl}/transactions'),
         headers: headers,
         body: jsonEncode(transactionData),
       );
@@ -246,7 +245,7 @@ class ApiService extends GetxService {
   Future<bool> updateTransaction(int id, Map<String, dynamic> transactionData) async {
     try {
       final response = await http.put(
-        Uri.parse('$baseUrl/transactions/$id'),
+        Uri.parse('${AppConfig.baseUrl}/transactions/$id'),
         headers: headers,
         body: jsonEncode(transactionData),
       );
@@ -261,7 +260,7 @@ class ApiService extends GetxService {
   Future<bool> deleteTransaction(int id) async {
     try {
       final response = await http.delete(
-        Uri.parse('$baseUrl/transactions/$id'),
+        Uri.parse('${AppConfig.baseUrl}/transactions/$id'),
         headers: headers,
       );
       
@@ -276,7 +275,7 @@ class ApiService extends GetxService {
   Future<List<Map<String, dynamic>>> getMaintenanceRequests() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/maintenance'),
+        Uri.parse('${AppConfig.baseUrl}/maintenance'),
         headers: headers,
       );
       
@@ -295,7 +294,7 @@ class ApiService extends GetxService {
   Future<bool> addMaintenanceRequest(Map<String, dynamic> requestData) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/maintenance'),
+        Uri.parse('${AppConfig.baseUrl}/maintenance'),
         headers: headers,
         body: jsonEncode(requestData),
       );
@@ -310,7 +309,7 @@ class ApiService extends GetxService {
   Future<bool> updateMaintenanceRequest(int id, Map<String, dynamic> requestData) async {
     try {
       final response = await http.put(
-        Uri.parse('$baseUrl/maintenance/$id'),
+        Uri.parse('${AppConfig.baseUrl}/maintenance/$id'),
         headers: headers,
         body: jsonEncode(requestData),
       );
@@ -325,7 +324,7 @@ class ApiService extends GetxService {
   Future<bool> deleteMaintenanceRequest(int id) async {
     try {
       final response = await http.delete(
-        Uri.parse('$baseUrl/maintenance/$id'),
+        Uri.parse('${AppConfig.baseUrl}/maintenance/$id'),
         headers: headers,
       );
       
@@ -340,7 +339,7 @@ class ApiService extends GetxService {
   Future<List<Map<String, dynamic>>> getDocuments() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/documents'),
+        Uri.parse('${AppConfig.baseUrl}/documents'),
         headers: headers,
       );
       
@@ -359,7 +358,7 @@ class ApiService extends GetxService {
   Future<bool> addDocument(Map<String, dynamic> documentData) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/documents'),
+        Uri.parse('${AppConfig.baseUrl}/documents'),
         headers: headers,
         body: jsonEncode(documentData),
       );
@@ -374,7 +373,7 @@ class ApiService extends GetxService {
   Future<bool> updateDocument(int id, Map<String, dynamic> documentData) async {
     try {
       final response = await http.put(
-        Uri.parse('$baseUrl/documents/$id'),
+        Uri.parse('${AppConfig.baseUrl}/documents/$id'),
         headers: headers,
         body: jsonEncode(documentData),
       );
@@ -389,7 +388,7 @@ class ApiService extends GetxService {
   Future<bool> deleteDocument(int id) async {
     try {
       final response = await http.delete(
-        Uri.parse('$baseUrl/documents/$id'),
+        Uri.parse('${AppConfig.baseUrl}/documents/$id'),
         headers: headers,
       );
       
@@ -404,7 +403,7 @@ class ApiService extends GetxService {
   Future<Map<String, dynamic>> getReportSummary() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/reports/summary'),
+        Uri.parse('${AppConfig.baseUrl}/reports/summary'),
         headers: headers,
       );
       
@@ -427,7 +426,7 @@ class ApiService extends GetxService {
   Future<bool> generateIncomeReport() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/reports/income'),
+        Uri.parse('${AppConfig.baseUrl}/reports/income'),
         headers: headers,
       );
       
@@ -441,7 +440,7 @@ class ApiService extends GetxService {
   Future<bool> generateExpenseReport() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/reports/expenses'),
+        Uri.parse('${AppConfig.baseUrl}/reports/expenses'),
         headers: headers,
       );
       
@@ -455,7 +454,7 @@ class ApiService extends GetxService {
   Future<bool> generateOccupancyReport() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/reports/occupancy'),
+        Uri.parse('${AppConfig.baseUrl}/reports/occupancy'),
         headers: headers,
       );
       
@@ -469,7 +468,7 @@ class ApiService extends GetxService {
   Future<bool> generateLeaseExpirationReport() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/reports/lease-expirations'),
+        Uri.parse('${AppConfig.baseUrl}/reports/lease-expirations'),
         headers: headers,
       );
       
@@ -483,7 +482,7 @@ class ApiService extends GetxService {
   Future<bool> generateMaintenanceReport() async {
     try {
       final response = await http.get(
-        Uri.parse('$baseUrl/reports/maintenance'),
+        Uri.parse('${AppConfig.baseUrl}/reports/maintenance'),
         headers: headers,
       );
       
@@ -497,7 +496,7 @@ class ApiService extends GetxService {
   Future<bool> exportReportToPdf(String reportType) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/reports/export'),
+        Uri.parse('${AppConfig.baseUrl}/reports/export'),
         headers: headers,
         body: jsonEncode({'reportType': reportType}),
       );
@@ -509,3 +508,4 @@ class ApiService extends GetxService {
     }
   }
 }
+

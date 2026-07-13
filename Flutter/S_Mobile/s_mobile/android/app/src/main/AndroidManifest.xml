@@ -2,7 +2,7 @@
     package="com.trimline.s_mobile">
    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="s_mobile"
+        android:label="Baraka Yetu"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

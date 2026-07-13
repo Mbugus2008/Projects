@@ -285,7 +285,7 @@ class _LoginState extends State<Login> {
           child: mycard(
             context,
             Container(
-              height: 480,
+              height: 500,
               width: 280,
               decoration: widgets().container1(context),
               child: Padding(
@@ -295,12 +295,12 @@ class _LoginState extends State<Login> {
                   children: <Widget>[
                     // Logo
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(12),
                       child: Image.asset(
                         'assets/baraka.jpg',
-                        height: 80,
-                        width: 80,
-                        fit: BoxFit.cover,
+                        height: 100,
+                        width: 100,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     const SizedBox(height: 12),

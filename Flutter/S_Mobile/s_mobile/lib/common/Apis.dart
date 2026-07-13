@@ -133,6 +133,14 @@ class Params {
   String? Image;
   String? Loan_No;
   int? Transaction_Type;
+  String? Account_2;
+  String? Document_No;
+  double? Amount;
+  String? Account_No;
+  String? Transaction_Date;
+  String? Transaction_Time;
+  String? Member_No;
+  String? Source;
   Params({
     this.Phone,
     this.Acc,
@@ -145,6 +153,14 @@ class Params {
     this.Image,
     this.Loan_No,
     this.Transaction_Type,
+    this.Account_2,
+    this.Document_No,
+    this.Amount,
+    this.Account_No,
+    this.Transaction_Date,
+    this.Transaction_Time,
+    this.Member_No,
+    this.Source,
   });
 
   Map<String, dynamic> toMap() {
@@ -160,6 +176,44 @@ class Params {
       'Image': Image,
       'Loan_No': Loan_No,
       'Transaction_Type': Transaction_Type,
+      'Account_2': Account_2,
+      'Document_No': Document_No,
+      'Amount': Amount,
+      'Account_No': Account_No,
+      'Transaction_Date': Transaction_Date,
+      'Transaction_Time': Transaction_Time,
+      'Member_No': Member_No,
+      'Source': Source,
+    };
+  }
+
+  /// Build a complete transaction body. Callers only supply what varies;
+  /// all common fields (date, time, source, etc.) are set here once.
+  static Map<String, dynamic> transactionBody({
+    required String accountNo,
+    required int transactionType,
+    required double amount,
+    String? memberNo,
+    String? loanNo,
+    String? account2,
+    String? phone,
+    String? description,
+  }) {
+    final now = DateTime.now();
+    return {
+      'Document_No':
+          'TXN-${now.millisecondsSinceEpoch}-${DateTime.now().microsecondsSinceEpoch}',
+      'Transaction_Date': now.toIso8601String().substring(0, 10),
+      'Transaction_Time': now.toIso8601String().substring(11, 19),
+      'Transaction_Type': transactionType,
+      'Amount': amount,
+      'Account_No': accountNo,
+      if (memberNo != null) 'Member_No': memberNo,
+      if (loanNo != null) 'Loan_No': loanNo,
+      if (account2 != null) 'Account_2': account2,
+      if (phone != null) 'Mobile_No': phone,
+      'Source': 'Mbaraka',
+      if (description != null) 'Description': description,
     };
   }
 

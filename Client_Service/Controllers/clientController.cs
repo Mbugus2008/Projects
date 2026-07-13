@@ -176,7 +176,7 @@ namespace Client_Service.Controllers
             {
                 //Controllers.clientController c = new Controllers.clientController();
                 var keywords = Keywords_Service.ReadMultiple(new Keywords.Keywords_Filter[] { }, null, 0);
- Depositaccounts a = new Depositaccounts();
+                Depositaccounts a = new Depositaccounts();
                 a.Account = "Mobile";
                 a.Name = "Mobile Money";
                 a.Type = Depositaccounts.status.savings;
@@ -185,13 +185,13 @@ namespace Client_Service.Controllers
                 a.transaction_Type = AccountEntries.Transaction_Type.Mobile_Money;
                 
 
-                      acc.Add(a);
-                 a = new Depositaccounts();
+                acc.Add(a);
+                a = new Depositaccounts();
                 a.Account = "Wallet";
                 a.Name = "Wallet";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Wallet;
-                a.Direction = Depositaccounts.direction.Deposit;
+                a.Direction = Depositaccounts.direction.Both;
                 a.transaction_Type = AccountEntries.Transaction_Type.Wallet;
                 if (keywords.Count() > 0)
                 {
@@ -199,15 +199,16 @@ namespace Client_Service.Controllers
                     if (k != null)
                         a.keyword = string.Format("{0}{1}", m.ID_No, k.Keyword);
                 }
-               
+            
                 acc.Add(a);
-                 a = new Depositaccounts();
+                a = new Depositaccounts();
                 a.Account = "Deposit";
                 a.Name = "Deposit";
                 a.Type = Depositaccounts.status.savings;
                 a.Balance = (Double)m.Current_Shares;
                 a.Direction = Depositaccounts.direction.Deposit;
                 a.transaction_Type = AccountEntries.Transaction_Type.Deposit_Contribution;
+                
                 if (keywords.Count() > 0)
                 {
                     var k = keywords.FirstOrDefault(o => o.Destination_Type == Keywords.Destination_Type.Deposit_Contribution);
@@ -216,7 +217,6 @@ namespace Client_Service.Controllers
                 }
 
                 acc.Add(a);
-
                 a = new Depositaccounts();
                 a.Account = "Toto";
                 a.Name = "Toto";    
@@ -663,15 +663,42 @@ namespace Client_Service.Controllers
         [Route("api/transactions")]
         public Results transaction(ClientRequest request)
         {
-            Transactions.MobileTransactions trans = JsonConvert.DeserializeObject<MobileTransactions>(request.body.ToString());
             Results r = new Results();
             try
             {
+                var body = request.body?.ToString() ?? "{}";
+                Transactions.MobileTransactions trans = JsonConvert.DeserializeObject<MobileTransactions>(body);
+
+                // Validate required fields
+                if (string.IsNullOrWhiteSpace(trans.Document_No))
+                {
+                    r.Code = -1;
+                    r.Desc = "Document_No is required.";
+                    return r;
+                }
+                if (trans.Transaction_Type <= 0)
+                {
+                    r.Code = -1;
+                    r.Desc = "Transaction_Type is required.";
+                    return r;
+                }
+                if (string.IsNullOrWhiteSpace(trans.Account_No))
+                {
+                    r.Code = -1;
+                    r.Desc = "Account_No is required.";
+                    return r;
+                }
+                if (trans.Amount <= 0)
+                {
+                    r.Code = -1;
+                    r.Desc = "Amount must be greater than zero.";
+                    return r;
+                }
+
                 var t = Transactions_Service.Read(trans.Document_No, trans.Transaction_Type);
 
                 if (t == null)
                 {
-
                     trans.AmountSpecified = true;
                     trans.StatusSpecified = true;
                     trans.Status = Transactions.Status.Pending_Posting;
@@ -682,11 +709,12 @@ namespace Client_Service.Controllers
                     Transactions_Service.Create(ref trans);
 
                     r.content = trans;
-
-
-
                 }
-
+                else
+                {
+                    r.content = t;
+                    r.Desc = "Transaction already exists.";
+                }
             }
             catch (Exception ex)
             {

@@ -46,8 +46,8 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/MobileTransac" +
-            "tions")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://services.trimline.co.ke:2527/Baraka/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20L" +
+            "TD/Page/MobileTransactions")]
         public string Client_Service_Transactions_MobileTransactions_Service {
             get {
                 return ((string)(this["Client_Service_Transactions_MobileTransactions_Service"]));

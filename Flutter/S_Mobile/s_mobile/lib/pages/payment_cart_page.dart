@@ -275,23 +275,20 @@ class PaymentCartPage extends StatelessWidget {
 
     bool allSuccess = true;
     for (final item in items) {
-      final docNo = 'PAY-${DateTime.now().millisecondsSinceEpoch}-${item.key}';
       final txType = item.type == 'loan'
           ? transaction_Type.Loan_Repayment.index
           : transaction_Type.Deposit.index;
 
-      final body = {
-        'Document_No': docNo,
-        'Transaction_Date': DateTime.now().toIso8601String().split('T').first,
-        'Transaction_Type': txType,
-        'Amount': item.amount,
-        'Account_No': item.accountNo ?? member.No,
-        'Loan_No': item.loanNo,
-        'Mobile_No': phone,
-        'Source': 'Mbaraka',
-        'Description':
+      final body = Params.transactionBody(
+        accountNo: item.accountNo ?? member.No ?? '',
+        transactionType: txType,
+        amount: item.amount,
+        memberNo: member.No,
+        loanNo: item.loanNo,
+        phone: phone,
+        description:
             '${item.type == 'loan' ? 'Loan Repayment' : 'Deposit'}: ${item.label}',
-      };
+      );
 
       try {
         final r = await ApiClient().postdata('transaction', json.encode(body));

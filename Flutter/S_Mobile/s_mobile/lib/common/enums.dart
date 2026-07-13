@@ -1,4 +1,4 @@
-import 'package:s_mobile/transaction/enums.dart';
+
 
 enum blocked {
   /// <remarks/>
@@ -151,4 +151,11 @@ extension product_category on product_Category {
         return "";
     }
   }
+}
+
+/// Matches C# Depositaccounts.direction
+enum AccountDirection {
+  Withdrawable,
+  Deposit,
+  Both,
 }

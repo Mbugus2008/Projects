@@ -34,6 +34,9 @@ class Account {
   /// From the API: "transaction_Type": 36
   int? transaction_Type;
 
+  /// Whether the account supports deposits, withdrawals, or both
+  AccountDirection? direction;
+
   List<TransactionType> get transTypes {
     // If API provided a transaction_Type, use it directly
     if (transaction_Type != null && transaction_Type! > 0) {
@@ -79,6 +82,7 @@ class Account {
     this.E_Mail,
     this.Agent_Code,
     this.transaction_Type,
+    this.direction,
   });
 
   Map<String, dynamic> toMap() {
@@ -100,6 +104,7 @@ class Account {
       'Product_Category': Product_Category?.index,
       'E_Mail': E_Mail,
       'Agent_Code': Agent_Code,
+      'direction': direction?.index,
     };
   }
 
@@ -138,7 +143,27 @@ class Account {
           map['Agent_Code'] != null ? map['Agent_Code'] as String : null,
       transaction_Type:
           map['transaction_Type'] as int? ?? map['transactionType'] as int?,
+      direction: _parseDirection(map['Direction']),
     );
+  }
+
+  static AccountDirection? _parseDirection(dynamic val) {
+    if (val == null) return null;
+    if (val is String) {
+      switch (val.toLowerCase()) {
+        case 'withdrawable':
+          return AccountDirection.Withdrawable;
+        case 'deposit':
+          return AccountDirection.Deposit;
+        case 'both':
+        case 'both_deposit_and_withdrawal':
+          return AccountDirection.Both;
+      }
+    }
+    if (val is int) {
+      return AccountDirection.values[val.clamp(0, 2)];
+    }
+    return null;
   }
 
   String toJson() => json.encode(toMap());
@@ -157,6 +182,7 @@ class Account {
       Key: map['Key'] ?? map['keyword'],
       transaction_Type:
           map['transaction_Type'] as int? ?? map['transactionType'] as int?,
+      direction: _parseDirection(map['Direction']),
       Product_Category:
           (map['Type'] as int?) == 1 ? product_Category.Share_Capital : null,
     );

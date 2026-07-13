@@ -3,18 +3,20 @@ import 'package:get/get.dart';
 import 'package:rental/app/data/auth_service.dart';
 import 'package:rental/app/di/dependency_injection.dart';
 import 'package:rental/app/routes/app_pages.dart';
+import 'package:rental/app/routes/app_routes.dart';
 import 'package:rental/app/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   await DependencyInjection.init();
-  // Initialize services
- final authService = Get.find<AuthService>();
- 
+  await DependencyInjection.init();
+
+  final authService = Get.find<AuthService>();
+
   runApp(
     GetMaterialApp(
-      title: "Rental Management",
-      initialRoute: authService.isAuthenticated.value ? AppPages.INITIAL : Routes.LOGIN,
+      title: 'Rental Management',
+      initialRoute:
+          authService.isAuthenticated.value ? AppPages.INITIAL : Routes.LOGIN,
       getPages: AppPages.routes,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -23,4 +25,3 @@ void main() async {
     ),
   );
 }
-

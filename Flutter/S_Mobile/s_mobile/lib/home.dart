@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
@@ -8,6 +10,7 @@ import 'package:s_mobile/members/member.dart';
 import 'Loans/Loan.dart';
 import 'common/Apis.dart';
 import 'common/Results.dart';
+import 'common/enums.dart';
 import 'common/utilities.dart';
 import 'login.dart';
 import 'master_page.dart';
@@ -446,6 +449,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 value: sourceAcc,
                 items: (member.Accounts ?? [])
+                    .where((a) =>
+                        a.direction == AccountDirection.Withdrawable ||
+                        a.direction == AccountDirection.Both)
                     .map((a) => DropdownMenuItem(
                           value: a,
                           child: Text(
@@ -511,14 +517,27 @@ class _MyHomePageState extends State<MyHomePage> {
                     return;
                   }
 
+                  // Validate source balance
+                  final balance = sourceAcc!.Balance ?? 0;
+                  if (amt > balance) {
+                    MotionToast.error(
+                      description: Text(
+                          'Insufficient balance. Available: ${utilities.formatcurrency.format(balance)}'),
+                      title: const Text('Transfer'),
+                    ).show(ctx);
+                    return;
+                  }
+
                   try {
-                    final request = Params(
-                      Acc: sourceAcc!.No,
-                      CS_Number: destAcc!.No,
-                      text: amt.toString(),
+                    final body = Params.transactionBody(
+                      accountNo: sourceAcc!.No!,
+                      transactionType: 9, // Transfer_to_Fosa
+                      amount: amt,
+                      memberNo: member.No,
+                      account2: destAcc!.No,
                     );
                     final response = await ApiClient()
-                        .postdata('transaction', request.toJson());
+                        .postdata('transaction', json.encode(body));
 
                     if (!ctx.mounted) return;
 
@@ -570,13 +589,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _refreshMemberData() async {
-    final member = Get.find<MemberController>().currentCustomer.value;
-    final request = Params(Phone: member.Mobile_Phone_No);
+    final controller = Get.find<MemberController>();
+    final phone = controller.loginPhone;
+    if (phone == null || phone.isEmpty) return;
+    final request = Params(Phone: phone);
     final r = await ApiClient().postdata('member', request.toJson());
     if (r.statusCode == 200) {
       final results = Results2<Member>.fromJson(r.body, Member.fromMap);
       if (results.Code == 0 && results.Contents != null) {
-        Get.find<MemberController>().currentCustomer.value = results.Contents!;
+        controller.currentCustomer.value = results.Contents!;
       }
     }
   }
