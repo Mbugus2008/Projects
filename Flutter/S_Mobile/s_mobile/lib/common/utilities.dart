@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:s_mobile/members/member.dart';
 import 'package:s_mobile/members/member_info.dart';
-import 'package:sms_receiver/sms_receiver.dart';
 
 import '../members/controller.dart';
 
@@ -128,7 +127,6 @@ class utilities {
   String? otperror;
 
   String? _textContent = 'Waiting for messages...';
-  SmsReceiver? _smsReceiver;
 
   Future<bool> Otp(BuildContext context, String compareotp) async {
     bool? otpok;

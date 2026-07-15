@@ -25,7 +25,7 @@ class AppConfig {
     }
     // Development — change this to your local IP for physical device testing
     // IIS-hosted Sacco.Core.Api on port 8088
-    return 'http://192.168.8.3:8088/api';
+    return 'https://services.trimline.co.ke/Sacco.Core.Api/api';
     //return 'http://10.0.2.2:8088/api';
   }
 

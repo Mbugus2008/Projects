@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.trimline.s_mobile"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -35,6 +35,14 @@ android {
 
 flutter {
     source = "../.."
+}
+
+// Force newer AndroidX core for Android 16 compat
+configurations.all {
+    resolutionStrategy {
+        force("androidx.core:core-ktx:1.13.1")
+        force("androidx.core:core:1.13.1")
+    }
 }
 
 dependencies {

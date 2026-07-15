@@ -156,7 +156,7 @@ class registration {
       First_Name:
           map['First_Name'] != null ? map['First_Name'] as String : null,
       Status: map['Status'] != null
-          ? status?.values[(map['Status'] ?? 0) as int]
+          ? status.values[(map['Status'] ?? 0) as int]
           : null,
       Second_Name:
           map['Second_Name'] != null ? map['Second_Name'] as String : null,

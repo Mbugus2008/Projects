@@ -6,11 +6,11 @@ import 'package:http/http.dart' as http;
 /// Integration tests for the Transfer Funds API.
 ///
 /// Requires:
-///   - Sacco.Core.Api running at http://localhost:8088
-///   - Client_Service running at http://localhost/Aps
+///   - Sacco.Core.Api running at http://services.trimline.co.ke/Sacco.Core.Api
+///   - Client_Service running at http://services.trimline.co.ke/Aps
 void main() {
-  const coreApiBase = 'http://localhost:8088';
-  const clientServiceBase = 'http://localhost/Aps';
+  const coreApiBase = 'http://services.trimline.co.ke/Sacco.Core.Api';
+  const clientServiceBase = 'http://services.trimline.co.ke/Aps';
   const clientId = 'BarakaYetu';
   const testPhone = '0710563359';
 
@@ -44,9 +44,13 @@ void main() {
     });
     if (response.statusCode != 200) return null;
     final body = jsonDecode(response.body) as Map<String, dynamic>;
-    if (body['Code'] != 0 || body['Contents'] == null) return null;
-    final contents = body['Contents'] as Map<String, dynamic>;
-    return contents['No'] as String?;
+    final code = body['Code'] ?? body['code'] as int?;
+    if (code != 0) return null;
+    final contents = body['Contents'] ?? body['contents'];
+    if (contents == null) return null;
+    final c =
+        contents is List ? contents.first : contents as Map<String, dynamic>;
+    return (c['No'] ?? c['no']) as String?;
   }
 
   group('Transfer Funds API — via Sacco.Core.Api proxy', () {

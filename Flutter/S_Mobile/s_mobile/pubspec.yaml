@@ -40,7 +40,6 @@ dependencies:
   motion_toast: ^2.6.4
   persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: ^2.0.15
-  sms_receiver: ^0.4.1
   syncfusion_flutter_core: ^20.3.60
   syncfusion_flutter_datagrid: ^20.3.59
 

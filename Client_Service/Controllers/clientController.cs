@@ -705,7 +705,6 @@ namespace Client_Service.Controllers
                     trans.Transaction_DateSpecified = true;
                     trans.Transaction_TypeSpecified = true;
                     trans.Transaction_TimeSpecified = true;
-
                     Transactions_Service.Create(ref trans);
 
                     r.content = trans;
