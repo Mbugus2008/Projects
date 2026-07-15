@@ -26,7 +26,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Page/Members")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Members")]
         public string Client_Service_Members_Members_Service {
             get {
                 return ((string)(this["Client_Service_Members_Members_Service"]));

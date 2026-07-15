@@ -93,6 +93,12 @@ namespace Client_Service.Controllers
 
                 if (r.content == null)
                     r.content = Members_Service.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = phone, Field = Members_Fields.Phone_No } }, null, 0).FirstOrDefault();
+
+                if (r.content == null)
+                {
+                    r.Code = -1;
+                    r.Desc = "Member not found. Please check your phone number or register.";
+                }
             }
             catch (Exception ex)
             {
@@ -724,6 +730,108 @@ namespace Client_Service.Controllers
             return r;
         }
         [HttpPost]
+        [Route("api/updatemember")]
+        public Results updatemember(Request request)
+        {
+            Results r = new Results();
+            try
+            {
+                var body = request.body?.ToString() ?? "{}";
+                var update = JsonConvert.DeserializeObject<MemberUpdate>(body);
+
+                if (string.IsNullOrWhiteSpace(update.No))
+                {
+                    r.Code = -1;
+                    r.Desc = "Member No is required.";
+                    return r;
+                }
+
+                // Read existing member by No
+                var member = Members_Service.Read(update.No);
+                if (member == null)
+                {
+                    r.Code = -1;
+                    r.Desc = "Member not found.";
+                    return r;
+                }
+
+                // Update only supplied fields
+                if (!string.IsNullOrWhiteSpace(update.Name))
+                    member.Name = update.Name;
+                if (!string.IsNullOrWhiteSpace(update.Phone_No))
+                    member.Phone_No = update.Phone_No;
+                if (!string.IsNullOrWhiteSpace(update.MPESA_Mobile_No))
+                    member.MPESA_Mobile_No = update.MPESA_Mobile_No;
+                if (!string.IsNullOrWhiteSpace(update.ID_No))
+                    member.ID_No = update.ID_No;
+                if (!string.IsNullOrWhiteSpace(update.Gender))
+                {
+                    member.Gender = update.Gender == "Male"
+                        ? Members.Gender.Male
+                        : Members.Gender.Female;
+                    member.GenderSpecified = true;
+                }
+                if (!string.IsNullOrWhiteSpace(update.E_Mail))
+                    member.E_Mail = update.E_Mail;
+                if (!string.IsNullOrWhiteSpace(update.Date_of_Birth))
+                {
+                    if (DateTime.TryParse(update.Date_of_Birth, out var dob))
+                    {
+                        member.Date_of_Birth = dob;
+                        member.Date_of_BirthSpecified = true;
+                    }
+                }
+
+                Members_Service.Update(ref member);
+                r.content = member;
+                r.Desc = "Member updated successfully.";
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+        [HttpPost]
+        [Route("api/getmember")]
+        public Results getmember(Request request)
+        {
+            Results r = new Results();
+            try
+            {
+                var body = request.body?.ToString() ?? "{}";
+                var req = JsonConvert.DeserializeObject<dynamic>(body);
+                string memberNo = req?.No ?? req?.Member_No ?? req?.Account ?? "";
+
+                if (string.IsNullOrWhiteSpace(memberNo))
+                {
+                    r.Code = -1;
+                    r.Desc = "Member No is required.";
+                    return r;
+                }
+
+                // Read by member No — returns FULL record with all fields
+                var member = Members_Service.Read(memberNo);
+                if (member == null)
+                {
+                    r.Code = -1;
+                    r.Desc = "Member not found.";
+                    return r;
+                }
+
+                r.content = member;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+        [HttpPost]
         [Route("api/Gettransactions")]
         public Results<MobileTransactions> gettransaction(Request request)
         {
@@ -1051,5 +1159,19 @@ namespace Client_Service.Loan_Products
         public string Comments { get; set; }
 
 
+    }
+}
+namespace Client_Service.Controllers
+{
+    public class MemberUpdate
+    {
+        public string No { get; set; }
+        public string Name { get; set; }
+        public string Phone_No { get; set; }
+        public string MPESA_Mobile_No { get; set; }
+        public string ID_No { get; set; }
+        public string E_Mail { get; set; }
+        public string Gender { get; set; }
+        public string Date_of_Birth { get; set; }
     }
 }

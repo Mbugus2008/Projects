@@ -18,6 +18,8 @@ class Member implements Tomaps {
   String? Name;
   String? E_Mail;
   String? Mobile_Phone_No;
+  String? Phone_No;
+  String? MPESA_Mobile_No;
   gender? Gender;
   String? ID_No;
   DateTime? Date_of_Birth;
@@ -38,6 +40,8 @@ class Member implements Tomaps {
     this.Name,
     this.E_Mail,
     this.Mobile_Phone_No,
+    this.Phone_No,
+    this.MPESA_Mobile_No,
     this.Gender,
     this.ID_No,
     this.Date_of_Birth,
@@ -62,6 +66,8 @@ class Member implements Tomaps {
       'Name': Name,
       'E_Mail': E_Mail,
       'Mobile_Phone_No': Mobile_Phone_No,
+      'Phone_No': Phone_No,
+      'MPESA_Mobile_No': MPESA_Mobile_No,
       'Gender': Gender?.index,
       'ID_No': ID_No,
       'Date_of_Birth': Date_of_Birth?.toIso8601String(),
@@ -91,6 +97,12 @@ class Member implements Tomaps {
       Mobile_Phone_No: map['Mobile_Phone_No'] != null
           ? map['Mobile_Phone_No'] as String
           : null,
+      Phone_No: map['Phone_No'] != null
+          ? map['Phone_No'] as String
+          : null,
+      MPESA_Mobile_No: map['MPESA_Mobile_No'] != null
+          ? map['MPESA_Mobile_No'] as String
+          : null,
       Gender: map['Gender'] != null
           ? gender.values[(map['Gender'] ?? 0) as int]
           : null,
@@ -113,8 +125,8 @@ class Member implements Tomaps {
       Accounts: _tryParseList<Account>(
               map['Accounts'] ?? map['DepositAccount'], Account.fromMap) ??
           (map['DepositAccount'] != null
-              ? _tryParseList<Account>(map['DepositAccount'],
-                  Account.fromDepositMap)
+              ? _tryParseList<Account>(
+                  map['DepositAccount'], Account.fromDepositMap)
               : null),
       Source_accounts:
           _tryParseList<Account>(map['Source_accounts'], Account.fromMap),
@@ -140,9 +152,6 @@ List<T>? _tryParseList<T>(
 }
 
 enum gender {
-  /// <remarks/>
-  _blank_,
-
   /// <remarks/>
   Male,
 

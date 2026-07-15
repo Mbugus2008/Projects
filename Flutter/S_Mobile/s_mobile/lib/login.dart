@@ -105,6 +105,15 @@ class _LoginState extends State<Login> {
         switch (results.Code) {
           case 0:
             {
+              if (results.Contents == null) {
+                if (mounted) {
+                  MotionToast.error(
+                    description: const Text('Member not found. Please check your phone number.'),
+                    title: const Text('Login'),
+                  ).show(context);
+                }
+                break;
+              }
               final SharedPreferences prefs = await _prefs;
               prefs.setString('user', usernamec.text);
               if (mounted) {

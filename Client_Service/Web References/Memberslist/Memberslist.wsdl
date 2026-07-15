@@ -10,6 +10,12 @@
           <xsd:enumeration value="All" />
         </xsd:restriction>
       </xsd:simpleType>
+      <xsd:simpleType name="Gender">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Male" />
+          <xsd:enumeration value="Female" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:complexType name="Memberslist">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
@@ -43,6 +49,9 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="Deposit_Drive" type="xsd:decimal" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Benevolent_Fund" type="xsd:decimal" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Wallet" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Gender" type="tns:Gender" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Date_of_Birth" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="E_Mail" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Memberslist_List">
@@ -82,6 +91,9 @@
           <xsd:enumeration value="Deposit_Drive" />
           <xsd:enumeration value="Benevolent_Fund" />
           <xsd:enumeration value="Wallet" />
+          <xsd:enumeration value="Gender" />
+          <xsd:enumeration value="Date_of_Birth" />
+          <xsd:enumeration value="E_Mail" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="Memberslist_Filter">

@@ -123,4 +123,9 @@ public interface IClientSwitchHandler
         HttpContext context,
         JsonNode? incoming,
         CancellationToken ct);
+
+    Task<ProxyResponse> UpdateMemberAsync(
+        HttpContext context,
+        JsonNode? incoming,
+        CancellationToken ct);
 }

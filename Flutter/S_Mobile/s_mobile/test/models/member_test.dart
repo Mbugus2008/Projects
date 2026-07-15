@@ -15,7 +15,7 @@ void main() {
     });
     test('fromMap parses enums', () {
       final m = Member.fromMap({'Gender': 1, 'Blocked': 0, 'Status': 2});
-      expect(m.Gender, gender.Male);
+      expect(m.Gender, gender.Female);
       expect(m.Blocked, blocked.values[0]);
       expect(m.Status, status.Active);
     });
@@ -89,7 +89,7 @@ void main() {
   });
 
   group('Member enums', () {
-    test('gender', () { expect(gender.Male.index, 1); });
+    test('gender', () { expect(gender.Male.index, 0); });
     test('blocked', () { expect(blocked.Credit.index, 1); expect(blocked.All.index, 3); });
     test('status', () { expect(status.Active.index, 2); expect(status.Closed.index, 9); });
     test('loan status', () { expect(loan.status.Open.index, 0); });

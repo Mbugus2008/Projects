@@ -246,6 +246,13 @@ public sealed class BarakaYetuSwitchHandler(IBridgeProxyService proxyService) : 
     public override Task<ProxyResponse> NextOfKinAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
         base.NextOfKinAsync(context, incoming, ct);
 
+    public override async Task<ProxyResponse> UpdateMemberAsync(HttpContext context, JsonNode? incoming, CancellationToken ct)
+    {
+        var wrapped = new JsonObject { ["body"] = incoming?.DeepClone() ?? new JsonObject() };
+        var ds = await ProxyService.ForwardAsync(context, "api/updatemember", ct, requestBody: wrapped.ToJsonString(), directRoutePath: "api/updatemember");
+        return ds;
+    }
+
     public override async Task<ProxyResponse> StatementAsync(HttpContext context, Request? incoming, CancellationToken ct)
     {
         var accountNo = incoming?.Acc;

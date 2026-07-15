@@ -598,7 +598,7 @@ class _menuState extends State<menu> {
   }
 }
 
-class ministatement extends StatelessWidget {
+class ministatement extends StatefulWidget {
   const ministatement({
     super.key,
     required this.context,
@@ -609,48 +609,118 @@ class ministatement extends StatelessWidget {
   final Member? m;
 
   @override
+  State<ministatement> createState() => _MinistatementState();
+}
+
+class _MinistatementState extends State<ministatement> {
+  DateTime? _from;
+  DateTime? _to;
+
+  @override
+  void initState() {
+    super.initState();
+    _from = DateTime.now().subtract(const Duration(days: 30));
+    _to = DateTime.now();
+  }
+
+  Future<void> _pickRange() async {
+    final picked = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+      initialDateRange: _from != null && _to != null
+          ? DateTimeRange(start: _from!, end: _to!)
+          : null,
+    );
+    if (picked != null) {
+      setState(() {
+        _from = picked.start;
+        _to = picked.end;
+      });
+    }
+  }
+
+  List<entries> _filtered() {
+    final all = Get.find<MemberController>().currentstatement.toList();
+    if (_from == null || _to == null) return all;
+    return all.where((e) {
+      final d = e.Posting_Date;
+      if (d == null) return false;
+      return d.isAfter(_from!.subtract(const Duration(days: 1))) &&
+          d.isBefore(_to!.add(const Duration(days: 1)));
+    }).toList();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: Obx(
-        () => Column(
-          children: [
-            Get.find<MemberController>().currentstatement.length > 0
-                ? StatefulBuilder(builder: (context, setState) {
-                    return SfDataGridTheme(
-                      data: SfDataGridThemeData(
-                          headerColor: const Color.fromRGBO(164, 92, 113, 0.5)),
-                      child: SfDataGrid(
-                        source: entriesDataSource(
-                            Entries: Get.find<MemberController>()
-                                .currentstatement
-                                .value),
-                        columnWidthMode: ColumnWidthMode.fill,
-                        columns: [
-                          GridColumn(
-                              columnName: "Posting_Date",
-                              label: Container(
-                                  alignment: Alignment.center,
-                                  child: Text("Date"))),
-                          GridColumn(
-                              columnName: "Desc",
-                              label: Container(
-                                  alignment: Alignment.centerRight,
-                                  child: Text("Desc"))),
-                          GridColumn(
-                              columnName: "Amount",
-                              label: Container(
-                                  alignment: Alignment.centerRight,
-                                  child: Text("amount")))
-                        ],
-                      ),
-                    );
-                  })
-                : Text('No data'),
-            Spacer(),
-          ],
+    final filtered = _filtered();
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  icon: const Icon(Icons.date_range, size: 18),
+                  label: Text(
+                    _from != null && _to != null
+                        ? '${_from!.day}/${_from!.month}/${_from!.year} — ${_to!.day}/${_to!.month}/${_to!.year}'
+                        : 'Select date range',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  onPressed: _pickRange,
+                ),
+              ),
+              if (_from != null)
+                IconButton(
+                  icon: const Icon(Icons.clear, size: 20),
+                  onPressed: () =>
+                      setState(() { _from = null; _to = null; }),
+                ),
+            ],
+          ),
         ),
-      ),
+        Expanded(
+          child: filtered.isNotEmpty
+              ? SfDataGridTheme(
+                  data: SfDataGridThemeData(
+                      headerColor: const Color.fromRGBO(164, 92, 113, 0.5)),
+                  child: SfDataGrid(
+                    source: entriesDataSource(Entries: filtered),
+                    columnWidthMode: ColumnWidthMode.fill,
+                    columns: [
+                      GridColumn(
+                          columnName: "Posting_Date",
+                          label: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(8),
+                              child: Text("Date",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold)))),
+                      GridColumn(
+                          columnName: "Desc",
+                          label: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(8),
+                              child: const Text("Desc",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold)))),
+                      GridColumn(
+                          columnName: "Amount",
+                          label: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(8),
+                              child: const Text("Amount",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold)))),
+                    ],
+                  ),
+                )
+              : const Center(child: Text('No entries for selected period')),
+        ),
+      ],
     );
   }
 }

@@ -589,10 +589,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Client_Service_Applications_MobileApplications_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/MobileTransactions">
+    <WebReferenceUrl Include="http://services.trimline.co.ke:2527/Baraka/WS/BARAKA%2520YETU%2520SACCO%2520SOCIETY%2520LTD/Page/MobileTransactions">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Transactions\</RelPath>
-      <UpdateFromURL>http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/MobileTransactions</UpdateFromURL>
+      <UpdateFromURL>http://services.trimline.co.ke:2527/Baraka/WS/BARAKA%2520YETU%2520SACCO%2520SOCIETY%2520LTD/Page/MobileTransactions</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

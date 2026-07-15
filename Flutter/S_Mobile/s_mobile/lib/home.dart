@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:s_mobile/members/controller.dart';
@@ -19,6 +20,8 @@ import 'pages/accounts.dart';
 import 'pages/dashboard.dart';
 import 'pages/ledgerEntries.dart';
 import 'pages/loan_list.dart';
+import 'pages/member_edit.dart';
+import 'pages/eligibility_checker.dart';
 import 'pages/newloan.dart';
 import 'pages/payment_cart_page.dart';
 
@@ -31,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   _MyHomePageState() {}
+  DateTime? _lastBackPress;
   Future<List<entries>?> getstatements() async {
     List<entries>? ln;
     var request =
@@ -183,11 +187,30 @@ class _MyHomePageState extends State<MyHomePage> {
       activeloans = loans.where((e) => e.Outstanding_Balance! > 0).toList();
     }
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      bottomNavigationBar: buildMyNavBar(context),
-      drawer: _buildDrawer(context),
-      body: pages[pageIndex],
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        final now = DateTime.now();
+        if (_lastBackPress == null ||
+            now.difference(_lastBackPress!) > const Duration(seconds: 2)) {
+          _lastBackPress = now;
+          MotionToast.warning(
+            description: const Text('Press again to exit'),
+            title: const Text(''),
+          ).show(context);
+          return;
+        }
+        // Second press — exit app
+        _lastBackPress = null;
+        SystemNavigator.pop();
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        bottomNavigationBar: buildMyNavBar(context),
+        drawer: _buildDrawer(context),
+        body: pages[pageIndex],
+      ),
     );
   }
 
@@ -279,6 +302,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 const Divider(indent: 16, endIndent: 16),
                 _drawerItem(
+                  icon: Icons.edit_outlined,
+                  title: 'Edit Profile',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: MemberEditPage(member: member),
+                          title: 'Edit Profile',
+                        ));
+                  },
+                ),
+                _drawerItem(
                   icon: Icons.add_circle_outline,
                   title: 'Apply for Loan',
                   onTap: () {
@@ -287,6 +322,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           member: member,
                           widgets: NewLoanPage(member: member),
                           title: 'New Loan',
+                        ));
+                  },
+                ),
+                _drawerItem(
+                  icon: Icons.check_circle_outline,
+                  title: 'Check Eligibility',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: const EligibilityCheckerPage(),
+                          title: 'Eligibility',
                         ));
                   },
                 ),

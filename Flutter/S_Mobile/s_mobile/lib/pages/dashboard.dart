@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
+import 'package:s_mobile/Loans/Loan_Eligibility.dart';
+import 'package:s_mobile/Loans/Loan_Type.dart';
 import 'package:s_mobile/Loans/Schedule.dart';
 import 'package:s_mobile/common/Apis.dart';
 import 'package:s_mobile/common/Results.dart';
-import 'package:s_mobile/common/payment_cart.dart';
 import 'package:s_mobile/common/utilities.dart';
 import 'package:s_mobile/members/accounts.dart';
 import 'package:s_mobile/members/entries.dart';
@@ -28,10 +29,46 @@ class dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<dashboard> {
+  double _loanLimit = 0;
+
   @override
   void initState() {
     super.initState();
     _fetchAllSchedules();
+    _fetchLoanLimits();
+  }
+
+  /// Fetch max eligible loan amount across all loan types
+  Future<void> _fetchLoanLimits() async {
+    try {
+      final member = Get.find<MemberController>().currentCustomer.value;
+      final phone = Get.find<MemberController>().loginPhone ??
+          member.Mobile_Phone_No ??
+          '';
+      if (phone.isEmpty) return;
+
+      final lt = await Loan_Type.fetchLoanProducts();
+      if (lt == null || lt.isEmpty) return;
+
+      double maxEligible = 0;
+      for (final loanType in lt) {
+        try {
+          final eligible = await Loan_Eligibility.checkEligibility(
+            phone: phone,
+            code: loanType.Code ?? '',
+            loanType: loanType.Description ?? '',
+          );
+          if (eligible != null &&
+              (eligible.Eligible_Amount ?? 0) > maxEligible) {
+            maxEligible = eligible.Eligible_Amount ?? 0;
+          }
+        } catch (_) {}
+      }
+
+      if (mounted) setState(() => _loanLimit = maxEligible);
+    } catch (e) {
+      print('⚠️ Error fetching loan limits: $e');
+    }
   }
 
   /// Fetch repayment schedules for all loans in the background.
@@ -85,8 +122,6 @@ class _DashboardState extends State<dashboard> {
         .toList();
 
     // Summary counts
-    final totalPortfolio =
-        accounts.fold<double>(0, (sum, a) => sum + (a.Balance ?? 0));
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F0),
@@ -160,8 +195,10 @@ class _DashboardState extends State<dashboard> {
                     const SizedBox(width: 10),
                     _summaryChip(
                       icon: Icons.trending_up,
-                      label: 'Portfolio',
-                      value: utilities.formatcurrency.format(totalPortfolio),
+                      label: 'Loan Limit',
+                      value: _loanLimit > 0
+                          ? utilities.formatcurrency.format(_loanLimit)
+                          : '...',
                     ),
                     const SizedBox(width: 10),
                     _summaryChip(
@@ -223,12 +260,20 @@ class _DashboardState extends State<dashboard> {
             ),
             const SizedBox(height: 12),
             Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: loans.length,
-                itemBuilder: (context, index) {
-                  return _loanListTile(context, loans[index]);
-                },
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: loans.length,
+                      itemBuilder: (context, index) {
+                        return _loanListTile(context, loans[index]);
+                      },
+                    ),
+                  ),
+                  // Recent transactions
+                  _recentTransactions(member),
+                ],
               ),
             ),
           ],
@@ -396,45 +441,6 @@ class _DashboardState extends State<dashboard> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Pay button
-                      GestureDetector(
-                        onTap: () {
-                          final cart = Get.find<PaymentCartController>();
-                          cart.addItem(PaymentItem(
-                            label: loanName,
-                            loanNo: loan.Loan_No,
-                            type: 'loan',
-                            amount: 0,
-                          ));
-                          MotionToast.success(
-                            description:
-                                Text('$loanName added to payment cart'),
-                            title: const Text('Payment'),
-                          ).show(context);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.only(right: 8),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFE8F5E9),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.add,
-                                  size: 14, color: Color(0xFF2E7D32)),
-                              SizedBox(width: 2),
-                              Text('Pay',
-                                  style: TextStyle(
-                                      color: Color(0xFF2E7D32),
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w700)),
-                            ],
-                          ),
-                        ),
-                      ),
                       if (arrears > 0)
                         Container(
                           margin: const EdgeInsets.only(right: 8),
@@ -518,9 +524,153 @@ class _DashboardState extends State<dashboard> {
                     ),
                 ],
               ),
+              // Next repayment date
+              if (schedules != null && schedules.isNotEmpty) ...[
+                const SizedBox(height: 6),
+                _nextPaymentRow(schedules, arrears),
+              ],
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  // ── Helper: next payment date row ─────────────────────────────
+  Widget _nextPaymentRow(List<Schedule> schedules, double arrears) {
+    final now = DateTime.now();
+    Schedule? nextDue;
+    bool foundNext = false;
+
+    for (final s in schedules) {
+      if (s.Paid == true) continue;
+      final date = _parseDate(s.Repayment_Date);
+      if (date == null) continue;
+
+      if (!foundNext && date.isAfter(now.subtract(const Duration(days: 1)))) {
+        nextDue = s;
+        foundNext = true;
+      }
+    }
+
+    if (nextDue == null && arrears == 0) return const SizedBox.shrink();
+
+    final dueDate = nextDue != null ? _parseDate(nextDue.Repayment_Date) : null;
+    final isOverdue =
+        dueDate != null && dueDate.isBefore(now) && dueDate.day != now.day;
+    final dateStr = dueDate != null
+        ? '${dueDate.day}/${dueDate.month}/${dueDate.year}'
+        : '--';
+
+    final installment = nextDue != null
+        ? (nextDue.Principal_Repayment ?? 0) + (nextDue.Monthly_Interest ?? 0)
+        : 0.0;
+    final totalDue = installment + arrears;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Row(
+        children: [
+          Icon(
+            isOverdue ? Icons.warning_amber_rounded : Icons.event,
+            size: 13,
+            color:
+                isOverdue ? const Color(0xFFD32F2F) : const Color(0xFF2E7D32),
+          ),
+          const SizedBox(width: 4),
+          Text(
+            isOverdue ? 'Overdue: $dateStr' : 'Next: $dateStr',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color:
+                  isOverdue ? const Color(0xFFD32F2F) : const Color(0xFF2E7D32),
+            ),
+          ),
+          Text(
+            ' | ${utilities.formatcurrency.format(installment)}',
+            style: const TextStyle(fontSize: 11),
+          ),
+          const Spacer(),
+          Text(
+            'total To pay = ${utilities.formatcurrency.format(totalDue)}',
+            style: const TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFE91E8C)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  DateTime? _parseDate(dynamic val) {
+    if (val == null) return null;
+    if (val is DateTime) return val;
+    if (val is String) {
+      return DateTime.tryParse(val);
+    }
+    if (val is int) {
+      return DateTime.fromMillisecondsSinceEpoch(val);
+    }
+    return null;
+  }
+
+  // ── Recent Transactions widget ───────────────────────────────
+  Widget _recentTransactions(member) {
+    final entries = member.Entries ?? [];
+    if (entries.isEmpty) return const SizedBox.shrink();
+
+    final recent = entries.take(5).toList();
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 2)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Recent Transactions',
+              style: TextStyle(
+                  color: Color(0xFF2E7D32),
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold)),
+          const SizedBox(height: 8),
+          ...recent.map((e) => Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        e.Description ?? e.Document_No ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ),
+                    Text(
+                      utilities.formatcurrency.format(e.Amount ?? 0),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: (e.Amount ?? 0) >= 0
+                            ? const Color(0xFF2E7D32)
+                            : const Color(0xFFD32F2F),
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+        ],
       ),
     );
   }

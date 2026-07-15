@@ -1,0 +1,268 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:motion_toast/motion_toast.dart';
+import 'package:s_mobile/common/Apis.dart';
+import 'package:s_mobile/common/Results.dart';
+
+import '../members/controller.dart';
+import '../members/member.dart';
+
+class MemberEditPage extends StatefulWidget {
+  final Member member;
+  const MemberEditPage({super.key, required this.member});
+
+  @override
+  State<MemberEditPage> createState() => _MemberEditPageState();
+}
+
+class _MemberEditPageState extends State<MemberEditPage> {
+  late final TextEditingController nameCtrl;
+  late final TextEditingController mpesaCtrl;
+  late final TextEditingController idNoCtrl;
+  late final TextEditingController emailCtrl;
+  late final TextEditingController dobCtrl;
+  String? _gender;
+  bool _saving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final m = widget.member;
+    nameCtrl = TextEditingController(text: m.Name ?? '');
+    mpesaCtrl = TextEditingController(
+        text: _cleanPhone(m.MPESA_Mobile_No ?? m.Mobile_Phone_No));
+    idNoCtrl = TextEditingController(text: m.ID_No ?? '');
+    emailCtrl = TextEditingController(text: m.E_Mail ?? '');
+    dobCtrl = TextEditingController(
+        text: m.Date_of_Birth != null
+            ? '${m.Date_of_Birth!.day}/${m.Date_of_Birth!.month}/${m.Date_of_Birth!.year}'
+            : '');
+    final g = m.Gender;
+    _gender = g?.name ?? '';
+  }
+
+  String _cleanPhone(String? phone) {
+    if (phone == null || phone.isEmpty) return '';
+    return phone.replaceFirst('+254', '0');
+  }
+
+  @override
+  void dispose() {
+    nameCtrl.dispose();
+    mpesaCtrl.dispose();
+    idNoCtrl.dispose();
+    emailCtrl.dispose();
+    dobCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _save() async {
+    if (_saving) return;
+    setState(() => _saving = true);
+
+    try {
+      final updateBody = json.encode({
+        'No': widget.member.No,
+        'Name': nameCtrl.text.trim(),
+        'MPESA_Mobile_No': mpesaCtrl.text.trim(),
+        'ID_No': idNoCtrl.text.trim(),
+        'E_Mail': emailCtrl.text.trim(),
+        'Gender': _gender,
+        if (dobCtrl.text.isNotEmpty)
+          'Date_of_Birth': dobCtrl.text.trim(),
+      });
+
+      // Call Client_Service directly (wrap in body as expected by ClientRequest)
+      const clientUrl = 'https://services.trimline.co.ke/Aps/api/updatemember';
+      final r = await http.post(
+        Uri.parse(clientUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Client-Identifier': 'BarakaYetu',
+        },
+        body: json.encode({'body': updateBody}),
+      );
+
+      if (!mounted) return;
+
+      if (r.statusCode == 200) {
+        final result = json.decode(r.body) as Map<String, dynamic>;
+        final code = result['Code'] ?? result['code'] as int?;
+        if (code == 0) {
+          // Refresh member data
+          final controller = Get.find<MemberController>();
+          final phone = controller.loginPhone;
+          if (phone != null && phone.isNotEmpty) {
+            final refreshReq = Params(Phone: phone);
+            final refreshR =
+                await ApiClient().postdata('member', refreshReq.toJson());
+            if (refreshR.statusCode == 200) {
+              final results =
+                  Results2<Member>.fromJson(refreshR.body, Member.fromMap);
+              if (results.Code == 0 && results.Contents != null) {
+                controller.currentCustomer.value = results.Contents!;
+              }
+            }
+          }
+
+          if (mounted) {
+            MotionToast.success(
+              description: const Text('Profile updated successfully.'),
+              title: const Text('Profile'),
+            ).show(context);
+            Navigator.pop(context);
+          }
+          return;
+        }
+      }
+
+      if (mounted) {
+        MotionToast.error(
+          description: const Text('Failed to update profile.'),
+          title: const Text('Profile'),
+        ).show(context);
+      }
+    } catch (e) {
+      if (mounted) {
+        MotionToast.error(
+          description: Text(e.toString()),
+          title: const Text('Profile'),
+        ).show(context);
+      }
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final m = widget.member;
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F5F0),
+      appBar: AppBar(
+        title: const Text('Edit Profile'),
+        backgroundColor: const Color(0xFF2E7D32),
+        foregroundColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Member No (read-only)
+            Card(
+              child: ListTile(
+                leading:
+                    const Icon(Icons.credit_card, color: Color(0xFF2E7D32)),
+                title: const Text('Member No'),
+                subtitle:
+                    Text(m.No ?? '', style: const TextStyle(fontSize: 16)),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Name
+            _buildField('Full Name', Icons.person, nameCtrl),
+            const SizedBox(height: 12),
+
+            // Mpesa Mobile No
+            _buildField('Mpesa Mobile No', Icons.phone_android, mpesaCtrl,
+                hint: 'e.g. 0710563359'),
+            const SizedBox(height: 12),
+
+            // ID No
+            _buildField('ID Number', Icons.badge, idNoCtrl,
+                hint: 'e.g. 25303735'),
+            const SizedBox(height: 12),
+
+            // Email
+            _buildField('Email', Icons.email_outlined, emailCtrl,
+                hint: 'email@example.com'),
+            const SizedBox(height: 12),
+
+            // Date of Birth
+            _buildField('Date of Birth', Icons.cake_outlined, dobCtrl,
+                hint: 'DD/MM/YYYY', readOnly: true,
+                onTap: () async {
+                  final picked = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime(1990),
+                    firstDate: DateTime(1940),
+                    lastDate: DateTime.now(),
+                  );
+                  if (picked != null) {
+                    dobCtrl.text =
+                        '${picked.day}/${picked.month}/${picked.year}';
+                  }
+                }),
+            const SizedBox(height: 12),
+
+            // Gender
+            DropdownButtonFormField<String>(
+              value: _gender,
+              decoration: InputDecoration(
+                labelText: 'Gender',
+                prefixIcon:
+                    Icon(Icons.people_outline, color: const Color(0xFF2E7D32)),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              items: const [
+                DropdownMenuItem(value: '', child: Text('')),
+                DropdownMenuItem(value: 'Male', child: Text('Male')),
+                DropdownMenuItem(value: 'Female', child: Text('Female')),
+              ],
+              onChanged: (v) => setState(() => _gender = v),
+            ),
+            const SizedBox(height: 24),
+
+            // Save button
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF2E7D32),
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: _saving ? null : _save,
+              child: _saving
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                          strokeWidth: 2, color: Colors.white),
+                    )
+                  : const Text('Save Changes',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildField(String label, IconData icon, TextEditingController ctrl,
+      {String? hint, bool readOnly = false, VoidCallback? onTap}) {
+    return TextField(
+      controller: ctrl,
+      readOnly: readOnly,
+      onTap: onTap,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        prefixIcon: Icon(icon, color: const Color(0xFF2E7D32)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        filled: true,
+        fillColor: Colors.white,
+      ),
+    );
+  }
+}

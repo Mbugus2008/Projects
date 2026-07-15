@@ -84,4 +84,7 @@ public abstract class ClientSwitchHandlerBase(IBridgeProxyService proxyService) 
 
     public virtual Task<ProxyResponse> GetTransactionsAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
         ProxyService.ForwardAsync(context, "api/Gettransactions", ct);
+
+    public virtual Task<ProxyResponse> UpdateMemberAsync(HttpContext context, JsonNode? incoming, CancellationToken ct) =>
+        ProxyService.ForwardAsync(context, "api/updatemember", ct, directRoutePath: "api/updatemember");
 }

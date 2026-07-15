@@ -539,6 +539,16 @@ namespace Client_Service.Memberslist {
         
         private bool walletFieldSpecified;
         
+        private Gender genderField;
+        
+        private bool genderFieldSpecified;
+        
+        private System.DateTime date_of_BirthField;
+        
+        private bool date_of_BirthFieldSpecified;
+        
+        private string e_MailField;
+        
         /// <remarks/>
         public string Key {
             get {
@@ -1025,6 +1035,59 @@ namespace Client_Service.Memberslist {
                 this.walletFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        public Gender Gender {
+            get {
+                return this.genderField;
+            }
+            set {
+                this.genderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool GenderSpecified {
+            get {
+                return this.genderFieldSpecified;
+            }
+            set {
+                this.genderFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime Date_of_Birth {
+            get {
+                return this.date_of_BirthField;
+            }
+            set {
+                this.date_of_BirthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Date_of_BirthSpecified {
+            get {
+                return this.date_of_BirthFieldSpecified;
+            }
+            set {
+                this.date_of_BirthFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string E_Mail {
+            get {
+                return this.e_MailField;
+            }
+            set {
+                this.e_MailField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1044,6 +1107,19 @@ namespace Client_Service.Memberslist {
         
         /// <remarks/>
         All,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/memberslist")]
+    public enum Gender {
+        
+        /// <remarks/>
+        Male,
+        
+        /// <remarks/>
+        Female,
     }
     
     /// <remarks/>
@@ -1174,6 +1250,15 @@ namespace Client_Service.Memberslist {
         
         /// <remarks/>
         Wallet,
+        
+        /// <remarks/>
+        Gender,
+        
+        /// <remarks/>
+        Date_of_Birth,
+        
+        /// <remarks/>
+        E_Mail,
     }
     
     /// <remarks/>

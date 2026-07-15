@@ -2,6 +2,12 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/page/members" targetNamespace="urn:microsoft-dynamics-schemas/page/members" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <xsd:schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/page/members" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="Gender">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Male" />
+          <xsd:enumeration value="Female" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:simpleType name="Destination_Type">
         <xsd:restriction base="xsd:string">
           <xsd:enumeration value="None" />
@@ -120,6 +126,9 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="Deposit_Drive" type="xsd:decimal" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Phone_No" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Benevolent_Fund" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Gender" type="tns:Gender" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Date_of_Birth" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="E_Mail" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Loan_Keywords" type="tns:Loan_Keywords_List" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Loans" type="tns:Loans_Mobile_List" />
         </xsd:sequence>
@@ -159,6 +168,9 @@
           <xsd:enumeration value="Deposit_Drive" />
           <xsd:enumeration value="Phone_No" />
           <xsd:enumeration value="Benevolent_Fund" />
+          <xsd:enumeration value="Gender" />
+          <xsd:enumeration value="Date_of_Birth" />
+          <xsd:enumeration value="E_Mail" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="Members_Filter">
