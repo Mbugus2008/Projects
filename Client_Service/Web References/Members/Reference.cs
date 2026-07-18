@@ -613,6 +613,14 @@ namespace Client_Service.Members {
         
         private string e_MailField;
         
+        private string pinField;
+        
+        private string addressField;
+        
+        private Marital_Status marital_StatusField;
+        
+        private bool marital_StatusFieldSpecified;
+        
         private Loan_Keywords[] loan_KeywordsField;
         
         private Loans_Mobile[] loansField;
@@ -1127,6 +1135,47 @@ namespace Client_Service.Members {
         }
         
         /// <remarks/>
+        public string Pin {
+            get {
+                return this.pinField;
+            }
+            set {
+                this.pinField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Address {
+            get {
+                return this.addressField;
+            }
+            set {
+                this.addressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Marital_Status Marital_Status {
+            get {
+                return this.marital_StatusField;
+            }
+            set {
+                this.marital_StatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Marital_StatusSpecified {
+            get {
+                return this.marital_StatusFieldSpecified;
+            }
+            set {
+                this.marital_StatusFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
         public Loan_Keywords[] Loan_Keywords {
             get {
@@ -1160,6 +1209,31 @@ namespace Client_Service.Members {
         
         /// <remarks/>
         Female,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members")]
+    public enum Marital_Status {
+        
+        /// <remarks/>
+        _blank_,
+        
+        /// <remarks/>
+        Single,
+        
+        /// <remarks/>
+        Married,
+        
+        /// <remarks/>
+        Divorced,
+        
+        /// <remarks/>
+        Widower,
+        
+        /// <remarks/>
+        Widow,
     }
     
     /// <remarks/>
@@ -1406,6 +1480,15 @@ namespace Client_Service.Members {
         
         /// <remarks/>
         E_Mail,
+        
+        /// <remarks/>
+        Pin,
+        
+        /// <remarks/>
+        Address,
+        
+        /// <remarks/>
+        Marital_Status,
     }
     
     /// <remarks/>

@@ -4,6 +4,7 @@ using Client_Service.Loans;
 using Client_Service.Members;
 using Client_Service.Memberslist;
 using Client_Service.NextOfKin;
+using Client_Service.N_OfKinMember;
 using Client_Service.Registration;
 using Client_Service.RepaymentSchedule;
 using Client_Service.Transactions;
@@ -43,6 +44,7 @@ namespace Client_Service.Controllers
         Alternate.Alternate alternate = new Alternate.Alternate();
         public static Registration.Registration_Service Registration_Service = new Registration.Registration_Service();
         public static NextOfKin.NextOfKin_Service NextOfKin_Service = new NextOfKin.NextOfKin_Service();
+        public static N_OfKinMember.NextOfKinMember_Service N_OfKinMember_Service = new N_OfKinMember.NextOfKinMember_Service();
 
         public clientController()
         {
@@ -66,6 +68,7 @@ namespace Client_Service.Controllers
                 alternate = new Alternate.Alternate { Url = misc.geturl(s, alternate.Url), Credentials = cd, PreAuthenticate = true };
                 Registration_Service = new Registration.Registration_Service { Url = misc.geturl(s, Registration_Service.Url), Credentials = cd, PreAuthenticate = true };
                 NextOfKin_Service = new NextOfKin.NextOfKin_Service { Url = misc.geturl(s, NextOfKin_Service.Url), Credentials = cd, PreAuthenticate = true };
+                N_OfKinMember_Service = new N_OfKinMember.NextOfKinMember_Service { Url = misc.geturl(s, N_OfKinMember_Service.Url), Credentials = cd, PreAuthenticate = true };
 
             }
             catch (Exception ex
@@ -86,13 +89,27 @@ namespace Client_Service.Controllers
             {
 
                 phone = phone.Replace(" ", "");
-                phone = string.Format("+254{0}", phone.Substring(phone.Length - 9));
+                var normalized = string.Format("+254{0}", phone.Substring(phone.Length - 9));
+                var zeroFormat = "0" + normalized.Substring(4); // e.g. 0710563359
+                var noPrefix = normalized.Substring(1);          // e.g. 254710563359
 
-                r.content = Members_Service.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = phone, Field = Members_Fields.MPESA_Mobile_No } }, null, 0).FirstOrDefault();
+                // Try multiple phone formats against MPESA_Mobile_No, then Phone_No
+                string[] formats = { normalized, zeroFormat, noPrefix, phone };
+                Members_Fields[] fields = { Members_Fields.MPESA_Mobile_No, Members_Fields.Phone_No };
+
+                foreach (var field in fields)
+                {
+                    foreach (var fmt in formats)
+                    {
+                        r.content = Members_Service.ReadMultiple(
+                            new Members_Filter[] { new Members_Filter { Criteria = fmt, Field = field } },
+                            null, 0).FirstOrDefault();
+                        if (r.content != null) break;
+                    }
+                    if (r.content != null) break;
+                }
+
                 Logging.Logging.LogEntryOnFile(JsonConvert.SerializeObject(r.content));
-
-                if (r.content == null)
-                    r.content = Members_Service.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = phone, Field = Members_Fields.Phone_No } }, null, 0).FirstOrDefault();
 
                 if (r.content == null)
                 {
@@ -781,6 +798,18 @@ namespace Client_Service.Controllers
                         member.Date_of_BirthSpecified = true;
                     }
                 }
+                if (!string.IsNullOrWhiteSpace(update.Pin))
+                    member.Pin = update.Pin;
+                if (!string.IsNullOrWhiteSpace(update.Marital_Status))
+                    member.Marital_Status = update.Marital_Status == "Single" ? Members.Marital_Status.Single :
+                        update.Marital_Status == "Married" ? Members.Marital_Status.Married :
+                        update.Marital_Status == "Divorced" ? Members.Marital_Status.Divorced :
+                        update.Marital_Status == "Widower" ? Members.Marital_Status.Widower :
+                        update.Marital_Status == "Widow" ? Members.Marital_Status.Widow :
+                        Members.Marital_Status._blank_;
+                    member.Marital_StatusSpecified = true;
+                if (!string.IsNullOrWhiteSpace(update.Address))
+                    member.Address = update.Address;
 
                 Members_Service.Update(ref member);
                 r.content = member;
@@ -920,6 +949,38 @@ namespace Client_Service.Controllers
             {
                 NextOfKin_Service.Create(ref nextOfKin);
                 r.Contents = nextOfKin;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
+        [HttpPost]
+        [Route("api/getnextofkin")]
+        public Results<List<N_OfKinMember.NextOfKinMember>> getnextofkin(Request request)
+        {
+            Results<List<N_OfKinMember.NextOfKinMember>> r = new Results<List<N_OfKinMember.NextOfKinMember>>();
+            try
+            {
+                var body = request.body?.ToString() ?? "{}";
+                var req = JsonConvert.DeserializeObject<dynamic>(body);
+                string memberNo = req?.No ?? req?.Member_No ?? req?.Account_No ?? "";
+
+                if (string.IsNullOrWhiteSpace(memberNo))
+                {
+                    r.Code = -1;
+                    r.Desc = "Member No is required.";
+                    return r;
+                }
+
+                var noks = N_OfKinMember_Service.ReadMultiple(
+                    new N_OfKinMember.NextOfKinMember_Filter[] { new N_OfKinMember.NextOfKinMember_Filter { Criteria = memberNo, Field = N_OfKinMember.NextOfKinMember_Fields.Account_No } },
+                    null, 0);
+                r.Contents = noks?.ToList();
             }
             catch (Exception ex)
             {
@@ -1173,5 +1234,8 @@ namespace Client_Service.Controllers
         public string E_Mail { get; set; }
         public string Gender { get; set; }
         public string Date_of_Birth { get; set; }
+        public string Pin { get; set; }
+        public string Marital_Status { get; set; }
+        public string Address { get; set; }
     }
 }

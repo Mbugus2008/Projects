@@ -179,5 +179,16 @@ namespace Client_Service.Properties {
                 return ((string)(this["Client_Service_tarrifs_Tarrifs_Service"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/NextOfKinMembe" +
+            "r")]
+        public string Client_Service_N_OfKinMember_NextOfKinMember_Service {
+            get {
+                return ((string)(this["Client_Service_N_OfKinMember_NextOfKinMember_Service"]));
+            }
+        }
     }
 }

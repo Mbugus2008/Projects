@@ -108,7 +108,8 @@ class _LoginState extends State<Login> {
               if (results.Contents == null) {
                 if (mounted) {
                   MotionToast.error(
-                    description: const Text('Member not found. Please check your phone number.'),
+                    description: const Text(
+                        'Member not found. Please check your phone number.'),
                     title: const Text('Login'),
                   ).show(context);
                 }

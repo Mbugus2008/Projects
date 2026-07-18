@@ -18,10 +18,10 @@ import 'master_page.dart';
 import 'members/accounts.dart';
 import 'pages/accounts.dart';
 import 'pages/dashboard.dart';
+import 'pages/eligibility_checker.dart';
 import 'pages/ledgerEntries.dart';
 import 'pages/loan_list.dart';
 import 'pages/member_edit.dart';
-import 'pages/eligibility_checker.dart';
 import 'pages/newloan.dart';
 import 'pages/payment_cart_page.dart';
 

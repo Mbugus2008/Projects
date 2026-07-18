@@ -20,11 +20,13 @@ class MemberEditPage extends StatefulWidget {
 
 class _MemberEditPageState extends State<MemberEditPage> {
   late final TextEditingController nameCtrl;
-  late final TextEditingController mpesaCtrl;
-  late final TextEditingController idNoCtrl;
   late final TextEditingController emailCtrl;
   late final TextEditingController dobCtrl;
+  late final TextEditingController kraPinCtrl;
+  late final TextEditingController maritalStatusCtrl;
+  late final TextEditingController addressCtrl;
   String? _gender;
+  String? _maritalStatus;
   bool _saving = false;
 
   @override
@@ -32,16 +34,17 @@ class _MemberEditPageState extends State<MemberEditPage> {
     super.initState();
     final m = widget.member;
     nameCtrl = TextEditingController(text: m.Name ?? '');
-    mpesaCtrl = TextEditingController(
-        text: _cleanPhone(m.MPESA_Mobile_No ?? m.Mobile_Phone_No));
-    idNoCtrl = TextEditingController(text: m.ID_No ?? '');
     emailCtrl = TextEditingController(text: m.E_Mail ?? '');
     dobCtrl = TextEditingController(
         text: m.Date_of_Birth != null
             ? '${m.Date_of_Birth!.day}/${m.Date_of_Birth!.month}/${m.Date_of_Birth!.year}'
             : '');
+    kraPinCtrl = TextEditingController(text: m.KRA_Pin ?? '');
+    maritalStatusCtrl = TextEditingController(text: m.Marital_Status ?? '');
+    addressCtrl = TextEditingController(text: m.Address ?? '');
     final g = m.Gender;
     _gender = g?.name ?? '';
+    _maritalStatus = m.Marital_Status;
   }
 
   String _cleanPhone(String? phone) {
@@ -52,10 +55,11 @@ class _MemberEditPageState extends State<MemberEditPage> {
   @override
   void dispose() {
     nameCtrl.dispose();
-    mpesaCtrl.dispose();
-    idNoCtrl.dispose();
     emailCtrl.dispose();
     dobCtrl.dispose();
+    kraPinCtrl.dispose();
+    maritalStatusCtrl.dispose();
+    addressCtrl.dispose();
     super.dispose();
   }
 
@@ -67,12 +71,12 @@ class _MemberEditPageState extends State<MemberEditPage> {
       final updateBody = json.encode({
         'No': widget.member.No,
         'Name': nameCtrl.text.trim(),
-        'MPESA_Mobile_No': mpesaCtrl.text.trim(),
-        'ID_No': idNoCtrl.text.trim(),
         'E_Mail': emailCtrl.text.trim(),
         'Gender': _gender,
-        if (dobCtrl.text.isNotEmpty)
-          'Date_of_Birth': dobCtrl.text.trim(),
+        if (dobCtrl.text.isNotEmpty) 'Date_of_Birth': dobCtrl.text.trim(),
+        'Pin': kraPinCtrl.text.trim(),
+        'Marital_Status': _maritalStatus,
+        'Address': addressCtrl.text.trim(),
       });
 
       // Call Client_Service directly (wrap in body as expected by ClientRequest)
@@ -168,36 +172,57 @@ class _MemberEditPageState extends State<MemberEditPage> {
             _buildField('Full Name', Icons.person, nameCtrl),
             const SizedBox(height: 12),
 
-            // Mpesa Mobile No
-            _buildField('Mpesa Mobile No', Icons.phone_android, mpesaCtrl,
-                hint: 'e.g. 0710563359'),
-            const SizedBox(height: 12),
-
-            // ID No
-            _buildField('ID Number', Icons.badge, idNoCtrl,
-                hint: 'e.g. 25303735'),
-            const SizedBox(height: 12),
-
             // Email
             _buildField('Email', Icons.email_outlined, emailCtrl,
                 hint: 'email@example.com'),
             const SizedBox(height: 12),
 
+            // KRA Pin
+            _buildField('KRA Pin', Icons.article_outlined, kraPinCtrl,
+                hint: 'e.g. A012345678Z'),
+            const SizedBox(height: 12),
+
+            // Marital Status
+            DropdownButtonFormField<String>(
+              value: _maritalStatus,
+              decoration: InputDecoration(
+                labelText: 'Marital Status',
+                prefixIcon: const Icon(Icons.favorite_outline,
+                    color: Color(0xFF2E7D32)),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              items: const [
+                DropdownMenuItem(value: '', child: Text('')),
+                DropdownMenuItem(value: 'Single', child: Text('Single')),
+                DropdownMenuItem(value: 'Married', child: Text('Married')),
+                DropdownMenuItem(value: 'Divorced', child: Text('Divorced')),
+                DropdownMenuItem(value: 'Widowed', child: Text('Widowed')),
+              ],
+              onChanged: (v) => setState(() => _maritalStatus = v),
+            ),
+            const SizedBox(height: 12),
+
+            // Address
+            _buildField('Address', Icons.home_outlined, addressCtrl,
+                hint: 'e.g. 123 Main St, Nairobi'),
+            const SizedBox(height: 12),
+
             // Date of Birth
             _buildField('Date of Birth', Icons.cake_outlined, dobCtrl,
-                hint: 'DD/MM/YYYY', readOnly: true,
-                onTap: () async {
-                  final picked = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime(1990),
-                    firstDate: DateTime(1940),
-                    lastDate: DateTime.now(),
-                  );
-                  if (picked != null) {
-                    dobCtrl.text =
-                        '${picked.day}/${picked.month}/${picked.year}';
-                  }
-                }),
+                hint: 'DD/MM/YYYY', readOnly: true, onTap: () async {
+              final picked = await showDatePicker(
+                context: context,
+                initialDate: DateTime(1990),
+                firstDate: DateTime(1940),
+                lastDate: DateTime.now(),
+              );
+              if (picked != null) {
+                dobCtrl.text = '${picked.day}/${picked.month}/${picked.year}';
+              }
+            }),
             const SizedBox(height: 12),
 
             // Gender

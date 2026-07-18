@@ -232,6 +232,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\N_OfKinMember\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\RepaymentSchedule\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -408,6 +413,11 @@
     </Content>
     <None Include="Web References\NextOfKin\NextOfKin.wsdl" />
     <Content Include="Web References\NextOfKin\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\N_OfKinMember\NextOfKinMember.wsdl" />
+    <Content Include="Web References\N_OfKinMember\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
@@ -621,6 +631,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Client_Service_NextOfKin_NextOfKin_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/NextOfKinMember">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\N_OfKinMember\</RelPath>
+      <UpdateFromURL>http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/NextOfKinMember</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Client_Service_N_OfKinMember_NextOfKinMember_Service</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

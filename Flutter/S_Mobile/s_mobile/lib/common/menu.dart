@@ -676,8 +676,10 @@ class _MinistatementState extends State<ministatement> {
               if (_from != null)
                 IconButton(
                   icon: const Icon(Icons.clear, size: 20),
-                  onPressed: () =>
-                      setState(() { _from = null; _to = null; }),
+                  onPressed: () => setState(() {
+                    _from = null;
+                    _to = null;
+                  }),
                 ),
             ],
           ),
@@ -697,24 +699,24 @@ class _MinistatementState extends State<ministatement> {
                               alignment: Alignment.center,
                               padding: const EdgeInsets.all(8),
                               child: Text("Date",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold)))),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)))),
                       GridColumn(
                           columnName: "Desc",
                           label: Container(
                               alignment: Alignment.center,
                               padding: const EdgeInsets.all(8),
                               child: const Text("Desc",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold)))),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)))),
                       GridColumn(
                           columnName: "Amount",
                           label: Container(
                               alignment: Alignment.center,
                               padding: const EdgeInsets.all(8),
                               child: const Text("Amount",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold)))),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)))),
                     ],
                   ),
                 )

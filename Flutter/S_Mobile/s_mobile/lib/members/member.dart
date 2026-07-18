@@ -22,6 +22,9 @@ class Member implements Tomaps {
   String? MPESA_Mobile_No;
   gender? Gender;
   String? ID_No;
+  String? KRA_Pin;
+  String? Marital_Status;
+  String? Address;
   DateTime? Date_of_Birth;
   blocked? Blocked;
   status? Status;
@@ -44,6 +47,9 @@ class Member implements Tomaps {
     this.MPESA_Mobile_No,
     this.Gender,
     this.ID_No,
+    this.KRA_Pin,
+    this.Marital_Status,
+    this.Address,
     this.Date_of_Birth,
     this.Blocked,
     this.Status,
@@ -70,6 +76,9 @@ class Member implements Tomaps {
       'MPESA_Mobile_No': MPESA_Mobile_No,
       'Gender': Gender?.index,
       'ID_No': ID_No,
+      'Pin': KRA_Pin,
+      'Marital_Status': Marital_Status,
+      'Address': Address,
       'Date_of_Birth': Date_of_Birth?.toIso8601String(),
       'Blocked': Blocked?.index,
       'Status': Status?.index,
@@ -97,9 +106,7 @@ class Member implements Tomaps {
       Mobile_Phone_No: map['Mobile_Phone_No'] != null
           ? map['Mobile_Phone_No'] as String
           : null,
-      Phone_No: map['Phone_No'] != null
-          ? map['Phone_No'] as String
-          : null,
+      Phone_No: map['Phone_No'] != null ? map['Phone_No'] as String : null,
       MPESA_Mobile_No: map['MPESA_Mobile_No'] != null
           ? map['MPESA_Mobile_No'] as String
           : null,
@@ -107,6 +114,9 @@ class Member implements Tomaps {
           ? gender.values[(map['Gender'] ?? 0) as int]
           : null,
       ID_No: map['ID_No'] != null ? map['ID_No'] as String : null,
+      KRA_Pin: map['Pin'] != null ? map['Pin'] as String : null,
+      Marital_Status: _parseMaritalStatus(map['Marital_Status']),
+      Address: map['Address'] != null ? map['Address'] as String : null,
       Date_of_Birth: map['Date_of_Birth'] != null
           ? DateTime.tryParse((map['Date_of_Birth'] ?? 0))
           : null,
@@ -142,6 +152,24 @@ class Member implements Tomaps {
 
   factory Member.fromJson(String source) =>
       Member.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+const _maritalStatusNames = [
+  '', // 0: _blank_
+  'Single', // 1
+  'Married', // 2
+  'Divorced', // 3
+  'Widower', // 4
+  'Widow', // 5
+];
+
+String? _parseMaritalStatus(dynamic val) {
+  if (val == null) return null;
+  final i = (val is int) ? val : int.tryParse(val.toString());
+  if (i != null && i > 0 && i < _maritalStatusNames.length) {
+    return _maritalStatusNames[i];
+  }
+  return '';
 }
 
 List<T>? _tryParseList<T>(
