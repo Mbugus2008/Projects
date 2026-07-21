@@ -23,7 +23,7 @@ namespace Client_Service.Alternate {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="Alternate_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/Alternate")]
@@ -44,6 +44,24 @@ namespace Client_Service.Alternate {
         private System.Threading.SendOrPostCallback Eligibility_localOperationCompleted;
         
         private System.Threading.SendOrPostCallback Eligibility2OperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CalculateArrearsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback Eligibilitylocal2OperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GeneratescheduleOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AccrueInterestOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InterestpostedOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AccruePenaltyOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveImageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetImageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback PostPaymentsOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -106,6 +124,33 @@ namespace Client_Service.Alternate {
         
         /// <remarks/>
         public event Eligibility2CompletedEventHandler Eligibility2Completed;
+        
+        /// <remarks/>
+        public event CalculateArrearsCompletedEventHandler CalculateArrearsCompleted;
+        
+        /// <remarks/>
+        public event Eligibilitylocal2CompletedEventHandler Eligibilitylocal2Completed;
+        
+        /// <remarks/>
+        public event GeneratescheduleCompletedEventHandler GeneratescheduleCompleted;
+        
+        /// <remarks/>
+        public event AccrueInterestCompletedEventHandler AccrueInterestCompleted;
+        
+        /// <remarks/>
+        public event InterestpostedCompletedEventHandler InterestpostedCompleted;
+        
+        /// <remarks/>
+        public event AccruePenaltyCompletedEventHandler AccruePenaltyCompleted;
+        
+        /// <remarks/>
+        public event SaveImageCompletedEventHandler SaveImageCompleted;
+        
+        /// <remarks/>
+        public event GetImageCompletedEventHandler GetImageCompleted;
+        
+        /// <remarks/>
+        public event PostPaymentsCompletedEventHandler PostPaymentsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:PostMpesa", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="PostMpesa_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -253,21 +298,23 @@ namespace Client_Service.Alternate {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:Loannotifications", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="Loannotifications_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void Loannotifications() {
-            this.Invoke("Loannotifications", new object[0]);
+        public void Loannotifications(string loanno) {
+            this.Invoke("Loannotifications", new object[] {
+                        loanno});
         }
         
         /// <remarks/>
-        public void LoannotificationsAsync() {
-            this.LoannotificationsAsync(null);
+        public void LoannotificationsAsync(string loanno) {
+            this.LoannotificationsAsync(loanno, null);
         }
         
         /// <remarks/>
-        public void LoannotificationsAsync(object userState) {
+        public void LoannotificationsAsync(string loanno, object userState) {
             if ((this.LoannotificationsOperationCompleted == null)) {
                 this.LoannotificationsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoannotificationsOperationCompleted);
             }
-            this.InvokeAsync("Loannotifications", new object[0], this.LoannotificationsOperationCompleted, userState);
+            this.InvokeAsync("Loannotifications", new object[] {
+                        loanno}, this.LoannotificationsOperationCompleted, userState);
         }
         
         private void OnLoannotificationsOperationCompleted(object arg) {
@@ -340,6 +387,287 @@ namespace Client_Service.Alternate {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:CalculateArrears", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="CalculateArrears_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void CalculateArrears(string no) {
+            this.Invoke("CalculateArrears", new object[] {
+                        no});
+        }
+        
+        /// <remarks/>
+        public void CalculateArrearsAsync(string no) {
+            this.CalculateArrearsAsync(no, null);
+        }
+        
+        /// <remarks/>
+        public void CalculateArrearsAsync(string no, object userState) {
+            if ((this.CalculateArrearsOperationCompleted == null)) {
+                this.CalculateArrearsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCalculateArrearsOperationCompleted);
+            }
+            this.InvokeAsync("CalculateArrears", new object[] {
+                        no}, this.CalculateArrearsOperationCompleted, userState);
+        }
+        
+        private void OnCalculateArrearsOperationCompleted(object arg) {
+            if ((this.CalculateArrearsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CalculateArrearsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:Eligibilitylocal2", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="Eligibilitylocal2_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public decimal Eligibilitylocal2(string phone, string loan_type) {
+            object[] results = this.Invoke("Eligibilitylocal2", new object[] {
+                        phone,
+                        loan_type});
+            return ((decimal)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void Eligibilitylocal2Async(string phone, string loan_type) {
+            this.Eligibilitylocal2Async(phone, loan_type, null);
+        }
+        
+        /// <remarks/>
+        public void Eligibilitylocal2Async(string phone, string loan_type, object userState) {
+            if ((this.Eligibilitylocal2OperationCompleted == null)) {
+                this.Eligibilitylocal2OperationCompleted = new System.Threading.SendOrPostCallback(this.OnEligibilitylocal2OperationCompleted);
+            }
+            this.InvokeAsync("Eligibilitylocal2", new object[] {
+                        phone,
+                        loan_type}, this.Eligibilitylocal2OperationCompleted, userState);
+        }
+        
+        private void OnEligibilitylocal2OperationCompleted(object arg) {
+            if ((this.Eligibilitylocal2Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.Eligibilitylocal2Completed(this, new Eligibilitylocal2CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:Generateschedule", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="Generateschedule_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void Generateschedule(string loanno) {
+            this.Invoke("Generateschedule", new object[] {
+                        loanno});
+        }
+        
+        /// <remarks/>
+        public void GeneratescheduleAsync(string loanno) {
+            this.GeneratescheduleAsync(loanno, null);
+        }
+        
+        /// <remarks/>
+        public void GeneratescheduleAsync(string loanno, object userState) {
+            if ((this.GeneratescheduleOperationCompleted == null)) {
+                this.GeneratescheduleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGeneratescheduleOperationCompleted);
+            }
+            this.InvokeAsync("Generateschedule", new object[] {
+                        loanno}, this.GeneratescheduleOperationCompleted, userState);
+        }
+        
+        private void OnGeneratescheduleOperationCompleted(object arg) {
+            if ((this.GeneratescheduleCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GeneratescheduleCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:AccrueInterest", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="AccrueInterest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public decimal AccrueInterest(string loan, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime posting_Date, string description) {
+            object[] results = this.Invoke("AccrueInterest", new object[] {
+                        loan,
+                        posting_Date,
+                        description});
+            return ((decimal)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AccrueInterestAsync(string loan, System.DateTime posting_Date, string description) {
+            this.AccrueInterestAsync(loan, posting_Date, description, null);
+        }
+        
+        /// <remarks/>
+        public void AccrueInterestAsync(string loan, System.DateTime posting_Date, string description, object userState) {
+            if ((this.AccrueInterestOperationCompleted == null)) {
+                this.AccrueInterestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAccrueInterestOperationCompleted);
+            }
+            this.InvokeAsync("AccrueInterest", new object[] {
+                        loan,
+                        posting_Date,
+                        description}, this.AccrueInterestOperationCompleted, userState);
+        }
+        
+        private void OnAccrueInterestOperationCompleted(object arg) {
+            if ((this.AccrueInterestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AccrueInterestCompleted(this, new AccrueInterestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:Interestposted", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="Interestposted_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool Interestposted(string loan, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime date) {
+            object[] results = this.Invoke("Interestposted", new object[] {
+                        loan,
+                        date});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InterestpostedAsync(string loan, System.DateTime date) {
+            this.InterestpostedAsync(loan, date, null);
+        }
+        
+        /// <remarks/>
+        public void InterestpostedAsync(string loan, System.DateTime date, object userState) {
+            if ((this.InterestpostedOperationCompleted == null)) {
+                this.InterestpostedOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInterestpostedOperationCompleted);
+            }
+            this.InvokeAsync("Interestposted", new object[] {
+                        loan,
+                        date}, this.InterestpostedOperationCompleted, userState);
+        }
+        
+        private void OnInterestpostedOperationCompleted(object arg) {
+            if ((this.InterestpostedCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InterestpostedCompleted(this, new InterestpostedCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:AccruePenalty", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="AccruePenalty_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public decimal AccruePenalty(string loan, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime posting_Date, string description) {
+            object[] results = this.Invoke("AccruePenalty", new object[] {
+                        loan,
+                        posting_Date,
+                        description});
+            return ((decimal)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AccruePenaltyAsync(string loan, System.DateTime posting_Date, string description) {
+            this.AccruePenaltyAsync(loan, posting_Date, description, null);
+        }
+        
+        /// <remarks/>
+        public void AccruePenaltyAsync(string loan, System.DateTime posting_Date, string description, object userState) {
+            if ((this.AccruePenaltyOperationCompleted == null)) {
+                this.AccruePenaltyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAccruePenaltyOperationCompleted);
+            }
+            this.InvokeAsync("AccruePenalty", new object[] {
+                        loan,
+                        posting_Date,
+                        description}, this.AccruePenaltyOperationCompleted, userState);
+        }
+        
+        private void OnAccruePenaltyOperationCompleted(object arg) {
+            if ((this.AccruePenaltyCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AccruePenaltyCompleted(this, new AccruePenaltyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:SaveImage", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="SaveImage_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool SaveImage(string memberNo, string imageBase64) {
+            object[] results = this.Invoke("SaveImage", new object[] {
+                        memberNo,
+                        imageBase64});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveImageAsync(string memberNo, string imageBase64) {
+            this.SaveImageAsync(memberNo, imageBase64, null);
+        }
+        
+        /// <remarks/>
+        public void SaveImageAsync(string memberNo, string imageBase64, object userState) {
+            if ((this.SaveImageOperationCompleted == null)) {
+                this.SaveImageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveImageOperationCompleted);
+            }
+            this.InvokeAsync("SaveImage", new object[] {
+                        memberNo,
+                        imageBase64}, this.SaveImageOperationCompleted, userState);
+        }
+        
+        private void OnSaveImageOperationCompleted(object arg) {
+            if ((this.SaveImageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveImageCompleted(this, new SaveImageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:GetImage", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="GetImage_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool GetImage(string memberNo, ref string imageBase64) {
+            object[] results = this.Invoke("GetImage", new object[] {
+                        memberNo,
+                        imageBase64});
+            imageBase64 = ((string)(results[1]));
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetImageAsync(string memberNo, string imageBase64) {
+            this.GetImageAsync(memberNo, imageBase64, null);
+        }
+        
+        /// <remarks/>
+        public void GetImageAsync(string memberNo, string imageBase64, object userState) {
+            if ((this.GetImageOperationCompleted == null)) {
+                this.GetImageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetImageOperationCompleted);
+            }
+            this.InvokeAsync("GetImage", new object[] {
+                        memberNo,
+                        imageBase64}, this.GetImageOperationCompleted, userState);
+        }
+        
+        private void OnGetImageOperationCompleted(object arg) {
+            if ((this.GetImageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetImageCompleted(this, new GetImageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Alternate:PostPayments", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", ResponseElementName="PostPayments_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Alternate", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void PostPayments(string docNo) {
+            this.Invoke("PostPayments", new object[] {
+                        docNo});
+        }
+        
+        /// <remarks/>
+        public void PostPaymentsAsync(string docNo) {
+            this.PostPaymentsAsync(docNo, null);
+        }
+        
+        /// <remarks/>
+        public void PostPaymentsAsync(string docNo, object userState) {
+            if ((this.PostPaymentsOperationCompleted == null)) {
+                this.PostPaymentsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPostPaymentsOperationCompleted);
+            }
+            this.InvokeAsync("PostPayments", new object[] {
+                        docNo}, this.PostPaymentsOperationCompleted, userState);
+        }
+        
+        private void OnPostPaymentsOperationCompleted(object arg) {
+            if ((this.PostPaymentsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.PostPaymentsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -359,27 +687,27 @@ namespace Client_Service.Alternate {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void PostMpesaCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void RunnCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void PostCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void SendSmsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void EligibilityCompletedEventHandler(object sender, EligibilityCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EligibilityCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -401,15 +729,15 @@ namespace Client_Service.Alternate {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void LoannotificationsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void Eligibility_localCompletedEventHandler(object sender, Eligibility_localCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class Eligibility_localCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -431,11 +759,11 @@ namespace Client_Service.Alternate {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     public delegate void Eligibility2CompletedEventHandler(object sender, Eligibility2CompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class Eligibility2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -455,6 +783,182 @@ namespace Client_Service.Alternate {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void CalculateArrearsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void Eligibilitylocal2CompletedEventHandler(object sender, Eligibilitylocal2CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class Eligibilitylocal2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal Eligibilitylocal2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void GeneratescheduleCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void AccrueInterestCompletedEventHandler(object sender, AccrueInterestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AccrueInterestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AccrueInterestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void InterestpostedCompletedEventHandler(object sender, InterestpostedCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InterestpostedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal InterestpostedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void AccruePenaltyCompletedEventHandler(object sender, AccruePenaltyCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AccruePenaltyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AccruePenaltyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void SaveImageCompletedEventHandler(object sender, SaveImageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveImageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveImageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void GetImageCompletedEventHandler(object sender, GetImageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetImageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetImageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string imageBase64 {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void PostPaymentsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

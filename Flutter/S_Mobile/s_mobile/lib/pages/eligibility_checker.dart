@@ -15,6 +15,7 @@ class EligibilityCheckerPage extends StatefulWidget {
 
 class _EligibilityCheckerPageState extends State<EligibilityCheckerPage> {
   Loan_Type? _selected;
+  String? _selectedCode;
   Loan_Eligibility? _result;
   bool _loading = false;
   String? _error;
@@ -47,97 +48,89 @@ class _EligibilityCheckerPageState extends State<EligibilityCheckerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F0),
-      appBar: AppBar(
-        title: const Text('Loan Eligibility'),
-        backgroundColor: const Color(0xFF2E7D32),
-        foregroundColor: Colors.white,
-      ),
-      body: FutureBuilder<List<Loan_Type>?>(
-        future: Loan_Type.fetchLoanProducts(),
-        builder: (context, snapshot) {
-          final products = snapshot.data ?? [];
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text('Select a loan product to check your eligibility.',
-                    style: TextStyle(fontSize: 14, color: Colors.grey)),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<Loan_Type>(
-                  decoration: InputDecoration(
-                    labelText: 'Loan Product',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                    filled: true,
-                    fillColor: Colors.white,
-                  ),
-                  value: _selected,
-                  items: products
-                      .map((p) => DropdownMenuItem(
-                            value: p,
-                            child: Text(p.Description ?? p.Code ?? '',
-                                style: const TextStyle(fontSize: 14)),
-                          ))
-                      .toList(),
-                  onChanged: (v) {
-                    setState(() {
-                      _selected = v;
-                      _result = null;
-                      _error = null;
-                    });
-                    _check();
-                  },
+    return FutureBuilder<List<Loan_Type>?>(
+      future: Loan_Type.fetchLoanProducts(),
+      builder: (context, snapshot) {
+        final products = snapshot.data ?? [];
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text('Select a loan product to check your eligibility.',
+                  style: TextStyle(fontSize: 14, color: Colors.grey)),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  labelText: 'Loan Product',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
-                const SizedBox(height: 20),
-                if (_loading) const Center(child: CircularProgressIndicator()),
-                if (_error != null)
+                value: _selectedCode,
+                items: products
+                    .map((p) => DropdownMenuItem(
+                          value: p.Code ?? '',
+                          child: Text(p.Description ?? p.Code ?? '',
+                              style: const TextStyle(fontSize: 14)),
+                        ))
+                    .toList(),
+                onChanged: (v) {
+                  setState(() {
+                    _selectedCode = v;
+                    _selected = products.firstWhere((p) => p.Code == v);
+                    _result = null;
+                    _error = null;
+                  });
+                  _check();
+                },
+              ),
+              const SizedBox(height: 20),
+              if (_loading) const Center(child: CircularProgressIndicator()),
+              if (_error != null)
+                Card(
+                  color: const Color(0xFFFFF3F0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(_error!,
+                        style: const TextStyle(color: Color(0xFFD32F2F))),
+                  ),
+                ),
+              if (_result != null) ...[
+                _infoCard(
+                    'Status',
+                    _statusLabel(_result!.Eligibility_Status),
+                    _result!.Eligibility_Status == 1
+                        ? const Color(0xFF2E7D32)
+                        : const Color(0xFFFF9800)),
+                const SizedBox(height: 12),
+                _infoCard(
+                    'Eligible Amount',
+                    utilities.formatcurrency
+                        .format(_result!.Eligible_Amount ?? 0),
+                    const Color(0xFFE91E8C)),
+                const SizedBox(height: 12),
+                if ((_result!.Loan_Balance ?? 0) > 0) ...[
+                  _infoCard(
+                      'Top-Up Paid',
+                      '${_result!.Topup_Paid}/${_result!.Topup_Installment ?? 0} installments',
+                      const Color(0xFF2E7D32)),
+                  const SizedBox(height: 12),
+                ],
+                if (_result!.Comments != null && _result!.Comments!.isNotEmpty)
                   Card(
-                    color: const Color(0xFFFFF3F0),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Text(_error!,
-                          style: const TextStyle(color: Color(0xFFD32F2F))),
+                      child: Text(_result!.Comments!,
+                          style: const TextStyle(fontSize: 13)),
                     ),
                   ),
-                if (_result != null) ...[
-                  _infoCard(
-                      'Status',
-                      _statusLabel(_result!.Eligibility_Status),
-                      _result!.Eligibility_Status == 1
-                          ? const Color(0xFF2E7D32)
-                          : const Color(0xFFFF9800)),
-                  const SizedBox(height: 12),
-                  _infoCard(
-                      'Eligible Amount',
-                      utilities.formatcurrency
-                          .format(_result!.Eligible_Amount ?? 0),
-                      const Color(0xFFE91E8C)),
-                  const SizedBox(height: 12),
-                  if ((_result!.Loan_Balance ?? 0) > 0) ...[
-                    _infoCard(
-                        'Top-Up Paid',
-                        '${_result!.Topup_Paid}/${_result!.Topup_Installment ?? 0} installments',
-                        const Color(0xFF2E7D32)),
-                    const SizedBox(height: 12),
-                  ],
-                  if (_result!.Comments != null &&
-                      _result!.Comments!.isNotEmpty)
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(_result!.Comments!,
-                            style: const TextStyle(fontSize: 13)),
-                      ),
-                    ),
-                ],
               ],
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 

@@ -2,8 +2,6 @@ using Matatu_Dashboard.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
-
 // Add services to the container.
 builder.Services.AddMemoryCache();
 builder.Services.AddControllersWithViews();
@@ -12,8 +10,6 @@ builder.Services.AddScoped<BusinessCentralDashboardService>();
 builder.Services.AddHostedService<ShareDashboardWarmService>();
 
 var app = builder.Build();
-
-app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

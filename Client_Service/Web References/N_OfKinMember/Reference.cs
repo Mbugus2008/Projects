@@ -39,6 +39,14 @@ namespace Client_Service.N_OfKinMember {
         
         private System.Threading.SendOrPostCallback GetRecIdFromKeyOperationCompleted;
         
+        private System.Threading.SendOrPostCallback CreateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CreateMultipleOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateMultipleOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -91,6 +99,18 @@ namespace Client_Service.N_OfKinMember {
         
         /// <remarks/>
         public event GetRecIdFromKeyCompletedEventHandler GetRecIdFromKeyCompleted;
+        
+        /// <remarks/>
+        public event CreateCompletedEventHandler CreateCompleted;
+        
+        /// <remarks/>
+        public event CreateMultipleCompletedEventHandler CreateMultipleCompleted;
+        
+        /// <remarks/>
+        public event UpdateCompletedEventHandler UpdateCompleted;
+        
+        /// <remarks/>
+        public event UpdateMultipleCompletedEventHandler UpdateMultipleCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/nextofkinmember:Read", RequestNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", ResponseElementName="Read_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -250,6 +270,122 @@ namespace Client_Service.N_OfKinMember {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/nextofkinmember:Create", RequestNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", ResponseElementName="Create_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void Create(ref NextOfKinMember NextOfKinMember) {
+            object[] results = this.Invoke("Create", new object[] {
+                        NextOfKinMember});
+            NextOfKinMember = ((NextOfKinMember)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CreateAsync(NextOfKinMember NextOfKinMember) {
+            this.CreateAsync(NextOfKinMember, null);
+        }
+        
+        /// <remarks/>
+        public void CreateAsync(NextOfKinMember NextOfKinMember, object userState) {
+            if ((this.CreateOperationCompleted == null)) {
+                this.CreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateOperationCompleted);
+            }
+            this.InvokeAsync("Create", new object[] {
+                        NextOfKinMember}, this.CreateOperationCompleted, userState);
+        }
+        
+        private void OnCreateOperationCompleted(object arg) {
+            if ((this.CreateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateCompleted(this, new CreateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/nextofkinmember:CreateMultiple", RequestNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", ResponseElementName="CreateMultiple_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void CreateMultiple([System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)] ref NextOfKinMember[] NextOfKinMember_List) {
+            object[] results = this.Invoke("CreateMultiple", new object[] {
+                        NextOfKinMember_List});
+            NextOfKinMember_List = ((NextOfKinMember[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CreateMultipleAsync(NextOfKinMember[] NextOfKinMember_List) {
+            this.CreateMultipleAsync(NextOfKinMember_List, null);
+        }
+        
+        /// <remarks/>
+        public void CreateMultipleAsync(NextOfKinMember[] NextOfKinMember_List, object userState) {
+            if ((this.CreateMultipleOperationCompleted == null)) {
+                this.CreateMultipleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateMultipleOperationCompleted);
+            }
+            this.InvokeAsync("CreateMultiple", new object[] {
+                        NextOfKinMember_List}, this.CreateMultipleOperationCompleted, userState);
+        }
+        
+        private void OnCreateMultipleOperationCompleted(object arg) {
+            if ((this.CreateMultipleCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateMultipleCompleted(this, new CreateMultipleCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/nextofkinmember:Update", RequestNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", ResponseElementName="Update_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void Update(ref NextOfKinMember NextOfKinMember) {
+            object[] results = this.Invoke("Update", new object[] {
+                        NextOfKinMember});
+            NextOfKinMember = ((NextOfKinMember)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateAsync(NextOfKinMember NextOfKinMember) {
+            this.UpdateAsync(NextOfKinMember, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateAsync(NextOfKinMember NextOfKinMember, object userState) {
+            if ((this.UpdateOperationCompleted == null)) {
+                this.UpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateOperationCompleted);
+            }
+            this.InvokeAsync("Update", new object[] {
+                        NextOfKinMember}, this.UpdateOperationCompleted, userState);
+        }
+        
+        private void OnUpdateOperationCompleted(object arg) {
+            if ((this.UpdateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateCompleted(this, new UpdateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/page/nextofkinmember:UpdateMultiple", RequestNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", ResponseElementName="UpdateMultiple_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/page/nextofkinmember", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateMultiple([System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)] ref NextOfKinMember[] NextOfKinMember_List) {
+            object[] results = this.Invoke("UpdateMultiple", new object[] {
+                        NextOfKinMember_List});
+            NextOfKinMember_List = ((NextOfKinMember[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateMultipleAsync(NextOfKinMember[] NextOfKinMember_List) {
+            this.UpdateMultipleAsync(NextOfKinMember_List, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateMultipleAsync(NextOfKinMember[] NextOfKinMember_List, object userState) {
+            if ((this.UpdateMultipleOperationCompleted == null)) {
+                this.UpdateMultipleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateMultipleOperationCompleted);
+            }
+            this.InvokeAsync("UpdateMultiple", new object[] {
+                        NextOfKinMember_List}, this.UpdateMultipleOperationCompleted, userState);
+        }
+        
+        private void OnUpdateMultipleOperationCompleted(object arg) {
+            if ((this.UpdateMultipleCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateMultipleCompleted(this, new UpdateMultipleCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -269,7 +405,7 @@ namespace Client_Service.N_OfKinMember {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -487,7 +623,7 @@ namespace Client_Service.N_OfKinMember {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nextofkinmember")]
     public enum Type {
@@ -503,7 +639,7 @@ namespace Client_Service.N_OfKinMember {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -536,7 +672,7 @@ namespace Client_Service.N_OfKinMember {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/nextofkinmember")]
     public enum NextOfKinMember_Fields {
@@ -704,6 +840,110 @@ namespace Client_Service.N_OfKinMember {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void CreateCompletedEventHandler(object sender, CreateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public NextOfKinMember NextOfKinMember {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((NextOfKinMember)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void CreateMultipleCompletedEventHandler(object sender, CreateMultipleCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateMultipleCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CreateMultipleCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public NextOfKinMember[] NextOfKinMember_List {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((NextOfKinMember[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void UpdateCompletedEventHandler(object sender, UpdateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public NextOfKinMember NextOfKinMember {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((NextOfKinMember)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    public delegate void UpdateMultipleCompletedEventHandler(object sender, UpdateMultipleCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9221.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateMultipleCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateMultipleCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public NextOfKinMember[] NextOfKinMember_List {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((NextOfKinMember[])(this.results[0]));
             }
         }
     }

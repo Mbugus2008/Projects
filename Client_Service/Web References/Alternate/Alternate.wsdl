@@ -64,7 +64,9 @@
       </element>
       <element name="Loannotifications">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loanno" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="Loannotifications_Result">
@@ -99,6 +101,135 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
           </sequence>
+        </complexType>
+      </element>
+      <element name="CalculateArrears">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="no" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CalculateArrears_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Eligibilitylocal2">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="phone" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="loan_type" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Eligibilitylocal2_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Generateschedule">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loanno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Generateschedule_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="AccrueInterest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loan" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="posting_Date" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="description" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AccrueInterest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Interestposted">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loan" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="date" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Interestposted_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AccruePenalty">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="loan" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="posting_Date" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="description" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AccruePenalty_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SaveImage">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="memberNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="imageBase64" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SaveImage_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetImage">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="memberNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="imageBase64" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetImage_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="imageBase64" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostPayments">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="docNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostPayments_Result">
+        <complexType>
+          <sequence />
         </complexType>
       </element>
     </schema>
@@ -151,6 +282,60 @@
   <message name="Eligibility2_Result">
     <part name="parameters" element="tns:Eligibility2_Result" />
   </message>
+  <message name="CalculateArrears">
+    <part name="parameters" element="tns:CalculateArrears" />
+  </message>
+  <message name="CalculateArrears_Result">
+    <part name="parameters" element="tns:CalculateArrears_Result" />
+  </message>
+  <message name="Eligibilitylocal2">
+    <part name="parameters" element="tns:Eligibilitylocal2" />
+  </message>
+  <message name="Eligibilitylocal2_Result">
+    <part name="parameters" element="tns:Eligibilitylocal2_Result" />
+  </message>
+  <message name="Generateschedule">
+    <part name="parameters" element="tns:Generateschedule" />
+  </message>
+  <message name="Generateschedule_Result">
+    <part name="parameters" element="tns:Generateschedule_Result" />
+  </message>
+  <message name="AccrueInterest">
+    <part name="parameters" element="tns:AccrueInterest" />
+  </message>
+  <message name="AccrueInterest_Result">
+    <part name="parameters" element="tns:AccrueInterest_Result" />
+  </message>
+  <message name="Interestposted">
+    <part name="parameters" element="tns:Interestposted" />
+  </message>
+  <message name="Interestposted_Result">
+    <part name="parameters" element="tns:Interestposted_Result" />
+  </message>
+  <message name="AccruePenalty">
+    <part name="parameters" element="tns:AccruePenalty" />
+  </message>
+  <message name="AccruePenalty_Result">
+    <part name="parameters" element="tns:AccruePenalty_Result" />
+  </message>
+  <message name="SaveImage">
+    <part name="parameters" element="tns:SaveImage" />
+  </message>
+  <message name="SaveImage_Result">
+    <part name="parameters" element="tns:SaveImage_Result" />
+  </message>
+  <message name="GetImage">
+    <part name="parameters" element="tns:GetImage" />
+  </message>
+  <message name="GetImage_Result">
+    <part name="parameters" element="tns:GetImage_Result" />
+  </message>
+  <message name="PostPayments">
+    <part name="parameters" element="tns:PostPayments" />
+  </message>
+  <message name="PostPayments_Result">
+    <part name="parameters" element="tns:PostPayments_Result" />
+  </message>
   <portType name="Alternate_Port">
     <operation name="PostMpesa">
       <input name="PostMpesa" message="tns:PostMpesa" />
@@ -183,6 +368,42 @@
     <operation name="Eligibility2">
       <input name="Eligibility2" message="tns:Eligibility2" />
       <output name="Eligibility2_Result" message="tns:Eligibility2_Result" />
+    </operation>
+    <operation name="CalculateArrears">
+      <input name="CalculateArrears" message="tns:CalculateArrears" />
+      <output name="CalculateArrears_Result" message="tns:CalculateArrears_Result" />
+    </operation>
+    <operation name="Eligibilitylocal2">
+      <input name="Eligibilitylocal2" message="tns:Eligibilitylocal2" />
+      <output name="Eligibilitylocal2_Result" message="tns:Eligibilitylocal2_Result" />
+    </operation>
+    <operation name="Generateschedule">
+      <input name="Generateschedule" message="tns:Generateschedule" />
+      <output name="Generateschedule_Result" message="tns:Generateschedule_Result" />
+    </operation>
+    <operation name="AccrueInterest">
+      <input name="AccrueInterest" message="tns:AccrueInterest" />
+      <output name="AccrueInterest_Result" message="tns:AccrueInterest_Result" />
+    </operation>
+    <operation name="Interestposted">
+      <input name="Interestposted" message="tns:Interestposted" />
+      <output name="Interestposted_Result" message="tns:Interestposted_Result" />
+    </operation>
+    <operation name="AccruePenalty">
+      <input name="AccruePenalty" message="tns:AccruePenalty" />
+      <output name="AccruePenalty_Result" message="tns:AccruePenalty_Result" />
+    </operation>
+    <operation name="SaveImage">
+      <input name="SaveImage" message="tns:SaveImage" />
+      <output name="SaveImage_Result" message="tns:SaveImage_Result" />
+    </operation>
+    <operation name="GetImage">
+      <input name="GetImage" message="tns:GetImage" />
+      <output name="GetImage_Result" message="tns:GetImage_Result" />
+    </operation>
+    <operation name="PostPayments">
+      <input name="PostPayments" message="tns:PostPayments" />
+      <output name="PostPayments_Result" message="tns:PostPayments_Result" />
     </operation>
   </portType>
   <binding name="Alternate_Binding" type="tns:Alternate_Port">
@@ -256,6 +477,87 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="Eligibility2_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CalculateArrears">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:CalculateArrears" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CalculateArrears">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CalculateArrears_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Eligibilitylocal2">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:Eligibilitylocal2" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Eligibilitylocal2">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Eligibilitylocal2_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Generateschedule">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:Generateschedule" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Generateschedule">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Generateschedule_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AccrueInterest">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:AccrueInterest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AccrueInterest">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AccrueInterest_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Interestposted">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:Interestposted" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Interestposted">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Interestposted_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AccruePenalty">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:AccruePenalty" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AccruePenalty">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AccruePenalty_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SaveImage">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:SaveImage" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SaveImage">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SaveImage_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetImage">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:GetImage" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetImage">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetImage_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostPayments">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Alternate:PostPayments" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostPayments">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostPayments_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

@@ -19,16 +19,17 @@ public sealed class ShareDashboardWarmService : BackgroundService
         _logger = logger;
     }
 
-    public override async Task StartAsync(CancellationToken cancellationToken)
+    public override Task StartAsync(CancellationToken cancellationToken)
     {
         if (!_options.Value.EnableSharePrewarm)
         {
             _logger.LogInformation("Public dashboard prewarm is disabled.");
-            return;
+            return base.StartAsync(cancellationToken);
         }
 
-        await WarmShareDashboardSafeAsync(cancellationToken);
-        await base.StartAsync(cancellationToken);
+        // Kick off the initial warm without blocking application startup.
+        _ = WarmShareDashboardSafeAsync(CancellationToken.None);
+        return base.StartAsync(cancellationToken);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)

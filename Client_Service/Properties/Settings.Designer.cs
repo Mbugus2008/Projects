@@ -12,7 +12,7 @@ namespace Client_Service.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -57,8 +57,7 @@ namespace Client_Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/BARAKA%20YETU%20SACCO%20SOCIETY%20LTD/Codeunit/Alternate" +
-            "")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Codeunit/Alternate")]
         public string Client_Service_Alternate_Alternate {
             get {
                 return ((string)(this["Client_Service_Alternate_Alternate"]));

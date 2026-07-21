@@ -960,6 +960,176 @@ namespace Client_Service.Controllers
         }
 
         [HttpPost]
+        [Route("api/updatenextofkin")]
+        public Results updatenextofkin(Request request)
+        {
+            Results r = new Results();
+            try
+            {
+                var body = request.body?.ToString() ?? "{}";
+                var update = JsonConvert.DeserializeObject<N_OfKinMember.NextOfKinMember>(body);
+
+                if (string.IsNullOrWhiteSpace(update.Account_No))
+                {
+                    r.Code = -1;
+                    r.Desc = "Account_No is required.";
+                    return r;
+                }
+
+                N_OfKinMember.NextOfKinMember kin;
+
+                if (!string.IsNullOrWhiteSpace(update.Key))
+                {
+                    // Update existing — find by Account_No + Name
+                    var matches = N_OfKinMember_Service.ReadMultiple(
+                        new N_OfKinMember.NextOfKinMember_Filter[] {
+                            new N_OfKinMember.NextOfKinMember_Filter {
+                                Criteria = update.Account_No,
+                                Field = N_OfKinMember.NextOfKinMember_Fields.Account_No
+                            }
+                        }, null, 0);
+                    // Original name is embedded in Key; match by Account_No and find by old Name
+                    // The Key from getnextofkin contains both Account_No and Name
+                    kin = matches?.FirstOrDefault(m => m.Name == update.Name);
+                    if (kin == null && matches?.Length > 0)
+                        kin = matches[0]; // fallback: update first match
+
+                    if (kin == null)
+                    {
+                        r.Code = -1;
+                        r.Desc = "Next of kin not found.";
+                        return r;
+                    }
+                }
+                else
+                {
+                    // Create new
+                    kin = new N_OfKinMember.NextOfKinMember
+                    {
+                        Account_No = update.Account_No
+                    };
+                }
+
+                // Apply changes
+                if (!string.IsNullOrWhiteSpace(update.Name))
+                    kin.Name = update.Name;
+                if (!string.IsNullOrWhiteSpace(update.Relationship))
+                    kin.Relationship = update.Relationship;
+                if (!string.IsNullOrWhiteSpace(update.Telephone))
+                    kin.Telephone = update.Telephone;
+                if (!string.IsNullOrWhiteSpace(update.Email))
+                    kin.Email = update.Email;
+                if (!string.IsNullOrWhiteSpace(update.Address))
+                    kin.Address = update.Address;
+                if (!string.IsNullOrWhiteSpace(update.ID_No))
+                    kin.ID_No = update.ID_No;
+                if (update.PercentAllocation > 0)
+                    kin.PercentAllocation = update.PercentAllocation;
+
+                if (string.IsNullOrWhiteSpace(update.Key))
+                    N_OfKinMember_Service.Create(ref kin);
+                else
+                    N_OfKinMember_Service.Update(ref kin);
+
+                r.Desc = "Next of kin saved.";
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
+        [HttpPost]
+        [Route("api/getmemberpicture")]
+        public Results<string> getmemberpicture(Request request)
+        {
+            Results<string> r = new Results<string>();
+            try
+            {
+                string memberNo = "";
+
+                // Handle body either as raw string or JObject
+                if (request.body is string rawBody)
+                {
+                    var req = JsonConvert.DeserializeObject<dynamic>(rawBody);
+                    memberNo = req?.No ?? req?.Member_No ?? "";
+                }
+                else if (request.body != null)
+                {
+                    var req = JsonConvert.DeserializeObject<dynamic>(
+                        JsonConvert.SerializeObject(request.body));
+                    memberNo = req?.No ?? req?.Member_No ?? "";
+                }
+
+                if (string.IsNullOrWhiteSpace(memberNo))
+                {
+                    r.Code = -1;
+                    r.Desc = "Member No is required.";
+                    return r;
+                }
+
+                string imageBase64 = "";
+                bool found = alternate.GetImage(memberNo, ref imageBase64);
+                if (found && !string.IsNullOrWhiteSpace(imageBase64))
+                {
+                    r.Contents = imageBase64;
+                }
+                else
+                {
+                    r.Code = -1;
+                    r.Desc = "No picture found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
+        [HttpPost]
+        [Route("api/setmemberpicture")]
+        public Results setmemberpicture(Request request)
+        {
+            Results r = new Results();
+            try
+            {
+                var body = request.body?.ToString() ?? "{}";
+                var req = JsonConvert.DeserializeObject<dynamic>(body);
+                string memberNo = req?.No ?? req?.Member_No ?? "";
+                string imageBase64 = req?.ImageBase64 ?? req?.Picture ?? "";
+
+                if (string.IsNullOrWhiteSpace(memberNo))
+                {
+                    r.Code = -1;
+                    r.Desc = "Member No is required.";
+                    return r;
+                }
+
+                bool ok = alternate.SaveImage(memberNo, imageBase64);
+                if (ok)
+                    r.Desc = "Picture saved.";
+                else
+                {
+                    r.Code = -1;
+                    r.Desc = "Failed to save picture.";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
+        [HttpPost]
         [Route("api/getnextofkin")]
         public Results<List<N_OfKinMember.NextOfKinMember>> getnextofkin(Request request)
         {

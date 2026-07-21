@@ -23,6 +23,7 @@ import 'pages/ledgerEntries.dart';
 import 'pages/loan_list.dart';
 import 'pages/member_edit.dart';
 import 'pages/newloan.dart';
+import 'pages/next_of_kin_page.dart';
 import 'pages/payment_cart_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -230,42 +231,53 @@ class _MyHomePageState extends State<MyHomePage> {
           // ── Drawer Header ─────────────────────────────────
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+            padding: const EdgeInsets.fromLTRB(20, 30, 20, 16),
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF2E7D32), Color(0xFF9C27B0)],
+                colors: [Color(0xFF2E7D32), Color(0xFF1B5E20)],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
                 CircleAvatar(
-                  radius: 32,
+                  radius: 24,
                   backgroundColor: Colors.white.withOpacity(0.3),
                   child: Text(
                     initials,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  (member.Name ?? 'Member').toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        (member.Name ?? 'Member').toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '${member.No ?? ''}  |  ${member.Mobile_Phone_No ?? ''}',
+                        style: const TextStyle(
+                            color: Colors.white70, fontSize: 12),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '${member.No ?? ''}  |  ${member.Mobile_Phone_No ?? ''}',
-                  style: const TextStyle(color: Colors.white70, fontSize: 13),
                 ),
               ],
             ),
@@ -274,8 +286,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // ── Menu Items ────────────────────────────────────
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.symmetric(vertical: 4),
               children: [
+                _drawerSection('Account'),
                 _drawerItem(
                   icon: Icons.dashboard_outlined,
                   title: 'Dashboard',
@@ -300,7 +313,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.pop(context);
                   },
                 ),
-                const Divider(indent: 16, endIndent: 16),
+                _drawerItem(
+                  icon: Icons.receipt_long_outlined,
+                  title: 'Transaction History',
+                  onTap: () {
+                    Navigator.pop(context);
+                    final entriess =
+                        entries().calculateRunningBalance(member.Entries);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: Ledgerentries(Entries: entriess),
+                          title: 'All Transactions',
+                        ));
+                  },
+                ),
+                const SizedBox(height: 12),
+                _drawerSection('Profile'),
                 _drawerItem(
                   icon: Icons.edit_outlined,
                   title: 'Edit Profile',
@@ -313,6 +341,20 @@ class _MyHomePageState extends State<MyHomePage> {
                         ));
                   },
                 ),
+                _drawerItem(
+                  icon: Icons.people_outline,
+                  title: 'Next of Kin',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: const NextOfKinPage(),
+                          title: 'Next of Kin',
+                        ));
+                  },
+                ),
+                const SizedBox(height: 12),
+                _drawerSection('Loans'),
                 _drawerItem(
                   icon: Icons.add_circle_outline,
                   title: 'Apply for Loan',
@@ -337,6 +379,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ));
                   },
                 ),
+                const SizedBox(height: 12),
+                _drawerSection('Payments'),
                 _drawerItem(
                   icon: Icons.swap_horiz_outlined,
                   title: 'Transfer Funds',
@@ -357,20 +401,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ));
                   },
                 ),
-                _drawerItem(
-                  icon: Icons.receipt_long_outlined,
-                  title: 'Transaction History',
-                  onTap: () {
-                    Navigator.pop(context);
-                    final entriess =
-                        entries().calculateRunningBalance(member.Entries);
-                    Get.to(() => Master(
-                          member: member,
-                          widgets: Ledgerentries(Entries: entriess),
-                          title: 'All Transactions',
-                        ));
-                  },
-                ),
+                const SizedBox(height: 12),
                 const Divider(indent: 16, endIndent: 16),
                 _drawerItem(
                   icon: Icons.logout,
@@ -411,25 +442,50 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget _drawerSection(String title) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
+      child: Text(
+        title.toUpperCase(),
+        style: TextStyle(
+          color: Colors.grey.shade600,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.0,
+        ),
+      ),
+    );
+  }
+
   Widget _drawerItem({
     required IconData icon,
     required String title,
     required VoidCallback onTap,
     Color color = Colors.black87,
   }) {
-    return ListTile(
-      leading: Icon(icon, color: color, size: 24),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: color,
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        elevation: 0,
+        child: ListTile(
+          leading: Icon(icon, color: const Color(0xFF2E7D32), size: 22),
+          title: Text(
+            title,
+            style: TextStyle(
+              color: color,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          onTap: onTap,
+          horizontalTitleGap: 8,
+          dense: true,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
         ),
       ),
-      onTap: onTap,
-      horizontalTitleGap: 12,
-      dense: true,
     );
   }
 

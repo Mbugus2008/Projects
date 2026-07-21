@@ -8,8 +8,6 @@
     <UserSecretsId>c0fbc195-94a0-47f3-a55d-a10a6bcf6df5</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Projects.ServiceDefaults\Projects.ServiceDefaults.csproj" />
-  </ItemGroup>
+
 
 </Project>
