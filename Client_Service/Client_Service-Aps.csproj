@@ -417,10 +417,10 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
     <None Include="Web References\N_OfKinMember\NextOfKinMember.wsdl" />
-    <Content Include="Web References\N_OfKinMember\Reference.map">
+    <None Include="Web References\N_OfKinMember\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -500,10 +500,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Client_Service_Memberslist_Memberslist_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Codeunit/Alternate">
+    <WebReferenceUrl Include="http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Codeunit/Alternate">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Alternate\</RelPath>
-      <UpdateFromURL>http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Codeunit/Alternate</UpdateFromURL>
+      <UpdateFromURL>http://paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Codeunit/Alternate</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
