@@ -40,6 +40,28 @@ public class HomeController : Controller
         return View(await _dashboardService.GetSourceSectionAsync("Deport Fuel", range, cancellationToken));
     }
 
+    [ResponseCache(Duration = 300, Location = ResponseCacheLocation.Any, NoStore = false)]
+    public async Task<IActionResult> FuelSummary(string? range, CancellationToken cancellationToken)
+    {
+        ViewData["Title"] = "Dispatch & Fuel Summary";
+        ViewData["RetrievedAt"] = DateTime.Now;
+        ViewData["SelectedRange"] = range?.Trim().ToLowerInvariant() switch
+        {
+            "yesterday" => "yesterday",
+            "week" => "week",
+            "month" => "month",
+            _ => "today"
+        };
+
+        // Load both sections in parallel
+        var summaryTask = _dashboardService.GetSourceSectionAsync("DisFuel Summary", range, cancellationToken);
+        var depotTask = _dashboardService.GetSourceSectionAsync("Deport Fuel", range, cancellationToken);
+        await Task.WhenAll(summaryTask, depotTask);
+
+        ViewData["Summary"] = await summaryTask;
+        return View(await depotTask);
+    }
+
     public IActionResult Privacy()
     {
         return View();

@@ -1545,6 +1545,12 @@ public sealed class BusinessCentralDashboardService
             return null;
         }
 
+        // Handle specific date: yyyy-MM-dd
+        if (DateTime.TryParseExact(selectedRange, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out var specificDate))
+        {
+            return (specificDate, specificDate);
+        }
+
         var today = DateTime.Today;
         var yesterday = today.AddDays(-1);
         return selectedRange switch
@@ -1560,7 +1566,15 @@ public sealed class BusinessCentralDashboardService
 
     private static string NormalizeRange(string? range)
     {
-        return range?.Trim().ToLowerInvariant() switch
+        if (string.IsNullOrWhiteSpace(range)) return "today";
+
+        var trimmed = range.Trim();
+        // Allow specific date: yyyy-MM-dd
+        if (DateTime.TryParseExact(trimmed, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out _))
+        {
+            return trimmed;
+        }
+        return trimmed.ToLowerInvariant() switch
         {
             "yesterday" => "yesterday",
             "week" => "week",

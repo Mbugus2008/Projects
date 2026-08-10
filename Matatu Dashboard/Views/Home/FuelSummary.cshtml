@@ -1,0 +1,146 @@
+@using System.Text.Json
+@model Matatu_Dashboard.Models.DashboardSectionViewModel
+@{
+    Layout = null;
+    var selectedRange = (ViewData["SelectedRange"] as string) ?? "today";
+    var pathBase = Context.Request.PathBase.HasValue ? Context.Request.PathBase.Value! : string.Empty;
+    var summaryBasePath = string.IsNullOrWhiteSpace(pathBase) ? "/fuelsummary" : $"{pathBase}/fuelsummary";
+    var retrievedAt = (DateTime?)ViewData["RetrievedAt"] ?? DateTime.Now;
+    var summary = ViewData["Summary"] as Matatu_Dashboard.Models.DashboardSectionViewModel;
+    var summaryRows = summary?.Rows ?? new();
+    var summaryCols = summary?.Columns ?? new();
+    var depotRows = Model.Rows;
+    var depotCols = Model.Columns;
+
+    // Metrics from DisFuelSummary (aggregated)
+    var metricKeys = new[] { "Total_Collection", "Total_Vehicles", "Active_Vehicles", "Total_Fuel_ltrs",
+        "Total_Fuels_Amount", "Total_Paid", "Total_Mileage", "Total_Fuel_Arrears", "Net_Offload" };
+    var availableMetrics = metricKeys.Where(k => summaryCols.Contains(k, StringComparer.OrdinalIgnoreCase)).ToList();
+
+    // Depot columns in display order (OData field names)
+    var depotFocusCols = new[] { "Date", "Vehicle", "Fleet", "Driver_Name", "Conductor_Name",
+        "Total_Collection", "Management", "Fuel", "Amount_Paid", "Balance", "Net_Offload" }
+        .Where(c => depotCols.Contains(c, StringComparer.OrdinalIgnoreCase)).ToList();
+
+    // Friendly labels for columns
+    var depotColLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+        {"Date", "Date"}, {"Vehicle", "Vehicle"}, {"Fleet", "Fleet"},
+        {"Driver_Name", "Driver"}, {"Conductor_Name", "Conductor"},
+        {"Total_Collection", "Total Collection"}, {"Management", "Management"},
+        {"Fuel", "Fuel"}, {"Amount_Paid", "Fuel Paid"},
+        {"Balance", "Balance"}, {"Net_Offload", "Net Offload"}
+    };
+
+    // Monetary columns to format with N2
+    var moneyCols = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+        "Total_Collection", "Management", "Fuel", "Amount_Paid", "Balance", "Net_Offload"
+    };
+
+    // Order by Total_Collection descending
+    var orderedDepotRows = depotRows
+        .OrderByDescending(r => r.TryGetValue("Total_Collection", out var v) && decimal.TryParse(v, out var d) ? d : 0)
+        .ToList();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { color-scheme: light; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: #f4f6f9; color: #1a1a2e; padding: 16px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+        .header h1 { font-size: 20px; font-weight: 700; }
+        .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tabs a { padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; color: #555; background: #e8ecf1; }
+        .tabs a.active { background: #006B3F; color: #fff; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
+        .metric-card { background: #fff; border-radius: 10px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.08); text-align: center; }
+        .metric-card .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: .5px; }
+        .metric-card .value { font-size: 22px; font-weight: 700; color: #006B3F; margin-top: 4px; }
+        .metric-card .value.red { color: #d32f2f; }
+        .metric-card .value.blue { color: #1565c0; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+        th { background: #006B3F; color: #fff; padding: 10px 8px; font-size: 12px; text-align: left; white-space: nowrap; }
+        td { padding: 8px; font-size: 13px; border-bottom: 1px solid #eee; }
+        tr:last-child td { border-bottom: none; }
+        .footer { margin-top: 12px; font-size: 11px; color: #999; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>@ViewData["Title"]</h1>
+        <div class="tabs">
+            <a href="@summaryBasePath/today" class="@(selectedRange == "today" ? "active" : "")">Today</a>
+            <a href="@summaryBasePath/yesterday" class="@(selectedRange == "yesterday" ? "active" : "")">Yesterday</a>
+            <a href="@summaryBasePath/week" class="@(selectedRange == "week" ? "active" : "")">Week</a>
+            <a href="@summaryBasePath/month" class="@(selectedRange == "month" ? "active" : "")">Month</a>
+        </div>
+    </div>
+
+    <div class="metrics">
+        @foreach (var key in availableMetrics)
+        {
+            var label = key.Replace("_", " ");
+            var isInt = key == "Total_Vehicles" || key == "Active_Vehicles";
+            decimal val = 0;
+            if (isInt)
+            {
+                val = summaryRows.Sum(r => r.TryGetValue(key, out var v) && int.TryParse(v, out var i) ? i : 0);
+            }
+            else
+            {
+                val = (decimal)summaryRows.Sum(r => r.TryGetValue(key, out var v) && decimal.TryParse(v, out var d) ? d : 0);
+            }
+            var css = key == "Total_Fuel_Arrears" && val > 0 ? "red" : key == "Total_Collection" ? "blue" : "";
+            <div class="metric-card">
+                <div class="label">@label</div>
+                <div class="value @css">@(key == "Total_Vehicles" || key == "Active_Vehicles" ? val.ToString("N0") : val.ToString("N2"))</div>
+            </div>
+        }
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                @foreach (var col in depotFocusCols)
+                {
+                    <th>@(depotColLabels.TryGetValue(col, out var label) ? label : col.Replace("_", " "))</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in orderedDepotRows)
+            {
+                <tr>
+                    @foreach (var col in depotFocusCols)
+                    {
+                        var val = row.TryGetValue(col, out var v) ? v : "-";
+                        if (col == "Date" && val != "-")
+                        {
+                            val = val.Length > 11 ? val.Substring(0, 11).Trim() : val;
+                        }
+                        else if (moneyCols.Contains(col) && val != "-" && decimal.TryParse(val, out var num))
+                        {
+                            val = num.ToString("N2");
+                        }
+                        <td>@val</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (orderedDepotRows.Count == 0)
+    {
+        <p style="text-align:center;color:#999;margin-top:40px;">No depot data for this period.</p>
+    }
+
+    <div class="footer">
+        @orderedDepotRows.Count depot records · Retrieved @retrievedAt.ToString("HH:mm:ss") · @selectedRange
+    </div>
+</body>
+</html>

@@ -47,6 +47,11 @@ app.MapControllerRoute(
     defaults: new { controller = "Home", action = "Fuel" });
 
 app.MapControllerRoute(
+    name: "fuelsummary",
+    pattern: "fuelsummary/{range?}",
+    defaults: new { controller = "Home", action = "FuelSummary" });
+
+app.MapControllerRoute(
     name: "admin",
     pattern: "admin/{action=Index}/{id?}",
     defaults: new { controller = "Home" });
