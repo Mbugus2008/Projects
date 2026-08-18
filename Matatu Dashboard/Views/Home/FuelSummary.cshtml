@@ -3,6 +3,13 @@
 @{
     Layout = null;
     var selectedRange = (ViewData["SelectedRange"] as string) ?? "today";
+    var todayStr = DateTime.Today.ToString("yyyy-MM-dd");
+    var yesterdayStr = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+    // Show selected date in the date picker (only for specific date ranges)
+    var initialDate = DateTime.TryParseExact(selectedRange, "yyyy-MM-dd", null,
+        System.Globalization.DateTimeStyles.None, out var parsedDate)
+        ? parsedDate.ToString("yyyy-MM-dd")
+        : todayStr;
     var pathBase = Context.Request.PathBase.HasValue ? Context.Request.PathBase.Value! : string.Empty;
     var summaryBasePath = string.IsNullOrWhiteSpace(pathBase) ? "/fuelsummary" : $"{pathBase}/fuelsummary";
     var retrievedAt = (DateTime?)ViewData["RetrievedAt"] ?? DateTime.Now;
@@ -13,28 +20,36 @@
     var depotCols = Model.Columns;
 
     // Metrics from DisFuelSummary (aggregated)
-    var metricKeys = new[] { "Total_Collection", "Total_Vehicles", "Active_Vehicles", "Total_Fuel_ltrs",
+    var metricKeys = new[] { "Total_Collection", "Total_Vehicles", "Total_Fuel_ltrs",
         "Total_Fuels_Amount", "Total_Paid", "Total_Mileage", "Total_Fuel_Arrears", "Net_Offload" };
     var availableMetrics = metricKeys.Where(k => summaryCols.Contains(k, StringComparer.OrdinalIgnoreCase)).ToList();
 
+    var activeVehicles = summaryRows.Sum(r => r.TryGetValue("Active_Vehicles", out var av) && int.TryParse(av, out var avi) ? avi : 0);
+    var totalVehicles = summaryRows.Sum(r => r.TryGetValue("Total_Vehicles", out var tv) && int.TryParse(tv, out var tvi) ? tvi : 0);
+
     // Depot columns in display order (OData field names)
-    var depotFocusCols = new[] { "Date", "Vehicle", "Fleet", "Driver_Name", "Conductor_Name",
-        "Total_Collection", "Management", "Fuel", "Amount_Paid", "Balance", "Net_Offload" }
-        .Where(c => depotCols.Contains(c, StringComparer.OrdinalIgnoreCase)).ToList();
+    var depotFocusCols = new[] { "Date", "Vehicle", "Fleet", "Crew",
+        "Total_Collection", "Management", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Millage", "Net_Offload", "Comments" }
+        .Where(c => c == "Crew" || depotCols.Contains(c, StringComparer.OrdinalIgnoreCase)).ToList();
 
     // Friendly labels for columns
     var depotColLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
         {"Date", "Date"}, {"Vehicle", "Vehicle"}, {"Fleet", "Fleet"},
-        {"Driver_Name", "Driver"}, {"Conductor_Name", "Conductor"},
+        {"Crew", "Crew"},
         {"Total_Collection", "Total Collection"}, {"Management", "Management"},
-        {"Fuel", "Fuel"}, {"Amount_Paid", "Fuel Paid"},
-        {"Balance", "Balance"}, {"Net_Offload", "Net Offload"}
+        {"Fuel", "Fuel"}, {"Total_Litres", "Litres"}, {"Km_Litre", "Km/Litre"},
+        {"Amount_Paid", "Fuel Paid"},
+        {"Balance", "Unpaid Fuel"}, {"Millage", "Mileage"}, {"Net_Offload", "Net Offload"},
+        {"Comments", "Comments"}
     };
 
-    // Monetary columns to format with N2
+    // Monetary columns to format with N2 and right-align
     var moneyCols = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
-        "Total_Collection", "Management", "Fuel", "Amount_Paid", "Balance", "Net_Offload"
+        "Total_Collection", "Management", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Net_Offload"
     };
+
+    // Columns that should wrap text instead of truncating on one line
+    var wrapCols = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Comments" };
 
     // Order by Total_Collection descending
     var orderedDepotRows = depotRows
@@ -65,27 +80,61 @@
         .metric-card .value.blue { color: #1565c0; }
         table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
         th { background: #006B3F; color: #fff; padding: 10px 8px; font-size: 12px; text-align: left; white-space: nowrap; }
-        td { padding: 8px; font-size: 13px; border-bottom: 1px solid #eee; }
+        td { padding: 8px; font-size: 13px; border-bottom: 1px solid #eee; white-space: nowrap; }
         tr:last-child td { border-bottom: none; }
         .footer { margin-top: 12px; font-size: 11px; color: #999; text-align: center; }
+        .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .table-wrap table { min-width: 900px; }
+        @@media (max-width: 640px) {
+            body { padding: 10px; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .header h1 { font-size: 17px; }
+            .tabs a { padding: 5px 10px; font-size: 12px; }
+            .metrics { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .metric-card { padding: 10px; }
+            .metric-card .value { font-size: 18px; }
+            .metric-card .label { font-size: 10px; }
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>@ViewData["Title"]</h1>
         <div class="tabs">
-            <a href="@summaryBasePath/today" class="@(selectedRange == "today" ? "active" : "")">Today</a>
-            <a href="@summaryBasePath/yesterday" class="@(selectedRange == "yesterday" ? "active" : "")">Yesterday</a>
+            <a href="@summaryBasePath/today" class="@(selectedRange == "today" || selectedRange == todayStr ? "active" : "")">Today</a>
+            <a href="@summaryBasePath/yesterday" class="@(selectedRange == "yesterday" || selectedRange == yesterdayStr ? "active" : "")">Yesterday</a>
             <a href="@summaryBasePath/week" class="@(selectedRange == "week" ? "active" : "")">Week</a>
             <a href="@summaryBasePath/month" class="@(selectedRange == "month" ? "active" : "")">Month</a>
         </div>
     </div>
 
+    <div class="controls" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <input type="date" id="dateFilter" value="@initialDate"
+               style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;"
+               onchange="if(this.value){window.location.href='@summaryBasePath/'+this.value;}" />
+        <input type="text" id="vehicleFilter" placeholder="Search vehicle, fleet or crew"
+               style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;flex:1;min-width:160px;"
+               oninput="filterVehicles()" onkeyup="filterVehicles()" />
+    </div>
+
+    <script>
+        function filterVehicles() {
+            var q = document.getElementById('vehicleFilter').value.toUpperCase();
+            var rows = document.querySelectorAll('#depotTable tbody tr');
+            rows.forEach(function (row) {
+                var vehicle = row.cells[1] ? row.cells[1].textContent.toUpperCase() : '';
+                var fleet = row.cells[2] ? row.cells[2].textContent.toUpperCase() : '';
+                var crew = row.cells[3] ? row.cells[3].textContent.toUpperCase() : '';
+                row.style.display = (!q || vehicle.indexOf(q) >= 0 || fleet.indexOf(q) >= 0 || crew.indexOf(q) >= 0) ? '' : 'none';
+            });
+        }
+    </script>
+
     <div class="metrics">
         @foreach (var key in availableMetrics)
         {
-            var label = key.Replace("_", " ");
-            var isInt = key == "Total_Vehicles" || key == "Active_Vehicles";
+            var label = key == "Total_Vehicles" ? "Vehicles (Active/Total)" : key.Replace("_", " ");
+            var isInt = key == "Total_Vehicles";
             decimal val = 0;
             if (isInt)
             {
@@ -98,17 +147,25 @@
             var css = key == "Total_Fuel_Arrears" && val > 0 ? "red" : key == "Total_Collection" ? "blue" : "";
             <div class="metric-card">
                 <div class="label">@label</div>
-                <div class="value @css">@(key == "Total_Vehicles" || key == "Active_Vehicles" ? val.ToString("N0") : val.ToString("N2"))</div>
+                @if (key == "Total_Vehicles")
+                {
+                    <div class="value">@activeVehicles/@totalVehicles</div>
+                }
+                else
+                {
+                    <div class="value @css">@(isInt ? val.ToString("N0") : val.ToString("N2"))</div>
+                }
             </div>
         }
     </div>
 
-    <table>
+    <div class="table-wrap">
+    <table id="depotTable">
         <thead>
             <tr>
                 @foreach (var col in depotFocusCols)
                 {
-                    <th>@(depotColLabels.TryGetValue(col, out var label) ? label : col.Replace("_", " "))</th>
+                    <th style="@(moneyCols.Contains(col) ? "text-align:right;" : "")">@(depotColLabels.TryGetValue(col, out var label) ? label : col.Replace("_", " "))</th>
                 }
             </tr>
         </thead>
@@ -118,21 +175,51 @@
                 <tr>
                     @foreach (var col in depotFocusCols)
                     {
+                        if (col == "Crew")
+                        {
+                            var driver = row.TryGetValue("Driver_Name", out var dv) ? dv : "-";
+                            var conductor = row.TryGetValue("Conductor_Name", out var cv) ? cv : "-";
+                            <td>
+                                <div>@driver</div>
+                                <div style="color:#666;">@conductor</div>
+                            </td>
+                            continue;
+                        }
                         var val = row.TryGetValue(col, out var v) ? v : "-";
+                        decimal? numVal = null;
                         if (col == "Date" && val != "-")
                         {
                             val = val.Length > 11 ? val.Substring(0, 11).Trim() : val;
                         }
-                        else if (moneyCols.Contains(col) && val != "-" && decimal.TryParse(val, out var num))
+                        else if (moneyCols.Contains(col) && val != "-" && decimal.TryParse(val, out var parsed))
                         {
-                            val = num.ToString("N2");
+                            numVal = parsed;
+                            val = parsed.ToString("N2");
                         }
-                        <td>@val</td>
+                        var cellStyle = moneyCols.Contains(col) ? "text-align:right;" : "";
+                        if (col == "Balance" && numVal is > 0)
+                        {
+                            cellStyle += "color:#d32f2f;font-weight:600;";
+                        }
+                        if (col == "Total_Collection")
+                        {
+                            cellStyle += "font-weight:700;";
+                        }
+                        if (col == "Net_Offload" && numVal is > 0)
+                        {
+                            cellStyle += "color:#2e7d32;font-weight:700;";
+                        }
+                        if (wrapCols.Contains(col))
+                        {
+                            cellStyle += "white-space:normal;word-break:break-word;min-width:150px;";
+                        }
+                        <td style="@cellStyle">@val</td>
                     }
                 </tr>
             }
         </tbody>
     </table>
+    </div>
 
     @if (orderedDepotRows.Count == 0)
     {

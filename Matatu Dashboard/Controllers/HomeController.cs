@@ -45,12 +45,14 @@ public class HomeController : Controller
     {
         ViewData["Title"] = "Dispatch & Fuel Summary";
         ViewData["RetrievedAt"] = DateTime.Now;
-        ViewData["SelectedRange"] = range?.Trim().ToLowerInvariant() switch
+        var rawRange = range?.Trim().ToLowerInvariant();
+        ViewData["SelectedRange"] = rawRange switch
         {
             "yesterday" => "yesterday",
             "week" => "week",
             "month" => "month",
-            _ => "today"
+            null or "" => "today",
+            _ => rawRange // keep specific dates as-is
         };
 
         // Load both sections in parallel

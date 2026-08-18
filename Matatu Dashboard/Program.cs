@@ -1,4 +1,5 @@
 using Matatu_Dashboard.Services;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,11 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Serve raw files (e.g. APK downloads) from wwwroot with correct MIME type
+var staticProvider = new FileExtensionContentTypeProvider();
+staticProvider.Mappings[".apk"] = "application/vnd.android.package-archive";
+app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = staticProvider });
 
 app.MapStaticAssets();
 
