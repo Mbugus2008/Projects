@@ -211,13 +211,10 @@ class RegistrationScreen extends StatelessWidget {
                     'Confirmation Date',
                     Icons.calendar_today,
                     controller.confirmationDateController,
-                    required: true,
                   )
                 : const SizedBox.shrink()),
-
             _buildTextField(context, 'Other Information', Icons.info_outline,
                 controller.otherInformationController),
-
             SizedBox(
                 height:
                     60), // Extra space at the bottom for the floating action button

@@ -19,7 +19,7 @@ public class JsonParser {
     static String json = "";
     public static SharedPreferences preferences;
     //public static String WEBSERVICE_URL = ":4000/Lopha/Collect.asmx";
-    public static String WEBSERVICE_URL = "http://5.189.167.52:4040/Collect.asmx";
+    public static String WEBSERVICE_URL = "http://trimline.co.ke/:4040/Collect.asmx";
     public static String postjson(String Method, String param, String json) {
         StringBuilder result = new StringBuilder();
         try {

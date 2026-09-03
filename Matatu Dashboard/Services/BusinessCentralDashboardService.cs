@@ -175,7 +175,7 @@ public sealed class BusinessCentralDashboardService
             }
 
             var section = await BuildSourceSectionAsync(sourceName, selectedRange, cancellationToken);
-            _cache.Set(cacheKey, section, TimeSpan.FromSeconds(Math.Max(5, _options.ShareCacheSeconds)));
+            _cache.Set(cacheKey, section, TimeSpan.FromSeconds(Math.Max(5, _options.SectionCacheSeconds)));
             return section;
         }
         finally
@@ -1826,6 +1826,7 @@ public sealed class BusinessCentralDashboardOptions
     public int PageSize { get; set; } = 1000;
     public int CacheSeconds { get; set; } = 60;
     public int ShareCacheSeconds { get; set; } = 300;
+    public int SectionCacheSeconds { get; set; } = 15;
     public bool EnableSharePrewarm { get; set; } = true;
     public int ShareWarmLeadSeconds { get; set; } = 60;
     public List<string> ShareWarmRanges { get; set; } = ["today", "yesterday"];

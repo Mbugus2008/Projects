@@ -219,11 +219,6 @@ class RegistrationController extends GetxController {
           backgroundColor: Colors.red);
       return false;
     }
-    if (isConfirmed.value == true && confirmationDateController.text.isEmpty) {
-      Get.snackbar('Error', 'Please select your confirmation date',
-          backgroundColor: Colors.red);
-      return false;
-    }
     if (Get.find<DimensionController>().selectedDistrictDimension.value ==
         null) {
       Get.snackbar('Error', 'Please select your district',
