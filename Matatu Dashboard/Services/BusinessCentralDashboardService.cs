@@ -175,7 +175,10 @@ public sealed class BusinessCentralDashboardService
             }
 
             var section = await BuildSourceSectionAsync(sourceName, selectedRange, cancellationToken);
-            _cache.Set(cacheKey, section, TimeSpan.FromSeconds(Math.Max(5, _options.SectionCacheSeconds)));
+            if (_options.SectionCacheSeconds > 0)
+            {
+                _cache.Set(cacheKey, section, TimeSpan.FromSeconds(_options.SectionCacheSeconds));
+            }
             return section;
         }
         finally

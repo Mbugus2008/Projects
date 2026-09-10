@@ -29,14 +29,14 @@
 
     // Depot columns in display order (OData field names)
     var depotFocusCols = new[] { "Date", "Vehicle", "Fleet", "Crew",
-        "Total_Collection", "Management", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Millage", "Net_Offload", "Comments" }
+        "Total_Collection", "Management_Target", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Millage", "Net_Offload", "Comments" }
         .Where(c => c == "Crew" || depotCols.Contains(c, StringComparer.OrdinalIgnoreCase)).ToList();
 
     // Friendly labels for columns
     var depotColLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
         {"Date", "Date"}, {"Vehicle", "Vehicle"}, {"Fleet", "Fleet"},
         {"Crew", "Crew"},
-        {"Total_Collection", "Total Collection"}, {"Management", "Management"},
+        {"Total_Collection", "Total Collection"}, {"Management_Target", "Management Target"},
         {"Fuel", "Fuel"}, {"Total_Litres", "Litres"}, {"Km_Litre", "Km/Litre"},
         {"Amount_Paid", "Fuel Paid"},
         {"Balance", "Unpaid Fuel"}, {"Millage", "Mileage"}, {"Net_Offload", "Net Offload"},
@@ -45,7 +45,7 @@
 
     // Monetary columns to format with N2 and right-align
     var moneyCols = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
-        "Total_Collection", "Management", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Net_Offload"
+        "Total_Collection", "Management_Target", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Net_Offload"
     };
 
     // Columns that should wrap text instead of truncating on one line
