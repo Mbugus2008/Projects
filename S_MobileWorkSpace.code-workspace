@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "S_Mobile -Wrapper"
+		},
+		{
+			"path": "Mobile/S-Mobile/S-Mobile"
+		}
+	],
+	"settings": {
+		"dotnet.preferCSharpExtension": true
+	}
+}

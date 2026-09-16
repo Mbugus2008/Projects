@@ -27,14 +27,40 @@
     var activeVehicles = summaryRows.Sum(r => r.TryGetValue("Active_Vehicles", out var av) && int.TryParse(av, out var avi) ? avi : 0);
     var totalVehicles = summaryRows.Sum(r => r.TryGetValue("Total_Vehicles", out var tv) && int.TryParse(tv, out var tvi) ? tvi : 0);
 
+    // DisFuelSummary has no management figure, so total it from the depot rows.
+    var hasManagement = depotCols.Contains("Management", StringComparer.OrdinalIgnoreCase);
+    var totalManagement = depotRows.Sum(r =>
+        r.TryGetValue("Management", out var mgmt) && decimal.TryParse(mgmt, out var mgmtVal) ? mgmtVal : 0m);
+
+    // Build the top strip up front so the management total can sit beside the
+    // collection total no matter what order BC returns its columns in.
+    var metricTiles = new List<(string Label, string Value, string Css)>();
+    foreach (var key in availableMetrics)
+    {
+        var isInt = key == "Total_Vehicles";
+        var label = isInt ? "Vehicles (Active/Total)" : key.Replace("_", " ");
+        decimal val = isInt
+            ? summaryRows.Sum(r => r.TryGetValue(key, out var v) && int.TryParse(v, out var i) ? i : 0)
+            : summaryRows.Sum(r => r.TryGetValue(key, out var v) && decimal.TryParse(v, out var d) ? d : 0);
+        var css = key == "Total_Fuel_Arrears" && val > 0 ? "red" : key == "Total_Collection" ? "blue" : "";
+        metricTiles.Add((label, isInt ? $"{activeVehicles}/{totalVehicles}" : val.ToString("N2"), css));
+
+        if (key == "Total_Collection" && hasManagement)
+        {
+            metricTiles.Add(("Total Management", totalManagement.ToString("N2"), ""));
+        }
+    }
+
     // Depot columns in display order (OData field names)
-    var depotFocusCols = new[] { "Date", "Vehicle", "Fleet", "Crew",
+    // "Capacity" carries the BC vehicle type code - labelled "Vehicle Type" below.
+    var depotFocusCols = new[] { "Date", "Vehicle", "Fleet", "Capacity", "Crew",
         "Total_Collection", "Management_Target", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Millage", "Net_Offload", "Comments" }
         .Where(c => c == "Crew" || depotCols.Contains(c, StringComparer.OrdinalIgnoreCase)).ToList();
 
     // Friendly labels for columns
     var depotColLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
         {"Date", "Date"}, {"Vehicle", "Vehicle"}, {"Fleet", "Fleet"},
+        {"Capacity", "Vehicle Type"},
         {"Crew", "Crew"},
         {"Total_Collection", "Total Collection"}, {"Management_Target", "Management Target"},
         {"Fuel", "Fuel"}, {"Total_Litres", "Litres"}, {"Km_Litre", "Km/Litre"},
@@ -51,9 +77,16 @@
     // Columns that should wrap text instead of truncating on one line
     var wrapCols = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Comments" };
 
-    // Order by Total_Collection descending
+    // Order by fleet no - numeric ascending, with blank / non-numeric fleets last.
+    // (Fleet comes from OData as text, so '99' would otherwise sort after '100'.)
     var orderedDepotRows = depotRows
-        .OrderByDescending(r => r.TryGetValue("Total_Collection", out var v) && decimal.TryParse(v, out var d) ? d : 0)
+        .OrderBy(r =>
+        {
+            var text = (r.TryGetValue("Fleet", out var f) ? (f ?? string.Empty) : string.Empty).Trim();
+            return int.TryParse(text, out var fleetNo) ? fleetNo : int.MaxValue;
+        })
+        .ThenBy(r => r.TryGetValue("Fleet", out var f2) ? (f2 ?? string.Empty) : string.Empty, StringComparer.OrdinalIgnoreCase)
+        .ThenBy(r => r.TryGetValue("Vehicle", out var v2) ? (v2 ?? string.Empty) : string.Empty, StringComparer.OrdinalIgnoreCase)
         .ToList();
 }
 <!DOCTYPE html>
@@ -112,7 +145,7 @@
         <input type="date" id="dateFilter" value="@initialDate"
                style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;"
                onchange="if(this.value){window.location.href='@summaryBasePath/'+this.value;}" />
-        <input type="text" id="vehicleFilter" placeholder="Search vehicle, fleet or crew"
+        <input type="text" id="vehicleFilter" placeholder="Search vehicle, fleet, type or crew"
                style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;flex:1;min-width:160px;"
                oninput="filterVehicles()" onkeyup="filterVehicles()" />
     </div>
@@ -120,41 +153,32 @@
     <script>
         function filterVehicles() {
             var q = document.getElementById('vehicleFilter').value.toUpperCase();
-            var rows = document.querySelectorAll('#depotTable tbody tr');
-            rows.forEach(function (row) {
-                var vehicle = row.cells[1] ? row.cells[1].textContent.toUpperCase() : '';
-                var fleet = row.cells[2] ? row.cells[2].textContent.toUpperCase() : '';
-                var crew = row.cells[3] ? row.cells[3].textContent.toUpperCase() : '';
-                row.style.display = (!q || vehicle.indexOf(q) >= 0 || fleet.indexOf(q) >= 0 || crew.indexOf(q) >= 0) ? '' : 'none';
+            var table = document.getElementById('depotTable');
+            if (!table || !table.tBodies.length) return;
+            // Resolve columns by header text so adding/removing a column cannot
+            // silently break the search (it used to hard-code cells 1/2/3).
+            var headers = Array.prototype.map.call(table.tHead.rows[0].cells, function (th) {
+                return th.textContent.trim().toUpperCase();
             });
+            var searchCols = ['VEHICLE', 'FLEET', 'CREW', 'VEHICLE TYPE'];
+            var indexes = searchCols.map(function (name) { return headers.indexOf(name); })
+                                    .filter(function (i) { return i >= 0; });
+            var rows = table.tBodies[0].rows;
+            for (var r = 0; r < rows.length; r++) {
+                var text = indexes.map(function (i) {
+                    return rows[r].cells[i] ? rows[r].cells[i].textContent : '';
+                }).join(' ').toUpperCase();
+                rows[r].style.display = (!q || text.indexOf(q) >= 0) ? '' : 'none';
+            }
         }
     </script>
 
     <div class="metrics">
-        @foreach (var key in availableMetrics)
+        @foreach (var tile in metricTiles)
         {
-            var label = key == "Total_Vehicles" ? "Vehicles (Active/Total)" : key.Replace("_", " ");
-            var isInt = key == "Total_Vehicles";
-            decimal val = 0;
-            if (isInt)
-            {
-                val = summaryRows.Sum(r => r.TryGetValue(key, out var v) && int.TryParse(v, out var i) ? i : 0);
-            }
-            else
-            {
-                val = (decimal)summaryRows.Sum(r => r.TryGetValue(key, out var v) && decimal.TryParse(v, out var d) ? d : 0);
-            }
-            var css = key == "Total_Fuel_Arrears" && val > 0 ? "red" : key == "Total_Collection" ? "blue" : "";
             <div class="metric-card">
-                <div class="label">@label</div>
-                @if (key == "Total_Vehicles")
-                {
-                    <div class="value">@activeVehicles/@totalVehicles</div>
-                }
-                else
-                {
-                    <div class="value @css">@(isInt ? val.ToString("N0") : val.ToString("N2"))</div>
-                }
+                <div class="label">@tile.Label</div>
+                <div class="value @tile.Css">@tile.Value</div>
             </div>
         }
     </div>
@@ -177,12 +201,35 @@
                     {
                         if (col == "Crew")
                         {
+                            // Show the crew's member no alongside the name, number first
+                            // (same order the mobile app uses: [A169] CHARLES MWENJE OREDI).
+                            var driverNo = row.TryGetValue("Driver", out var dno) ? dno : string.Empty;
+                            var conductorNo = row.TryGetValue("Conductor", out var cno) ? cno : string.Empty;
                             var driver = row.TryGetValue("Driver_Name", out var dv) ? dv : "-";
                             var conductor = row.TryGetValue("Conductor_Name", out var cv) ? cv : "-";
                             <td>
-                                <div>@driver</div>
-                                <div style="color:#666;">@conductor</div>
+                                <div>
+                                    @if (!string.IsNullOrWhiteSpace(driverNo))
+                                    {
+                                        <b>@driverNo</b>
+                                    }
+                                    @driver
+                                </div>
+                                <div style="color:#666;">
+                                    @if (!string.IsNullOrWhiteSpace(conductorNo))
+                                    {
+                                        <b>@conductorNo</b>
+                                    }
+                                    @conductor
+                                </div>
                             </td>
+                            continue;
+                        }
+                        if (col == "Capacity")
+                        {
+                            // BC vehicle type code -> friendly label ("51 Seater")
+                            var cap = row.TryGetValue("Capacity", out var capv) ? capv : string.Empty;
+                            <td>@Matatu_Dashboard.Models.VehicleTypeLabels.Describe(cap)</td>
                             continue;
                         }
                         var val = row.TryGetValue(col, out var v) ? v : "-";
