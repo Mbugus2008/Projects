@@ -4,7 +4,10 @@
 			"path": "S_Mobile -Wrapper"
 		},
 		{
-			"path": "Mobile/S-Mobile/S-Mobile"
+			"path": "Mobile/S-Mobile/Switch"
+		},
+		{
+			"path": "Mobile/S-Mobile/S_Ussd/S_Ussd"
 		}
 	],
 	"settings": {

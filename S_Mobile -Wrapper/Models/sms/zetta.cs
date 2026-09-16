@@ -25,7 +25,7 @@ namespace S_Mobile.Models
 
             request.AlwaysMultipartFormData = true;
             request.AddParameter("userid", "Paul");
-            request.AddParameter("password", "FS0fcs6v");
+            request.AddParameter("password", "Touran2018");
             request.AddParameter("mobile", s.Phone);
             request.AddParameter("senderid", s.Client);
             request.AddParameter("msg", s.Message_to_send);

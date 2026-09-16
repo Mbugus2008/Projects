@@ -108,11 +108,24 @@ namespace S_Ussd
                                 if (d.content != null)
                                     m = JsonConvert.DeserializeObject<Members>(d.content.ToString());
                             }
+                            else
+                            {
+                                Logging.Logging.LogEntryOnFile(string.Format("baraka member Code={0} for {1}", d.Code, tel));
+                            }
+                        }
+                        else
+                        {
+                            Logging.Logging.LogEntryOnFile(string.Format("baraka member HTTP {0} {1} for {2}", (int)response.StatusCode, response.ErrorMessage, tel));
                         }
                     }
                     catch (Exception ex)
                     {
                         Logging.Logging.ReportError(ex);
+                    }
+                    if (m == null)
+                    {
+                        Logging.Logging.LogEntryOnFile(string.Format("baraka member: no member record returned for {0}", tel));
+                        return Account;
                     }
                     Account.Add(new account() { No = m.No, Name = m.Name, Balance = (double)m.Mobile_Money, memberno = m.No });
                 }

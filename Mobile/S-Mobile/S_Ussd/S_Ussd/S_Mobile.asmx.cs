@@ -1812,6 +1812,8 @@ namespace S_Ussd
                                 r.transaction.Transaction_Type = (int)Transtype.Balance;
                                 //var m = new client(req.client.Url).member(req.MSISDN);
                                 var t = service.Accounts(req.MSISDN);
+                                if (t == null || t.Count == 0)
+                                    return lang.getlang(enums.sessionstatus.END, ref req, enums.response.Noaccount, Request.newline);
                                 r.transaction.Account_No = t[0].No;
                                 if (service.twostepbalancemenu)
                                     return lang.getlang(enums.sessionstatus.CON, ref req, enums.response.OtherBalances, Request.newline);
