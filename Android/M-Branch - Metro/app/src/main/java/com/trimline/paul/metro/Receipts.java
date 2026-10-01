@@ -3,6 +3,7 @@ package com.trimline.paul.metro;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.card.MaterialCardView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -62,17 +66,17 @@ public class Receipts extends BaseExpandableListAdapter {
         TextView type = (TextView) convertView.findViewById(R.id.type);
         type.setText(t.typename);
         TextView loanno = (TextView) convertView.findViewById(R.id.loanno);
-        if(t.Type.contains("LOAN"))
-        loanno.setText(t.Loan_No +"("+ t.Ward +")");
+        String ln = t.Loan_No == null ? "" : t.Loan_No;
+        if (t.Type.contains("LOAN"))
+            loanno.setText(ln + "(" + t.Ward + ")");
         else
-            loanno.setText(t.Loan_No);
+            loanno.setText(ln);
 
         TextView txtamount = (TextView) convertView.findViewById(R.id.Amount);
-        txtamount.setText(String.format("%.2f", t.getAmount()));
+        txtamount.setText(String.format("%,.2f", t.getAmount()));
 
         ImageView sent = (ImageView) convertView.findViewById(R.id.sent);
-        if (!t.sent)
-            sent.setVisibility(View.GONE);
+        sent.setVisibility(t.sent ? View.VISIBLE : View.GONE);
 
         return convertView;
     }
@@ -104,10 +108,14 @@ public class Receipts extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.receiptgroup, null);
         }
-        RelativeLayout rl = (RelativeLayout)convertView.findViewById(R.id.reclayout);
-if (headerTitle.Recovery !=null)
-        if (headerTitle.Recovery)
-            rl.setBackgroundResource(R.drawable.backgroundrecovery);
+        MaterialCardView card = (MaterialCardView) convertView.findViewById(R.id.receiptcard);
+        if (headerTitle.Recovery != null && headerTitle.Recovery) {
+            card.setCardBackgroundColor(Color.parseColor("#FFF3E0"));
+            card.setStrokeColor(Color.parseColor("#E65100"));
+        } else {
+            card.setCardBackgroundColor(Color.WHITE);
+            card.setStrokeColor(Color.parseColor("#C9D2E3"));
+        }
 
         //ImageView im = (ImageView) convertView.findViewById(R.id.down.groupheadericon);
 
@@ -116,10 +124,12 @@ if (headerTitle.Recovery !=null)
         lblgroupname.setText(headerTitle.date);
         TextView lblrec = (TextView) convertView
                 .findViewById(R.id.lblListreceipt);
-        lblrec.setText(headerTitle.receipt + "(" + headerTitle.Count + ")");
+        lblrec.setText(headerTitle.receipt + " (" + headerTitle.Count + (headerTitle.Count == 1 ? " item)" : " items)"));
         TextView lblmno = (TextView) convertView
                 .findViewById(R.id.memberno);
-        lblmno.setText( headerTitle.vehicle +" - "+ headerTitle.fleetNo);
+        String veh = headerTitle.vehicle == null ? "" : headerTitle.vehicle;
+        String flt = headerTitle.fleetNo == null ? "" : headerTitle.fleetNo;
+        lblmno.setText(veh.isEmpty() && flt.isEmpty() ? "" : veh + " - " + flt);
         TextView mname = (TextView) convertView
                 .findViewById(R.id.membername);
         mname.setText(headerTitle.Name);
@@ -129,7 +139,7 @@ if (headerTitle.Recovery !=null)
 
         TextView lbltotal = (TextView) convertView
                 .findViewById(R.id.grouptotalvalue);
-        lbltotal.setText(String.format("%.2f", headerTitle.Total));
+        lbltotal.setText(String.format("%,.2f", headerTitle.Total));
 
         Calendar cdt;
         cdt = Calendar.getInstance();
@@ -173,13 +183,18 @@ if (headerTitle.Recovery !=null)
                 db.post(headerTitle.receipt);
                 summaries.printer p = new summaries.printer();
                 Bitmap b = BitmapFactory.decodeResource(finalConvertView.getResources(), R.drawable.logop);
-                p.printcollection(b, db.gettransbybatch(headerTitle.receipt));
+                if (!p.printcollection(b, db.gettransbybatch(headerTitle.receipt)))
+                    Toast.makeText(_context,
+                            "Could not print - check the printer connection", Toast.LENGTH_LONG).show();
             }
         });
         reverse.setVisibility(View.VISIBLE);
         print.setVisibility(View.VISIBLE);
-        List<transaction> d = db.gettransbybatch(headerTitle.receipt);
-        if (d.size() > 0) {
+        // Use the already loaded transactions instead of re-querying the DB
+        // here: this runs on the main thread while rendering, and background
+        // sync threads hold SQLite write locks, which caused an ANR.
+        List<transaction> d = _listDataChild.get(headerTitle);
+        if (d != null && d.size() > 0) {
                if (d.get(0).Constituency != null) {
                 if ((d.get(0).Constituency.equals("1"))) {
                     reverse.setVisibility(View.GONE);

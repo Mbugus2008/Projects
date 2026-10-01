@@ -12,16 +12,17 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     private DB db;
     private List<summaries.collectiondates> _listDataHeader; // header titles
-    private HashMap<summaries.collectiondates, List<transaction>> _listDataChild;
+    private HashMap<summaries.collectiondates, List<Object>> _listDataChild;
 
     public ExpandableListAdapter(Context context, List<summaries.collectiondates> listDataHeader,
-                                 HashMap<summaries.collectiondates, List<transaction>> listChildData, DB d) {
+                                 HashMap<summaries.collectiondates, List<Object>> listChildData, DB d) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -43,12 +44,33 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final transaction t = (transaction) getChild(groupPosition, childPosition);
+        final Object child = getChild(groupPosition, childPosition);
 
-        if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater infalInflater = (LayoutInflater) this._context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        Object tag = convertView != null ? convertView.getTag() : null;
+
+        // Type sub-header row (e.g. CASH - 2 items - 4,800.00)
+        if (child instanceof summaries.typegroup) {
+            summaries.typegroup tg = (summaries.typegroup) child;
+            if (!(tag instanceof Integer) || (Integer) tag != R.layout.reporttypeheader) {
+                convertView = infalInflater.inflate(R.layout.reporttypeheader, null);
+                convertView.setTag(R.layout.reporttypeheader);
+            }
+
+            TextView txttype = (TextView) convertView.findViewById(R.id.typename);
+            txttype.setText(tg.Name);
+            TextView txttypecount = (TextView) convertView.findViewById(R.id.typecount);
+            txttypecount.setText(tg.Count + (tg.Count == 1 ? " item" : " items"));
+            TextView txttypetotal = (TextView) convertView.findViewById(R.id.typetotal);
+            txttypetotal.setText(String.format("%,.2f", tg.Total));
+            return convertView;
+        }
+
+        final transaction t = (transaction) child;
+        if (!(tag instanceof Integer) || (Integer) tag != R.layout.reportlist) {
             convertView = infalInflater.inflate(R.layout.reportlist, null);
+            convertView.setTag(R.layout.reportlist);
         }
 
         TextView txtmemberno = (TextView) convertView.findViewById(R.id.memberno);
@@ -69,7 +91,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             txtttype.setText(t.typename);
 
         TextView txtamount = (TextView) convertView.findViewById(R.id.tamount);
-        txtamount.setText(String.format("%.2f", t.getAmount()));
+        txtamount.setText(String.format("%,.2f", t.getAmount()));
         ImageView sent = (ImageView) convertView.findViewById(R.id.sent);
         if (!t.sent)
             sent.setVisibility(View.GONE);
@@ -114,11 +136,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         TextView lblcount = (TextView) convertView
                 .findViewById(R.id.groupcountvalue);
-        lblcount.setText(String.valueOf(headerTitle.Count));
+        lblcount.setText(headerTitle.Count + (headerTitle.Count == 1 ? " transaction" : " transactions"));
 
         TextView lbltotal = (TextView) convertView
                 .findViewById(R.id.grouptotalvalue);
-        lbltotal.setText(headerTitle.Total.toString());
+        lbltotal.setText(String.format("%,.2f", headerTitle.Total));
 
         ImageView print = (ImageView) convertView.findViewById(R.id.printdaily);
         View v = convertView;
@@ -128,7 +150,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 summaries.printer p = new summaries.printer();
                 Bitmap b = BitmapFactory.decodeResource(v.getResources(), R.drawable.logop);
                 List<tsummary> tr = db.gettranssummarybydate(headerTitle.date);
-                p.printSummary(b, tr);
+                if (!p.printSummary(b, tr))
+                    Toast.makeText(_context,
+                            "Could not print - check the printer connection", Toast.LENGTH_LONG).show();
                 db.refresh(headerTitle.date);
             }
         });

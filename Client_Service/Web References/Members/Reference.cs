@@ -1347,6 +1347,12 @@ namespace Client_Service.Members {
         
         /// <remarks/>
         BBF,
+        
+        /// <remarks/>
+        Junior,
+        
+        /// <remarks/>
+        Wallet,
     }
     
     /// <remarks/>

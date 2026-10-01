@@ -1,0 +1,234 @@
+@using Matatu_Dashboard.Services
+@model Matatu_Dashboard.Services.WaybillReport
+@{
+    Layout = null;
+    var selectedRange = (ViewData["SelectedRange"] as string) ?? "today";
+    var todayStr = DateTime.Today.ToString("yyyy-MM-dd");
+    var yesterdayStr = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+    var initialDate = DateTime.TryParseExact(selectedRange, "yyyy-MM-dd", null,
+        System.Globalization.DateTimeStyles.None, out var parsedDate)
+        ? parsedDate.ToString("yyyy-MM-dd")
+        : todayStr;
+    var printMode = (ViewData["PrintMode"] as bool?) ?? false;
+    var pathBase = Context.Request.PathBase.HasValue ? Context.Request.PathBase.Value! : string.Empty;
+    var basePath = string.IsNullOrWhiteSpace(pathBase) ? "/waybillsummary" : $"{pathBase}/waybillsummary";
+    var exportBase = string.IsNullOrWhiteSpace(pathBase) ? "/waybillsummary-export" : $"{pathBase}/waybillsummary-export";
+    var printBase = string.IsNullOrWhiteSpace(pathBase) ? "/waybillsummary-print" : $"{pathBase}/waybillsummary-print";
+    var rangeSuffix = string.IsNullOrWhiteSpace(selectedRange) ? string.Empty : $"/{selectedRange}";
+    var retrievedAt = (DateTime?)ViewData["RetrievedAt"] ?? DateTime.Now;
+
+    string Money(decimal value) => value.ToString("N2");
+    var totalPassengers = Model.Trips.Sum(t => WaybillReport.Whole(t, "Pax_No"));
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { color-scheme: light; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: #f4f6f9; color: #1a1a2e; padding: 16px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+        .header h1 { font-size: 20px; font-weight: 700; }
+        .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tabs a { padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; color: #555; background: #e8ecf1; }
+        .tabs a.active { background: #006B3F; color: #fff; }
+        .tabs a.export { background: #006B3F; color: #fff; }
+        .tabs a.export:hover { background: #005432; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 16px; }
+        .metric-card { background: #fff; border-radius: 10px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.08); text-align: center; }
+        .metric-card .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: .5px; }
+        .metric-card .value { font-size: 21px; font-weight: 700; color: #006B3F; margin-top: 4px; }
+        .metric-card .value.red { color: #d32f2f; }
+        .metric-card .value.blue { color: #1565c0; }
+        h2.section { font-size: 15px; font-weight: 700; margin: 18px 0 8px; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+        th { background: #006B3F; color: #fff; padding: 9px 8px; font-size: 12px; text-align: left; white-space: nowrap; }
+        td { padding: 8px; font-size: 13px; border-bottom: 1px solid #eee; white-space: nowrap; }
+        tr:last-child td { border-bottom: none; }
+        td.num, th.num { text-align: right; }
+        .open { color: #d32f2f; font-weight: 700; }
+        .closed { color: #2e7d32; font-weight: 600; }
+        .muted { color: #777; }
+        .footer { margin-top: 12px; font-size: 11px; color: #999; text-align: center; }
+        .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .table-wrap table { min-width: 860px; }
+        @@media (max-width: 640px) {
+            body { padding: 10px; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .metrics { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .metric-card .value { font-size: 18px; }
+        }
+        @@media print {
+            body { background: #fff; padding: 0; }
+            .tabs, .controls, .footer { display: none !important; }
+            .metric-card, table { box-shadow: none; }
+            .metric-card { border: 1px solid #ddd; }
+            .table-wrap { overflow: visible; }
+            .table-wrap table { min-width: 0; }
+            th { background: #006B3F !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            tr { break-inside: avoid; }
+            @@page { size: A4 landscape; margin: 10mm; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>@ViewData["Title"]</h1>
+        @if (!printMode)
+        {
+            <div class="tabs">
+                <a href="@basePath/today" class="@(selectedRange == "today" || selectedRange == todayStr ? "active" : "")">Today</a>
+                <a href="@basePath/yesterday" class="@(selectedRange == "yesterday" || selectedRange == yesterdayStr ? "active" : "")">Yesterday</a>
+                <a href="@basePath/week" class="@(selectedRange == "week" ? "active" : "")">Week</a>
+                <a href="@basePath/month" class="@(selectedRange == "month" ? "active" : "")">Month</a>
+                <a href="@(exportBase)@rangeSuffix" class="export" title="Download waybills and trips as a spreadsheet">Excel</a>
+                <a href="@(printBase)@rangeSuffix" class="export" target="_blank" rel="noopener"
+                   title="Opens a print view - save it as PDF from the print dialog">PDF</a>
+            </div>
+        }
+    </div>
+
+    @if (!printMode)
+    {
+        <div class="controls" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+            <input type="date" id="dateFilter" value="@initialDate"
+                   style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;"
+                   onchange="if(this.value){window.location.href='@basePath/'+this.value;}" />
+            <input type="text" id="wbFilter" placeholder="Search vehicle, fleet, origin, destination or crew"
+                   style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;flex:1;min-width:160px;"
+                   oninput="filterRows()" onkeyup="filterRows()" />
+        </div>
+    }
+
+    <script>
+        function filterRows() {
+            var q = (document.getElementById('wbFilter') || {}).value || '';
+            q = q.toUpperCase();
+            ['waybillTable', 'tripTable'].forEach(function (id) {
+                var table = document.getElementById(id);
+                if (!table || !table.tBodies.length) return;
+                var rows = table.tBodies[0].rows;
+                for (var r = 0; r < rows.length; r++) {
+                    var text = rows[r].textContent.toUpperCase();
+                    rows[r].style.display = (!q || text.indexOf(q) >= 0) ? '' : 'none';
+                }
+            });
+        }
+    </script>
+
+    <div class="metrics">
+        @foreach (var tile in Model.Tiles)
+        {
+            <div class="metric-card">
+                <div class="label">@tile.Label</div>
+                <div class="value @tile.Css">@tile.Value</div>
+            </div>
+        }
+    </div>
+
+    <h2 class="section">Waybills (@Model.Waybills.Count)</h2>
+    <div class="table-wrap">
+    <table id="waybillTable">
+        <thead>
+            <tr>
+                <th>Date</th><th>Vehicle</th><th>Fleet</th><th>Crew</th><th class="num">Entry</th>
+                <th class="num">Target</th><th class="num">Expected</th><th class="num">Collected</th>
+                <th class="num">Shortage</th><th class="num">Cash</th>
+                <th class="num">Trips</th><th class="num">Pax</th><th class="num">Trip Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var waybill in Model.Waybills)
+            {
+                var trips = WaybillReportBuilder.TripsFor(Model, waybill);
+                var (driverNo, conductorNo) = WaybillReport.Crew(waybill);
+                var shortage = WaybillReport.Number(waybill, "Shortage");
+                var collected = WaybillReport.Number(waybill, "Total_Collected");
+                <tr>
+                    <td>@(WaybillReport.Value(waybill, "Date", "-") is var d && d.Length > 10 ? d[..10] : WaybillReport.Value(waybill, "Date", "-"))</td>
+                    <td><b>@WaybillReport.Value(waybill, "Vehicle_No", "-")</b></td>
+                    <td>@WaybillReport.Value(waybill, "Fleet_No", "-")</td>
+                    <td>
+                        <div><b>@driverNo</b></div>
+                        <div class="muted"><b>@conductorNo</b></div>
+                    </td>
+                    <td class="num">@WaybillReport.Whole(waybill, "Entry_No")</td>
+                    <td class="num">@Money(WaybillReport.Number(waybill, "Target_Revenue"))</td>
+                    <td class="num">@Money(WaybillReport.Number(waybill, "Total_Expected"))</td>
+                    <td class="num" style="font-weight:700;">@Money(collected)</td>
+                    <td class="num @(shortage > 0 ? "open" : "")">@Money(shortage)</td>
+                    <td class="num">@Money(WaybillReport.Number(waybill, "Cash"))</td>
+                    <td class="num">@trips.Count</td>
+                    <td class="num">@trips.Sum(t => WaybillReport.Whole(t, "Pax_No"))</td>
+                    <td class="num">@Money(trips.Sum(t => WaybillReport.Number(t, "Total")))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+
+    @if (Model.Waybills.Count == 0)
+    {
+        <p style="text-align:center;color:#999;margin-top:24px;">No waybills for this period.</p>
+    }
+
+    <h2 class="section">Trips (@Model.Trips.Count)</h2>
+    <div class="table-wrap">
+    <table id="tripTable">
+        <thead>
+            <tr>
+                <th class="num">Entry</th><th class="num">Trip</th><th>From</th><th>To</th>
+                <th>Departure</th><th>Arrival</th><th class="num">Pax</th><th class="num">Fare</th>
+                <th class="num">Total</th><th>Received</th><th>Status</th><th>Started By</th><th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var trip in Model.Trips)
+            {
+                var status = WaybillReport.TripStatus(trip);
+                <tr>
+                    <td class="num">@WaybillReport.Whole(trip, "Weign_Bridge_id")</td>
+                    <td class="num">@WaybillReport.Whole(trip, "Trip_No")</td>
+                    <td>@WaybillReport.Value(trip, "From", "-")</td>
+                    <td>@WaybillReport.Value(trip, "To", "-")</td>
+                    <td>@WaybillReport.Clock(WaybillReport.Value(trip, "From_Time"))</td>
+                    <td>@WaybillReport.Clock(WaybillReport.Value(trip, "To_Time"))</td>
+                    <td class="num">@WaybillReport.Whole(trip, "Pax_No")</td>
+                    <td class="num">@Money(WaybillReport.Number(trip, "Fare_Amount"))</td>
+                    <td class="num" style="font-weight:700;">@Money(WaybillReport.Number(trip, "Total"))</td>
+                    <td>@WaybillReport.Value(trip, "Amount_Received", "-")</td>
+                    <td class="@(status == "Open" ? "open" : "closed")">@status</td>
+                    <td>@WaybillReport.Value(trip, "Started_By", "-")</td>
+                    <td class="muted">@WaybillReport.Value(trip, "Comments", string.Empty)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+
+    @if (Model.Trips.Count == 0)
+    {
+        <p style="text-align:center;color:#999;margin-top:24px;">No trips for the waybills in this period.</p>
+    }
+
+    <div class="footer">
+        @Model.Waybills.Count waybills · @Model.Trips.Count trips · @totalPassengers passengers · Retrieved @retrievedAt.ToString("HH:mm:ss") · @selectedRange
+    </div>
+
+    @if (printMode)
+    {
+        <script>
+            // Wait for load plus a beat: measuring while the tables lay out
+            // clips the last rows off the printed output.
+            window.addEventListener('load', function () {
+                setTimeout(function () { window.print(); }, 300);
+            });
+        </script>
+    }
+</body>
+</html>

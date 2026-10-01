@@ -52,6 +52,28 @@ public class summaries {
             return this.date;
         }
     }
+
+    /** A transaction-type sub-group inside a date group of the Daily
+     *  summary (e.g. Sacco Dues - 2 items - 4,800.00). Groups open
+     *  collapsed; tapping the header expands them. */
+    public static class typegroup {
+        public String Name;
+        public int Count;
+        public double Total;
+        public boolean Expanded = false;
+        public List<transaction> Items = new ArrayList<transaction>();
+    }
+
+    /** A date group (parent) of the Daily summary; holds its transaction-type
+     *  sub-groups, which in turn hold the transactions. Groups open
+     *  collapsed; tapping the card expands them. */
+    public static class typeday {
+        public String date;
+        public int Count;
+        public double Total;
+        public boolean Expanded = false;
+        public List<typegroup> Types = new ArrayList<typegroup>();
+    }
     public  static class getdata{
         public  String firstdate;
         public  String LastDate;
@@ -69,10 +91,23 @@ public class summaries {
         public String vehicle;
         public String fleetNo;
         public Boolean Recovery;
+        public boolean Expanded = false;
 
         public String toString() {
             return this.date;
         }
+    }
+
+    /** An agent group (parent level) of the Receipts screen; holds the
+     *  receipt batches collected by that agent. */
+    public static class agentreceipts {
+        public String Code;
+        public String Name;
+        public int Count;
+        public int VehicleCount;
+        public double Total;
+        public boolean Expanded = true;
+        public List<Receipts> ReceiptsList = new ArrayList<Receipts>();
     }
 
     public static class reportheader {
@@ -111,10 +146,8 @@ public class summaries {
             // Make a connection to the BluetoothSocket
             while (true) {
                 try {
-                    Log.i("thread", "running");
-
-if (stopped)
-    break;
+                    if (stopped)
+                        break;
                     String value = preferences.getString("PRINTER", "");
 //                BluetoothDevice prnt = BluetoothAdapter.getDefaultAdapter().                        getRemoteDevice("00:02:0A:02:60:10");
                     if (!value.equals("")) {
@@ -157,12 +190,19 @@ if (stopped)
 
                             pSocket = printersock;
                             printerout = pSocket.getOutputStream();
-                            //Log.i("thread", "printer connected");
-                            //return;
+                            Log.i("Printer", "Connected to " + value);
                             try {
-                                while (printersock.isConnected()) {
-                                    Log.i("thread", "printer connected");
-                                    this.sleep(2000);
+                                while (printersock.isConnected() && !stopped) {
+                                    // Re-read the preference so a printer picked in Settings
+                                    // is used without restarting the app.
+                                    if (!preferences.getString("PRINTER", "").equals(value)) {
+                                        try {
+                                            printersock.close();
+                                        } catch (Exception ignored) {
+                                        }
+                                        break;
+                                    }
+                                    Thread.sleep(2000);
                                 }
 
                                 // mHandler.obtainMessage(Constants.PRINTER_DISCONNECTED, true).sendToTarget();
@@ -173,14 +213,35 @@ if (stopped)
                         } else
                             mHandler.obtainMessage(Constants.MESSAGE_TOAST, "No bluetooth found").sendToTarget();
 
-                    } else return;
+                    } else {
+                        // No printer configured yet - wait for one instead of exiting,
+                        // so it starts working as soon as one is set in Settings.
+                        Thread.sleep(3000);
+                    }
+                } catch (InterruptedException ie) {
+                    break;
                 } catch (Exception ex) {
                     ex.printStackTrace();
-
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException ie) {
+                        break;
+                    }
                 }
 
             }
             // Reset the ConnectThread because we're done
+
+            // Close the socket when the thread stops so the Bluetooth connection
+            // is not left open (or reconnecting) after the app is closed.
+            try {
+                if (printersock != null) {
+                    printersock.close();
+                }
+            } catch (Exception ignored) {
+            }
+            printerout = null;
+            printersock = null;
 
             Log.i("Printer thread", "Stopped");
             // Start the connected thread
@@ -376,6 +437,73 @@ if (stopped)
         public static Printerthread printThread;
         public static BluetoothDevice printerdevice;
 
+        /** True when a printer socket is connected and ready to receive data. */
+        public static boolean isConnected() {
+            try {
+                return printersock != null && printersock.isConnected() && printerout != null;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        /**
+         * Stops the printer thread and closes the Bluetooth connection.
+         * Call this when the main screen closes so the socket is not left open
+         * (and the thread does not keep reconnecting in the background).
+         */
+        public static void disconnect() {
+            Printerthread t = printThread;
+            if (t != null) {
+                t.stopped = true;
+                t.interrupt();
+            }
+            try {
+                if (printerout != null) {
+                    printerout.close();
+                }
+            } catch (Exception ignored) {
+            }
+            try {
+                if (printersock != null) {
+                    printersock.close();
+                }
+            } catch (Exception ignored) {
+            }
+            printerout = null;
+            printersock = null;
+            Log.i("Printer", "Disconnected");
+        }
+
+        /** Prints a short test page - used to verify a newly attached printer. */
+        public static boolean printTest() {
+            if (!isConnected()) {
+                Log.i("Printing", "Test print skipped - printer not connected");
+                return false;
+            }
+            try {
+                String ts = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss", java.util.Locale.US).format(new java.util.Date());
+                String msg = " METROTRANS SACCO SOCIETY LTD  \n";
+                msg += "          PRINTER TEST         \n";
+                msg += "-------------------------------\n";
+                msg += "Date: " + ts + "\n";
+                msg += "-------------------------------\n";
+                msg += "If you can read this, the\n";
+                msg += "printer is working correctly.\n\n";
+                byte[] format = {27, 33, 0};
+                printerout.write(format);
+                printerout.write(msg.getBytes());
+                printerout.write(0x0D);
+                printerout.write(0x0D);
+                printerout.write(0x0D);
+                printerout.flush();
+                Log.i("Printing", "Test page sent");
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
 
 
         public void writetoprinter(byte[] out) {
@@ -414,7 +542,11 @@ if (stopped)
             r.flush();
         }
 
-        public void printcollection(Bitmap logo, List<transaction> t) {
+        public boolean printcollection(Bitmap logo, List<transaction> t) {
+            if (!isConnected()) {
+                Log.i("Printing", "Skipped - printer not connected");
+                return false;
+            }
             try {
                 Log.i("Printing", new Gson().toJson(t));
                 //print_image(logo);
@@ -455,7 +587,7 @@ if (stopped)
                 }
                 data += "--------------------------------\n";
                 data += printout("Total", String.format("%.2f", total) )+ "\n";
-                data += printout("Served by:" , Myvariables.CurrentAgent.Name )+ "\n";
+                data += printout("Served by:" , Myvariables.CurrentAgent.Name )+ "\n\n";
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -476,12 +608,18 @@ if (stopped)
                     printerout.write(0x0D);
                     printerout.flush();
                 }
+                return true;
             } catch (Exception e) {
                 e.printStackTrace();
+                return false;
             }
 
         }
-        public void printSummary(Bitmap logo, List<tsummary> t) {
+        public boolean printSummary(Bitmap logo, List<tsummary> t) {
+            if (!isConnected()) {
+                Log.i("Printing", "Skipped - printer not connected");
+                return false;
+            }
             try {
                 Log.i("Summary", new Gson().toJson(t));
                // print_image(logo);
@@ -509,7 +647,7 @@ if (stopped)
                 }
                 data += "--------------------------------\n";
                 data += printout("Total", String.format("%.2f", total) )+ "\n";
-                data += printout("Printed by:" , Myvariables.CurrentAgent.Name )+ "\n";
+                data += printout("Printed by:" , Myvariables.CurrentAgent.Name )+ "\n\n";
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -530,8 +668,10 @@ if (stopped)
                     printerout.write(0x0D);
                     printerout.flush();
                 }
+                return true;
             } catch (Exception e) {
                 e.printStackTrace();
+                return false;
             }
 
         }
@@ -542,7 +682,11 @@ if (stopped)
 
 
 }
-        public void printcollectioncopy(Bitmap logo, List<transaction> t) {
+        public boolean printcollectioncopy(Bitmap logo, List<transaction> t) {
+            if (!isConnected()) {
+                Log.i("Printing", "Skipped - printer not connected");
+                return false;
+            }
             try {
                 String head;
                 head = " METROTRANS SACCO SOCIETY LTD  \n";
@@ -582,7 +726,7 @@ if (stopped)
                 data += "--------------------------------\n";
                 data += "TOTAL                 " + String.format("%.2f", total) + "\n\n";
 
-                data += "Served by:  " + Myvariables.CurrentAgent.Name + "\n\n\n\n\n";
+                data += "Served by:  " + Myvariables.CurrentAgent.Name + "\n\n\n\n\n\n";
 
 
                 try {
@@ -609,8 +753,10 @@ if (stopped)
                     printerout.flush();
 
                 }
+                return true;
             } catch (Exception e) {
                 e.printStackTrace();
+                return false;
             }
 
         }

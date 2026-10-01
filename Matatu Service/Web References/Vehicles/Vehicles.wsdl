@@ -13,6 +13,13 @@
           <xsd:enumeration value="_37_Seater" />
         </xsd:restriction>
       </xsd:simpleType>
+      <xsd:simpleType name="Owner">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="_blank_" />
+          <xsd:enumeration value="Sacco" />
+          <xsd:enumeration value="Investor" />
+        </xsd:restriction>
+      </xsd:simpleType>
       <xsd:complexType name="Vehicles">
         <xsd:sequence>
           <xsd:element minOccurs="0" maxOccurs="1" name="Key" type="xsd:string" />
@@ -24,6 +31,7 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="Id_Number" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Fleet_No" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Last_Modification" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Owner" type="tns:Owner" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Vehicles_List">
@@ -41,6 +49,7 @@
           <xsd:enumeration value="Id_Number" />
           <xsd:enumeration value="Fleet_No" />
           <xsd:enumeration value="Last_Modification" />
+          <xsd:enumeration value="Owner" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="Vehicles_Filter">
@@ -390,7 +399,7 @@
   </binding>
   <service name="Vehicles_Service">
     <port name="Vehicles_Port" binding="tns:Vehicles_Binding">
-      <address location="http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Vehicles" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://services.trimline.co.ke:4022/Metroservice/WS/MetroTrans/Page/Vehicles" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

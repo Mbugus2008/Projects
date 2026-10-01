@@ -471,6 +471,8 @@ namespace Collection.Users {
         
         private bool amount_CollectedFieldSpecified;
         
+        private string routeField;
+        
         /// <remarks/>
         public string Key {
             get {
@@ -603,6 +605,16 @@ namespace Collection.Users {
                 this.amount_CollectedFieldSpecified = value;
             }
         }
+
+        /// <remarks/>
+        public string Route {
+            get {
+                return this.routeField;
+            }
+            set {
+                this.routeField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -641,6 +653,9 @@ namespace Collection.Users {
         
         /// <remarks/>
         Manager,
+        
+        /// <remarks/>
+        SuperUser,
     }
     
     /// <remarks/>
@@ -708,6 +723,9 @@ namespace Collection.Users {
         
         /// <remarks/>
         Amount_Collected,
+        
+        /// <remarks/>
+        Route,
     }
     
     /// <remarks/>

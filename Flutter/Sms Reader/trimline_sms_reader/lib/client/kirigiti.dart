@@ -45,8 +45,7 @@ class kiriigiti extends SmsClients {
         print(
             'Checking message: ${body.substring(0, min(50, body.length))}...');
         // Changed from startsWith to contains to be more lenient with message format
-        final isMatch = body.contains('Dear PCEA KIRIGITI CHURCH') ||
-            body.contains('Dear PCEA T/A PCEA KIRIGITI CHURCH');
+        final isMatch = SmsClients.isKirigitiSms(body);
         if (isMatch) {
           print('Found matching message: $body');
         }
@@ -121,13 +120,7 @@ class kiriigiti extends SmsClients {
       t.Detaills = 'Paybill - ${t.Name} - Ref:${t.Receipt_No}';
 
       // detect source by greeting variants
-      if (body.contains('Dear PCEA KIRIGITI CHURCH')) {
-        t.Source = 'KIRIGITI';
-      } else if (body.contains('Dear PCEA T/A KIRIGITI CHURCH')) {
-        t.Source = 'KIRIGITI_TA';
-      } else {
-        t.Source = 'UNKNOWN';
-      }
+      t.Source = SmsClients.sourceFromBody(body);
 
       return t;
     } catch (e) {

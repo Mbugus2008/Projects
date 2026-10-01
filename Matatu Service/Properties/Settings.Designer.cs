@@ -12,7 +12,7 @@ namespace Collection.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -76,7 +76,7 @@ namespace Collection.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Vehicles")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://services.trimline.co.ke:4022/Metroservice/WS/MetroTrans/Page/Vehicles")]
         public string Collection_Vehicles_Vehicles_Service {
             get {
                 return ((string)(this["Collection_Vehicles_Vehicles_Service"]));

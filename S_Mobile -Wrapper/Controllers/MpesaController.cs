@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using S_Mobile.Controllers.Clients;
 using S_Mobile.Models;
+using S_Mobile.Models.MpesaPull;
 using S_Mobile.Models.Paybill;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -201,6 +203,72 @@ namespace S_Mobile.Controllers
             catch (Exception ex) { Logging.Logging.ReportError(ex); }
 
             return new MpesaResponse() { ResultCode = 0, ResultDesc = "Accepted" };
+        }
+
+        /// <summary>
+        /// Lists running-balance gaps in [MPESA Transactions] (candidate missed C2B transactions).
+        /// Optionally filter by paybill and date (defaults to today).
+        /// </summary>
+        [HttpPost]
+        [Route("api/mpesapull/check")]
+        public Logging.Results<List<MpesaGap>> MpesaPullCheck(MpesaPullRequest request)
+        {
+            try
+            {
+                using (var ctx = new MobileEntities())
+                {
+                    var service = new MpesaPullService(ctx);
+                    return service.CheckGaps(request == null ? null : request.Paybill, request == null ? (DateTime?)null : request.Date);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                return new Logging.Results<List<MpesaGap>>() { Code = -1, Desc = ex.Message };
+            }
+        }
+
+        /// <summary>Same as api/mpesapull/check but available as GET (handy for browsers/tests).</summary>
+        [HttpGet]
+        [Route("api/mpesapull/check")]
+        public Logging.Results<List<MpesaGap>> MpesaPullCheckGet(string paybill = null)
+        {
+            try
+            {
+                using (var ctx = new MobileEntities())
+                {
+                    var service = new MpesaPullService(ctx);
+                    return service.CheckGaps(paybill);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                return new Logging.Results<List<MpesaGap>>() { Code = -1, Desc = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// Finds gaps and recovers the missing transactions via the Safaricom Pull Transactions API,
+        /// inserting them and handing them to the same paybill processing used by /api/confirm.
+        /// </summary>
+        [HttpPost]
+        [Route("api/mpesapull/recover")]
+        public Logging.Results<MpesaPullRunResult> MpesaPullRecover(MpesaPullRequest request)
+        {
+            try
+            {
+                using (var ctx = new MobileEntities())
+                {
+                    var service = new MpesaPullService(ctx);
+                    return service.Recover(request == null ? null : request.Paybill, request == null ? (DateTime?)null : request.Date);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                return new Logging.Results<MpesaPullRunResult>() { Code = -1, Desc = ex.Message };
+            }
         }
     }
 }

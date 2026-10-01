@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:clipChildren="false" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Space android:layout_width="0.0dp" android:layout_height="0.0dp" android:layout_weight="@dimen/ws_nav_drawer_top_space_weight" />
+    <androidx.wear.widget.CircledImageView android:layout_gravity="center" android:id="@id/ws_nav_drawer_icon_0" android:layout_weight="@dimen/ws_nav_drawer_items_weight" style="@style/WsSinglePageNavDrawerIconStyle" />
+    <include layout="@layout/ws_single_page_nav_drawer_text" />
+</LinearLayout>

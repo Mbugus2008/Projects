@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>METROTRANS SACCO - Collections Dashboard</title>
+<link rel="icon" type="image/png" href="../logo.png">
+<link rel="apple-touch-icon" href="../logo.png">
+<style>
+  :root{
+    --brand:#1F3863; --brand2:#2E5190; --accent:#C0243F; --ink:#1B2431; --muted:#6B7280;
+    --bg:#F4F6F9; --card:#FFFFFF; --line:#E3E6ED; --green:#2E7D32; --red:#C0243F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,"Segoe UI",Roboto,Arial,sans-serif}
+  .top{position:sticky;top:0;z-index:6}
+  header{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:14px 22px;
+         display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+         box-shadow:0 2px 10px rgba(31,56,99,.28)}
+  .ribbon{background:#F6F8FB;border-bottom:1px solid var(--line);box-shadow:0 2px 6px rgba(16,24,40,.06);
+          display:flex;padding:4px 8px 2px;flex-wrap:wrap;align-items:stretch}
+  .rmain{display:flex;flex-wrap:wrap;align-items:stretch}
+  .rgroup{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:2px 12px 0;border-right:1px solid #E1E6EF}
+  .rgroup:last-child{border-right:0}
+  .rbtns{display:flex;flex-direction:column;gap:4px;align-items:center}
+  .rbrow{display:flex;gap:2px;align-items:center;justify-content:center}
+  .rlabel{font-size:10px;color:#7A8599;text-align:center;margin-top:3px}
+  .rbtn{border:0;background:transparent;color:var(--ink);border-radius:6px;padding:5px 9px;margin:2px 0;
+        font:inherit;font-size:11.5px;font-weight:600;cursor:pointer;text-decoration:none;
+        display:inline-flex;flex-direction:column;align-items:center;gap:3px;line-height:1.1;min-width:52px}
+  .rbtn svg{width:22px;height:22px;flex:none}
+  .rbtn:hover{background:#E9EEF7}
+  .rbtn:active{background:#DCE5F3}
+  .rbtn.active{background:#D6E3F5;color:var(--brand);box-shadow:inset 0 0 0 1px #B7C9E6}
+  .rdate{border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:inherit;font-size:12.5px;background:#fff}
+.rnav{width:150px;font-size:11.5px;letter-spacing:.2px;color:var(--ink)}
+  .brand{display:flex;flex-direction:column}
+  .brand b{font-size:20px;letter-spacing:.5px}
+  .brand span{font-size:12px;opacity:.9}
+  .controls{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:13px}
+  .controls input[type=date]{border:0;border-radius:8px;padding:7px 10px;font:inherit}
+  .controls label{display:flex;gap:6px;align-items:center;cursor:pointer;user-select:none}
+  .btn{border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer;
+       background:#ffffff;color:var(--brand)}
+  .btn:active{transform:translateY(1px)}
+  main{max-width:1200px;margin:20px auto;padding:0 16px 40px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+        box-shadow:0 1px 3px rgba(16,24,40,.06)}
+  .card .k{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .card .v{font-size:26px;font-weight:700;margin-top:6px;color:var(--brand)}
+  .card .s{font-size:12px;color:var(--muted);margin-top:2px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:16px;
+          box-shadow:0 1px 3px rgba(16,24,40,.06);overflow:hidden}
+  section h2{margin:0;padding:13px 18px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;
+             color:var(--brand);border-bottom:1px solid var(--line);background:#FAFBFD;
+             display:flex;align-items:center;justify-content:flex-start;gap:10px}
+  section h2 > *:last-child{margin-left:auto}
+  section h2.clk{cursor:pointer;user-select:none}
+  h2 .chev{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;
+           border:1px solid #CDD7E8;border-radius:4px;background:#F4F6FB;color:var(--brand);
+           font-size:10px;line-height:1;margin-right:2px}
+  section.collapsed > *:not(h2){display:none!important}
+  .xls{border:1px solid #C6CEDF;background:#F4F6FB;color:var(--brand);border-radius:7px;padding:4px 10px;
+       font:inherit;font-size:11px;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0;white-space:nowrap;
+       text-decoration:none;display:inline-block}
+  .xls:hover{background:#E9EEF7}
+  .hact{display:flex;gap:8px;align-items:center}
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;background:var(--brand);color:#fff;
+         padding:10px 16px;border-radius:9px;font-size:12.5px;box-shadow:0 6px 18px rgba(16,24,40,.32);
+         z-index:99;opacity:0;pointer-events:none;transition:opacity .18s ease}
+  .toast.on{opacity:1}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:9px 18px;text-align:left;border-bottom:1px solid #F1F3F7;white-space:nowrap}
+  th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:#FCFCFE}
+  tr:last-child td{border-bottom:0}
+  tr:nth-child(even) td{background:#FCFDFF}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .total-row td{font-weight:700;background:#EDF1F8!important;border-top:2px solid #CDD7E8}
+  .pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700}
+  .pill.g{background:#E8F5E9;color:var(--green)}
+  .pill.b{background:#E8ECF5;color:#2E5190}
+  .pill.o{background:#FDF3E2;color:#B26A00}
+  .pill.r{background:#FDECEA;color:#C0392B}
+  .muted{color:var(--muted)}
+  #status{max-width:1200px;margin:14px auto 0;padding:10px 16px;font-size:13px;color:var(--muted);
+          display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  #error{display:none;max-width:1200px;margin:14px auto 0;padding:12px 16px;border-radius:10px;
+         background:#FDECEA;border:1px solid #F5C6C4;color:#B3261E;font-size:14px}
+  .empty{padding:18px;color:var(--muted);font-size:14px}
+  .chart{display:flex;align-items:stretch;gap:5px;height:190px;padding:14px 18px 10px}
+  .chart .col{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+  .chart .barwrap{flex:1;display:flex;align-items:flex-end}
+  .chart .bar{width:100%;background:linear-gradient(180deg,#5B7BB4,#1F3863);border-radius:6px 6px 0 0;min-height:3px;transition:height .35s ease}
+  .chart .bar.cmp{background:linear-gradient(180deg,#D3DBE8,#B6C2D6)}
+  .chart .hr{text-align:center;font-size:10px;color:var(--muted)}
+  .subhd{padding:12px 18px 0;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .spark{display:inline-flex;align-items:flex-end;gap:2px;height:24px}
+  .spark i{width:4px;background:#7E9BCC;border-radius:1px;min-height:2px;align-self:flex-end}
+  .spark i.hi{background:#C0243F}
+  .spark i.cmp{background:#C9D4E6}
+  .split{font-size:12px;color:var(--muted);white-space:normal;max-width:300px;line-height:1.55}
+  .tablewrap{overflow-x:auto}
+  .ths{white-space:normal;max-width:86px;font-size:10.5px;line-height:1.25}
+  .nm{display:flex;flex-direction:column;gap:4px}
+  .track{height:5px;max-width:220px;background:#EDF2F9;border-radius:3px;overflow:hidden}
+  .track i{display:block;height:100%;background:linear-gradient(90deg,#6E8DC4,#1F3863);border-radius:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  /* the vehicle chips grow with a fleet range - keep them in a scrollable box */
+  #vehChips{max-height:82px;overflow-y:auto;align-content:flex-start;padding:1px 6px 1px 0;
+            scrollbar-width:thin;scrollbar-color:#C6CEDF transparent}
+  #vehChips::-webkit-scrollbar{width:8px}
+  #vehChips::-webkit-scrollbar-thumb{background:#C6CEDF;border-radius:8px}
+  #vehChips::-webkit-scrollbar-track{background:transparent}
+  #agentFilters{max-height:190px;overflow-y:auto;align-content:flex-start;padding:1px 6px 1px 0;scrollbar-width:thin;scrollbar-color:#C6CEDF transparent}
+  .vhcount{font-size:11px;font-weight:700;color:var(--brand);white-space:nowrap}
+  /* filters as ribbon dropdown buttons */
+  .fhold{position:relative}
+  .fhold .rbtn{position:relative}
+  .fdrop{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:390px;max-width:min(640px,92vw);
+         background:#fff;border:1px solid #E3E6ED;border-radius:12px;box-shadow:0 14px 40px rgba(10,20,40,.28);
+         padding:11px 13px;z-index:95;text-align:left}
+  .fdrop.open{display:block}
+  .fbadge{display:none;position:absolute;top:1px;right:1px;background:#E8710A;color:#fff;font-size:9.5px;font-weight:800;
+          line-height:1;padding:2px 5px;border-radius:9px;box-shadow:0 0 0 1.5px #F6F8FB}
+  .fbadge.on{display:block}
+  .fbrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .fdrop .fbrow + .fbrow{margin-top:9px;padding-top:9px;border-top:1px dashed #E7EAF1}
+  .flabel{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:104px}
+  .vin{border:1px solid var(--line);border-radius:8px;padding:6px 10px;font:inherit;font-size:12.5px;min-width:240px;background:#fff}
+  .vin:focus{outline:none;border-color:#B9C5DA;box-shadow:0 0 0 3px rgba(31,56,99,.14)}
+  .vclear{border:0;background:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer;padding:4px 2px}
+  .chip .x{opacity:.85;margin-left:3px;font-weight:700}
+  .mini{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;border-radius:8px;padding:6px 10px;
+        font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+  .mini:hover{background:rgba(255,255,255,.25)}
+  .rng{display:flex;align-items:center;gap:6px}
+  body::after{content:"";position:fixed;inset:0;z-index:2;pointer-events:none;background-image:url(../logo.png);
+              background-repeat:no-repeat;background-position:center;background-size:min(58vh,58vw);opacity:.05}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer;user-select:none;background:#fff;color:var(--ink);transition:background .15s,border-color .15s}
+  .chip:hover{border-color:#B9C5DA}
+  .chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  .chip .c{opacity:.65;font-weight:400;margin-left:4px}
+  .chip .ln{display:block;font-weight:700}
+  .chip .tot{display:block;font-weight:400;font-size:11px;opacity:.75;margin-top:1px}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px}
+  @media print{
+    header,#status,#error,.filterbar,.noprint,.chev{display:none!important}
+    main{max-width:none;margin:0;padding:0 6mm}
+    section.collapsed > *:not(h2){display:block!important}
+    .tablewrap{overflow:visible!important}
+    section{break-inside:auto;box-shadow:none}
+    section h2{break-after:avoid}
+    thead{display:table-header-group}
+    tr{break-inside:avoid}
+    body::after{opacity:.06}
+  }
+  @media(max-width:640px){ .controls{width:100%;justify-content:space-between} th,td{padding:8px 10px} }
+</style>
+</head>
+<body>
+<div class="top">
+<header>
+  <div class="brand">
+    <b>METROTRANS SACCO</b>
+    <span>Collections Dashboard</span>
+  </div>
+</header>
+<div class="ribbon noprint">
+  <div class="rmain">
+    <div class="rgroup fhold">
+      <div class="rbtns">
+        <div class="rbrow"><input type="date" id="dateOne" class="rdate"><input type="text" id="navDate" class="rdate rnav" autocomplete="off" spellcheck="false" placeholder="010126..013126 · T" title="NAV-style date: 010126 = 01-01-2026 · 010126..013126 = a range · T = today"><button class="rbtn" id="rangeBtn"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#2E75B6" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#2E75B6" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#2E75B6" stroke-width="1.9" stroke-linecap="round"/><path d="M7.2 14.9h9.6M7.2 14.9l2.5-2.5M16.8 14.9l-2.5 2.5" stroke="#4C9AFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Range</button></div>
+        <div class="rbrow">
+        <button class="rbtn" data-days="1"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#2E75B6" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#2E75B6" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#2E75B6" stroke-width="1.9" stroke-linecap="round"/><rect x="6.8" y="12.3" width="10.4" height="5.4" rx="1.2" fill="#4C9AFF"/></svg>Today</button>
+        <button class="rbtn" data-days="7"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#2FA84F" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#2FA84F" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#2FA84F" stroke-width="1.9" stroke-linecap="round"/><rect x="6.6" y="12" width="11" height="2.6" rx="1.3" fill="#2FA84F"/><rect x="6.6" y="15.6" width="6" height="2.6" rx="1.3" fill="#97D9AC"/></svg>7 days</button>
+        <button class="rbtn" data-days="30"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#7A5AF8" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#7A5AF8" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#7A5AF8" stroke-width="1.9" stroke-linecap="round"/><circle cx="8.4" cy="13.2" r="1.25" fill="#7A5AF8"/><circle cx="12" cy="13.2" r="1.25" fill="#A995FF"/><circle cx="15.6" cy="13.2" r="1.25" fill="#7A5AF8"/><circle cx="8.4" cy="16.8" r="1.25" fill="#A995FF"/><circle cx="12" cy="16.8" r="1.25" fill="#7A5AF8"/></svg>30 days</button>
+        <button class="rbtn" data-days="90"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#0E9F6E" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#0E9F6E" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#0E9F6E" stroke-width="1.9" stroke-linecap="round"/><circle cx="8.4" cy="13.2" r="1.25" fill="#0E9F6E"/><circle cx="12" cy="13.2" r="1.25" fill="#34C38F"/><circle cx="15.6" cy="13.2" r="1.25" fill="#0E9F6E"/><circle cx="8.4" cy="16.8" r="1.25" fill="#34C38F"/><circle cx="12" cy="16.8" r="1.25" fill="#0E9F6E"/><circle cx="15.6" cy="16.8" r="1.25" fill="#0E9F6E"/></svg>90 days</button>
+        </div>
+      </div>
+      <div class="rlabel">Date</div>
+      <div class="fdrop" id="fdRange"><div class="fbrow"><span class="flabel">Custom range</span><input type="date" id="dateFrom" class="rdate"><span style="color:var(--muted)">&rarr;</span><input type="date" id="dateTo" class="rdate"></div></div>
+    </div>
+    <div class="rgroup">
+      <div class="rbtns">
+        <div class="rbrow"><button class="rbtn" id="refresh"><svg viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><polyline points="21 3.2 21 9 15.2 9"/></svg>Refresh</button></div>
+        <div class="rbrow"><button class="rbtn active" id="autoBtn"><svg viewBox="0 0 24 24" fill="none" stroke="#F29900" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><polyline points="12 7.4 12 12.3 15.4 14"/></svg>Auto 5 min</button></div>
+      </div>
+      <div class="rlabel">Refresh</div>
+    </div>
+    <div class="rgroup">
+      <div class="rbtns">
+        <div class="rbrow"><button class="rbtn" id="expandAll"><svg viewBox="0 0 24 24" fill="none" stroke="#4472C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6.5 5.5 12 11 17.5 5.5"/><polyline points="6.5 12.5 12 18 17.5 12.5"/></svg>Expand all</button></div>
+        <div class="rbrow"><button class="rbtn" id="collapseAll"><svg viewBox="0 0 24 24" fill="none" stroke="#4472C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5.5 6.5 11 12 5.5 17.5"/><polyline points="12.5 6.5 18 12 12.5 17.5"/></svg>Collapse all</button></div>
+      </div>
+      <div class="rlabel">View</div>
+    </div>
+    <div class="rgroup fhold" id="filterbar">
+      <div class="rbtns">
+        <div class="rbrow"><button class="rbtn" id="ftType"><svg viewBox="0 0 24 24"><path d="M3.6 6.8c0-.9.7-1.6 1.6-1.6h6.2c.45 0 .88.19 1.19.52l6.1 6.3c.62.64.6 1.66-.05 2.27l-5.5 5.2c-.63.6-1.63.58-2.24-.04l-5.7-5.9a1.6 1.6 0 0 1-.44-1.12z" fill="#8FAADC" stroke="#2E75B6" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7.6" cy="8.9" r="1.25" fill="#fff"/></svg>Type<span class="fbadge" id="fbType"></span></button>
+        <button class="rbtn" id="ftVeh"><svg viewBox="0 0 24 24"><rect x="2.8" y="9.4" width="11.6" height="7.4" rx="1.3" fill="#8FAADC"/><path d="M14.4 11.6h3.4l2.8 3v2.2h-6.2z" fill="#2E75B6"/><circle cx="7" cy="17.8" r="1.7" fill="#1F3863"/><circle cx="17.2" cy="17.8" r="1.7" fill="#1F3863"/></svg>Vehicle<span class="fbadge" id="fbVeh"></span></button><button class="rbtn" id="ftOwner"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.7" fill="#2E75B6"/><path d="M5 20.2c0-3.9 3.2-6.1 7-6.1s7 2.2 7 6.1z" fill="#8FAADC"/></svg>Owner<span class="fbadge" id="fbOwner"></span></button></div>
+        <div class="rbrow"><button class="rbtn" id="ftAgent"><svg viewBox="0 0 24 24"><circle cx="16.8" cy="9.2" r="2.8" fill="#8FAADC"/><path d="M16 14c3.4 0 5.8 2.3 5.8 6h-5.6z" fill="#8FAADC"/><circle cx="9" cy="7.8" r="3.8" fill="#2E75B6"/><path d="M2.6 20c0-3.6 2.9-5.9 6.4-5.9s6.4 2.3 6.4 5.9z" fill="#2E75B6"/></svg>Agent<span class="fbadge" id="fbAgent"></span></button><button class="rbtn" id="ftRoute"><svg viewBox="0 0 24 24"><path d="M12 22s-7-6.4-7-11.4a7 7 0 0 1 14 0C19 15.6 12 22 12 22z" fill="#E8503A"/><circle cx="12" cy="10.4" r="2.6" fill="#fff"/></svg>Route<span class="fbadge" id="fbRoute"></span></button><button class="rbtn" id="fClearAll"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="#FDE7E4" stroke="#E8503A" stroke-width="1.8"/><path d="M9 9l6 6M15 9l-6 6" stroke="#E8503A" stroke-width="2" stroke-linecap="round"/></svg>Clear</button></div>
+      </div>
+      <div class="rlabel">Filters</div>
+      <div class="fdrop" id="fdType"><div class="fbrow"><span class="flabel">Collection type</span><div class="chips" id="typeFilters"></div></div></div>
+      <div class="fdrop" id="fdVeh"><div class="fbrow"><span class="flabel">Vehicle</span><div class="chips" id="vehChips"></div><input class="vin" id="vehInput" list="vehSuggestions" placeholder="vehicle or fleet no - list M129|M142 or a range M601..M689" autocomplete="off"><datalist id="vehSuggestions"></datalist><span class="vhcount" id="vehCount"></span><button class="vclear" id="vehClear" style="display:none">clear all</button></div><div class="fbrow"><span class="flabel">Saved filters</span><div class="chips" id="savedFilters"></div><input class="vin" id="sfName" placeholder="name it - e.g. M601-689 fleet" style="max-width:230px" autocomplete="off"><button class="vclear" id="sfSave">save current</button></div></div>
+      <div class="fdrop" id="fdRoute"><div class="fbrow" id="routeRow" style="display:none"><span class="flabel">Route</span><div class="chips" id="routeFilters"></div></div></div>
+      <div class="fdrop" id="fdAgent"><div class="fbrow"><span class="flabel">Agent</span><div class="chips" id="agentFilters"></div></div></div>
+      <div class="fdrop" id="fdOwner"><div class="fbrow"><span class="flabel">Owner</span><div class="chips" id="ownerFilters"></div></div></div>
+    </div>
+    <div class="rgroup">
+      <div class="rbtns"><button class="rbtn" id="printBtn"><svg viewBox="0 0 24 24"><path d="M7 8.5V3.8h10v4.7z" fill="#8FAADC"/><rect x="3" y="8.5" width="18" height="8.6" rx="1.6" fill="#2E75B6"/><rect x="6.6" y="14.2" width="10.8" height="6.4" rx="0.9" fill="#fff" stroke="#2E75B6" stroke-width="1.4"/><circle cx="17.7" cy="11.5" r="0.95" fill="#fff"/></svg>Print</button></div>
+      <div class="rlabel">Output</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="error"></div>
+<div id="status"><span id="updated">Loading...</span><span id="counts"></span></div>
+
+<main>
+  <div class="cards">
+    <div class="card"><div class="k">Total collected</div><div class="v" id="kTotal">-</div><div class="s" id="kTotalS"></div></div>
+    <div class="card"><div class="k">Receipts</div><div class="v" id="kReceipts">-</div><div class="s" id="kReceiptsS"></div></div>
+    <div class="card"><div class="k">Agents collecting</div><div class="v" id="kAgents">-</div><div class="s" id="kAgentsS"></div></div>
+    <div class="card"><div class="k">Vehicles</div><div class="v" id="kVehicles">-</div><div class="s" id="kVehiclesS"></div></div>
+  </div>
+
+  <section>
+    <h2>By route<span class="hact"><button class="xls" data-export="route">Export CSV</button><a class="xls" id="routeMore" href="routes.html">More &rarr;</a></span></h2>
+    <table id="routeTable">
+      <thead><tr><th>Route</th><th class="num">Vehicles</th><th class="num">Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="empty" id="routeEmpty" style="display:none">No collections in this range.</div>
+  </section>
+
+  <section>
+    <h2>By agent<span class="hact"><button class="xls" data-export="agent">Export CSV</button><a class="xls" id="agentMore" href="agentsystems.html">More &rarr;</a></span></h2>
+    <div class="tablewrap">
+    <table id="agentTable">
+      <thead><tr><th>Agent</th><th class="num">Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+    <div class="empty" id="agentEmpty" style="display:none">No collections for this date.</div>
+  </section>
+
+  <section>
+    <h2>By type<button class="xls" data-export="type">Export CSV</button></h2>
+    <table id="typeTable">
+      <thead><tr><th>Type</th><th class="num">Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="empty" id="typeEmpty" style="display:none">No collections for this date.</div>
+  </section>
+
+  <section id="vehSection">
+    <h2><span id="vehTitle">By vehicle</span><button class="xls" data-export="veh">Export CSV</button></h2>
+    <div class="tablewrap">
+    <table id="vehTable">
+      <thead><tr><th>Vehicle</th><th title="Last 7 days daily totals - darker bar = best day in the selection">Trend</th><th class="num">Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+    <div class="empty" id="vehEmpty" style="display:none">No collections for this date.</div>
+    <div class="empty" id="vehNote" style="display:none"></div>
+  </section>
+
+  <section>
+    <h2>Recent receipts<button class="xls" data-export="rec">Export CSV</button></h2>
+    <table id="recTable">
+      <thead><tr><th>Ref</th><th>Time</th><th>Agent</th><th>Vehicle</th><th>Type</th><th class="num">Items</th><th class="num">Total</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="empty" id="recEmpty" style="display:none">No receipts for this date.</div>
+  </section>
+</main>
+
+<footer>METROTRANS SACCO &middot; live data from Collect.asmx</footer>
+
+<script>
+(function(){
+  "use strict";
+  var BASE = "../Collect.asmx/";
+  var agents = {};   // Agent_Code -> Name
+  var agentRoute = {}; // Agent_Code -> Route (Users feed, when set)
+  var types  = {};   // Type code  -> Name
+  var vehMeta = {};  // Vehicle_Number -> {fleetNo, owner, dues, route}
+  var vehMetaUp = {}; // same map keyed by UPPERCASE plate (fast lookups)
+  var routes = {};   // Route code -> Description (from Collect.asmx/Routes)
+  var selTypes = [];  // globally selected type codes (empty = all types)
+  var selAgents = []; // globally selected agent codes (empty = all agents)
+  var selOwners = []; // globally selected owners (SACCO / INVESTOR, empty = all)
+  var selRoutes = []; // globally selected route codes (empty = all routes)
+  var selVehs = [];   // globally selected vehicles, UPPERCASE plates (empty = all vehicles)
+  var retryPending = false; // one retry when a filter is typed before the data has loaded
+  var lastTrendKey = "", lastTrendAt = 0; // the 7-day trend window is cached for 10 minutes
+  var presentPlates = []; // plates with rows in the loaded data (uppercase), for suggestions + prefix matching
+  var lastRows = null; // last loaded (reversed-filtered) rows, so the filters can re-slice without a refetch
+  var lastRange = null; // {days, list:[iso...]} for the loaded range (daily trend + sparklines)
+  var lastTrend = null, lastTrendRows = null; // last-7-days window for the trend comparison
+  var MAX_DAYS = 92;   // max span per load (a quarter: ~120k rows, ~9 MB gzipped, 20-35s)
+  var timer = null;
+  var watchdog = null; // stall guard for the in-flight load (scales with range size)
+  var loadSeq = 0;     // drops stale responses when a newer load is started meanwhile
+
+  function api(method, body){
+    return fetch(BASE + method, {
+      method: "POST",
+      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      body: body || "x=y"
+    }).then(function(r){
+      if(!r.ok) throw new Error("HTTP " + r.status + " from " + method);
+      return r.text();
+    }).then(function(t){ return t ? JSON.parse(t) : null; });
+  }
+
+  // Data before 2026-01-01 lives in the Transactions ARCHIVE (Tarchive);
+  // 2026 onwards is live (Transactions page). A range that spans the
+  // cutoff is fetched from both sources and merged.
+  var ARCHIVE_CUT = new Date(2026, 0, 1);
+  function txFetch(from, to){
+    var parts = [];
+    if(from.getTime() < ARCHIVE_CUT.getTime()){
+      var aTo = new Date(Math.min(to.getTime(), ARCHIVE_CUT.getTime() - 86400000));
+      parts.push(api("Tarchive", "data=" + encodeURIComponent(JSON.stringify({firstdate: ddmm(from), LastDate: ddmm(aTo), user: ""}))));
+    }
+    if(to.getTime() >= ARCHIVE_CUT.getTime()){
+      var lFrom = new Date(Math.max(from.getTime(), ARCHIVE_CUT.getTime()));
+      parts.push(lFrom.getTime() === to.getTime()
+        ? api("GetallCollections", "data=" + encodeURIComponent(JSON.stringify({firstdate: ddmm(lFrom), user: ""})))
+        : api("GetCollections_byDates", "data=" + encodeURIComponent(JSON.stringify({firstdate: ddmm(lFrom), LastDate: ddmm(to), user: ""}))));
+    }
+    if(parts.length === 1) return parts[0];
+    return Promise.all(parts).then(function(arrs){
+      var out = [];
+      arrs.forEach(function(a){ if(a && a.length) out = out.concat(a); });
+      return out;
+    });
+  }
+
+  function fmt(n){
+    return (n || 0).toLocaleString(undefined,{minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function fmt0(n){
+    return (n || 0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  // Collection types the office treats as one "Management" bucket (shown as the first type column)
+  var TYPE_COMBINE = {MANAGEMENT:"MANAGEMENT", SACCO:"MANAGEMENT", WELFARE:"MANAGEMENT", OPERATION:"MANAGEMENT", F1:"MANAGEMENT"};
+  function combineType(c){ return TYPE_COMBINE[c] || c; }
+  function groupMap(m){
+    var out = {};
+    Object.keys(m || {}).forEach(function(c){ var g = combineType(c); out[g] = (out[g] || 0) + m[c]; });
+    return out;
+  }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function ddmm(d){ return pad(d.getDate()) + "-" + pad(d.getMonth()+1) + "-" + d.getFullYear(); }
+  function iso(d){ return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate()); }
+  function ymd(dm){ var p = String(dm || "").split("-"); return p.length === 3 && p[2].length === 4 ? p[2] + "-" + p[1] + "-" + p[0] : ""; }
+
+  // ---- CSV export ----
+  function csvCell(v){
+    var q = String.fromCharCode(34);
+    return q + String(v == null ? "" : v).split(q).join(q + q) + q;
+  }
+
+  function rangeTag(){
+    var f = document.getElementById("dateFrom").value || "", t = document.getElementById("dateTo").value || "";
+    return f === t ? f : f + "_to_" + t;
+  }
+
+  function downloadCsv(name, lines){
+    var blob = new Blob([String.fromCharCode(65279) + lines.join("\r\n")], {type:"text/csv;charset=utf-8;"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "metrotrans-" + name + "-" + rangeTag() + ".csv";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.parentNode.removeChild(a); }, 0);
+  }
+
+  function tableLines(table){
+    var lines = [];
+    Array.prototype.forEach.call(table.querySelectorAll("tr"), function(tr){
+      var cells = [];
+      Array.prototype.forEach.call(tr.children, function(c){
+        cells.push(csvCell(String(c.innerText || c.textContent || "").replace(/\s+/g, " ").trim()));
+      });
+      lines.push(cells.join(","));
+    });
+    return lines;
+  }
+
+  function exportTable(tableId, name){
+    var table = document.getElementById(tableId);
+    downloadCsv(name, tableLines(table));
+  }
+
+  var toastTimer = null;
+  function toast(msg){
+    var t = document.getElementById("toast");
+    if(!t){
+      t = document.createElement("div");
+      t.id = "toast";
+      t.className = "toast";
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.classList.add("on");
+    if(toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("on"); }, 2600);
+  }
+
+  /** Share one section: the system share sheet on phones (CSV file or text),
+   *  clipboard summary on desktop browsers that have no share sheet. */
+  function shareSection(csvBtn){
+    var sec = csvBtn.closest("section");
+    if(!sec) return;
+    var tbl = sec.querySelector("table");
+    if(!tbl){ alert("Nothing to share in this section."); return; }
+    var title = (sec.querySelector("h2").innerText || "Report").replace(/[\u25B8\u25BE]/g, "").replace(/\s*(Export (CSV|PDF)|Share)\s*/g, " ").replace(/\s+/g, " ").trim();
+    var f = document.getElementById("dateFrom").value, tt = document.getElementById("dateTo").value;
+    var range = f === tt ? f : f + " \u2192 " + tt;
+    var rows = [];
+    var tcol = trendColIndex(tbl);
+    Array.prototype.forEach.call(tbl.querySelectorAll("tr"), function(tr){
+      var one = [];
+      Array.prototype.forEach.call(tr.children, function(c, ci){
+        if(ci === tcol) return;
+        var v = String(c.innerText || "").replace(/\s+/g, " ").trim();
+        if(v) one.push(v);
+      });
+      if(one.length) rows.push(one.join(" \u00b7 "));
+    });
+    var summary = title + "  (" + range + ")" + "\n" + rows.slice(0, 20).join("\n") +
+      (rows.length > 20 ? "\n\u2026 +" + (rows.length - 20) + " more rows" : "");
+    var file = null;
+    try{
+      var name = csvBtn.getAttribute("data-export") || "report";
+      file = new File([String.fromCharCode(65279) + tableLines(tbl).join("\r\n")],
+        "metrotrans-" + name + "-" + rangeTag() + ".csv", {type:"text/csv"});
+    }catch(e){ file = null; }
+    if(file && navigator.canShare && navigator.canShare({files:[file]})){
+      navigator.share({files:[file], title:title, text:summary}).catch(function(){});
+      return;
+    }
+    if(navigator.share){
+      navigator.share({title:title, text:summary, url:location.href}).catch(function(){});
+      return;
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(summary + "\n" + location.href).then(function(){
+        toast("Summary copied - paste it into WhatsApp, Email or Excel");
+      }, function(){
+        legacyCopy(summary + "\n" + location.href);
+      });
+      return;
+    }
+    legacyCopy(summary + "\n" + location.href);
+  }
+
+  /** Clipboard without permissions (older browsers / when the async API is blocked). */
+  function legacyCopy(text){
+    try{
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      if(ok){ toast("Summary copied - paste it into WhatsApp, Email or Excel"); return; }
+    }catch(e){}
+    window.prompt("Copy the summary (Ctrl+C, then Enter):", text);
+  }
+
+  function showError(msg){
+    var e = document.getElementById("error");
+    if(msg){ e.style.display = "block"; e.textContent = msg; }
+    else{ e.style.display = "none"; }
+  }
+
+  function load(){
+    var seq = ++loadSeq;
+    var fromEl = document.getElementById("dateFrom"), toEl = document.getElementById("dateTo");
+    var from = fromEl.value ? new Date(fromEl.value + "T00:00:00") : new Date();
+    var to   = toEl.value ? new Date(toEl.value + "T00:00:00") : from;
+    if(to < from){ var t2 = to; to = from; from = t2; }
+    var capped = false;
+    if(Math.round((to - from) / 86400000) + 1 > MAX_DAYS){
+      from = new Date(to.getTime() - (MAX_DAYS - 1) * 86400000);
+      fromEl.value = iso(from);
+      capped = true;
+    }
+    var days = Math.round((to - from) / 86400000) + 1;
+    var isoFrom = iso(from), isoTo = iso(to);
+    var trendKey = ddmm(to); // cache key for the 7-day trend window (heavy query)
+    var rangeLabel = days === 1 ? ddmm(from) : ddmm(from) + " \u2192 " + ddmm(to);
+    var dayList = [];
+    for(var di = 0; di < days; di++){ dayList.push(iso(new Date(from.getTime() + di * 86400000))); }
+    lastRange = {days: days, list: dayList, fromIso: isoFrom, toIso: isoTo};
+    var trendFrom = new Date(to.getTime() - 6 * 86400000);
+    document.getElementById("updated").textContent = "Loading " + rangeLabel + "...";
+    showError("");
+
+    var mainReq = txFetch(from, to);
+
+    Promise.all([
+      mainReq,
+      Object.keys(agents).length ? Promise.resolve(null) : api("logins"),
+      Object.keys(types).length  ? Promise.resolve(null) : api("Transtypes"),
+      Object.keys(vehMeta).length ? Promise.resolve(null) : api("Vehicles"),
+      Object.keys(routes).length ? Promise.resolve(null) : api("Routes"),
+      days < 7 && (!lastTrendRows || trendKey !== lastTrendKey || (Date.now() - (lastTrendAt || 0)) > 600000)
+        ? txFetch(trendFrom, to)
+        : Promise.resolve(null)
+    ]).then(function(res){
+      if(seq !== loadSeq) return; // a newer load superseded this one
+      if(res[1]) res[1].forEach(function(u){ agents[u.Agent_Code] = u.Name; if(u.Route) agentRoute[u.Agent_Code] = String(u.Route).trim(); });
+      if(res[2]) res[2].forEach(function(t){ types[t.Code] = t.Name; });
+      if(res[3]) res[3].forEach(function(v){
+        if(!v.Vehicle_Number) return;
+        // plates never contain spaces - BC has a "KDX 392K" style typo that must not
+        // create a second fleet entry for the same vehicle
+        var plate = v.Vehicle_Number.toUpperCase().replace(/\s+/g, "");
+        var info = {fleetNo:(v.Fleet_No || "").trim(), owner:v.Owner, dues:Number(v.Dues) || 0, route:(v.Route || "").trim(),
+                    collect:Number(v.Collect) || 0, active:v.Active === true};
+        vehMeta[plate] = info;
+        vehMetaUp[plate] = info;
+      });
+      if(res[4]) res[4].forEach(function(r){ if(r.Code) routes[r.Code] = r.Description || r.Code; });
+      if(days < 7){
+        var tAll = res[5] || [];
+        if(!Array.isArray(tAll)) tAll = [];
+        if(tAll.length) { lastTrendRows = tAll.slice(); lastTrendKey = trendKey; lastTrendAt = Date.now(); }
+      } else { lastTrendRows = null; }
+      var tList = []; // last 7 days ending at the selected end date - drives the vehicle Trend column
+      for(var ti = 0; ti < 7; ti++){ tList.push(iso(new Date(trendFrom.getTime() + ti * 86400000))); }
+      lastTrend = {list: tList};
+
+      var all = res[0] || [];
+      if(!Array.isArray(all)) all = [];
+      // every transaction is summed (no omission): a reversed payment's two lines
+      // (original + negative mirror) cancel each other, whatever its Constituency
+      var rows = all.filter(function(t){
+        if(days > 1){ var rd = ymd(t.Date); if(rd && (rd < isoFrom || rd > isoTo)) return false; } // keep rows inside the range
+        return true;
+      });
+      lastRows = rows;
+      renderTypeChips();
+      renderRouteChips();
+      renderVehPick();
+      renderAgentChips();
+      renderOwnerChips();
+      renderAll();
+      if(watchdog){ clearTimeout(watchdog); watchdog = null; }
+      showError(""); // clear a stale watchdog warning - the load finished
+      var now = new Date();
+      document.getElementById("updated").textContent =
+        "Updated " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) +
+        "  ·  " + rangeLabel + (days > 1 ? "  (" + days + " days)" : "") +
+        (capped ? "  ·  capped to last " + MAX_DAYS + " days" : "");
+      schedule();
+    }).catch(function(err){
+      if(seq !== loadSeq) return; // stale failure from a superseded load
+      if(watchdog){ clearTimeout(watchdog); watchdog = null; }
+      showError("Could not load data: " + err.message);
+      document.getElementById("updated").textContent = "Load failed";
+    });
+    // watchdog: never leave the page sitting on "Loading..." when a request stalls.
+    // Long ranges genuinely take longer, so the guard scales with the number of days.
+    if(watchdog) clearTimeout(watchdog);
+    watchdog = window.setTimeout(function(){
+      var st = document.getElementById("updated").textContent || "";
+      if(st.indexOf("Loading") === 0){
+        document.getElementById("updated").textContent = "Load timed out";
+        showError("The server did not answer in time - press Refresh to try again.");
+      }
+    }, Math.max(30000, days * 2000));
+  }
+
+  // NOTE: reversed transactions are NOT hidden any more - every line is summed so a
+  // reversal always nets to zero with its original (even when Constituency is blank).
+
+  // Everything below the fetch is recomputed from the selected types only.
+  function passFilters(t){
+    if(selTypes.length && selTypes.indexOf(combineType(t.Type || "-")) === -1) return false;
+    if(selVehs.length && selVehs.indexOf(String(t.Loan_No || "").trim().toUpperCase()) === -1) return false;
+    if(selRoutes.length && selRoutes.indexOf(rowRoute(t)) === -1) return false;
+    if(selAgents.length && selAgents.indexOf(t.Agent_Code || "-") === -1) return false;
+    if(selOwners.length){
+      var om = vehMetaByPlate(String(t.Loan_No || "").trim());
+      var ob = om && om.owner === 1 ? "SACCO" : (om && om.owner === 2 ? "INVESTOR" : "");
+      if(ob === "" || selOwners.indexOf(ob) === -1) return false;
+    }
+    return true;
+  }
+
+  function renderAll(){
+    if(!lastRows) return;
+    var rows = lastRows.filter(passFilters);
+
+    var total = 0, byAgent = {}, byType = {}, byRoute = {}, receipts = {}, vmap = {};
+    var aType = {}, aRoute = {}, vType = {};
+    var dayAgg = !!(lastRange && lastRange.days > 1);
+    var daily = {}, vDaily = {};
+    rows.forEach(function(t){
+        var amt = Number(t.Amount) || 0;
+        total += amt;
+        var a = t.Agent_Code || "-";
+        byAgent[a] = byAgent[a] || {n:0, s:0}; byAgent[a].n++; byAgent[a].s += amt;
+        var ty = t.Type || "-";
+        byType[ty] = byType[ty] || {n:0, s:0}; byType[ty].n++; byType[ty].s += amt;
+        (aType[a] = aType[a] || {})[ty] = ((aType[a][ty]) || 0) + amt;
+        var b = t.OTTN || t.Document_No || "?";
+        var r = receipts[b] = receipts[b] || {ref:b, first:t, n:0, s:0, veh:"", types:{}};
+        r.n++; r.s += amt;
+        r.types[ty] = 1;
+        if(!r.veh && t.Loan_No) r.veh = t.Loan_No;
+        if(t.Time && (!r.first.Time || t.Time < r.first.Time)) r.first = t;
+        var vk = t.Loan_No || "NO VEHICLE";
+        vmap[vk] = vmap[vk] || {n:0, s:0}; vmap[vk].n++; vmap[vk].s += amt;
+        (vType[vk] = vType[vk] || {})[ty] = ((vType[vk][ty]) || 0) + amt;
+        var rt = rowRoute(t);
+        byRoute[rt] = byRoute[rt] || {n:0, s:0, v:{}}; byRoute[rt].n++; byRoute[rt].s += amt;
+        (aRoute[a] = aRoute[a] || {})[rt] = ((aRoute[a][rt]) || 0) + amt;
+        var plr = String(t.Loan_No || "").trim().toUpperCase();
+        if(plr) byRoute[rt].v[plr] = 1;
+        if(dayAgg){
+          var isoD = ymd(t.Date);
+          if(isoD){
+            daily[isoD] = (daily[isoD] || 0) + amt;
+            var pl = String(t.Loan_No || "").trim().toUpperCase();
+            if(pl){ var vd = vDaily[pl] || (vDaily[pl] = {}); vd[isoD] = (vd[isoD] || 0) + amt; }
+          }
+        }
+      });
+
+    document.getElementById("kTotal").textContent = fmt(total);
+    document.getElementById("kTotalS").textContent = rows.length + " line items";
+    document.getElementById("kReceipts").textContent = Object.keys(receipts).length;
+    document.getElementById("kReceiptsS").textContent = Object.keys(receipts).length ? "avg " + fmt(total / Object.keys(receipts).length) + " each" : "";
+    var agCount = Object.keys(byAgent).length;
+    document.getElementById("kAgents").textContent = agCount;
+    document.getElementById("kAgentsS").textContent = agCount ? "collecting" : "";
+    var vehCount = Object.keys(vmap).filter(function(k){
+      var m = vehMetaByPlate(k);
+      return k !== "NO VEHICLE" && m && m.fleetNo;
+    }).length;
+    document.getElementById("kVehicles").textContent = vehCount;
+    document.getElementById("kVehiclesS").textContent = vehCount ? "fleet vehicles" : "";
+
+    // last-7-days window (or the selected range when it is 7+ days), same filters - sparklines only
+    var vDay7 = {};
+    var trendSrc = (lastRange && lastRange.days >= 7) ? rows : (lastTrendRows ? lastTrendRows.filter(passFilters) : []);
+    trendSrc.forEach(function(t){
+      var td = ymd(t.Date);
+      if(!td) return;
+      var amt7 = Number(t.Amount) || 0;
+      var p7 = String(t.Loan_No || "").trim().toUpperCase();
+      if(p7){ var v7 = vDay7[p7] || (vDay7[p7] = {}); v7[td] = (v7[td] || 0) + amt7; }
+    });
+    // agent route (Users feed first, else the route they collected most on)
+    var agentDisp = {};
+    Object.keys(byAgent).forEach(function(k){
+      var r = agentRoute[k];
+      if(r){ agentDisp[k] = routes[r] || r; return; }
+      var m = aRoute[k] || {}, best = "", bv = 0;
+      Object.keys(m).forEach(function(x){ if(x !== "NO ROUTE" && m[x] > bv){ bv = m[x]; best = x; } });
+      if(best) agentDisp[k] = routes[best] || best;
+    });
+
+    renderSimple("agentTable", "agentEmpty", byAgent, function(k){ return agents[k] || k; }, total, aType, function(k){ return agentDisp[k] || ""; });
+    var byTypeG = {}; // the By type section shows the same Management bucket as the pivot columns and chips
+    Object.keys(byType).forEach(function(c){
+      var g = combineType(c);
+      byTypeG[g] = byTypeG[g] || {n:0, s:0};
+      byTypeG[g].n += byType[c].n; byTypeG[g].s += byType[c].s;
+    });
+    renderSimple("typeTable",  "typeEmpty",  byTypeG,  function(k){ return types[k]  || k; }, total);
+    renderRoutes(byRoute, total);
+    var more = document.getElementById("routeMore");
+    if(more && lastRange){
+      more.href = "routes.html?from=" + encodeURIComponent(lastRange.fromIso) + "&to=" + encodeURIComponent(lastRange.toIso) +
+        (selRoutes.length ? "&routes=" + encodeURIComponent(selRoutes.join(",")) : "");
+    }
+    var moreAgent = document.getElementById("agentMore");
+    if(moreAgent && lastRange){
+      moreAgent.href = "agentsystems.html?from=" + encodeURIComponent(lastRange.fromIso) + "&to=" + encodeURIComponent(lastRange.toIso);
+    }
+    renderVehicles(vmap, vDaily, vType, vDay7);
+    renderReceipts(receipts, total);
+
+    document.getElementById("counts").textContent = rows.length + " items  ·  " + Object.keys(receipts).length + " receipts" +
+      (selTypes.length ? "  ·  type filter" : "") + (selVehs.length ? "  ·  vehicle filter" : "") + (selRoutes.length ? "  ·  route filter" : "") + (selAgents.length ? "  ·  agent filter" : "") + (selOwners.length ? "  ·  owner filter" : "");
+    saveSharedFilters();
+  }
+
+  function renderSimple(tableId, emptyId, map, nameOf, grandTotal, splitMap, routeOf){
+    var table = document.getElementById(tableId);
+    var tb = document.querySelector("#" + tableId + " tbody");
+    var keys = Object.keys(map).sort(function(a,b){ return map[b].s - map[a].s; });
+    tb.innerHTML = "";
+    document.getElementById(emptyId).style.display = keys.length ? "none" : "block";
+    var max = 0;
+    keys.forEach(function(x){ if(map[x].s > max) max = map[x].s; });
+    if(splitMap){
+      // pivot: one column per collection type (Management bucket first), biggest first
+      var colTot = {};
+      keys.forEach(function(k){
+        var g = groupMap(splitMap[k]);
+        Object.keys(g).forEach(function(c){ colTot[c] = (colTot[c] || 0) + g[c]; });
+      });
+      var typeCols = Object.keys(colTot).sort(function(a,b){ return colTot[b] - colTot[a]; });
+      var mi = typeCols.indexOf("MANAGEMENT");
+      if(mi > 0){ typeCols.splice(mi, 1); typeCols.unshift("MANAGEMENT"); }
+      var firstLabel = table.querySelector("thead th").textContent || "Group";
+      table.querySelector("thead").innerHTML = "<tr><th>" + esc(firstLabel) + "</th>" +
+        typeCols.map(function(c){ return "<th class='num ths'" + (c === "MANAGEMENT" ? " title='Management + Sacco + Welfare + Operation + F1'" : "") + ">" + esc(types[c] || c) + "</th>"; }).join("") +
+        "<th class='num'>Amount</th></tr>";
+      keys.forEach(function(k){
+        var pct = max ? Math.round(map[k].s / max * 100) : 0;
+        var gm = groupMap(splitMap[k]);
+        var rtxt = routeOf ? routeOf(k) : "";
+        var tr = document.createElement("tr");
+        tr.innerHTML = "<td><div class='nm'><span>" + esc(nameOf(k)) + " <span class='muted'>(" + esc(k) + ")" + (rtxt ? " " + esc(rtxt) : "") + "</span></span>" +
+                       "<span class='track'><i style='width:" + pct + "%'></i></span></div></td>" +
+                       typeCols.map(function(c){ return "<td class='num'>" + fmt0(gm[c] || 0) + "</td>"; }).join("") +
+                       "<td class='num'>" + fmt(map[k].s) + "</td>";
+        tb.appendChild(tr);
+      });
+      if(keys.length){
+        var tr = document.createElement("tr");
+        tr.className = "total-row";
+        tr.innerHTML = "<td>TOTAL</td>" +
+          typeCols.map(function(c){ return "<td class='num'>" + fmt0(colTot[c]) + "</td>"; }).join("") +
+          "<td class='num'>" + fmt(grandTotal) + "</td>";
+        tb.appendChild(tr);
+      }
+      return;
+    }
+    keys.forEach(function(k){
+      var pct = max ? Math.round(map[k].s / max * 100) : 0;
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td><div class='nm'><span>" + esc(nameOf(k)) + " <span class='muted'>(" + esc(k) + ")</span></span>" +
+                     "<span class='track'><i style='width:" + pct + "%'></i></span></div></td>" +
+                     "<td class='num'>" + fmt(map[k].s) + "</td>";
+      tb.appendChild(tr);
+    });
+    if(keys.length){
+      var tr = document.createElement("tr");
+      tr.className = "total-row";
+      tr.innerHTML = "<td>TOTAL</td><td class='num'>" + fmt(grandTotal) + "</td>";
+      tb.appendChild(tr);
+    }
+  }
+
+  function renderRoutes(map, grandTotal){
+    var tb = document.querySelector("#routeTable tbody");
+    var keys = Object.keys(map).sort(function(a,b){ return map[b].s - map[a].s; });
+    tb.innerHTML = "";
+    document.getElementById("routeEmpty").style.display = keys.length ? "none" : "block";
+    var max = 0;
+    keys.forEach(function(k){ if(map[k].s > max) max = map[k].s; });
+    keys.forEach(function(k){
+      var pct = max ? Math.round(map[k].s / max * 100) : 0;
+      var label = k === "NO ROUTE" ? "No route" : (routes[k] || k);
+      var vehCount = Object.keys(map[k].v || {}).length;
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td><div class='nm'><span>" + esc(label) + " <span class='muted'>(" + esc(k) + ")</span></span>" +
+                     "<span class='track'><i style='width:" + pct + "%'></i></span></div></td>" +
+                     "<td class='num'>" + vehCount + "</td>" +
+                     "<td class='num'>" + fmt(map[k].s) + "</td>";
+      tb.appendChild(tr);
+    });
+    if(keys.length){
+      var tr = document.createElement("tr");
+      tr.className = "total-row";
+      tr.innerHTML = "<td>TOTAL</td><td class='num'></td><td class='num'>" + fmt(grandTotal) + "</td>";
+      tb.appendChild(tr);
+    }
+  }
+
+  function renderTypeChips(){
+    var el = document.getElementById("typeFilters");
+    var agg = {};
+    (lastRows || []).forEach(function(t){
+      var ty = combineType(t.Type || "-");
+      var a = agg[ty] = agg[ty] || {n:0, s:0};
+      a.n++; a.s += Number(t.Amount) || 0;
+    });
+    var codes = Object.keys(agg).sort(function(a,b){ return agg[b].s - agg[a].s; });
+    var mi = codes.indexOf("MANAGEMENT"); // keep the combined bucket first, like the pivot columns
+    if(mi > 0){ codes.splice(mi, 1); codes.unshift("MANAGEMENT"); }
+    selTypes = selTypes.filter(function(c){ return codes.indexOf(c) !== -1; }); // drop types absent from the loaded data
+    el.innerHTML = "";
+    codes.forEach(function(c){
+      var on = selTypes.indexOf(c) !== -1;
+      var label = types[c] || c;
+      var note = (c === "MANAGEMENT") ? " (Management + Sacco + Welfare + Operation + F1)" : "";
+      var chip = document.createElement("div");
+      chip.className = "chip" + (on ? " on" : "");
+      chip.innerHTML = "<span class='ln'>" + esc(label) + "</span><span class='tot'>" + agg[c].n + " | " + fmt(agg[c].s) + "</span>";
+      chip.title = "Show only " + label + note + " \u2014 " + agg[c].n + " items, " + fmt(agg[c].s) + " (click to toggle, pick several to combine)";
+      chip.addEventListener("click", function(){
+        var i = selTypes.indexOf(c);
+        if(i === -1) selTypes.push(c); else selTypes.splice(i, 1);
+        renderTypeChips();
+        renderAll();
+      });
+      el.appendChild(chip);
+    });
+  }
+
+  function renderAgentChips(){
+    var el = document.getElementById("agentFilters");
+    var agg = {};
+    (lastRows || []).forEach(function(t){
+      var a = String(t.Agent_Code || "-");
+      var o = agg[a] = agg[a] || {n:0, s:0};
+      o.n++; o.s += Number(t.Amount) || 0;
+    });
+    var codes = Object.keys(agg).sort(function(x,y){ return agg[y].s - agg[x].s; });
+    selAgents = selAgents.filter(function(c){ return codes.indexOf(c) !== -1; }); // drop agents absent from the loaded data
+    el.innerHTML = "";
+    codes.forEach(function(c){
+      var on = selAgents.indexOf(c) !== -1;
+      var label = agents[c] || c;
+      var chip = document.createElement("div");
+      chip.className = "chip" + (on ? " on" : "");
+      chip.innerHTML = "<span class='ln'>" + esc(label) + "</span><span class='tot'>" + agg[c].n + " | " + fmt(agg[c].s) + "</span>";
+      chip.title = "Show only " + label + " (" + c + ") \u2014 " + agg[c].n + " items, " + fmt(agg[c].s) + " (click to toggle, pick several to combine)";
+      chip.addEventListener("click", function(){
+        var i = selAgents.indexOf(c);
+        if(i === -1) selAgents.push(c); else selAgents.splice(i, 1);
+        renderAgentChips();
+        renderAll();
+      });
+      el.appendChild(chip);
+    });
+  }
+
+  function renderOwnerChips(){
+    var el = document.getElementById("ownerFilters");
+    var agg = {SACCO:{n:0,s:0}, INVESTOR:{n:0,s:0}};
+    (lastRows || []).forEach(function(t){
+      var m = vehMetaByPlate(String(t.Loan_No || "").trim());
+      if(!m) return;
+      var k = m.owner === 1 ? "SACCO" : (m.owner === 2 ? "INVESTOR" : null);
+      if(!k) return;
+      agg[k].n++; agg[k].s += Number(t.Amount) || 0;
+    });
+    var keys = ["SACCO","INVESTOR"].filter(function(k){ return agg[k].n > 0; });
+    selOwners = selOwners.filter(function(k){ return keys.indexOf(k) !== -1; }); // drop owners absent from the loaded data
+    el.innerHTML = "";
+    keys.forEach(function(k){
+      var on = selOwners.indexOf(k) !== -1;
+      var chip = document.createElement("div");
+      chip.className = "chip" + (on ? " on" : "");
+      chip.innerHTML = "<span class='ln'>" + k + "</span><span class='tot'>" + agg[k].n + " | " + fmt(agg[k].s) + "</span>";
+      chip.title = "Show only " + k.toLowerCase() + "-owned vehicles \u2014 " + agg[k].n + " items, " + fmt(agg[k].s) + " (click to toggle)";
+      chip.addEventListener("click", function(){
+        var i = selOwners.indexOf(k);
+        if(i === -1) selOwners.push(k); else selOwners.splice(i, 1);
+        renderOwnerChips();
+        renderAll();
+      });
+      el.appendChild(chip);
+    });
+  }
+
+  function rowRoute(t){
+    var m = t && t.Loan_No ? vehMetaByPlate(String(t.Loan_No).trim()) : null;
+    return m && m.route ? m.route : "NO ROUTE";
+  }
+
+  function renderRouteChips(){
+    var el = document.getElementById("routeFilters");
+    var row = document.getElementById("routeRow");
+    var agg = {};
+    (lastRows || []).forEach(function(t){
+      var rt = rowRoute(t);
+      var a = agg[rt] = agg[rt] || {n:0, s:0, v:{}};
+      a.n++; a.s += Number(t.Amount) || 0;
+      var p = String(t.Loan_No || "").trim().toUpperCase();
+      if(p) a.v[p] = 1;
+    });
+    var codes = Object.keys(agg).sort(function(a,b){ return agg[b].s - agg[a].s; });
+    selRoutes = selRoutes.filter(function(c){ return codes.indexOf(c) !== -1; });
+    el.innerHTML = "";
+    if(row) row.style.display = codes.length ? "" : "none";
+    codes.forEach(function(c){
+      var on = selRoutes.indexOf(c) !== -1;
+      var label = c === "NO ROUTE" ? "No route" : (routes[c] || c);
+      var vcount = Object.keys(agg[c].v).length;
+      var chip = document.createElement("div");
+      chip.className = "chip" + (on ? " on" : "");
+      chip.innerHTML = "<span class='ln'>" + esc(label) + "</span><span class='tot'>" + vcount + " | " + fmt(agg[c].s) + "</span>";
+      chip.title = "Show only " + label + " \u2014 " + vcount + " vehicles, " + fmt(agg[c].s) + " (click to toggle, pick several to combine)";
+      chip.addEventListener("click", function(){
+        var i = selRoutes.indexOf(c);
+        if(i === -1) selRoutes.push(c); else selRoutes.splice(i, 1);
+        renderRouteChips();
+        renderAll();
+      });
+      el.appendChild(chip);
+    });
+  }
+
+  function vehMetaByPlate(p){
+    return vehMeta[p] || vehMetaUp[String(p).toUpperCase()] || null;
+  }
+
+  function renderVehPick(){
+    var wrap = document.getElementById("vehChips");
+    var list = document.getElementById("vehSuggestions");
+    // plates present in the loaded rows, biggest collector first
+    var sums = {}, order = [];
+    (lastRows || []).forEach(function(t){
+      var p = String(t.Loan_No || "").trim().toUpperCase();
+      if(!p) return;
+      var meta = vehMetaByPlate(p);
+      if(!meta || !meta.fleetNo) return; // fleet-numbered vehicles only
+      if(!sums[p]){ sums[p] = 0; order.push(p); }
+      sums[p] += Math.abs(Number(t.Amount) || 0);
+    });
+    presentPlates = order.sort(function(a,b){ return sums[b] - sums[a]; });
+    // suggestions: "PLATE · FLEET" only (typing a fleet no still matches via contains / resolveVeh)
+    var opts = [];
+    presentPlates.forEach(function(p){
+      var meta = vehMetaByPlate(p);
+      var fleet = meta && meta.fleetNo ? meta.fleetNo : "";
+      opts.push("<option value=\"" + esc(p + (fleet ? " \u00b7 " + fleet : "")) + "\"></option>");
+    });
+    list.innerHTML = opts.join("");
+    // selected vehicles as removable chips
+    wrap.innerHTML = "";
+    selVehs.forEach(function(p){
+      var meta = vehMetaByPlate(p);
+      var label = p + (meta && meta.fleetNo ? " \u00b7 " + meta.fleetNo : "");
+      var chip = document.createElement("div");
+      chip.className = "chip on";
+      chip.innerHTML = esc(label) + " <span class='x'>\u00d7</span>";
+      chip.title = "Remove " + p + " from the vehicle filter";
+      chip.addEventListener("click", function(){
+        selVehs.splice(selVehs.indexOf(p), 1);
+        renderVehPick();
+        renderAll();
+      });
+      wrap.appendChild(chip);
+    });
+    document.getElementById("vehClear").style.display = selVehs.length ? "inline-block" : "none";
+    var cnt = document.getElementById("vehCount");
+    if(cnt) cnt.textContent = selVehs.length ? (selVehs.length + " selected") : "";
+  }
+
+  // ---- saved filter sets (types + routes + vehicles, kept in the browser) ----
+  var SF_KEY = "metrotrans.savedFilters";
+  var lastRangeToken = ""; // last fleet range typed, used when a saved filter is auto-named
+  function loadSavedFilters(){
+    try { return JSON.parse(localStorage.getItem(SF_KEY) || "[]") || []; } catch(e){ return []; }
+  }
+  function storeSavedFilters(list){
+    try { localStorage.setItem(SF_KEY, JSON.stringify(list)); } catch(e){}
+  }
+  function savedFilterSummary(s){
+    var bits = [];
+    if(s.vehs && s.vehs.length) bits.push(s.vehs.length + " vehicles");
+    if(s.routes && s.routes.length) bits.push(s.routes.length + " route" + (s.routes.length === 1 ? "" : "s"));
+    if(s.types && s.types.length) bits.push(s.types.length + " type" + (s.types.length === 1 ? "" : "s"));
+    if(s.agents && s.agents.length) bits.push(s.agents.length + " agent" + (s.agents.length === 1 ? "" : "s"));
+    if(s.owners && s.owners.length) bits.push(s.owners.join(" + ") + " owned");
+    return bits.join(" \u00b7 ") || "no filters";
+  }
+  function renderSavedFilters(){
+    var wrap = document.getElementById("savedFilters");
+    if(!wrap) return;
+    var list = loadSavedFilters();
+    wrap.innerHTML = "";
+    if(!list.length){
+      wrap.innerHTML = "<span class='muted' style='font-size:11.5px'>none yet \u2014 set your filters below, name them and press save</span>";
+      return;
+    }
+    list.forEach(function(s, i){
+      var chip = document.createElement("div");
+      chip.className = "chip";
+      chip.style.cursor = "pointer";
+      chip.innerHTML = "<b>" + esc(s.name) + "</b> <span class='muted'>(" + esc(savedFilterSummary(s)) + ")</span> <span class='x'>\u00d7</span>";
+      chip.title = "Apply saved filter \"" + s.name + "\"";
+      chip.addEventListener("click", function(ev){
+        if(ev.target && ev.target.classList && ev.target.classList.contains("x")){
+          var l = loadSavedFilters();
+          l.splice(i, 1);
+          storeSavedFilters(l);
+          renderSavedFilters();
+          toast("Deleted \"" + s.name + "\"");
+          return;
+        }
+        applySavedFilter(s);
+      });
+      wrap.appendChild(chip);
+    });
+  }
+  function applySavedFilter(s){
+    selTypes.length = 0; (s.types || []).forEach(function(t){ selTypes.push(t); });
+    selRoutes.length = 0; (s.routes || []).forEach(function(r){ selRoutes.push(r); });
+    selVehs.length = 0; (s.vehs || []).forEach(function(p){ selVehs.push(p); });
+    selAgents.length = 0; (s.agents || []).forEach(function(c){ selAgents.push(c); });
+    selOwners.length = 0; (s.owners || []).forEach(function(o){ selOwners.push(o); });
+    renderTypeChips();
+    renderRouteChips();
+    renderVehPick();
+    renderAgentChips();
+    renderOwnerChips();
+    renderAll();
+    toast("Applied \"" + s.name + "\" \u2014 " + savedFilterSummary(s));
+  }
+  function saveCurrentFilter(){
+    var inp = document.getElementById("sfName");
+    var name = (inp.value || "").trim();
+    if(!name){
+      name = lastRangeToken || (selVehs.length === 1 ? (vehMetaByPlate(selVehs[0]) || {}).fleetNo + " / " + selVehs[0] : "");
+      name = (name || "").trim();
+      if(!name){
+        toast("Type a name for the filter first");
+        inp.focus();
+        return;
+      }
+    }
+    if(!selTypes.length && !selRoutes.length && !selVehs.length && !selAgents.length && !selOwners.length){
+      toast("Nothing to save \u2014 pick some filters first");
+      return;
+    }
+    var list = loadSavedFilters();
+    var entry = { name: name, types: selTypes.slice(), routes: selRoutes.slice(), vehs: selVehs.slice(), agents: selAgents.slice(), owners: selOwners.slice(), saved: iso(new Date()) };
+    var at = -1;
+    list.forEach(function(s, i){ if(String(s.name).toLowerCase() === name.toLowerCase()) at = i; });
+    if(at >= 0) list[at] = entry; else list.push(entry);
+    storeSavedFilters(list);
+    inp.value = "";
+    renderSavedFilters();
+    toast("Saved \"" + name + "\" \u2014 " + savedFilterSummary(entry));
+  }
+
+  function resolveVeh(v){
+    var token = v.toUpperCase().split("\u00b7")[0].trim(); // tolerate a picked "KDU939E · M331"
+    if(!token) return "";
+    if(presentPlates.indexOf(token) !== -1) return token;
+    var hits = [];
+    for(var k in vehMeta){ // fleet number -> plate (Vehicles feed)
+      var f = vehMeta[k].fleetNo;
+      if(f && f.toUpperCase() === token) hits.push(k.toUpperCase());
+    }
+    if(hits.length){
+      // a fleet number can appear twice in BC (duplicate / typo rows): prefer the
+      // vehicle that actually collected, else the first entry
+      for(var i = 0; i < hits.length; i++){ if(presentPlates.indexOf(hits[i]) !== -1) return hits[i]; }
+      return hits[0];
+    }
+    var m = presentPlates.filter(function(p){ return p.indexOf(token) === 0; }); // unique plate prefix
+    if(m.length === 1) return m[0];
+    return "";
+  }
+
+  /** "M601..M689" / "M601-M689" / "M601 to M689" -> the plates of every vehicle whose
+   *  fleet number falls in that range (fleets that do not exist are skipped). */
+  function expandRange(tk){
+    var m = String(tk || "").match(/^([A-Za-z]*)(\d+)\s*(?:\.\.+|-|to)\s*([A-Za-z]*)(\d+)$/i);
+    if(!m) return null;
+    var pre1 = m[1].toUpperCase(), sTxt = m[2], pre2 = m[3].toUpperCase(), eTxt = m[4];
+    if(pre1 && pre2 && pre1 !== pre2) return null;
+    var pre = pre1 || pre2;
+    var from = parseInt(sTxt, 10), to = parseInt(eTxt, 10);
+    if(isNaN(from) || isNaN(to)) return null;
+    if(to < from){ var tmp = from; from = to; to = tmp; }
+    if(to - from > 500) return null; // sanity limit
+    var width = Math.max(sTxt.length, eTxt.length);
+    var byFleet = {};
+    for(var k in vehMeta){
+      var fk = (vehMeta[k].fleetNo || "").toUpperCase();
+      if(!fk) continue;
+      (byFleet[fk] = byFleet[fk] || []).push(k.toUpperCase());
+    }
+    function pickFleet(f){
+      var list = byFleet[f];
+      if(!list) return "";
+      for(var i = 0; i < list.length; i++){ if(presentPlates.indexOf(list[i]) !== -1) return list[i]; }
+      return list[0];
+    }
+    var out = [];
+    for(var n = from; n <= to; n++){
+      var num = String(n);
+      while(num.length < width) num = "0" + num;
+      var p = pickFleet(pre + num) || pickFleet(pre + n);
+      if(p && out.indexOf(p) === -1) out.push(p);
+    }
+    return out;
+  }
+
+  function addVehFromInput(){
+    var inp = document.getElementById("vehInput");
+    var raw = (inp.value || "").trim();
+    if(!raw) return;
+    inp.value = "";
+    // "M601 to M689" / "M601 .. M689" / "M601 - M689" all mark a range - normalise before splitting
+    raw = raw.replace(/\s+to\s+/gi, "..")
+             .replace(/\s*\.\.+\s*/g, "..")
+             .replace(/([A-Za-z0-9])\s*-\s*([A-Za-z0-9])/g, "$1-$2");
+    // a picked suggestion ("KDU939E \u00b7 M331") resolves as a whole; otherwise split a list like M129|M142|M123
+    var whole = resolveVeh(raw);
+    var tokens = whole ? [whole] : raw.split(/[|,;\s]+/).map(function(s){ return s.trim(); }).filter(Boolean);
+    var added = 0, unknown = [], rangeMsg = "";
+    var fleetLoaded = false;
+    for(var kk in vehMeta){ fleetLoaded = true; break; }
+    tokens.forEach(function(tk){
+      var range = expandRange(tk);
+      if(range){
+        if(!fleetLoaded && !range.length){
+          toast("Fleet list is still loading - try the range again in a second");
+          return;
+        }
+        var inRange = 0;
+        range.forEach(function(p){ if(selVehs.indexOf(p) === -1){ selVehs.push(p); added++; } inRange++; });
+        rangeMsg += (rangeMsg ? " \u00b7 " : "") + tk.toUpperCase() + ": " + inRange + " vehicle" + (inRange === 1 ? "" : "s");
+        if(inRange) lastRangeToken = tk.toUpperCase();
+        if(!inRange) unknown.push(tk);
+        return;
+      }
+      var p = resolveVeh(tk);
+      if(!p){ unknown.push(tk); return; }
+      if(selVehs.indexOf(p) === -1){ selVehs.push(p); added++; }
+    });
+    if(added){ renderVehPick(); renderAll(); }
+    if(rangeMsg) toast("Range added - " + rangeMsg + (added ? "" : " (already selected)"));
+    if(unknown.length){
+      inp.style.borderColor = "#E57373";
+      setTimeout(function(){ inp.style.borderColor = ""; }, 2000);
+      // typed before the data arrived? retry once the rows are in
+      if((!lastRows || !lastRows.length) && !retryPending){
+        retryPending = true;
+        toast("Data is still loading - retrying \u201c" + unknown.join(" ") + "\u201d in a moment");
+        setTimeout(function(){
+          retryPending = false;
+          inp.value = unknown.join(" ");
+          addVehFromInput();
+        }, 4000);
+      }
+    }
+  }
+
+  function sparkHtml(k, vDay7){
+    if(!lastTrend || !lastTrend.list.length) return "";
+    var vd = vDay7[k.toUpperCase()] || {};
+    var win = lastTrend.list;
+    var inSel = function(d){ return lastRange && d >= lastRange.fromIso && d <= lastRange.toIso; };
+    var maxSel = 0, total7 = 0;
+    win.forEach(function(d){
+      var a = vd[d] || 0;
+      total7 += a;
+      if(inSel(d) && a > maxSel) maxSel = a;
+    });
+    var out = "<span class='spark' title='Last 7 days total: " + fmt(total7) + "'>";
+    win.forEach(function(d){
+      var a = vd[d] || 0;
+      var h = maxSel ? Math.max(2, Math.min(100, Math.round(a / maxSel * 100))) : 2;
+      var cls = !inSel(d) ? "cmp" : (maxSel && a === maxSel ? "hi" : "");
+      out += "<i class='" + cls + "' style='height:" + h + "%' title='" + d + " \u2013 " + fmt(a) + (inSel(d) ? "" : "  (before selection)") + "'></i>";
+    });
+    return out + "</span>";
+  }
+
+  function splitText(m){
+    if(!m) return "";
+    var codes = Object.keys(m).sort(function(x,y){ return m[y] - m[x]; });
+    return codes.map(function(c){ return (types[c] || c) + " " + fmt(m[c]); }).join(" \u00b7 ");
+  }
+
+  function renderVehicles(map, vDaily, vType, vDay7){
+    vDaily = vDaily || {};
+    vType = vType || {};
+    vDay7 = vDay7 || {};
+    var tb = document.querySelector("#vehTable tbody");
+    var allKeys = Object.keys(map).sort(function(a,b){ return map[b].s - map[a].s; });
+    // EVERY vehicle that has a fleet no on the vehicle list (0.00 rows included), plus
+    // any fleet-numbered vehicle that collected but is missing from the list
+    var keys = [];
+    Object.keys(vehMeta).forEach(function(p){
+      if(vehMeta[p] && vehMeta[p].fleetNo && keys.indexOf(p.toUpperCase()) === -1) keys.push(p.toUpperCase());
+    });
+    allKeys.forEach(function(k){
+      if(k === "NO VEHICLE" || keys.indexOf(k) !== -1) return;
+      var mm = vehMetaByPlate(k);
+      if(mm && mm.fleetNo) keys.push(k);
+    });
+    // an active vehicle filter limits the list to those vehicles; route chips limit it to their routes
+    if(selVehs.length) keys = keys.filter(function(k){ return selVehs.indexOf(k) !== -1; });
+    if(selRoutes.length) keys = keys.filter(function(k){
+      var m = vehMetaByPlate(k) || {};
+      return selRoutes.indexOf(m.route || "NO ROUTE") !== -1;
+    });
+    // amount desc, then fleet no A-Z (the no-collection vehicles group at the bottom)
+    keys.sort(function(a, b){
+      var d = ((map[b] && map[b].s) || 0) - ((map[a] && map[a].s) || 0);
+      if(d) return d;
+      var fa = (vehMetaByPlate(a) || {}).fleetNo || "";
+      var fb = (vehMetaByPlate(b) || {}).fleetNo || "";
+      return fa.localeCompare(fb);
+    });
+    var hiddenV = 0, hiddenS = 0;
+    allKeys.forEach(function(k){
+      if(keys.indexOf(k) !== -1) return;
+      hiddenS += map[k].s;
+      if(k !== "NO VEHICLE") hiddenV++;
+    });
+    tb.innerHTML = "";
+    var empty = document.getElementById("vehEmpty");
+    empty.textContent = selTypes.length ? "No collections of the selected types in this range." : "No collections in this range.";
+    empty.style.display = keys.length ? "none" : "block";
+    var max = 0, grandTotal = 0;
+    keys.forEach(function(k){ if(map[k] && map[k].s > max) max = map[k].s; grandTotal += (map[k] ? map[k].s : 0); });
+    var sacco = 0, investor = 0;
+    keys.forEach(function(k){
+      var m = vehMetaByPlate(k) || {};
+      if(m.owner === 1) sacco++; else if(m.owner === 2) investor++;
+    });
+    var nZero = 0;
+    keys.forEach(function(k){ if(!map[k] || !map[k].s) nZero++; });
+    // one column per collection type (Management bucket first)
+    var colTot = {};
+    keys.forEach(function(k){
+      var g = groupMap(vType[k] || {});
+      Object.keys(g).forEach(function(c){ colTot[c] = (colTot[c] || 0) + g[c]; });
+    });
+    var typeCols = Object.keys(colTot).sort(function(a,b){ return colTot[b] - colTot[a]; });
+    var mi = typeCols.indexOf("MANAGEMENT");
+    if(mi > 0){ typeCols.splice(mi, 1); typeCols.unshift("MANAGEMENT"); }
+    document.querySelector("#vehTable thead").innerHTML = "<tr><th>Vehicle</th><th title='Last 7 days daily totals - darker bar = best day in the selection'>Trend</th>" +
+      typeCols.map(function(c){ return "<th class='num ths'" + (c === "MANAGEMENT" ? " title='Management + Sacco + Welfare + Operation + F1'" : "") + ">" + esc(types[c] || c) + "</th>"; }).join("") +
+      "<th class='num'>Amount</th></tr>";
+    keys.forEach(function(k){
+      var meta = vehMetaByPlate(k) || {};
+      var amt = (map[k] && map[k].s) || 0;
+      var pct = max ? Math.round(amt / max * 100) : 0;
+      var label = k === "NO VEHICLE" ? "<span class='muted'>NO VEHICLE</span>" : esc(k);
+      if(meta.fleetNo) label += " <span class='muted'>" + esc(meta.fleetNo) + "</span>";
+      if(meta.route) label += " <span class='muted'>" + esc(routes[meta.route] || meta.route) + "</span>";
+      var badge = meta.owner === 1 ? "<span class='pill g'>SACCO</span>" :
+                  (meta.owner === 2 ? "<span class='pill b'>INVESTOR</span>" : "");
+      if(meta.collect === 1) badge += " <span class='pill o' title='Vehicles page: Collect = Loan'>LOAN</span>";
+      else if(meta.collect === 2) badge += " <span class='pill r' title='Vehicles page: Collect = Offload'>OFFLOAD</span>";
+      var tr = document.createElement("tr");
+      var tm = groupMap(vType[k] || {});
+      tr.innerHTML = "<td><div class='nm'><span>" + label + " " + badge + "</span>" +
+                     "<span class='track'><i style='width:" + pct + "%'></i></span></div></td>" +
+                     "<td class='trc'>" + (amt ? sparkHtml(k, vDay7) : "<span class='muted'>\u2014</span>") + "</td>" +
+                     typeCols.map(function(c){ return "<td class='num'>" + fmt0(tm[c] || 0) + "</td>"; }).join("") +
+                     "<td class='num'>" + fmt(amt) + "</td>";
+      tb.appendChild(tr);
+    });
+    document.getElementById("vehTitle").textContent = keys.length
+      ? "By vehicle \u2014 " + keys.length + " fleet vehicles (" + sacco + " sacco / " + investor + " investor" + (nZero ? " \u00b7 " + nZero + " with no collections" : "") + ")"
+      : "By vehicle";
+    var note = document.getElementById("vehNote");
+    if(hiddenV || hiddenS){
+      var bits = [];
+      if(hiddenV) bits.push(hiddenV + " vehicle" + (hiddenV === 1 ? "" : "s") + " without a fleet no");
+      if(map["NO VEHICLE"]) bits.push("unassigned items");
+      note.textContent = "Not in this list: " + bits.join(" + ") + "  \u00b7  " + fmt(hiddenS);
+      note.style.display = "block";
+    } else {
+      note.style.display = "none";
+    }
+    if(keys.length){
+      var tr = document.createElement("tr");
+      tr.className = "total-row";
+      tr.innerHTML = "<td>TOTAL</td><td></td>" +
+                     typeCols.map(function(c){ return "<td class='num'>" + fmt0(colTot[c]) + "</td>"; }).join("") +
+                     "<td class='num'>" + fmt(grandTotal) + "</td>";
+      tb.appendChild(tr);
+    }
+  }
+
+  function renderReceipts(map, grandTotal){
+    var tb = document.querySelector("#recTable tbody");
+    var list = Object.keys(map).map(function(k){ return map[k]; })
+      .sort(function(a,b){ return (b.first.Date + b.first.Time) < (a.first.Date + a.first.Time) ? -1 : 1; })
+      .slice(0, 15);
+    tb.innerHTML = "";
+    document.getElementById("recEmpty").style.display = list.length ? "none" : "block";
+    list.forEach(function(r){
+      var tNames = Object.keys(r.types || {}).map(function(c){ return types[c] || c; });
+      var tLabel = tNames.length ? tNames.join(" + ") : "-";
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + esc(r.ref) + "</td>" +
+                     "<td>" + esc(r.first.Time || "") + "</td>" +
+                     "<td>" + esc(agents[r.first.Agent_Code] || r.first.Agent_Code || "-") + "</td>" +
+                     "<td>" + esc(r.veh || "-") + "</td>" +
+                     "<td title='" + esc(tLabel) + "'>" + esc(tLabel) + "</td>" +
+                     "<td class='num'>" + r.n + "</td>" +
+                     "<td class='num'>" + fmt(r.s) + "</td>";
+      tb.appendChild(tr);
+    });
+  }
+
+  var autoOn = true; // ribbon "Auto 5 min" toggle
+  function schedule(){
+    if(timer) clearInterval(timer);
+    if(!autoOn) return;
+    if(document.hidden) return; // background tab: no polling (restarts when visible again)
+    timer = setInterval(load, 300000); // 5 minutes - keeps the server load low
+  }
+
+  document.getElementById("refresh").addEventListener("click", load);
+  document.getElementById("dateFrom").addEventListener("change", function(){
+    // moving the From date pulls the To date along to the same day
+    var f = document.getElementById("dateFrom").value;
+    if(f){ document.getElementById("dateTo").value = f; }
+    load();
+  });
+  document.getElementById("dateTo").addEventListener("change", load);
+  document.getElementById("autoBtn").addEventListener("click", function(){
+    autoOn = !autoOn;
+    this.classList.toggle("active", autoOn);
+    schedule();
+  });
+  document.addEventListener("visibilitychange", function(){
+    if(document.hidden){ if(timer){ clearInterval(timer); timer = null; } }
+    else if(autoOn){ load(); }
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-days]"), function(b){
+    b.addEventListener("click", function(){
+      var n = Number(b.getAttribute("data-days")) || 1;
+      var to = new Date(), from = new Date(to.getTime() - (n - 1) * 86400000);
+      document.getElementById("dateFrom").value = iso(from);
+      document.getElementById("dateTo").value = iso(to);
+      load();
+    });
+  });
+
+  document.getElementById("vehInput").addEventListener("change", addVehFromInput);
+  document.getElementById("vehInput").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); addVehFromInput(); }
+  });
+  document.getElementById("vehClear").addEventListener("click", function(){
+    selVehs.length = 0;
+    renderVehPick();
+    renderAll();
+  });
+  document.getElementById("sfSave").addEventListener("click", saveCurrentFilter);
+  document.getElementById("sfName").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); saveCurrentFilter(); }
+  });
+  renderSavedFilters();
+
+  Array.prototype.forEach.call(document.querySelectorAll(".xls"), function(b){
+    b.addEventListener("click", function(){
+      var kind = b.getAttribute("data-export");
+      if(kind === "agent") exportTable("agentTable", "by-agent");
+      else if(kind === "type") exportTable("typeTable", "by-type");
+      else if(kind === "route") exportTable("routeTable", "by-route");
+      else if(kind === "veh") exportTable("vehTable", "by-vehicle");
+      else if(kind === "rec") exportTable("recTable", "recent-receipts");
+    });
+  });
+
+  // every report section collapses from its heading (the filter bar above stays put)
+  // all sections start COLLAPSED on open - click a heading to expand it
+  Array.prototype.forEach.call(document.querySelectorAll("main section"), function(sec){
+    var h2 = sec.querySelector("h2");
+    if(!h2) return;
+    var chev = document.createElement("span");
+    chev.className = "chev";
+    chev.textContent = "\u25BE";
+    h2.insertBefore(chev, h2.firstChild);
+    h2.classList.add("clk");
+    sec.classList.add("collapsed");
+    chev.textContent = "\u25B8";
+    h2.addEventListener("click", function(ev){
+      if(ev.target && ev.target.closest && ev.target.closest("button,a,input")) return; // keep Export / More working
+      var col = sec.classList.toggle("collapsed");
+      chev.textContent = col ? "\u25B8" : "\u25BE";
+    });
+  });
+
+  // ribbon: expand / collapse every section at once, and print the open report
+  function setAllSections(collapsed){
+    Array.prototype.forEach.call(document.querySelectorAll("main section"), function(sec){
+      sec.classList.toggle("collapsed", collapsed);
+      var c = sec.querySelector(".chev");
+      if(c) c.textContent = collapsed ? "\u25B8" : "\u25BE";
+    });
+  }
+  document.getElementById("expandAll").addEventListener("click", function(){ setAllSections(false); });
+  document.getElementById("collapseAll").addEventListener("click", function(){ setAllSections(true); });
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+  // ribbon: filters as dropdown buttons
+  var FD = [["ftType","fdType","typeFilters","fbType"], ["ftVeh","fdVeh","vehChips","fbVeh"], ["ftOwner","fdOwner","ownerFilters","fbOwner"], ["ftAgent","fdAgent","agentFilters","fbAgent"], ["ftRoute","fdRoute","routeFilters","fbRoute"]];
+  function closeDrops(){ Array.prototype.forEach.call(document.querySelectorAll(".ribbon .fdrop.open"), function(p){ p.classList.remove("open"); }); }
+  function updBadges(){
+    FD.forEach(function(d){
+      var n = document.querySelectorAll("#" + d[2] + " .chip.on").length;
+      if(d[0] === "ftVeh"){ var vi = document.getElementById("vehInput"); if(vi && vi.value.trim()) n++; }
+      var b = document.getElementById(d[3]); if(b){ b.textContent = n ? String(n) : ""; b.classList.toggle("on", n > 0); }
+      var t = document.getElementById(d[0]); if(t) t.classList.toggle("active", n > 0);
+    });
+  }
+  FD.forEach(function(d){
+    var btn = document.getElementById(d[0]), pan = document.getElementById(d[1]);
+    btn.addEventListener("click", function(ev){
+      ev.stopPropagation();
+      var was = pan.classList.contains("open");
+      closeDrops();
+      if(!was){ pan.style.left = Math.max(-6, btn.offsetLeft - 12) + "px"; pan.classList.add("open"); }
+    });
+  });
+  var rangeBtn = document.getElementById("rangeBtn"), fdRange = document.getElementById("fdRange");
+  rangeBtn.addEventListener("click", function(ev){
+    ev.stopPropagation();
+    var was = fdRange.classList.contains("open");
+    closeDrops();
+    if(!was){ fdRange.style.left = Math.max(-6, rangeBtn.offsetLeft - 12) + "px"; fdRange.classList.add("open"); }
+  });
+  document.getElementById("fClearAll").addEventListener("click", function(){
+    var had = selTypes.length + selRoutes.length + selVehs.length + selAgents.length + selOwners.length;
+    selTypes.length = 0; selRoutes.length = 0; selVehs.length = 0; selAgents.length = 0; selOwners.length = 0;
+    var vi = document.getElementById("vehInput"); if(vi) vi.value = "";
+    renderTypeChips(); renderRouteChips(); renderVehPick(); renderAgentChips(); renderOwnerChips(); renderAll();
+    closeDrops();
+    toast(had ? "All filters cleared" : "No filters were set");
+  });
+  document.addEventListener("mousedown", function(ev){
+    var t = ev.target;
+    if(t && t.closest && (t.closest(".fhold") || t.closest(".fdrop"))) return;
+    closeDrops();
+  });
+  document.addEventListener("keydown", function(ev){ if(ev.key === "Escape") closeDrops(); });
+  var fmo = new MutationObserver(updBadges);
+  ["typeFilters","vehChips","savedFilters","routeFilters","agentFilters","ownerFilters"].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) fmo.observe(el, {childList:true, subtree:true, attributes:true, attributeFilter:["class"]});
+  });
+  var vinputEl = document.getElementById("vehInput");
+  if(vinputEl) vinputEl.addEventListener("input", updBadges);
+  updBadges();
+
+  /** Index of the sparkline Trend column (-1 when the table has none). */
+  function trendColIndex(table){
+    var ths = table.querySelectorAll("thead th");
+    for(var i = 0; i < ths.length; i++){ if(/^trend$/i.test(String(ths[i].textContent).trim())) return i; }
+    return -1;
+  }
+
+  /** Clean, printable copy of one section - the browser's "Save as PDF" turns it
+   *  into a PDF. Exactly what is on screen (filters, range and the current rows). */
+  function exportPdfSection(btn){
+    var sec = btn.closest("section");
+    if(!sec) return;
+    var tbl = sec.querySelector("table");
+    if(!tbl){ alert("Nothing to export in this section."); return; }
+    var h2 = sec.querySelector("h2");
+    var title = (h2 ? h2.innerText : "Report").replace(/[\u25B8\u25BE]/g, "").replace(/\s*(Export (CSV|PDF)|Share)\s*/g, " ").replace(/\s+/g, " ").trim();
+    var f = document.getElementById("dateFrom").value, t = document.getElementById("dateTo").value;
+    var range = f === t ? f : f + " \u2192 " + t;
+    var filters = [];
+    if(selTypes.length) filters.push("types: " + selTypes.join(", "));
+    if(selRoutes.length) filters.push("routes: " + selRoutes.join(", "));
+    if(selVehs.length) filters.push("vehicles: " + selVehs.join(", "));
+    var clone = tbl.cloneNode(true);
+    Array.prototype.forEach.call(clone.querySelectorAll(".track,.spark,button,input"), function(n){ n.parentNode.removeChild(n); });
+    var tcol = trendColIndex(clone);
+    if(tcol >= 0){
+      Array.prototype.forEach.call(clone.querySelectorAll("tr"), function(tr){
+        if(tr.children[tcol]) tr.removeChild(tr.children[tcol]);
+      });
+    }
+    var note = "";
+    Array.prototype.forEach.call(sec.querySelectorAll(".empty"), function(e){
+      if(e.style.display !== "none" && e.innerText.trim()) note += "<div class='note'>" + esc(e.innerText.trim()) + "</div>";
+    });
+    var now = new Date();
+    var html = "<!doctype html><html><head><meta charset='utf-8'><title>MetroTrans \u2014 " + esc(title) + " \u2014 " + esc(range) + "</title><style>" +
+      "*{box-sizing:border-box} body{font:12.5px/1.4 'Segoe UI',system-ui,Arial,sans-serif;color:#111;margin:12mm}" +
+      "h1{font-size:15px;margin:0;color:#1F3863;text-transform:uppercase;letter-spacing:.03em}" +
+      ".brand{font-size:11px;color:#1F3863;font-weight:700;letter-spacing:.08em;text-transform:uppercase}" +
+      ".meta{font-size:11.5px;color:#555;margin:2px 0 10px;border-bottom:2px solid #1F3863;padding-bottom:6px}" +
+      "table{width:100%;border-collapse:collapse;font-size:11.5px}" +
+      "th,td{border-bottom:1px solid #D5DCE8;padding:4px 6px;text-align:left;vertical-align:top}" +
+      "th{background:#F1F4FA;color:#1F3863;text-transform:uppercase;font-size:10px;letter-spacing:.03em}" +
+      "td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}" +
+      "tr.total-row td,tr.sub td{font-weight:700;background:#EDF1F8}" +
+      ".muted{color:#6B7280} .note{font-size:10.5px;color:#555;margin-top:6px}" +
+      ".pill{font-size:9px;border:1px solid #9AA7BD;border-radius:9px;padding:0 5px}" +
+      "@page{size:A4 landscape;margin:10mm}" +
+      "</style></head><body><div class='brand'>MetroTrans Sacco</div><h1>" + esc(title) + "</h1>" +
+      "<div class='meta'>" + esc(range) + (filters.length ? "  \u00b7  " + esc(filters.join("  \u00b7  ")) : "") +
+      "  \u00b7  printed " + esc(now.toLocaleString()) + "</div>" +
+      clone.outerHTML + note + "</body></html>";
+    var w = window.open("", "_blank", "width=1150,height=820");
+    if(!w){ alert("Please allow pop-ups for this page to export the PDF."); return; }
+    w.document.open();
+    w.document.write(html);
+    w.document.close();
+    w.focus();
+    setTimeout(function(){ try{ w.print(); }catch(e){} }, 350);
+  }
+
+  // every Export CSV gets Export PDF and Share twins
+  Array.prototype.forEach.call(document.querySelectorAll("button.xls[data-export]"), function(csvBtn){
+    function mkBtn(label, extra){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "xls";
+      b.textContent = label;
+      if(extra) b.setAttribute("data-act", extra);
+      return b;
+    }
+    var pdf = mkBtn("Export PDF");
+    var share = mkBtn("Share");
+    var host = csvBtn.parentNode;
+    var wrap;
+    if(host && host.classList && host.classList.contains("hact")){
+      wrap = host;
+      host.insertBefore(pdf, csvBtn.nextSibling);
+      host.insertBefore(share, pdf.nextSibling);
+    } else {
+      wrap = document.createElement("span");
+      wrap.className = "hact";
+      host.insertBefore(wrap, csvBtn);
+      wrap.appendChild(csvBtn);
+      wrap.appendChild(pdf);
+      wrap.appendChild(share);
+    }
+    pdf.addEventListener("click", function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      exportPdfSection(csvBtn);
+    });
+    share.addEventListener("click", function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      shareSection(csvBtn);
+    });
+  });
+
+  document.getElementById("dateFrom").value = iso(new Date());
+  document.getElementById("dateTo").value = iso(new Date());
+
+  // simplified date: one day by default; a custom range lives in the Range popup
+  var dateOneEl = document.getElementById("dateOne");
+  function syncDateUI(){
+    var fv = document.getElementById("dateFrom").value, tv = document.getElementById("dateTo").value;
+    if(tv) dateOneEl.value = tv;
+    var isRange = !!(fv && tv && fv !== tv);
+    rangeBtn.classList.toggle("active", isRange);
+    rangeBtn.title = isRange ? ("Range: " + fv + " \u2192 " + tv) : "Pick a date range (From \u2192 To)";
+  }
+  dateOneEl.addEventListener("change", function(){
+    if(!dateOneEl.value) return;
+    document.getElementById("dateFrom").value = dateOneEl.value;
+    document.getElementById("dateTo").value = dateOneEl.value;
+    load();
+    closeDrops();
+    syncDateUI();
+  });
+  document.getElementById("dateFrom").addEventListener("change", syncDateUI);
+  document.getElementById("dateTo").addEventListener("change", syncDateUI);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-days]"), function(b){
+    b.addEventListener("click", function(){ setTimeout(syncDateUI, 0); });
+  });
+
+  // NAV-style typed dates: 010126 = 01-01-2026 · 010126..013126 = range · T = today
+  var navDateEl = document.getElementById("navDate");
+  var navLastKey = null, navLastAt = 0;
+  function navParseOne(s){
+    s = String(s || "").trim();
+    if(!s) return null;
+    if(/^t(oday)?$/i.test(s)) return new Date();
+    var dg = s.replace(/[^0-9]/g, "");
+    if(dg.length !== 6 && dg.length !== 8) return null;
+    var a = +dg.slice(0,2), b = +dg.slice(2,4);
+    var y = dg.length === 6 ? ((+dg.slice(4,6) < 70) ? 2000 + +dg.slice(4,6) : 1900 + +dg.slice(4,6)) : +dg.slice(4,8);
+    // day-month first (NAV style), then month-day - so 013126 also works for 31-01-2026
+    return navMakeDate(a, b, y) || navMakeDate(b, a, y);
+  }
+  function navMakeDate(dd, mm, yyyy){
+    var d = new Date(yyyy, mm - 1, dd);
+    return (d.getFullYear() === yyyy && d.getMonth() === mm - 1 && d.getDate() === dd) ? d : null;
+  }
+  function applyNavDate(){
+    if(!navDateEl) return;
+    var raw = (navDateEl.value || "").trim();
+    if(!raw) return;
+    var parts = raw.split(/\.{2,}|\u2026|\u00B7/); // tolerate .. / … / · typed separators
+    var f = navParseOne(parts[0]);
+    var t = parts.length > 1 ? navParseOne(parts[1]) : f;
+    if(!f || !t){
+      navDateEl.style.borderColor = "#C0243F";
+      setTimeout(function(){ navDateEl.style.borderColor = ""; }, 1500);
+      return; // keep the text so it can be corrected
+    }
+    if(t < f){ var sw = f; f = t; t = sw; }
+    var key = raw + "|" + iso(f) + "|" + iso(t);
+    if(key === navLastKey && (Date.now() - navLastAt) < 2000) return; // Enter then blur: apply once
+    navLastKey = key; navLastAt = Date.now();
+    document.getElementById("dateFrom").value = iso(f);
+    document.getElementById("dateTo").value = iso(t);
+    dateOneEl.value = iso(t);
+    load();
+    closeDrops();
+    syncDateUI();
+  }
+  if(navDateEl){
+    navDateEl.addEventListener("change", applyNavDate);
+    navDateEl.addEventListener("keydown", function(ev){ if(ev.key === "Enter"){ ev.preventDefault(); applyNavDate(); } });
+  }
+  syncDateUI();
+
+  // filters follow you between the pages (shared with Agent Summary)
+  try{
+    var sfShared = JSON.parse(localStorage.getItem("metrotrans.sharedFilters") || "null");
+    if(sfShared){
+      (sfShared.types || []).forEach(function(v){ selTypes.push(v); });
+      (sfShared.vehs || []).forEach(function(v){ selVehs.push(v); });
+      (sfShared.routes || []).forEach(function(v){ selRoutes.push(v); });
+      (sfShared.agents || []).forEach(function(v){ selAgents.push(v); });
+      (sfShared.owners || []).forEach(function(v){ selOwners.push(v); });
+    }
+  }catch(e){}
+  function saveSharedFilters(){
+    try{
+      localStorage.setItem("metrotrans.sharedFilters", JSON.stringify({types:selTypes, vehs:selVehs, routes:selRoutes, agents:selAgents, owners:selOwners}));
+    }catch(e){}
+  }
+
+  load();
+  schedule();
+})();
+</script>
+<script src="../nav.js"></script>
+</body>
+</html>

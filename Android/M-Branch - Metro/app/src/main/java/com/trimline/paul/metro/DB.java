@@ -19,7 +19,12 @@ public class DB extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "MBranch.db";
 
     public DB(Context context) {
-        super(context, DATABASE_NAME, null, 26);
+        super(context, DATABASE_NAME, null, 29);
+        // Use write-ahead logging: the menu's background sync threads write to
+        // this database continuously, and in the default journal mode UI reads
+        // had to wait on their locks (blocked lists, ANRs). WAL lets readers
+        // and the writer run concurrently.
+        setWriteAheadLoggingEnabled(true);
     }
 
     class a {
@@ -116,7 +121,10 @@ public class DB extends SQLiteOpenHelper {
                         v.Penalty + " float," +
                         v.Start_Date + " text," +
                         v.Daily_Contribution + " float," +
-                        v.Id_Number + " text)");
+                        v.Id_Number + " text," +
+                        v.Owner + " text," +
+                        v.Dues + " float," +
+                        v.Collect + " int)");
         db.execSQL(
                 "create table " + tt.Types_Table + "" +
                         "(" + tt.Code + " text primary key," +
@@ -166,6 +174,9 @@ public class DB extends SQLiteOpenHelper {
         public static final String Id_Number = "Id_Number";
         public static final String Arrears = "Arrears";
         public static final String Penalty = "Penalty";
+        public static final String Owner = "Owner";
+        public static final String Dues = "Dues";
+        public static final String Collect = "Collect";
 
 
         public static ContentValues values(vehicles vv) {
@@ -179,6 +190,9 @@ public class DB extends SQLiteOpenHelper {
             contentValues.put(Code, vv.Code);
             contentValues.put(vehicle_type, vv.vehicle_type);
             contentValues.put(Id_Number, vv.Id_Number);
+            contentValues.put(Owner, vv.Owner);
+            contentValues.put(Dues, vv.Dues);
+            contentValues.put(Collect, vv.Collect);
             return contentValues;
         }
     }
@@ -684,7 +698,18 @@ public class DB extends SQLiteOpenHelper {
        // Cursor res = db.rawQuery("select * from " + t.Transactions_TABLE_NAME + " Where " + t.Date + " =?", new String[]{date + ""});
 
 
-        Cursor res = db.rawQuery("select (select `Name` from types tt where tt.Code = t.Type) as Type,`Date` , sum(Amount) as Amount from " + t.Transactions_TABLE_NAME + " t Where " + t.Date + " =?  group by Type,Date", new String[]{date + ""});
+        // The printed summary mirrors the on-screen grouping: OffLoad rows
+        // are split by the vehicle's owner (1 = Sacco, 2 = Investor),
+        // everything else groups by its type name as before.
+        Cursor res = db.rawQuery("select Type, Date, sum(Amount) as Amount from (" +
+                " select case" +
+                " when t.Type = 'OFFLOAD' and v.Owner = 1 then (select `Name` from types tt where tt.Code = t.Type) || ' - Sacco'" +
+                " when t.Type = 'OFFLOAD' and v.Owner = 2 then (select `Name` from types tt where tt.Code = t.Type) || ' - Investor'" +
+                " else (select `Name` from types tt where tt.Code = t.Type) end as Type," +
+                " t.Date as Date, t.Amount as Amount" +
+                " from " + t.Transactions_TABLE_NAME + " t" +
+                " left join vehicles v on upper(trim(v.Vehicle_Number)) = upper(trim(t.Loan_No))" +
+                " where t.Date = ?) group by Type, Date", new String[]{date + ""});
 
 
 
@@ -1265,6 +1290,9 @@ public class DB extends SQLiteOpenHelper {
                 f.Daily_Contribution = res.getDouble(res.getColumnIndex(v.Daily_Contribution));
                 f.Arrears = res.getDouble(res.getColumnIndex(v.Arrears));
                 f.Penalty = res.getDouble(res.getColumnIndex(v.Penalty));
+                f.Owner = res.getInt(res.getColumnIndex(v.Owner));
+                f.Dues = res.getDouble(res.getColumnIndex(v.Dues));
+                f.Collect = res.getInt(res.getColumnIndex(v.Collect));
 
                 array_list.add(f);
             }   res.moveToNext();
@@ -1301,6 +1329,9 @@ public class DB extends SQLiteOpenHelper {
             f.Daily_Contribution = res.getDouble(res.getColumnIndex(v.Daily_Contribution));
             f.Arrears = res.getDouble(res.getColumnIndex(v.Arrears));
             f.Penalty = res.getDouble(res.getColumnIndex(v.Penalty));
+            f.Owner = res.getInt(res.getColumnIndex(v.Owner));
+            f.Dues = res.getDouble(res.getColumnIndex(v.Dues));
+            f.Collect = res.getInt(res.getColumnIndex(v.Collect));
             array_list.add(f);
             } res.moveToNext();
         }
@@ -1326,6 +1357,9 @@ public class DB extends SQLiteOpenHelper {
             f.Daily_Contribution = res.getDouble(res.getColumnIndex(v.Daily_Contribution));
             f.Arrears = res.getDouble(res.getColumnIndex(v.Arrears));
             f.Penalty = res.getDouble(res.getColumnIndex(v.Penalty));
+            f.Owner = res.getInt(res.getColumnIndex(v.Owner));
+            f.Dues = res.getDouble(res.getColumnIndex(v.Dues));
+            f.Collect = res.getInt(res.getColumnIndex(v.Collect));
             res.close();
 
         }
@@ -1347,6 +1381,9 @@ public class DB extends SQLiteOpenHelper {
             f.Daily_Contribution = res.getDouble(res.getColumnIndex(v.Daily_Contribution));
             f.Arrears = res.getDouble(res.getColumnIndex(v.Arrears));
             f.Penalty = res.getDouble(res.getColumnIndex(v.Penalty));
+            f.Owner = res.getInt(res.getColumnIndex(v.Owner));
+            f.Dues = res.getDouble(res.getColumnIndex(v.Dues));
+            f.Collect = res.getInt(res.getColumnIndex(v.Collect));
             res.close();
         }
         return f;
@@ -1369,6 +1406,9 @@ public class DB extends SQLiteOpenHelper {
             f.Daily_Contribution = res.getDouble(res.getColumnIndex(v.Daily_Contribution));
             f.Arrears = res.getDouble(res.getColumnIndex(v.Arrears));
             f.Penalty = res.getDouble(res.getColumnIndex(v.Penalty));
+            f.Owner = res.getInt(res.getColumnIndex(v.Owner));
+            f.Dues = res.getDouble(res.getColumnIndex(v.Dues));
+            f.Collect = res.getInt(res.getColumnIndex(v.Collect));
             res.moveToNext();
             ff.add(f);
         }

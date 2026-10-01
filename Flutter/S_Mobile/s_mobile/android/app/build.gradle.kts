@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.trimline.s_mobile"
-    compileSdk = 34
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

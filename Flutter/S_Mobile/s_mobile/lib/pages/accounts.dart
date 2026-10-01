@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
+import 'package:s_mobile/common/payment_cart.dart';
 import 'package:s_mobile/common/utilities.dart';
 import 'package:s_mobile/members/accounts.dart';
 import 'package:s_mobile/members/entries.dart';
@@ -280,12 +281,42 @@ class _accountsState extends State<accounts> {
                 ),
               ],
             ),
-            const SizedBox(width: 4),
+            IconButton(
+              onPressed: () => _addToPayment(context, acc, member),
+              tooltip: 'Add to payment',
+              icon: const Icon(Icons.add_shopping_cart, size: 20),
+              color: accentColor,
+              visualDensity: VisualDensity.compact,
+            ),
+            const SizedBox(width: 2),
             Icon(Icons.chevron_right, color: Colors.grey.shade400),
           ],
         ),
       ),
     );
+  }
+
+  // ── Add account to payment cart ───────────────────────────
+  void _addToPayment(BuildContext context, Account acc, Member member) {
+    final isLoan = acc.Product_Category != null;
+    final item = isLoan
+        ? PaymentItem(
+            label: acc.Name ?? acc.Product_Name ?? 'Loan',
+            loanNo: acc.No,
+            type: 'loan')
+        : PaymentItem(
+            label: acc.Name ?? acc.Product_Name ?? 'Savings',
+            accountNo: acc.No,
+            type: 'savings');
+    final cart = Get.find<PaymentCartController>();
+    final already = cart.items.any((i) => i.key == item.key);
+    cart.addItem(item);
+    MotionToast.success(
+      description: Text(already
+          ? '"${item.label}" is already in the payment cart.'
+          : '"${item.label}" added to the payment cart.'),
+      title: const Text('Payment'),
+    ).show(context);
   }
 
   // ── Navigate on account tap ───────────────────────────────

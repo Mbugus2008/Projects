@@ -1,0 +1,219 @@
+@using Matatu_Dashboard.Services
+@model Matatu_Dashboard.Services.TripBookReport
+@{
+    Layout = null;
+    var selectedRange = (ViewData["SelectedRange"] as string) ?? "today";
+    var todayStr = DateTime.Today.ToString("yyyy-MM-dd");
+    var yesterdayStr = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+    var pathBase = Context.Request.PathBase.HasValue ? Context.Request.PathBase.Value! : string.Empty;
+    var basePath = string.IsNullOrWhiteSpace(pathBase) ? "/tripbook" : $"{pathBase}/tripbook";
+    var retrievedAt = (DateTime?)ViewData["RetrievedAt"] ?? DateTime.Now;
+    var vehicles = Model.Vehicles;
+
+    // "unformatted": sums stay plain so they can be read straight off the screen.
+    string Money(decimal value) => value.ToString("N2");
+    string Plain(decimal value) => value.ToString("0.##");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { color-scheme: light; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: #f4f6f9; color: #1a1a2e; padding: 16px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+        .header h1 { font-size: 20px; font-weight: 700; }
+        .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tabs a { padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; color: #555; background: #e8ecf1; }
+        .tabs a.active { background: #006B3F; color: #fff; }
+
+        .book { display: grid; grid-template-columns: 230px 260px minmax(0, 1fr); gap: 14px; align-items: start; }
+        .panel { background: #fff; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.08); padding: 14px; }
+        .panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: #888; margin-bottom: 10px; font-weight: 700; }
+
+        select { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 14px; background: #fff; }
+        .hint { font-size: 11px; color: #999; margin-top: 8px; line-height: 1.4; }
+
+        dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 10px; font-size: 13px; }
+        dt { color: #777; }
+        dd { font-weight: 600; text-align: right; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #006B3F; color: #fff; padding: 8px; font-size: 11px; text-align: left; white-space: nowrap; }
+        td { padding: 7px 8px; font-size: 13px; border-bottom: 1px solid #eee; white-space: nowrap; }
+        tr:last-child td { border-bottom: none; }
+        td.num, th.num { text-align: right; }
+        .empty { color: #999; font-size: 13px; padding: 10px 0; }
+
+        .settlement { margin-top: 16px; border-top: 2px solid #006B3F; padding-top: 12px; }
+        .settlement dl { font-size: 14px; }
+        .settlement dd { font-weight: 700; }
+        .settlement .total dd { color: #1565c0; }
+        .settlement .account dd { color: #006B3F; }
+        .settlement .uncollected dd { color: #d32f2f; }
+        .settlement .target dd { color: #b26a00; }
+        .settlement input { width: 130px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 14px; text-align: right; }
+
+        .footer { margin-top: 14px; font-size: 11px; color: #999; text-align: center; }
+        @@media (max-width: 900px) {
+            .book { grid-template-columns: 1fr; }
+            body { padding: 10px; }
+        }
+        @@media print {
+            body { background: #fff; padding: 0; }
+            .tabs, .footer, .hint { display: none !important; }
+            .panel { box-shadow: none; border: 1px solid #ddd; }
+            th { background: #006B3F !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            tr { break-inside: avoid; }
+            @@page { size: A4 landscape; margin: 10mm; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>@ViewData["Title"]</h1>
+        <div class="tabs">
+            <a href="@basePath/today" class="@(selectedRange == "today" || selectedRange == todayStr ? "active" : "")">Today</a>
+            <a href="@basePath/yesterday" class="@(selectedRange == "yesterday" || selectedRange == yesterdayStr ? "active" : "")">Yesterday</a>
+            <a href="@basePath/week" class="@(selectedRange == "week" ? "active" : "")">Week</a>
+            <a href="@basePath/month" class="@(selectedRange == "month" ? "active" : "")">Month</a>
+        </div>
+    </div>
+
+    <div class="book">
+        <!-- 1. vehicle picker -->
+        <div class="panel">
+            <h2>Vehicle</h2>
+            <select id="vehicleSelect" onchange="showVehicle(this.value)">
+                @foreach (var vehicle in vehicles)
+                {
+                    <option value="@vehicle.Vehicle">@vehicle.Vehicle — fleet @vehicle.Fleet</option>
+                }
+            </select>
+            <p class="hint">@vehicles.Count vehicle(s) on the depot sheet for this period.</p>
+        </div>
+
+        <!-- 2. the selected vehicle -->
+        <div class="panel">
+            <h2>Vehicle details</h2>
+            @foreach (var vehicle in vehicles)
+            {
+                <div class="vehicle-block" data-vehicle="@vehicle.Vehicle" hidden>
+                    <dl>
+                        <dt>Date</dt><dd>@vehicle.Date</dd>
+                        <dt>Driver</dt><dd>@vehicle.Driver</dd>
+                        <dt>Conductor</dt><dd>@vehicle.Conductor</dd>
+                        <dt>Fleet No</dt><dd>@vehicle.Fleet</dd>
+                        <dt>Waybill</dt><dd>@vehicle.EntryNo</dd>
+                    </dl>
+                </div>
+            }
+        </div>
+
+        <!-- 3. trips, then the settlement -->
+        <div class="panel">
+            @foreach (var vehicle in vehicles)
+            {
+                <div class="vehicle-block" data-vehicle="@vehicle.Vehicle" hidden>
+                    <h2>Trips</h2>
+                    @if (vehicle.Trips.Count == 0)
+                    {
+                        <p class="empty">No trips recorded@(vehicle.HasWaybill ? "" : " — no waybill for this vehicle today").</p>
+                    }
+                    else
+                    {
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Route</th><th>Departure</th><th>Arrival</th>
+                                    <th class="num">Pax</th><th class="num">Fare</th>
+                                    <th class="num">Amount</th><th class="num">Total</th><th class="num">Expenses</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var trip in vehicle.Trips)
+                                {
+                                    <tr>
+                                        <td>@trip.From - @trip.To</td>
+                                        <td>@trip.Departure</td>
+                                        <td>@trip.Arrival</td>
+                                        <td class="num">@trip.Pax</td>
+                                        <td class="num">@Money(trip.Fare)</td>
+                                        <td class="num">@Money(trip.Fare * trip.Pax)</td>
+                                        <td class="num" style="font-weight:700;">@Money(trip.Total)</td>
+                                        <td class="num">@Money(trip.Expenses)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+
+                    <div class="settlement">
+                        <h2>Settlement</h2>
+                        <dl>
+                            <dt class="total">Total Amount</dt>
+                            <dd class="total">@Money(vehicle.TotalAmount)</dd>
+
+                            <dt>Management</dt>
+                            <dd>@Money(vehicle.Management)</dd>
+
+                            <dt class="account">Account</dt>
+                            <dd class="account">@Money(vehicle.Account)</dd>
+
+                            <dt>Cash</dt>
+                            <dd>@Money(vehicle.Cash)</dd>
+
+                            <dt class="uncollected">Uncollected</dt>
+                            <dd class="uncollected">@Money(vehicle.Uncollected)</dd>
+
+                            <dt>Bank Deposit</dt>
+                            <dd><input type="text" inputmode="decimal" placeholder="@Plain(0)" /></dd>
+
+                            <dt class="target">Target Balance</dt>
+                            <dd class="target">@Money(vehicle.TargetBalance)</dd>
+                        </dl>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @if (vehicles.Count == 0)
+    {
+        <p style="text-align:center;color:#999;margin-top:24px;">No vehicles on the depot sheet for this period.</p>
+    }
+
+    <div class="footer">
+        Retrieved @retrievedAt.ToString("HH:mm:ss") · @selectedRange
+    </div>
+
+    <script>
+        function showVehicle(vehicle) {
+            var blocks = document.querySelectorAll('.vehicle-block');
+            for (var i = 0; i < blocks.length; i++) {
+                blocks[i].hidden = blocks[i].getAttribute('data-vehicle') !== vehicle;
+            }
+            try { localStorage.setItem('tripbook.vehicle', vehicle); } catch (e) { }
+        }
+
+        (function () {
+            var select = document.getElementById('vehicleSelect');
+            if (!select || !select.options.length) return;
+            // Reopen on the vehicle last looked at, when it is still on the sheet.
+            var remembered = null;
+            try { remembered = localStorage.getItem('tripbook.vehicle'); } catch (e) { }
+            if (remembered) {
+                for (var i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === remembered) { select.selectedIndex = i; break; }
+                }
+            }
+            showVehicle(select.value);
+        })();
+    </script>
+</body>
+</html>

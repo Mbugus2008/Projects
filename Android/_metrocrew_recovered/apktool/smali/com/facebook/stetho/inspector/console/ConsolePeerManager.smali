@@ -1,0 +1,92 @@
+.class public Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+.super Lcom/facebook/stetho/inspector/helper/ChromePeerManager;
+.source "ConsolePeerManager.java"
+
+
+# static fields
+.field private static sInstance:Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+
+
+# direct methods
+.method private constructor <init>()V
+    .locals 0
+
+    .line 19
+    invoke-direct {p0}, Lcom/facebook/stetho/inspector/helper/ChromePeerManager;-><init>()V
+
+    .line 20
+    return-void
+.end method
+
+.method public static declared-synchronized getInstanceOrNull()Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+    .locals 2
+    .annotation runtime Ljavax/annotation/Nullable;
+    .end annotation
+
+    const-class v0, Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+
+    monitor-enter v0
+
+    .line 24
+    :try_start_0
+    sget-object v1, Lcom/facebook/stetho/inspector/console/ConsolePeerManager;->sInstance:Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    monitor-exit v0
+
+    return-object v1
+
+    .line 24
+    :catchall_0
+    move-exception v1
+
+    :try_start_1
+    monitor-exit v0
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    throw v1
+.end method
+
+.method public static declared-synchronized getOrCreateInstance()Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+    .locals 2
+
+    const-class v0, Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+
+    monitor-enter v0
+
+    .line 28
+    :try_start_0
+    sget-object v1, Lcom/facebook/stetho/inspector/console/ConsolePeerManager;->sInstance:Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+
+    if-nez v1, :cond_0
+
+    .line 29
+    new-instance v1, Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+
+    invoke-direct {v1}, Lcom/facebook/stetho/inspector/console/ConsolePeerManager;-><init>()V
+
+    sput-object v1, Lcom/facebook/stetho/inspector/console/ConsolePeerManager;->sInstance:Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+
+    .line 31
+    :cond_0
+    sget-object v1, Lcom/facebook/stetho/inspector/console/ConsolePeerManager;->sInstance:Lcom/facebook/stetho/inspector/console/ConsolePeerManager;
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    monitor-exit v0
+
+    return-object v1
+
+    .line 27
+    :catchall_0
+    move-exception v1
+
+    :try_start_1
+    monitor-exit v0
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    throw v1
+.end method

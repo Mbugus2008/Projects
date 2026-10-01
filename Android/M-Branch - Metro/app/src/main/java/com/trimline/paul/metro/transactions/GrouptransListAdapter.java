@@ -76,10 +76,14 @@ public class GrouptransListAdapter extends BaseExpandableListAdapter {
         GroupedByVehicle group = (GroupedByVehicle) getGroup(groupPosition);
         TextView text1 = convertView.findViewById(R.id.text1);
         TextView text2 = convertView.findViewById(R.id.text2);
+        TextView text3 = convertView.findViewById(R.id.text3);
+        TextView text4 = convertView.findViewById(R.id.text4);
 
         text1.setText( String.format("%s (%s)", group.getFleetNO(),group.getVehicle()));
-        text2.setText( String.format("%,.2f",group.getTotalAmount()));
-        text2.setOnClickListener(new View.OnClickListener() {
+        text2.setText( String.format("%,.2f",group.getManagementAmount()));
+        text3.setText( String.format("%,.2f",group.getOtherAmount()));
+        text4.setText( String.format("%,.2f",group.getTotalAmount()));
+        text4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showCustomDialog(group);

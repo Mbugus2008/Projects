@@ -1,5 +1,25 @@
 package com.trimline.paul.metro;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.trimline.paul.metro.databinding.Agent;
+
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -10,11 +30,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-
 import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
@@ -36,30 +56,11 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.trimline.paul.metro.databinding.Agent;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class cashreceipt extends AppCompatActivity {
     StringBuilder s;
@@ -70,13 +71,16 @@ public class cashreceipt extends AppCompatActivity {
     ImageButton find, clear;
     Spinner ttypes, tvehicles, tloans;
     String type;
-    Button addtrans, postnew, reprint,recoverydate;
+    Button addtrans, postnew, reprint, recoverydate;
     ProgressBar findmember;
     Calendar cdt;
     transaction T;
     DB db = null;
     member f;
     CheckBox recovery;
+    /** The date the receipt is recorded for - today, or an earlier date when the
+     *  "Recovery" box is ticked (the old hidden control is now a visible one). */
+    String txnDate;
     List<vehicles> mvehicles = new ArrayList<>();
     SimpleDateFormat batch;
     static String Batch, lastbatch;
@@ -94,6 +98,105 @@ public class cashreceipt extends AppCompatActivity {
     vehicles currentvehcle;
     final static int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
     private int mYear, mMonth, mDay, mHour, mMinute;
+
+    // picked value (vehicle number or fleet no) -> details for the styled dropdown row
+    private static class VehInfo {
+        String vehicleNo;
+        String fleetNo;
+        int owner;      // 0 = blank, 1 = Sacco, 2 = Investor
+        double dues;
+        int collect;    // 0 = blank, 1 = Loan, 2 = Offload
+    }
+
+    private final HashMap<String, VehInfo> vehicleInfo = new HashMap<String, VehInfo>();
+    private final HashSet<String> fleetKeys = new HashSet<String>();
+
+    private void buildVehicleInfo() {
+        vehicleInfo.clear();
+        fleetKeys.clear();
+        for (vehicles v : db.getvehicles()) {
+            if (v.Vehicle_Number == null || v.Vehicle_Number.trim().isEmpty())
+                continue;
+            VehInfo info = new VehInfo();
+            info.vehicleNo = v.Vehicle_Number;
+            info.fleetNo = v.Fleet_No == null ? "" : v.Fleet_No.trim();
+            info.owner = v.Owner;
+            info.dues = v.Dues;
+            info.collect = v.Collect;
+            vehicleInfo.put(v.Vehicle_Number, info);
+            if (!info.fleetNo.isEmpty()) {
+                vehicleInfo.put(info.fleetNo, info);
+                fleetKeys.add(info.fleetNo);
+            }
+        }
+    }
+
+    /** Suggestion adapter with a styled two-line row: the picked value with its
+     *  vehicle number/fleet, an owner badge and the current dues. */
+    private AutoSuggestAdapter makeSuggestAdapter(List<String> items) {
+        buildVehicleInfo();
+        AutoSuggestAdapter adapter = new AutoSuggestAdapter(this, android.R.layout.simple_list_item_1, items);
+        adapter.setRanker(new AutoSuggestAdapter.Ranker() {
+            @Override
+            public boolean ranksFirst(String item) {
+                return fleetKeys.contains(item);
+            }
+        });
+        adapter.setCustomRow(R.layout.vehicle_dropdown_item, new AutoSuggestAdapter.RowBinder() {
+            @Override
+            public void bind(View view, String item) {
+                TextView title = view.findViewById(R.id.dd_title);
+                TextView sub = view.findViewById(R.id.dd_sub);
+                TextView owner = view.findViewById(R.id.dd_owner);
+                TextView dues = view.findViewById(R.id.dd_dues);
+
+                title.setText(item);
+
+                VehInfo info = vehicleInfo.get(item);
+                if (info == null) {
+                    sub.setVisibility(View.GONE);
+                    owner.setVisibility(View.GONE);
+                    dues.setVisibility(View.GONE);
+                    return;
+                }
+
+                sub.setVisibility(View.VISIBLE);
+                owner.setVisibility(View.VISIBLE);
+                dues.setVisibility(View.VISIBLE);
+
+                String line2;
+                if (item.equals(info.vehicleNo))
+                    line2 = info.fleetNo.isEmpty() ? "" : "Fleet " + info.fleetNo;
+                else
+                    line2 = "Veh " + info.vehicleNo;
+                if (info.collect == 1) line2 += (line2.isEmpty() ? "" : "  \u00b7  ") + "Loan";
+                else if (info.collect == 2) line2 += (line2.isEmpty() ? "" : "  \u00b7  ") + "Offload";
+                if (line2.isEmpty())
+                    sub.setVisibility(View.GONE);
+                else
+                    sub.setText(line2);
+
+                if (info.owner == 1) {
+                    owner.setText("SACCO");
+                    owner.setTextColor(Color.parseColor("#2E7D32"));
+                    owner.setBackgroundResource(R.drawable.badge_sacco);
+                } else if (info.owner == 2) {
+                    owner.setText("INVESTOR");
+                    owner.setTextColor(Color.parseColor("#3949AB"));
+                    owner.setBackgroundResource(R.drawable.badge_investor);
+                } else {
+                    owner.setText("NO OWNER");
+                    owner.setTextColor(Color.parseColor("#9CA3AF"));
+                    owner.setBackgroundResource(R.drawable.badge_blank);
+                }
+
+                dues.setText(String.format("Dues %,.2f", info.dues));
+                dues.setTextColor(Color.parseColor(info.dues > 0 ? "#D32F2F" : "#9CA3AF"));
+            }
+        });
+        return adapter;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,11 +209,51 @@ public class cashreceipt extends AppCompatActivity {
         tvehicles = findViewById(R.id.tvehicles);
         tloans = findViewById(R.id.tloans);
         texpenses = findViewById(R.id.texpense);
-        recoverydate= findViewById(R.id.recoverydate);
-        recoverydate.setVisibility(View.GONE);
         cdt=Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        recoverydate.setText(df.format(cdt.getTime()));
+        txnDate = df.format(cdt.getTime());
+        recoverydate = findViewById(R.id.recoverydate);
+        recovery = findViewById(R.id.recovery);
+        recoverydate.setText(txnDate);
+        recoverydate.setVisibility(View.GONE);
+        recovery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                cdt = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                if (isChecked){
+                    // back-dated receipt: default to yesterday, tappable to pick another day
+                    cdt.add(Calendar.DATE, -1);
+                    txnDate = df.format(cdt.getTime());
+                    recoverydate.setText(txnDate);
+                    recoverydate.setVisibility(View.VISIBLE);
+                } else {
+                    txnDate = df.format(Calendar.getInstance().getTime());
+                    recoverydate.setText(txnDate);
+                    recoverydate.setVisibility(View.GONE);
+                }
+                reloadCollectionsForDate();
+            }
+        });
+        recoverydate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(cashreceipt.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                DecimalFormat mFormat = new DecimalFormat("00");
+                                txnDate = mFormat.format(Double.valueOf(dayOfMonth)) + "-" +
+                                        mFormat.format(Double.valueOf(monthOfYear + 1)) + "-" + year;
+                                recoverydate.setText(txnDate);
+                                reloadCollectionsForDate();
+                            }
+                        }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                datePickerDialog.show();
+            }
+        });
         final Calendar c = Calendar.getInstance();
         DecimalFormat mFormat= new DecimalFormat("00");
 
@@ -121,46 +264,6 @@ public class cashreceipt extends AppCompatActivity {
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        recoverydate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(cashreceipt.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-//dd-MM-yyyy
-                                DecimalFormat mFormat = new DecimalFormat("00");
-                                String date = mFormat.format(Double.valueOf(dayOfMonth)) + "-" + mFormat.format(Double.valueOf(monthOfYear + 1)) + "-" + year;
-                                recoverydate.setText(date);
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-                datePickerDialog.show();
-            }
-        });
-        recovery = (CheckBox)findViewById(R.id.recovery);
-        recovery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                cdt = Calendar.getInstance();
-                Log.i( "onCheckedChanged: ",String.valueOf(isChecked));
-                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
-                if (isChecked){
-                    cdt.add(Calendar.DATE ,-1);
-                    recoverydate.setText(df.format(cdt.getTime()));
-                recoverydate.setVisibility(View.VISIBLE);
-               }
-               else{
-                    cdt=Calendar.getInstance();
-                    recoverydate.setText(df.format(cdt.getTime()));
-                   recoverydate.setVisibility(View.GONE);
-
-               }
-            }
-        });
-        recovery.setChecked(false);
         permissions();
 //       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
 //       new getclients().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -220,7 +323,7 @@ else
                     type = "";
                     if (t.Code != null)
                         if (t.Attach_to_vehicle) {
-                            tvehicles.setVisibility(View.VISIBLE);
+                            // vehicle spinner stays hidden; the searched vehicle (or first) is attached silently
                             vehicleAdapter = new ArrayAdapter<vehicles>(cashreceipt.this,
                                     android.R.layout.simple_spinner_item, mvehicles);
                             vehicleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -231,7 +334,7 @@ else
                             }
                         }
                     if (t.Code.equals("LOANss")) {
-                        tloans.setVisibility(View.VISIBLE);
+                        // loan spinner stays hidden; adapter is still set so the first loan attaches silently
                         loanAdapter = new ArrayAdapter<loan>(cashreceipt.this,
                                 android.R.layout.simple_spinner_item, db.getcustomerloans(f.No));
                         loanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -365,9 +468,13 @@ else
 
                 s = new StringBuilder();
                 s.append(String.format("Reg : <b>%s</b> Fleet No: <b>%s</b><br>", veh.Vehicle_Number,veh.Fleet_No));
+                if (veh.Collect == 1)
+                    s.append("<b>Collect: Loan</b><br>");
+                else if (veh.Collect == 2)
+                    s.append("<b>Collect: Offload</b><br>");
                 s.append(String.format("_____________________________________________________<br>"));
                 membername.setText(Html.fromHtml(s.toString().replace(" ", "&nbsp;")));
-                new getcollections(veh.Vehicle_Number,recoverydate.getText().toString()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                new getcollections(veh.Vehicle_Number,txnDate).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                 //id.setText(f.No);
                 String loans = String.format("Loan Arrears: <b>%s</b>   Last Payment :<b>%s</b><br/>Savings: <b>%s</b> Last Payment: <b>%s</b><br/>Xmas: <b>%s</b>  Last Payment: <b>%s</b>", String.format("%,.2f", f.Loan_Arrears + f.dailyrepayment),f.Last_update_Loan,String.format("%,.2f",(f.Savings>=0?0:f.Savings)),f.Last_update_savings,String.format("%,.2f",(f.Xmas>=0?0:f.Xmas)),f.Last_update_xmas);
@@ -399,7 +506,7 @@ else
         }
         Myvariables.vehs = clients;
 
-        AutoSuggestAdapter adapter = new AutoSuggestAdapter(cashreceipt.this, android.R.layout.simple_list_item_1, Myvariables.vehs);
+        AutoSuggestAdapter adapter = makeSuggestAdapter(Myvariables.vehs);
         memberno.setAdapter(adapter);
         totalrec = findViewById(R.id.totalreceipt);
         clear = findViewById(R.id.clear);
@@ -467,7 +574,9 @@ else
             @Override
             public void onClick(View v) {
                 Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-                p.printcollection(b, db.gettransbybatch(lastbatch));
+                if (!p.printcollection(b, db.gettransbybatch(lastbatch)))
+                    Toast.makeText(getApplicationContext(),
+                            "Could not print - check the printer connection", Toast.LENGTH_LONG).show();
             }
         });
         postnew = findViewById(R.id.postnew);
@@ -478,7 +587,7 @@ else
                     if (T != null) {
                         db.post(T);
                         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-                        p.printcollection(b, db.gettransbybatch(Batch));
+                        boolean printed = p.printcollection(b, db.gettransbybatch(Batch));
                         clearfarmer();
                         cleartrans();
                         lastbatch = Batch;
@@ -487,6 +596,10 @@ else
                         batch = new SimpleDateFormat("yyyyMMddHHmmss");
                         Batch = batch.format(cdt.getTime());
                         memberno.requestFocus();
+                        if (!printed)
+                            Toast.makeText(getApplicationContext(),
+                                    "Saved, but the receipt could not be printed - check the printer",
+                                    Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -546,7 +659,7 @@ else
                     final String Doc = df.format(cdt.getTime());
                     T = new transaction();
                     T.Recovery = recovery.isChecked();
-                    T.Date = recoverydate.getText().toString();// formattedDate;
+                    T.Date = txnDate;
                     T.Time = formattedtime;
                     T.Account_No = f.No;
                     T.Document_No = selectedvehicle.replace(" ","") + Doc;
@@ -771,12 +884,24 @@ public static void createfile(transaction c)
             ex.printStackTrace();
         }
     }
+    /** Re-load the attached vehicle's collections when the receipt date changes
+     *  (ticking Recovery, or picking a different day on the date button). */
+    private void reloadCollectionsForDate() {
+        try {
+            if (selectedvehicle != null && !selectedvehicle.trim().isEmpty()) {
+                new getcollections(selectedvehicle, txnDate).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private void clearfarmer() {
         memberno.setText("");
         memberno.setSelection(memberno.getText().length());
         membername.setText("");
         id.setText("");
-        recovery.setChecked(false);
+        recovery.setChecked(false); // also resets the date back to today
         f = null;
         totalrec.setText("");
         ttrans.setAdapter(null);
@@ -841,7 +966,7 @@ public static void createfile(transaction c)
         @Override
         protected void onPostExecute(ArrayList<String> res) {
             try {
-                AutoSuggestAdapter adapter = new AutoSuggestAdapter(cashreceipt.this, android.R.layout.simple_list_item_1, res);
+                AutoSuggestAdapter adapter = makeSuggestAdapter(res);
                 memberno.setAdapter(adapter);
                 //  Toast.makeText(getApplicationContext(), res.size() + " Members attached", Toast.LENGTH_LONG).show();
             } catch (Exception ex) {
@@ -920,8 +1045,8 @@ public static void createfile(transaction c)
 
                     } else
 
-                    {  Toast.makeText(getApplicationContext(), "No payment for Vehicle " + c + " today", Toast.LENGTH_LONG).show();
-                s.append(String.format("No payment for vehicle %s today",c));}
+                    {  Toast.makeText(getApplicationContext(), "No payment for Vehicle " + c + " on " + date, Toast.LENGTH_LONG).show();
+                s.append(String.format("No payment for vehicle %s on %s",c,date));}
                 membername.setText(Html.fromHtml(s.toString().replace(" ", "&nbsp;")));
 
             } catch (Exception ex) {

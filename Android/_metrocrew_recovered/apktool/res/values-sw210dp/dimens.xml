@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ws_nav_drawer_single_page_circle_radius">27.0dp</dimen>
+    <dimen name="ws_nav_drawer_single_page_half_icon_size">16.0dp</dimen>
+    <dimen name="ws_nav_drawer_single_page_icon_size">32.0dp</dimen>
+    <dimen name="ws_nav_drawer_text_size">14.0sp</dimen>
+</resources>

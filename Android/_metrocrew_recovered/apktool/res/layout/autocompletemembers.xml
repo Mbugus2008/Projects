@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/autocompletelayout" android:background="@drawable/layoutborder" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="3.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="15.0sp" android:gravity="left" android:id="@id/name" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dp" android:hint="Name" />
+    <TextView android:textSize="15.0sp" android:gravity="left" android:id="@id/no" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="No" />
+</LinearLayout>

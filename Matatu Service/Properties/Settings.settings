@@ -18,7 +18,7 @@
       <Value Profile="(Default)">http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Codeunit/MBranch</Value>
     </Setting>
     <Setting Name="Collection_Vehicles_Vehicles_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Vehicles</Value>
+      <Value Profile="(Default)">http://services.trimline.co.ke:4022/Metroservice/WS/MetroTrans/Page/Vehicles</Value>
     </Setting>
     <Setting Name="Collection_Credits_Credits_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://desktop-elbbejj:4002/emba/WS/EMBASSAVA%20SACCO%20LTD/Page/Credits</Value>

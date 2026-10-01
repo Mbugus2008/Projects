@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-apk",
+      "type": "shell",
+      "command": "gradlew assembleDebug",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
+// This file is used to define tasks for building the Android APK.
+// The task "build-apk" runs the Gradle command to assemble the debug APK.
+// You can run this task from the command palette or automatically on file save.
+// Make sure you have the Android SDK and Gradle installed and configured in your environment.
+// To run the task, use the command palette (Ctrl+Shift+P) and type

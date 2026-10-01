@@ -6,40 +6,47 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import java.util.stream.Collectors;
 
 public class receiptreport extends AppCompatActivity implements
         View.OnClickListener {
-    Receipts listAdapter;
-    List<summaries.Receipts> listDataHeader;
+    ReceiptsRecyclerAdapter listAdapter;
+    List<summaries.agentreceipts> daylist;
+    List<Object> rows; // flattened visible rows (agent / receipt / transaction)
     HashMap<summaries.Receipts, List<transaction>> listDataChild;
-    ExpandableListView report;
+    RecyclerView report;
     ProgressDialog progress;
     private int mYear, mMonth, mDay, mHour, mMinute;
     DB db = null;
     Button setdate;
     String date;
-TextView total ;
+    TextView total;
+    CheckBox showreversed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_summary);
+        setContentView(R.layout.activity_receipts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Summary Report");
@@ -49,9 +56,35 @@ TextView total ;
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progress.setIndeterminate(false);
         progress.setProgress(0);
-        //progress.setMax( db.getcollectionreceipts().size());
-        report = (ExpandableListView) findViewById(R.id.summuryreport);
-total = (TextView)findViewById(R.id.total);
+        report = (RecyclerView) findViewById(R.id.receiptsrecycler);
+        total = (TextView) findViewById(R.id.total);
+
+        // The list is flattened manually (agent -> receipt -> transactions) so
+        // each level can expand and collapse independently.
+        report.setLayoutManager(new LinearLayoutManager(this));
+        rows = new ArrayList<Object>();
+        daylist = new ArrayList<summaries.agentreceipts>();
+        listDataChild = new HashMap<summaries.Receipts, List<transaction>>();
+        listAdapter = new ReceiptsRecyclerAdapter(this, db, listDataChild, daylist, rows, new Runnable() {
+            @Override
+            public void run() {
+                rebuildRows();
+            }
+        });
+        report.setAdapter(listAdapter);
+
+        // Reversed entries are hidden unless this box is ticked, so the report
+        // shows an auditable net view by default.
+        showreversed = (CheckBox) findViewById(R.id.showreversed);
+        showreversed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                    new loaddata(date, isChecked).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                else
+                    new loaddata(date, isChecked).execute();
+            }
+        });
 
         //datepicker
 
@@ -71,42 +104,9 @@ total = (TextView)findViewById(R.id.total);
         //datepicker
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-            new loaddata(date).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            new loaddata(date, showreversed.isChecked()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         else
-            new loaddata(date).execute();
-
-        report.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-                // Toast.makeText(getApplicationContext(),
-                // "Group Clicked " + listDataHeader.get(groupPosition),
-                // Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-        report.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-
-                return false;
-            }
-        });
-        report.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                //rl.setVisibility(View.VISIBLE);
-            }
-        });
-        // Listview Group collasped listener
-        report.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-
-            }
-        });
+            new loaddata(date, showreversed.isChecked()).execute();
     }
 
     @Override
@@ -124,44 +124,47 @@ total = (TextView)findViewById(R.id.total);
                         date = mFormat.format(Double.valueOf(dayOfMonth)) + "-" + mFormat.format(Double.valueOf(monthOfYear + 1)) + "-" + year;
                         setdate.setText(date);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                            new loaddata(date).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                            new loaddata(date, showreversed.isChecked()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                         else
-                            new loaddata(date).execute();
+                            new loaddata(date, showreversed.isChecked()).execute();
 
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
 
-    private void expandAll() {
-        int count = listAdapter.getGroupCount();
-        for (int i = 0; i < count; i++) {
-            report.expandGroup(i);
+    /** Flattens the agent -> receipt -> transactions hierarchy into the
+     *  visible rows, honouring the expanded state of each level. */
+    private void rebuildRows() {
+        rows.clear();
+        for (summaries.agentreceipts a : daylist
+        ) {
+            rows.add(a);
+            if (!a.Expanded)
+                continue;
+            for (summaries.Receipts r : a.ReceiptsList
+            ) {
+                rows.add(r);
+                if (r.Expanded) {
+                    List<transaction> t = listDataChild.get(r);
+                    if (t != null)
+                        rows.addAll(t);
+                }
+            }
         }
+        listAdapter.notifyDataSetChanged();
     }
 
-    private void DateCollection() {
-        listDataHeader = new ArrayList<summaries.Receipts>();
-        listDataChild = new HashMap<summaries.Receipts, List<transaction>>();
-        listDataHeader = db.getcollectionreceipts();
-        for (summaries.Receipts c : listDataHeader
-                ) {
-            List<transaction> t = db.gettransbyottn(c.receipt);
-            c.Count = t.size();
-
-            double total = 0.0;
-            for (transaction tt : t
-                    ) {
-                c.date = tt.Date;
-                c.No = tt.Account_No;
-                c.Name = tt.Account_Name;
-                c.user = tt.Agent_Code;
-                tt.typename = db.gettype(tt.Type).Name;
-                if (!tt.Type.equals("PENALTY CHARGED"))
-                total += tt.getAmount();
+    private void showEmptyState() {
+        TextView empty = (TextView) findViewById(R.id.summaryEmpty);
+        if (empty != null) {
+            boolean none = daylist.isEmpty() || daylist.get(0).Count == 0;
+            if (none) {
+                empty.setText("No receipts found");
+                empty.setVisibility(View.VISIBLE);
+            } else {
+                empty.setVisibility(View.GONE);
             }
-            c.Total = total;
-            listDataChild.put(c, t);
         }
     }
 
@@ -169,9 +172,11 @@ total = (TextView)findViewById(R.id.total);
 
         int i = 1;
         String d;
+        boolean showrev;
 
-        loaddata(String dd) {
+        loaddata(String dd, boolean revers) {
             d = dd;
+            showrev = revers;
         }
 
         @Override
@@ -191,23 +196,37 @@ total = (TextView)findViewById(R.id.total);
 
             try {
 
-                listDataHeader = new ArrayList<summaries.Receipts>();
-                listDataChild = new HashMap<summaries.Receipts, List<transaction>>();
-                Log.i("Start", "Start");
-                listDataHeader = db.getcollectionreceiptsbydate(d);
-                Log.i("end", "end");
+                List<summaries.agentreceipts> builtAgents = new ArrayList<summaries.agentreceipts>();
+                HashMap<summaries.Receipts, List<transaction>> builtChild = new HashMap<summaries.Receipts, List<transaction>>();
+                final LinkedHashMap<String, summaries.agentreceipts> byagent = new LinkedHashMap<String, summaries.agentreceipts>();
+                HashMap<String, HashSet<String>> agentvehicles = new HashMap<String, HashSet<String>>();
+                HashMap<String, String> typenames = new HashMap<String, String>();
+
+                List<summaries.Receipts> rec = db.getcollectionreceiptsbydate(d);
                 List<types> typ = db.gettypes();
-                List<transaction> trns = db.gettransallbydate(date);
+                List<transaction> trns = db.gettransallbydate(d);
+                if (!showrev) {
+                    // hide reversed entries (Constituency "1" marks both the
+                    // reversed original and its reversal batch)
+                    List<transaction> filtered = new ArrayList<transaction>();
+                    for (transaction tt : trns
+                    ) {
+                        if (tt.Constituency == null || !tt.Constituency.equals("1"))
+                            filtered.add(tt);
+                    }
+                    trns = filtered;
+                }
 
 double globaltotal =0;
-                progress.setMax(listDataHeader.size());
-                for (summaries.Receipts c : listDataHeader
+                progress.setMax(rec.size());
+                for (summaries.Receipts c : rec
                         ) {
                     publishProgress(i);
-                    // Log.i("Startchild", "Start");
                     List<transaction> t = trns.stream().filter(p -> p.OTTN.contentEquals(c.receipt)).collect(Collectors.toList());
-                    //List<transaction> t = db.gettransbyottn(c.receipt);
-                    //Log.i("stopchild", "Start");
+                    if (t.isEmpty() && !showrev) {
+                        i++;
+                        continue;
+                    }
                     c.Count = t.size();
 
                     double total = 0.0;
@@ -220,14 +239,26 @@ double globaltotal =0;
                         c.vehicle = tt.Loan_No;
                         c.fleetNo = tt.Group;
                         c.Recovery = tt.Recovery;
-                        //Log.i("type1",tt.Type);
-                        //Log.i("type1",String.valueOf((typ.size())));
-                        //List<types> ty = typ.removeIf(p-> p.Code !=tt.Type);
-                        List<types> ty = typ.stream().filter(p -> p.Code.contentEquals(tt.Type)).collect(Collectors.toList());
 
-                        //Log.i("typeafter",ty.get(0).Code);
-                        if (ty.size() > 0)
-                            tt.typename = ty.get(0).Name;
+                        // Display names resolve from the synced types table;
+                        // inactive (historical) types are still looked up so
+                        // old collections show their proper name.
+                        if (!typenames.containsKey(tt.Type)) {
+                            String nm = null;
+                            for (types o : typ
+                            ) {
+                                if (o.Code.contentEquals(tt.Type)) {
+                                    nm = o.Name;
+                                    break;
+                                }
+                            }
+                            if (nm == null) {
+                                types in = db.gettype(tt.Type);
+                                nm = (in != null) ? in.Name : tt.Type;
+                            }
+                            typenames.put(tt.Type, nm);
+                        }
+                        tt.typename = typenames.get(tt.Type);
 
                         if (!tt.Type.equals("PENALTY CHARGED"))
                         total += tt.getAmount();
@@ -235,9 +266,52 @@ double globaltotal =0;
                     }
                     c.Total = total;
                     globaltotal += total;
-                    listDataChild.put(c, t);
+                    builtChild.put(c, t);
+
+                    // parent group: the agent that collected this receipt
+                    String code = c.user == null ? "" : c.user;
+                    summaries.agentreceipts a = byagent.get(code);
+                    if (a == null) {
+                        a = new summaries.agentreceipts();
+                        a.Code = code;
+                        a.Name = code.isEmpty() ? "" : null;
+                        byagent.put(code, a);
+                    }
+                    a.ReceiptsList.add(c);
+                    a.Count++;
+                    a.Total += total;
+
+                    // distinct vehicles this agent collected for
+                    String vcode = (c.vehicle == null ? "" : c.vehicle.trim()) + "|" + (c.fleetNo == null ? "" : c.fleetNo.trim());
+                    if (!vcode.equals("|")) {
+                        HashSet<String> vs = agentvehicles.get(code);
+                        if (vs == null) {
+                            vs = new HashSet<String>();
+                            agentvehicles.put(code, vs);
+                        }
+                        vs.add(vcode);
+                    }
                     i++;
                 }
+
+                for (summaries.agentreceipts a : byagent.values()
+                ) {
+                    if (a.Name == null) {
+                        Agent ag = db.getagent(a.Code);
+                        a.Name = (ag != null && ag.Name != null && !ag.Name.isEmpty()) ? ag.Name : a.Code;
+                    }
+                    HashSet<String> vs = agentvehicles.get(a.Code);
+                    a.VehicleCount = vs == null ? 0 : vs.size();
+                    builtAgents.add(a);
+                }
+
+                // swap in the freshly built data on the shared instances so the
+                // adapter keeps working with the same references
+                daylist.clear();
+                daylist.addAll(builtAgents);
+                listDataChild.clear();
+                listDataChild.putAll(builtChild);
+
                 total.setText(String.format("%,.2f",globaltotal));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -250,8 +324,8 @@ double globaltotal =0;
             try {
                 if (progress.isShowing())
                     progress.dismiss();
-                listAdapter = new Receipts(receiptreport.this, listDataHeader, listDataChild, db);
-                report.setAdapter(listAdapter);
+                rebuildRows();
+                showEmptyState();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

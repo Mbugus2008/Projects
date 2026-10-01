@@ -63,6 +63,11 @@ app.MapControllerRoute(
     defaults: new { controller = "Home", action = "DispatchSummary" });
 
 app.MapControllerRoute(
+    name: "loading",
+    pattern: "loading/{range?}",
+    defaults: new { controller = "Home", action = "Loading" });
+
+app.MapControllerRoute(
     name: "admin",
     pattern: "admin/{action=Index}/{id?}",
     defaults: new { controller = "Home" });

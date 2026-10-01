@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:id="@id/card_view" android:background="@color/white" android:layout_width="match_parent" android:layout_height="wrap_content" card_view:cardCornerRadius="2.0dp" card_view:cardElevation="8.0dp"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:background="@drawable/layoutborder" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1.0">
+            <LinearLayout android:layout_gravity="top" android:orientation="vertical" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_margin="3.0dp" android:layout_weight="0.8">
+                <TextView android:textSize="10.0sp" android:textStyle="bold" android:textColor="@color/grey_900" android:id="@id/receipt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MS-0001" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/grey_900" android:id="@id/member" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dp" android:text="Name" />
+            </LinearLayout>
+            <LinearLayout android:layout_gravity="end|center" android:orientation="vertical" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_margin="8.0dp" android:layout_weight="0.2">
+                <TextView android:textSize="15.0sp" android:textColor="@color/grey_900" android:layout_gravity="end" android:id="@id/amount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1000.00" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

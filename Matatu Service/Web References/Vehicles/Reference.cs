@@ -438,7 +438,7 @@ namespace Collection.Vehicles {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -470,6 +470,24 @@ namespace Collection.Vehicles {
         private System.DateTime last_ModificationField;
         
         private bool last_ModificationFieldSpecified;
+        
+        private Owner ownerField;
+        
+        private bool ownerFieldSpecified;
+
+        private decimal duesField;
+
+        private bool duesFieldSpecified;
+
+        private string routeField;
+        
+        private bool activeField;
+        
+        private bool activeFieldSpecified;
+        
+        private Collect collectField;
+        
+        private bool collectFieldSpecified;
         
         /// <remarks/>
         public string Key {
@@ -606,10 +624,104 @@ namespace Collection.Vehicles {
                 this.last_ModificationFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        public Owner Owner {
+            get {
+                return this.ownerField;
+            }
+            set {
+                this.ownerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool OwnerSpecified {
+            get {
+                return this.ownerFieldSpecified;
+            }
+            set {
+                this.ownerFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public decimal Dues {
+            get {
+                return this.duesField;
+            }
+            set {
+                this.duesField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DuesSpecified {
+            get {
+                return this.duesFieldSpecified;
+            }
+            set {
+                this.duesFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public string Route {
+            get {
+                return this.routeField;
+            }
+            set {
+                this.routeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Active {
+            get {
+                return this.activeField;
+            }
+            set {
+                this.activeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ActiveSpecified {
+            get {
+                return this.activeFieldSpecified;
+            }
+            set {
+                this.activeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Collect Collect {
+            get {
+                return this.collectField;
+            }
+            set {
+                this.collectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CollectSpecified {
+            get {
+                return this.collectFieldSpecified;
+            }
+            set {
+                this.collectFieldSpecified = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/vehicles")]
     public enum Vehicle_Type {
@@ -637,7 +749,39 @@ namespace Collection.Vehicles {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/vehicles")]
+    public enum Owner {
+        
+        /// <remarks/>
+        _blank_,
+        
+        /// <remarks/>
+        Sacco,
+        
+        /// <remarks/>
+        Investor,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/vehicles")]
+    public enum Collect {
+        
+        /// <remarks/>
+        _blank_,
+        
+        /// <remarks/>
+        Loan,
+        
+        /// <remarks/>
+        Offload,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -670,7 +814,7 @@ namespace Collection.Vehicles {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9221.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9340.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/vehicles")]
     public enum Vehicles_Fields {
@@ -698,6 +842,21 @@ namespace Collection.Vehicles {
         
         /// <remarks/>
         Last_Modification,
+        
+        /// <remarks/>
+        Owner,
+        
+        /// <remarks/>
+        Dues,
+        
+        /// <remarks/>
+        Route,
+        
+        /// <remarks/>
+        Active,
+        
+        /// <remarks/>
+        Collect,
     }
     
     /// <remarks/>

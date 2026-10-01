@@ -161,6 +161,7 @@
     <Compile Include="Controllers\clientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogRequestAndResponseHandler.cs" />
+    <Compile Include="Mpesa\StkPushClient.cs" />
     <Compile Include="Controllers\member.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -511,10 +512,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Client_Service_Alternate_Alternate</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Keywords">
+    <WebReferenceUrl Include="http://services.trimline.co.ke:2527/Baraka/WS/BARAKA%2520YETU%2520SACCO%2520SOC%2520TRAINING/Page/Keywords">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Keywords\</RelPath>
-      <UpdateFromURL>http://Paulo:1113/Aps/WS/APS%2520BARAKA%2520SACCO%2520SOCIETY%2520LTD/Page/Keywords</UpdateFromURL>
+      <UpdateFromURL>http://services.trimline.co.ke:2527/Baraka/WS/BARAKA%2520YETU%2520SACCO%2520SOC%2520TRAINING/Page/Keywords</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

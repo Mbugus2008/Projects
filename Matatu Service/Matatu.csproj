@@ -226,6 +226,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\Routes\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -385,6 +390,27 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\Vehicles\Vehicles.wsdl" />
+    <Compile Include="Web References\Tarchive\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <None Include="Web References\Tarchive\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Tarchive\Tarchive.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Tarchive\Tarchive.wsdl" />
+    <None Include="Web References\Routes\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\Routes\Routes.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\Routes\Routes.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logging\Logging 4\Logging 4.0.csproj">
@@ -535,6 +561,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Collection_Vehicles_Vehicles_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Routes">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Routes\</RelPath>
+      <UpdateFromURL>http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Routes</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Collection_Routes_Routes_Service</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://5.189.167.52:4022/Metroservice/WS/MetroTrans/Page/Members">
       <UrlBehavior>Dynamic</UrlBehavior>

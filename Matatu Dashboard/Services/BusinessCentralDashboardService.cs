@@ -187,6 +187,133 @@ public sealed class BusinessCentralDashboardService
         }
     }
 
+    /// <summary>
+    /// Loading performance at the geofenced loading points: how often vehicles arrived, found the
+    /// bay full and had to go round, versus trips that loaded normally.
+    /// </summary>
+    public async Task<LoadingTripsViewModel> GetLoadingTripsAsync(string? range, CancellationToken cancellationToken = default)
+    {
+        var selectedRange = NormalizeRange(range);
+        var cacheKey = $"loading:{selectedRange}";
+
+        if (_cache.TryGetValue<LoadingTripsViewModel>(cacheKey, out var cachedModel) && cachedModel is not null)
+        {
+            return cachedModel;
+        }
+
+        var cacheLock = CacheLocks.GetOrAdd(cacheKey, static _ => new SemaphoreSlim(1, 1));
+        await cacheLock.WaitAsync(cancellationToken);
+
+        try
+        {
+            if (_cache.TryGetValue<LoadingTripsViewModel>(cacheKey, out cachedModel) && cachedModel is not null)
+            {
+                return cachedModel;
+            }
+
+            var model = await BuildLoadingTripsAsync(selectedRange, cancellationToken);
+            _cache.Set(cacheKey, model, TimeSpan.FromSeconds(Math.Max(5, _options.CacheSeconds)));
+            return model;
+        }
+        finally
+        {
+            cacheLock.Release();
+        }
+    }
+
+    private async Task<LoadingTripsViewModel> BuildLoadingTripsAsync(string selectedRange, CancellationToken cancellationToken)
+    {
+        var (requestUrl, description) = BuildLoadingRequest(selectedRange);
+
+        if (string.IsNullOrWhiteSpace(_options.Username) || string.IsNullOrWhiteSpace(_options.Password))
+        {
+            return new LoadingTripsViewModel
+            {
+                Range = selectedRange,
+                RetrievedAt = DateTime.Now,
+                FilterDescription = description,
+                ErrorMessage = "Business Central credentials are missing in appsettings.json."
+            };
+        }
+
+        try
+        {
+            using var handler = new HttpClientHandler
+            {
+                PreAuthenticate = true,
+                UseDefaultCredentials = _options.UseDefaultCredentials
+            };
+
+            handler.Credentials = _options.UseDefaultCredentials
+                ? CredentialCache.DefaultNetworkCredentials
+                : CreateCredentialCache(requestUrl);
+
+            using var httpClient = new HttpClient(handler);
+            var items = await LoadAllItemsAsync(httpClient, requestUrl, cancellationToken, MaxLoadingItems);
+            return LoadingTripsBuilder.Build(items, selectedRange, DateTime.Now, description);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to load loading performance data");
+            return new LoadingTripsViewModel
+            {
+                Range = selectedRange,
+                RetrievedAt = DateTime.Now,
+                FilterDescription = description,
+                ErrorMessage = ex.Message
+            };
+        }
+    }
+
+    private (string Url, string Description) BuildLoadingRequest(string selectedRange)
+    {
+        var baseUrl = string.IsNullOrWhiteSpace(_options.ProtrackAlertsUrl) ? DefaultProtrackAlertsUrl : _options.ProtrackAlertsUrl;
+        var (start, endExclusive) = ResolveLoadingRange(selectedRange);
+        var timeZone = LoadingTripsBuilder.DisplayTimeZone;
+
+        var startUtc = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(start, DateTimeKind.Unspecified), timeZone);
+        var endUtc = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(endExclusive, DateTimeKind.Unspecified), timeZone);
+
+        // Only fence entries/exits matter here, and the window bounds keep a week or month query bounded.
+        var filter = $"(Alarm_Type eq 5 or Alarm_Type eq 6) and GPS_Date_Time ge {startUtc:yyyy-MM-ddTHH:mm:ssZ} " +
+                     $"and GPS_Date_Time lt {endUtc:yyyy-MM-ddTHH:mm:ssZ}";
+        var url = $"{baseUrl}?$filter={Uri.EscapeDataString(filter)}" +
+                  "&$select=IMEI,Vehicle_No,Alarm_Type,Geofence_Name,GPS_Date_Time&$orderby=Entry_No";
+
+        return (url, BuildFilterDescription(selectedRange, start, endExclusive.AddDays(-1)));
+    }
+
+    private static string BuildFilterDescription(string selectedRange, DateTime start, DateTime end)
+    {
+        return selectedRange switch
+        {
+            "yesterday" => $"Loading activity for yesterday ({start:dd MMM yyyy})",
+            "week" => $"Loading activity {start:dd MMM} - {end:dd MMM yyyy}",
+            "month" => $"Loading activity {start:dd MMM} - {end:dd MMM yyyy}",
+            _ when DateTime.TryParseExact(selectedRange, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _)
+                => $"Loading activity on {start:dd MMM yyyy}",
+            _ => $"Loading activity today ({start:dd MMM yyyy})"
+        };
+    }
+
+    /// <summary>Local-day range for the selector, with an exclusive end so "today" is a full day.</summary>
+    private static (DateTime Start, DateTime EndExclusive) ResolveLoadingRange(string selectedRange)
+    {
+        if (DateTime.TryParseExact(selectedRange, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var specificDate))
+        {
+            return (specificDate.Date, specificDate.Date.AddDays(1));
+        }
+
+        var today = DateTime.Today;
+        return selectedRange switch
+        {
+            "yesterday" => (today.AddDays(-1), today),
+            "week" => (today.AddDays(-(((int)today.DayOfWeek + 6) % 7)), today.AddDays(1)),
+            "month" => (new DateTime(today.Year, today.Month, 1), today.AddDays(1)),
+            _ => (today, today.AddDays(1))
+        };
+    }
+
     private async Task<BusinessCentralDashboardViewModel> GetOrCreateDashboardAsync(string? range, bool transactionsOnly, CancellationToken cancellationToken)
     {
         var selectedRange = NormalizeRange(range);
@@ -1505,6 +1632,12 @@ public sealed class BusinessCentralDashboardService
         return $"{section.Title}-{suffix}".Replace(' ', '-').ToLowerInvariant();
     }
 
+    /// <summary>Entity set used when the loading screen has no explicit URL configured.</summary>
+    private const string DefaultProtrackAlertsUrl = "http://services.trimline.co.ke:9993/CityServices/ODataV4/Company('Mbranch')/ProTrack_Alerts";
+
+    /// <summary>Ceiling on fence rows pulled for the loading screen, so a month view stays bounded.</summary>
+    private const int MaxLoadingItems = 20000;
+
     private static string BuildRequestUrl(BusinessCentralDashboardSourceOptions source, string selectedRange)
     {
         if (string.IsNullOrWhiteSpace(source.DateField))
@@ -1834,6 +1967,14 @@ public sealed class BusinessCentralDashboardOptions
     public int ShareWarmLeadSeconds { get; set; } = 60;
     public List<string> ShareWarmRanges { get; set; } = ["today", "yesterday"];
     public int MaxRows { get; set; } = 100;
+
+    /// <summary>
+    /// OData V4 entity set holding the geofence alarms (ProTrack_Alerts). Used by the loading
+    /// performance screen; kept out of <see cref="Sources"/> so it does not appear as a raw
+    /// table section on the main dashboard.
+    /// </summary>
+    public string ProtrackAlertsUrl { get; set; } = "http://services.trimline.co.ke:9993/CityServices/ODataV4/Company('Mbranch')/ProTrack_Alerts";
+
     public List<BusinessCentralDashboardSourceOptions> Sources { get; set; } = [];
 }
 

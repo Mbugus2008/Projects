@@ -64,7 +64,7 @@ class PaymentCartPage extends StatelessWidget {
                         style: TextStyle(color: Colors.grey, fontSize: 16)),
                     const SizedBox(height: 8),
                     Text(
-                      'Tap "Add to Payment" or use a template',
+                      'Tap the cart icon on any account, or load a template',
                       style:
                           TextStyle(color: Colors.grey.shade500, fontSize: 13),
                     ),
@@ -190,26 +190,10 @@ class PaymentCartPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              width: 100,
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: TextEditingController(
-                    text:
-                        item.amount > 0 ? item.amount.toStringAsFixed(0) : ''),
-                decoration: InputDecoration(
-                  hintText: 'Amount',
-                  isDense: true,
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-                onChanged: (val) {
-                  final amt = double.tryParse(val) ?? 0;
-                  cart.updateAmount(item, amt);
-                },
-              ),
+            _AmountField(
+              key: ValueKey(item.key),
+              item: item,
+              onChanged: (amt) => cart.updateAmount(item, amt),
             ),
             IconButton(
               icon: const Icon(Icons.remove_circle_outline,
@@ -272,46 +256,166 @@ class PaymentCartPage extends StatelessWidget {
     final member = Get.find<MemberController>().currentCustomer.value;
     final phone =
         Get.find<MemberController>().loginPhone ?? member.Mobile_Phone_No ?? '';
+    final digits = phone.replaceAll(RegExp(r'[^0-9]'), '');
+    if (digits.length < 9) {
+      MotionToast.error(
+        description: const Text(
+            'No valid phone number found. Please update your profile phone number first.'),
+        title: const Text('Payment'),
+      ).show(context);
+      return;
+    }
 
-    bool allSuccess = true;
+    final total = items.fold<double>(0, (sum, item) => sum + item.amount);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Confirm Payment'),
+        content: Text(
+            'Send ${items.length} M-Pesa payment request${items.length > 1 ? 's' : ''} '
+            'totaling ${utilities.formatcurrency.format(total)} to $phone?\n\n'
+            'You will receive an M-Pesa prompt on your phone. Enter your PIN to complete each payment.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF2E7D32),
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Send Request'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    final api = ApiClient();
+    api.baseUrl = AppConfig.apsUrl;
+
+    final sent = <PaymentItem>[];
+    final failed = <String>[];
+    String? firstError;
+
     for (final item in items) {
       final txType = item.type == 'loan'
           ? transaction_Type.Loan_Repayment.index
           : transaction_Type.Deposit.index;
 
-      final body = Params.transactionBody(
-        accountNo: item.accountNo ?? member.No ?? '',
-        transactionType: txType,
-        amount: item.amount,
-        memberNo: member.No,
-        loanNo: item.loanNo,
-        phone: phone,
-        description:
-            '${item.type == 'loan' ? 'Loan Repayment' : 'Deposit'}: ${item.label}',
-      );
+      final payload = <String, dynamic>{
+        // Mirror the USSD deposit flow: Account_No carries the member number;
+        // the target account is identified by the description / loan number.
+        'Account_No': member.No ?? item.accountNo ?? '',
+        'Amount': item.amount,
+        'Phone': phone,
+        'Transaction_Type': txType,
+        if (item.loanNo != null) 'Loan_No': item.loanNo,
+        'Description': item.label,
+      };
 
       try {
-        final r = await ApiClient().postdata('transaction', json.encode(body));
-        if (r.statusCode != 200) allSuccess = false;
-      } catch (_) {
-        allSuccess = false;
+        final r = await api.postdata('stkpush', json.encode(payload));
+        Map<String, dynamic> res = {};
+        try {
+          res = json.decode(r.body) as Map<String, dynamic>;
+        } catch (_) {}
+        if (r.statusCode == 200 && res['Code'] == 0) {
+          sent.add(item);
+        } else {
+          failed.add(item.label);
+          firstError ??= (res['Desc'] ?? 'HTTP ${r.statusCode}').toString();
+        }
+      } catch (e) {
+        failed.add(item.label);
+        firstError ??= e.toString();
       }
+    }
+
+    for (final item in sent) {
+      cart.removeItem(item);
     }
 
     if (!context.mounted) return;
 
-    if (allSuccess) {
-      cart.clear();
+    if (failed.isEmpty) {
       MotionToast.success(
         description: Text(
-            '${items.length} payment${items.length > 1 ? 's' : ''} submitted.'),
+            '${sent.length} M-Pesa request${sent.length > 1 ? 's' : ''} sent to $phone. '
+            'Enter your PIN on the prompt to complete the payment.'),
         title: const Text('Payment'),
+      ).show(context);
+    } else if (sent.isEmpty) {
+      MotionToast.error(
+        description: Text(firstError ?? 'Could not send the payment request.'),
+        title: const Text('Payment Failed'),
       ).show(context);
     } else {
       MotionToast.warning(
-        description: const Text('Some payments may not have been processed.'),
+        description: Text(
+            '${sent.length} of ${items.length} requests sent. Failed: ${failed.join(', ')}'),
         title: const Text('Payment'),
       ).show(context);
     }
+  }
+}
+
+// ── Amount editor ──────────────────────────────────────────────
+// Stateful so the TextField keeps its own controller (and the typed
+// text / cursor position) across the cart's reactive rebuilds.
+class _AmountField extends StatefulWidget {
+  const _AmountField({
+    super.key,
+    required this.item,
+    required this.onChanged,
+  });
+
+  final PaymentItem item;
+  final ValueChanged<double> onChanged;
+
+  @override
+  State<_AmountField> createState() => _AmountFieldState();
+}
+
+class _AmountFieldState extends State<_AmountField> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(
+      text: widget.item.amount > 0
+          ? widget.item.amount.toStringAsFixed(0)
+          : '',
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 100,
+      child: TextField(
+        keyboardType: TextInputType.number,
+        controller: _controller,
+        decoration: InputDecoration(
+          hintText: 'Amount',
+          isDense: true,
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        onChanged: (val) {
+          widget.onChanged(double.tryParse(val) ?? 0);
+        },
+      ),
+    );
   }
 }

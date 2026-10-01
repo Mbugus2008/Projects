@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:tag="layout/activity_add_edit_member_0" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView android:id="@id/balances" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent" style="@style/cardview">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView android:id="@id/no" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" />
+            <TextView android:tag="binding_1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="No" app:layout_constraintStart_toEndOf="@id/guideline4" />
+            <TextView android:id="@id/Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Name" app:layout_constraintBottom_toBottomOf="@id/Nameedit" app:layout_constraintTop_toBottomOf="@id/no" />
+            <EditText android:id="@id/Nameedit" android:tag="binding_2" android:layout_width="0.0dp" android:layout_height="wrap_content" android:hint="Name" android:inputType="textCapWords" app:layout_constraintEnd_toStartOf="@id/guideline5" app:layout_constraintStart_toEndOf="@id/guideline4" app:layout_constraintTop_toBottomOf="@id/no" />
+            <TextView android:id="@id/phone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Phone" app:layout_constraintBottom_toBottomOf="@id/phoneedit" app:layout_constraintTop_toBottomOf="@id/Name" />
+            <EditText android:id="@id/phoneedit" android:tag="binding_3" android:layout_width="0.0dp" android:layout_height="wrap_content" android:hint="Phone" android:inputType="number" app:layout_constraintEnd_toStartOf="@id/guideline5" app:layout_constraintStart_toEndOf="@id/guideline4" app:layout_constraintTop_toBottomOf="@id/Nameedit" />
+            <TextView android:id="@id/Id" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ID No" app:layout_constraintBottom_toBottomOf="@id/idedit" app:layout_constraintTop_toBottomOf="@id/phone" />
+            <EditText android:id="@id/idedit" android:tag="binding_4" android:layout_width="0.0dp" android:layout_height="wrap_content" android:hint="Id No" android:inputType="number" app:layout_constraintEnd_toStartOf="@id/guideline5" app:layout_constraintStart_toEndOf="@id/guideline4" app:layout_constraintTop_toBottomOf="@id/phoneedit" />
+            <Button android:id="@id/save" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dp" android:text="Save" app:layout_constraintStart_toEndOf="@id/guideline4" app:layout_constraintTop_toBottomOf="@id/Id" />
+            <androidx.constraintlayout.widget.Guideline android:orientation="vertical" android:id="@id/guideline4" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintGuide_percent="0.15" />
+            <androidx.constraintlayout.widget.Guideline android:orientation="vertical" android:id="@id/guideline5" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintGuide_percent="0.9" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout android:id="@id/drawer_layout" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout android:id="@id/toolbars" android:layout_width="match_parent" android:layout_height="wrap_content">
+            <androidx.appcompat.widget.Toolbar android:id="@id/toolbar" android:background="?colorPrimary" android:layout_width="match_parent" android:layout_height="?actionBarSize" />
+        </com.google.android.material.appbar.AppBarLayout>
+        <Button android:textSize="30.0dp" android:id="@id/Date" android:background="@drawable/layoutborder" android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Select date" android:layout_below="@id/toolbars" />
+        <TextView android:textSize="20.0dp" android:gravity="center" android:id="@id/tillbal" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Till Balance" android:layout_toRightOf="@id/printer" android:layout_below="@id/toolbars" />
+        <CheckBox android:id="@id/printer" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Printer" android:layout_below="@id/toolbars" android:layout_alignBottom="@id/tillbal" android:inputType="none" />
+        <androidx.recyclerview.widget.RecyclerView android:id="@id/headerlist" android:background="@drawable/layoutborder" android:padding="2.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dp" android:layout_below="@id/tillbal" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton android:id="@id/Receipts" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="16.0dp" android:src="@drawable/new_file" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:contentDescription="New Transaction" />
+    </RelativeLayout>
+    <androidx.constraintlayout.widget.Guideline android:orientation="vertical" android:id="@id/guideline" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintGuide_percent="0.5" />
+    <androidx.constraintlayout.widget.Guideline android:orientation="horizontal" android:id="@id/guideline2" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintGuide_percent="0.5" />
+    <com.google.android.material.navigation.NavigationView android:layout_gravity="start" android:id="@id/nav_view" android:fitsSystemWindows="true" android:layout_width="wrap_content" android:layout_height="match_parent" app:headerLayout="@layout/nav_header_main" app:layout_constraintStart_toStartOf="parent" app:menu="@menu/activity_main_drawer" />
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -159,6 +159,39 @@ namespace Client_Service.Controllers
             return m;
         }
 
+        private Members.Members getmemberfromrequest(ClientRequest request)
+        {
+            if (!string.IsNullOrEmpty(request.No))
+            {
+                var byNo = Members_Service.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = request.No.Trim(), Field = Members_Fields.No } }, null, 0).FirstOrDefault();
+                if (byNo != null)
+                    return byNo;
+            }
+
+            var raw = request.phone;
+            if (string.IsNullOrEmpty(raw) && request.body != null)
+                raw = request.body.ToString();
+            raw = (raw ?? "").Replace(" ", "");
+            if (raw.Length >= 9)
+            {
+                var normalized = string.Format("+254{0}", raw.Substring(raw.Length - 9));
+                var zeroFormat = "0" + normalized.Substring(4);
+                var noPrefix = normalized.Substring(1);
+                string[] formats = { normalized, zeroFormat, noPrefix, raw };
+                Members_Fields[] fields = { Members_Fields.MPESA_Mobile_No, Members_Fields.Phone_No };
+                foreach (var field in fields)
+                {
+                    foreach (var fmt in formats)
+                    {
+                        var m = Members_Service.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = fmt, Field = field } }, null, 0).FirstOrDefault();
+                        if (m != null)
+                            return m;
+                    }
+                }
+            }
+            return null;
+        }
+
         [HttpPost]
         [Route("api/member2")]
         public Results member2(ClientRequest request)
@@ -451,14 +484,17 @@ namespace Client_Service.Controllers
         [Route("api/balances")]
         public Results balances(ClientRequest request)
         {
-            var phone = request.body.ToString();
             Results r = new Results();
             try
             {
-                phone = phone.Replace(" ", "");
-                phone = string.Format("+254{0}", phone.Substring(phone.Length - 9));
+                var m = getmemberfromrequest(request);
+                if (m == null)
+                {
+                    r.Code = -1;
+                    r.Desc = "Member not found. Please check your member number or phone.";
+                    return r;
+                }
 
-                var m = Members_Service.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = phone, Field = Members_Fields.MPESA_Mobile_No } }, null, 0).FirstOrDefault();
                 StringBuilder s = new StringBuilder();
 
                 s.AppendLine(string.Format("Deposits: {0}", m.Current_Shares));
@@ -470,7 +506,6 @@ namespace Client_Service.Controllers
                 s.AppendLine(string.Format("Mobile Money: {0}", m.Mobile_Money));
 
                 r.content = s.ToString();
-
             }
             catch (Exception ex)
             {
@@ -615,17 +650,24 @@ namespace Client_Service.Controllers
         [Route("api/loanbalances")]
         public Results loanbalances(ClientRequest request)
         {
-            var phone = request.body.ToString();
             Results r = new Results();
             try
             {
-                phone = phone.Replace(" ", "");
-                phone = string.Format("+254{0}", phone.Substring(phone.Length - 9));
-                var m = Members_Service.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = phone, Field = Members_Fields.MPESA_Mobile_No } }, null, 0).FirstOrDefault();
-                StringBuilder s = new StringBuilder();
-                foreach (var loan in m.Loans.Where(o => o.Outstanding_Balance + o.Oustanding_Interest > 10))
+                var m = getmemberfromrequest(request);
+                if (m == null)
                 {
-                    s.AppendLine(string.Format("{0}: {1} \n", loan.Loan_Product_Type, string.Format("{0:0}", loan.Total_Balance)));
+                    r.Code = -1;
+                    r.Desc = "Member not found. Please check your member number or phone.";
+                    return r;
+                }
+
+                StringBuilder s = new StringBuilder();
+                if (m.Loans != null)
+                {
+                    foreach (var loan in m.Loans.Where(o => o.Outstanding_Balance + o.Oustanding_Interest > 10))
+                    {
+                        s.AppendLine(string.Format("{0}: {1} \n", loan.Loan_Product_Type, string.Format("{0:0}", loan.Total_Balance)));
+                    }
                 }
                 r.content = s.ToString();
             }
@@ -737,6 +779,122 @@ namespace Client_Service.Controllers
                     r.content = t;
                     r.Desc = "Transaction already exists.";
                 }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// Mobile app "Pay Now": sends an M-Pesa STK push to the member's phone and records a
+        /// pending MobileTransactions row (same as the USSD deposit flow) for posting once paid.
+        /// </summary>
+        [HttpPost]
+        [Route("api/stkpush")]
+        public Results stkpush(Mpesa.StkPushRequest request)
+        {
+            Results r = new Results();
+            try
+            {
+                if (request == null)
+                {
+                    r.Code = -1;
+                    r.Desc = "Invalid request.";
+                    return r;
+                }
+
+                var rawPhone = (request.Phone ?? "").Replace(" ", "").Replace("+", "");
+                if (rawPhone.Length < 9)
+                {
+                    r.Code = -1;
+                    r.Desc = "Valid phone number is required.";
+                    return r;
+                }
+                var phone = string.Format("254{0}", rawPhone.Substring(rawPhone.Length - 9));
+
+                if (request.Amount <= 0)
+                {
+                    r.Code = -1;
+                    r.Desc = "Amount must be greater than zero.";
+                    return r;
+                }
+                if (request.Transaction_Type <= 0)
+                {
+                    r.Code = -1;
+                    r.Desc = "Transaction_Type is required.";
+                    return r;
+                }
+                if (string.IsNullOrWhiteSpace(request.Account_No))
+                {
+                    r.Code = -1;
+                    r.Desc = "Account_No is required.";
+                    return r;
+                }
+
+                var desc = string.IsNullOrWhiteSpace(request.Description)
+                    ? (request.Transaction_Type == 2 ? "Deposit" : "Payment")
+                    : request.Description;
+
+                Logging.Logging.LogEntryOnFile(JsonConvert.SerializeObject(new { stk = "request", phone, request.Account_No, request.Amount, request.Transaction_Type, desc }));
+
+                var stk = Mpesa.StkPushClient.Push(request.Amount, phone, request.Account_No, desc);
+
+                if (!stk.Success)
+                {
+                    Logging.Logging.LogEntryOnFile(JsonConvert.SerializeObject(new { stk = "rejected", stk.Stage, stk.ErrorCode, stk.ErrorMessage, stk.ResponseDescription }));
+                    r.Code = -1;
+                    r.Desc = !string.IsNullOrWhiteSpace(stk.ErrorMessage)
+                        ? stk.ErrorMessage
+                        : !string.IsNullOrWhiteSpace(stk.ResponseDescription)
+                            ? stk.ResponseDescription
+                            : "Payment request was not accepted. Please try again.";
+                    return r;
+                }
+
+                // Record a pending MobileTransactions row so the M-Pesa payment can be matched
+                // and posted once the member approves the prompt on their phone.
+                var docNo = stk.CheckoutRequestID;
+                MobileTransactions trans = Transactions_Service.Read(docNo, request.Transaction_Type);
+                if (trans == null)
+                {
+                    trans = new MobileTransactions
+                    {
+                        Document_No = docNo,
+                        Account_No = request.Account_No,
+                        Transaction_Date = DateTime.Today,
+                        Transaction_DateSpecified = true,
+                        Transaction_Time = DateTime.Now,
+                        Transaction_TimeSpecified = true,
+                        Transaction_Type = request.Transaction_Type,
+                        Transaction_TypeSpecified = true,
+                        Amount = (decimal)request.Amount,
+                        AmountSpecified = true,
+                        Mobile_No = phone,
+                        Description = desc,
+                        Loan_No = string.IsNullOrWhiteSpace(request.Loan_No) ? null : request.Loan_No,
+                        Reference = stk.MerchantRequestID,
+                        Source = Transactions.Source.Mbaraka,
+                        SourceSpecified = true,
+                        Status = Transactions.Status.Pending_Posting,
+                        StatusSpecified = true
+                    };
+                    Transactions_Service.Create(ref trans);
+                }
+
+                Logging.Logging.LogEntryOnFile(JsonConvert.SerializeObject(new { stk = "accepted", stk.MerchantRequestID, stk.CheckoutRequestID, stk.CustomerMessage, trans.Document_No }));
+
+                r.content = new
+                {
+                    trans.Document_No,
+                    stk.MerchantRequestID,
+                    stk.CheckoutRequestID,
+                    stk.CustomerMessage
+                };
+                r.Desc = string.IsNullOrWhiteSpace(stk.CustomerMessage) ? "Payment request sent." : stk.CustomerMessage;
             }
             catch (Exception ex)
             {

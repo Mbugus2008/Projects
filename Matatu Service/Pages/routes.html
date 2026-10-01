@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>METROTRANS SACCO - Route Analysis</title>
+<link rel="icon" type="image/png" href="../logo.png">
+<link rel="apple-touch-icon" href="../logo.png">
+<style>
+  :root{
+    --brand:#1F3863; --brand2:#2E5190; --accent:#C0243F; --ink:#1B2431; --muted:#6B7280;
+    --bg:#F4F6F9; --card:#FFFFFF; --line:#E3E6ED; --green:#2E7D32; --red:#C0243F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,"Segoe UI",Roboto,Arial,sans-serif}
+  header{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:18px 22px;
+         display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+         box-shadow:0 2px 10px rgba(31,56,99,.28)}
+  .top{position:sticky;top:0;z-index:6}
+  .brand{display:flex;flex-direction:column}
+  .brand b{font-size:20px;letter-spacing:.5px}
+  .brand span{font-size:12px;opacity:.9}
+  .controls{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:13px}
+  .controls input[type=date]{border:0;border-radius:8px;padding:7px 10px;font:inherit}
+  .controls label{display:flex;gap:6px;align-items:center;cursor:pointer;user-select:none}
+  .btn{border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer;
+       background:#ffffff;color:var(--brand)}
+  .btn:active{transform:translateY(1px)}
+  .mini{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;border-radius:8px;padding:6px 10px;
+        font:inherit;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+  .mini:hover{background:rgba(255,255,255,.25)}
+  .rng{display:flex;align-items:center;gap:6px}
+  main{max-width:1200px;margin:20px auto;padding:0 16px 40px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+        box-shadow:0 1px 3px rgba(16,24,40,.06)}
+  .card .k{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .card .v{font-size:26px;font-weight:700;margin-top:6px;color:var(--brand)}
+  .card .s{font-size:12px;color:var(--muted);margin-top:2px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:16px;
+          box-shadow:0 1px 3px rgba(16,24,40,.06);overflow:hidden}
+  section h2{margin:0;padding:13px 18px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;
+             color:var(--brand);border-bottom:1px solid var(--line);background:#FAFBFD;
+             display:flex;align-items:center;justify-content:space-between;gap:10px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:9px 18px;text-align:left;border-bottom:1px solid #F1F3F7;white-space:nowrap}
+  th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:#FCFCFE}
+  tr:last-child td{border-bottom:0}
+  tr:nth-child(even) td{background:#FCFDFF}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .total-row td{font-weight:700;background:#EDF1F8!important;border-top:2px solid #CDD7E8}
+  .pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700}
+  .pill.g{background:#E8F5E9;color:var(--green)}
+  .pill.b{background:#E8ECF5;color:#2E5190}
+  .muted{color:var(--muted)}
+  #status{max-width:1200px;margin:14px auto 0;padding:10px 16px;font-size:13px;color:var(--muted);
+          display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  #error{display:none;max-width:1200px;margin:14px auto 0;padding:12px 16px;border-radius:10px;
+         background:#FDECEA;border:1px solid #F5C6C4;color:#B3261E;font-size:14px}
+  .empty{padding:18px;color:var(--muted);font-size:14px}
+  .chart{display:flex;align-items:stretch;gap:5px;height:190px;padding:14px 18px 10px}
+  .chart .col{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+  .chart .barwrap{flex:1;display:flex;align-items:flex-end}
+  .chart .bar{width:100%;background:linear-gradient(180deg,#5B7BB4,#1F3863);border-radius:6px 6px 0 0;min-height:3px;transition:height .35s ease}
+  .chart .bar.cmp{background:linear-gradient(180deg,#D3DBE8,#B6C2D6)}
+  .chart .hr{text-align:center;font-size:10px;color:var(--muted)}
+  .tablewrap{overflow-x:auto}
+  .nm{display:flex;flex-direction:column;gap:4px}
+  .track{height:5px;max-width:220px;background:#EDF2F9;border-radius:3px;overflow:hidden}
+  .track i{display:block;height:100%;background:linear-gradient(90deg,#6E8DC4,#1F3863);border-radius:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .filterbar{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);
+             border-radius:14px;padding:11px 16px;margin-bottom:14px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+  .fbrow{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .flabel{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:104px;padding-top:7px}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer;user-select:none;background:#fff;color:var(--ink);transition:background .15s,border-color .15s}
+  .chip:hover{border-color:#B9C5DA}
+  .chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  .chip .ln{display:block;font-weight:700}
+  .chip .tot{display:block;font-weight:400;font-size:11px;opacity:.75;margin-top:1px}
+  .vclear{border:0;background:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer;padding:8px 2px}
+  body::after{content:"";position:fixed;inset:0;z-index:2;pointer-events:none;background-image:url(../logo.png);
+              background-repeat:no-repeat;background-position:center;background-size:min(58vh,58vw);opacity:.05}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px}
+  .ribbon{background:#F6F8FB;border-bottom:1px solid var(--line);box-shadow:0 2px 6px rgba(16,24,40,.06);
+          display:flex;padding:4px 8px 2px;flex-wrap:wrap;align-items:stretch}
+  .rmain{display:flex;flex-wrap:wrap;align-items:stretch}
+  .rgroup{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:2px 12px 0;border-right:1px solid #E1E6EF}
+  .rgroup:last-child{border-right:0}
+  .rbtns{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
+  .rlabel{font-size:10px;color:#7A8599;text-align:center;margin-top:3px}
+  .rbtn{border:0;background:transparent;color:var(--ink);border-radius:6px;padding:5px 9px;margin:2px 0;
+        font:inherit;font-size:11.5px;font-weight:600;cursor:pointer;text-decoration:none;
+        display:inline-flex;flex-direction:column;align-items:center;gap:3px;line-height:1.1;min-width:52px}
+  .rbtn svg{width:22px;height:22px;flex:none}
+  .rbtn:hover{background:#E9EEF7}
+  .rbtn:active{background:#DCE5F3}
+  .rbtn.active{background:#D6E3F5;color:var(--brand);box-shadow:inset 0 0 0 1px #B7C9E6}
+  .rdate{border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:inherit;font-size:12.5px;background:#fff}
+  @media(max-width:640px){ .controls{width:100%;justify-content:space-between} th,td{padding:8px 10px} }
+</style>
+</head>
+<body>
+<div class="top">
+<header>
+  <div class="brand">
+    <b>METROTRANS SACCO</b>
+    <span>Route Analysis</span>
+  </div>
+</header>
+<div class="ribbon noprint">
+  <div class="rmain">
+    <div class="rgroup">
+      <div class="rbtns">
+        <input type="date" id="dateFrom" class="rdate"><span class="to" style="color:var(--muted)">&rarr;</span><input type="date" id="dateTo" class="rdate">
+        <button class="rbtn" data-days="1"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#2E75B6" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#2E75B6" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#2E75B6" stroke-width="1.9" stroke-linecap="round"/><rect x="6.8" y="12.3" width="10.4" height="5.4" rx="1.2" fill="#4C9AFF"/></svg>Today</button>
+        <button class="rbtn" data-days="7"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#2FA84F" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#2FA84F" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#2FA84F" stroke-width="1.9" stroke-linecap="round"/><rect x="6.6" y="12" width="11" height="2.6" rx="1.3" fill="#2FA84F"/><rect x="6.6" y="15.6" width="6" height="2.6" rx="1.3" fill="#97D9AC"/></svg>7 days</button>
+        <button class="rbtn" data-days="30"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#7A5AF8" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#7A5AF8" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#7A5AF8" stroke-width="1.9" stroke-linecap="round"/><circle cx="8.4" cy="13.2" r="1.25" fill="#7A5AF8"/><circle cx="12" cy="13.2" r="1.25" fill="#A995FF"/><circle cx="15.6" cy="13.2" r="1.25" fill="#7A5AF8"/><circle cx="8.4" cy="16.8" r="1.25" fill="#A995FF"/><circle cx="12" cy="16.8" r="1.25" fill="#7A5AF8"/></svg>30 days</button>
+      </div>
+      <div class="rlabel">Date</div>
+    </div>
+    <div class="rgroup">
+      <div class="rbtns">
+        <button class="rbtn" id="refresh"><svg viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><polyline points="21 3.2 21 9 15.2 9"/></svg>Refresh</button>
+        <button class="rbtn active" id="autoBtn"><svg viewBox="0 0 24 24" fill="none" stroke="#F29900" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><polyline points="12 7.4 12 12.3 15.4 14"/></svg>Auto 5 min</button>
+      </div>
+      <div class="rlabel">Refresh</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="error"></div>
+<div id="status"><span id="updated">Loading...</span><span id="counts"></span></div>
+
+<main>
+  <div class="cards">
+    <div class="card"><div class="k">Total collected</div><div class="v" id="kTotal">-</div><div class="s" id="kTotalS"></div></div>
+    <div class="card"><div class="k">Receipts</div><div class="v" id="kReceipts">-</div><div class="s" id="kReceiptsS"></div></div>
+    <div class="card"><div class="k">Vehicles</div><div class="v" id="kVehicles">-</div><div class="s" id="kVehiclesS"></div></div>
+    <div class="card"><div class="k">Average per day</div><div class="v" id="kAvg">-</div><div class="s" id="kAvgS"></div></div>
+  </div>
+
+  <div class="filterbar" style="margin-top:14px">
+    <div class="fbrow">
+      <span class="flabel">Route</span>
+      <div class="chips" id="routeFilters"></div>
+      <button class="vclear" id="routeClear" style="display:none">clear selection</button>
+    </div>
+  </div>
+
+  <section>
+    <h2><span id="dayTitle">Daily collections</span></h2>
+    <div class="chart" id="dayChart"></div>
+    <div class="empty" id="dayEmpty" style="display:none">No collections in this range.</div>
+  </section>
+
+  <section>
+    <h2><span id="hourTitle">Collections by hour</span></h2>
+    <div class="chart" id="hourChart"></div>
+    <div class="empty" id="hourEmpty" style="display:none">No collections in this range.</div>
+  </section>
+
+  <section>
+    <h2>Route comparison</h2>
+    <div class="chart" id="routeChart" style="height:200px"></div>
+    <table id="routeTable">
+      <thead><tr><th>Route</th><th class="num">Vehicles</th><th class="num">Items</th><th class="num">Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="empty" id="routeEmpty" style="display:none">No collections in this range.</div>
+  </section>
+
+  <section>
+    <h2><span id="vehTitle">By vehicle</span></h2>
+    <div class="tablewrap">
+    <table id="vehTable">
+      <thead><tr><th>Vehicle</th><th class="num">Days</th><th class="num">Items</th><th class="num">Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+    <div class="empty" id="vehEmpty" style="display:none">No collections in this range.</div>
+    <div class="empty" id="vehNote" style="display:none"></div>
+  </section>
+
+  <section>
+    <h2>By type</h2>
+    <table id="typeTable">
+      <thead><tr><th>Type</th><th class="num">Items</th><th class="num">Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="empty" id="typeEmpty" style="display:none">No collections in this range.</div>
+  </section>
+
+  <section>
+    <h2>By agent</h2>
+    <table id="agentTable">
+      <thead><tr><th>Agent</th><th class="num">Items</th><th class="num">Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="empty" id="agentEmpty" style="display:none">No collections in this range.</div>
+  </section>
+</main>
+
+<footer>METROTRANS SACCO &middot; route analysis &middot; live data from Collect.asmx</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var BASE = "../Collect.asmx/";
+  var params = new URLSearchParams(location.search);
+  var routes = {}, vehMeta = {}, vehMetaUp = {}, types = {}, agents = {};
+  var selRoutes = [];
+  var lastRows = null, lastRange = null;
+  var MAX_DAYS = 31;
+  var timer = null;
+
+  function api(method, body){
+    return fetch(BASE + method, {
+      method: "POST",
+      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      body: body || "x=y"
+    }).then(function(r){
+      if(!r.ok) throw new Error("HTTP " + r.status + " from " + method);
+      return r.text();
+    }).then(function(t){ return t ? JSON.parse(t) : null; });
+  }
+
+  function fmt(n){
+    return (n || 0).toLocaleString(undefined,{minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function ddmm(d){ return pad(d.getDate()) + "-" + pad(d.getMonth()+1) + "-" + d.getFullYear(); }
+  function iso(d){ return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate()); }
+  function ymd(dm){ var p = String(dm || "").split("-"); return p.length === 3 && p[2].length === 4 ? p[2] + "-" + p[1] + "-" + p[0] : ""; }
+  function addDays(d, n){ return new Date(d.getTime() + n * 86400000); }
+  function parseIso(s){
+    var p = String(s || "").split("-");
+    if(p.length !== 3) return null;
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  // Collection types the office treats as one "Management" bucket
+  var TYPE_COMBINE = {MANAGEMENT:"MANAGEMENT", SACCO:"MANAGEMENT", WELFARE:"MANAGEMENT", OPERATION:"MANAGEMENT", F1:"MANAGEMENT"};
+  function combineType(c){ return TYPE_COMBINE[c] || c; }
+
+  function vehMetaByPlate(p){
+    return vehMeta[p] || vehMetaUp[String(p).toUpperCase()] || null;
+  }
+  function rowRoute(t){
+    var m = t && t.Loan_No ? vehMetaByPlate(String(t.Loan_No).trim()) : null;
+    return m && m.route ? m.route : "NO ROUTE";
+  }
+  function routeLabel(c){ return c === "NO ROUTE" ? "No route" : (routes[c] || c); }
+
+  // NOTE: reversed transactions are NOT hidden any more - every line is summed so a
+  // reversal always nets to zero with its original (even when Constituency is blank).
+
+  function passSel(t){
+    return !selRoutes.length || selRoutes.indexOf(rowRoute(t)) !== -1;
+  }
+
+  // ---- date controls ----
+  var dateFrom = document.getElementById("dateFrom");
+  var dateTo = document.getElementById("dateTo");
+  function initDates(){
+    var f = params.get("from"), t = params.get("to");
+    var okF = /^\d{4}-\d{2}-\d{2}$/.test(f || ""), okT = /^\d{4}-\d{2}-\d{2}$/.test(t || "");
+    var today = new Date();
+    if(okF && okT){ dateFrom.value = f; dateTo.value = t; }
+    else { dateFrom.value = iso(addDays(today, -6)); dateTo.value = iso(today); }
+    var rp = params.get("routes");
+    if(rp) selRoutes = rp.split(",").map(function(s){ return s.trim(); }).filter(Boolean);
+  }
+
+  function load(){
+    var from = parseIso(dateFrom.value) || new Date();
+    var to = parseIso(dateTo.value) || from;
+    if(to < from){ var tmp = from; from = to; to = tmp; }
+    var days = Math.round((to - from) / 86400000) + 1;
+    if(days > MAX_DAYS){ from = addDays(to, -(MAX_DAYS - 1)); days = MAX_DAYS; dateFrom.value = iso(from); }
+    var isoFrom = iso(from), isoTo = iso(to);
+    var rangeLabel = isoFrom === isoTo ? isoFrom : isoFrom + " \u2192 " + isoTo;
+
+    var mainReq = days === 1
+      ? api("GetallCollections", "data=" + encodeURIComponent(JSON.stringify({firstdate: ddmm(from), user: ""})))
+      : api("GetCollections_byDates", "data=" + encodeURIComponent(JSON.stringify({firstdate: ddmm(from), LastDate: ddmm(to), user: ""})));
+
+    Promise.all([
+      mainReq,
+      (Object.keys(agents).length || Object.keys(types).length || Object.keys(vehMeta).length || Object.keys(routes).length) ? Promise.resolve(null)
+        : Promise.all([api("logins"), api("Transtypes"), api("Vehicles"), api("Routes")])
+    ]).then(function(res){
+      if(res[1]){
+        (res[1][0] || []).forEach(function(u){ if(u.Agent_Code && u.Name) agents[u.Agent_Code] = u.Name; });
+        (res[1][1] || []).forEach(function(t){ if(t.Code) types[t.Code] = t.Name || t.Code; });
+        (res[1][2] || []).forEach(function(v){
+          if(!v.Vehicle_Number) return;
+          var info = {fleetNo:(v.Fleet_No || "").trim(), owner:v.Owner, dues:Number(v.Dues) || 0, route:(v.Route || "").trim()};
+          vehMeta[v.Vehicle_Number] = info;
+          vehMetaUp[v.Vehicle_Number.toUpperCase()] = info;
+        });
+        (res[1][3] || []).forEach(function(r){ if(r.Code) routes[r.Code] = r.Description || r.Code; });
+      }
+      var all = res[0] || [];
+      if(!Array.isArray(all)) all = [];
+      // every transaction is summed (no omission): a reversed payment's two lines
+      // (original + negative mirror) cancel each other, whatever its Constituency
+      lastRows = all.filter(function(t){
+        if(days > 1){ var rd = ymd(t.Date); if(rd && (rd < isoFrom || rd > isoTo)) return false; }
+        return true;
+      });
+      var list = [];
+      for(var di = 0; di < days; di++) list.push(iso(addDays(from, di)));
+      lastRange = {days:days, list:list, fromIso:isoFrom, toIso:isoTo};
+      renderRouteChips();
+      renderAll();
+      var now = new Date();
+      document.getElementById("updated").textContent =
+        "Updated " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) +
+        "  \u00b7  " + rangeLabel + (days > 1 ? "  (" + days + " days)" : "");
+      schedule();
+    }).catch(function(err){
+      document.getElementById("error").textContent = "Could not load data: " + err.message;
+      document.getElementById("error").style.display = "block";
+      document.getElementById("updated").textContent = "Load failed";
+      schedule();
+    });
+  }
+
+  var autoOn = true; // ribbon "Auto 5 min" toggle
+  function schedule(){
+    if(timer){ clearTimeout(timer); timer = null; }
+    if(!autoOn) return;
+    if(document.hidden) return; // background tab: no polling (restarts when visible again)
+    var ms = (lastRange && lastRange.days > 1) ? 600000 : 300000;
+    timer = setTimeout(load, ms);
+  }
+
+  function renderRouteChips(){
+    var el = document.getElementById("routeFilters");
+    var agg = {};
+    (lastRows || []).forEach(function(t){
+      var rt = rowRoute(t);
+      var a = agg[rt] = agg[rt] || {n:0, s:0, v:{}};
+      a.n++; a.s += Number(t.Amount) || 0;
+      var p = String(t.Loan_No || "").trim().toUpperCase();
+      if(p) a.v[p] = 1;
+    });
+    var codes = Object.keys(agg).sort(function(a,b){ return agg[b].s - agg[a].s; });
+    selRoutes = selRoutes.filter(function(c){ return codes.indexOf(c) !== -1; });
+    el.innerHTML = "";
+    document.getElementById("routeClear").style.display = selRoutes.length ? "inline-block" : "none";
+    codes.forEach(function(c){
+      var on = selRoutes.indexOf(c) !== -1;
+      var vcount = Object.keys(agg[c].v).length;
+      var chip = document.createElement("div");
+      chip.className = "chip" + (on ? " on" : "");
+      chip.innerHTML = "<span class='ln'>" + esc(routeLabel(c)) + "</span><span class='tot'>" + vcount + " | " + fmt(agg[c].s) + "</span>";
+      chip.title = routeLabel(c) + " \u2014 " + vcount + " vehicles, " + agg[c].n + " items, " + fmt(agg[c].s) + " (click to toggle, pick several to combine)";
+      chip.addEventListener("click", function(){
+        var i = selRoutes.indexOf(c);
+        if(i === -1) selRoutes.push(c); else selRoutes.splice(i, 1);
+        renderRouteChips();
+        renderAll();
+      });
+      el.appendChild(chip);
+    });
+  }
+
+  function renderAll(){
+    if(!lastRows) return;
+    var rows = lastRows.filter(passSel);
+    var days = lastRange.days;
+
+    var total = 0, receipts = {}, byRoute = {}, byVeh = {}, byType = {}, byAgent = {}, byHour = {};
+    rows.forEach(function(t){
+      var amt = Number(t.Amount) || 0;
+      total += amt;
+      var b = t.OTTN || t.Document_No || "?";
+      receipts[b] = 1;
+      var rt = rowRoute(t);
+      var br = byRoute[rt] = byRoute[rt] || {n:0, s:0, v:{}};
+      br.n++; br.s += amt;
+      var pl = String(t.Loan_No || "").trim().toUpperCase();
+      if(pl) br.v[pl] = 1;
+      var vk = t.Loan_No || "NO VEHICLE";
+      var bv = byVeh[vk] = byVeh[vk] || {n:0, s:0, d:{}};
+      bv.n++; bv.s += amt;
+      var dd = ymd(t.Date);
+      if(dd) bv.d[dd] = 1;
+      var ty = t.Type || "-";
+      var bt = byType[ty] = byType[ty] || {n:0, s:0};
+      bt.n++; bt.s += amt;
+      var ag = t.Agent_Code || "-";
+      var ba = byAgent[ag] = byAgent[ag] || {n:0, s:0};
+      ba.n++; ba.s += amt;
+      var hh = t.Time ? parseInt(String(t.Time).substring(0,2), 10) : NaN;
+      if(!isNaN(hh) && hh > 0) byHour[hh] = (byHour[hh] || 0) + amt; // skip 00:00 = office-posted rows without a time
+    });
+
+    document.getElementById("kTotal").textContent = fmt(total);
+    document.getElementById("kTotalS").textContent = rows.length + " line items" + (selRoutes.length ? " \u00b7 " + selRoutes.map(routeLabel).join(" + ") : "");
+    var rc = Object.keys(receipts).length;
+    document.getElementById("kReceipts").textContent = rc;
+    document.getElementById("kReceiptsS").textContent = rc ? "avg " + fmt(total / rc) + " each" : "";
+
+    var sacco = 0, investor = 0, vehCount = 0;
+    Object.keys(byVeh).forEach(function(k){
+      var m = vehMetaByPlate(k);
+      if(k === "NO VEHICLE" || !m || !m.fleetNo) return;
+      vehCount++;
+      if(m.owner === 1) sacco++; else if(m.owner === 2) investor++;
+    });
+    document.getElementById("kVehicles").textContent = vehCount;
+    document.getElementById("kVehiclesS").textContent = vehCount ? sacco + " sacco / " + investor + " investor" : "";
+    document.getElementById("kAvg").textContent = fmt(total / days);
+    document.getElementById("kAvgS").textContent = days === 1 ? "single day" : "over " + days + " days";
+
+    // daily chart (route-filtered): exactly the selected period
+    var trendDaily = {};
+    rows.forEach(function(t){
+      var td = ymd(t.Date);
+      if(!td) return;
+      trendDaily[td] = (trendDaily[td] || 0) + (Number(t.Amount) || 0);
+    });
+    var win = lastRange.list;
+    var max = 0;
+    win.forEach(function(d){ var a = trendDaily[d] || 0; if(a > max) max = a; });
+    var el = document.getElementById("dayChart");
+    el.innerHTML = "";
+    document.getElementById("dayEmpty").style.display = rows.length ? "none" : "block";
+    var gap = win.length > 20 ? Math.ceil(win.length / 12) : 1;
+    if(rows.length) win.forEach(function(d, i){
+      var amt = trendDaily[d] || 0;
+      var col = document.createElement("div");
+      col.className = "col";
+      col.innerHTML = "<div class='barwrap'><div class='bar' style='height:" +
+        (max ? Math.round(amt / max * 100) : 0) + "%' title='" + d + " \u2013 " + fmt(amt) +
+        "'></div></div><div class='hr'>" + (i % gap === 0 ? String(parseIso(d).getDate()) : "") + "</div>";
+      el.appendChild(col);
+    });
+    var title = document.getElementById("dayTitle");
+    title.textContent = days > 1
+      ? "Daily collections \u2014 avg " + fmt(total / days) + "/day over " + days + " days"
+      : "Daily collections \u2014 " + lastRange.fromIso;
+
+    renderRoutes(byRoute, total);
+    renderRouteChart(byRoute);
+    renderHourChart(byHour);
+    renderVehicles(byVeh);
+    renderType(byType, total);
+    renderSimple("agentTable", "agentEmpty", byAgent, function(k){ return agents[k] || k; }, total);
+
+    document.getElementById("counts").textContent = rows.length + " items  \u00b7  " + rc + " receipts" +
+      (selRoutes.length ? "  \u00b7  route filter: " + selRoutes.map(routeLabel).join(", ") : "");
+  }
+
+  function renderRouteChart(map){
+    var el = document.getElementById("routeChart");
+    var keys = Object.keys(map).sort(function(a,b){ return map[b].s - map[a].s; });
+    el.innerHTML = "";
+    if(!keys.length) return;
+    var max = 0;
+    keys.forEach(function(k){ if(map[k].s > max) max = map[k].s; });
+    keys.forEach(function(k){
+      var a = map[k];
+      var col = document.createElement("div");
+      col.className = "col";
+      col.innerHTML = "<div class='barwrap'><div class='bar' style='height:" +
+        (max ? Math.round(a.s / max * 100) : 0) + "%' title='" + esc(routeLabel(k)) + " \u2013 " + fmt(a.s) +
+        " (" + Object.keys(a.v).length + " vehicles, " + a.n + " items)'></div></div>" +
+        "<div class='hr' style='white-space:normal;line-height:1.15'>" + esc(routeLabel(k)) + "</div>";
+      el.appendChild(col);
+    });
+  }
+
+  function renderHourChart(byHour){
+    var el = document.getElementById("hourChart");
+    var hours = Object.keys(byHour).map(Number);
+    el.innerHTML = "";
+    if(!hours.length){
+      document.getElementById("hourEmpty").style.display = "block";
+      el.style.display = "none";
+      document.getElementById("hourTitle").textContent = "Collections by hour";
+      return;
+    }
+    document.getElementById("hourEmpty").style.display = "none";
+    el.style.display = "flex";
+    var minH = Math.max(0, Math.min.apply(null, hours) - 1);
+    var maxH = Math.min(23, Math.max.apply(null, hours) + 1);
+    var max = 0; hours.forEach(function(h){ if(byHour[h] > max) max = byHour[h]; });
+    var peakH = hours.reduce(function(a,b){ return byHour[b] > byHour[a] ? b : a; }, hours[0]);
+    document.getElementById("hourTitle").textContent =
+      "Collections by hour \u2014 peak " + pad(peakH) + ":00 (" + fmt(byHour[peakH]) + ")";
+    for(var h = minH; h <= maxH; h++){
+      var amt = byHour[h] || 0;
+      var col = document.createElement("div");
+      col.className = "col";
+      col.innerHTML = "<div class='barwrap'><div class='bar' style='height:" +
+        (max ? Math.round(amt / max * 100) : 0) + "%' title='" + pad(h) + ":00 \u2013 " + fmt(amt) +
+        "'></div></div><div class='hr'>" + pad(h) + "</div>";
+      el.appendChild(col);
+    }
+  }
+
+  function renderRoutes(map, grandTotal){
+    var tb = document.querySelector("#routeTable tbody");
+    var keys = Object.keys(map).sort(function(a,b){ return map[b].s - map[a].s; });
+    tb.innerHTML = "";
+    document.getElementById("routeEmpty").style.display = keys.length ? "none" : "block";
+    var max = 0, vTot = 0, nTot = 0;
+    keys.forEach(function(k){ if(map[k].s > max) max = map[k].s; vTot += Object.keys(map[k].v).length; nTot += map[k].n; });
+    keys.forEach(function(k){
+      var a = map[k];
+      var pct = max ? Math.round(a.s / max * 100) : 0;
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td><div class='nm'><span>" + esc(routeLabel(k)) + "</span>" +
+                     "<span class='track'><i style='width:" + pct + "%'></i></span></div></td>" +
+                     "<td class='num'>" + Object.keys(a.v).length + "</td>" +
+                     "<td class='num'>" + a.n + "</td>" +
+                     "<td class='num'>" + fmt(a.s) + "</td>";
+      tb.appendChild(tr);
+    });
+    if(keys.length){
+      var tr = document.createElement("tr");
+      tr.className = "total-row";
+      tr.innerHTML = "<td>TOTAL</td><td class='num'>" + vTot + "</td><td class='num'>" + nTot + "</td><td class='num'>" + fmt(grandTotal) + "</td>";
+      tb.appendChild(tr);
+    }
+  }
+
+  function renderVehicles(map){
+    var tb = document.querySelector("#vehTable tbody");
+    var collected = Object.keys(map).sort(function(a,b){ return map[b].s - map[a].s; });
+    var keys = collected.filter(function(k){
+      var m = vehMetaByPlate(k);
+      return k !== "NO VEHICLE" && m && m.fleetNo;
+    });
+    var hiddenV = 0, hiddenS = 0;
+    collected.forEach(function(k){
+      if(keys.indexOf(k) !== -1) return;
+      hiddenS += map[k].s;
+      if(k !== "NO VEHICLE") hiddenV++;
+    });
+    // fleet-numbered vehicles with NO collections in the range (optionally limited to the selected routes)
+    var keyUp = {};
+    keys.forEach(function(k){ keyUp[String(k).toUpperCase()] = 1; });
+    var zeros = Object.keys(vehMetaUp).filter(function(k){
+      if(keyUp[k]) return false;
+      var m = vehMetaUp[k];
+      if(!m || !m.fleetNo) return false;
+      if(selRoutes.length){
+        var rt = m.route ? m.route : "NO ROUTE";
+        if(selRoutes.indexOf(rt) === -1) return false;
+      }
+      return true;
+    }).sort();
+    var rowsK = keys.concat(zeros);
+    tb.innerHTML = "";
+    document.getElementById("vehEmpty").style.display = rowsK.length ? "none" : "block";
+    var max = 0, grandTotal = 0;
+    rowsK.forEach(function(k){
+      var a = map[k] || {n:0, s:0, d:{}};
+      if(a.s > max) max = a.s;
+      grandTotal += a.s;
+    });
+    rowsK.forEach(function(k){
+      var a = map[k] || {n:0, s:0, d:{}};
+      var meta = vehMetaByPlate(k) || {};
+      var pct = max ? Math.round(a.s / max * 100) : 0;
+      var label = esc(k);
+      if(meta.fleetNo) label += " <span class='muted'>" + esc(meta.fleetNo) + "</span>";
+      if(meta.route) label += " <span class='muted'>" + esc(routeLabel(meta.route)) + "</span>";
+      var badge = meta.owner === 1 ? "<span class='pill g'>SACCO</span>" :
+                  (meta.owner === 2 ? "<span class='pill b'>INVESTOR</span>" : "");
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td><div class='nm'><span>" + label + " " + badge + "</span>" +
+                     "<span class='track'><i style='width:" + pct + "%'></i></span></div></td>" +
+                     "<td class='num'>" + Object.keys(a.d).length + "</td>" +
+                     "<td class='num'>" + a.n + "</td>" +
+                     "<td class='num'>" + fmt(a.s) + "</td>";
+      tb.appendChild(tr);
+    });
+    document.getElementById("vehTitle").textContent = rowsK.length
+      ? "By vehicle \u2014 " + rowsK.length + " fleet vehicles" + (zeros.length ? " (" + zeros.length + " with no collections)" : "")
+      : "By vehicle";
+    var note = document.getElementById("vehNote");
+    if(hiddenV || hiddenS){
+      var bits = [];
+      if(hiddenV) bits.push(hiddenV + " vehicle" + (hiddenV === 1 ? "" : "s") + " without a fleet no");
+      if(map["NO VEHICLE"]) bits.push("unassigned items");
+      note.textContent = "Not in this list: " + bits.join(" + ") + "  \u00b7  " + fmt(hiddenS);
+      note.style.display = "block";
+    } else note.style.display = "none";
+    if(rowsK.length){
+      var tr = document.createElement("tr");
+      tr.className = "total-row";
+      tr.innerHTML = "<td>TOTAL</td><td></td><td></td><td class='num'>" + fmt(grandTotal) + "</td>";
+      tb.appendChild(tr);
+    }
+  }
+
+  function renderType(map, grandTotal){
+    var g = {};
+    Object.keys(map).forEach(function(c){
+      var k = combineType(c);
+      g[k] = g[k] || {n:0, s:0};
+      g[k].n += map[c].n; g[k].s += map[c].s;
+    });
+    var keys = Object.keys(g).sort(function(a,b){ return g[b].s - g[a].s; });
+    var mi = keys.indexOf("MANAGEMENT");
+    if(mi > 0){ keys.splice(mi, 1); keys.unshift("MANAGEMENT"); }
+    var tb = document.querySelector("#typeTable tbody");
+    tb.innerHTML = "";
+    document.getElementById("typeEmpty").style.display = keys.length ? "none" : "block";
+    var nTot = 0;
+    keys.forEach(function(k){
+      nTot += g[k].n;
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + esc(types[k] || k) + "</td><td class='num'>" + g[k].n + "</td><td class='num'>" + fmt(g[k].s) + "</td>";
+      tb.appendChild(tr);
+    });
+    if(keys.length){
+      var tr = document.createElement("tr");
+      tr.className = "total-row";
+      tr.innerHTML = "<td>TOTAL</td><td class='num'>" + nTot + "</td><td class='num'>" + fmt(grandTotal) + "</td>";
+      tb.appendChild(tr);
+    }
+  }
+
+  function renderSimple(tableId, emptyId, map, nameOf, grandTotal){
+    var tb = document.querySelector("#" + tableId + " tbody");
+    var keys = Object.keys(map).sort(function(a,b){ return map[b].s - map[a].s; });
+    tb.innerHTML = "";
+    document.getElementById(emptyId).style.display = keys.length ? "none" : "block";
+    var max = 0, nTot = 0;
+    keys.forEach(function(k){ if(map[k].s > max) max = map[k].s; nTot += map[k].n; });
+    keys.forEach(function(k){
+      var pct = max ? Math.round(map[k].s / max * 100) : 0;
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td><div class='nm'><span>" + esc(nameOf(k)) + "</span>" +
+                     "<span class='track'><i style='width:" + pct + "%'></i></span></div></td>" +
+                     "<td class='num'>" + map[k].n + "</td>" +
+                     "<td class='num'>" + fmt(map[k].s) + "</td>";
+      tb.appendChild(tr);
+    });
+    if(keys.length){
+      var tr = document.createElement("tr");
+      tr.className = "total-row";
+      tr.innerHTML = "<td>TOTAL</td><td class='num'>" + nTot + "</td><td class='num'>" + fmt(grandTotal) + "</td>";
+      tb.appendChild(tr);
+    }
+  }
+
+  // ---- wiring ----
+  document.getElementById("refresh").addEventListener("click", load);
+  document.getElementById("autoBtn").addEventListener("click", function(){
+    autoOn = !autoOn;
+    this.classList.toggle("active", autoOn);
+    schedule();
+  });
+  document.addEventListener("visibilitychange", function(){
+    if(document.hidden){ if(timer){ clearTimeout(timer); timer = null; } }
+    else if(autoOn){ load(); }
+  });
+  dateFrom.addEventListener("change", load);
+  dateTo.addEventListener("change", load);
+  document.getElementById("routeClear").addEventListener("click", function(){
+    selRoutes.length = 0;
+    renderRouteChips();
+    renderAll();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-days]"), function(b){
+    b.addEventListener("click", function(){
+      var n = parseInt(b.getAttribute("data-days"), 10) || 1;
+      var today = new Date();
+      dateTo.value = iso(today);
+      dateFrom.value = iso(addDays(today, -(n - 1)));
+      load();
+    });
+  });
+
+  initDates();
+  load();
+})();
+</script>
+<script src="../nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/activity_login" android:background="@drawable/selectablebackground" android:fitsSystemWindows="true" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:fitsSystemWindows="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <ImageView android:id="@id/imageView2" android:layout_width="match_parent" android:layout_height="wrap_content" android:src="@drawable/logo" android:layout_centerInParent="true" android:alpha="0.2" />
+        <com.google.android.material.textfield.TextInputLayout android:gravity="center" android:id="@id/input_layout_username" android:layout_width="200.0dp" android:layout_height="wrap_content" android:layout_centerHorizontal="true">
+            <EditText android:textSize="20.0dp" android:gravity="center" android:id="@id/username" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="User Name" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:gravity="center" android:id="@id/input_layout_password" android:layout_width="200.0dp" android:layout_height="wrap_content" android:layout_below="@id/input_layout_username" android:layout_centerHorizontal="true">
+            <EditText android:textSize="20.0dp" android:gravity="center" android:id="@id/password" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="pin" android:layout_below="@id/input_layout_password" android:layout_centerInParent="true" android:inputType="numberPassword" android:imeOptions="actionDone" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button android:id="@id/login" android:padding="10.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Login" android:layout_below="@id/input_layout_password" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -486,6 +486,21 @@
             Mpesa End Points
             </summary>
         </member>
+        <member name="M:S_Mobile.Controllers.MpesaController.MpesaPullCheck(S_Mobile.Models.MpesaPull.MpesaPullRequest)">
+            <summary>
+            Lists running-balance gaps in [MPESA Transactions] (candidate missed C2B transactions).
+            Optionally filter by paybill and date (defaults to today).
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Controllers.MpesaController.MpesaPullCheckGet(System.String)">
+            <summary>Same as api/mpesapull/check but available as GET (handy for browsers/tests).</summary>
+        </member>
+        <member name="M:S_Mobile.Controllers.MpesaController.MpesaPullRecover(S_Mobile.Models.MpesaPull.MpesaPullRequest)">
+            <summary>
+            Finds gaps and recovers the missing transactions via the Safaricom Pull Transactions API,
+            inserting them and handing them to the same paybill processing used by /api/confirm.
+            </summary>
+        </member>
         <member name="T:S_Mobile.Controllers.SaccoController">
             <summary>
             Nav Integration API
@@ -4472,6 +4487,76 @@
         </member>
         <member name="P:S_Mobile.Transactions.DeleteCompletedEventArgs.Result">
             <remarks/>
+        </member>
+        <member name="T:S_Mobile.Models.MpesaPull.MpesaPullClient">
+            <summary>
+            Safaricom Daraja Pull Transactions API client (production).
+            "Register" is a one-time call per shortcode; "Query" retrieves C2B transactions
+            for a period (last 48 hours) so missed transactions can be recovered/reconciled.
+            </summary>
+        </member>
+        <member name="P:S_Mobile.Models.MpesaPull.MpesaPullClient.ConsumerKey">
+            <summary>Consumer key from the Daraja app that owns the shortcode.</summary>
+        </member>
+        <member name="P:S_Mobile.Models.MpesaPull.MpesaPullClient.ConsumerSecret">
+            <summary>Consumer secret from the Daraja app that owns the shortcode.</summary>
+        </member>
+        <member name="M:S_Mobile.Models.MpesaPull.MpesaPullClient.Auth">
+            <summary>Gets an OAuth access token (valid ~1 hour).</summary>
+        </member>
+        <member name="M:S_Mobile.Models.MpesaPull.MpesaPullClient.Register(System.String,System.String,System.String)">
+            <summary>One-time registration of a shortcode for pulling transactions.</summary>
+        </member>
+        <member name="M:S_Mobile.Models.MpesaPull.MpesaPullClient.Query(System.String,System.DateTime,System.DateTime,System.String)">
+            <summary>Queries C2B transactions for a shortcode between two timestamps (window: last 48 hours).</summary>
+        </member>
+        <member name="P:S_Mobile.Models.MpesaPull.PullQueryResponse.Transactions">
+            <summary>Flattened list of transactions (the API returns an array of arrays).</summary>
+        </member>
+        <member name="T:S_Mobile.Models.MpesaPull.MpesaPullService">
+             <summary>
+             Detects missed M-Pesa C2B transactions from the running-balance chain in
+             [MPESA Transactions] and recovers them via the Safaricom Pull Transactions API.
+            
+             Detection rule (per paybill): Balance - PaidIn must equal the previous
+             transaction's Balance. A positive residual means one or more credits are missing.
+            
+             Notes:
+              - Balances are swept overnight, so the chain restarts every day; misses late in
+                the day can only be seen via the Pull API (48 hour retrieval window).
+              - Transactions sharing the same second can create cancelling artifacts
+                (+x / -2x / +x). Those simply produce no recoverable transactions when pulled.
+             </summary>
+        </member>
+        <member name="M:S_Mobile.Models.MpesaPull.MpesaPullService.CheckGaps(System.String,System.Nullable{System.DateTime})">
+            <summary>Lists running-balance gaps (candidate missed transactions) for a paybill/date.</summary>
+        </member>
+        <member name="M:S_Mobile.Models.MpesaPull.MpesaPullService.PullGap(S_Mobile.Models.MpesaPull.MpesaGap)">
+            <summary>Pulls the transactions Safaricom holds for one gap window.</summary>
+        </member>
+        <member name="M:S_Mobile.Models.MpesaPull.MpesaPullService.Recover(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Full flow: find gaps, pull each window, insert what is missing and hand the
+            recovered transactions to the same paybill processing used by /api/confirm.
+            </summary>
+        </member>
+        <member name="M:S_Mobile.Models.MpesaPull.MpesaPullService.HashPhone(System.String)">
+            <summary>
+            Hashes MSISDN the same way Safaricom's confirmation callbacks deliver it:
+            lowercase SHA-256 hex of the number in 2547XXXXXXXX format.
+            </summary>
+        </member>
+        <member name="T:S_Mobile.Models.MpesaPull.MpesaPullRequest">
+            <summary>Request body for the api/mpesapull endpoints.</summary>
+        </member>
+        <member name="T:S_Mobile.Models.MpesaPull.MpesaGap">
+            <summary>One running-balance gap between two consecutive transactions.</summary>
+        </member>
+        <member name="T:S_Mobile.Models.MpesaPull.MpesaPullRunResult">
+            <summary>Result of a recovery run.</summary>
+        </member>
+        <member name="T:S_Mobile.Models.MpesaPull.MpesaConfigRow">
+            <summary>Row of [Subscription Mpesa Config].</summary>
         </member>
         <member name="P:S_Mobile.Logs.Logger.BaseLogPath">
             <summary>

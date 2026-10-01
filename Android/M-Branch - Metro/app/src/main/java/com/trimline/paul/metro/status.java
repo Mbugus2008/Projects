@@ -346,6 +346,13 @@ public class status extends AppCompatActivity {
                 GrouptransListAdapter adapter = new GrouptransListAdapter(status.this, groupedByLoanNoList);
                 expandableListView.setAdapter(adapter);
 
+                double grandTotal = 0;
+                for (GroupedByVehicle g : groupedByLoanNoList) {
+                    grandTotal += g.getTotalAmount();
+                }
+                total.setText(String.format("Total: %,.2f", grandTotal));
+                total.setVisibility(View.VISIBLE);
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

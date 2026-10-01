@@ -1,4 +1,5 @@
 @using System.Text.Json
+@using Matatu_Dashboard.Services
 @model Matatu_Dashboard.Models.DashboardSectionViewModel
 @{
     Layout = null;
@@ -14,80 +15,14 @@
     var summaryBasePath = string.IsNullOrWhiteSpace(pathBase) ? "/fuelsummary" : $"{pathBase}/fuelsummary";
     var retrievedAt = (DateTime?)ViewData["RetrievedAt"] ?? DateTime.Now;
     var summary = ViewData["Summary"] as Matatu_Dashboard.Models.DashboardSectionViewModel;
-    var summaryRows = summary?.Rows ?? new();
-    var summaryCols = summary?.Columns ?? new();
-    var depotRows = Model.Rows;
-    var depotCols = Model.Columns;
+    var printMode = (ViewData["PrintMode"] as bool?) ?? false;
 
-    // Metrics from DisFuelSummary (aggregated)
-    var metricKeys = new[] { "Total_Collection", "Total_Vehicles", "Total_Fuel_ltrs",
-        "Total_Fuels_Amount", "Total_Paid", "Total_Mileage", "Total_Fuel_Arrears", "Net_Offload" };
-    var availableMetrics = metricKeys.Where(k => summaryCols.Contains(k, StringComparer.OrdinalIgnoreCase)).ToList();
-
-    var activeVehicles = summaryRows.Sum(r => r.TryGetValue("Active_Vehicles", out var av) && int.TryParse(av, out var avi) ? avi : 0);
-    var totalVehicles = summaryRows.Sum(r => r.TryGetValue("Total_Vehicles", out var tv) && int.TryParse(tv, out var tvi) ? tvi : 0);
-
-    // DisFuelSummary has no management figure, so total it from the depot rows.
-    var hasManagement = depotCols.Contains("Management", StringComparer.OrdinalIgnoreCase);
-    var totalManagement = depotRows.Sum(r =>
-        r.TryGetValue("Management", out var mgmt) && decimal.TryParse(mgmt, out var mgmtVal) ? mgmtVal : 0m);
-
-    // Build the top strip up front so the management total can sit beside the
-    // collection total no matter what order BC returns its columns in.
-    var metricTiles = new List<(string Label, string Value, string Css)>();
-    foreach (var key in availableMetrics)
-    {
-        var isInt = key == "Total_Vehicles";
-        var label = isInt ? "Vehicles (Active/Total)" : key.Replace("_", " ");
-        decimal val = isInt
-            ? summaryRows.Sum(r => r.TryGetValue(key, out var v) && int.TryParse(v, out var i) ? i : 0)
-            : summaryRows.Sum(r => r.TryGetValue(key, out var v) && decimal.TryParse(v, out var d) ? d : 0);
-        var css = key == "Total_Fuel_Arrears" && val > 0 ? "red" : key == "Total_Collection" ? "blue" : "";
-        metricTiles.Add((label, isInt ? $"{activeVehicles}/{totalVehicles}" : val.ToString("N2"), css));
-
-        if (key == "Total_Collection" && hasManagement)
-        {
-            metricTiles.Add(("Total Management", totalManagement.ToString("N2"), ""));
-        }
-    }
-
-    // Depot columns in display order (OData field names)
-    // "Capacity" carries the BC vehicle type code - labelled "Vehicle Type" below.
-    var depotFocusCols = new[] { "Date", "Vehicle", "Fleet", "Capacity", "Crew",
-        "Total_Collection", "Management_Target", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Millage", "Net_Offload", "Comments" }
-        .Where(c => c == "Crew" || depotCols.Contains(c, StringComparer.OrdinalIgnoreCase)).ToList();
-
-    // Friendly labels for columns
-    var depotColLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-        {"Date", "Date"}, {"Vehicle", "Vehicle"}, {"Fleet", "Fleet"},
-        {"Capacity", "Vehicle Type"},
-        {"Crew", "Crew"},
-        {"Total_Collection", "Total Collection"}, {"Management_Target", "Management Target"},
-        {"Fuel", "Fuel"}, {"Total_Litres", "Litres"}, {"Km_Litre", "Km/Litre"},
-        {"Amount_Paid", "Fuel Paid"},
-        {"Balance", "Unpaid Fuel"}, {"Millage", "Mileage"}, {"Net_Offload", "Net Offload"},
-        {"Comments", "Comments"}
-    };
-
-    // Monetary columns to format with N2 and right-align
-    var moneyCols = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
-        "Total_Collection", "Management_Target", "Fuel", "Total_Litres", "Km_Litre", "Amount_Paid", "Balance", "Net_Offload"
-    };
-
-    // Columns that should wrap text instead of truncating on one line
-    var wrapCols = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Comments" };
-
-    // Order by fleet no - numeric ascending, with blank / non-numeric fleets last.
-    // (Fleet comes from OData as text, so '99' would otherwise sort after '100'.)
-    var orderedDepotRows = depotRows
-        .OrderBy(r =>
-        {
-            var text = (r.TryGetValue("Fleet", out var f) ? (f ?? string.Empty) : string.Empty).Trim();
-            return int.TryParse(text, out var fleetNo) ? fleetNo : int.MaxValue;
-        })
-        .ThenBy(r => r.TryGetValue("Fleet", out var f2) ? (f2 ?? string.Empty) : string.Empty, StringComparer.OrdinalIgnoreCase)
-        .ThenBy(r => r.TryGetValue("Vehicle", out var v2) ? (v2 ?? string.Empty) : string.Empty, StringComparer.OrdinalIgnoreCase)
-        .ToList();
+    // Shaped once, in one place: the page, the Excel export and the print view
+    // all render this same object.
+    var report = FuelSummaryReportBuilder.Build(Model, summary, selectedRange, retrievedAt);
+    var rangeSuffix = string.IsNullOrWhiteSpace(selectedRange) ? string.Empty : $"/{selectedRange}";
+    var exportBase = string.IsNullOrWhiteSpace(pathBase) ? "/fuelsummary-export" : $"{pathBase}/fuelsummary-export";
+    var printBase = string.IsNullOrWhiteSpace(pathBase) ? "/fuelsummary-print" : $"{pathBase}/fuelsummary-print";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -128,27 +63,54 @@
             .metric-card .value { font-size: 18px; }
             .metric-card .label { font-size: 10px; }
         }
+        .tabs a.export { background: #006B3F; color: #fff; }
+        .tabs a.export:hover { background: #005432; }
+        @@media print {
+            body { background: #fff; padding: 0; }
+            .tabs, .controls, .footer { display: none !important; }
+            .header { margin-bottom: 8px; }
+            .metric-card { box-shadow: none; border: 1px solid #ddd; }
+            table { box-shadow: none; }
+            .table-wrap { overflow: visible; }
+            .table-wrap table { min-width: 0; }
+            th {
+                background: #006B3F !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            tr { break-inside: avoid; }
+            @@page { size: A4 landscape; margin: 10mm; }
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>@ViewData["Title"]</h1>
-        <div class="tabs">
-            <a href="@summaryBasePath/today" class="@(selectedRange == "today" || selectedRange == todayStr ? "active" : "")">Today</a>
-            <a href="@summaryBasePath/yesterday" class="@(selectedRange == "yesterday" || selectedRange == yesterdayStr ? "active" : "")">Yesterday</a>
-            <a href="@summaryBasePath/week" class="@(selectedRange == "week" ? "active" : "")">Week</a>
-            <a href="@summaryBasePath/month" class="@(selectedRange == "month" ? "active" : "")">Month</a>
-        </div>
+        @if (!printMode)
+        {
+            <div class="tabs">
+                <a href="@summaryBasePath/today" class="@(selectedRange == "today" || selectedRange == todayStr ? "active" : "")">Today</a>
+                <a href="@summaryBasePath/yesterday" class="@(selectedRange == "yesterday" || selectedRange == yesterdayStr ? "active" : "")">Yesterday</a>
+                <a href="@summaryBasePath/week" class="@(selectedRange == "week" ? "active" : "")">Week</a>
+                <a href="@summaryBasePath/month" class="@(selectedRange == "month" ? "active" : "")">Month</a>
+                <a href="@(exportBase)@rangeSuffix" class="export" title="Download these rows as a spreadsheet">Excel</a>
+                <a href="@(printBase)@rangeSuffix" class="export" target="_blank" rel="noopener"
+                   title="Opens a print view - save it as PDF from the print dialog">PDF</a>
+            </div>
+        }
     </div>
 
-    <div class="controls" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
-        <input type="date" id="dateFilter" value="@initialDate"
-               style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;"
-               onchange="if(this.value){window.location.href='@summaryBasePath/'+this.value;}" />
-        <input type="text" id="vehicleFilter" placeholder="Search vehicle, fleet, type or crew"
-               style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;flex:1;min-width:160px;"
-               oninput="filterVehicles()" onkeyup="filterVehicles()" />
-    </div>
+    @if (!printMode)
+    {
+        <div class="controls" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+            <input type="date" id="dateFilter" value="@initialDate"
+                   style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;"
+                   onchange="if(this.value){window.location.href='@summaryBasePath/'+this.value;}" />
+            <input type="text" id="vehicleFilter" placeholder="Search vehicle, fleet, type or crew"
+                   style="padding:8px;border:1px solid #ccc;border-radius:6px;font-family:inherit;flex:1;min-width:160px;"
+                   oninput="filterVehicles()" onkeyup="filterVehicles()" />
+        </div>
+    }
 
     <script>
         function filterVehicles() {
@@ -174,7 +136,7 @@
     </script>
 
     <div class="metrics">
-        @foreach (var tile in metricTiles)
+        @foreach (var tile in report.Tiles)
         {
             <div class="metric-card">
                 <div class="label">@tile.Label</div>
@@ -187,26 +149,23 @@
     <table id="depotTable">
         <thead>
             <tr>
-                @foreach (var col in depotFocusCols)
+                @foreach (var col in report.Columns)
                 {
-                    <th style="@(moneyCols.Contains(col) ? "text-align:right;" : "")">@(depotColLabels.TryGetValue(col, out var label) ? label : col.Replace("_", " "))</th>
+                    <th style="@(report.IsMoney(col) ? "text-align:right;" : "")">@report.LabelFor(col)</th>
                 }
             </tr>
         </thead>
         <tbody>
-            @foreach (var row in orderedDepotRows)
+            @foreach (var row in report.Rows)
             {
                 <tr>
-                    @foreach (var col in depotFocusCols)
+                    @foreach (var col in report.Columns)
                     {
                         if (col == "Crew")
                         {
-                            // Show the crew's member no alongside the name, number first
-                            // (same order the mobile app uses: [A169] CHARLES MWENJE OREDI).
-                            var driverNo = row.TryGetValue("Driver", out var dno) ? dno : string.Empty;
-                            var conductorNo = row.TryGetValue("Conductor", out var cno) ? cno : string.Empty;
-                            var driver = row.TryGetValue("Driver_Name", out var dv) ? dv : "-";
-                            var conductor = row.TryGetValue("Conductor_Name", out var cv) ? cv : "-";
+                            // Member no alongside the name, number first - the same
+                            // order the mobile app uses ([A169] CHARLES MWENJE OREDI).
+                            var (driverNo, driver, conductorNo, conductor) = FuelSummaryReport.Crew(row);
                             <td>
                                 <div>
                                     @if (!string.IsNullOrWhiteSpace(driverNo))
@@ -228,8 +187,7 @@
                         if (col == "Capacity")
                         {
                             // BC vehicle type code -> friendly label ("51 Seater")
-                            var cap = row.TryGetValue("Capacity", out var capv) ? capv : string.Empty;
-                            <td>@Matatu_Dashboard.Models.VehicleTypeLabels.Describe(cap)</td>
+                            <td>@FuelSummaryReport.VehicleType(row)</td>
                             continue;
                         }
                         var val = row.TryGetValue(col, out var v) ? v : "-";
@@ -238,12 +196,12 @@
                         {
                             val = val.Length > 11 ? val.Substring(0, 11).Trim() : val;
                         }
-                        else if (moneyCols.Contains(col) && val != "-" && decimal.TryParse(val, out var parsed))
+                        else if (report.IsMoney(col) && val != "-" && decimal.TryParse(val, out var parsed))
                         {
                             numVal = parsed;
                             val = parsed.ToString("N2");
                         }
-                        var cellStyle = moneyCols.Contains(col) ? "text-align:right;" : "";
+                        var cellStyle = report.IsMoney(col) ? "text-align:right;" : "";
                         if (col == "Balance" && numVal is > 0)
                         {
                             cellStyle += "color:#d32f2f;font-weight:600;";
@@ -256,7 +214,7 @@
                         {
                             cellStyle += "color:#2e7d32;font-weight:700;";
                         }
-                        if (wrapCols.Contains(col))
+                        if (report.IsWrapped(col))
                         {
                             cellStyle += "white-space:normal;word-break:break-word;min-width:150px;";
                         }
@@ -268,13 +226,24 @@
     </table>
     </div>
 
-    @if (orderedDepotRows.Count == 0)
+    @if (report.Rows.Count == 0)
     {
         <p style="text-align:center;color:#999;margin-top:40px;">No depot data for this period.</p>
     }
 
     <div class="footer">
-        @orderedDepotRows.Count depot records · Retrieved @retrievedAt.ToString("HH:mm:ss") · @selectedRange
+        @report.Rows.Count depot records · Retrieved @retrievedAt.ToString("HH:mm:ss") · @selectedRange
     </div>
+
+    @if (printMode)
+    {
+        <script>
+            // Wait for load plus a beat: measuring the page while the table is
+            // still laying out clips the last rows off the printed output.
+            window.addEventListener('load', function () {
+                setTimeout(function () { window.print(); }, 300);
+            });
+        </script>
+    }
 </body>
 </html>

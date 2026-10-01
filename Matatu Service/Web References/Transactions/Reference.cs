@@ -465,6 +465,10 @@ namespace Collection.Transactions {
         
         private bool postedFieldSpecified;
         
+        private Status statusField;
+        
+        private bool statusFieldSpecified;
+        
         private Transaction_Type transaction_TypeField;
         
         private bool transaction_TypeFieldSpecified;
@@ -524,6 +528,20 @@ namespace Collection.Transactions {
         private bool recoveryField;
         
         private bool recoveryFieldSpecified;
+        
+        private string fleet_NoField;
+        
+        private bool syncField;
+        
+        private bool syncFieldSpecified;
+        
+        private Source sourceField;
+        
+        private bool sourceFieldSpecified;
+        
+        private Owner ownerField;
+        
+        private bool ownerFieldSpecified;
         
         /// <remarks/>
         public string Key {
@@ -626,6 +644,27 @@ namespace Collection.Transactions {
             }
             set {
                 this.postedFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Status Status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool StatusSpecified {
+            get {
+                return this.statusFieldSpecified;
+            }
+            set {
+                this.statusFieldSpecified = value;
             }
         }
         
@@ -939,6 +978,79 @@ namespace Collection.Transactions {
                 this.recoveryFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        public string Fleet_No {
+            get {
+                return this.fleet_NoField;
+            }
+            set {
+                this.fleet_NoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Sync {
+            get {
+                return this.syncField;
+            }
+            set {
+                this.syncField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SyncSpecified {
+            get {
+                return this.syncFieldSpecified;
+            }
+            set {
+                this.syncFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Source Source {
+            get {
+                return this.sourceField;
+            }
+            set {
+                this.sourceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SourceSpecified {
+            get {
+                return this.sourceFieldSpecified;
+            }
+            set {
+                this.sourceFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Owner Owner {
+            get {
+                return this.ownerField;
+            }
+            set {
+                this.ownerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool OwnerSpecified {
+            get {
+                return this.ownerFieldSpecified;
+            }
+            set {
+                this.ownerFieldSpecified = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1007,6 +1119,54 @@ namespace Collection.Transactions {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4161.0")]
     [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/transactions")]
+    public enum Status {
+        
+        /// <remarks/>
+        Pending,
+        
+        /// <remarks/>
+        Completed,
+        
+        /// <remarks/>
+        Failed,
+        
+        /// <remarks/>
+        No_setup,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4161.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/transactions")]
+    public enum Source {
+        
+        /// <remarks/>
+        Trimline,
+        
+        /// <remarks/>
+        Mtwende,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4161.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/transactions")]
+    public enum Owner {
+        
+        /// <remarks/>
+        _blank_,
+        
+        /// <remarks/>
+        Sacco,
+        
+        /// <remarks/>
+        Investor,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4161.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/transactions")]
@@ -1060,6 +1220,9 @@ namespace Collection.Transactions {
         
         /// <remarks/>
         Posted,
+        
+        /// <remarks/>
+        Status,
         
         /// <remarks/>
         Transaction_Type,
@@ -1126,6 +1289,18 @@ namespace Collection.Transactions {
         
         /// <remarks/>
         Recovery,
+        
+        /// <remarks/>
+        Fleet_No,
+        
+        /// <remarks/>
+        Sync,
+        
+        /// <remarks/>
+        Source,
+        
+        /// <remarks/>
+        Owner,
     }
     
     /// <remarks/>

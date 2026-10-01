@@ -16,6 +16,8 @@
           <xsd:enumeration value="RRF" />
           <xsd:enumeration value="Savings_Drive" />
           <xsd:enumeration value="BBF" />
+          <xsd:enumeration value="Junior" />
+          <xsd:enumeration value="Wallet" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="Keywords">
@@ -386,7 +388,7 @@
   </binding>
   <service name="Keywords_Service">
     <port name="Keywords_Port" binding="tns:Keywords_Binding">
-      <address location="http://paulo:1113/Aps/WS/APS%20BARAKA%20SACCO%20SOCIETY%20LTD/Page/Keywords" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://services.trimline.co.ke:2527/Baraka/WS/BARAKA%20YETU%20SACCO%20SOC%20TRAINING/Page/Keywords" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

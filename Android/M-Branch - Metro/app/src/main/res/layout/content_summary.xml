@@ -4,36 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    android:padding="12dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.trimline.paul.metro.summary"
     tools:showIn="@layout/activity_summary">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/Date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:text="Select date"
-        android:textSize="30dp"
-        >
-
-    </Button>
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp"
+        app:cornerRadius="12dp"
+        app:strokeColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ExpandableListView
         android:id="@+id/summuryreport"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-app:layout_constraintHeight_default="wrap"
-        app:layout_constraintBottom_toTopOf="@id/total"
-        app:layout_constraintTop_toBottomOf="@+id/Date">
-
-    </ExpandableListView>
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:childDivider="@null"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:clipToPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/totalbar"
+        app:layout_constraintTop_toBottomOf="@+id/Date" />
 
     <TextView
-        android:id="@+id/total"
-        android:layout_width="match_parent"
+        android:id="@+id/summaryEmpty"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="20dp"
-        android:gravity="right"
-                app:layout_constraintBottom_toBottomOf="parent"  />
+        android:text="No collections found"
+        android:textColor="@color/loginMuted"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/summuryreport"
+        app:layout_constraintBottom_toBottomOf="@id/summuryreport" />
+
+    <LinearLayout
+        android:id="@+id/totalbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.1"
+            android:text="TOTAL"
+            android:textColor="@color/loginMuted"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="0.00"
+            android:textColor="#2E7D32"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

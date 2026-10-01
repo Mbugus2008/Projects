@@ -18,6 +18,12 @@ public class vehicles {
     public double Arrears;
     public double Penalty;
     public String Fleet_No;
+    /** 0 = blank, 1 = Sacco, 2 = Investor (Vehicles page "Owner" enum) */
+    public int Owner;
+    /** Vehicles page "Dues" (decimal) */
+    public double Dues;
+    /** Vehicles page "Collect": 0 = blank, 1 = Loan, 2 = Offload */
+    public int Collect;
     @Override
     public String toString() {
         return this.Code;

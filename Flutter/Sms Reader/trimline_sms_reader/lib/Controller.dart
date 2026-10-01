@@ -3,6 +3,7 @@ import 'package:android_sms_reader/android_sms_reader.dart' as sms;
 import 'package:get/get.dart';
 import 'package:trimline_sms_reader/Apis.dart';
 import 'package:trimline_sms_reader/Dimensions.dart';
+import 'package:trimline_sms_reader/client/client.dart';
 import 'package:trimline_sms_reader/vouchers.dart';
 
 import 't__results.dart';
@@ -43,9 +44,8 @@ class SmsController extends GetxController {
     );
 
     if (messages.isNotEmpty) {
-      final filteredMessages = messages
-          .where((msg) => msg.body.contains('Dear PCEA KIRIGITI CHURCH'))
-          .toList();
+      final filteredMessages =
+          messages.where((msg) => SmsClients.isKirigitiSms(msg.body)).toList();
       gettrans(filteredMessages);
     }
   }
@@ -229,6 +229,7 @@ class SmsController extends GetxController {
       //Paybill Offering - Collins Mwangi  - Ref:RHK2KTV7QE.. - Undefined
 
       //Dear PCEA KIRIGITI CHURCH, you have received Ksh. 10905.0 from ISAAC MUNGA KABUTHU for 1767371#JPRC Refund on 05/06/2023 at 07:35:28. MPESA Ref. RE65U10Z31..
+      //Dear PCEA T/A PCEA KIRIGITI CHURCH, you have received Ksh. 5000.0 from RICHARD MUCHERU for 176#V mucheru pp2 on 09/15/2026 at 08:57:15. MPESA Ref. UIFE96L0YF..
       String? date;
       int? year;
       String? time;
@@ -236,7 +237,11 @@ class SmsController extends GetxController {
       try {
         date = ms.body
             .substring(ms.body.indexOf(" on ") + 4, ms.body.indexOf(" at "));
-        year = int.tryParse(date.split(RegExp(r'[/\-]'))[2]);
+        final yearPart = date.split(RegExp(r'[/\-]'))[2];
+        final parsedYear = int.tryParse(yearPart);
+        year = parsedYear != null && yearPart.length == 2
+            ? 2000 + parsedYear
+            : parsedYear;
         time = ms.body
             .substring(ms.body.indexOf(" at ") + 4, ms.body.indexOf("Ref.") - 7)
             .replaceAll('.', '');
@@ -267,10 +272,13 @@ class SmsController extends GetxController {
           .replaceAll(".", "")
           .replaceAll("\n", "");
       tr.Detaills = "Paybill - ${tr.Name} - Ref:${tr.Receipt_No}";
+      tr.Source = SmsClients.sourceFromBody(ms.body);
 
       transaction? exist = Get.find<SmsController>()
           .messages
-          .firstWhereOrNull((element) => element.Receipt_No == tr?.Receipt_No);
+          .firstWhereOrNull((element) =>
+              element.Receipt_No == tr?.Receipt_No &&
+              element.Source == tr!.Source);
       //db.insert(tr);
       if (exist == null) {
         //trr.add(tr);

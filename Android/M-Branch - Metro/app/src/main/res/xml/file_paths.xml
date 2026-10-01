@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- getExternalFilesDir(null)/updates (normal download location) -->
+    <external-files-path name="updates_external" path="updates/" />
+    <!-- getCacheDir()/updates (fallback when external storage is unavailable) -->
+    <cache-path name="updates_cache" path="updates/" />
+</paths>

@@ -1,83 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@drawable/login_bg"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context="com.trimline.paul.metro.status"
-    tools:showIn="@layout/activity_status"
-    android:gravity="top">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Date"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/recoverydate"
-        />
-    <AutoCompleteTextView
+    tools:showIn="@layout/activity_status">
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchno"
-        android:hint="Vehicle no"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:inputType="textCapCharacters"
-        android:digits="0123456789|ME."
-        android:layout_below="@id/recoverydate"
-        />
-    <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@null"
-        android:src="@drawable/search"
-        android:id="@+id/findveh"
-        android:layout_below="@id/recoverydate"
-        />
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchprogress"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/searchno"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/statuslist"
-        android:layout_alignTop="@id/searchprogress"
-        android:visibility="gone"
-        android:layout_above="@id/total"
-        android:layout_below="@id/findveh"
-       >
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp">
 
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/recoverydate"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:text="Date"
+                android:textAllCaps="false"
+                android:textColor="#212121"
+                android:textSize="15sp"
+                app:backgroundTint="@android:color/white"
+                app:cornerRadius="12dp"
+                app:strokeColor="#E0E0E0"
+                app:strokeWidth="1dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/searchno"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/input_row_bg"
+                    android:digits="0123456789|ME."
+                    android:gravity="center_vertical"
+                    android:hint="Vehicle no"
+                    android:inputType="textCapCharacters"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/findveh"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/input_row_bg"
+                    android:contentDescription="Search"
+                    android:padding="12dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/search" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/searchprogress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <ListView
+        android:id="@+id/statuslist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Vehicle"
+            android:textAllCaps="true"
+            android:textColor="#757575"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:gravity="end"
+            android:text="Management"
+            android:textAllCaps="true"
+            android:textColor="#757575"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:gravity="end"
+            android:text="Other"
+            android:textAllCaps="true"
+            android:textColor="#757575"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="78dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:gravity="end"
+            android:text="Total"
+            android:textAllCaps="true"
+            android:textColor="#757575"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <ExpandableListView
         android:id="@+id/expandableListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/searchprogress"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/list_panel_bg"
+        android:childDivider="@null"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:paddingBottom="6dp" />
 
-        android:layout_above="@id/total"
-        android:layout_below="@id/findveh"
-        >
-
-
-    </ExpandableListView>
     <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-        android:text="Total"
-android:gravity="right"
-        android:textSize="50dp"
-android:layout_alignParentBottom="true"
-    android:id="@+id/total"
-android:visibility="gone"
-    ></TextView>
-</RelativeLayout>
+        android:id="@+id/total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="end"
+        android:text="Total: 0.00"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</LinearLayout>

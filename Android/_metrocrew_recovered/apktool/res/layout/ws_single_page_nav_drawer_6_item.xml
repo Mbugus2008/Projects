@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:clipChildren="false" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Space android:layout_width="0.0dp" android:layout_height="0.0dp" android:layout_weight="@dimen/ws_nav_drawer_top_space_weight" />
+    <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:clipChildren="false" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="@dimen/ws_nav_drawer_items_weight">
+        <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:clipChildren="false" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="0.5">
+            <Space android:layout_width="0.0dp" android:layout_height="0.0dp" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_start_space_weight" />
+            <androidx.wear.widget.CircledImageView android:layout_gravity="center" android:id="@id/ws_nav_drawer_icon_0" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_item_weight" style="@style/WsSinglePageNavDrawerIconStyle" />
+            <androidx.wear.widget.CircledImageView android:layout_gravity="center" android:id="@id/ws_nav_drawer_icon_1" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_item_weight" style="@style/WsSinglePageNavDrawerIconStyle" />
+            <androidx.wear.widget.CircledImageView android:layout_gravity="center" android:id="@id/ws_nav_drawer_icon_2" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_item_weight" style="@style/WsSinglePageNavDrawerIconStyle" />
+            <Space android:layout_width="0.0dp" android:layout_height="0.0dp" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_end_space_weight" />
+        </LinearLayout>
+        <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:clipChildren="false" android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="0.5">
+            <Space android:layout_width="0.0dp" android:layout_height="0.0dp" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_start_space_weight" />
+            <androidx.wear.widget.CircledImageView android:layout_gravity="center" android:id="@id/ws_nav_drawer_icon_3" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_item_weight" style="@style/WsSinglePageNavDrawerIconStyle" />
+            <androidx.wear.widget.CircledImageView android:layout_gravity="center" android:id="@id/ws_nav_drawer_icon_4" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_item_weight" style="@style/WsSinglePageNavDrawerIconStyle" />
+            <androidx.wear.widget.CircledImageView android:layout_gravity="center" android:id="@id/ws_nav_drawer_icon_5" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_item_weight" style="@style/WsSinglePageNavDrawerIconStyle" />
+            <Space android:layout_width="0.0dp" android:layout_height="0.0dp" android:layout_weight="@dimen/ws_nav_drawer_three_item_row_end_space_weight" />
+        </LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/ws_single_page_nav_drawer_text" />
+</LinearLayout>

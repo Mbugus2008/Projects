@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../../../Sacco.Core.Api"
+		},
+		{
+			"path": "../../../../../Mobile/S-Mobile/S_Ussd/S_Ussd"
 		}
 	],
 	"settings": {

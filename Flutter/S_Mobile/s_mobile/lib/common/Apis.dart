@@ -31,6 +31,9 @@ class AppConfig {
 
   // Request timeout in seconds
   static const int requestTimeoutSeconds = 30;
+
+  // Client_Service (/Aps) — direct endpoints not proxied by the bridge
+  static const String apsUrl = 'https://services.trimline.co.ke/Aps/api';
 }
 
 class MyHttpOverrides extends HttpOverrides {
@@ -175,7 +178,7 @@ class Params {
       'Loan_Type': Loan_Type,
       'Image': Image,
       'Loan_No': Loan_No,
-      'Transaction_Type': Transaction_Type,
+      'Transaction_Type': Transaction_Type?.toString(),
       'Account_2': Account_2,
       'Document_No': Document_No,
       'Amount': Amount,
@@ -205,7 +208,7 @@ class Params {
           'TXN-${now.millisecondsSinceEpoch}-${DateTime.now().microsecondsSinceEpoch}',
       'Transaction_Date': now.toIso8601String().substring(0, 10),
       'Transaction_Time': now.toIso8601String().substring(11, 19),
-      'Transaction_Type': transactionType,
+      'Transaction_Type': transactionType.toString(),
       'Amount': amount,
       'Account_No': accountNo,
       if (memberNo != null) 'Member_No': memberNo,

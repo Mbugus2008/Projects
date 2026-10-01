@@ -702,6 +702,14 @@ namespace Collection.Members2 {
         private decimal penaltyField;
         
         private bool penaltyFieldSpecified;
+
+        private Owner ownerField;
+
+        private bool ownerFieldSpecified;
+
+        private decimal duesField;
+
+        private bool duesFieldSpecified;
         
         /// <remarks/>
         public string Key {
@@ -848,6 +856,48 @@ namespace Collection.Members2 {
                 this.penaltyFieldSpecified = value;
             }
         }
+
+        /// <remarks/>
+        public Owner Owner {
+            get {
+                return this.ownerField;
+            }
+            set {
+                this.ownerField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool OwnerSpecified {
+            get {
+                return this.ownerFieldSpecified;
+            }
+            set {
+                this.ownerFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public decimal Dues {
+            get {
+                return this.duesField;
+            }
+            set {
+                this.duesField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DuesSpecified {
+            get {
+                return this.duesFieldSpecified;
+            }
+            set {
+                this.duesFieldSpecified = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -876,6 +926,22 @@ namespace Collection.Members2 {
         
         /// <remarks/>
         _37_Seater,
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4161.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-schemas/page/members2")]
+    public enum Owner {
+
+        /// <remarks/>
+        _blank_,
+
+        /// <remarks/>
+        Sacco,
+
+        /// <remarks/>
+        Investor,
     }
     
     /// <remarks/>

@@ -1,0 +1,45 @@
+package com.facebook.stetho.common.android;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.view.View;
+import javax.annotation.Nullable;
+
+/* JADX INFO: loaded from: classes.dex */
+final class ViewUtil {
+    private ViewUtil() {
+    }
+
+    @Nullable
+    static Activity tryGetActivity(View view) {
+        if (view == null) {
+            return null;
+        }
+        Context context = view.getContext();
+        Activity activityFromContext = tryGetActivity(context);
+        if (activityFromContext != null) {
+            return activityFromContext;
+        }
+        Object parent = view.getParent();
+        if (!(parent instanceof View)) {
+            return null;
+        }
+        View parentView = (View) parent;
+        return tryGetActivity(parentView);
+    }
+
+    @Nullable
+    private static Activity tryGetActivity(Context context) {
+        while (context != null) {
+            if (context instanceof Activity) {
+                return (Activity) context;
+            }
+            if (!(context instanceof ContextWrapper)) {
+                return null;
+            }
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+        return null;
+    }
+}

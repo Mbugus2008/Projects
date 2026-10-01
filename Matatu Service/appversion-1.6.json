@@ -1,0 +1,1 @@
+{"versionCode":8,"versionName":"1.6","apkUrl":"https://services.trimline.co.ke/Metro/App/MetroTrans-1.6.apk","changelog":"Lighter sync with the server (gentler uploads; the whole-fleet Vehicle Status card refreshes every 5 minutes). Login now ignores extra spaces after the username. Home-screen vehicle totals are the exact sums of all transactions.","minVersionCode":6}

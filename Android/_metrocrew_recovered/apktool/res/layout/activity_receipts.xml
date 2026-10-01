@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_above="@id/bottomView">
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="10.0dp">
+            <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="5.0" android:layout_marginStart="10.0dp">
+                <AutoCompleteTextView android:textSize="20.0sp" android:id="@id/receipt" android:background="@drawable/layoutborder" android:padding="10.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dp" android:layout_marginBottom="10.0dp" android:hint="Type member no..." android:drawablePadding="10.0dp" android:layout_weight="4.0" android:drawableStart="@drawable/memberno_24dp" android:drawableEnd="@drawable/clear_24dp" android:layout_marginEnd="30.0dp" />
+                <ImageButton android:id="@id/addmember" android:layout_width="25.0dp" android:layout_height="wrap_content" android:layout_marginTop="8.0dp" android:layout_marginBottom="10.0dp" android:src="@drawable/add" android:layout_weight="1.0" />
+            </LinearLayout>
+            <TextView android:textSize="15.0dp" android:id="@id/balances" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="balances" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1.0">
+            <LinearLayout android:orientation="vertical" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:layout_marginStart="8.0dp" android:layout_marginEnd="8.0dp">
+                <Spinner android:gravity="start" android:id="@id/paymenttype" android:background="@drawable/layoutborder" android:layout_width="match_parent" android:layout_height="50.0dp" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_weight="0.5" android:layout_marginStart="8.0dp" android:layout_marginEnd="8.0dp">
+                <Spinner android:gravity="start" android:id="@id/ttype" android:background="@drawable/layoutborder" android:layout_width="match_parent" android:layout_height="50.0dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/loan" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="2.0" android:layout_marginStart="8.0dp" android:layout_marginEnd="8.0dp">
+            <AutoCompleteTextView android:gravity="center" android:id="@id/vehicles" android:background="@drawable/layoutborder" android:layout_width="wrap_content" android:layout_height="50.0dp" android:hint="Enter fleetNo/veh reg" android:layout_weight="1.0" android:inputType="number" />
+            <Spinner android:gravity="center" android:layout_gravity="right" android:id="@id/LoanNo" android:background="@drawable/layoutborder" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="50.0dp" android:layout_marginTop="3.0dp" android:layout_weight="1.0" android:layout_marginStart="3.0dp" android:layout_marginEnd="3.0dp" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/line" android:layout_width="match_parent" android:layout_height="wrap_content" android:weightSum="1.0">
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0.8" android:layout_marginStart="10.0dp">
+                <EditText android:textSize="20.0sp" android:textColor="@color/black" android:textColorHint="@color/grey_700" android:id="@id/amount" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Enter amount" android:maxLines="1" android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatButton android:textSize="15.0sp" android:textColor="@color/white" android:gravity="center" android:id="@id/Add" android:background="@drawable/button_bg_fill" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ADD" android:layout_weight="0.1" style="@style/Widget.AppCompat.Button.Borderless" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:background="@color/grey_200" android:padding="8.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="8.0dp">
+            <TextView android:textSize="13.0sp" android:id="@id/recordCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Receipt Lines" />
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView android:id="@id/translist" android:padding="8.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <RelativeLayout android:id="@id/bottomView" android:padding="10.0dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <Button android:id="@id/Print" android:background="@drawable/layoutborder" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Print" android:layout_alignParentEnd="true" />
+        <Button android:id="@id/Cancel" android:background="@drawable/layoutborder" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cancel" android:layout_alignParentLeft="true" />
+        <TextView android:textSize="30.0sp" android:id="@id/total" android:layout_width="wrap_content" android:layout_height="wrap_content" android:hint="Total" android:layout_centerInParent="true" />
+    </RelativeLayout>
+</RelativeLayout>

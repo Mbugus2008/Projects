@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>METROTRANS SACCO - Master</title>
+<link rel="icon" type="image/png" href="../logo.png">
+<link rel="apple-touch-icon" href="../logo.png">
+<style>
+  :root{
+    --brand:#1F3863; --brand2:#2E5190; --accent:#C0243F; --ink:#1B2431; --muted:#6B7280;
+    --bg:#F4F6F9; --card:#FFFFFF; --line:#E3E6ED;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,"Segoe UI",Roboto,Arial,sans-serif}
+  .top{position:sticky;top:0;z-index:25}
+  header{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:14px 22px;
+         display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+         box-shadow:0 2px 10px rgba(31,56,99,.28)}
+  .brand b{display:block;font-size:17px;letter-spacing:.02em}
+  .brand span{opacity:.82;font-size:12.5px}
+  main{padding:0}
+  main iframe{display:block;width:100%;height:calc(100vh - var(--topH,64px) - 32px);
+              border:1px solid var(--line);border-radius:12px;background:var(--bg);
+              box-shadow:0 1px 3px rgba(16,24,40,.06);margin:18px 0 0}
+  /* the master ribbon — lives inside the header, right after the brand */
+  #mRibbon{display:flex;padding:0;margin-left:16px;flex:1 1 auto;flex-wrap:wrap;align-items:stretch;
+           justify-content:flex-start;position:relative;z-index:11;min-width:0}
+  /* base styling for the unified ribbon (refined by the scoped page CSS copy) */
+  #mRibbon .rmain{display:flex;flex-wrap:wrap;align-items:stretch}
+  #mRibbon .rgroup{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:2px 11px 0;border-right:1px solid rgba(255,255,255,.18)}
+  #mRibbon .rgroup:last-child{border-right:0}
+  #mRibbon .rbtns{display:flex;flex-direction:column;gap:2px;align-items:center}
+  #mRibbon .rbrow{display:flex;gap:2px;align-items:center;justify-content:center}
+  #mRibbon .rlabel{font-size:10px;color:rgba(255,255,255,.62);text-align:center;margin-top:2px}
+  #mRibbon .rbtn{border:0;background:transparent;color:rgba(255,255,255,.95);border-radius:8px;padding:4px 8px;margin:1px 0;
+                 font:inherit;font-size:11px;font-weight:600;cursor:pointer;text-decoration:none;position:relative;
+                 display:inline-flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1;min-width:50px}
+  #mRibbon .rbtn:hover{background:rgba(255,255,255,.12)}
+  #mRibbon .rbtn.active{background:rgba(255,255,255,.22);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.38)}
+  #mRibbon .fbadge{display:none;position:absolute;top:1px;right:1px;background:#E8710A;color:#fff;font-size:9.5px;font-weight:800;
+                   line-height:1;padding:2px 5px;border-radius:9px;box-shadow:0 0 0 1.5px #24406F}
+  #mRibbon .fbadge.on{display:block}
+  #mRibbon .rbtn svg{width:20px;height:20px}
+  #mRibbon .rdate{border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:4px 7px;font:inherit;font-size:11.5px;background:#fff;color:var(--ink)}
+#mRibbon .rnav{width:140px;font-size:11px}
+  #mRibbon .fbseg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:#F1F3F7;border-radius:10px;padding:4px;width:260px;max-width:100%}
+  #mRibbon .fbseg button{border:0;background:none;border-radius:9px;padding:8px 4px;font-size:12.5px;font-weight:600;color:#5B6472;cursor:pointer}
+  #mRibbon .fbseg button:hover{color:var(--ink)}
+  #mRibbon .fbseg button.on{background:var(--brand);color:#fff;font-weight:700;box-shadow:0 1px 3px rgba(16,24,40,.25)}
+  /* ribbon dropdown panels (base copy — pages that have their own ribbon CSS refine these) */
+  .fdrop{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:390px;max-width:min(640px,92vw);
+         background:#fff;border:1px solid #E3E6ED;border-radius:12px;box-shadow:0 14px 40px rgba(10,20,40,.28);
+         padding:11px 13px;z-index:95;text-align:left}
+  .fdrop.open{display:block}
+  .fbrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .fdrop .fbrow + .fbrow{margin-top:9px;padding-top:9px;border-top:1px dashed #E7EAF1}
+  .flabel{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:104px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer;user-select:none;background:#fff;color:var(--ink);transition:background .15s,border-color .15s}
+  .chip:hover{border-color:#B9C5DA}
+  .chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  .chip .ln{display:block;font-weight:700}
+  .chip .tot{display:block;font-weight:400;font-size:11px;opacity:.75;margin-top:1px}
+  .chip .x{opacity:.85;margin-left:3px;font-weight:700}
+  .vin{border:1px solid var(--line);border-radius:8px;padding:6px 10px;font:inherit;font-size:12.5px;min-width:240px;background:#fff}
+  .vin:focus{outline:none;border-color:#B9C5DA;box-shadow:0 0 0 3px rgba(31,56,99,.14)}
+  .vclear{border:0;background:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer;padding:4px 2px}
+  .vhcount{font-size:11px;font-weight:700;color:var(--brand);white-space:nowrap}
+  #mRibbon .rbtn.dim,#mRibbon .rdate.dim,#mRibbon .fbseg.dim,#mRibbon .vclear.dim{opacity:.35;pointer-events:none}
+  @media(max-width:900px){
+    main iframe{height:auto;min-height:62vh;margin-top:10px}
+  }
+  @media print{
+    header,.sidenav{display:none!important}
+    main iframe{height:auto;border:0;box-shadow:none;margin:0}
+    .sidenavwrap{display:block;max-width:none;padding:0}
+    .sncol{display:block}
+  }
+</style>
+</head>
+<body>
+<div class="top">
+  <header>
+    <div class="brand">
+      <b>METROTRANS SACCO</b>
+      <span id="pgLabel">Dashboard</span>
+    </div>
+  </header>
+</div>
+<main>
+  <iframe id="pageFrame" name="pageFrame" src="dashboard.html?v=2" title="Report page"></iframe>
+</main>
+<script src="../nav.js"></script>
+</body>
+</html>

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Map;
@@ -16,7 +17,7 @@ public class Settings extends Activity {
     SharedPreferences sharedPreferences;
     EditText Scale;
     EditText printer;
-    EditText ip,copies;
+    EditText copies;
     Button save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,6 @@ public class Settings extends Activity {
 
         printer = (EditText) findViewById(R.id.setprinter);
         copies =(EditText)findViewById(R.id.copiestoprint);
-        ip = (EditText) findViewById(R.id.setip);
         sharedPreferences = getSharedPreferences("Settings",MODE_PRIVATE);
         Map<String,?> keys = sharedPreferences.getAll();
 
@@ -37,7 +37,6 @@ public class Settings extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                savePreferences("IP", ip.getText().toString());
                 savePreferences("PRINTER", printer.getText().toString());
                 savePreferences("COPIES", copies.getText().toString());
                 Toast.makeText(getApplicationContext(),"Settings saved successfully",Toast.LENGTH_LONG).show();
@@ -45,17 +44,6 @@ public class Settings extends Activity {
             }
         });
         printer.setText(getpreferences("PRINTER"));
-        ip.setText(getpreferences("IP"));
-
-       ip.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-           @Override
-           public void onFocusChange(View v, boolean hasFocus) {
-               if (!hasFocus)
-               {
-                   savePreferences("IP", ip.getText().toString());
-               }
-           }
-       });
 
         printer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -75,6 +63,48 @@ public class Settings extends Activity {
 
             }
         });
+
+        Button testPrinter = (Button) findViewById(R.id.testprinter);
+        testPrinter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (summaries.printer.isConnected()) {
+                    doTestPrint();
+                    return;
+                }
+                // A printer just set above might still be connecting - give it a few seconds.
+                Toast.makeText(getApplicationContext(), "Connecting to printer...", Toast.LENGTH_SHORT).show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < 20 && !summaries.printer.isConnected(); i++) {
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                break;
+                            }
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!isFinishing()) {
+                                    doTestPrint();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
+
+        TextView version = findViewById(R.id.settingsVersion);
+        if (version != null) {
+            try {
+                String vName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+                version.setText("MetroTrans v" + vName);
+            } catch (Exception ignored) {
+            }
+        }
 
         DB db = new DB(this);
 
@@ -105,6 +135,14 @@ public class Settings extends Activity {
             e.printStackTrace();
         }
     }
+    private void doTestPrint() {
+        if (summaries.printer.printTest()) {
+            Toast.makeText(getApplicationContext(), "Test page sent to the printer", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Printer not connected - check that it is paired, switched on and the MAC address is correct", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private String getpreferences(String key) {
         String pref = "";
         String value = sharedPreferences.getString(key, "");

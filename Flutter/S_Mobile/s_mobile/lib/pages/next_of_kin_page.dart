@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:motion_toast/motion_toast.dart';
-
 import '../members/controller.dart';
 import '../members/next_of_kin.dart';
 import 'next_of_kin_edit.dart';

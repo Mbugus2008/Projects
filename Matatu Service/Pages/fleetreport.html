@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>METROTRANS SACCO - Fleet Allocation &amp; Performance Report</title>
+<link rel="icon" type="image/png" href="../logo.png">
+<link rel="apple-touch-icon" href="../logo.png">
+<style>
+  :root{
+    --brand:#1F3863; --brand2:#2E5190; --accent:#C0243F; --ink:#1B2431; --muted:#6B7280;
+    --bg:#F4F6F9; --card:#FFFFFF; --line:#E3E6ED; --green:#2E7D32; --red:#C0243F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,"Segoe UI",Roboto,Arial,sans-serif}
+  .top{position:sticky;top:0;z-index:6}
+  header{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:14px 22px;
+         display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+         box-shadow:0 2px 10px rgba(31,56,99,.28)}
+  .ribbon{background:#F6F8FB;border-bottom:1px solid var(--line);box-shadow:0 2px 6px rgba(16,24,40,.06);
+          display:flex;padding:4px 8px 2px;flex-wrap:wrap;align-items:stretch}
+  .rmain{display:flex;flex-wrap:wrap;align-items:stretch}
+  .rgroup{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:2px 12px 0;border-right:1px solid #E1E6EF}
+  .rgroup:last-child{border-right:0}
+  .rbtns{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
+  .rlabel{font-size:10px;color:#7A8599;text-align:center;margin-top:3px}
+  .rbtn{border:0;background:transparent;color:var(--ink,#1B2431);border-radius:6px;padding:5px 9px;margin:2px 0;
+        font:inherit;font-size:11.5px;font-weight:600;cursor:pointer;text-decoration:none;
+        display:inline-flex;flex-direction:column;align-items:center;gap:3px;line-height:1.1;min-width:52px}
+  .rbtn svg{width:22px;height:22px;flex:none}
+  .rbtn:hover{background:#E9EEF7}
+  .rbtn:active{background:#DCE5F3}
+  .rbtn.active{background:#D6E3F5;color:var(--brand);box-shadow:inset 0 0 0 1px #B7C9E6}
+  .rdate{border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:inherit;font-size:12.5px;background:#fff}
+  .brand{display:flex;flex-direction:column}
+  .brand b{font-size:20px;letter-spacing:.5px}
+  .brand span{font-size:12px;opacity:.9}
+  .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:13px}
+  .controls input[type=date]{border:0;border-radius:8px;padding:7px 10px;font:inherit}
+  .controls label{display:flex;gap:6px;align-items:center;cursor:pointer;user-select:none}
+  .btn{border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer;background:#fff;color:var(--brand)}
+  .mini{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;border-radius:8px;padding:6px 10px;
+        font:inherit;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+  .mini:hover{background:rgba(255,255,255,.25)}
+  main{max-width:1250px;margin:18px auto;padding:0 14px 40px}
+  #status{max-width:1250px;margin:12px auto 0;padding:8px 16px;font-size:13px;color:var(--muted);
+          display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  #error{display:none;max-width:1250px;margin:12px auto 0;padding:12px 16px;border-radius:10px;
+         background:#FDECEA;border:1px solid #F5C6C4;color:#B3261E;font-size:14px}
+  .rpthead{text-align:center;padding:6px 0 2px}
+  .rpthead .t1{font-size:16px;font-weight:700;letter-spacing:.08em}
+  .rpthead .t2{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+        box-shadow:0 1px 3px rgba(16,24,40,.06)}
+  .card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .card .v{font-size:22px;font-weight:700;margin-top:5px;color:var(--brand)}
+  .card .v.pos{color:var(--green)}
+  .card .v.neg{color:var(--red)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:14px;
+          box-shadow:0 1px 3px rgba(16,24,40,.06);overflow:hidden}
+  section h2{margin:0;padding:11px 16px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;
+             color:var(--brand);border-bottom:1px solid var(--line);background:#FAFBFD;
+             display:flex;align-items:center;justify-content:space-between;gap:10px}
+  section h2 .sub{font-size:13.5px;color:#374151;font-weight:600;text-transform:none;letter-spacing:0}
+  section h2.clk{cursor:pointer;user-select:none}
+  .chev{font-size:15px;font-weight:700;color:var(--brand);margin-right:8px;display:inline-block;line-height:1.3;
+        padding:1px 7px;border:1px solid var(--line);border-radius:6px;background:#EEF2F8;min-width:24px;text-align:center}
+  .vn{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:left;margin:0 10px;line-height:1.35}
+  .vn .pct{font-size:11.5px;color:#5A6B8C;font-weight:700;margin-left:4px}
+  .tablewrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:7px 12px;text-align:left;border-bottom:1px solid #F1F3F7;white-space:nowrap}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:#FCFCFE}
+  tr:last-child td{border-bottom:0}
+  tr:nth-child(even) td{background:#FCFDFF}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .pct{color:#5A6B8C;font-weight:700}
+  tr.sub td{font-weight:700;background:#EDF1F8!important;border-top:2px solid #CDD7E8}
+  tr.total-row td{font-weight:700;background:#E6ECF6!important;border-top:2px solid #C5D1E4;font-size:14.5px}
+  .pos{color:var(--green)}
+  .neg{color:var(--red)}
+  .muted{color:var(--muted)}
+  .note{max-width:1250px;margin:14px auto 0;padding:0 16px;font-size:12px;color:var(--muted)}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 0 30px}
+  body::after{content:"";position:fixed;inset:0;z-index:2;pointer-events:none;background-image:url(../logo.png);
+              background-repeat:no-repeat;background-position:center;background-size:min(58vh,58vw);opacity:.05}
+  @media print{
+    header,#status,#error,.controls,.noprint{display:none!important}
+    .tablewrap{display:block!important;overflow:visible!important}
+    .chev{display:none!important}
+    body{background:#fff}
+    body::after{opacity:.07}
+    main{margin:0;padding:0 6mm;max-width:none}
+    section{break-inside:auto;box-shadow:none}
+    section h2{break-after:avoid;break-inside:avoid}
+    thead{display:table-header-group}
+    tr{break-inside:avoid}
+    .cards{grid-template-columns:repeat(4,1fr)}
+    .rpthead{margin-top:6mm}
+  }
+</style>
+</head>
+<body>
+<div class="top">
+<header>
+  <div class="brand">
+    <b>METROTRANS SACCO</b>
+    <span>Fleet Allocation &amp; Performance Report</span>
+  </div>
+</header>
+<div class="ribbon noprint">
+  <div class="rmain">
+    <div class="rgroup">
+      <div class="rbtns"><input type="date" id="date" class="rdate"><button class="rbtn" id="todayBtn"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2" fill="#fff" stroke="#2E75B6" stroke-width="1.9"/><path d="M3.5 9.8h17" stroke="#2E75B6" stroke-width="1.9"/><path d="M8 3.4v3.2M16 3.4v3.2" stroke="#2E75B6" stroke-width="1.9" stroke-linecap="round"/><rect x="6.8" y="12.3" width="10.4" height="5.4" rx="1.2" fill="#4C9AFF"/></svg>Today</button></div>
+      <div class="rlabel">Date</div>
+    </div>
+    <div class="rgroup">
+      <div class="rbtns"><button class="rbtn" id="refresh"><svg viewBox="0 0 24 24" fill="none" stroke="#2FA84F" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><polyline points="21 3.2 21 9 15.2 9"/></svg>Refresh</button><button class="rbtn active" id="autoBtn"><svg viewBox="0 0 24 24" fill="none" stroke="#F29900" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><polyline points="12 7.4 12 12.3 15.4 14"/></svg>Auto 60s</button></div>
+      <div class="rlabel">Refresh</div>
+    </div>
+    <div class="rgroup">
+      <div class="rbtns"><button class="rbtn" id="expandAll"><svg viewBox="0 0 24 24" fill="none" stroke="#4472C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6.5 5.5 12 11 17.5 5.5"/><polyline points="6.5 12.5 12 18 17.5 12.5"/></svg>Expand all</button><button class="rbtn" id="collapseAll"><svg viewBox="0 0 24 24" fill="none" stroke="#4472C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5.5 6.5 11 12 5.5 17.5"/><polyline points="12.5 6.5 18 12 12.5 17.5"/></svg>Collapse all</button></div>
+      <div class="rlabel">View</div>
+    </div>
+    <div class="rgroup">
+      <div class="rbtns"><button class="rbtn" id="xlsxBtn"><svg viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2" fill="#E7F4EC" stroke="#217346" stroke-width="1.8"/><path d="M8 8.2h8M8 12h8M8 15.8h8" stroke="#217346" stroke-width="1.7" stroke-linecap="round"/></svg>XLSX</button><button class="rbtn" id="csvBtn"><svg viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2" fill="#FDF3E2" stroke="#D97706" stroke-width="1.8"/><path d="M8 8.2h8M8 12h8M8 15.8h5" stroke="#D97706" stroke-width="1.7" stroke-linecap="round"/></svg>CSV</button><button class="rbtn" id="print"><svg viewBox="0 0 24 24"><path d="M7 8.5V3.8h10v4.7z" fill="#8FAADC"/><rect x="3" y="8.5" width="18" height="8.6" rx="1.6" fill="#2E75B6"/><rect x="6.6" y="14.2" width="10.8" height="6.4" rx="0.9" fill="#fff" stroke="#2E75B6" stroke-width="1.4"/><circle cx="17.7" cy="11.5" r="0.95" fill="#fff"/></svg>Print</button></div>
+      <div class="rlabel">Output</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="error"></div>
+<div id="status"><span id="updated">Loading...</span><span id="counts"></span></div>
+
+<main>
+  <div class="rpthead">
+    <div class="t1">DAILY LOANS AND FLEET COLLECTION / PERFORMANCE REPORT</div>
+    <div class="t2" id="rptDate">&nbsp;</div>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="k">Daily target</div><div class="v" id="kTarget">-</div><div class="s" id="kTargetS"></div></div>
+    <div class="card"><div class="k">Collected</div><div class="v" id="kColl">-</div><div class="s" id="kCollS"></div></div>
+    <div class="card"><div class="k">Variance</div><div class="v" id="kVar">-</div><div class="s" id="kVarS"></div></div>
+    <div class="card"><div class="k">Achievement</div><div class="v" id="kPct">-</div><div class="s" id="kPctS"></div></div>
+  </div>
+
+  <div id="groups"></div>
+
+  <div class="note noprint">
+    Targets come from the office allocation list (<span id="srcNote">fleet-targets.json</span>) — a vehicle's target is its daily offload, matched by fleet no.
+    Routes and vehicles come from the system (each vehicle's route on the Vehicles page).
+    Collected = total collections on the selected date <b>less management and less Sacco dues (collection type "Dues")</b>.
+    Every transaction is summed - a reversed payment's two lines cancel each other out.
+  </div>
+</main>
+
+<footer>METROTRANS SACCO &middot; fleet performance report &middot; live data from Collect.asmx</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var BASE = "../Collect.asmx/";
+  var vehMetaUp = {};
+  var fleetToPlate = {};
+  var timer = null, autoOn = true;
+  var lastPerf = null, lastRows = null, lastDay = null, lastUsers = null, groupTitles = [];
+  var routeNameOf = null; // sheet route label -> official route (Routes list)
+  var vehRouteFleet = {}; // official route -> [{fleet, plate}] from the Vehicles feed
+  var sysRouteByFleet = {}; // fleet no -> BC route ("" = no route assigned in the system)
+  var sysRouteByPlate = {}; // plate -> BC route
+  var coveredAll = {}; // name tokens of EVERY user in the Users feed
+
+  function api(method, body){
+    return fetch(BASE + method, {
+      method: "POST",
+      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      body: body || "x=y"
+    }).then(function(r){
+      if(!r.ok) throw new Error("HTTP " + r.status + " from " + method);
+      return r.text();
+    }).then(function(t){ return t ? JSON.parse(t) : null; });
+  }
+
+  function fmt(n){
+    return (n || 0).toLocaleString(undefined,{minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function ddmm(d){ return pad(d.getDate()) + "-" + pad(d.getMonth()+1) + "-" + d.getFullYear(); }
+  function iso(d){ return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate()); }
+  function ymd(dm){ var p = String(dm || "").split("-"); return p.length === 3 && p[2].length === 4 ? p[2] + "-" + p[1] + "-" + p[0] : ""; }
+  function parseIso(s){
+    var p = String(s || "").split("-");
+    if(p.length !== 3) return null;
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  // NOTE: reversed transactions are NOT hidden - every line is summed so a reversal
+  // always nets to zero with its original (even when Constituency is blank).
+
+  var dateEl = document.getElementById("date");
+  dateEl.value = iso(new Date());
+  document.getElementById("rptDate").textContent = dateEl.value;
+
+  function load(){
+    var d = parseIso(dateEl.value) || new Date();
+    document.getElementById("rptDate").textContent = iso(d).split("-").reverse().join("-");
+    Promise.all([
+      api("GetallCollections", "data=" + encodeURIComponent(JSON.stringify({firstdate: ddmm(d), user: ""}))),
+      api("logins"),
+      api("Routes"),
+      Object.keys(vehMetaUp).length ? Promise.resolve(null) : api("Vehicles"),
+      fetch("../fleet-targets.json", { cache: "no-store" }).then(function(r){ return r.ok ? r.json() : null; })
+    ]).then(function(res){
+      // users attached to routes (Users page Route field) -> responsible staff per route
+      var routeUserMap = {};
+      (res[1] || []).forEach(function(u){
+        var r = normRoute(u.Route);
+        var nm = u.Name || u.Agent_Code;
+        if(r.length > 2 && nm) (routeUserMap[r] = routeUserMap[r] || []).push(nm);
+      });
+      // a user belongs to ONE route: collect EVERY user's name tokens globally so a
+      // workbook name matching a user only ever shows under that user's own route
+      coveredAll = {};
+      (res[1] || []).forEach(function(u){
+        var nm = u.Name || u.Agent_Code;
+        if(!nm) return;
+        var ts = nameTokens(nm);
+        Object.keys(ts).forEach(function(t){ coveredAll[t] = 1; });
+      });
+      // official routes list (Code -> Description) - sheet route labels are matched to it
+      var routeList = (res[2] || []).map(function(rt){
+        var nm = String(rt.Description || rt.Code || "").trim();
+        return { norm: normRoute(nm), desc: nm };
+      }).filter(function(rt){ return rt.norm.length > 2; });
+      routeNameOf = routeList.length ? function(label){
+        var tokens = normRoute(label).split(/\s+/).filter(function(t){ return t.length > 2; });
+        for(var i = 0; i < routeList.length; i++){
+          var lt = routeList[i].norm.split(/\s+/);
+          for(var j = 0; j < lt.length; j++){
+            for(var k = 0; k < tokens.length; k++){
+              var t = tokens[k], r = lt[j];
+              if(t === r || t.indexOf(r) !== -1 || r.indexOf(t) !== -1) return routeList[i].desc;
+            }
+          }
+        }
+        return null; // not in the BC Routes list -> the row is dropped from the report
+      } : null;
+      if(res[3]){
+        // rebuild the fleet maps only when the (cached) Vehicles feed actually arrives,
+        // otherwise a date change would wipe the route structure
+        vehRouteFleet = {};
+        sysRouteByFleet = {};
+        sysRouteByPlate = {};
+        res[3].forEach(function(v){
+          if(!v.Vehicle_Number) return;
+          var plate = v.Vehicle_Number.toUpperCase();
+          vehMetaUp[plate] = true;
+          var f = (v.Fleet_No || "").trim().toUpperCase();
+          if(f) fleetToPlate[f] = plate;
+          var sysRd = (v.Route && routeNameOf) ? (routeNameOf(v.Route) || "") : "";
+          if(f) sysRouteByFleet[f] = sysRd;
+          sysRouteByPlate[plate] = sysRd;
+          // fleet vehicles per route (BC routes without an allocation list get their own group)
+          if(v.Route && routeNameOf){
+            var rd = routeNameOf(v.Route);
+            if(rd) (vehRouteFleet[rd] = vehRouteFleet[rd] || []).push({
+              fleet: (v.Fleet_No || "").trim() || v.Vehicle_Number,
+              plate: plate
+            });
+          }
+        });
+      }
+      var rows = res[0] || [];
+      if(!Array.isArray(rows)) rows = [];
+      // every transaction is summed (no omission): a reversed payment's two lines
+      // (original + negative mirror) cancel each other, whatever its Constituency
+      var active = rows.slice();
+      render(res[4], active, d, routeUserMap);
+      var now = new Date();
+      document.getElementById("updated").textContent =
+        "Updated " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds()) + "  \u00b7  " + iso(d);
+      schedule();
+    }).catch(function(err){
+      document.getElementById("error").textContent = "Could not load data: " + err.message;
+      document.getElementById("error").style.display = "block";
+      document.getElementById("updated").textContent = "Load failed";
+      schedule();
+    });
+  }
+
+  function schedule(){
+    if(timer){ clearTimeout(timer); timer = null; }
+    if(!autoOn) return;
+    if(document.hidden) return; // background tab: no polling (restarts when visible again)
+    timer = setTimeout(load, 300000);
+  }
+
+  var collapsedGroups = {}; // group title -> true when collapsed (kept across refreshes)
+  var lastSheetData = []; // per-route rows as rendered - feeds the XLSX export
+
+  function normRoute(s){
+    return String(s || "").toUpperCase().replace(/[^A-Z0-9]+/g, " ").trim();
+  }
+
+  /** Names of users whose Route (Users page) matches the route label - tokens are
+   *  matched both ways ("KIAMBU-BANANA" -> KIAMBU/BANANA), tolerating naming drift. */
+  function usersForRoute(label, routeUserMap){
+    if(!routeUserMap) return [];
+    var tokens = normRoute(label).split(/\s+/).filter(function(t){ return t.length > 2; });
+    var out = [], seen = {};
+    Object.keys(routeUserMap).forEach(function(ur){
+      if(ur.length <= 2) return;
+      var hit = false;
+      tokens.forEach(function(t){ if(ur === t || ur.indexOf(t) !== -1 || t.indexOf(ur) !== -1) hit = true; });
+      if(hit) routeUserMap[ur].forEach(function(n){ if(!seen[n]){ seen[n] = 1; out.push(n); } });
+    });
+    return out;
+  }
+
+  /** Sheet staff strings like "GICHUHI/SAWE MOKUA" or "Njoroge/Mildred" -> names. */
+  function splitNames(s){
+    return String(s || "").split(/[\/,&]+/).map(function(x){ return x.trim(); }).filter(function(x){ return x.length > 1; });
+  }
+  function nameTokens(s){
+    var out = {};
+    normRoute(s).split(/\s+/).forEach(function(t){ if(t.length > 1) out[t] = 1; });
+    return out;
+  }
+  /** Every user attached to the route shows first (BC users), then workbook names of
+   *  people who are NOT in the Users feed at all (e.g. GICHUHI comes from the Excel).
+   *  A workbook name matching a user only shows under that user's own route. */
+  function mergeStaff(sheetStaff, bcUsers){
+    var kept = splitNames(sheetStaff).filter(function(sn){
+      var toks = Object.keys(nameTokens(sn));
+      if(!toks.length) return false;
+      return toks.some(function(t){ return !coveredAll[t]; });
+    });
+    return bcUsers.concat(kept).join(", ");
+  }
+
+  function render(perf, rows, day, routeUserMap){
+    lastPerf = perf; lastRows = rows; lastDay = day; lastUsers = routeUserMap;
+    groupTitles = [];
+    lastSheetData = [];
+    var groupsEl = document.getElementById("groups");
+    groupsEl.innerHTML = "";
+    if(!perf || !perf.groups){
+      document.getElementById("error").textContent = "Allocation list not found (fleet-targets.json).";
+      document.getElementById("error").style.display = "block";
+      return;
+    }
+    document.getElementById("srcNote").textContent = "list updated " + (perf.updated || "?");
+    var amt = {}; // plate -> {g: gross, m: management bucket, d: Sacco Dues collected}
+    rows.forEach(function(t){
+      var p = String(t.Loan_No || "").trim().toUpperCase();
+      if(!p) return;
+      var a = amt[p] || (amt[p] = {g:0, m:0, d:0});
+      var v = Number(t.Amount) || 0;
+      a.g += v;
+      var code = t.Type == null ? "" : String(t.Type).trim().toUpperCase();
+      if(code === "MANAGEMENT" || code === "SACCO" || code === "WELFARE" || code === "OPERATION" || code === "F1") a.m += v;
+      if(code === "DUES") a.d += v;
+    });
+
+    var totT = 0, totC = 0, totDue = 0, totM = 0, totD = 0, nVeh = 0, nAllocG = 0;
+
+    // The route structure comes from the SYSTEM: one group per BC route, with the
+    // fleet vehicles assigned to that route (the Vehicles page Route field). The
+    // allocation workbook only supplies the targets, matched by fleet no / plate.
+    var targetsByFleet = {}, targetsByPlate = {};
+    perf.groups.forEach(function(g){
+      (g.vehicles || []).forEach(function(v){
+        var t = { target: Number(v.offload) || 0, due: Number(v.saccoDue) || 0, staff: v.staff || "" };
+        if(v.fleet) targetsByFleet[String(v.fleet).toUpperCase()] = t;
+        if(v.plate) targetsByPlate[String(v.plate).toUpperCase()] = t;
+      });
+    });
+
+    var buckets = [];
+    Object.keys(vehRouteFleet).forEach(function(rd){
+      buckets.push({ route: rd, vehicles: vehRouteFleet[rd] });
+    });
+    // routes ordered by fleet size (most vehicles first), ties alphabetically
+    buckets.sort(function(a, c){
+      var d = c.vehicles.length - a.vehicles.length;
+      if(d) return d;
+      return a.route.localeCompare(c.route);
+    });
+
+    // allocation rows whose vehicle has no route in the system (blank Route in BC,
+    // or not in the fleet list) - a final group so nothing silently disappears
+    var unassigned = [], unSeen = {};
+    perf.groups.forEach(function(g){
+      (g.vehicles || []).forEach(function(v){
+        var f = String(v.fleet || "").trim().toUpperCase();
+        var p = String(v.plate || "").trim().toUpperCase();
+        var rd = (f && sysRouteByFleet[f] !== undefined) ? sysRouteByFleet[f] : (p && sysRouteByPlate[p] !== undefined ? sysRouteByPlate[p] : null);
+        if(rd) return; // already shown under its system route
+        var key = f + "|" + p;
+        if(unSeen[key]) return;
+        unSeen[key] = true;
+        unassigned.push({ fleet: v.fleet || "", plate: p || (f ? (fleetToPlate[f] || "") : "") });
+      });
+    });
+    if(unassigned.length){
+      buckets.push({ route: "UNASSIGNED \u2014 no route in system", vehicles: unassigned, noRoute: true });
+    }
+    if(!buckets.length){
+      document.getElementById("error").textContent = "No fleet routes found - the Vehicles page returned no route assignments.";
+      document.getElementById("error").style.display = "block";
+      return;
+    }
+
+    buckets.forEach(function(b){
+      var gt = 0, gc = 0, gDue = 0, gM = 0, gD = 0, nFull = 0, nPart = 0, nNone = 0, nAlloc = 0;
+      var list = b.vehicles.map(function(fv){
+        var plate = String(fv.plate || "").toUpperCase();
+        var rec = plate ? amt[plate] : null;
+        var mgmt = rec ? rec.m : 0;
+        var duesC = rec ? rec.d : 0;
+        var t = targetsByFleet[String(fv.fleet || "").toUpperCase()] || (plate ? targetsByPlate[plate] : null) || null;
+        return {
+          fleet: fv.fleet || "", plate: plate, matched: !!plate,
+          mgmt: mgmt, duesC: duesC, collected: plate ? ((rec ? rec.g : 0) - mgmt - duesC) : null, // total collection less management less Sacco dues
+          target: t ? t.target : null, // the offload IS the daily target
+          due: t ? t.due : 0,
+          staff: t ? t.staff : ""
+        };
+      });
+      // order by collected (actual collection), biggest first; ties by fleet no
+      list.sort(function(a, c){
+        var d = (c.collected || 0) - (a.collected || 0);
+        if(d) return d;
+        return String(a.fleet).localeCompare(String(c.fleet));
+      });
+      var trs = "";
+      var xrows = []; // raw values of this route for the XLSX sheet
+      list.forEach(function(v, i){
+        nVeh++;
+        if(v.target != null) nAlloc++;
+        gt += (v.target || 0); gDue += v.due;
+        if(v.matched){ gc += v.collected; gM += v.mgmt; gD += v.duesC; }
+        var varv = (v.target != null && v.matched) ? (v.collected + v.duesC) - v.target : null;
+        xrows.push({
+          fleet: v.fleet + (v.plate ? " - " + v.plate : ""),
+          target: v.target,
+          due: v.due || null,
+          duec: v.matched ? v.duesC : null,
+          collected: v.matched ? v.collected : null,
+          pct: (v.target != null && v.matched && v.target > 0) ? Math.round((v.collected + v.duesC) / v.target * 1000) / 10 : null,
+          varv: varv
+        });
+        // full target / collected but short / nothing at all
+        if(!v.matched || (v.collected + v.duesC) <= 0) nNone++;
+        else if(v.target != null && v.target > 0 && (v.collected + v.duesC) >= v.target) nFull++;
+        else nPart++;
+        // responsible staff lives in the group heading only (column removed on request)
+        trs += "<tr>" +
+          "<td class='muted'>" + (i + 1) + "</td>" +
+          "<td>" + esc(v.fleet) + (v.plate ? " - " + esc(v.plate) : "") + "</td>" +
+          "<td class='num' title='Offload - the daily target'>" + (v.target == null ? "\u2014" : fmt(v.target)) + "</td>" +
+          "<td class='num'>" + (v.due ? fmt(v.due) : "") + "</td>" +
+          "<td class='num'>" + (v.matched ? (v.duesC ? fmt(v.duesC) : "") : "\u2014") + "</td>" +
+          "<td class='num'>" + (v.matched ? fmt(v.collected) : "\u2014") + "</td>" +
+          "<td class='num pct'>" + (v.target != null && v.matched && v.target > 0 ? ((v.collected + v.duesC) / v.target * 100).toFixed(1) + "%" : "\u2014") + "</td>" +
+          "<td class='num " + (varv == null ? "" : (varv >= 0 ? "pos" : "neg")) + "'>" + (varv == null ? "\u2014" : fmt(varv)) + "</td>" +
+          "</tr>";
+      });
+      totT += gt; totC += gc; totDue += gDue; totM += gM; totD += gD; nAllocG += nAlloc;
+      var gv = (gc + gD) - gt;
+      var title = b.route;
+      groupTitles.push(title);
+      // responsible staff for the whole group: BC users on the route, plus allocation-list names
+      var groupUsers = usersForRoute(title, routeUserMap);
+      var sheetStaffs = [];
+      list.forEach(function(v){ if(v.staff && sheetStaffs.indexOf(v.staff) === -1) sheetStaffs.push(v.staff); });
+      var groupStaff = mergeStaff(sheetStaffs.join("/"), groupUsers);
+      if(typeof lastSheetData !== "undefined"){
+        lastSheetData.push({
+          name: title, staff: groupStaff, vehicles: list.length, rows: xrows,
+          tot: { t: gt, due: gDue, duec: gD, c: gc, pct: gt > 0 ? Math.round((gc + gD) / gt * 1000) / 10 : null, v: gv }
+        });
+      }
+      var isCollapsed = collapsedGroups[title] === undefined ? true : !!collapsedGroups[title];
+      var sec = document.createElement("section");
+      sec.innerHTML =
+        "<h2 class='clk'><span><span class='chev'>" + (isCollapsed ? "\u25B8" : "\u25BE") + "</span>" + esc(title) + (groupStaff ? " \u2014 " + esc(groupStaff) : "") + "</span>" +
+        "<span class='sub'>" + list.length + " vehicles \u00b7 <span class='vn'>" +
+          "<span>Full <b class='pos'>" + nFull + "</b></span>" +
+          "<span>Partial <b>" + nPart + "</b></span>" +
+          "<span>None <b class='neg'>" + nNone + "</b></span>" +
+        "</span> \u00b7 <span class='vn'>" +
+          "<span>Target <b>" + fmt(gt) + "</b></span>" +
+          "<span>Collected <b>" + fmt(gc) + "</b><span class='pct'>" + (gt > 0 ? ((gc + gD) / gt * 100).toFixed(1) + "%" : "\u2014") + "</span></span>" +
+          "<span>Var <b class='" + (gv >= 0 ? "pos" : "neg") + "'>" + fmt(gv) + "</b></span>" +
+        "</span></span></h2>" +
+        "<div class='tablewrap'><table><thead><tr>" +
+        "<th>No</th><th>Fleet No.</th><th class='num' title='Offload - the daily target'>Target</th><th class='num'>Sacco due</th>" +
+        "<th class='num' title='Collected under the Sacco Dues type on this date'>Dues collected</th><th class='num' title='Total collection less management and Sacco dues'>Collected</th><th class='num' title='Collected as a percentage of the target'>%</th><th class='num'>Var</th>" +
+        "</tr></thead><tbody>" + trs +
+        "<tr class='sub'><td></td><td>Subtotal</td><td class='num'>" + fmt(gt) + "</td><td class='num'>" + (gDue ? fmt(gDue) : "") +
+        "</td><td class='num'>" + (gD ? fmt(gD) : "") +
+        "</td><td class='num'>" + fmt(gc) +
+        "</td><td class='num pct'>" + (gt > 0 ? ((gc + gD) / gt * 100).toFixed(1) + "%" : "\u2014") +
+        "</td><td class='num " + (gv >= 0 ? "pos" : "neg") + "'>" + fmt(gv) + "</td></tr>" +
+        "</tbody></table></div>";
+      var h2 = sec.querySelector("h2");
+      h2.addEventListener("click", function(){
+        collapsedGroups[title] = !collapsedGroups[title];
+        var tw = sec.querySelector(".tablewrap");
+        tw.style.display = collapsedGroups[title] ? "none" : "";
+        h2.querySelector(".chev").textContent = collapsedGroups[title] ? "\u25B8" : "\u25BE";
+      });
+      if(isCollapsed) sec.querySelector(".tablewrap").style.display = "none";
+      groupsEl.appendChild(sec);
+    });
+
+    var tv = (totC + totD) - totT;
+    var sec = document.createElement("section");
+    sec.innerHTML =
+      "<h2>Grand total<span class='sub'>" + nVeh + " fleet vehicles \u00b7 " + nAllocG + " with allocation list</span></h2>" +
+      "<div class='tablewrap'><table><tbody><tr class='total-row'>" +
+      "<td>TOTAL</td><td class='num'>" + fmt(totT) + "</td><td class='num'>" + (totDue ? fmt(totDue) : "") +
+      "</td><td class='num'>" + (totD ? fmt(totD) : "") +
+      "</td><td class='num'>" + fmt(totC) +
+      "</td><td class='num pct'>" + (totT > 0 ? ((totC + totD) / totT * 100).toFixed(1) + "%" : "\u2014") +
+      "</td><td class='num " + (tv >= 0 ? "pos" : "neg") + "'>" + fmt(tv) + "</td>" +
+      "</tr></tbody></table></div>";
+    groupsEl.appendChild(sec);
+
+    document.getElementById("kTarget").textContent = fmt(totT);
+    document.getElementById("kTargetS").textContent = nAllocG + " allocated vehicles";
+    document.getElementById("kColl").textContent = fmt(totC);
+    document.getElementById("kCollS").textContent = "gross " + fmt(totC + totM + totD) + " \u00b7 management " + fmt(totM) + " + dues " + fmt(totD) + " deducted";
+    document.getElementById("kVar").textContent = fmt(tv);
+    document.getElementById("kVarS").textContent = tv >= 0 ? "above target" : "below target";
+    var pct = totT ? ((totC + totD) / totT * 100) : 0;
+    document.getElementById("kPct").textContent = pct.toFixed(1) + "%";
+    document.getElementById("kPctS").textContent = "of daily target";
+    document.getElementById("counts").textContent = rows.length + " items  \u00b7  " + nVeh + " vehicles";
+  }
+
+  document.getElementById("refresh").addEventListener("click", load);
+  var xlsxBtn = document.getElementById("xlsxBtn");
+  if(xlsxBtn) xlsxBtn.addEventListener("click", exportXlsx);
+  document.addEventListener("visibilitychange", function(){
+    if(document.hidden){ if(timer){ clearTimeout(timer); timer = null; } }
+    else if(autoOn){ load(); }
+  });
+  dateEl.addEventListener("change", load);
+  document.getElementById("todayBtn").addEventListener("click", function(){
+    dateEl.value = iso(new Date());
+    load();
+  });
+  document.getElementById("autoBtn").addEventListener("click", function(){
+    autoOn = !autoOn;
+    this.classList.toggle("active", autoOn);
+    schedule();
+  });
+  document.getElementById("expandAll").addEventListener("click", function(){
+    groupTitles.forEach(function(t){ collapsedGroups[t] = false; });
+    if(lastPerf) render(lastPerf, lastRows, lastDay, lastUsers);
+  });
+  document.getElementById("collapseAll").addEventListener("click", function(){
+    groupTitles.forEach(function(t){ collapsedGroups[t] = true; });
+    if(lastPerf) render(lastPerf, lastRows, lastDay, lastUsers);
+  });
+  document.getElementById("csvBtn").addEventListener("click", exportCsv);
+  document.getElementById("print").addEventListener("click", function(){ window.print(); });
+
+  // ---------- XLSX export: every route gets its own sheet (self-contained, no libs) ----------
+  function strBytes(s){ return new TextEncoder().encode(String(s)); }
+  function xmlEsc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c];
+    });
+  }
+  function crc32(buf){
+    if(!crc32.t){
+      var t = crc32.t = new Int32Array(256);
+      for(var n = 0; n < 256; n++){
+        var c = n;
+        for(var k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+        t[n] = c;
+      }
+    }
+    var crc = -1;
+    for(var i = 0; i < buf.length; i++) crc = (crc >>> 8) ^ crc32.t[(crc ^ buf[i]) & 0xFF];
+    return (crc ^ -1) >>> 0;
+  }
+  /** Minimal store-only ZIP (Excel accepts method 0). */
+  function zipStore(files){
+    var chunks = [], central = [], offset = 0;
+    function u16(n){ return [n & 255, (n >>> 8) & 255]; }
+    function u32(n){ return [n & 255, (n >>> 8) & 255, (n >>> 16) & 255, (n >>> 24) & 255]; }
+    var now = new Date();
+    var dosTime = ((now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1)) & 0xFFFF;
+    var dosDate = (((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate()) & 0xFFFF;
+    files.forEach(function(f){
+      var name = strBytes(f.name), data = f.data, crc = crc32(data);
+      var head = [].concat([0x50,0x4B,0x03,0x04], u16(20), u16(0), u16(0), u16(dosTime), u16(dosDate),
+        u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0));
+      chunks.push(new Uint8Array(head), name, data);
+      central.push({name:name, crc:crc, size:data.length, offset:offset});
+      offset += head.length + name.length + data.length;
+    });
+    var cd = [], cdSize = 0;
+    central.forEach(function(e){
+      var h = [].concat([0x50,0x4B,0x01,0x02], u16(20), u16(20), u16(0), u16(0), u16(dosTime), u16(dosDate),
+        u32(e.crc), u32(e.size), u32(e.size), u16(e.name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(e.offset));
+      cd.push(new Uint8Array(h), e.name);
+      cdSize += h.length + e.name.length;
+    });
+    var end = [].concat([0x50,0x4B,0x05,0x06], u16(0), u16(0), u16(files.length), u16(files.length),
+      u32(cdSize), u32(offset), u16(0));
+    return new Blob(chunks.concat(cd, [new Uint8Array(end)]),
+      {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  }
+  function colRef(i){
+    var s = "";
+    i = i + 1;
+    while(i > 0){ var m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - m) / 26); }
+    return s;
+  }
+  /** cell: string or number, or {v, b:bold, p:plain-number (General instead of 2 decimals)} */
+  function C(v, bold, plain){ return {v: v, b: !!bold, p: !!plain}; }
+  function sheetXml(rows, widths, freeze){
+    var out = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+      "<worksheet xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\">";
+    if(freeze > 0){
+      out += "<sheetViews><sheetView workbookViewId=\"0\"><pane ySplit=\"" + freeze + "\" topLeftCell=\"A" + (freeze + 1) +
+        "\" activePane=\"bottomLeft\" state=\"frozen\"/></sheetView></sheetViews>";
+    }
+    if(widths && widths.length){
+      out += "<cols>";
+      widths.forEach(function(w, i){
+        out += "<col min=\"" + (i + 1) + "\" max=\"" + (i + 1) + "\" width=\"" + w + "\" customWidth=\"1\"/>";
+      });
+      out += "</cols>";
+    }
+    out += "<sheetData>";
+    rows.forEach(function(row, ri){
+      var r = ri + 1, cells = "";
+      row.forEach(function(cell, ci){
+        if(cell == null) return;
+        var v = (cell && cell.v !== undefined) ? cell.v : cell;
+        var b = !!(cell && cell.b), plain = !!(cell && cell.p);
+        if(v === null || v === undefined || v === "") return;
+        var ref = colRef(ci) + r;
+        if(typeof v === "number" && isFinite(v)){
+          var st = plain ? (b ? 1 : 0) : (b ? 3 : 2);
+          cells += "<c r=\"" + ref + "\" s=\"" + st + "\"><v>" + v + "</v></c>";
+        } else {
+          cells += "<c r=\"" + ref + "\" s=\"" + (b ? 1 : 0) + "\" t=\"inlineStr\"><is><t xml:space=\"preserve\">" +
+            xmlEsc(v) + "</t></is></c>";
+        }
+      });
+      out += "<row r=\"" + r + "\">" + cells + "</row>";
+    });
+    return out + "</sheetData></worksheet>";
+  }
+  function safeSheetName(name, used){
+    var n = String(name || "Sheet").replace(/[:\\\/?*\[\]]/g, " ").replace(/\s+/g, " ").trim().slice(0, 31) || "Sheet";
+    var base = n, i = 2;
+    while(used[n]){ n = base.slice(0, 28) + " " + i; i++; }
+    used[n] = 1;
+    return n;
+  }
+  function buildXlsxBlob(sheets){
+    var used = {}, parts = [];
+    var ct = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+      "<Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\">" +
+      "<Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/>" +
+      "<Default Extension=\"xml\" ContentType=\"application/xml\"/>" +
+      "<Override PartName=\"/xl/workbook.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml\"/>" +
+      "<Override PartName=\"/xl/styles.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml\"/>";
+    var wbSheets = "", wbRels = "";
+    sheets.forEach(function(s, i){
+      var nm = safeSheetName(s.name, used);
+      var idx = i + 1;
+      ct += "<Override PartName=\"/xl/worksheets/sheet" + idx + ".xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml\"/>";
+      wbSheets += "<sheet name=\"" + xmlEsc(nm) + "\" sheetId=\"" + idx + "\" r:id=\"rId" + idx + "\"/>";
+      wbRels += "<Relationship Id=\"rId" + idx + "\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet\" Target=\"worksheets/sheet" + idx + ".xml\"/>";
+      parts.push({name: "xl/worksheets/sheet" + idx + ".xml", data: strBytes(sheetXml(s.rows, s.widths, s.freeze || 0))});
+    });
+    ct += "</Types>";
+    parts.push({name: "[Content_Types].xml", data: strBytes(ct)});
+    parts.push({name: "_rels/.rels", data: strBytes("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+      "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\">" +
+      "<Relationship Id=\"rId1\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument\" Target=\"xl/workbook.xml\"/></Relationships>")});
+    parts.push({name: "xl/workbook.xml", data: strBytes("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+      "<workbook xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\">" +
+      "<sheets>" + wbSheets + "</sheets></workbook>")});
+    parts.push({name: "xl/_rels/workbook.xml.rels", data: strBytes("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+      "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\">" + wbRels +
+      "<Relationship Id=\"rId" + (sheets.length + 1) + "\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles\" Target=\"styles.xml\"/></Relationships>")});
+    parts.push({name: "xl/styles.xml", data: strBytes("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+      "<styleSheet xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\">" +
+      "<fonts count=\"2\"><font><sz val=\"11\"/><name val=\"Calibri\"/></font><font><b/><sz val=\"11\"/><name val=\"Calibri\"/></font></fonts>" +
+      "<fills count=\"2\"><fill><patternFill patternType=\"none\"/></fill><fill><patternFill patternType=\"gray125\"/></fill></fills>" +
+      "<borders count=\"1\"><border/></borders>" +
+      "<cellStyleXfs count=\"1\"><xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\"/></cellStyleXfs>" +
+      "<cellXfs count=\"4\">" +
+      "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>" +
+      "<xf numFmtId=\"0\" fontId=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>" +
+      "<xf numFmtId=\"4\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyNumberFormat=\"1\"/>" +
+      "<xf numFmtId=\"4\" fontId=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyNumberFormat=\"1\" applyFont=\"1\"/>" +
+      "</cellXfs><cellStyles count=\"1\"><cellStyle name=\"Normal\" xfId=\"0\" builtinId=\"0\"/></cellStyles></styleSheet>")});
+    return zipStore(parts);
+  }
+  function exportXlsx(){
+    if(!lastSheetData || !lastSheetData.length){ alert("Nothing to export yet - wait for the report to load."); return; }
+    var sheets = [];
+    // first sheet: one line per route
+    var sum = [
+      [C("DAILY LOANS AND FLEET COLLECTION / PERFORMANCE REPORT", true)],
+      [C(document.getElementById("rptDate").textContent || "")],
+      [],
+      [C("Route", true), C("Person responsible", true), C("Vehicles", true), C("Target", true), C("Sacco due", true), C("Dues coll.", true), C("Collected", true), C("%", true), C("Var", true)]
+    ];
+    var tT = 0, tC = 0, tV = 0, tDue = 0, tDc = 0;
+    lastSheetData.forEach(function(g){
+      sum.push([C(g.name), C(g.staff), C(g.vehicles, false, true),
+        C(g.tot.t), C(g.tot.due || null), C(g.tot.duec || null), C(g.tot.c), C(g.tot.pct, false, true), C(g.tot.v)]);
+      tT += g.tot.t; tC += g.tot.c; tV += g.tot.v; tDue += g.tot.due; tDc += g.tot.duec;
+    });
+    sum.push([]);
+    sum.push([C("TOTAL", true), C("", true), C("", true), C(tT, true), C(tDue, true), C(tDc, true), C(tC, true),
+      C(tT > 0 ? Math.round((tC + tDc) / tT * 1000) / 10 : null, true, true), C(tV, true)]);
+    sheets.push({name: "Summary", rows: sum, widths: [24, 34, 10, 14, 12, 12, 14, 8, 14], freeze: 3});
+    // one sheet per route, workbook style: title, header, vehicles, subtotal
+    lastSheetData.forEach(function(g){
+      var rows = [
+        [C(g.name + (g.staff ? "  \u2014  " + g.staff : ""), true)],
+        [],
+        [C("No", true), C("Fleet No.", true), C("Target", true), C("Sacco due", true), C("Dues coll.", true), C("Collected", true), C("%", true), C("Var", true)]
+      ];
+      g.rows.forEach(function(v, i){
+        rows.push([C(i + 1, false, true), C(v.fleet), C(v.target), C(v.due), C(v.duec), C(v.collected), C(v.pct, false, true), C(v.varv)]);
+      });
+      rows.push([]);
+      rows.push([C("", true), C("Subtotal", true), C(g.tot.t, true), C(g.tot.due, true), C(g.tot.duec, true), C(g.tot.c, true), C(g.tot.pct, true, true), C(g.tot.v, true)]);
+      sheets.push({name: g.name, rows: rows, widths: [5, 22, 14, 12, 12, 14, 8, 14], freeze: 3});
+    });
+    var blob = buildXlsxBlob(sheets);
+    var d = parseIso(document.getElementById("date").value) || new Date();
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "metrotrans-fleet-report-" + iso(d) + ".xlsx";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.parentNode.removeChild(a); }, 0);
+  }
+
+  function csvCell(v){
+    var q = String.fromCharCode(34);
+    return q + String(v == null ? "" : v).split(q).join(q + q) + q;
+  }
+  function exportCsv(){
+    var lines = [];
+    Array.prototype.forEach.call(document.querySelectorAll("#groups section"), function(sec){
+      var h = sec.querySelector("h2");
+      lines.push(csvCell(h ? h.innerText.replace(/\s+/g, " ").trim() : ""));
+      Array.prototype.forEach.call(sec.querySelectorAll("tbody tr"), function(tr){
+        var cells = [];
+        Array.prototype.forEach.call(tr.children, function(c){
+          cells.push(csvCell(String(c.innerText || c.textContent || "").replace(/\s+/g, " ").trim()));
+        });
+        lines.push(cells.join(","));
+      });
+      lines.push("");
+    });
+    var blob = new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "fleet-performance-" + (dateEl.value || "report") + ".csv";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+
+  load();
+})();
+</script>
+<script src="../nav.js"></script>
+</body>
+</html>

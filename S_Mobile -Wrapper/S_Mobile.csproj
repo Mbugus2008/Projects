@@ -314,6 +314,8 @@
       <DependentUpon>data.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\localdb.cs" />
+    <Compile Include="Models\MpesaPull\MpesaPullClient.cs" />
+    <Compile Include="Models\MpesaPull\MpesaPullService.cs" />
     <Compile Include="Models\Nav.cs" />
     <Compile Include="Models\Paybill\Ipaybill.cs" />
     <Compile Include="Models\Result_Parameter.cs">

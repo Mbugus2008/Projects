@@ -1,11 +1,18 @@
 package com.trimline.paul.metro;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
+import com.facebook.stetho.Stetho;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,17 +20,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import com.facebook.stetho.Stetho;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 public class login extends AppCompatActivity {
     EditText username, pass;
@@ -69,18 +67,22 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 username.setError(null);
                 pass.setError(null);
-                if (username.getText().toString().equalsIgnoreCase("")) {
+                // users (especially on new installs) often leave a trailing space after the
+                // username - trim it (and the pin) before checking the credentials
+                String user = username.getText().toString().trim();
+                String pin = pass.getText().toString().trim();
+                if (user.isEmpty()) {
                     username.setError("username required");
                     username.requestFocus();
                     return;
                 }
                 Log.i("Agents", String.valueOf(db.Totalagents()));
-                Agent a = db.getagent(username.getText().toString().toUpperCase());
+                Agent a = db.getagent(user.toUpperCase());
                 if (a == null) {
                     Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (!a.Password.equals(pass.getText().toString())) {
+                if (!a.Password.equals(pin)) {
                     Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -88,10 +90,19 @@ public class login extends AppCompatActivity {
                Myvariables.CurrentAgent = a;
 
                 savePreferences("User", a.Agent_Code);
+                pass.setText("");
                 startActivity(new Intent(login.this, menu.class));
             }
         });
+        UpdateChecker.checkForUpdate(this);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UpdateChecker.onResume(this);
+    }
+
     private void savePreferences(String key, String value) {
 
         SharedPreferences.Editor editor = preferences.edit();

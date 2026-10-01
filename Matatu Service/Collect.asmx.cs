@@ -31,6 +31,8 @@ namespace Collection
         public Transtypes_Service TTservice = new Transtypes_Service();
         public Mbranch.MBranch mbranch = new Mbranch.MBranch();
         public Vehicles.Vehicles_Service vservice = new Collection.Vehicles.Vehicles_Service();
+        public Tarchive.Tarchive_Service tarchiveservice = new Collection.Tarchive.Tarchive_Service();
+        public Routes.Routes_Service routeservice = new Collection.Routes.Routes_Service();
         public Parcel.Parcel_Service Parcel_Service = new Parcel.Parcel_Service();
         public Credits.Credits_Service cservice = new Credits.Credits_Service();
         public SalesHeader.SalesHeader_Service SalesHeader_Service = new SalesHeader.SalesHeader_Service();
@@ -49,6 +51,12 @@ namespace Collection
             string path = Server.MapPath("~/Settings.txt");
             ServerSetting.getsettings(path);
             Logging.Logging.logpath = ServerSetting.logpath;
+            // every method answers with JSON - declaring the type lets IIS compress the
+            // responses (a day of collections is ~1.2 MB uncompressed, ~120 KB gzipped)
+            if (System.Web.HttpContext.Current != null)
+            {
+                System.Web.HttpContext.Current.Response.ContentType = "application/json; charset=utf-8";
+            }
             cd = new System.Net.NetworkCredential(ServerSetting.user, ServerSetting.pass, ServerSetting.domain);
             Aservice.Url = string.Format("http://{0}:{3}/{2}/WS/{1}/Page/Users",
                           ServerSetting.server, ServerSetting.Companyname, ServerSetting.Instance, ServerSetting.Port);
@@ -89,6 +97,16 @@ namespace Collection
                           ServerSetting.server, ServerSetting.Companyname, ServerSetting.Instance, ServerSetting.Port);
             vservice.Credentials = cd;
             vservice.PreAuthenticate = true;
+
+            tarchiveservice.Url = string.Format("http://{0}:{3}/{2}/WS/{1}/Page/Tarchive",
+                          ServerSetting.server, ServerSetting.Companyname, ServerSetting.Instance, ServerSetting.Port);
+            tarchiveservice.Credentials = cd;
+            tarchiveservice.PreAuthenticate = true;
+
+            routeservice.Url = string.Format("http://{0}:{3}/{2}/WS/{1}/Page/Routes",
+                          ServerSetting.server, ServerSetting.Companyname, ServerSetting.Instance, ServerSetting.Port);
+            routeservice.Credentials = cd;
+            routeservice.PreAuthenticate = true;
 
             cservice.Url = string.Format("http://{0}:{3}/{2}/WS/{1}/Page/Credits",
                           ServerSetting.server, ServerSetting.Companyname, ServerSetting.Instance, ServerSetting.Port);
@@ -362,6 +380,63 @@ namespace Collection
         }
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void Tarchive(string data)
+        {
+            try
+            {
+                Logging.Logging.LogEntryOnFile($"Tarchive request: {data}");
+
+                // The archive of the Transactions page. Read by date range:
+                // firstdate (dd-MM-yyyy; MM-dd-yyyy still accepted from older app
+                // builds) and optional LastDate - same request shape as GetallCollections.
+                var request = string.IsNullOrWhiteSpace(data) ? null : JsonConvert.DeserializeObject<getdata>(data);
+                if (request == null || string.IsNullOrWhiteSpace(request.firstdate))
+                {
+                    throw new ArgumentException("Invalid request data - firstdate is required (dd-MM-yyyy)");
+                }
+
+                var from = ParseDate(request.firstdate).Date;
+                var to = string.IsNullOrWhiteSpace(request.LastDate) ? from : ParseDate(request.LastDate).Date;
+
+                var filters = new List<Collection.Tarchive.Tarchive_Filter>
+                {
+                    new Collection.Tarchive.Tarchive_Filter
+                    {
+                        Field = Collection.Tarchive.Tarchive_Fields.Transaction_Date,
+                        Criteria = from.ToShortDateString() + ".." + to.ToShortDateString()
+                    }
+                };
+
+                var rows = tarchiveservice.ReadMultiple(filters.ToArray(), null, 0).ToList();
+
+                // Return response
+                var response = JsonConvert.SerializeObject(rows);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Output.Write(response);
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                Context.Response.StatusCode = 500;
+                Context.Response.Output.Write(JsonConvert.SerializeObject(new { error = ex.Message }));
+            }
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void Routes()
+        {
+            Logging.Logging.LogEntryOnFile(routeservice.Url);
+            var response = string.Empty;
+            try
+            {
+                response = new JavaScriptSerializer().Serialize(routeservice.ReadMultiple(new Collection.Routes.Routes_Filter[] { }, null, 0).ToList());
+            }
+            catch (Exception ex)
+            { Logging.Logging.ReportError(ex); }
+            Context.Response.Output.Write(response);
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void Vehiclesdetails( string vehicleno)
         {
             Logging.Logging.LogEntryOnFile(vservice.Url);
@@ -584,40 +659,31 @@ namespace Collection
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void changepass(string No)
         {
-            //var response = string.Empty;
-            //Members.Members m = null;
-            //Logging.Results results = new Logging.Results();
-            //try
-            //{
-            //    var format = "dd/MM/yyyy"; // your datetime format
-            //    var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
-
-            //    m = JsonConvert.DeserializeObject<Members.Members>(No, dateTimeConverter);
-
-            //    //var mm = Mservice.Read(m.No);
-            //    mbranch.Changpass(m.No, m.Password);
-            //    // if (mm != null)
-            //    //{
-            //    //    mm.Password = m.Password;
-            //    //    mm.Password_Changed = true;
-            //    //    mm.Password_ChangedSpecified = true;
-            //    //    Mservice.Update(ref mm);
-            //    //    m = mm;
-            //    //}
-            //}
-            //catch (Exception ex)
-            //{
-            //    Logging.Logging.ReportError(ex);
-            //    results.Code = -1;
-            //    results.Desc = ex.Message;
-            //}
-            //finally
-            //{
-            //    JavaScriptSerializer jsSerializer = new JavaScriptSerializer() { MaxJsonLength = Int32.MaxValue };
-            //    var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" };
-            //    response = JsonConvert.SerializeObject(results, dateTimeConverter);
-            //}
-            //Context.Response.Output.Write(response);
+            string response = string.Empty;
+            try
+            {
+                Users.Users user = JsonConvert.DeserializeObject<Users.Users>(No);
+                if (user == null || string.IsNullOrEmpty(user.Agent_Code) || string.IsNullOrEmpty(user.Password))
+                {
+                    response = new JavaScriptSerializer().Serialize(new { Desc = "INVALID" });
+                }
+                else if (Aservice.Read(user.Agent_Code) == null)
+                {
+                    response = new JavaScriptSerializer().Serialize(new { Desc = "NOUSER" });
+                }
+                else
+                {
+                    var before = Aservice.Read(user.Agent_Code);
+                    before.Password = user.Password;
+                    Aservice.Update(ref before);
+                    var after = Aservice.Read(user.Agent_Code);
+                    bool ok = after != null && after.Password == user.Password;
+                    response = new JavaScriptSerializer().Serialize(new { Desc = ok ? "OK" : "FAILED", Password = after != null ? after.Password : "" });
+                }
+            }
+            catch (Exception ex)
+            { Logging.Logging.ReportError(ex); }
+            Context.Response.Output.Write(response);
         }
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -858,6 +924,7 @@ namespace Collection
                         cc.Time = cc.Creation_time.ToString("HH:mm:ss");
                     }
                 }
+                NormalizeAgentCodes(c);
                 response = new JavaScriptSerializer().Serialize(c);
             }
             catch (Exception ex)
@@ -883,7 +950,7 @@ namespace Collection
                     throw new ArgumentException("Invalid request data");
                 }
 
-                // Parse date safely
+                // Parse the date (dd-MM-yyyy; MM-dd-yyyy still accepted from older app builds)
                 var transactionDate = ParseDate(request.firstdate);
 
                 // Build filters
@@ -893,14 +960,18 @@ namespace Collection
             new Transactions.Transactions_Filter
             {
                 Field = Transactions.Transactions_Fields.Transaction_Date,
-                Criteria = request.firstdate
+                Criteria = transactionDate.Date.ToShortDateString()
             }
         };
 
                 // Query transactions
                 var transactions = Tservice.ReadMultiple(filters.ToArray(), null, 0).ToList();
 
-
+                // NAV stores the agent as either the code ("ESTHER") or the
+                // display name ("Esther Nyokabi") depending on who posted the
+                // document; normalise to the canonical code so every client
+                // groups one cashier under one entry.
+                NormalizeAgentCodes(transactions);
 
                 // Format transaction dates
                 FormatTransactionDates(transactions);
@@ -926,15 +997,78 @@ namespace Collection
                 if (parts.Length != 3)
                     throw new FormatException("Date must be in dd-MM-yyyy format");
 
-                return new DateTime(
-                    int.Parse(parts[2]), // year
-                    int.Parse(parts[0]), // month
-                    int.Parse(parts[1])  // day
-                );
+                int first = int.Parse(parts[0]);
+                int second = int.Parse(parts[1]);
+                int year = int.Parse(parts[2]);
+
+                // Primary format is dd-MM-yyyy (the app-wide convention).
+                if (second >= 1 && second <= 12 && first >= 1 && first <= 31)
+                    return new DateTime(year, second, first);
+
+                // Fallback for clients still sending MM-dd-yyyy.
+                if (first >= 1 && first <= 12 && second >= 1 && second <= 31)
+                    return new DateTime(year, first, second);
+
+                throw new FormatException($"Invalid date: {dateString}");
             }
             catch (Exception ex)
             {
                 throw new FormatException("Invalid date format. Expected dd-MM-yyyy", ex);
+            }
+        }
+
+        private static Dictionary<string, string> agentNameToCode;
+        private static DateTime agentMapLoaded = DateTime.MinValue;
+
+        /// <summary>
+        /// Replaces Agent_Code values that hold an agent's display name with
+        /// the agent's canonical code (Users page: Name -> Agent_Code), so the
+        /// mixed forms NAV stores collapse to one key per cashier. Never fails
+        /// the request: on error the values are left untouched.
+        /// </summary>
+        private void NormalizeAgentCodes(List<Transactions.Transactions> transactions)
+        {
+            if (transactions == null || transactions.Count == 0)
+                return;
+            try
+            {
+                if (agentNameToCode == null || (DateTime.UtcNow - agentMapLoaded) > TimeSpan.FromMinutes(15))
+                {
+                    var users = Aservice.ReadMultiple(new Users.Users_Filter[] { }, null, 10000);
+                    var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                    foreach (var u in users)
+                    {
+                        if (u == null || string.IsNullOrEmpty(u.Name) || string.IsNullOrEmpty(u.Agent_Code))
+                            continue;
+                        string name = u.Name.Trim();
+                        if (!map.ContainsKey(name))
+                            map[name] = u.Agent_Code.Trim();
+                    }
+                    agentNameToCode = map;
+                    agentMapLoaded = DateTime.UtcNow;
+                    Logging.Logging.LogEntryOnFile(string.Format("Agent name map loaded: {0} users", map.Count));
+                }
+
+                int changed = 0;
+                foreach (var t in transactions)
+                {
+                    if (t == null || string.IsNullOrEmpty(t.Agent_Code))
+                        continue;
+                    string key = t.Agent_Code.Trim();
+                    string code;
+                    if (agentNameToCode.TryGetValue(key, out code)
+                        && !key.Equals(code, StringComparison.OrdinalIgnoreCase))
+                    {
+                        t.Agent_Code = code;
+                        changed++;
+                    }
+                }
+                if (changed > 0)
+                    Logging.Logging.LogEntryOnFile(string.Format("Normalised {0} agent value(s) to codes", changed));
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
             }
         }
 
@@ -992,12 +1126,12 @@ namespace Collection
             { DateTime d =   DateTime.Today;
                 DateTime d2 = DateTime.Today;
                 v = JsonConvert.DeserializeObject<getdata>(data,dateformat2);
-                if (String.IsNullOrEmpty(v.firstdate))
+                if (!String.IsNullOrEmpty(v.firstdate))
                 {
                     string[] date = v.firstdate.Split(new char[] { '-' });
                    d = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0]));
                 }
-                if (string.IsNullOrEmpty(v.LastDate))
+                if (!string.IsNullOrEmpty(v.LastDate))
                 {
                     string[] date2 = v.LastDate.Split(new char[] { '-' });
                     d2 = new DateTime(int.Parse(date2[2]), int.Parse(date2[1]), int.Parse(date2[0]));
@@ -1013,7 +1147,12 @@ namespace Collection
                         cc.Time = cc.Creation_time.ToString("HH:mm:ss");
                     }
                 }
-                response = new JavaScriptSerializer().Serialize(c);
+                NormalizeAgentCodes(c);
+                // Multi-day ranges easily exceed the JavaScriptSerializer 2MB
+                // default, which throws and yields an empty response.
+                var serializer = new JavaScriptSerializer();
+                serializer.MaxJsonLength = int.MaxValue;
+                response = serializer.Serialize(c);
             }
             catch (Exception ex)
 

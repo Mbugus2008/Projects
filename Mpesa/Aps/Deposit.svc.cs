@@ -132,6 +132,42 @@ namespace Mpesa_Api
                 try
                 {
                     stk r = JsonConvert.DeserializeObject<stk>(inn);
+
+                    // On a successful payment the callback carries the actual M-Pesa receipt
+                    // (MpesaReceiptNumber). Update the matching pending MobileTransactions row so
+                    // its Reference becomes the real M-Pesa code — the NAV posting (codeunit
+                    // 39003909 Altenate channels, PostTrans) uses Reference as the journal
+                    // Document No. for reconciliation.
+                    if (r != null && r.Body != null && r.Body.stkCallback != null && r.Body.stkCallback.ResultCode == 0)
+                    {
+                        var items = r.Body.stkCallback.CallbackMetadata == null ? null : r.Body.stkCallback.CallbackMetadata.Item;
+                        var receipt = items == null ? null : items.Where(o => o.Name == "MpesaReceiptNumber").Select(o => Convert.ToString(o.Value)).FirstOrDefault();
+                        if (!string.IsNullOrWhiteSpace(receipt))
+                        {
+                            // Find by Reference (MerchantRequestID written by /api/stkpush) first,
+                            // then fall back to Document No. (CheckoutRequestID).
+                            var m = Transactions_Service.ReadMultiple(new MobileTransactions.MobileTransactions_Filter[] {
+                                new MobileTransactions.MobileTransactions_Filter { Field = MobileTransactions.MobileTransactions_Fields.Reference, Criteria = r.Body.stkCallback.MerchantRequestID }
+                            }, null, 0).FirstOrDefault();
+                            if (m == null)
+                            {
+                                m = Transactions_Service.ReadMultiple(new MobileTransactions.MobileTransactions_Filter[] {
+                                    new MobileTransactions.MobileTransactions_Filter { Field = MobileTransactions.MobileTransactions_Fields.Document_No, Criteria = r.Body.stkCallback.CheckoutRequestID }
+                                }, null, 0).FirstOrDefault();
+                            }
+                            if (m != null && !m.Posted)
+                            {
+                                m.Reference = receipt;
+                                Transactions_Service.Update(ref m);
+                                Logging.Logging.LogEntryOnFile("stk reference " + m.Document_No + " -> " + receipt);
+                            }
+                            else
+                            {
+                                Logging.Logging.LogEntryOnFile("stk no pending transaction found for " + r.Body.stkCallback.MerchantRequestID);
+                            }
+                        }
+                    }
+
                     //if (r.Body.stkCallback.ResultCode == 0)
                     //{
                     //    List<Item> items = r.Body.stkCallback.CallbackMetadata.Item;

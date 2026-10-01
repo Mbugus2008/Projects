@@ -1,0 +1,82 @@
+package com.facebook.stetho.inspector.elements.android;
+
+import android.graphics.Rect;
+import android.view.View;
+import com.facebook.stetho.common.Accumulator;
+import com.facebook.stetho.common.LogUtil;
+import com.facebook.stetho.common.android.FragmentAccessor;
+import com.facebook.stetho.common.android.FragmentCompat;
+import com.facebook.stetho.common.android.ResourcesUtil;
+import com.facebook.stetho.inspector.elements.AbstractChainedDescriptor;
+import com.facebook.stetho.inspector.elements.AttributeAccumulator;
+import com.facebook.stetho.inspector.elements.Descriptor;
+import com.facebook.stetho.inspector.elements.DescriptorMap;
+import javax.annotation.Nullable;
+
+/* JADX INFO: loaded from: classes.dex */
+final class FragmentDescriptor extends AbstractChainedDescriptor<Object> implements HighlightableDescriptor<Object> {
+    private static final String ID_ATTRIBUTE_NAME = "id";
+    private static final String TAG_ATTRIBUTE_NAME = "tag";
+    private final FragmentAccessor mAccessor;
+
+    public static DescriptorMap register(DescriptorMap map) {
+        maybeRegister(map, FragmentCompat.getSupportLibInstance());
+        maybeRegister(map, FragmentCompat.getFrameworkInstance());
+        return map;
+    }
+
+    private static void maybeRegister(DescriptorMap map, @Nullable FragmentCompat compat) {
+        if (compat != null) {
+            Class<?> fragmentClass = compat.getFragmentClass();
+            LogUtil.d("Adding support for %s", fragmentClass.getName());
+            map.registerDescriptor(fragmentClass, (Descriptor) new FragmentDescriptor(compat));
+        }
+    }
+
+    private FragmentDescriptor(FragmentCompat compat) {
+        this.mAccessor = compat.forFragment();
+    }
+
+    @Override // com.facebook.stetho.inspector.elements.AbstractChainedDescriptor
+    protected void onGetAttributes(Object element, AttributeAccumulator attributes) {
+        int id = this.mAccessor.getId(element);
+        if (id != 0) {
+            String value = ResourcesUtil.getIdStringQuietly(element, this.mAccessor.getResources(element), id);
+            attributes.store(ID_ATTRIBUTE_NAME, value);
+        }
+        String tag = this.mAccessor.getTag(element);
+        if (tag != null && tag.length() > 0) {
+            attributes.store(TAG_ATTRIBUTE_NAME, tag);
+        }
+    }
+
+    @Override // com.facebook.stetho.inspector.elements.AbstractChainedDescriptor
+    protected void onGetChildren(Object element, Accumulator<Object> children) {
+        View view = this.mAccessor.getView(element);
+        if (view != null) {
+            children.store(view);
+        }
+    }
+
+    @Override // com.facebook.stetho.inspector.elements.android.HighlightableDescriptor
+    @Nullable
+    public View getViewAndBoundsForHighlighting(Object element, Rect bounds) {
+        return this.mAccessor.getView(element);
+    }
+
+    @Override // com.facebook.stetho.inspector.elements.android.HighlightableDescriptor
+    @Nullable
+    public Object getElementToHighlightAtPosition(Object element, int x, int y, Rect bounds) {
+        Descriptor.Host host = getHost();
+        View view = null;
+        HighlightableDescriptor descriptor = null;
+        if (host instanceof AndroidDescriptorHost) {
+            view = this.mAccessor.getView(element);
+            descriptor = ((AndroidDescriptorHost) host).getHighlightableDescriptor(view);
+        }
+        if (descriptor == null) {
+            return null;
+        }
+        return descriptor.getElementToHighlightAtPosition(view, x, y, bounds);
+    }
+}

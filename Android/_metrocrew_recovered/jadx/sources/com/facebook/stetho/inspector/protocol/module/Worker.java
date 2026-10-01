@@ -1,0 +1,15 @@
+package com.facebook.stetho.inspector.protocol.module;
+
+import com.facebook.stetho.inspector.jsonrpc.JsonRpcPeer;
+import com.facebook.stetho.inspector.jsonrpc.JsonRpcResult;
+import com.facebook.stetho.inspector.protocol.ChromeDevtoolsDomain;
+import com.facebook.stetho.inspector.protocol.ChromeDevtoolsMethod;
+import org.json.JSONObject;
+
+/* JADX INFO: loaded from: classes.dex */
+public class Worker implements ChromeDevtoolsDomain {
+    @ChromeDevtoolsMethod
+    public JsonRpcResult canInspectWorkers(JsonRpcPeer peer, JSONObject params) {
+        return new SimpleBooleanResult(true);
+    }
+}
