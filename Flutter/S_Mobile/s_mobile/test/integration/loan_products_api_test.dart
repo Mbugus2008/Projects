@@ -6,10 +6,10 @@ import 'package:s_mobile/Loans/Loan_Type.dart';
 
 /// Integration tests for the Loan Products API.
 ///
-/// Requires Sacco.Core.Api running at http://localhost:8088.
+/// Requires the TEST server (services.trimline.co.ke).
 void main() {
-  const coreApiBase = 'http://localhost:8088';
-  const clientServiceBase = 'http://localhost/Aps';
+  const coreApiBase = 'https://services.trimline.co.ke/Sacco.Core.Api';
+  const clientServiceBase = 'https://services.trimline.co.ke/Aps';
   const clientId = 'BarakaYetu';
 
   final httpClient = http.Client();

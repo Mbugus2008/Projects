@@ -45,6 +45,8 @@ namespace Client_Service.Controllers
         public static Registration.Registration_Service Registration_Service = new Registration.Registration_Service();
         public static NextOfKin.NextOfKin_Service NextOfKin_Service = new NextOfKin.NextOfKin_Service();
         public static N_OfKinMember.NextOfKinMember_Service N_OfKinMember_Service = new N_OfKinMember.NextOfKinMember_Service();
+        public static MobileLoanGuarantors.MobileLoanGuarantors_Service MobileLoanGuarantors_Service = new MobileLoanGuarantors.MobileLoanGuarantors_Service();
+        public static LoanSecurities.LoanSecurities_Service LoanSecurities_Service = new LoanSecurities.LoanSecurities_Service();
 
         public clientController()
         {
@@ -69,6 +71,8 @@ namespace Client_Service.Controllers
                 Registration_Service = new Registration.Registration_Service { Url = misc.geturl(s, Registration_Service.Url), Credentials = cd, PreAuthenticate = true };
                 NextOfKin_Service = new NextOfKin.NextOfKin_Service { Url = misc.geturl(s, NextOfKin_Service.Url), Credentials = cd, PreAuthenticate = true };
                 N_OfKinMember_Service = new N_OfKinMember.NextOfKinMember_Service { Url = misc.geturl(s, N_OfKinMember_Service.Url), Credentials = cd, PreAuthenticate = true };
+                MobileLoanGuarantors_Service = new MobileLoanGuarantors.MobileLoanGuarantors_Service { Url = misc.geturl(s, MobileLoanGuarantors_Service.Url), Credentials = cd, PreAuthenticate = true };
+                LoanSecurities_Service = new LoanSecurities.LoanSecurities_Service { Url = misc.geturl(s, LoanSecurities_Service.Url), Credentials = cd, PreAuthenticate = true };
 
             }
             catch (Exception ex
@@ -904,6 +908,139 @@ namespace Client_Service.Controllers
             }
             return r;
         }
+
+        /// <summary>
+        /// Mobile app "Bill Payments": records a pending MobileTransactions row for the bill
+        /// (funds debited from the member's wallet) so the payment can be posted/disbursed
+        /// through the SACCO channel (B2C once configured).
+        /// </summary>
+        [HttpPost]
+        [Route("api/billpay")]
+        public Results billpay(Mpesa.BillPayRequest request)
+        {
+            Results r = new Results();
+            try
+            {
+                if (request == null)
+                {
+                    r.Code = -1;
+                    r.Desc = "Invalid request.";
+                    return r;
+                }
+                if (request.Amount <= 0)
+                {
+                    r.Code = -1;
+                    r.Desc = "Amount must be greater than zero.";
+                    return r;
+                }
+                if (string.IsNullOrWhiteSpace(request.Biller_Name) && string.IsNullOrWhiteSpace(request.Biller_Code))
+                {
+                    r.Code = -1;
+                    r.Desc = "Biller is required.";
+                    return r;
+                }
+                if (string.IsNullOrWhiteSpace(request.Bill_Account))
+                {
+                    r.Code = -1;
+                    r.Desc = "Bill account / reference is required.";
+                    return r;
+                }
+                if (string.IsNullOrWhiteSpace(request.Account_No))
+                {
+                    r.Code = -1;
+                    r.Desc = "Source account is required.";
+                    return r;
+                }
+
+                var rawPhone = (request.Phone ?? "").Replace(" ", "").Replace("+", "");
+                var phone = rawPhone.Length >= 9
+                    ? string.Format("254{0}", rawPhone.Substring(rawPhone.Length - 9))
+                    : rawPhone;
+
+                var billerLabel = string.IsNullOrWhiteSpace(request.Biller_Name)
+                    ? request.Biller_Code
+                    : request.Biller_Name;
+                var desc = string.IsNullOrWhiteSpace(request.Description)
+                    ? string.Format("BILL PAY: {0} / {1}", billerLabel, request.Bill_Account)
+                    : request.Description;
+                var transactionType = request.Transaction_Type > 0 ? request.Transaction_Type : 11; // Utility_Payment
+
+                var docNo = string.Format("BP{0}", DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+
+                Logging.Logging.LogEntryOnFile(JsonConvert.SerializeObject(new
+                {
+                    billpay = "request",
+                    docNo,
+                    request.Member_No,
+                    request.Account_No,
+                    billerLabel,
+                    request.Bill_Account,
+                    request.Amount,
+                    phone
+                }));
+
+                MobileTransactions trans = Transactions_Service.Read(docNo, transactionType);
+                if (trans == null)
+                {
+                    trans = new MobileTransactions
+                    {
+                        Document_No = docNo,
+                        Account_No = request.Account_No,
+                        Transaction_Date = DateTime.Today,
+                        Transaction_DateSpecified = true,
+                        Transaction_Time = DateTime.Now,
+                        Transaction_TimeSpecified = true,
+                        Transaction_Type = transactionType,
+                        Transaction_TypeSpecified = true,
+                        Amount = (decimal)request.Amount,
+                        AmountSpecified = true,
+                        Mobile_No = phone,
+                        Description = desc,
+                        Loan_No = null,
+                        Reference = request.Bill_Account,
+                        Source = Transactions.Source.Mbaraka,
+                        SourceSpecified = true,
+                        Status = Transactions.Status.Pending_Posting,
+                        StatusSpecified = true
+                    };
+                    Transactions_Service.Create(ref trans);
+                }
+
+                // Automatic disbursement (B2C) is dispatched once the channel is configured —
+                // see Mpesa.B2cClient (Web.config appSettings MpesaB2c*). Until then the
+                // request stays Pending_Posting for the standard posting/disbursement process.
+                if (Mpesa.B2cClient.IsConfigured)
+                {
+                    var b2c = Mpesa.B2cClient.Push(request.Amount, desc, request.Bill_Account);
+                    Logging.Logging.LogEntryOnFile(JsonConvert.SerializeObject(new
+                    {
+                        billpay = "b2c",
+                        b2c.Success,
+                        b2c.Stage,
+                        b2c.ErrorMessage,
+                        b2c.ConversationID
+                    }));
+                }
+
+                r.content = new
+                {
+                    trans.Document_No,
+                    Status = "Pending",
+                    Biller = billerLabel,
+                    Bill_Account = request.Bill_Account,
+                    Amount = request.Amount
+                };
+                r.Desc = "Bill payment request received. It will be processed shortly.";
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
         [HttpPost]
         [Route("api/updatemember")]
         public Results updatemember(Request request)
@@ -1309,6 +1446,129 @@ namespace Client_Service.Controllers
                     new N_OfKinMember.NextOfKinMember_Filter[] { new N_OfKinMember.NextOfKinMember_Filter { Criteria = memberNo, Field = N_OfKinMember.NextOfKinMember_Fields.Account_No } },
                     null, 0);
                 r.Contents = noks?.ToList();
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.ReportError(ex);
+                r.Code = -1;
+                r.Desc = ex.Message;
+            }
+            return r;
+        }
+
+        [HttpPost]
+        [Route("api/guarantors")]
+        public Results<object> guarantors(Request request)
+        {
+            Results<object> r = new Results<object>();
+            try
+            {
+                string key = null;
+                if (!string.IsNullOrWhiteSpace(request.No)) key = request.No.Trim();
+                else if (!string.IsNullOrWhiteSpace(request.Account)) key = request.Account.Trim();
+                else if (!string.IsNullOrWhiteSpace(request.Member)) key = request.Member.Trim();
+                else if (!string.IsNullOrWhiteSpace(request.phone)) key = request.phone.Trim();
+                else if (request.body != null) key = request.body.ToString().Replace("\"", "").Trim();
+
+                if (string.IsNullOrWhiteSpace(key))
+                {
+                    r.Code = -1;
+                    r.Desc = "Member number is required.";
+                    return r;
+                }
+
+                // Resolve the member: accept either member no (e.g. 004297) or a phone number.
+                var member = Members_Service.ReadMultiple(new Members_Filter[] { new Members_Filter { Criteria = key, Field = Members_Fields.No } }, null, 0).FirstOrDefault();
+                if (member == null)
+                    member = getmemberfromrequest(request);
+                var memberNo = (member != null && !string.IsNullOrEmpty(member.No)) ? member.No : key;
+
+                // Rows where this member is the guarantor / loanee (page 50104).
+                // NOTE: page 50104 falls outside the NAV license object range, so these queries
+                // fail until the page is renumbered into the licensed range. Treated as optional.
+                string bufferError = null;
+                var asGuarantor = new List<MobileLoanGuarantors.MobileLoanGuarantors>();
+                var asLoanee = new List<MobileLoanGuarantors.MobileLoanGuarantors>();
+                try
+                {
+                    // Rows where this member is the guarantor (loans guaranteed for others)
+                    asGuarantor = MobileLoanGuarantors_Service.ReadMultiple(new MobileLoanGuarantors.MobileLoanGuarantors_Filter[] {
+                        new MobileLoanGuarantors.MobileLoanGuarantors_Filter { Criteria = memberNo, Field = MobileLoanGuarantors.MobileLoanGuarantors_Fields.Guarantor_Member_No }
+                    }, null, 0).ToList();
+                    var accExtra = MobileLoanGuarantors_Service.ReadMultiple(new MobileLoanGuarantors.MobileLoanGuarantors_Filter[] {
+                        new MobileLoanGuarantors.MobileLoanGuarantors_Filter { Criteria = memberNo + "*", Field = MobileLoanGuarantors.MobileLoanGuarantors_Fields.Guarantor_Account_No }
+                    }, null, 0).ToList();
+                    foreach (var g in accExtra)
+                        if (!asGuarantor.Any(x => x.Key == g.Key)) asGuarantor.Add(g);
+
+                    // Rows where this member is the loanee (guarantors on my loans)
+                    asLoanee = MobileLoanGuarantors_Service.ReadMultiple(new MobileLoanGuarantors.MobileLoanGuarantors_Filter[] {
+                        new MobileLoanGuarantors.MobileLoanGuarantors_Filter { Criteria = memberNo + "*", Field = MobileLoanGuarantors.MobileLoanGuarantors_Fields.Loanee_Account_No }
+                    }, null, 0).ToList();
+                    var loaneeExtra = MobileLoanGuarantors_Service.ReadMultiple(new MobileLoanGuarantors.MobileLoanGuarantors_Filter[] {
+                        new MobileLoanGuarantors.MobileLoanGuarantors_Filter { Criteria = memberNo, Field = MobileLoanGuarantors.MobileLoanGuarantors_Fields.Loanee_Account_No }
+                    }, null, 0).ToList();
+                    foreach (var g in loaneeExtra)
+                        if (!asLoanee.Any(x => x.Key == g.Key)) asLoanee.Add(g);
+                }
+                catch (Exception exBuffer)
+                {
+                    bufferError = exBuffer.Message;
+                }
+
+                // Loan securities held for / by this member (amounts committed vs released)
+                var securities = LoanSecurities_Service.ReadMultiple(new LoanSecurities.LoanSecurities_Filter[] {
+                    new LoanSecurities.LoanSecurities_Filter { Criteria = memberNo + "*", Field = LoanSecurities.LoanSecurities_Fields.Security_No }
+                }, null, 0).ToList();
+                var memberSecurities = LoanSecurities_Service.ReadMultiple(new LoanSecurities.LoanSecurities_Filter[] {
+                    new LoanSecurities.LoanSecurities_Filter { Criteria = memberNo + "*", Field = LoanSecurities.LoanSecurities_Fields.Member_Guaranteed }
+                }, null, 0).ToList();
+
+                Func<MobileLoanGuarantors.MobileLoanGuarantors, object> project = g => new
+                {
+                    key = g.Key,
+                    loanNo = g.Loan_No,
+                    guarantorNo = g.Guarantor_No,
+                    guarantorMemberNo = g.Guarantor_Member_No,
+                    guarantorAccountNo = g.Guarantor_Account_No,
+                    guarantorName = g.Guarantor_Name,
+                    loaneeAccountNo = g.Loanee_Account_No,
+                    amount = g.Guaranteed_Amount,
+                    acknowledged = g.Acknowledged,
+                    status = g.Guarantor_Status.ToString(),
+                    createdOn = g.Created_DateSpecified ? g.Created_Date.ToString("yyyy-MM-dd") : null,
+                    acknowledgedOn = g.Date_acknowledgedSpecified ? g.Date_acknowledged.ToString("yyyy-MM-dd") : null
+                };
+
+                Func<LoanSecurities.LoanSecurities, object> projectSec = s => new
+                {
+                    key = s.Key,
+                    securityNo = s.Security_No,
+                    name = s.Name,
+                    type = s.Type.ToString(),
+                    securityType = s.Security_Type.ToString(),
+                    accountNo = s.Account_No,
+                    memberGuaranteed = s.Member_Guaranteed,
+                    amountCommitted = s.Amount_Committed,
+                    amountReleased = s.Amount_Released,
+                    amountGuaranteed = s.Amount_Guaranteed,
+                    outstandingBalance = s.Outstanding_Balance,
+                    loanBalance = s.Loan_Balance,
+                    noOfLoansGuaranteed = s.No_Of_Loans_Guaranteed,
+                    selfGuarantee = s.Self_Guarantee,
+                    substituted = s.Substituted,
+                    date = s.DateSpecified ? s.Date.ToString("yyyy-MM-dd") : null
+                };
+
+                r.Contents = new
+                {
+                    memberNo = memberNo,
+                    bufferError = bufferError,
+                    guaranteed = asGuarantor.Select(project).ToList(),
+                    myGuarantors = asLoanee.Select(project).ToList(),
+                    securities = securities.Select(projectSec).ToList(),
+                    memberSecurities = memberSecurities.Select(projectSec).ToList()
+                };
             }
             catch (Exception ex)
             {

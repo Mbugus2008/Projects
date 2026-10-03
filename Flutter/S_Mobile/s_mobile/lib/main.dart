@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:s_mobile/common/notifications.dart';
 import 'package:s_mobile/common/payment_cart.dart';
 import 'package:s_mobile/login.dart';
 import 'package:s_mobile/members/controller.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(MemberController());
   Get.put(PaymentCartController());
   Get.put(PaymentTemplateController());
+  NotificationService.init();
   runApp(const MyApp());
 }
 

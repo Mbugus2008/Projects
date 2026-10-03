@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:s_mobile/common/payment_cart.dart';
+import 'package:s_mobile/common/statement_pdf.dart';
 import 'package:s_mobile/common/utilities.dart';
 import 'package:s_mobile/members/accounts.dart';
 import 'package:s_mobile/members/entries.dart';
@@ -282,6 +284,13 @@ class _accountsState extends State<accounts> {
               ],
             ),
             IconButton(
+              onPressed: () => _showMiniStatement(context, acc, member),
+              tooltip: 'Mini statement',
+              icon: const Icon(Icons.receipt_long_outlined, size: 20),
+              color: accentColor,
+              visualDensity: VisualDensity.compact,
+            ),
+            IconButton(
               onPressed: () => _addToPayment(context, acc, member),
               tooltip: 'Add to payment',
               icon: const Icon(Icons.add_shopping_cart, size: 20),
@@ -317,6 +326,127 @@ class _accountsState extends State<accounts> {
           : '"${item.label}" added to the payment cart.'),
       title: const Text('Payment'),
     ).show(context);
+  }
+
+  // ── Mini statement (bottom sheet) ─────────────────────────
+  void _showMiniStatement(
+      BuildContext context, Account acc, Member member) async {
+    final fetched = await entries().fetchEntries(
+        account: member.No ?? '', transactionType: acc.transaction_Type);
+    if (!context.mounted) return;
+    if (fetched == null || fetched.isEmpty) {
+      MotionToast.info(
+        description: const Text('No transactions found.'),
+        title: const Text('Mini Statement'),
+      ).show(context);
+      return;
+    }
+    final balanced = entries().calculateRunningBalance(fetched) ?? [];
+    final last =
+        balanced.length > 5 ? balanced.sublist(balanced.length - 5) : balanced;
+    final newestFirst = last.reversed.toList();
+    final accName = acc.Name ?? acc.Product_Name ?? 'Account';
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (sheetCtx) => Padding(
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text('$accName — Mini Statement',
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            Text(
+                'Last ${newestFirst.length} transactions · Balance ${utilities.formatcurrency.format(acc.Balance ?? 0)}',
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+            const SizedBox(height: 10),
+            ...newestFirst.map((e) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                e.Description ??
+                                    e.Transaction_Type?.description ??
+                                    '',
+                                style: const TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.w600),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis),
+                            Text(
+                                e.Posting_Date != null
+                                    ? DateFormat('dd/MM/yyyy')
+                                        .format(e.Posting_Date!)
+                                    : '',
+                                style: TextStyle(
+                                    fontSize: 11, color: Colors.grey.shade600)),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        ((e.Credit ?? 0) > 0
+                                ? '+'
+                                : (e.Debit ?? 0) > 0
+                                    ? '-'
+                                    : '') +
+                            utilities.formatcurrency.format((e.Credit ?? 0) > 0
+                                ? e.Credit
+                                : (e.Debit ?? 0) > 0
+                                    ? e.Debit
+                                    : (e.Amount ?? 0)),
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: (e.Credit ?? 0) > 0
+                                ? const Color(0xFF2E7D32)
+                                : Colors.red),
+                      ),
+                    ],
+                  ),
+                )),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(sheetCtx);
+                      _onAccountTap(context, acc, member);
+                    },
+                    icon: const Icon(Icons.list_alt, size: 18),
+                    label: const Text('Full statement'),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: () {
+                      Navigator.pop(sheetCtx);
+                      StatementPdf.share(
+                        title: '$accName — Statement',
+                        subtitle: 'Mini statement (last ${last.length})',
+                        items: last,
+                      );
+                    },
+                    icon: const Icon(Icons.picture_as_pdf_outlined, size: 18),
+                    label: const Text('Download PDF'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   // ── Navigate on account tap ───────────────────────────────

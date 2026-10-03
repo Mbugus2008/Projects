@@ -6,9 +6,9 @@ import 'package:s_mobile/members/member.dart';
 
 /// Integration tests for the Member API.
 ///
-/// Requires Sacco.Core.Api running at http://localhost:8088.
+/// Requires the TEST server (services.trimline.co.ke).
 void main() {
-  const coreApiBase = 'http://localhost:8088';
+  const coreApiBase = 'https://services.trimline.co.ke/Sacco.Core.Api';
   const clientId = 'BarakaYetu';
   const testPhone = '0710563359';
 

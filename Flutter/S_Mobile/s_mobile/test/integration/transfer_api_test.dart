@@ -5,12 +5,12 @@ import 'package:http/http.dart' as http;
 
 /// Integration tests for the Transfer Funds API.
 ///
-/// Requires:
-///   - Sacco.Core.Api running at http://services.trimline.co.ke/Sacco.Core.Api
-///   - Client_Service running at http://services.trimline.co.ke/Aps
+/// Requires the TEST server (services.trimline.co.ke):
+///   - Sacco.Core.Api at https://services.trimline.co.ke/Sacco.Core.Api
+///   - Client_Service at https://services.trimline.co.ke/Aps
 void main() {
-  const coreApiBase = 'http://services.trimline.co.ke/Sacco.Core.Api';
-  const clientServiceBase = 'http://services.trimline.co.ke/Aps';
+  const coreApiBase = 'https://services.trimline.co.ke/Sacco.Core.Api';
+  const clientServiceBase = 'https://services.trimline.co.ke/Aps';
   const clientId = 'BarakaYetu';
   const testPhone = '0710563359';
 

@@ -33,14 +33,19 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_local_notifications:
+  geolocator:
   http: ^0.13.5
   intl: ^0.17.0
   image_picker: ^0.8.7
   get:
   json_annotation: ^4.7.0
   motion_toast: ^2.6.4
+  pdf:
   persistent_bottom_nav_bar: ^5.0.2
+  printing:
   shared_preferences: ^2.0.15
+  signature:
   syncfusion_flutter_core: ^20.3.60
   syncfusion_flutter_datagrid: ^20.3.59
 

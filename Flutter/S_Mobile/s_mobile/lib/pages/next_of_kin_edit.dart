@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:motion_toast/motion_toast.dart';
 
+import '../common/Apis.dart';
 import '../members/next_of_kin.dart';
 
 class NextOfKinEditPage extends StatefulWidget {
@@ -71,7 +72,7 @@ class _NextOfKinEditPageState extends State<NextOfKinEditPage> {
       });
 
       final r = await http.post(
-        Uri.parse('https://services.trimline.co.ke/Aps/api/updatenextofkin'),
+        Uri.parse('${AppConfig.apsUrl}/updatenextofkin'),
         headers: {
           'Content-Type': 'application/json',
           'X-Client-Identifier': 'BarakaYetu',

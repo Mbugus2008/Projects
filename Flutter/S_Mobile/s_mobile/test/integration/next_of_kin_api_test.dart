@@ -6,7 +6,7 @@ import 'package:s_mobile/members/next_of_kin.dart';
 
 /// Integration tests for the NextOfKin API.
 ///
-/// Requires the live API at https://services.trimline.co.ke.
+/// Requires the TEST server at https://services.trimline.co.ke.
 void main() {
   const clientUrl = 'https://services.trimline.co.ke/Aps/api/getnextofkin';
   const clientId = 'BarakaYetu';

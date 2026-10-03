@@ -17,9 +17,14 @@ import 'login.dart';
 import 'master_page.dart';
 import 'members/accounts.dart';
 import 'pages/accounts.dart';
+import 'pages/alerts_page.dart';
+import 'pages/applications_page.dart';
+import 'pages/bill_payments_page.dart';
 import 'pages/dashboard.dart';
 import 'pages/eligibility_checker.dart';
+import 'pages/guarantors_page.dart';
 import 'pages/ledgerEntries.dart';
+import 'pages/loan_calculator.dart';
 import 'pages/loan_list.dart';
 import 'pages/member_edit.dart';
 import 'pages/newloan.dart';
@@ -85,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         loans_page(member: widget.member),
       ];
 
-  Container buildMyNavBar(BuildContext context) {
+  Widget buildMyNavBar(BuildContext context) {
     final navItems = [
       {
         'icon': Icons.grid_view_rounded,
@@ -105,70 +110,72 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     final bottomSafe = MediaQuery.of(context).padding.bottom;
-    return Container(
-      height: 80 + bottomSafe,
-      padding: EdgeInsets.only(bottom: bottomSafe),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF2E7D32), Color(0xFF9C27B0)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 12,
-            offset: Offset(0, -4),
+
+    // Floating gradient pill nav bar (client_consumer_app design): margin all
+    // around, big corner radius, translucent inactive tabs and a sagging
+    // "cable" curve under the active label.
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 10 + bottomSafe),
+      child: Container(
+        height: 68,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFF3AA852), Color(0xFFC62A90)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(navItems.length, (i) {
-          final active = pageIndex == i;
-          return GestureDetector(
-            onTap: () => setState(() => pageIndex = i),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    active
-                        ? navItems[i]['icon'] as IconData
-                        : navItems[i]['iconOff'] as IconData,
-                    color: Colors.white,
-                    size: 26,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    navItems[i]['label'] as String,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: active ? FontWeight.bold : FontWeight.normal,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    height: active ? 3 : 0,
-                    width: active ? 24 : 0,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ],
-              ),
+          borderRadius: BorderRadius.circular(34),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 14,
+              offset: Offset(0, 6),
             ),
-          );
-        }),
+          ],
+        ),
+        child: Row(
+          children: List.generate(navItems.length, (i) {
+            final active = pageIndex == i;
+            return Expanded(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => setState(() => pageIndex = i),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      active
+                          ? navItems[i]['icon'] as IconData
+                          : navItems[i]['iconOff'] as IconData,
+                      color: active ? Colors.white : Colors.white70,
+                      size: 22,
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      navItems[i]['label'] as String,
+                      style: TextStyle(
+                        color: active ? Colors.white : Colors.white70,
+                        fontSize: 11.5,
+                        fontWeight:
+                            active ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    AnimatedOpacity(
+                      opacity: active ? 1 : 0,
+                      duration: const Duration(milliseconds: 220),
+                      child: const SizedBox(
+                        width: 110,
+                        height: 12,
+                        child: CustomPaint(painter: _TabIndicatorPainter()),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
@@ -322,8 +329,21 @@ class _MyHomePageState extends State<MyHomePage> {
                         entries().calculateRunningBalance(member.Entries);
                     Get.to(() => Master(
                           member: member,
-                          widgets: Ledgerentries(Entries: entriess),
+                          widgets: Ledgerentries(
+                              Entries: entriess, title: 'All Transactions'),
                           title: 'All Transactions',
+                        ));
+                  },
+                ),
+                _drawerItem(
+                  icon: Icons.notifications_none,
+                  title: 'Alerts & Notifications',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: const AlertsPage(),
+                          title: 'Alerts',
                         ));
                   },
                 ),
@@ -379,6 +399,42 @@ class _MyHomePageState extends State<MyHomePage> {
                         ));
                   },
                 ),
+                _drawerItem(
+                  icon: Icons.calculate_outlined,
+                  title: 'Loan Calculator',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: const LoanCalculatorPage(),
+                          title: 'Loan Calculator',
+                        ));
+                  },
+                ),
+                _drawerItem(
+                  icon: Icons.assignment_outlined,
+                  title: 'My Applications',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: const ApplicationsPage(),
+                          title: 'My Applications',
+                        ));
+                  },
+                ),
+                _drawerItem(
+                  icon: Icons.handshake_outlined,
+                  title: 'Guarantors',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: const GuarantorsPage(),
+                          title: 'Guarantors',
+                        ));
+                  },
+                ),
                 const SizedBox(height: 12),
                 _drawerSection('Payments'),
                 _drawerItem(
@@ -398,6 +454,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           member: member,
                           widgets: const PaymentCartPage(),
                           title: 'Payment Cart',
+                        ));
+                  },
+                ),
+                _drawerItem(
+                  icon: Icons.receipt_outlined,
+                  title: 'Bill Payments',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Get.to(() => Master(
+                          member: member,
+                          widgets: const BillPaymentsPage(),
+                          title: 'Bill Payments',
                         ));
                   },
                 ),
@@ -704,4 +772,26 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
   }
+}
+
+/// Sagging "cable" curve drawn under the active bottom-nav tab.
+class _TabIndicatorPainter extends CustomPainter {
+  const _TabIndicatorPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.4
+      ..strokeCap = StrokeCap.round;
+    final path = Path()
+      ..moveTo(2, 2)
+      ..quadraticBezierTo(
+          size.width / 2, size.height * 1.55, size.width - 2, 2);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

@@ -58,6 +58,13 @@ class registration {
   String? Global_Dimension_1_Code;
   String? Global_Dimension_2_Code;
 
+  // Captured during registration (base64 payloads + GPS location).
+  String? Signature;
+  String? Passport_Photo;
+  String? ID_Photo;
+  double? Latitude;
+  double? Longitude;
+
   registration({
     this.Key,
     this.No,
@@ -100,6 +107,11 @@ class registration {
     this.Responsibility_Center,
     this.Global_Dimension_1_Code,
     this.Global_Dimension_2_Code,
+    this.Signature,
+    this.Passport_Photo,
+    this.ID_Photo,
+    this.Latitude,
+    this.Longitude,
   });
 
   Map<String, dynamic> toMap() {
@@ -145,6 +157,11 @@ class registration {
       'Responsibility_Center': Responsibility_Center,
       'Global_Dimension_1_Code': Global_Dimension_1_Code,
       'Global_Dimension_2_Code': Global_Dimension_2_Code,
+      if (Signature != null) 'Signature': Signature,
+      if (Passport_Photo != null) 'Passport_Photo': Passport_Photo,
+      if (ID_Photo != null) 'ID_Photo': ID_Photo,
+      if (Latitude != null) 'Latitude': Latitude,
+      if (Longitude != null) 'Longitude': Longitude,
     };
   }
 

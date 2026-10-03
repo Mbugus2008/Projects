@@ -135,7 +135,7 @@ class _NewLoanPageState extends State<NewLoanPage> {
       final body = json.encode({
         'Document_No': docNo,
         'Transaction_Date': today,
-        'Transaction_Type': transaction_Type.Loan_Application.index,
+        'Transaction_Type': transaction_Type.Loan_Application.index.toString(),
         'Amount': amount,
         'Application_No': member.No,
         'Loan_Type': _selectedLoanType!.Code,

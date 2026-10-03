@@ -57,8 +57,7 @@ class _MemberEditPageState extends State<MemberEditPage> {
     setState(() => _loadingPicture = true);
     try {
       final r = await http.post(
-        Uri.parse(
-            'https://services.trimline.co.ke/Aps/api/getmemberpicture'),
+        Uri.parse('${AppConfig.apsUrl}/getmemberpicture'),
         headers: {
           'Content-Type': 'application/json',
           'X-Client-Identifier': 'BarakaYetu',
@@ -103,8 +102,7 @@ class _MemberEditPageState extends State<MemberEditPage> {
     if (_imageBase64 == null) return;
     try {
       await http.post(
-        Uri.parse(
-            'https://services.trimline.co.ke/Aps/api/setmemberpicture'),
+        Uri.parse('${AppConfig.apsUrl}/setmemberpicture'),
         headers: {
           'Content-Type': 'application/json',
           'X-Client-Identifier': 'BarakaYetu',
@@ -152,7 +150,7 @@ class _MemberEditPageState extends State<MemberEditPage> {
       });
 
       // Call Client_Service directly (wrap in body as expected by ClientRequest)
-      const clientUrl = 'https://services.trimline.co.ke/Aps/api/updatemember';
+      final clientUrl = '${AppConfig.apsUrl}/updatemember';
       final r = await http.post(
         Uri.parse(clientUrl),
         headers: {
@@ -230,16 +228,13 @@ class _MemberEditPageState extends State<MemberEditPage> {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundColor:
-                        const Color(0xFF2E7D32).withOpacity(0.1),
-                    backgroundImage: _imageBytes != null
-                        ? MemoryImage(_imageBytes!)
-                        : null,
+                    backgroundColor: const Color(0xFF2E7D32).withOpacity(0.1),
+                    backgroundImage:
+                        _imageBytes != null ? MemoryImage(_imageBytes!) : null,
                     child: _imageBytes == null
                         ? Icon(Icons.person,
                             size: 50,
-                            color: const Color(0xFF2E7D32)
-                                .withOpacity(0.5))
+                            color: const Color(0xFF2E7D32).withOpacity(0.5))
                         : null,
                   ),
                   Positioned(

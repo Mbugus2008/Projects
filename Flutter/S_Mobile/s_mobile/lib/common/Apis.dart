@@ -13,27 +13,32 @@ import 'Interface.dart';
 
 // ── App Configuration ───────────────────────────────────────────
 class AppConfig {
-  // Toggle this to switch between environments
+  // Toggle this to switch between environments.
+  // false = TEST (services.trimline.co.ke); true = PRODUCTION
   static const bool isProduction = false;
 
-  // Android emulator uses 10.0.2.2 to reach host localhost
-  // iOS simulator uses localhost directly
-  // Physical device uses your LAN IP (e.g., 192.168.x.x)
+  // Sacco.Core.Api (bridge) base URL
   static String get baseUrl {
     if (isProduction) {
+      // TODO: set the production bridge URL before release
       return 'https://your-production-server.com/api';
     }
-    // Development — change this to your local IP for physical device testing
-    // IIS-hosted Sacco.Core.Api on port 8088
+    // TEST environment (shared test server)
     return 'https://services.trimline.co.ke/Sacco.Core.Api/api';
-    //return 'http://10.0.2.2:8088/api';
   }
 
   // Request timeout in seconds
   static const int requestTimeoutSeconds = 30;
 
   // Client_Service (/Aps) — direct endpoints not proxied by the bridge
-  static const String apsUrl = 'https://services.trimline.co.ke/Aps/api';
+  static String get apsUrl {
+    if (isProduction) {
+      // TODO: set the production Client_Service URL before release
+      return 'https://your-production-server.com/Aps/api';
+    }
+    // TEST environment (shared test server)
+    return 'https://services.trimline.co.ke/Aps/api';
+  }
 }
 
 class MyHttpOverrides extends HttpOverrides {

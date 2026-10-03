@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:motion_toast/motion_toast.dart';
+
+import '../common/Apis.dart';
 import '../members/controller.dart';
 import '../members/next_of_kin.dart';
 import 'next_of_kin_edit.dart';
@@ -31,7 +33,7 @@ class _NextOfKinPageState extends State<NextOfKinPage> {
       final memberNo =
           Get.find<MemberController>().currentCustomer.value.No ?? '';
       final r = await http.post(
-        Uri.parse('https://services.trimline.co.ke/Aps/api/getnextofkin'),
+        Uri.parse('${AppConfig.apsUrl}/getnextofkin'),
         headers: {
           'Content-Type': 'application/json',
           'X-Client-Identifier': 'BarakaYetu',

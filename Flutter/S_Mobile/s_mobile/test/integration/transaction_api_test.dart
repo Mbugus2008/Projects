@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 
 /// Integration tests for the Transaction API.
 ///
-/// Requires Sacco.Core.Api running at http://localhost:8088.
+/// Requires the TEST server (services.trimline.co.ke).
 void main() {
-  const coreApiBase = 'http://localhost:8088';
-  const clientServiceBase = 'http://localhost/Aps';
+  const coreApiBase = 'https://services.trimline.co.ke/Sacco.Core.Api';
+  const clientServiceBase = 'https://services.trimline.co.ke/Aps';
   const clientId = 'BarakaYetu';
   const testPhone = '0710563359';
 

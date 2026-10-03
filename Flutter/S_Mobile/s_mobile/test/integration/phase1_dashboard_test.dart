@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 ///   2. Next Repayment Date (schedule API)
 ///   3. Recent Transactions (statement API)
 ///
-/// Requires services at https://services.trimline.co.ke
+/// Requires the TEST server at https://services.trimline.co.ke
 void main() {
   const coreApiBase = 'https://services.trimline.co.ke/Sacco.Core.Api';
   const clientServiceBase = 'https://services.trimline.co.ke/Aps';

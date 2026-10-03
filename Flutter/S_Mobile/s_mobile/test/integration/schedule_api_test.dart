@@ -6,12 +6,12 @@ import 'package:s_mobile/Loans/Schedule.dart';
 
 /// Integration tests for the Schedule / RepaymentSchedule API.
 ///
-/// These tests require the backend services to be running:
-///   - Sacco.Core.Api at http://localhost:8088
-///   - Client_Service at http://localhost/Aps
+/// These tests require the TEST server (services.trimline.co.ke):
+///   - Sacco.Core.Api at https://services.trimline.co.ke/Sacco.Core.Api
+///   - Client_Service at https://services.trimline.co.ke/Aps
 void main() {
-  const coreApiBase = 'http://localhost:8088';
-  const clientServiceBase = 'http://localhost/Aps';
+  const coreApiBase = 'https://services.trimline.co.ke/Sacco.Core.Api';
+  const clientServiceBase = 'https://services.trimline.co.ke/Aps';
   const clientId = 'BarakaYetu';
   const testLoanNo = 'BLN000003';
 

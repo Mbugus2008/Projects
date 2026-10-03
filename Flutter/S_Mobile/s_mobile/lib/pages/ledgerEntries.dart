@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:s_mobile/common/statement_pdf.dart';
 import 'package:s_mobile/common/utilities.dart';
 import 'package:s_mobile/members/entries.dart';
 
@@ -9,9 +11,11 @@ class Ledgerentries extends StatefulWidget {
   const Ledgerentries({
     Key? key,
     required this.Entries,
+    this.title,
   }) : super(key: key);
 
   final List<entries>? Entries;
+  final String? title;
 
   @override
   State<Ledgerentries> createState() => _ledgerentries();
@@ -72,6 +76,12 @@ class _ledgerentries extends State<Ledgerentries> {
                   Text('${items.length} entries',
                       style:
                           const TextStyle(color: Colors.white70, fontSize: 12)),
+                  IconButton(
+                    onPressed: () => _downloadPdf(context),
+                    tooltip: 'Download PDF statement',
+                    icon: const Icon(Icons.picture_as_pdf_outlined,
+                        color: Colors.white, size: 22),
+                  ),
                 ],
               ),
             ),
@@ -88,6 +98,22 @@ class _ledgerentries extends State<Ledgerentries> {
         ),
       ),
     );
+  }
+
+  Future<void> _downloadPdf(BuildContext context) async {
+    try {
+      await StatementPdf.share(
+        title: widget.title ?? 'Account Statement',
+        items: widget.Entries ?? [],
+      );
+    } catch (e) {
+      if (context.mounted) {
+        MotionToast.error(
+          description: Text(e.toString()),
+          title: const Text('Statement'),
+        ).show(context);
+      }
+    }
   }
 
   Widget _summaryChip(String label, double amount, Color bgColor) {

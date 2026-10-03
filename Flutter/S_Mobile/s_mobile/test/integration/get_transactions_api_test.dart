@@ -5,12 +5,12 @@ import 'package:http/http.dart' as http;
 
 /// Integration tests for the GetTransactions API.
 ///
-/// Requires:
-///   - Sacco.Core.Api at http://localhost:8088
-///   - Client_Service at http://localhost/Aps
+/// Requires the TEST server (services.trimline.co.ke):
+///   - Sacco.Core.Api at https://services.trimline.co.ke/Sacco.Core.Api
+///   - Client_Service at https://services.trimline.co.ke/Aps
 void main() {
-  const coreApiBase = 'http://localhost:8088';
-  const clientServiceBase = 'http://localhost/Aps';
+  const coreApiBase = 'https://services.trimline.co.ke/Sacco.Core.Api';
+  const clientServiceBase = 'https://services.trimline.co.ke/Aps';
   const clientId = 'BarakaYetu';
   const testAccount = '004297';
   const loanAppType = 12; // Loan_Application

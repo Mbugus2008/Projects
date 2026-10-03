@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:s_mobile/common/Apis.dart';
 import 'package:s_mobile/common/Results.dart';
 import 'package:s_mobile/common/utilities.dart';
 import 'package:s_mobile/common/widgets.dart';
+import 'package:signature/signature.dart';
 
 import 'registration.dart';
 
@@ -37,6 +42,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
   DateTime _dob = DateTime(1990, 1, 1);
   gender _gender = gender.Male;
   marital_Status _maritalStatus = marital_Status.Single;
+
+  // Captured documents & location
+  String? _signatureBase64;
+  String? _passportBase64;
+  String? _idBase64;
+  double? _latitude;
+  double? _longitude;
 
   @override
   void initState() {
@@ -73,6 +85,112 @@ class _RegistrationPageState extends State<RegistrationPage> {
     }
   }
 
+  // ── Documents & location capture ─────────────────────────
+  Future<void> _captureSignature() async {
+    final controller = SignatureController(
+      penStrokeWidth: 2.5,
+      penColor: Colors.black,
+      exportBackgroundColor: Colors.white,
+    );
+    final save = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Member Signature'),
+        content: SizedBox(
+          width: double.maxFinite,
+          height: 220,
+          child: Signature(
+            controller: controller,
+            backgroundColor: Colors.grey.shade100,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => controller.clear(),
+            child: const Text('Clear'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
+    if (save == true) {
+      final bytes = await controller.toPngBytes();
+      if (bytes != null && mounted) {
+        setState(() => _signatureBase64 = base64Encode(bytes));
+      }
+    }
+    controller.dispose();
+  }
+
+  Future<void> _pickRegistrationPhoto(bool isPassport) async {
+    try {
+      final picker = ImagePicker();
+      final picked = await picker.pickImage(
+        source: ImageSource.camera,
+        maxWidth: 900,
+        imageQuality: 75,
+      );
+      if (picked == null) return;
+      final bytes = await picked.readAsBytes();
+      final b64 = base64Encode(bytes);
+      if (!mounted) return;
+      setState(() {
+        if (isPassport) {
+          _passportBase64 = b64;
+        } else {
+          _idBase64 = b64;
+        }
+      });
+    } catch (e) {
+      if (mounted) {
+        MotionToast.error(
+          description: Text(e.toString()),
+          title: const Text('Photo'),
+        ).show(context);
+      }
+    }
+  }
+
+  Future<void> _captureLocation() async {
+    try {
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        if (mounted) {
+          MotionToast.warning(
+            description: const Text('Location permission denied.'),
+            title: const Text('Location'),
+          ).show(context);
+        }
+        return;
+      }
+      final pos = await Geolocator.getCurrentPosition();
+      if (mounted) {
+        setState(() {
+          _latitude = pos.latitude;
+          _longitude = pos.longitude;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        MotionToast.error(
+          description: Text(e.toString()),
+          title: const Text('Location'),
+        ).show(context);
+      }
+    }
+  }
+
   Future<void> _submitRegistration() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -98,6 +216,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
         Payroll_No: _payrollController.text.trim(),
         P_I_N_Number: _pinController.text.trim(),
         Phone_No: _phoneController.text.trim(),
+        Signature: _signatureBase64,
+        Passport_Photo: _passportBase64,
+        ID_Photo: _idBase64,
+        Latitude: _latitude,
+        Longitude: _longitude,
       );
 
       final response = await ApiClient().postdata('register', reg.toJson());
@@ -153,7 +276,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           child: Stepper(
             currentStep: _currentStep,
             onStepContinue: () {
-              if (_currentStep < 2) {
+              if (_currentStep < 3) {
                 setState(() => _currentStep++);
               } else {
                 _submitRegistration();
@@ -172,7 +295,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 padding: const EdgeInsets.only(top: 16),
                 child: Row(
                   children: [
-                    if (_currentStep < 2)
+                    if (_currentStep < 3)
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF2E7D32),
@@ -183,7 +306,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         onPressed: details.onStepContinue,
                         child: const Text('Continue'),
                       ),
-                    if (_currentStep == 2)
+                    if (_currentStep == 3)
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF2E7D32),
@@ -419,11 +542,93 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
               ),
 
-              // ── Step 3: Review & Submit ────────────────────
+              // ── Step 3: Documents & Location ────────────────
+              Step(
+                title: const Text('Documents'),
+                isActive: _currentStep >= 2,
+                state:
+                    _currentStep > 2 ? StepState.complete : StepState.indexed,
+                content: Column(
+                  children: [
+                    Card(
+                      elevation: 1,
+                      child: ListTile(
+                        leading: const Icon(Icons.draw_outlined),
+                        title: const Text('Member Signature'),
+                        subtitle: Text(_signatureBase64 == null
+                            ? 'Not captured yet'
+                            : 'Captured'),
+                        trailing: TextButton(
+                          onPressed: _captureSignature,
+                          child: Text(_signatureBase64 == null
+                              ? 'Capture'
+                              : 'Redo'),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Card(
+                      elevation: 1,
+                      child: ListTile(
+                        leading: const Icon(Icons.photo_camera_outlined),
+                        title: const Text('Passport Photo'),
+                        subtitle: Text(_passportBase64 == null
+                            ? 'Not captured yet'
+                            : 'Captured'),
+                        trailing: TextButton(
+                          onPressed: () => _pickRegistrationPhoto(true),
+                          child: Text(_passportBase64 == null
+                              ? 'Capture'
+                              : 'Redo'),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Card(
+                      elevation: 1,
+                      child: ListTile(
+                        leading: const Icon(Icons.badge_outlined),
+                        title: const Text('ID Photo'),
+                        subtitle: Text(_idBase64 == null
+                            ? 'Not captured yet'
+                            : 'Captured'),
+                        trailing: TextButton(
+                          onPressed: () => _pickRegistrationPhoto(false),
+                          child:
+                              Text(_idBase64 == null ? 'Capture' : 'Redo'),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Card(
+                      elevation: 1,
+                      child: ListTile(
+                        leading: const Icon(Icons.my_location_outlined),
+                        title: const Text('Member Location'),
+                        subtitle: Text(_latitude == null
+                            ? 'Not captured yet'
+                            : '${_latitude!.toStringAsFixed(5)}, ${_longitude!.toStringAsFixed(5)}'),
+                        trailing: TextButton(
+                          onPressed: _captureLocation,
+                          child: Text(_latitude == null ? 'Get' : 'Refresh'),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    const Text(
+                      'Your signature and document photos are captured for KYC and sent with the registration.',
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ── Step 4: Review & Submit ────────────────────
               Step(
                 title: const Text('Review'),
-                isActive: _currentStep >= 2,
-                state: StepState.indexed,
+                isActive: _currentStep >= 3,
+                state:
+                    _currentStep > 3 ? StepState.complete : StepState.indexed,
                 content: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

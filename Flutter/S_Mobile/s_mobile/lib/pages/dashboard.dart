@@ -12,6 +12,7 @@ import 'package:s_mobile/common/utilities.dart';
 import 'package:s_mobile/members/accounts.dart';
 import 'package:s_mobile/members/entries.dart';
 import 'package:s_mobile/members/member.dart';
+import 'package:s_mobile/pages/alerts_page.dart';
 import 'package:s_mobile/pages/ledgerEntries.dart';
 import 'package:s_mobile/pages/loan_ledger.dart' show LoanLedgerEntries;
 import 'package:s_mobile/pages/loan_list.dart';
@@ -171,6 +172,16 @@ class _DashboardState extends State<dashboard> {
                           ),
                         ],
                       ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.notifications_none,
+                          color: Colors.white, size: 26),
+                      tooltip: 'Alerts',
+                      onPressed: () => Get.to(() => Master(
+                            member: member,
+                            widgets: const AlertsPage(),
+                            title: 'Alerts',
+                          )),
                     ),
                     IconButton(
                       icon:
