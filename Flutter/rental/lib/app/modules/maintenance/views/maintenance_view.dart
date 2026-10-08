@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../controllers/maintenance_controller.dart';
 
 class MaintenanceView extends GetView<MaintenanceController> {
@@ -8,13 +9,12 @@ class MaintenanceView extends GetView<MaintenanceController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Maintenance'),
-      ),
+      appBar: AppBar(title: const Text('Maintenance')),
       body: Obx(
-        () => controller.isLoading.value
-            ? const Center(child: CircularProgressIndicator())
-            : _buildMaintenanceList(context),
+        () =>
+            controller.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : _buildMaintenanceList(context),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showMaintenanceForm(context),
@@ -26,109 +26,111 @@ class MaintenanceView extends GetView<MaintenanceController> {
   Widget _buildMaintenanceList(BuildContext context) {
     return controller.maintenanceRequests.isEmpty
         ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.build_outlined,
-                  size: 80,
-                  color: Colors.grey,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'No maintenance requests found',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Tap the + button to add your first request',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
-          )
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.build_outlined, size: 80, color: Colors.grey),
+              const SizedBox(height: 16),
+              Text(
+                'No maintenance requests found',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Tap the + button to add your first request',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
+          ),
+        )
         : ListView.builder(
-            itemCount: controller.maintenanceRequests.length,
-            itemBuilder: (context, index) {
-              final request = controller.maintenanceRequests[index];
-              return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Column(
-                  children: [
-                    ListTile(
-                      leading: _buildPriorityIcon(request['priority']),
-                      title: Text(
-                        request['title'],
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        '${request['property']} - Unit ${request['unit']}',
-                      ),
-                      trailing: _buildStatusChip(request['status']),
+          itemCount: controller.maintenanceRequests.length,
+          itemBuilder: (context, index) {
+            final request = controller.maintenanceRequests[index];
+            return Card(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: _buildPriorityIcon(request['priority']),
+                    title: Text(
+                      request['title'],
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              request['description'],
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
+                    subtitle: Text(
+                      '${request['property']} - Unit ${request['unit']}',
                     ),
-                    const Divider(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Created: ${request['createdDate']}'),
-                          Text('Est. Cost: \$${request['estimatedCost']}'),
-                        ],
-                      ),
-                    ),
-                    ButtonBar(
-                      alignment: MainAxisAlignment.spaceAround,
+                    trailing: _buildStatusChip(request['status']),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
                       children: [
-                        TextButton.icon(
-                          onPressed: () {
-                            _showMaintenanceForm(context, request);
-                          },
-                          icon: const Icon(Icons.edit),
-                          label: const Text('Edit'),
-                        ),
-                        TextButton.icon(
-                          onPressed: () {
-                            // Update status
-                            _showStatusUpdateDialog(context, request);
-                          },
-                          icon: const Icon(Icons.update),
-                          label: const Text('Update Status'),
-                        ),
-                        TextButton.icon(
-                          onPressed: () {
-                            _showDeleteConfirmation(context, request['id']);
-                          },
-                          icon: const Icon(Icons.delete, color: Colors.red),
-                          label: const Text('Delete', style: TextStyle(color: Colors.red)),
+                        Expanded(
+                          child: Text(
+                            request['description'],
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-              );
-            },
-          );
+                  ),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Created: ${request['createdDate']}'),
+                        Text('Est. Cost: \$${request['estimatedCost']}'),
+                      ],
+                    ),
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton.icon(
+                        onPressed: () {
+                          _showMaintenanceForm(context, request);
+                        },
+                        icon: const Icon(Icons.edit),
+                        label: const Text('Edit'),
+                      ),
+                      TextButton.icon(
+                        onPressed: () {
+                          // Update status
+                          _showStatusUpdateDialog(context, request);
+                        },
+                        icon: const Icon(Icons.update),
+                        label: const Text('Update Status'),
+                      ),
+                      TextButton.icon(
+                        onPressed: () {
+                          _showDeleteConfirmation(context, request['id']);
+                        },
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        label: const Text(
+                          'Delete',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        );
   }
 
   Widget _buildPriorityIcon(String priority) {
     IconData iconData;
     Color iconColor;
-    
+
     switch (priority) {
       case 'High':
         iconData = Icons.priority_high;
@@ -146,7 +148,7 @@ class MaintenanceView extends GetView<MaintenanceController> {
         iconData = Icons.help;
         iconColor = Colors.grey;
     }
-    
+
     return CircleAvatar(
       backgroundColor: iconColor.withOpacity(0.2),
       child: Icon(iconData, color: iconColor),
@@ -155,7 +157,7 @@ class MaintenanceView extends GetView<MaintenanceController> {
 
   Widget _buildStatusChip(String status) {
     Color chipColor;
-    
+
     switch (status) {
       case 'Open':
         chipColor = Colors.red;
@@ -172,7 +174,7 @@ class MaintenanceView extends GetView<MaintenanceController> {
       default:
         chipColor = Colors.grey;
     }
-    
+
     return Chip(
       label: Text(status),
       backgroundColor: chipColor.withOpacity(0.2),
@@ -180,9 +182,12 @@ class MaintenanceView extends GetView<MaintenanceController> {
     );
   }
 
-  void _showMaintenanceForm(BuildContext context, [Map<String, dynamic>? request]) {
+  void _showMaintenanceForm(
+    BuildContext context, [
+    Map<String, dynamic>? request,
+  ]) {
     final isEditing = request != null;
-    
+
     if (isEditing) {
       controller.titleController.text = request['title'];
       controller.descriptionController.text = request['description'];
@@ -191,19 +196,21 @@ class MaintenanceView extends GetView<MaintenanceController> {
       controller.priorityController.text = request['priority'];
       controller.statusController.text = request['status'];
       controller.assignedToController.text = request['assignedTo'];
-      controller.estimatedCostController.text = request['estimatedCost'].toString();
+      controller.estimatedCostController.text =
+          request['estimatedCost'].toString();
     } else {
       controller.clearForm();
       controller.priorityController.text = 'Medium';
       controller.statusController.text = 'Open';
     }
-    
+
     Get.dialog(
       Dialog(
         child: Container(
-          width: MediaQuery.of(context).size.width > 600 
-              ? 500 
-              : MediaQuery.of(context).size.width * 0.9,
+          width:
+              MediaQuery.of(context).size.width > 600
+                  ? 500
+                  : MediaQuery.of(context).size.width * 0.9,
           padding: const EdgeInsets.all(16),
           child: SingleChildScrollView(
             child: Column(
@@ -211,7 +218,9 @@ class MaintenanceView extends GetView<MaintenanceController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  isEditing ? 'Edit Maintenance Request' : 'Add Maintenance Request',
+                  isEditing
+                      ? 'Edit Maintenance Request'
+                      : 'Add Maintenance Request',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 16),
@@ -314,9 +323,12 @@ class MaintenanceView extends GetView<MaintenanceController> {
                     ),
                     const SizedBox(width: 16),
                     ElevatedButton(
-                      onPressed: isEditing
-                          ? () => controller.editMaintenanceRequest(request['id'])
-                          : controller.addMaintenanceRequest,
+                      onPressed:
+                          isEditing
+                              ? () => controller.editMaintenanceRequest(
+                                request['id'],
+                              )
+                              : controller.addMaintenanceRequest,
                       child: Text(isEditing ? 'Update' : 'Add'),
                     ),
                   ],
@@ -440,15 +452,19 @@ class MaintenanceView extends GetView<MaintenanceController> {
     );
   }
 
-  void _showStatusUpdateDialog(BuildContext context, Map<String, dynamic> request) {
+  void _showStatusUpdateDialog(
+    BuildContext context,
+    Map<String, dynamic> request,
+  ) {
     controller.statusController.text = request['status'];
-    
+
     Get.dialog(
       Dialog(
         child: Container(
-          width: MediaQuery.of(context).size.width > 600 
-              ? 400 
-              : MediaQuery.of(context).size.width * 0.8,
+          width:
+              MediaQuery.of(context).size.width > 600
+                  ? 400
+                  : MediaQuery.of(context).size.width * 0.8,
           padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -461,9 +477,9 @@ class MaintenanceView extends GetView<MaintenanceController> {
               const SizedBox(height: 16),
               Text(
                 request['title'],
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
                 '${request['property']} - Unit ${request['unit']}',
@@ -491,7 +507,8 @@ class MaintenanceView extends GetView<MaintenanceController> {
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: () => controller.editMaintenanceRequest(request['id']),
+                    onPressed:
+                        () => controller.editMaintenanceRequest(request['id']),
                     child: const Text('Update'),
                   ),
                 ],
@@ -511,16 +528,10 @@ class MaintenanceView extends GetView<MaintenanceController> {
           'Are you sure you want to delete this maintenance request? This action cannot be undone.',
         ),
         actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Cancel'),
-          ),
+          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
           TextButton(
             onPressed: () => controller.deleteMaintenanceRequest(id),
-            child: const Text(
-              'Delete',
-              style: TextStyle(color: Colors.red),
-            ),
+            child: const Text('Delete', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../controllers/reports_controller.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 class ReportsView extends GetView<ReportsController> {
   const ReportsView({Key? key}) : super(key: key);
@@ -9,13 +9,12 @@ class ReportsView extends GetView<ReportsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reports'),
-      ),
+      appBar: AppBar(title: const Text('Reports')),
       body: Obx(
-        () => controller.isLoading.value
-            ? const Center(child: CircularProgressIndicator())
-            : _buildReportsContent(context),
+        () =>
+            controller.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : _buildReportsContent(context),
       ),
     );
   }
@@ -102,16 +101,9 @@ class ReportsView extends GetView<ReportsController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 32,
-              color: color,
-            ),
+            Icon(icon, size: 32, color: color),
             const SizedBox(height: 8),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+            Text(value, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 4),
             Text(
               title,
@@ -192,28 +184,29 @@ class ReportsView extends GetView<ReportsController> {
                   controller.exportReportToPdf(report['title'] as String);
                 }
               },
-              itemBuilder: (context) => [
-                const PopupMenuItem(
-                  value: 'generate',
-                  child: Row(
-                    children: [
-                      Icon(Icons.refresh),
-                      SizedBox(width: 8),
-                      Text('Generate'),
-                    ],
-                  ),
-                ),
-                const PopupMenuItem(
-                  value: 'export',
-                  child: Row(
-                    children: [
-                      Icon(Icons.download),
-                      SizedBox(width: 8),
-                      Text('Export to PDF'),
-                    ],
-                  ),
-                ),
-              ],
+              itemBuilder:
+                  (context) => [
+                    const PopupMenuItem(
+                      value: 'generate',
+                      child: Row(
+                        children: [
+                          Icon(Icons.refresh),
+                          SizedBox(width: 8),
+                          Text('Generate'),
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 'export',
+                      child: Row(
+                        children: [
+                          Icon(Icons.download),
+                          SizedBox(width: 8),
+                          Text('Export to PDF'),
+                        ],
+                      ),
+                    ),
+                  ],
             ),
             onTap: () => (report['onTap'] as Function)(),
           ),

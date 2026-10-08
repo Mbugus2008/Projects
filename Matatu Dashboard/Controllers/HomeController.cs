@@ -115,6 +115,19 @@ public class HomeController : Controller
         return View(await _dashboardService.GetLoadingTripsAsync(range, cancellationToken));
     }
 
+    /// <summary>
+    /// Vehicle-by-vehicle detail behind the loading screen: every arrival at a loading point with
+    /// its timings, so a supervisor can follow one unit's day rather than read aggregate numbers.
+    /// </summary>
+    [HttpGet("/loading/vehicles/{range?}")]
+    public async Task<IActionResult> LoadingVehicles(string? range, string? vehicle, bool? loads, CancellationToken cancellationToken)
+    {
+        ViewData["Title"] = "Loading - Vehicle Detail";
+        ViewData["RetrievedAt"] = DateTime.Now;
+        ViewData["SelectedRange"] = NormalizeRange(range);
+        return View(await _dashboardService.GetLoadingVehicleTripsAsync(range, vehicle, loads ?? true, cancellationToken));
+    }
+
     private async Task<FuelSummaryReport> BuildFuelSummaryReportAsync(
         string? range,
         CancellationToken cancellationToken)

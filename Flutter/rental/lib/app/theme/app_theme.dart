@@ -12,22 +12,16 @@ class AppTheme {
     ),
     cardTheme: CardThemeData(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: const BorderSide(color: Colors.blue, width: 2),
@@ -50,17 +44,12 @@ class AppTheme {
         fontWeight: FontWeight.bold,
         color: Colors.black87,
       ),
-      bodyLarge: TextStyle(
-        fontSize: 16,
-        color: Colors.black87,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        color: Colors.black87,
-      ),
+      bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
+      bodyMedium: TextStyle(fontSize: 14, color: Colors.black87),
     ),
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-        .copyWith(secondary: Colors.blueAccent),
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.blue,
+    ).copyWith(secondary: Colors.blueAccent),
   );
 
   static final ThemeData darkTheme = ThemeData(
@@ -75,22 +64,16 @@ class AppTheme {
     cardTheme: CardThemeData(
       color: const Color(0xFF2C2C2C),
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: const BorderSide(color: Colors.blueAccent, width: 2),
@@ -115,16 +98,12 @@ class AppTheme {
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
-      bodyLarge: TextStyle(
-        fontSize: 16,
-        color: Colors.white70,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        color: Colors.white70,
-      ),
+      bodyLarge: TextStyle(fontSize: 16, color: Colors.white70),
+      bodyMedium: TextStyle(fontSize: 14, color: Colors.white70),
     ),
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue, brightness: Brightness.dark)
-        .copyWith(secondary: Colors.blueAccent),
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.blue,
+      brightness: Brightness.dark,
+    ).copyWith(secondary: Colors.blueAccent),
   );
 }

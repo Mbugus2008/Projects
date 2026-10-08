@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../data/api_service.dart';
 
 class DocumentsController extends GetxController {
   final RxList<Map<String, dynamic>> documents = <Map<String, dynamic>>[].obs;
   final RxBool isLoading = false.obs;
-  
+
   // Form controllers
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -13,17 +14,18 @@ class DocumentsController extends GetxController {
   final TextEditingController propertyController = TextEditingController();
   final TextEditingController unitController = TextEditingController();
   final TextEditingController tenantController = TextEditingController();
-  final TextEditingController expirationDateController = TextEditingController();
-  
+  final TextEditingController expirationDateController =
+      TextEditingController();
+
   // Get the API service
   final ApiService _apiService = Get.find<ApiService>();
-  
+
   @override
   void onInit() {
     super.onInit();
     loadDocuments();
   }
-  
+
   @override
   void onClose() {
     titleController.dispose();
@@ -35,10 +37,10 @@ class DocumentsController extends GetxController {
     expirationDateController.dispose();
     super.onClose();
   }
-  
+
   void loadDocuments() async {
     isLoading.value = true;
-    
+
     try {
       final result = await _apiService.getDocuments();
       documents.value = result;
@@ -55,16 +57,16 @@ class DocumentsController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void addDocument() async {
     isLoading.value = true;
-    
+
     try {
       // Parse the property, unit, and tenant IDs from the controller values
       final propertyId = int.tryParse(propertyController.text) ?? 0;
       final unitId = int.tryParse(unitController.text) ?? 0;
       final tenantId = int.tryParse(tenantController.text) ?? 0;
-      
+
       final documentData = {
         'title': titleController.text,
         'description': descriptionController.text,
@@ -72,15 +74,18 @@ class DocumentsController extends GetxController {
         'propertyId': propertyId > 0 ? propertyId : null,
         'unitId': unitId > 0 ? unitId : null,
         'tenantId': tenantId > 0 ? tenantId : null,
-        'expirationDate': expirationDateController.text.isNotEmpty ? expirationDateController.text : null,
+        'expirationDate':
+            expirationDateController.text.isNotEmpty
+                ? expirationDateController.text
+                : null,
         'uploadDate': DateTime.now().toIso8601String(),
         'fileType': 'PDF', // Default file type
         'fileSize': 0, // Will be updated when actual file is uploaded
         'filePath': '', // Will be updated when actual file is uploaded
       };
-      
+
       final success = await _apiService.addDocument(documentData);
-      
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -113,16 +118,16 @@ class DocumentsController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void editDocument(int id) async {
     isLoading.value = true;
-    
+
     try {
       // Parse the property, unit, and tenant IDs from the controller values
       final propertyId = int.tryParse(propertyController.text) ?? 0;
       final unitId = int.tryParse(unitController.text) ?? 0;
       final tenantId = int.tryParse(tenantController.text) ?? 0;
-      
+
       final documentData = {
         'title': titleController.text,
         'description': descriptionController.text,
@@ -130,11 +135,14 @@ class DocumentsController extends GetxController {
         'propertyId': propertyId > 0 ? propertyId : null,
         'unitId': unitId > 0 ? unitId : null,
         'tenantId': tenantId > 0 ? tenantId : null,
-        'expirationDate': expirationDateController.text.isNotEmpty ? expirationDateController.text : null,
+        'expirationDate':
+            expirationDateController.text.isNotEmpty
+                ? expirationDateController.text
+                : null,
       };
-      
+
       final success = await _apiService.updateDocument(id, documentData);
-      
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -167,13 +175,13 @@ class DocumentsController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void deleteDocument(int id) async {
     isLoading.value = true;
-    
+
     try {
       final success = await _apiService.deleteDocument(id);
-      
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -206,7 +214,7 @@ class DocumentsController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void clearForm() {
     titleController.clear();
     descriptionController.clear();

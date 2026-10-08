@@ -16,8 +16,13 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+
+    // Deliberately NO UseHsts(): HSTS applies to the whole host, not just this port. Sending it
+    // from the dashboard pinned every browser that opened it to HTTPS on services.trimline.co.ke,
+    // which broke the plain-HTTP services on that machine (the :8093 binding itself, and the
+    // Business Central OData endpoints on :9992/:9993) for 30 days with a redirect to an HTTP-only
+    // port - the browser then fails with ERR_SSL_PROTOCOL_ERROR. The redirect below still sends
+    // visitors to the HTTPS copy of this site.
 }
 
 app.UseHttpsRedirection();
@@ -66,6 +71,11 @@ app.MapControllerRoute(
     name: "loading",
     pattern: "loading/{range?}",
     defaults: new { controller = "Home", action = "Loading" });
+
+app.MapControllerRoute(
+    name: "loading-vehicles",
+    pattern: "loading/vehicles/{range?}",
+    defaults: new { controller = "Home", action = "LoadingVehicles" });
 
 app.MapControllerRoute(
     name: "admin",

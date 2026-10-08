@@ -76,6 +76,17 @@ class MyAccountScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
+            icon: const Icon(Icons.privacy_tip_outlined),
+            tooltip: 'Privacy Policy',
+            onPressed: () async {
+              final Uri url =
+                  Uri.parse('https://trimline.co.ke/kanisa-privacy.html');
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url, mode: LaunchMode.externalApplication);
+              }
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.help_outline),
             tooltip: 'Help',
             onPressed: () async {

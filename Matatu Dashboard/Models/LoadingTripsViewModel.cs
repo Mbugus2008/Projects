@@ -22,6 +22,13 @@ public sealed class LoadingTripsViewModel
     /// <summary>Arrivals that could not load and had to go round.</summary>
     public int WentRound { get; set; }
 
+    /// <summary>
+    /// Arrivals where the unit stayed inside the fence long enough to load, but then drove out and
+    /// came back: it was queueing in the yard, not loading. Counted separately from a round, and
+    /// never counted as a completed trip.
+    /// </summary>
+    public int WaitedInBay { get; set; }
+
     public int Vehicles { get; set; }
     public int LoadingPoints { get; set; }
 
@@ -53,6 +60,9 @@ public sealed class LoadingTripsViewModel
     public List<LoadingPointRow> LoadingPointRows { get; set; } = [];
     public List<string> Takeaways { get; set; } = [];
 
+    /// <summary>True when the range held more arrivals than could be read in one pass.</summary>
+    public bool Truncated { get; set; }
+
     public bool HasData => Trips > 0 || WentRound > 0;
 }
 
@@ -64,7 +74,10 @@ public sealed class LoadingHourRow
     public int Trips { get; set; }
     public int WentRound { get; set; }
 
-    /// <summary>Share of arrivals this hour that had to go round, 0-100.</summary>
+    /// <summary>Arrivals that waited inside the fence and then left without loading.</summary>
+    public int Waited { get; set; }
+
+    /// <summary>Share of arrivals this hour that did not end in a load, 0-100.</summary>
     public double PressurePct { get; set; }
 
     public bool IsWorst { get; set; }
@@ -75,6 +88,7 @@ public sealed class LoadingVehicleRow
     public string Vehicle { get; set; } = string.Empty;
     public int Trips { get; set; }
     public int WentRound { get; set; }
+    public int WaitedInBay { get; set; }
     public double PressurePct { get; set; }
     public double AverageLoadingMinutes { get; set; }
 }
@@ -84,5 +98,9 @@ public sealed class LoadingPointRow
     public string Name { get; set; } = string.Empty;
     public int Trips { get; set; }
     public int WentRound { get; set; }
+
+    /// <summary>Arrivals that queued inside the fence before driving out again.</summary>
+    public int Waited { get; set; }
+
     public double SuccessPct { get; set; }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../controllers/finances_controller.dart';
 
 class FinancesView extends GetView<FinancesController> {
@@ -8,13 +9,12 @@ class FinancesView extends GetView<FinancesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Finances'),
-      ),
+      appBar: AppBar(title: const Text('Finances')),
       body: Obx(
-        () => controller.isLoading.value
-            ? const Center(child: CircularProgressIndicator())
-            : _buildFinancesContent(context),
+        () =>
+            controller.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : _buildFinancesContent(context),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showTransactionForm(context),
@@ -46,9 +46,7 @@ class FinancesView extends GetView<FinancesController> {
             ],
           ),
         ),
-        Expanded(
-          child: _buildTransactionList(context),
-        ),
+        Expanded(child: _buildTransactionList(context)),
       ],
     );
   }
@@ -105,16 +103,9 @@ class FinancesView extends GetView<FinancesController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 32,
-              color: color,
-            ),
+            Icon(icon, size: 32, color: color),
             const SizedBox(height: 8),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+            Text(value, style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 4),
             Text(
               title,
@@ -130,81 +121,84 @@ class FinancesView extends GetView<FinancesController> {
   Widget _buildTransactionList(BuildContext context) {
     return controller.transactions.isEmpty
         ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.receipt_long_outlined,
-                  size: 80,
-                  color: Colors.grey,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'No transactions found',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Tap the + button to add your first transaction',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
-          )
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.receipt_long_outlined,
+                size: 80,
+                color: Colors.grey,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'No transactions found',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Tap the + button to add your first transaction',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
+          ),
+        )
         : ListView.builder(
-            itemCount: controller.transactions.length,
-            itemBuilder: (context, index) {
-              final transaction = controller.transactions[index];
-              final isIncome = transaction['type'] == 'Income';
-              
-              return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: isIncome ? Colors.green : Colors.red,
-                    child: Icon(
-                      isIncome ? Icons.arrow_upward : Icons.arrow_downward,
-                      color: Colors.white,
-                    ),
+          itemCount: controller.transactions.length,
+          itemBuilder: (context, index) {
+            final transaction = controller.transactions[index];
+            final isIncome = transaction['type'] == 'Income';
+
+            return Card(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: isIncome ? Colors.green : Colors.red,
+                  child: Icon(
+                    isIncome ? Icons.arrow_upward : Icons.arrow_downward,
+                    color: Colors.white,
                   ),
-                  title: Text(
-                    transaction['description'],
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(
-                    '${transaction['category']} - ${transaction['property']} ${transaction['unit'] != 'N/A' ? '(Unit ${transaction['unit']})' : ''}',
-                  ),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        '\$${transaction['amount'].toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: isIncome ? Colors.green : Colors.red,
-                        ),
-                      ),
-                      Text(
-                        transaction['date'],
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    _showTransactionForm(context, transaction);
-                  },
                 ),
-              );
-            },
-          );
+                title: Text(
+                  transaction['description'],
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                  '${transaction['category']} - ${transaction['property']} ${transaction['unit'] != 'N/A' ? '(Unit ${transaction['unit']})' : ''}',
+                ),
+                trailing: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '\$${transaction['amount'].toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: isIncome ? Colors.green : Colors.red,
+                      ),
+                    ),
+                    Text(
+                      transaction['date'],
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  _showTransactionForm(context, transaction);
+                },
+              ),
+            );
+          },
+        );
   }
 
-  void _showTransactionForm(BuildContext context, [Map<String, dynamic>? transaction]) {
+  void _showTransactionForm(
+    BuildContext context, [
+    Map<String, dynamic>? transaction,
+  ]) {
     final isEditing = transaction != null;
     final isIncome = isEditing ? transaction['type'] == 'Income' : true;
     final RxBool rxIsIncome = isIncome.obs;
-    
+
     if (isEditing) {
       controller.dateController.text = transaction['date'];
       controller.amountController.text = transaction['amount'].toString();
@@ -217,13 +211,14 @@ class FinancesView extends GetView<FinancesController> {
       controller.clearForm();
       controller.dateController.text = DateTime.now().toString().split(' ')[0];
     }
-    
+
     Get.dialog(
       Dialog(
         child: Container(
-          width: MediaQuery.of(context).size.width > 600 
-              ? 500 
-              : MediaQuery.of(context).size.width * 0.9,
+          width:
+              MediaQuery.of(context).size.width > 600
+                  ? 500
+                  : MediaQuery.of(context).size.width * 0.9,
           padding: const EdgeInsets.all(16),
           child: SingleChildScrollView(
             child: Column(
@@ -277,16 +272,19 @@ class FinancesView extends GetView<FinancesController> {
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 16),
-               Obx(() => TextField(
-  controller: controller.categoryController,
-  decoration: InputDecoration(
-    labelText: 'Category',
-    prefixIcon: const Icon(Icons.category),
-    hintText: rxIsIncome.value 
-        ? 'e.g., Rent, Deposit' 
-        : 'e.g., Maintenance, Utilities',
-  ),
-)),
+                Obx(
+                  () => TextField(
+                    controller: controller.categoryController,
+                    decoration: InputDecoration(
+                      labelText: 'Category',
+                      prefixIcon: const Icon(Icons.category),
+                      hintText:
+                          rxIsIncome.value
+                              ? 'e.g., Rent, Deposit'
+                              : 'e.g., Maintenance, Utilities',
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: controller.propertyController,
@@ -338,9 +336,11 @@ class FinancesView extends GetView<FinancesController> {
                     ),
                     const SizedBox(width: 16),
                     ElevatedButton(
-                      onPressed: isEditing
-                          ? () => controller.editTransaction(transaction['id'])
-                          : controller.addTransaction,
+                      onPressed:
+                          isEditing
+                              ? () =>
+                                  controller.editTransaction(transaction['id'])
+                              : controller.addTransaction,
                       child: Text(isEditing ? 'Update' : 'Add'),
                     ),
                   ],

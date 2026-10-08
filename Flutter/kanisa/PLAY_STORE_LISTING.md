@@ -128,16 +128,40 @@ Use your existing `kirigitilogo` icon scaled to 512x512
 ---
 
 ## Contact Information for Play Console
-- **Email**: support@trimline.co.ke (or your support email)
+- **Email**: support@trimline.co.ke
 - **Website**: https://trimline.co.ke
-- **Privacy Policy URL**: Host PRIVACY_POLICY.md online
+- **Developer name**: Trimline Technologies
+- **Privacy Policy URL**: https://trimline.co.ke/kanisa-privacy.html
+- **Account deletion URL**: https://trimline.co.ke/kanisa-delete-account/
+
+## Privacy Policy Publishing
+
+The live privacy policy page is a plain HTML page served by the trimline.co.ke IIS site.
+`privacy_policy.html` in this repository is the source of truth for that page.
+
+- Deploy: upload `privacy_policy.html` to the site root as `kanisa-privacy.html`
+  (keep the existing `kanisa.html`, `kanisa-help.html` and `kanisa-delete-account.html`
+  pages; the policy links to them).
+- Never point Play Console at a Markdown file or a shared document - the URL must serve a
+  publicly reachable HTML page that renders without JavaScript or a login.
+- Verify after every upload:
+
+```bash
+curl -s -o /dev/null -w "%{http_code} %{content_type}\n" https://trimline.co.ke/kanisa-privacy.html
+# expect: 200 text/html
+```
+
+- The page must stay reachable to Google's crawlers from outside Kenya, so do not add IP
+  restrictions, basic auth or bot blocking for it, and keep the TLS certificate
+  (Let's Encrypt) renewing automatically.
 
 ---
 
 ## Pre-Launch Checklist
 
 - [ ] Create Google Play Developer account ($25)
-- [ ] Host privacy policy at a public URL
+- [x] Host privacy policy at a public URL (https://trimline.co.ke/kanisa-privacy.html, from `privacy_policy.html`)
+- [x] Host account deletion page (https://trimline.co.ke/kanisa-delete-account/)
 - [ ] Prepare 512x512 app icon
 - [ ] Create 1024x500 feature graphic
 - [ ] Take 4-8 app screenshots

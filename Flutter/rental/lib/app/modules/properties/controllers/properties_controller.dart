@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../data/api_service.dart';
 
 class PropertiesController extends GetxController {
   final RxList<Map<String, dynamic>> properties = <Map<String, dynamic>>[].obs;
   final RxBool isLoading = false.obs;
-  
+
   // Form controllers
   final TextEditingController nameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
@@ -18,16 +19,16 @@ class PropertiesController extends GetxController {
   final TextEditingController purchasePriceController = TextEditingController();
   final TextEditingController currentValueController = TextEditingController();
   final TextEditingController notesController = TextEditingController();
-  
+
   // Get the API service
   final ApiService _apiService = Get.find<ApiService>();
-  
+
   @override
   void onInit() {
     super.onInit();
     loadProperties();
   }
-  
+
   @override
   void onClose() {
     nameController.dispose();
@@ -43,10 +44,10 @@ class PropertiesController extends GetxController {
     notesController.dispose();
     super.onClose();
   }
-  
+
   void loadProperties() async {
     isLoading.value = true;
-    
+
     try {
       final result = await _apiService.getProperties();
       properties.value = result;
@@ -63,10 +64,10 @@ class PropertiesController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void addProperty() async {
     isLoading.value = true;
-    
+
     try {
       final propertyData = {
         'name': nameController.text,
@@ -80,9 +81,9 @@ class PropertiesController extends GetxController {
         'marketValue': double.tryParse(currentValueController.text) ?? 0.0,
         'description': notesController.text,
       };
-      
+
       final success = await _apiService.addProperty(propertyData);
-      
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -115,10 +116,10 @@ class PropertiesController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void editProperty(int id) async {
     isLoading.value = true;
-    
+
     try {
       final propertyData = {
         'name': nameController.text,
@@ -132,9 +133,9 @@ class PropertiesController extends GetxController {
         'marketValue': double.tryParse(currentValueController.text) ?? 0.0,
         'description': notesController.text,
       };
-      
+
       final success = await _apiService.updateProperty(id, propertyData);
-      
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -167,13 +168,13 @@ class PropertiesController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void deleteProperty(int id) async {
     isLoading.value = true;
-    
+
     try {
       final success = await _apiService.deleteProperty(id);
-      
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -206,7 +207,7 @@ class PropertiesController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void clearForm() {
     nameController.clear();
     addressController.clear();

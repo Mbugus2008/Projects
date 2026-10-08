@@ -6,6 +6,12 @@ public class BusinessCentralDashboardViewModel
     public string? ErrorMessage { get; set; }
     public string SelectedRange { get; set; } = "today";
     public List<DashboardSectionViewModel> Sections { get; set; } = [];
+
+    /// <summary>
+    /// Loading performance for the same range, shown as a widget on the dashboard so the queueing
+    /// picture is visible without leaving the page.
+    /// </summary>
+    public LoadingTripsViewModel? Loading { get; set; }
 }
 
 public class DashboardSectionViewModel

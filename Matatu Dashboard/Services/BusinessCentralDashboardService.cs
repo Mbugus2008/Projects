@@ -221,23 +221,177 @@ public sealed class BusinessCentralDashboardService
         }
     }
 
+    /// <summary>
+    /// Vehicle-by-vehicle detail behind the loading screen: every arrival at a loading point with
+    /// the times attached, so the client can follow one unit's day instead of one percentage.
+    /// </summary>
+    public async Task<LoadingVehicleTripsViewModel> GetLoadingVehicleTripsAsync(
+        string? range,
+        string? vehicle,
+        bool loadsOnly,
+        CancellationToken cancellationToken = default)
+    {
+        var selectedRange = NormalizeRange(range);
+        var (_, description) = BuildLoadingRequest(selectedRange);
+        var (items, error) = await LoadLoadingItemsAsync(selectedRange, cancellationToken);
+
+        if (items is null)
+        {
+            return new LoadingVehicleTripsViewModel
+            {
+                Range = selectedRange,
+                RetrievedAt = DateTime.Now,
+                FilterDescription = description,
+                SelectedVehicle = vehicle,
+                LoadsOnly = loadsOnly,
+                ErrorMessage = error
+            };
+        }
+
+        var detail = LoadingTripsBuilder.BuildVehicleTrips(items, selectedRange, DateTime.Now, description, vehicle, loadsOnly);
+        detail.Truncated = items.Count >= MaxLoadingItems;
+        await ApplyFleetNumbersAsync(detail, cancellationToken);
+        return detail;
+    }
+
+    /// <summary>
+    /// Adds the depot's fleet number to each row. Depot staff know units by fleet number, not by
+    /// plate, so the picker is hard to use without it. A failure here must not break the page.
+    /// </summary>
+    private async Task ApplyFleetNumbersAsync(LoadingVehicleTripsViewModel model, CancellationToken cancellationToken)
+    {
+        var fleets = await GetVehicleFleetsAsync(cancellationToken);
+        if (fleets.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var row in model.Vehicles)
+        {
+            if (fleets.TryGetValue(row.Vehicle, out var fleet))
+            {
+                row.Fleet = fleet;
+            }
+        }
+
+        foreach (var row in model.TripRows)
+        {
+            if (fleets.TryGetValue(row.Vehicle, out var fleet))
+            {
+                row.Fleet = fleet;
+            }
+        }
+    }
+
+    /// <summary>Vehicle number to fleet number, read once and cached - it changes rarely.</summary>
+    private async Task<Dictionary<string, string>> GetVehicleFleetsAsync(CancellationToken cancellationToken)
+    {
+        const string cacheKey = "vehicle-fleets";
+        if (_cache.TryGetValue<Dictionary<string, string>>(cacheKey, out var cached) && cached is not null)
+        {
+            return cached;
+        }
+
+        var empty = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (string.IsNullOrWhiteSpace(_options.Username) || string.IsNullOrWhiteSpace(_options.Password))
+        {
+            return empty;
+        }
+
+        try
+        {
+            var baseUrl = string.IsNullOrWhiteSpace(_options.VehiclesUrl) ? DefaultVehiclesUrl : _options.VehiclesUrl;
+            var requestUrl = $"{baseUrl}?$select=Vehicle_Number,Fleet_No&$orderby=Vehicle_Number";
+
+            using var handler = new HttpClientHandler
+            {
+                PreAuthenticate = true,
+                UseDefaultCredentials = _options.UseDefaultCredentials
+            };
+
+            handler.Credentials = _options.UseDefaultCredentials
+                ? CredentialCache.DefaultNetworkCredentials
+                : CreateCredentialCache(requestUrl);
+
+            using var httpClient = new HttpClient(handler);
+            var items = await LoadAllItemsAsync(httpClient, requestUrl, cancellationToken, 5000);
+
+            var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var item in items)
+            {
+                var vehicle = GetStringValue(item, "Vehicle_Number");
+                var fleet = GetStringValue(item, "Fleet_No");
+
+                if (!string.IsNullOrWhiteSpace(vehicle) && !string.IsNullOrWhiteSpace(fleet))
+                {
+                    map[vehicle.Trim()] = fleet.Trim();
+                }
+            }
+
+            _logger.LogInformation("Loaded {Count} vehicle/fleet numbers.", map.Count);
+            _cache.Set(cacheKey, map, TimeSpan.FromSeconds(Math.Max(300, _options.ShareCacheSeconds)));
+            return map;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Could not load vehicle fleet numbers; the vehicle picker will show plates only.");
+            return empty;
+        }
+    }
+
     private async Task<LoadingTripsViewModel> BuildLoadingTripsAsync(string selectedRange, CancellationToken cancellationToken)
     {
-        var (requestUrl, description) = BuildLoadingRequest(selectedRange);
+        var (_, description) = BuildLoadingRequest(selectedRange);
+        var (items, error) = await LoadLoadingItemsAsync(selectedRange, cancellationToken);
 
-        if (string.IsNullOrWhiteSpace(_options.Username) || string.IsNullOrWhiteSpace(_options.Password))
+        if (items is null)
         {
             return new LoadingTripsViewModel
             {
                 Range = selectedRange,
                 RetrievedAt = DateTime.Now,
                 FilterDescription = description,
-                ErrorMessage = "Business Central credentials are missing in appsettings.json."
+                ErrorMessage = error
             };
         }
 
+        var summary = LoadingTripsBuilder.Build(items, selectedRange, DateTime.Now, description);
+        summary.Truncated = items.Count >= MaxLoadingItems;
+        return summary;
+    }
+
+    /// <summary>
+    /// Raw fence alerts for a range, cached. The summary and the vehicle detail page both read
+    /// from here, so a range is only ever fetched once per cache window however many times the
+    /// user switches between the two screens.
+    /// </summary>
+    private async Task<(List<JsonElement>? Items, string? Error)> LoadLoadingItemsAsync(
+        string selectedRange,
+        CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(_options.Username) || string.IsNullOrWhiteSpace(_options.Password))
+        {
+            return (null, "Business Central credentials are missing in appsettings.json.");
+        }
+
+        var cacheKey = $"loading-items:{selectedRange}";
+        if (_cache.TryGetValue<List<JsonElement>>(cacheKey, out var cached) && cached is not null)
+        {
+            return (cached, null);
+        }
+
+        var cacheLock = CacheLocks.GetOrAdd(cacheKey, static _ => new SemaphoreSlim(1, 1));
+        await cacheLock.WaitAsync(cancellationToken);
+
         try
         {
+            if (_cache.TryGetValue<List<JsonElement>>(cacheKey, out cached) && cached is not null)
+            {
+                return (cached, null);
+            }
+
+            var (requestUrl, _) = BuildLoadingRequest(selectedRange);
+
             using var handler = new HttpClientHandler
             {
                 PreAuthenticate = true,
@@ -250,18 +404,21 @@ public sealed class BusinessCentralDashboardService
 
             using var httpClient = new HttpClient(handler);
             var items = await LoadAllItemsAsync(httpClient, requestUrl, cancellationToken, MaxLoadingItems);
-            return LoadingTripsBuilder.Build(items, selectedRange, DateTime.Now, description);
+            _cache.Set(cacheKey, items, TimeSpan.FromSeconds(Math.Max(5, _options.CacheSeconds)));
+            return (items, null);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to load loading performance data");
-            return new LoadingTripsViewModel
-            {
-                Range = selectedRange,
-                RetrievedAt = DateTime.Now,
-                FilterDescription = description,
-                ErrorMessage = ex.Message
-            };
+            _logger.LogError(ex, "Failed to load loading performance data for {Range}", selectedRange);
+            return (null, ex.Message);
+        }
+        finally
+        {
+            cacheLock.Release();
         }
     }
 
@@ -407,6 +564,10 @@ public sealed class BusinessCentralDashboardService
 
         var sections = await Task.WhenAll(sources.Select(source => BuildSectionAsync(source, selectedRange, cancellationToken, source.MaxItemsToLoad)));
         model.Sections.AddRange(sections);
+
+        // Loading performance rides along with the dashboard (same range, its own cache), so the
+        // queueing picture is on the page instead of a separate report nobody opens.
+        model.Loading = await GetLoadingTripsAsync(selectedRange, cancellationToken);
 
         return model;
     }
@@ -1634,9 +1795,10 @@ public sealed class BusinessCentralDashboardService
 
     /// <summary>Entity set used when the loading screen has no explicit URL configured.</summary>
     private const string DefaultProtrackAlertsUrl = "http://services.trimline.co.ke:9993/CityServices/ODataV4/Company('Mbranch')/ProTrack_Alerts";
+    private const string DefaultVehiclesUrl = "http://services.trimline.co.ke:9993/CityServices/ODataV4/Company('Mbranch')/VehiclesBasics";
 
     /// <summary>Ceiling on fence rows pulled for the loading screen, so a month view stays bounded.</summary>
-    private const int MaxLoadingItems = 20000;
+    private const int MaxLoadingItems = 45000;
 
     private static string BuildRequestUrl(BusinessCentralDashboardSourceOptions source, string selectedRange)
     {
@@ -1974,6 +2136,11 @@ public sealed class BusinessCentralDashboardOptions
     /// table section on the main dashboard.
     /// </summary>
     public string ProtrackAlertsUrl { get; set; } = "http://services.trimline.co.ke:9993/CityServices/ODataV4/Company('Mbranch')/ProTrack_Alerts";
+
+    /// <summary>
+    /// VehiclesBasics, used only to show the fleet number next to a plate on the loading screens.
+    /// </summary>
+    public string VehiclesUrl { get; set; } = "http://services.trimline.co.ke:9993/CityServices/ODataV4/Company('Mbranch')/VehiclesBasics";
 
     public List<BusinessCentralDashboardSourceOptions> Sources { get; set; } = [];
 }

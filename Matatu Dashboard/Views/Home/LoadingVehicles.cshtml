@@ -1,0 +1,419 @@
+@model Matatu_Dashboard.Models.LoadingVehicleTripsViewModel
+@{
+    Layout = null;
+    var selectedRange = (ViewData["SelectedRange"] as string) ?? "today";
+    var todayStr = DateTime.Today.ToString("yyyy-MM-dd");
+    var pathBase = Context.Request.PathBase.HasValue ? Context.Request.PathBase.Value! : string.Empty;
+    var summaryUrl = string.IsNullOrWhiteSpace(pathBase) ? "/loading" : $"{pathBase}/loading";
+    var baseUrl = string.IsNullOrWhiteSpace(pathBase) ? "/loading/vehicles" : $"{pathBase}/loading/vehicles";
+    var retrievedAt = Model.RetrievedAt;
+
+    // One place that knows how the page's own query string is built, so the range tabs, the
+    // vehicle picker and the vehicle links can never drift apart.
+    string Url(string range, string? vehicle, bool? loadsMode)
+    {
+        var parts = new List<string>();
+        if (!string.IsNullOrWhiteSpace(vehicle))
+        {
+            parts.Add($"vehicle={Uri.EscapeDataString(vehicle)}");
+        }
+        if (loadsMode is not null)
+        {
+            parts.Add(loadsMode.Value ? "loads=true" : "loads=false");
+        }
+        return parts.Count == 0 ? $"{baseUrl}/{range}" : $"{baseUrl}/{range}?{string.Join("&", parts)}";
+    }
+
+    // Range tabs keep the current filter; the "Show" switch sets the mode explicitly.
+    var keepFilter = Url(selectedRange, Model.SelectedVehicle, Model.LoadsOnly ? null : false);
+    var partialUrl = Url(selectedRange, Model.SelectedVehicle, true);
+    var allUrl = Url(selectedRange, Model.SelectedVehicle, false);
+
+    // Everything on the page follows the picker: once a vehicle is chosen the totals, the table and
+    // the trip list all describe that one unit.
+    var scopedRows = Model.SelectedVehicle is null
+        ? Model.Vehicles
+        : Model.Vehicles.Where(row => string.Equals(row.Vehicle, Model.SelectedVehicle, StringComparison.OrdinalIgnoreCase)).ToList();
+
+    var arrivals = scopedRows.Sum(row => row.Arrivals);
+    var trips = scopedRows.Sum(row => row.Trips);
+    var rounds = scopedRows.Sum(row => row.Rounds);
+    var waited = scopedRows.Sum(row => row.WaitedInBay);
+    var lostMinutes = scopedRows.Sum(row => row.TotalWaitMinutes);
+    var scopedFleet = scopedRows.Select(row => row.Fleet).FirstOrDefault(fleet => !string.IsNullOrWhiteSpace(fleet));
+
+    string Time(DateTime value) => Model.ShowDates ? value.ToString("ddd HH:mm") : value.ToString("HH:mm");
+
+    string Tone(double pct) => pct >= 60 ? "high" : pct >= 35 ? "medium" : "low";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { color-scheme: light; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: #f4f6f9; color: #1a1a2e; padding: 16px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+        .header h1 { font-size: 20px; font-weight: 700; }
+        .header .sub { font-size: 12px; color: #888; margin-top: 2px; }
+        .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+        .tabs a { padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; color: #555; background: #e8ecf1; }
+        .tabs a.active { background: #006B3F; color: #fff; }
+        .tabs a.link { background: transparent; color: #006B3F; font-weight: 700; }
+        .controls { background: #fff; border-radius: 10px; padding: 12px 14px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; }
+        .controls label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: .5px; display: block; margin-bottom: 4px; }
+        select { padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 14px; background: #fff; min-width: 190px; }
+        .modes { display: flex; gap: 4px; }
+        .modes a { padding: 7px 12px; border-radius: 6px; text-decoration: none; font-size: 12.5px; font-weight: 500; color: #555; background: #e8ecf1; }
+        .modes a.active { background: #006B3F; color: #fff; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
+        .metric-card { background: #fff; border-radius: 10px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.08); text-align: center; }
+        .metric-card .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: .5px; }
+        .metric-card .value { font-size: 22px; font-weight: 700; color: #006B3F; margin-top: 4px; }
+        .metric-card .value.red { color: #d32f2f; }
+        .metric-card .note { font-size: 11px; color: #999; margin-top: 3px; }
+        .panel { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 16px; }
+        .panel h2 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .panel .hint { font-size: 12px; color: #888; margin-bottom: 12px; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+        th { background: #006B3F; color: #fff; padding: 10px 8px; font-size: 12px; text-align: left; white-space: nowrap; }
+        td { padding: 8px; font-size: 13px; border-bottom: 1px solid #eee; white-space: nowrap; vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        td.num, th.num { text-align: right; }
+        .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11.5px; font-weight: 700; }
+        .pill.high { background: #fdecea; color: #c62828; }
+        .pill.medium { background: #fff4e5; color: #ef6c00; }
+        .pill.low { background: #e8f5e9; color: #2e7d32; }
+        .empty { background: #fff; border-radius: 10px; padding: 28px; text-align: center; color: #777; font-size: 13.5px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+        .error { background: #fdecea; color: #b71c1c; border-radius: 8px; padding: 12px 14px; font-size: 13px; margin-bottom: 16px; }
+        .notice { background: #fff4e5; color: #8a4b00; border-radius: 8px; padding: 12px 14px; font-size: 13px; margin-bottom: 16px; border-left: 4px solid #ef6c00; }
+        .footer { margin-top: 12px; font-size: 11px; color: #999; text-align: center; }
+        .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        a.veh { color: #006B3F; font-weight: 700; text-decoration: none; }
+        a.veh:hover { text-decoration: underline; }
+        .rounds { font-size: 12px; color: #666; line-height: 1.5; }
+        .rounds .none { color: #2e7d32; font-weight: 600; }
+        .vet { font-weight: 700; }
+        tr.noload td { background: #fcfcfd; color: #777; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; background: #eef1f5; color: #666; }
+        .vehicle-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+        .vehicle-head h2 { font-size: 16px; }
+        .vehicle-head .meta { font-size: 12px; color: #888; }
+        @@media (max-width: 640px) {
+            body { padding: 10px; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .header h1 { font-size: 17px; }
+            .tabs a { padding: 5px 10px; font-size: 12px; }
+            .metrics { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .metric-card { padding: 10px; }
+            .metric-card .value { font-size: 18px; }
+            select { min-width: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>Vehicle detail</h1>
+            <div class="sub">@Model.FilterDescription</div>
+        </div>
+        <div class="tabs">
+            <a href="@Url("today", Model.SelectedVehicle, Model.LoadsOnly ? null : false)" class="@(selectedRange == "today" || selectedRange == todayStr ? "active" : "")">Today</a>
+            <a href="@Url("yesterday", Model.SelectedVehicle, Model.LoadsOnly ? null : false)" class="@(selectedRange == "yesterday" ? "active" : "")">Yesterday</a>
+            <a href="@Url("week", Model.SelectedVehicle, Model.LoadsOnly ? null : false)" class="@(selectedRange == "week" ? "active" : "")">This week</a>
+            <a href="@Url("month", Model.SelectedVehicle, Model.LoadsOnly ? null : false)" class="@(selectedRange == "month" ? "active" : "")">This month</a>
+            <a href="@summaryUrl/@selectedRange" class="link">Summary</a>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="error">Could not load loading data: @Model.ErrorMessage</div>
+    }
+
+    @if (Model.Truncated)
+    {
+        <div class="notice">
+            This range holds more arrivals than can be read in one pass, so the list below covers the
+            start of it only. Use today or yesterday for a complete picture.
+        </div>
+    }
+
+    @if (!Model.HasData)
+    {
+        <div class="empty">
+            No arrivals recorded for this period@(Model.SelectedVehicle is null ? "" : $" for {Model.SelectedVehicle}").
+            @if (Model.LoadsOnly)
+            {
+                <text><br /><span style="font-size:12px">Try <a href="@allUrl" style="color:#006B3F">All arrivals</a> to include visits that did not end in a load.</span></text>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="controls">
+            <div>
+                <label>Vehicle</label>
+                <select id="vehicleSelect" onchange="pickVehicle(this.value)">
+                    @if (Model.SelectedVehicle is null)
+                    {
+                        <option value="" selected>All vehicles (@Model.Vehicles.Count)</option>
+                    }
+                    else
+                    {
+                        <option value="">All vehicles (@Model.Vehicles.Count)</option>
+                    }
+                    @foreach (var row in Model.Vehicles)
+                    {
+                        var isCurrent = string.Equals(row.Vehicle, Model.SelectedVehicle, StringComparison.OrdinalIgnoreCase);
+                        var name = string.IsNullOrWhiteSpace(row.Fleet) ? row.Vehicle : $"{row.Vehicle} (Fleet {row.Fleet})";
+                        var caption = $"{name} — {row.Trips} trip(s), {row.Rounds} round(s)";
+                        @if (isCurrent)
+                        {
+                            <option value="@row.Vehicle" selected>@caption</option>
+                        }
+                        else
+                        {
+                            <option value="@row.Vehicle">@caption</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div>
+                <label>Show</label>
+                <div class="modes">
+                    <a href="@partialUrl" class="@(Model.LoadsOnly ? "active" : "")">Loaded trips</a>
+                    <a href="@allUrl" class="@(Model.LoadsOnly ? "" : "active")">All arrivals</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="metrics">
+            @if (Model.SelectedVehicle is null)
+            {
+                <div class="metric-card">
+                    <div class="label">Vehicles</div>
+                    <div class="value">@Model.Vehicles.Count</div>
+                    <div class="note">With activity in this period</div>
+                </div>
+            }
+            else
+            {
+                <div class="metric-card">
+                    <div class="label">Selected vehicle</div>
+                    <div class="value" style="font-size:18px;">@Model.SelectedVehicle</div>
+                    <div class="note">@(string.IsNullOrWhiteSpace(scopedFleet) ? "Fleet number not on file" : $"Fleet {scopedFleet}")</div>
+                </div>
+            }
+            <div class="metric-card">
+                <div class="label">Trips loaded</div>
+                <div class="value">@trips.ToString("N0")</div>
+                <div class="note">@(Model.SelectedVehicle is null ? "Across all vehicles" : "This vehicle")</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Arrivals</div>
+                <div class="value">@arrivals.ToString("N0")</div>
+                <div class="note">@(Model.LoadsOnly ? "Visits that ended in a load" : "Every fence visit, loaded or not")</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Went round</div>
+                <div class="value red">@rounds.ToString("N0")</div>
+                <div class="note">Left at the gate and returned</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Waited in bay</div>
+                <div class="value amber">@waited.ToString("N0")</div>
+                <div class="note">Queued inside, then drove out</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Time lost queueing</div>
+                <div class="value">@lostMinutes.ToString("N0")m</div>
+                <div class="note">@(Model.SelectedVehicle is null ? "Total across all vehicles" : "This vehicle")</div>
+            </div>
+        </div>
+
+        <div class="panel" style="padding:0; overflow:hidden;">
+            <div style="padding:16px 16px 8px;">
+                @if (Model.SelectedVehicle is null)
+                {
+                    <h2>Vehicles in this period</h2>
+                    <div class="hint">Click a vehicle to see only its arrivals, or pick one from the list above.</div>
+                }
+                else
+                {
+                    <h2>@Model.SelectedVehicle@(string.IsNullOrWhiteSpace(scopedFleet) ? "" : $" (Fleet {scopedFleet})")</h2>
+                    <div class="hint">
+                        Showing this vehicle only —
+                        <a href="@Url(selectedRange, null, Model.LoadsOnly ? null : false)" style="color:#006B3F; font-weight:700;">show all @Model.Vehicles.Count vehicles</a>.
+                    </div>
+                }
+            </div>
+            <div class="table-wrap">
+                <table style="box-shadow:none;">
+                    <thead>
+                        <tr>
+                            <th>Vehicle</th>
+                            <th>Fleet</th>
+                            <th class="num">Arrivals</th>
+                            <th class="num">Trips loaded</th>
+                            <th class="num">Went round</th>
+                            <th class="num">Waited in bay</th>
+                            <th>First time</th>
+                            <th class="num">Avg time in bay</th>
+                            <th class="num">Time lost queueing</th>
+                            <th>First arrival</th>
+                            <th>Last departure</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in scopedRows)
+                        {
+                            var isCurrent = string.Equals(row.Vehicle, Model.SelectedVehicle, StringComparison.OrdinalIgnoreCase);
+                            <tr>
+                                <td><a class="veh" href="@Url(selectedRange, row.Vehicle, Model.LoadsOnly ? null : false)">@row.Vehicle</a>@(isCurrent ? " ✓" : "")</td>
+                                <td>@(string.IsNullOrWhiteSpace(row.Fleet) ? "—" : row.Fleet)</td>
+                                <td class="num">@row.Arrivals.ToString("N0")</td>
+                                <td class="num">@row.Trips.ToString("N0")</td>
+                                <td class="num">@row.Rounds.ToString("N0")</td>
+                                <td class="num">@row.WaitedInBay.ToString("N0")</td>
+                                <td><span class="pill @Tone(row.FirstTimePct)">@row.FirstTimePct.ToString("0")%</span></td>
+                                <td class="num">@row.AverageLoadingMinutes.ToString("0.#") min</td>
+                                <td class="num">@row.TotalWaitMinutes.ToString("N0") min</td>
+                                <td>@(row.FirstArrival is null ? "—" : Time(row.FirstArrival.Value))</td>
+                                <td>@(row.LastDeparture is null ? "—" : Time(row.LastDeparture.Value))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @if (Model.SelectedVehicle is null)
+        {
+            <div class="panel">
+                <h2>Trips and timings</h2>
+                <div class="hint">
+                    Pick a vehicle above — or click one in the table — to see every arrival it made, the rounds
+                    it had to do, and the time it loaded and left. One vehicle is shown at a time so the page
+                    stays quick on a phone.
+                </div>
+            </div>
+        }
+        else
+        {
+            foreach (var group in Model.TripRows.GroupBy(row => row.Vehicle))
+            {
+            var groupTrips = group.Count(row => row.DidLoad);
+            var groupRounds = group.Sum(row => row.Rounds);
+            var groupWaited = group.Sum(row => row.WaitedBefore);
+            var groupLost = group.Sum(row => row.WaitMinutes);
+            var groupFleet = group.Select(row => row.Fleet).FirstOrDefault(fleet => !string.IsNullOrWhiteSpace(fleet));
+            <div class="panel" style="padding:0; overflow:hidden;">
+                <div style="padding:16px 16px 10px;">
+                    <div class="vehicle-head">
+                        <h2>@group.Key@(string.IsNullOrWhiteSpace(groupFleet) ? "" : $" (Fleet {groupFleet})")</h2>
+                        <span class="meta">
+                            @groupTrips trip(s) loaded · @groupRounds round(s)@(groupWaited > 0 ? $" · {groupWaited} waited in bay" : "") · @groupLost.ToString("N0") min lost queueing
+                        </span>
+                    </div>
+                    <div class="hint" style="margin-bottom:0">
+                        Each line is one visit to a loading point: when the vehicle arrived, the rounds it made
+                        before getting in, when it finally loaded and when it drove off.
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table style="box-shadow:none;">
+                        <thead>
+                            <tr>
+                                <th>Loading point</th>
+                                <th>Arrived</th>
+                                <th>Before loading</th>
+                                <th>Loaded at</th>
+                                <th>Left at</th>
+                                <th class="num">Time in bay</th>
+                                <th class="num">Wait to load</th>
+                                <th>Seen next at</th>
+                                <th class="num">Arrival to departure</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var trip in group)
+                            {
+                                <tr class="@(trip.DidLoad ? "" : "noload")">
+                                    <td><strong>@trip.LoadingPoint</strong></td>
+                                    <td>@Time(trip.Arrived)</td>
+                                    <td>
+                                        @if (trip.RoundDetail.Count == 0)
+                                        {
+                                            <span class="rounds"><span class="none">none — loaded on arrival</span></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="rounds">
+                                                @foreach (var move in trip.RoundDetail)
+                                                {
+                                                    <span class="badge">@(move.Waited ? "waited" : "round")</span>
+                                                    @($"{Time(move.Enter)} → {Time(move.Exit)} ({move.Minutes:0}m)")
+                                                    <br />
+                                                }
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>@(trip.LoadedAt is null ? "—" : Time(trip.LoadedAt.Value))</td>
+                                    <td>@Time(trip.LoadUntil ?? trip.Departed)</td>
+                                    <td class="num">@(trip.DidLoad ? $"{trip.MinutesInBay:0.#} min" : "—")</td>
+                                    <td class="num">@(trip.DidLoad ? $"{trip.WaitMinutes:0} min" : "—")</td>
+                                    <td>
+                                        @if (!trip.DidLoad)
+                                        {
+                                            <span class="rounds">—</span>
+                                        }
+                                        else if (trip.MovedOn)
+                                        {
+                                            <span>@trip.MovedOnTo</span>
+                                            <span class="rounds">@(trip.MovedOnAt is null ? "" : Time(trip.MovedOnAt.Value))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="rounds">not seen again after this</span>
+                                        }
+                                    </td>
+                                    <td class="num">@trip.TotalMinutes.ToString("0") min</td>
+                                </tr>
+                                @if (!trip.DidLoad)
+                                {
+                                    <tr class="noload">
+                                        <td colspan="8" style="font-size:11.5px; color:#999;">
+                                            <span class="badge">did not load</span>
+                                            this visit never stayed long enough to load — treated as passing through, not queueing.
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            }
+        }
+    }
+
+    <div class="footer">
+        A trip = the last stay of an attempt: the unit loaded and drove away instead of coming back.
+        "Round" = turned away at the gate and left; "waited" = stayed inside the fence and then drove out and returned.<br />
+        Data from vehicle tracking, @retrievedAt.ToString("dd MMM yyyy HH:mm")
+    </div>
+
+    <script>
+        function pickVehicle(value) {
+            var url = new URL(window.location.href);
+            if (value) { url.searchParams.set('vehicle', value); } else { url.searchParams.delete('vehicle'); }
+            window.location.href = url.toString();
+        }
+    </script>
+</body>
+</html>

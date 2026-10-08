@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../data/api_service.dart';
 
 class MaintenanceController extends GetxController {
-  final RxList<Map<String, dynamic>> maintenanceRequests = <Map<String, dynamic>>[].obs;
+  final RxList<Map<String, dynamic>> maintenanceRequests =
+      <Map<String, dynamic>>[].obs;
   final RxBool isLoading = false.obs;
-  
+
   // Form controllers
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -15,16 +17,16 @@ class MaintenanceController extends GetxController {
   final TextEditingController statusController = TextEditingController();
   final TextEditingController assignedToController = TextEditingController();
   final TextEditingController estimatedCostController = TextEditingController();
-  
+
   // Get the API service
   final ApiService _apiService = Get.find<ApiService>();
-  
+
   @override
   void onInit() {
     super.onInit();
     loadMaintenanceRequests();
   }
-  
+
   @override
   void onClose() {
     titleController.dispose();
@@ -37,10 +39,10 @@ class MaintenanceController extends GetxController {
     estimatedCostController.dispose();
     super.onClose();
   }
-  
+
   void loadMaintenanceRequests() async {
     isLoading.value = true;
-    
+
     try {
       final result = await _apiService.getMaintenanceRequests();
       maintenanceRequests.value = result;
@@ -57,29 +59,30 @@ class MaintenanceController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void addMaintenanceRequest() async {
     isLoading.value = true;
-    
+
     try {
       // Parse the property and unit IDs from the controller values
       final propertyId = int.tryParse(propertyController.text) ?? 0;
       final unitId = int.tryParse(unitController.text) ?? 0;
-      
+
       final requestData = {
         'title': titleController.text,
         'description': descriptionController.text,
         'propertyId': propertyId,
         'unitId': unitId > 0 ? unitId : null,
         'priority': priorityController.text,
-        'status': statusController.text.isEmpty ? 'Open' : statusController.text,
+        'status':
+            statusController.text.isEmpty ? 'Open' : statusController.text,
         'assignedTo': assignedToController.text,
         'estimatedCost': double.tryParse(estimatedCostController.text) ?? 0.0,
         'requestDate': DateTime.now().toIso8601String(),
       };
-      
+
       final success = await _apiService.addMaintenanceRequest(requestData);
-      
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -112,15 +115,15 @@ class MaintenanceController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void editMaintenanceRequest(int id) async {
     isLoading.value = true;
-    
+
     try {
       // Parse the property and unit IDs from the controller values
       final propertyId = int.tryParse(propertyController.text) ?? 0;
       final unitId = int.tryParse(unitController.text) ?? 0;
-      
+
       final requestData = {
         'title': titleController.text,
         'description': descriptionController.text,
@@ -131,9 +134,12 @@ class MaintenanceController extends GetxController {
         'assignedTo': assignedToController.text,
         'estimatedCost': double.tryParse(estimatedCostController.text) ?? 0.0,
       };
-      
-      final success = await _apiService.updateMaintenanceRequest(id, requestData);
-      
+
+      final success = await _apiService.updateMaintenanceRequest(
+        id,
+        requestData,
+      );
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -166,13 +172,13 @@ class MaintenanceController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void deleteMaintenanceRequest(int id) async {
     isLoading.value = true;
-    
+
     try {
       final success = await _apiService.deleteMaintenanceRequest(id);
-      
+
       if (success) {
         Get.back();
         Get.snackbar(
@@ -205,7 +211,7 @@ class MaintenanceController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   void clearForm() {
     titleController.clear();
     descriptionController.clear();

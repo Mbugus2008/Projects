@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/auth_service.dart';
+import '../../../routes/app_routes.dart';
+
 class SplashController extends GetxController {
+  final AuthService _authService = Get.find<AuthService>();
+
   @override
   void onInit() {
     super.onInit();
@@ -10,8 +14,17 @@ class SplashController extends GetxController {
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 2));
-    // Check if user is authenticated
-    // For now, navigate to login
-    Get.offAllNamed('/login');
+
+    if (_authService.isAuthenticated.value) {
+      // Validate the stored token before proceeding
+      final isValid = await _authService.validateToken();
+      if (isValid) {
+        Get.offAllNamed(Routes.DASHBOARD);
+        return;
+      }
+      // Token invalid — clear it
+      await _authService.logout();
+    }
+    Get.offAllNamed(Routes.LOGIN);
   }
 }

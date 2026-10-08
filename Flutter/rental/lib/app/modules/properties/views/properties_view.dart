@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../controllers/properties_controller.dart';
 
 class PropertiesView extends GetView<PropertiesController> {
@@ -8,13 +9,12 @@ class PropertiesView extends GetView<PropertiesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Properties'),
-      ),
+      appBar: AppBar(title: const Text('Properties')),
       body: Obx(
-        () => controller.isLoading.value
-            ? const Center(child: CircularProgressIndicator())
-            : _buildPropertyList(context),
+        () =>
+            controller.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : _buildPropertyList(context),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showPropertyForm(context),
@@ -26,138 +26,144 @@ class PropertiesView extends GetView<PropertiesController> {
   Widget _buildPropertyList(BuildContext context) {
     return controller.properties.isEmpty
         ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.home_work_outlined,
-                  size: 80,
-                  color: Colors.grey,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'No properties found',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Tap the + button to add your first property',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
-          )
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.home_work_outlined,
+                size: 80,
+                color: Colors.grey,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'No properties found',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Tap the + button to add your first property',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
+          ),
+        )
         : ListView.builder(
-            itemCount: controller.properties.length,
-            itemBuilder: (context, index) {
-              final property = controller.properties[index];
-              return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text(
-                        property['name'],
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        '${property['address']}, ${property['city']}, ${property['state']} ${property['zipCode']}',
-                      ),
-                      trailing: PopupMenuButton(
-                        onSelected: (value) {
-                          if (value == 'edit') {
-                            _showPropertyForm(context, property);
-                          } else if (value == 'delete') {
-                            _showDeleteConfirmation(context, property['id']);
-                          }
-                        },
-                        itemBuilder: (context) => [
-                          const PopupMenuItem(
-                            value: 'edit',
-                            child: Row(
-                              children: [
-                                Icon(Icons.edit),
-                                SizedBox(width: 8),
-                                Text('Edit'),
-                              ],
-                            ),
-                          ),
-                          const PopupMenuItem(
-                            value: 'delete',
-                            child: Row(
-                              children: [
-                                Icon(Icons.delete, color: Colors.red),
-                                SizedBox(width: 8),
-                                Text('Delete', style: TextStyle(color: Colors.red)),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+          itemCount: controller.properties.length,
+          itemBuilder: (context, index) {
+            final property = controller.properties[index];
+            return Card(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      property['name'],
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const Divider(),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildPropertyStat(
-                            'Units',
-                            '${property['totalUnits']}',
-                            Icons.apartment,
-                          ),
-                          _buildPropertyStat(
-                            'Occupied',
-                            '${property['occupiedUnits']}',
-                            Icons.person,
-                          ),
-                          _buildPropertyStat(
-                            'Vacant',
-                            '${property['vacantUnits']}',
-                            Icons.no_accounts,
-                          ),
-                          _buildPropertyStat(
-                            'Rent',
-                            '\$${property['totalRent']}',
-                            Icons.attach_money,
-                          ),
-                        ],
-                      ),
+                    subtitle: Text(
+                      '${property['address']}, ${property['city']}, ${property['state']} ${property['zipCode']}',
                     ),
-                    ButtonBar(
-                      alignment: MainAxisAlignment.spaceAround,
+                    trailing: PopupMenuButton(
+                      onSelected: (value) {
+                        if (value == 'edit') {
+                          _showPropertyForm(context, property);
+                        } else if (value == 'delete') {
+                          _showDeleteConfirmation(context, property['id']);
+                        }
+                      },
+                      itemBuilder:
+                          (context) => [
+                            const PopupMenuItem(
+                              value: 'edit',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.edit),
+                                  SizedBox(width: 8),
+                                  Text('Edit'),
+                                ],
+                              ),
+                            ),
+                            const PopupMenuItem(
+                              value: 'delete',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.delete, color: Colors.red),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Delete',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                    ),
+                  ),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        TextButton.icon(
-                          onPressed: () {
-                            // Navigate to units
-                            Get.toNamed('/properties/${property['id']}/units');
-                          },
-                          icon: const Icon(Icons.apartment),
-                          label: const Text('Units'),
+                        _buildPropertyStat(
+                          'Units',
+                          '${property['totalUnits']}',
+                          Icons.apartment,
                         ),
-                        TextButton.icon(
-                          onPressed: () {
-                            // Navigate to tenants
-                            Get.toNamed('/properties/${property['id']}/tenants');
-                          },
-                          icon: const Icon(Icons.people),
-                          label: const Text('Tenants'),
+                        _buildPropertyStat(
+                          'Occupied',
+                          '${property['occupiedUnits']}',
+                          Icons.person,
                         ),
-                        TextButton.icon(
-                          onPressed: () {
-                            // Navigate to maintenance
-                            Get.toNamed('/properties/${property['id']}/maintenance');
-                          },
-                          icon: const Icon(Icons.build),
-                          label: const Text('Maintenance'),
+                        _buildPropertyStat(
+                          'Vacant',
+                          '${property['vacantUnits']}',
+                          Icons.no_accounts,
+                        ),
+                        _buildPropertyStat(
+                          'Rent',
+                          '\$${property['totalRent']}',
+                          Icons.attach_money,
                         ),
                       ],
                     ),
-                  ],
-                ),
-              );
-            },
-          );
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton.icon(
+                        onPressed: () {
+                          // Navigate to units
+                          Get.toNamed('/properties/${property['id']}/units');
+                        },
+                        icon: const Icon(Icons.apartment),
+                        label: const Text('Units'),
+                      ),
+                      TextButton.icon(
+                        onPressed: () {
+                          // Navigate to tenants
+                          Get.toNamed('/properties/${property['id']}/tenants');
+                        },
+                        icon: const Icon(Icons.people),
+                        label: const Text('Tenants'),
+                      ),
+                      TextButton.icon(
+                        onPressed: () {
+                          // Navigate to maintenance
+                          Get.toNamed(
+                            '/properties/${property['id']}/maintenance',
+                          );
+                        },
+                        icon: const Icon(Icons.build),
+                        label: const Text('Maintenance'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        );
   }
 
   Widget _buildPropertyStat(String label, String value, IconData icon) {
@@ -167,25 +173,19 @@ class PropertiesView extends GetView<PropertiesController> {
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 12,
-          ),
-        ),
+        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)),
       ],
     );
   }
 
-  void _showPropertyForm(BuildContext context, [Map<String, dynamic>? property]) {
+  void _showPropertyForm(
+    BuildContext context, [
+    Map<String, dynamic>? property,
+  ]) {
     final isEditing = property != null;
-    
+
     if (isEditing) {
       controller.nameController.text = property['name'];
       controller.addressController.text = property['address'];
@@ -197,13 +197,14 @@ class PropertiesView extends GetView<PropertiesController> {
     } else {
       controller.clearForm();
     }
-    
+
     Get.dialog(
       Dialog(
         child: Container(
-          width: MediaQuery.of(context).size.width > 600 
-              ? 500 
-              : MediaQuery.of(context).size.width * 0.9,
+          width:
+              MediaQuery.of(context).size.width > 600
+                  ? 500
+                  : MediaQuery.of(context).size.width * 0.9,
           padding: const EdgeInsets.all(16),
           child: SingleChildScrollView(
             child: Column(
@@ -237,18 +238,14 @@ class PropertiesView extends GetView<PropertiesController> {
                       flex: 2,
                       child: TextField(
                         controller: controller.cityController,
-                        decoration: const InputDecoration(
-                          labelText: 'City',
-                        ),
+                        decoration: const InputDecoration(labelText: 'City'),
                       ),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
                         controller: controller.stateController,
-                        decoration: const InputDecoration(
-                          labelText: 'State',
-                        ),
+                        decoration: const InputDecoration(labelText: 'State'),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -325,9 +322,10 @@ class PropertiesView extends GetView<PropertiesController> {
                     ),
                     const SizedBox(width: 16),
                     ElevatedButton(
-                      onPressed: isEditing
-                          ? () => controller.editProperty(property['id'])
-                          : controller.addProperty,
+                      onPressed:
+                          isEditing
+                              ? () => controller.editProperty(property['id'])
+                              : controller.addProperty,
                       child: Text(isEditing ? 'Update' : 'Add'),
                     ),
                   ],
@@ -348,16 +346,10 @@ class PropertiesView extends GetView<PropertiesController> {
           'Are you sure you want to delete this property? This action cannot be undone.',
         ),
         actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Cancel'),
-          ),
+          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
           TextButton(
             onPressed: () => controller.deleteProperty(id),
-            child: const Text(
-              'Delete',
-              style: TextStyle(color: Colors.red),
-            ),
+            child: const Text('Delete', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
