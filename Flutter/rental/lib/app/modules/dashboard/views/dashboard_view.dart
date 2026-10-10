@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../core/widgets/app_ui.dart';
+import '../../../data/auth_service.dart';
+import '../../../theme/app_theme.dart';
 import '../controllers/dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -7,352 +10,424 @@ class DashboardView extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Get.find<AuthService>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Rental Management'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: controller.logout,
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Dashboard',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(height: 24),
-                _buildSummaryCards(context),
-                const SizedBox(height: 24),
-                Text(
-                  'Quick Actions',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 16),
-                _buildQuickActions(context),
-                const SizedBox(height: 24),
-                Text(
-                  'Recent Activities',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 16),
-                _buildRecentActivities(context),
-              ],
-            ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.selectedIndex.value,
-          onTap: controller.changeTab,
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              label: 'Dashboard',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_work),
-              label: 'Properties',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              label: 'Tenants',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz),
-              label: 'More',
-            ),
-          ],
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.blue,
-              ),
+      body: Column(
+        children: [
+          _buildHeader(context, authService),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.person,
-                      size: 30,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Landlord User',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                        ),
-                  ),
-                  Text(
-                    'landlord@example.com',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white70,
-                        ),
-                  ),
+                  _buildStatsGrid(context),
+                  const SizedBox(height: 26),
+                  const SectionHeader(title: 'Quick Actions'),
+                  _buildQuickActions(context),
+                  const SizedBox(height: 14),
+                  const SectionHeader(title: 'Lease Renewals'),
+                  _buildRenewalsCard(context),
                 ],
               ),
             ),
-            ...controller.navigationItems.map((item) => ListTile(
-                  leading: Icon(item['icon']),
-                  title: Text(item['title']),
-                  onTap: () {
-                    Get.back();
-                    Get.toNamed(item['route']);
-                  },
-                )),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-                // Will be implemented later
-                Get.back();
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Logout'),
-              onTap: () {
-                Get.back();
-                controller.logout();
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSummaryCards(BuildContext context) {
-    return Obx(
-      () => GridView.count(
-        crossAxisCount: MediaQuery.of(context).size.width > 600 ? 4 : 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          _buildSummaryCard(
-            context,
-            'Properties',
-            controller.totalProperties.toString(),
-            Icons.home_work,
-            Colors.blue,
-          ),
-          _buildSummaryCard(
-            context,
-            'Occupancy Rate',
-            '${controller.occupancyRate}%',
-            Icons.person,
-            Colors.green,
-          ),
-          _buildSummaryCard(
-            context,
-            'Rent Collected',
-            '\$${controller.totalRentCollected}',
-            Icons.attach_money,
-            Colors.amber,
-          ),
-          _buildSummaryCard(
-            context,
-            'Maintenance',
-            controller.pendingMaintenance.toString(),
-            Icons.build,
-            Colors.red,
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildSummaryCard(
-    BuildContext context,
-    String title,
-    String value,
-    IconData icon,
-    Color color,
-  ) {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 32,
-              color: color,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildQuickActions(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: MediaQuery.of(context).size.width > 600 ? 4 : 2,
-      crossAxisSpacing: 16,
-      mainAxisSpacing: 16,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      children: [
-        _buildActionCard(
-          context,
-          'Add Property',
-          Icons.add_home,
-          Colors.blue,
-          () => Get.toNamed('/properties'),
-        ),
-        _buildActionCard(
-          context,
-          'Add Tenant',
-          Icons.person_add,
-          Colors.green,
-          () => Get.toNamed('/tenants'),
-        ),
-        _buildActionCard(
-          context,
-          'Record Payment',
-          Icons.payment,
-          Colors.amber,
-          () => Get.toNamed('/finances'),
-        ),
-        _buildActionCard(
-          context,
-          'Maintenance Request',
-          Icons.build,
-          Colors.red,
-          () => Get.toNamed('/maintenance'),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildActionCard(
-    BuildContext context,
-    String title,
-    IconData icon,
-    Color color,
-    VoidCallback onTap,
-  ) {
-    return Card(
-      elevation: 2,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 32,
-                color: color,
+      bottomNavigationBar: Builder(
+        builder: (ctx) => Obx(
+          () => BottomNavigationBar(
+            currentIndex: controller.selectedIndex.value,
+            onTap: (index) {
+              if (index == 3) {
+                Scaffold.of(ctx).openDrawer();
+                return;
+              }
+              if (index == controller.selectedIndex.value) return;
+              controller.changeTab(index);
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.grid_view_rounded),
+                label: 'Dashboard',
               ),
-              const SizedBox(height: 8),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.bodyMedium,
-                textAlign: TextAlign.center,
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_work_rounded),
+                label: 'Properties',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.people_alt_rounded),
+                label: 'Tenants',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.more_horiz_rounded),
+                label: 'More',
               ),
             ],
           ),
         ),
       ),
+      drawer: _buildDrawer(context, authService),
     );
   }
 
-  Widget _buildRecentActivities(BuildContext context) {
-    // Mock data - will be replaced with real data during API integration
-    final activities = [
-      {
-        'title': 'Rent Payment Received',
-        'description': 'Unit 101 - \$1,200',
-        'time': '2 hours ago',
-        'icon': Icons.attach_money,
-        'color': Colors.green,
-      },
-      {
-        'title': 'Maintenance Request',
-        'description': 'Unit 203 - Leaking faucet',
-        'time': '1 day ago',
-        'icon': Icons.build,
-        'color': Colors.orange,
-      },
-      {
-        'title': 'New Tenant',
-        'description': 'John Doe - Unit 305',
-        'time': '2 days ago',
-        'icon': Icons.person,
-        'color': Colors.blue,
-      },
-      {
-        'title': 'Lease Expiring',
-        'description': 'Unit 102 - In 30 days',
-        'time': '3 days ago',
-        'icon': Icons.event,
-        'color': Colors.red,
-      },
-    ];
+  String _greeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
+  }
 
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: activities.length,
-      itemBuilder: (context, index) {
-        final activity = activities[index];
-        return Card(
-          margin: const EdgeInsets.only(bottom: 8),
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: activity['color'] as Color,
-              child: Icon(
-                activity['icon'] as IconData,
-                color: Colors.white,
-                size: 20,
+  String _displayName(Map<dynamic, dynamic> user) {
+    final name = [user['firstName'], user['lastName']]
+        .whereType<String>()
+        .where((s) => s.trim().isNotEmpty)
+        .join(' ');
+    return name.isEmpty ? 'Landlord' : name;
+  }
+
+  Widget _buildHeader(BuildContext context, AuthService authService) {
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        gradient: AppColors.brandGradient,
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(28)),
+      ),
+      padding: EdgeInsets.fromLTRB(
+        20,
+        MediaQuery.paddingOf(context).top + 18,
+        20,
+        26,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Obx(() {
+            final user = authService.currentUser;
+            return Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _greeting(),
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.75),
+                          fontSize: 13,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _displayName(user),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.3,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                InitialsAvatar(
+                  initials: initialsOf(
+                    user['firstName']?.toString(),
+                    user['lastName']?.toString(),
+                  ),
+                  color: Colors.white,
+                  size: 48,
+                ),
+              ],
+            );
+          }),
+          const SizedBox(height: 20),
+          Obx(
+            () => Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.pie_chart_rounded,
+                    color: Colors.white70,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Portfolio occupancy',
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.85),
+                      fontSize: 13,
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    '${controller.occupancyRate.value.toStringAsFixed(1)}%',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
               ),
             ),
-            title: Text(activity['title'] as String),
-            subtitle: Text(activity['description'] as String),
-            trailing: Text(
-              activity['time'] as String,
-              style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsGrid(BuildContext context) {
+    return Obx(
+      () => GridView.count(
+        crossAxisCount: 2,
+        crossAxisSpacing: 14,
+        mainAxisSpacing: 14,
+        childAspectRatio: 1.22,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          StatCard(
+            icon: Icons.home_work_rounded,
+            iconColor: AppColors.primary,
+            value: controller.totalProperties.value.toString(),
+            label: 'Properties',
+            caption: '${controller.totalUnits.value} total units',
+          ),
+          StatCard(
+            icon: Icons.trending_up_rounded,
+            iconColor: AppColors.success,
+            value: formatMoney(controller.totalRentCollected.value),
+            label: 'Rent Collected',
+            caption: 'income recorded',
+          ),
+          StatCard(
+            icon: Icons.build_circle_rounded,
+            iconColor: AppColors.warning,
+            value: controller.pendingMaintenance.value.toString(),
+            label: 'Maintenance',
+            caption: 'open requests',
+          ),
+          StatCard(
+            icon: Icons.meeting_room_rounded,
+            iconColor: AppColors.purple,
+            value: controller.vacantUnits.value.toString(),
+            label: 'Vacant Units',
+            caption: 'of ${controller.totalUnits.value} units',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickActions(BuildContext context) {
+    final actions = [
+      (
+        'Add Property',
+        Icons.add_home_rounded,
+        AppColors.primary,
+        '/properties'
+      ),
+      ('Add Tenant', Icons.person_add_alt_1_rounded, AppColors.success, '/tenants'),
+      (
+        'Record Payment',
+        Icons.payments_rounded,
+        AppColors.warning,
+        '/finances'
+      ),
+      ('New Request', Icons.handyman_rounded, AppColors.danger, '/maintenance'),
+    ];
+
+    return GridView.count(
+      crossAxisCount: 2,
+      crossAxisSpacing: 14,
+      mainAxisSpacing: 14,
+      childAspectRatio: 2.6,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      children: actions
+          .map(
+            (action) => AppCard(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              onTap: () => Get.toNamed(action.$4),
+              child: Row(
+                children: [
+                  Container(
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(
+                      color: action.$3.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(11),
+                    ),
+                    child: Icon(action.$2, color: action.$3, size: 20),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      action.$1,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontSize: 13.5),
+                      maxLines: 2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _buildRenewalsCard(BuildContext context) {
+    return Obx(() {
+      final count = controller.upcomingLeaseRenewals.value;
+      return AppCard(
+        onTap: () => Get.toNamed('/leases'),
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: AppColors.info.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: const Icon(
+                Icons.event_available_rounded,
+                color: AppColors.info,
+                size: 22,
+              ),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    count == 0
+                        ? 'No renewals due'
+                        : '$count lease${count == 1 ? '' : 's'} expiring soon',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontSize: 14),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    'Within the next 30 days',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Theme.of(context).textTheme.bodySmall?.color,
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _buildDrawer(BuildContext context, AuthService authService) {
+    return Drawer(
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            decoration: const BoxDecoration(gradient: AppColors.brandGradient),
+            padding: EdgeInsets.fromLTRB(
+              20,
+              MediaQuery.paddingOf(context).top + 24,
+              20,
+              24,
+            ),
+            child: Obx(() {
+              final user = authService.currentUser;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InitialsAvatar(
+                    initials: initialsOf(
+                      user['firstName']?.toString(),
+                      user['lastName']?.toString(),
+                    ),
+                    color: Colors.white,
+                    size: 56,
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    _displayName(user),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    user['email']?.toString() ?? '',
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.7),
+                      fontSize: 12.5,
+                    ),
+                  ),
+                ],
+              );
+            }),
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+              children: [
+                ...controller.navigationItems
+                    .where((item) => item['route'] != '/dashboard')
+                    .map(
+                      (item) => ListTile(
+                        leading: Icon(item['icon'] as IconData, size: 21),
+                        title: Text(item['title'] as String),
+                        onTap: () {
+                          Get.back();
+                          Get.toNamed(item['route'] as String);
+                        },
+                      ),
+                    ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: Divider(),
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.logout_rounded,
+                    size: 21,
+                    color: AppColors.danger,
+                  ),
+                  title: const Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: AppColors.danger,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  onTap: () {
+                    Get.back();
+                    controller.logout();
+                  },
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

@@ -14,7 +14,8 @@ import 'package:kanisa/services/logger.dart';
 
 class ApiClient extends ChangeNotifier {
   final LoggerService logger = Get.find();
-  String baseUrl = "http://trimline.co.ke:4006/api";
+  // HTTPS binding of the same IIS site as :4006 - keep it on TLS, plain HTTP is disabled in the manifest.
+  String baseUrl = "https://trimline.co.ke:4001/api";
   //String baseUrl = "http://192.168.100.47:898/api";
   //String baseUrl = "http://192.168.1.118:898/api";
   //String baseUrl = "http://192.168.100.54:898/api";

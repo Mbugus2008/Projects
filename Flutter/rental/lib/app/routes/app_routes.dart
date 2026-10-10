@@ -12,4 +12,7 @@ abstract class Routes {
   static const MAINTENANCE = '/maintenance';
   static const DOCUMENTS = '/documents';
   static const REPORTS = '/reports';
+  static const BALANCES = '/balances';
+  static const INVOICES = '/invoices';
+  static const SETTINGS = '/settings';
 }

@@ -28,7 +28,7 @@ lib/
 ## Essential Development Patterns
 
 ### 1. API Communication
-- Base URL: `http://trimline.co.ke:4006/api` (see `ApiClient` class)
+- Base URL: `https://trimline.co.ke:4001/api` (see `ApiClient` class) - TLS binding of the API; cleartext traffic is disabled
 - All requests include custom header: `X-Client-Identifier: "kirigiti"`
 - Use `postdata()` method for both GET and POST operations
 - API responses wrapped in `Results<T>` objects with `Code`, `Desc`, and `Contents`

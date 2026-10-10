@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../core/widgets/app_ui.dart';
+import '../../../theme/app_theme.dart';
 import '../controllers/finances_controller.dart';
 
 class FinancesView extends GetView<FinancesController> {
@@ -9,42 +10,37 @@ class FinancesView extends GetView<FinancesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Finances')),
-      body: Obx(
-        () =>
-            controller.isLoading.value
-                ? const Center(child: CircularProgressIndicator())
-                : _buildFinancesContent(context),
+      appBar: AppBar(
+        title: const Text('Finances'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh_rounded),
+            tooltip: 'Refresh',
+            onPressed: controller.loadTransactions,
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
+      body: Obx(
+        () => controller.isLoading.value && controller.transactions.isEmpty
+            ? const LoadingView(label: 'Loading transactions…')
+            : _buildContent(context),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showTransactionForm(context),
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add_rounded),
+        label: const Text('Add Transaction'),
       ),
     );
   }
 
-  Widget _buildFinancesContent(BuildContext context) {
+  Widget _buildContent(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSummaryCards(context),
-        const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Recent Transactions',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              TextButton(
-                onPressed: () {
-                  // Navigate to transaction history
-                },
-                child: const Text('View All'),
-              ),
-            ],
-          ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(20, 4, 20, 8),
+          child: Text('Recent Transactions'),
         ),
         Expanded(child: _buildTransactionList(context)),
       ],
@@ -52,65 +48,39 @@ class FinancesView extends GetView<FinancesController> {
   }
 
   Widget _buildSummaryCards(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Obx(
-        () => GridView.count(
-          crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 1,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
           children: [
-            _buildSummaryCard(
-              context,
-              'Income',
-              '\$${controller.totalIncome.value.toStringAsFixed(2)}',
-              Icons.arrow_upward,
-              Colors.green,
+            Expanded(
+              child: StatCard(
+                icon: Icons.trending_up_rounded,
+                iconColor: AppColors.success,
+                value: formatMoney(controller.totalIncome.value),
+                label: 'Income',
+                compact: true,
+              ),
             ),
-            _buildSummaryCard(
-              context,
-              'Expenses',
-              '\$${controller.totalExpenses.value.toStringAsFixed(2)}',
-              Icons.arrow_downward,
-              Colors.red,
+            const SizedBox(width: 12),
+            Expanded(
+              child: StatCard(
+                icon: Icons.trending_down_rounded,
+                iconColor: AppColors.danger,
+                value: formatMoney(controller.totalExpenses.value),
+                label: 'Expenses',
+                compact: true,
+              ),
             ),
-            _buildSummaryCard(
-              context,
-              'Net Income',
-              '\$${controller.netIncome.value.toStringAsFixed(2)}',
-              Icons.account_balance,
-              Colors.blue,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSummaryCard(
-    BuildContext context,
-    String title,
-    String value,
-    IconData icon,
-    Color color,
-  ) {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 32, color: color),
-            const SizedBox(height: 8),
-            Text(value, style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 4),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
+            const SizedBox(width: 12),
+            Expanded(
+              child: StatCard(
+                icon: Icons.account_balance_rounded,
+                iconColor: AppColors.primary,
+                value: formatMoney(controller.netIncome.value),
+                label: 'Net',
+                compact: true,
+              ),
             ),
           ],
         ),
@@ -119,76 +89,170 @@ class FinancesView extends GetView<FinancesController> {
   }
 
   Widget _buildTransactionList(BuildContext context) {
-    return controller.transactions.isEmpty
-        ? Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    if (controller.transactions.isEmpty) {
+      return EmptyState(
+        icon: Icons.receipt_long_outlined,
+        title: 'No transactions yet',
+        message: 'Record rent payments and expenses to see your cash flow.',
+        actionLabel: 'Add Transaction',
+        onAction: () => _showTransactionForm(context),
+      );
+    }
+
+    return RefreshIndicator(
+      onRefresh: () async => controller.loadTransactions(),
+      child: ListView.separated(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.fromLTRB(16, 4, 16, 96),
+        itemCount: controller.transactions.length,
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (context, index) =>
+            _buildTransactionCard(context, controller.transactions[index]),
+      ),
+    );
+  }
+
+  Widget _buildTransactionCard(
+    BuildContext context,
+    Map<String, dynamic> transaction,
+  ) {
+    final theme = Theme.of(context);
+    final isIncome = transaction['type']?.toString() == 'Income';
+    final accent = isIncome ? AppColors.success : AppColors.danger;
+    final amount = transaction['amount'];
+    final description = transaction['description']?.toString() ?? '';
+    final category = transaction['category']?.toString() ?? 'Uncategorized';
+    final property = transaction['property']?.toString() ?? '';
+    final unit = transaction['unit']?.toString() ?? '';
+    final tenant = transaction['tenant']?.toString() ?? '';
+
+    final subtitleParts = [
+      category,
+      if (property.isNotEmpty) property,
+      if (unit.isNotEmpty && unit != 'N/A') 'Unit $unit',
+    ];
+
+    return AppCard(
+      padding: const EdgeInsets.all(16),
+      onTap: () => _showTransactionForm(context, transaction),
+      child: Row(
+        children: [
+          Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: accent.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(13),
+            ),
+            child: Icon(
+              isIncome
+                  ? Icons.arrow_upward_rounded
+                  : Icons.arrow_downward_rounded,
+              color: accent,
+              size: 22,
+            ),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  description.isEmpty ? category : description,
+                  style: theme.textTheme.titleMedium?.copyWith(fontSize: 15),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  subtitleParts.join(' · '),
+                  style: theme.textTheme.bodySmall,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                if (tenant.isNotEmpty) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    tenant,
+                    style: theme.textTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Icon(
-                Icons.receipt_long_outlined,
-                size: 80,
-                color: Colors.grey,
-              ),
-              const SizedBox(height: 16),
               Text(
-                'No transactions found',
-                style: Theme.of(context).textTheme.titleLarge,
+                '${isIncome ? '+' : '−'}${formatMoney(amount)}',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontSize: 14,
+                  color: accent,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 3),
               Text(
-                'Tap the + button to add your first transaction',
-                style: Theme.of(context).textTheme.bodyMedium,
+                formatDate(transaction['date']),
+                style: theme.textTheme.bodySmall,
               ),
             ],
           ),
-        )
-        : ListView.builder(
-          itemCount: controller.transactions.length,
-          itemBuilder: (context, index) {
-            final transaction = controller.transactions[index];
-            final isIncome = transaction['type'] == 'Income';
-
-            return Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: isIncome ? Colors.green : Colors.red,
-                  child: Icon(
-                    isIncome ? Icons.arrow_upward : Icons.arrow_downward,
-                    color: Colors.white,
-                  ),
-                ),
-                title: Text(
-                  transaction['description'],
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  '${transaction['category']} - ${transaction['property']} ${transaction['unit'] != 'N/A' ? '(Unit ${transaction['unit']})' : ''}',
-                ),
-                trailing: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert_rounded, size: 20),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            onSelected: (value) {
+              if (value == 'edit') {
+                _showTransactionForm(context, transaction);
+              } else if (value == 'delete') {
+                _confirmDelete(context, transaction['id'] as int);
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'edit',
+                child: Row(
                   children: [
-                    Text(
-                      '\$${transaction['amount'].toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: isIncome ? Colors.green : Colors.red,
-                      ),
-                    ),
-                    Text(
-                      transaction['date'],
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
+                    Icon(Icons.edit_outlined, size: 19),
+                    SizedBox(width: 10),
+                    Text('Edit'),
                   ],
                 ),
-                onTap: () {
-                  _showTransactionForm(context, transaction);
-                },
               ),
-            );
-          },
-        );
+              const PopupMenuItem(
+                value: 'delete',
+                child: Row(
+                  children: [
+                    Icon(Icons.delete_outline_rounded,
+                        size: 19, color: AppColors.danger),
+                    SizedBox(width: 10),
+                    Text('Delete', style: TextStyle(color: AppColors.danger)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _pickDate(BuildContext context) async {
+    final now = DateTime.now();
+    final initial = DateTime.tryParse(controller.dateController.text) ?? now;
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: initial,
+      firstDate: DateTime(now.year - 5),
+      lastDate: DateTime(now.year + 5),
+    );
+    if (picked != null) {
+      controller.dateController.text = picked.toIso8601String().split('T').first;
+    }
   }
 
   void _showTransactionForm(
@@ -200,156 +264,151 @@ class FinancesView extends GetView<FinancesController> {
     final RxBool rxIsIncome = isIncome.obs;
 
     if (isEditing) {
-      controller.dateController.text = transaction['date'];
-      controller.amountController.text = transaction['amount'].toString();
-      controller.categoryController.text = transaction['category'];
-      controller.propertyController.text = transaction['property'];
-      controller.unitController.text = transaction['unit'];
-      controller.tenantController.text = transaction['tenant'];
-      controller.descriptionController.text = transaction['description'];
+      controller.dateController.text = transaction['date']?.toString() ?? '';
+      controller.amountController.text =
+          transaction['amount']?.toString() ?? '';
+      controller.categoryController.text =
+          transaction['category']?.toString() ?? '';
+      controller.propertyController.text =
+          transaction['property']?.toString() ?? '';
+      controller.unitController.text = transaction['unit']?.toString() ?? '';
+      controller.tenantController.text =
+          transaction['tenant']?.toString() ?? '';
+      controller.descriptionController.text =
+          transaction['description']?.toString() ?? '';
     } else {
       controller.clearForm();
-      controller.dateController.text = DateTime.now().toString().split(' ')[0];
+      controller.dateController.text =
+          DateTime.now().toIso8601String().split('T').first;
     }
 
-    Get.dialog(
-      Dialog(
-        child: Container(
-          width:
-              MediaQuery.of(context).size.width > 600
-                  ? 500
-                  : MediaQuery.of(context).size.width * 0.9,
-          padding: const EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  isEditing ? 'Edit Transaction' : 'Add Transaction',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 16),
-                Obx(
-                  () => SegmentedButton<bool>(
-                    segments: const [
-                      ButtonSegment<bool>(
-                        value: true,
-                        label: Text('Income'),
-                        icon: Icon(Icons.arrow_upward),
-                      ),
-                      ButtonSegment<bool>(
-                        value: false,
-                        label: Text('Expense'),
-                        icon: Icon(Icons.arrow_downward),
-                      ),
-                    ],
-                    selected: {rxIsIncome.value},
-                    onSelectionChanged: (Set<bool> selection) {
-                      rxIsIncome.value = selection.first;
-                    },
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.dateController,
-                  decoration: const InputDecoration(
-                    labelText: 'Date',
-                    prefixIcon: Icon(Icons.calendar_today),
-                    hintText: 'YYYY-MM-DD',
-                  ),
-                  onTap: () async {
-                    // Date picker would be implemented in a real app
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.amountController,
-                  decoration: const InputDecoration(
-                    labelText: 'Amount',
-                    prefixIcon: Icon(Icons.attach_money),
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-                const SizedBox(height: 16),
-                Obx(
-                  () => TextField(
-                    controller: controller.categoryController,
-                    decoration: InputDecoration(
-                      labelText: 'Category',
-                      prefixIcon: const Icon(Icons.category),
-                      hintText:
-                          rxIsIncome.value
-                              ? 'e.g., Rent, Deposit'
-                              : 'e.g., Maintenance, Utilities',
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.propertyController,
-                  decoration: const InputDecoration(
-                    labelText: 'Property',
-                    prefixIcon: Icon(Icons.home_work),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: controller.unitController,
-                        decoration: const InputDecoration(
-                          labelText: 'Unit',
-                          prefixIcon: Icon(Icons.apartment),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        controller: controller.tenantController,
-                        decoration: const InputDecoration(
-                          labelText: 'Tenant',
-                          prefixIcon: Icon(Icons.person),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.descriptionController,
-                  decoration: const InputDecoration(
-                    labelText: 'Description',
-                    prefixIcon: Icon(Icons.description),
-                  ),
-                  maxLines: 2,
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () => Get.back(),
-                      child: const Text('Cancel'),
-                    ),
-                    const SizedBox(width: 16),
-                    ElevatedButton(
-                      onPressed:
-                          isEditing
-                              ? () =>
-                                  controller.editTransaction(transaction['id'])
-                              : controller.addTransaction,
-                      child: Text(isEditing ? 'Update' : 'Add'),
-                    ),
-                  ],
-                ),
-              ],
+    showFormSheet(
+      context: context,
+      title: isEditing ? 'Edit Transaction' : 'New Transaction',
+      subtitle: isEditing
+          ? 'Update the details of this transaction.'
+          : 'Record a rent payment or an expense.',
+      submitLabel: isEditing ? 'Save Changes' : 'Add Transaction',
+      isLoading: controller.isLoading,
+      onSubmit: () {
+        if (isEditing) {
+          controller.editTransaction(transaction['id'] as int);
+        } else {
+          controller.addTransaction();
+        }
+      },
+      fields: [
+        Obx(
+          () => SegmentedButton<bool>(
+            segments: const [
+              ButtonSegment<bool>(
+                value: true,
+                label: Text('Income'),
+                icon: Icon(Icons.arrow_upward_rounded, size: 17),
+              ),
+              ButtonSegment<bool>(
+                value: false,
+                label: Text('Expense'),
+                icon: Icon(Icons.arrow_downward_rounded, size: 17),
+              ),
+            ],
+            selected: {rxIsIncome.value},
+            onSelectionChanged: (Set<bool> selection) {
+              rxIsIncome.value = selection.first;
+              if (controller.categoryController.text.trim().isEmpty) {
+                controller.categoryController.text =
+                    selection.first ? 'Rent' : 'Maintenance';
+              }
+            },
+          ),
+        ),
+        const SizedBox(height: 14),
+        TextField(
+          controller: controller.dateController,
+          readOnly: true,
+          onTap: () => _pickDate(context),
+          decoration: const InputDecoration(
+            labelText: 'Date',
+            prefixIcon: Icon(Icons.event_outlined),
+          ),
+        ),
+        const SizedBox(height: 14),
+        TextField(
+          controller: controller.amountController,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          textInputAction: TextInputAction.next,
+          decoration: const InputDecoration(
+            labelText: 'Amount',
+            prefixIcon: Icon(Icons.payments_outlined),
+          ),
+        ),
+        const SizedBox(height: 14),
+        Obx(
+          () => TextField(
+            controller: controller.categoryController,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              labelText: 'Category',
+              prefixIcon: const Icon(Icons.sell_outlined),
+              hintText: rxIsIncome.value
+                  ? 'e.g., Rent, Deposit'
+                  : 'e.g., Maintenance, Utilities',
             ),
           ),
         ),
-      ),
+        const SizedBox(height: 14),
+        TextField(
+          controller: controller.propertyController,
+          textInputAction: TextInputAction.next,
+          decoration: const InputDecoration(
+            labelText: 'Property',
+            prefixIcon: Icon(Icons.home_work_outlined),
+          ),
+        ),
+        const SizedBox(height: 14),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller.unitController,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
+                  labelText: 'Unit',
+                  prefixIcon: Icon(Icons.meeting_room_outlined),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: TextField(
+                controller: controller.tenantController,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
+                  labelText: 'Tenant',
+                  prefixIcon: Icon(Icons.person_outline_rounded),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        TextField(
+          controller: controller.descriptionController,
+          maxLines: 2,
+          decoration: const InputDecoration(labelText: 'Description'),
+        ),
+      ],
+    );
+  }
+
+  void _confirmDelete(BuildContext context, int id) {
+    showConfirmDialog(
+      context: context,
+      title: 'Delete Transaction',
+      message:
+          'Are you sure you want to delete this transaction? This action cannot be undone.',
+      confirmLabel: 'Delete',
+      onConfirm: () => controller.deleteTransaction(id),
     );
   }
 }

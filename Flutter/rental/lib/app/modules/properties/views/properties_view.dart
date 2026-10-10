@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../core/widgets/app_ui.dart';
+import '../../../theme/app_theme.dart';
 import '../controllers/properties_controller.dart';
 
 class PropertiesView extends GetView<PropertiesController> {
@@ -9,350 +10,316 @@ class PropertiesView extends GetView<PropertiesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Properties')),
-      body: Obx(
-        () =>
-            controller.isLoading.value
-                ? const Center(child: CircularProgressIndicator())
-                : _buildPropertyList(context),
+      appBar: AppBar(
+        title: const Text('Properties'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh_rounded),
+            tooltip: 'Refresh',
+            onPressed: controller.loadProperties,
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showPropertyForm(context),
-        child: const Icon(Icons.add),
+      body: Obx(
+        () => controller.isLoading.value && controller.properties.isEmpty
+            ? const LoadingView(label: 'Loading properties…')
+            : _buildList(context),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _showForm(context),
+        icon: const Icon(Icons.add_rounded),
+        label: const Text('Add Property'),
       ),
     );
   }
 
-  Widget _buildPropertyList(BuildContext context) {
-    return controller.properties.isEmpty
-        ? Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.home_work_outlined,
-                size: 80,
-                color: Colors.grey,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'No properties found',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Tap the + button to add your first property',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
-          ),
-        )
-        : ListView.builder(
-          itemCount: controller.properties.length,
-          itemBuilder: (context, index) {
-            final property = controller.properties[index];
-            return Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text(
-                      property['name'],
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      '${property['address']}, ${property['city']}, ${property['state']} ${property['zipCode']}',
-                    ),
-                    trailing: PopupMenuButton(
-                      onSelected: (value) {
-                        if (value == 'edit') {
-                          _showPropertyForm(context, property);
-                        } else if (value == 'delete') {
-                          _showDeleteConfirmation(context, property['id']);
-                        }
-                      },
-                      itemBuilder:
-                          (context) => [
-                            const PopupMenuItem(
-                              value: 'edit',
-                              child: Row(
-                                children: [
-                                  Icon(Icons.edit),
-                                  SizedBox(width: 8),
-                                  Text('Edit'),
-                                ],
-                              ),
-                            ),
-                            const PopupMenuItem(
-                              value: 'delete',
-                              child: Row(
-                                children: [
-                                  Icon(Icons.delete, color: Colors.red),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    'Delete',
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                    ),
-                  ),
-                  const Divider(),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _buildPropertyStat(
-                          'Units',
-                          '${property['totalUnits']}',
-                          Icons.apartment,
-                        ),
-                        _buildPropertyStat(
-                          'Occupied',
-                          '${property['occupiedUnits']}',
-                          Icons.person,
-                        ),
-                        _buildPropertyStat(
-                          'Vacant',
-                          '${property['vacantUnits']}',
-                          Icons.no_accounts,
-                        ),
-                        _buildPropertyStat(
-                          'Rent',
-                          '\$${property['totalRent']}',
-                          Icons.attach_money,
-                        ),
-                      ],
-                    ),
-                  ),
-                  ButtonBar(
-                    alignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      TextButton.icon(
-                        onPressed: () {
-                          // Navigate to units
-                          Get.toNamed('/properties/${property['id']}/units');
-                        },
-                        icon: const Icon(Icons.apartment),
-                        label: const Text('Units'),
-                      ),
-                      TextButton.icon(
-                        onPressed: () {
-                          // Navigate to tenants
-                          Get.toNamed('/properties/${property['id']}/tenants');
-                        },
-                        icon: const Icon(Icons.people),
-                        label: const Text('Tenants'),
-                      ),
-                      TextButton.icon(
-                        onPressed: () {
-                          // Navigate to maintenance
-                          Get.toNamed(
-                            '/properties/${property['id']}/maintenance',
-                          );
-                        },
-                        icon: const Icon(Icons.build),
-                        label: const Text('Maintenance'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-        );
+  Widget _buildList(BuildContext context) {
+    if (controller.properties.isEmpty) {
+      return EmptyState(
+        icon: Icons.home_work_outlined,
+        title: 'No properties yet',
+        message:
+            'Add your first property to start tracking units, leases and tenants.',
+        actionLabel: 'Add Property',
+        onAction: () => _showForm(context),
+      );
+    }
+
+    return RefreshIndicator(
+      onRefresh: () async => controller.loadProperties(),
+      child: ListView.separated(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 96),
+        itemCount: controller.properties.length,
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (context, index) =>
+            _buildPropertyCard(context, controller.properties[index]),
+      ),
+    );
   }
 
-  Widget _buildPropertyStat(String label, String value, IconData icon) {
-    return Column(
-      children: [
-        Icon(icon, color: Colors.blue),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+  Widget _buildPropertyCard(BuildContext context, Map<String, dynamic> property) {
+    final theme = Theme.of(context);
+    final name = property['name']?.toString() ?? '—';
+    final address = property['address']?.toString() ?? '';
+    final city = property['city']?.toString() ?? '';
+    final state = property['state']?.toString() ?? '';
+    final type = property['propertyType']?.toString() ?? '';
+    final units = property['totalUnits']?.toString() ?? '0';
+    final description = property['description']?.toString() ?? '';
+    final location = [city, state].where((s) => s.isNotEmpty).join(', ');
+
+    return AppCard(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.10),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Icon(
+                  Icons.home_work_rounded,
+                  color: AppColors.primary,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: theme.textTheme.titleMedium?.copyWith(fontSize: 15),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      address.isEmpty ? '—' : address,
+                      style: theme.textTheme.bodySmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              _buildMenu(context, property),
+            ],
+          ),
+          const SizedBox(height: 14),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              StatusChip(
+                label: type.isEmpty ? 'Residential' : type,
+                color: AppColors.primary,
+              ),
+              StatusChip(label: '$units units', color: AppColors.teal),
+              if (location.isNotEmpty)
+                StatusChip(label: location, color: AppColors.info),
+            ],
+          ),
+          if (description.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Text(
+              description,
+              style: theme.textTheme.bodySmall,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMenu(BuildContext context, Map<String, dynamic> property) {
+    return PopupMenuButton<String>(
+      icon: const Icon(Icons.more_vert_rounded, size: 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      onSelected: (value) {
+        if (value == 'edit') {
+          _showForm(context, property);
+        } else if (value == 'delete') {
+          _confirmDelete(context, property['id'] as int);
+        }
+      },
+      itemBuilder: (context) => [
+        const PopupMenuItem(
+          value: 'edit',
+          child: Row(
+            children: [
+              Icon(Icons.edit_outlined, size: 19),
+              SizedBox(width: 10),
+              Text('Edit'),
+            ],
+          ),
         ),
-        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+        const PopupMenuItem(
+          value: 'delete',
+          child: Row(
+            children: [
+              Icon(Icons.delete_outline_rounded, size: 19, color: AppColors.danger),
+              SizedBox(width: 10),
+              Text('Delete', style: TextStyle(color: AppColors.danger)),
+            ],
+          ),
+        ),
       ],
     );
   }
 
-  void _showPropertyForm(
-    BuildContext context, [
-    Map<String, dynamic>? property,
-  ]) {
+  void _showForm(BuildContext context, [Map<String, dynamic>? property]) {
     final isEditing = property != null;
 
     if (isEditing) {
-      controller.nameController.text = property['name'];
-      controller.addressController.text = property['address'];
-      controller.cityController.text = property['city'];
-      controller.stateController.text = property['state'];
-      controller.zipCodeController.text = property['zipCode'];
-      controller.propertyTypeController.text = property['propertyType'];
-      controller.totalUnitsController.text = property['totalUnits'].toString();
+      controller.nameController.text = property['name']?.toString() ?? '';
+      controller.addressController.text = property['address']?.toString() ?? '';
+      controller.cityController.text = property['city']?.toString() ?? '';
+      controller.stateController.text = property['state']?.toString() ?? '';
+      controller.zipCodeController.text = property['zipCode']?.toString() ?? '';
+      controller.propertyTypeController.text =
+          property['propertyType']?.toString() ?? '';
+      controller.totalUnitsController.text =
+          property['totalUnits']?.toString() ?? '';
+      controller.purchasePriceController.text =
+          property['purchasePrice']?.toString() ?? '';
+      controller.currentValueController.text =
+          property['marketValue']?.toString() ?? '';
+      controller.notesController.text = property['description']?.toString() ?? '';
     } else {
       controller.clearForm();
     }
 
-    Get.dialog(
-      Dialog(
-        child: Container(
-          width:
-              MediaQuery.of(context).size.width > 600
-                  ? 500
-                  : MediaQuery.of(context).size.width * 0.9,
-          padding: const EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  isEditing ? 'Edit Property' : 'Add Property',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Property Name',
-                    prefixIcon: Icon(Icons.home_work),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.addressController,
-                  decoration: const InputDecoration(
-                    labelText: 'Address',
-                    prefixIcon: Icon(Icons.location_on),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: TextField(
-                        controller: controller.cityController,
-                        decoration: const InputDecoration(labelText: 'City'),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        controller: controller.stateController,
-                        decoration: const InputDecoration(labelText: 'State'),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        controller: controller.zipCodeController,
-                        decoration: const InputDecoration(
-                          labelText: 'Zip Code',
-                        ),
-                        keyboardType: TextInputType.number,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.propertyTypeController,
-                  decoration: const InputDecoration(
-                    labelText: 'Property Type',
-                    prefixIcon: Icon(Icons.category),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.totalUnitsController,
-                  decoration: const InputDecoration(
-                    labelText: 'Total Units',
-                    prefixIcon: Icon(Icons.apartment),
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: controller.purchasePriceController,
-                        decoration: const InputDecoration(
-                          labelText: 'Purchase Price',
-                          prefixIcon: Icon(Icons.attach_money),
-                        ),
-                        keyboardType: TextInputType.number,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        controller: controller.currentValueController,
-                        decoration: const InputDecoration(
-                          labelText: 'Current Value',
-                          prefixIcon: Icon(Icons.trending_up),
-                        ),
-                        keyboardType: TextInputType.number,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller.notesController,
-                  decoration: const InputDecoration(
-                    labelText: 'Notes',
-                    prefixIcon: Icon(Icons.note),
-                  ),
-                  maxLines: 3,
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () => Get.back(),
-                      child: const Text('Cancel'),
-                    ),
-                    const SizedBox(width: 16),
-                    ElevatedButton(
-                      onPressed:
-                          isEditing
-                              ? () => controller.editProperty(property['id'])
-                              : controller.addProperty,
-                      child: Text(isEditing ? 'Update' : 'Add'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+    showFormSheet(
+      context: context,
+      title: isEditing ? 'Edit Property' : 'New Property',
+      subtitle: isEditing
+          ? 'Update the details for this property.'
+          : 'Fill in the details to add a property to your portfolio.',
+      submitLabel: isEditing ? 'Save Changes' : 'Add Property',
+      isLoading: controller.isLoading,
+      onSubmit: () {
+        if (isEditing) {
+          controller.editProperty(property['id'] as int);
+        } else {
+          controller.addProperty();
+        }
+      },
+      fields: [
+        TextField(
+          controller: controller.nameController,
+          textInputAction: TextInputAction.next,
+          decoration: const InputDecoration(
+            labelText: 'Property name',
+            prefixIcon: Icon(Icons.home_work_outlined),
           ),
         ),
-      ),
+        const SizedBox(height: 14),
+        TextField(
+          controller: controller.addressController,
+          textInputAction: TextInputAction.next,
+          decoration: const InputDecoration(
+            labelText: 'Address',
+            prefixIcon: Icon(Icons.location_on_outlined),
+          ),
+        ),
+        const SizedBox(height: 14),
+        Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: TextField(
+                controller: controller.cityController,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(labelText: 'City'),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: TextField(
+                controller: controller.stateController,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(labelText: 'County'),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller.zipCodeController,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(labelText: 'Postal code'),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: TextField(
+                controller: controller.propertyTypeController,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(labelText: 'Type'),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller.totalUnitsController,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(labelText: 'Total units'),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: TextField(
+                controller: controller.purchasePriceController,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(labelText: 'Purchase price'),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        TextField(
+          controller: controller.currentValueController,
+          keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.next,
+          decoration: const InputDecoration(labelText: 'Current value'),
+        ),
+        const SizedBox(height: 14),
+        TextField(
+          controller: controller.notesController,
+          maxLines: 3,
+          decoration: const InputDecoration(labelText: 'Notes'),
+        ),
+      ],
     );
   }
 
-  void _showDeleteConfirmation(BuildContext context, int id) {
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Delete Property'),
-        content: const Text(
+  void _confirmDelete(BuildContext context, int id) {
+    showConfirmDialog(
+      context: context,
+      title: 'Delete Property',
+      message:
           'Are you sure you want to delete this property? This action cannot be undone.',
-        ),
-        actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
-          TextButton(
-            onPressed: () => controller.deleteProperty(id),
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
-          ),
-        ],
-      ),
+      confirmLabel: 'Delete',
+      onConfirm: () => controller.deleteProperty(id),
     );
   }
 }

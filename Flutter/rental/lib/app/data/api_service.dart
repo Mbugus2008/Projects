@@ -4,16 +4,27 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../core/config/app_config.dart';
+import 'auth_service.dart';
 
 class ApiService extends GetxService {
   final String authToken;
 
   ApiService({required this.authToken});
 
+  /// Prefers the live token from [AuthService] so a login that happens after
+  /// app startup propagates to every request; falls back to the token
+  /// captured at construction time.
+  String get _token {
+    if (Get.isRegistered<AuthService>()) {
+      return Get.find<AuthService>().token.value;
+    }
+    return authToken;
+  }
+
   // Headers for API requests
   Map<String, String> get headers => {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer $authToken',
+    'Authorization': 'Bearer $_token',
   };
 
   // Properties API
@@ -403,6 +414,104 @@ class ApiService extends GetxService {
       return response.statusCode == 200;
     } catch (e) {
       print('Error deleting document: $e');
+      return false;
+    }
+  }
+
+  // Settings API
+  Future<Map<String, dynamic>> getSettings() async {
+    try {
+      final response = await http.get(
+        Uri.parse('${AppConfig.baseUrl}/settings'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed to load settings');
+      }
+    } catch (e) {
+      print('Error fetching settings: $e');
+      return {'waterRatePerUnit': 150.0, 'garbageFee': 500.0};
+    }
+  }
+
+  Future<bool> updateSettings(Map<String, dynamic> settings) async {
+    try {
+      final response = await http.put(
+        Uri.parse('${AppConfig.baseUrl}/settings'),
+        headers: headers,
+        body: jsonEncode(settings),
+      );
+
+      return response.statusCode == 200;
+    } catch (e) {
+      print('Error updating settings: $e');
+      return false;
+    }
+  }
+
+  // Invoices API
+  Future<List<Map<String, dynamic>>> getInvoices() async {
+    try {
+      final response = await http.get(
+        Uri.parse('${AppConfig.baseUrl}/invoices'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        return data.map((item) => item as Map<String, dynamic>).toList();
+      } else {
+        throw Exception('Failed to load invoices');
+      }
+    } catch (e) {
+      print('Error fetching invoices: $e');
+      return [];
+    }
+  }
+
+  Future<bool> addInvoice(Map<String, dynamic> invoiceData) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${AppConfig.baseUrl}/invoices'),
+        headers: headers,
+        body: jsonEncode(invoiceData),
+      );
+
+      return response.statusCode == 201;
+    } catch (e) {
+      print('Error adding invoice: $e');
+      return false;
+    }
+  }
+
+  Future<bool> updateInvoice(int id, Map<String, dynamic> invoiceData) async {
+    try {
+      final response = await http.put(
+        Uri.parse('${AppConfig.baseUrl}/invoices/$id'),
+        headers: headers,
+        body: jsonEncode(invoiceData),
+      );
+
+      return response.statusCode == 200;
+    } catch (e) {
+      print('Error updating invoice: $e');
+      return false;
+    }
+  }
+
+  Future<bool> deleteInvoice(int id) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('${AppConfig.baseUrl}/invoices/$id'),
+        headers: headers,
+      );
+
+      return response.statusCode == 200;
+    } catch (e) {
+      print('Error deleting invoice: $e');
       return false;
     }
   }

@@ -46,6 +46,8 @@
     };
     var transactionsPageLink = BuildRangeLink(transactionsBasePath, Model.SelectedRange);
     var fuelPageLink = BuildRangeLink(fuelBasePath, Model.SelectedRange);
+    var waybillBasePath = string.IsNullOrWhiteSpace(pathBase) ? "/waybillsummary" : $"{pathBase}/waybillsummary";
+    var waybillPageLink = BuildRangeLink(waybillBasePath, Model.SelectedRange);
 
     // The loading widget links through to the full report and the per-vehicle breakdown for the
     // same range, so a queueing problem can be followed from the summary to the individual unit.
@@ -954,6 +956,7 @@
                         <nav class="filters page-links" aria-label="Page links">
                             <a href="@transactionsPageLink" class="active">Transactions</a>
                             <a href="@fuelPageLink">Depot Fuel</a>
+                            <a href="@waybillPageLink">Waybill</a>
                         </nav>
                         <nav class="filters range-links" aria-label="Date range">
                             <a href="@transactionsTodayLink" class="@(Model.SelectedRange == "today" ? "active" : null)">Today</a>

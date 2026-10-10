@@ -2,7 +2,7 @@
 
 ## API Endpoint
 ```
-POST http://trimline.co.ke:4006/api/pushstk
+POST https://trimline.co.ke:4001/api/pushstk
 ```
 
 ## Single Payment Request
@@ -194,7 +194,7 @@ Expected response format for status check:
 
 ### Test Single Payment
 ```bash
-curl -X POST http://trimline.co.ke:4006/api/pushstk \
+curl -X POST https://trimline.co.ke:4001/api/pushstk \
   -H "Content-Type: application/json" \
   -H "X-Client-Identifier: kirigiti" \
   -d '{
@@ -207,7 +207,7 @@ curl -X POST http://trimline.co.ke:4006/api/pushstk \
 
 ### Test Multiple Payments
 ```bash
-curl -X POST http://trimline.co.ke:4006/api/pushstk \
+curl -X POST https://trimline.co.ke:4001/api/pushstk \
   -H "Content-Type: application/json" \
   -H "X-Client-Identifier: kirigiti" \
   -d '{

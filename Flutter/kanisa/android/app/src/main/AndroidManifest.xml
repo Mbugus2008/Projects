@@ -14,7 +14,7 @@
         android:label="Kanisa"
         android:name="${applicationName}"
         android:icon="@mipmap/kirigitilogo"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="false">
         <activity
             android:name=".MainActivity"
             android:exported="true"

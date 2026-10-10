@@ -155,6 +155,14 @@ curl -s -o /dev/null -w "%{http_code} %{content_type}\n" https://trimline.co.ke/
   restrictions, basic auth or bot blocking for it, and keep the TLS certificate
   (Let's Encrypt) renewing automatically.
 
+### Account deletion URL
+
+The URL declared in Play Console → App content → Data safety must return a real page with
+HTTP 200 on the first request - no meta-refresh stub and no redirect. Keep
+`kanisa-delete-account/index.html` served as the actual deletion page (it is what
+`https://trimline.co.ke/kanisa-delete-account/` resolves to) and keep
+`kanisa-delete-account.html` as the copy linked from inside the app.
+
 ---
 
 ## Pre-Launch Checklist

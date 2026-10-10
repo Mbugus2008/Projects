@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../core/widgets/app_ui.dart';
+import '../../../theme/app_theme.dart';
 import '../controllers/auth_controller.dart';
 
 class LoginView extends GetView<AuthController> {
@@ -7,136 +9,135 @@ class LoginView extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(24),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 440),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Icon(
-                    Icons.home_work,
-                    size: 80.0,
-                    color: Colors.blue,
-                  ),
-                  const SizedBox(height: 24),
+                  const Center(child: AppLogo(size: 68)),
+                  const SizedBox(height: 28),
                   Text(
-                    'Rental Management',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    'Welcome back',
                     textAlign: TextAlign.center,
+                    style: theme.textTheme.headlineMedium,
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
                   Text(
-                    'Sign in to your account',
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    'Sign in to manage your properties',
                     textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyMedium,
                   ),
-                  const SizedBox(height: 48),
-                  TextField(
-                    controller: controller.emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      prefixIcon: Icon(Icons.email),
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(height: 16),
-                  Obx(
-                    () => TextField(
-                      controller: controller.passwordController,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        prefixIcon: const Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            controller.obscurePassword.value
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                  const SizedBox(height: 32),
+                  AppCard(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TextField(
+                          controller: controller.emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: const [AutofillHints.email],
+                          decoration: const InputDecoration(
+                            labelText: 'Email address',
+                            prefixIcon: Icon(Icons.alternate_email_rounded),
                           ),
-                          onPressed: controller.togglePasswordVisibility,
+                        ),
+                        const SizedBox(height: 16),
+                        Obx(
+                          () => TextField(
+                            controller: controller.passwordController,
+                            obscureText: controller.obscurePassword.value,
+                            onSubmitted: (_) => controller.login(),
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              prefixIcon: const Icon(Icons.lock_outline_rounded),
+                              suffixIcon: IconButton(
+                                onPressed:
+                                    controller.togglePasswordVisibility,
+                                icon: Icon(
+                                  controller.obscurePassword.value
+                                      ? Icons.visibility_off_outlined
+                                      : Icons.visibility_outlined,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 22),
+                        Obx(
+                          () => LoadingButton(
+                            label: 'Sign In',
+                            isLoading: controller.isLoading.value,
+                            onPressed: controller.login,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 26),
+                  Row(
+                    children: [
+                      const Expanded(child: Divider()),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: Text('or continue with',
+                            style: theme.textTheme.bodySmall),
+                      ),
+                      const Expanded(child: Divider()),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () => controller.loginWithOAuth('google'),
+                          icon: const Icon(Icons.g_mobiledata_rounded, size: 26, color: AppColors.danger),
+                          label: const FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text('Google'),
+                          ),
                         ),
                       ),
-                      obscureText: controller.obscurePassword.value,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Obx(
-                    () => ElevatedButton(
-                      onPressed: controller.isLoading.value
-                          ? null
-                          : controller.login,
-                      child: controller.isLoading.value
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
-                            )
-                          : const Text('Sign In'),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Divider(thickness: 1),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Or sign in with',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _buildOAuthButton(
-                        context,
-                        'Google',
-                        Colors.red,
-                        Icons.g_mobiledata,
-                        () => controller.loginWithOAuth('google'),
-                      ),
-                      const SizedBox(width: 16),
-                      _buildOAuthButton(
-                        context,
-                        'Microsoft',
-                        Colors.blue,
-                        Icons.window,
-                        () => controller.loginWithOAuth('microsoft'),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () =>
+                              controller.loginWithOAuth('microsoft'),
+                          icon: const Icon(Icons.window_rounded, size: 20, color: AppColors.info),
+                          label: const FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text('Microsoft'),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                  TextButton(
-                    onPressed: () => Get.toNamed('/register'),
-                    child: const Text('Don\'t have an account? Sign Up'),
+                  const SizedBox(height: 28),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text("Don't have an account?",
+                          style: theme.textTheme.bodyMedium),
+                      TextButton(
+                        onPressed: () => Get.toNamed('/register'),
+                        child: const Text('Create one'),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildOAuthButton(
-    BuildContext context,
-    String provider,
-    Color color,
-    IconData icon,
-    VoidCallback onPressed,
-  ) {
-    return Expanded(
-      child: ElevatedButton.icon(
-        onPressed: onPressed,
-        icon: Icon(icon),
-        label: Text(provider),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          foregroundColor: Colors.white,
         ),
       ),
     );

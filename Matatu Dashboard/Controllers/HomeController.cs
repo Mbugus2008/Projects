@@ -138,8 +138,10 @@ public class HomeController : Controller
 
     /// <summary>
     /// Waybill summary: entries in range plus the trips that hang off them.
+    /// Served at both /waybillsummary and the short /waybill alias.
     /// </summary>
     [HttpGet("/waybillsummary/{range?}")]
+    [HttpGet("/waybill/{range?}")]
     public async Task<IActionResult> WaybillSummary(string? range, CancellationToken cancellationToken)
     {
         var report = await BuildWaybillReportAsync(range, cancellationToken);

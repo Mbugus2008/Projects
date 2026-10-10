@@ -57,6 +57,18 @@
         .footer { margin-top: 12px; font-size: 11px; color: #999; text-align: center; }
         .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .table-wrap table { min-width: 860px; }
+        .wb-row { cursor: pointer; }
+        .wb-row:hover td { background: #f0f7f2; }
+        .wb-row .chev { display: inline-block; font-size: 11px; color: #006B3F; transition: transform .15s; }
+        .wb-row.expanded .chev { transform: rotate(90deg); }
+        .wb-detail { display: none; }
+        .wb-detail.open { display: table-row; }
+        .wb-detail > td { background: #f7faf8; padding: 6px 12px 14px 30px; }
+        .detail-table { min-width: 0 !important; box-shadow: none; border-radius: 6px; }
+        .detail-table th { background: #e2efe7; color: #006B3F; font-size: 10px; padding: 5px 8px; }
+        .detail-table td { font-size: 12px; padding: 5px 8px; background: transparent; }
+        .detail-empty { color: #8a978d; font-size: 12px; padding: 6px 0; white-space: normal; }
+        .toggle-all { font-size: 12px; font-weight: 500; margin-left: 10px; color: #006B3F; text-decoration: none; border-bottom: 1px dashed #006B3F; }
         @@media (max-width: 640px) {
             body { padding: 10px; }
             .header { flex-direction: column; align-items: flex-start; }
@@ -65,7 +77,8 @@
         }
         @@media print {
             body { background: #fff; padding: 0; }
-            .tabs, .controls, .footer { display: none !important; }
+            .tabs, .controls, .footer, .toggle-all { display: none !important; }
+            .wb-row .chev { visibility: hidden; }
             .metric-card, table { box-shadow: none; }
             .metric-card { border: 1px solid #ddd; }
             .table-wrap { overflow: visible; }
@@ -109,16 +122,64 @@
         function filterRows() {
             var q = (document.getElementById('wbFilter') || {}).value || '';
             q = q.toUpperCase();
-            ['waybillTable', 'tripTable'].forEach(function (id) {
-                var table = document.getElementById(id);
-                if (!table || !table.tBodies.length) return;
-                var rows = table.tBodies[0].rows;
+
+            var wbTable = document.getElementById('waybillTable');
+            if (wbTable && wbTable.tBodies.length) {
+                var rows = wbTable.tBodies[0].rows;
                 for (var r = 0; r < rows.length; r++) {
-                    var text = rows[r].textContent.toUpperCase();
-                    rows[r].style.display = (!q || text.indexOf(q) >= 0) ? '' : 'none';
+                    var row = rows[r];
+                    if (row.classList.contains('wb-detail')) continue;
+                    var show = !q || row.textContent.toUpperCase().indexOf(q) >= 0;
+                    row.style.display = show ? '' : 'none';
+                    var next = row.nextElementSibling;
+                    if (next && next.classList.contains('wb-detail')) {
+                        // Keep the detail row in step with its parent; when the
+                        // parent is shown again the wb-detail/open classes decide.
+                        next.style.display = show ? '' : 'none';
+                    }
                 }
-            });
+            }
+
+            var tripTable = document.getElementById('tripTable');
+            if (tripTable && tripTable.tBodies.length) {
+                var tripRows = tripTable.tBodies[0].rows;
+                for (var t = 0; t < tripRows.length; t++) {
+                    tripRows[t].style.display =
+                        (!q || tripRows[t].textContent.toUpperCase().indexOf(q) >= 0) ? '' : 'none';
+                }
+            }
         }
+
+        // Clicking a waybill row expands its trips (sub-details) underneath it.
+        // Attach after the DOM is parsed - this script block sits above the
+        // tables in the markup, so the rows don't exist yet at parse time.
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('tr.wb-row').forEach(function (row) {
+                row.addEventListener('click', function () {
+                    var detail = row.nextElementSibling;
+                    if (!detail || !detail.classList.contains('wb-detail')) return;
+                    var open = !detail.classList.contains('open');
+                    detail.classList.toggle('open', open);
+                    row.classList.toggle('expanded', open);
+                });
+            });
+
+            var toggleAll = document.getElementById('toggleAll');
+            if (toggleAll) {
+                toggleAll.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var expand = toggleAll.textContent.trim() === 'Expand all';
+                    document.querySelectorAll('tr.wb-row').forEach(function (row) {
+                        row.classList.toggle('expanded', expand);
+                        var detail = row.nextElementSibling;
+                        if (detail && detail.classList.contains('wb-detail')) {
+                            detail.classList.toggle('open', expand);
+                        }
+                    });
+                    toggleAll.textContent = expand ? 'Collapse all' : 'Expand all';
+                });
+            }
+        });
     </script>
 
     <div class="metrics">
@@ -131,12 +192,12 @@
         }
     </div>
 
-    <h2 class="section">Waybills (@Model.Waybills.Count)</h2>
+    <h2 class="section">Waybills (@Model.Waybills.Count)<a href="#" id="toggleAll" class="toggle-all">Expand all</a></h2>
     <div class="table-wrap">
     <table id="waybillTable">
         <thead>
             <tr>
-                <th>Date</th><th>Vehicle</th><th>Fleet</th><th>Crew</th><th class="num">Entry</th>
+                <th></th><th>Date</th><th>Vehicle</th><th>Fleet</th><th>Crew</th><th class="num">Entry</th>
                 <th class="num">Target</th><th class="num">Expected</th><th class="num">Collected</th>
                 <th class="num">Shortage</th><th class="num">Cash</th>
                 <th class="num">Trips</th><th class="num">Pax</th><th class="num">Trip Revenue</th>
@@ -149,7 +210,9 @@
                 var (driverNo, conductorNo) = WaybillReport.Crew(waybill);
                 var shortage = WaybillReport.Number(waybill, "Shortage");
                 var collected = WaybillReport.Number(waybill, "Total_Collected");
-                <tr>
+                var entryNo = WaybillReport.Whole(waybill, "Entry_No");
+                <tr class="wb-row" title="Show trips for entry @entryNo">
+                    <td class="expander"><span class="chev">&#9656;</span></td>
                     <td>@(WaybillReport.Value(waybill, "Date", "-") is var d && d.Length > 10 ? d[..10] : WaybillReport.Value(waybill, "Date", "-"))</td>
                     <td><b>@WaybillReport.Value(waybill, "Vehicle_No", "-")</b></td>
                     <td>@WaybillReport.Value(waybill, "Fleet_No", "-")</td>
@@ -157,7 +220,7 @@
                         <div><b>@driverNo</b></div>
                         <div class="muted"><b>@conductorNo</b></div>
                     </td>
-                    <td class="num">@WaybillReport.Whole(waybill, "Entry_No")</td>
+                    <td class="num">@entryNo</td>
                     <td class="num">@Money(WaybillReport.Number(waybill, "Target_Revenue"))</td>
                     <td class="num">@Money(WaybillReport.Number(waybill, "Total_Expected"))</td>
                     <td class="num" style="font-weight:700;">@Money(collected)</td>
@@ -166,6 +229,47 @@
                     <td class="num">@trips.Count</td>
                     <td class="num">@trips.Sum(t => WaybillReport.Whole(t, "Pax_No"))</td>
                     <td class="num">@Money(trips.Sum(t => WaybillReport.Number(t, "Total")))</td>
+                </tr>
+                <tr class="wb-detail">
+                    <td colspan="14">
+                        @if (trips.Count == 0)
+                        {
+                            <div class="detail-empty">No trips recorded for this waybill.</div>
+                        }
+                        else
+                        {
+                            <table class="detail-table">
+                                <thead>
+                                    <tr>
+                                        <th class="num">Trip</th><th>From</th><th>To</th>
+                                        <th>Departure</th><th>Arrival</th><th class="num">Pax</th>
+                                        <th class="num">Fare</th><th class="num">Total</th><th>Received</th>
+                                        <th>Status</th><th>Started By</th><th>Comments</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var trip in trips)
+                                    {
+                                        var status = WaybillReport.TripStatus(trip);
+                                        <tr>
+                                            <td class="num">@WaybillReport.Whole(trip, "Trip_No")</td>
+                                            <td>@WaybillReport.Value(trip, "From", "-")</td>
+                                            <td>@WaybillReport.Value(trip, "To", "-")</td>
+                                            <td>@WaybillReport.Clock(WaybillReport.Value(trip, "From_Time"))</td>
+                                            <td>@WaybillReport.Clock(WaybillReport.Value(trip, "To_Time"))</td>
+                                            <td class="num">@WaybillReport.Whole(trip, "Pax_No")</td>
+                                            <td class="num">@Money(WaybillReport.Number(trip, "Fare_Amount"))</td>
+                                            <td class="num" style="font-weight:700;">@Money(WaybillReport.Number(trip, "Total"))</td>
+                                            <td>@WaybillReport.Value(trip, "Amount_Received", "-")</td>
+                                            <td class="@(status == "Open" ? "open" : "closed")">@status</td>
+                                            <td>@WaybillReport.Value(trip, "Started_By", "-")</td>
+                                            <td class="muted">@WaybillReport.Value(trip, "Comments", string.Empty)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>

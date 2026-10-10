@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../core/widgets/app_ui.dart';
+import '../../../theme/app_theme.dart';
 import '../controllers/reports_controller.dart';
 
 class ReportsView extends GetView<ReportsController> {
@@ -9,38 +10,39 @@ class ReportsView extends GetView<ReportsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Reports')),
+      appBar: AppBar(
+        title: const Text('Reports'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh_rounded),
+            tooltip: 'Refresh',
+            onPressed: controller.loadReports,
+          ),
+        ],
+      ),
       body: Obx(
-        () =>
-            controller.isLoading.value
-                ? const Center(child: CircularProgressIndicator())
-                : _buildReportsContent(context),
+        () => controller.isLoading.value
+            ? const LoadingView(label: 'Crunching numbers…')
+            : _buildContent(context),
       ),
     );
   }
 
-  Widget _buildReportsContent(BuildContext context) {
+  Widget _buildContent(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Financial Summary',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 16),
-            _buildSummaryCards(context),
-            const SizedBox(height: 24),
-            Text(
-              'Available Reports',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 16),
-            _buildReportCards(context),
-          ],
-        ),
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SectionHeader(title: 'Financial Summary'),
+          const SizedBox(height: 12),
+          _buildSummaryCards(context),
+          const SizedBox(height: 24),
+          const SectionHeader(title: 'Available Reports'),
+          const SizedBox(height: 12),
+          ..._buildReportCards(context),
+        ],
       ),
     );
   }
@@ -48,170 +50,130 @@ class ReportsView extends GetView<ReportsController> {
   Widget _buildSummaryCards(BuildContext context) {
     return Obx(
       () => GridView.count(
-        crossAxisCount: MediaQuery.of(context).size.width > 600 ? 4 : 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
+        crossAxisCount: 2,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        childAspectRatio: 1.45,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          _buildSummaryCard(
-            context,
-            'Total Revenue',
-            '\$${controller.totalRevenue.value.toStringAsFixed(2)}',
-            Icons.arrow_upward,
-            Colors.green,
+          StatCard(
+            icon: Icons.trending_up_rounded,
+            iconColor: AppColors.success,
+            value: formatMoney(controller.totalRevenue.value),
+            label: 'Total Revenue',
           ),
-          _buildSummaryCard(
-            context,
-            'Total Expenses',
-            '\$${controller.totalExpenses.value.toStringAsFixed(2)}',
-            Icons.arrow_downward,
-            Colors.red,
+          StatCard(
+            icon: Icons.trending_down_rounded,
+            iconColor: AppColors.danger,
+            value: formatMoney(controller.totalExpenses.value),
+            label: 'Total Expenses',
           ),
-          _buildSummaryCard(
-            context,
-            'Net Income',
-            '\$${controller.netIncome.value.toStringAsFixed(2)}',
-            Icons.account_balance,
-            Colors.blue,
+          StatCard(
+            icon: Icons.account_balance_rounded,
+            iconColor: AppColors.primary,
+            value: formatMoney(controller.netIncome.value),
+            label: 'Net Income',
           ),
-          _buildSummaryCard(
-            context,
-            'Occupancy Rate',
-            '${controller.occupancyRate.value.toStringAsFixed(1)}%',
-            Icons.people,
-            Colors.orange,
+          StatCard(
+            icon: Icons.pie_chart_outline_rounded,
+            iconColor: AppColors.warning,
+            value: '${controller.occupancyRate.value.toStringAsFixed(1)}%',
+            label: 'Occupancy Rate',
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSummaryCard(
-    BuildContext context,
-    String title,
-    String value,
-    IconData icon,
-    Color color,
-  ) {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 32, color: color),
-            const SizedBox(height: 8),
-            Text(value, style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 4),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildReportCards(BuildContext context) {
+  List<Widget> _buildReportCards(BuildContext context) {
     final reports = [
-      {
-        'title': 'Income Report',
-        'description': 'Detailed breakdown of all income sources',
-        'icon': Icons.attach_money,
-        'color': Colors.green,
-        'onTap': controller.generateIncomeReport,
-      },
-      {
-        'title': 'Expense Report',
-        'description': 'Detailed breakdown of all expenses',
-        'icon': Icons.money_off,
-        'color': Colors.red,
-        'onTap': controller.generateExpenseReport,
-      },
-      {
-        'title': 'Occupancy Report',
-        'description': 'Current and historical occupancy rates',
-        'icon': Icons.people,
-        'color': Colors.blue,
-        'onTap': controller.generateOccupancyReport,
-      },
-      {
-        'title': 'Lease Expiration Report',
-        'description': 'Upcoming lease expirations',
-        'icon': Icons.event,
-        'color': Colors.orange,
-        'onTap': controller.generateLeaseExpirationReport,
-      },
-      {
-        'title': 'Maintenance Report',
-        'description': 'Summary of maintenance requests and costs',
-        'icon': Icons.build,
-        'color': Colors.purple,
-        'onTap': controller.generateMaintenanceReport,
-      },
+      (
+        title: 'Income Report',
+        description: 'Detailed breakdown of all income sources',
+        icon: Icons.trending_up_rounded,
+        color: AppColors.success,
+        onGenerate: controller.generateIncomeReport,
+      ),
+      (
+        title: 'Expense Report',
+        description: 'Detailed breakdown of all expenses',
+        icon: Icons.trending_down_rounded,
+        color: AppColors.danger,
+        onGenerate: controller.generateExpenseReport,
+      ),
+      (
+        title: 'Occupancy Report',
+        description: 'Current and historical occupancy rates',
+        icon: Icons.pie_chart_outline_rounded,
+        color: AppColors.primary,
+        onGenerate: controller.generateOccupancyReport,
+      ),
+      (
+        title: 'Lease Expiration Report',
+        description: 'Upcoming lease expirations',
+        icon: Icons.event_note_outlined,
+        color: AppColors.warning,
+        onGenerate: controller.generateLeaseExpirationReport,
+      ),
+      (
+        title: 'Maintenance Report',
+        description: 'Summary of maintenance requests and costs',
+        icon: Icons.build_outlined,
+        color: AppColors.purple,
+        onGenerate: controller.generateMaintenanceReport,
+      ),
     ];
 
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: reports.length,
-      itemBuilder: (context, index) {
-        final report = reports[index];
-        return Card(
-          margin: const EdgeInsets.only(bottom: 16),
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: (report['color'] as Color).withOpacity(0.2),
-              child: Icon(
-                report['icon'] as IconData,
-                color: report['color'] as Color,
+    return reports.map((report) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 12),
+        child: AppCard(
+          padding: const EdgeInsets.all(16),
+          onTap: report.onGenerate,
+          child: Row(
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: report.color.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(13),
+                ),
+                child: Icon(report.icon, color: report.color, size: 22),
               ),
-            ),
-            title: Text(
-              report['title'] as String,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(report['description'] as String),
-            trailing: PopupMenuButton(
-              onSelected: (value) {
-                if (value == 'generate') {
-                  (report['onTap'] as Function)();
-                } else if (value == 'export') {
-                  controller.exportReportToPdf(report['title'] as String);
-                }
-              },
-              itemBuilder:
-                  (context) => [
-                    const PopupMenuItem(
-                      value: 'generate',
-                      child: Row(
-                        children: [
-                          Icon(Icons.refresh),
-                          SizedBox(width: 8),
-                          Text('Generate'),
-                        ],
-                      ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      report.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontSize: 15),
                     ),
-                    const PopupMenuItem(
-                      value: 'export',
-                      child: Row(
-                        children: [
-                          Icon(Icons.download),
-                          SizedBox(width: 8),
-                          Text('Export to PDF'),
-                        ],
-                      ),
+                    const SizedBox(height: 3),
+                    Text(
+                      report.description,
+                      style: Theme.of(context).textTheme.bodySmall,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
-            ),
-            onTap: () => (report['onTap'] as Function)(),
+                ),
+              ),
+              const SizedBox(width: 6),
+              IconButton(
+                icon: const Icon(Icons.download_rounded, size: 21),
+                tooltip: 'Export to PDF',
+                onPressed: () => controller.exportReportToPdf(report.title),
+              ),
+            ],
           ),
-        );
-      },
-    );
+        ),
+      );
+    }).toList();
   }
 }
