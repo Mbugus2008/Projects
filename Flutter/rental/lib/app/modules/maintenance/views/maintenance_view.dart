@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/app_ui.dart';
 import '../../../theme/app_theme.dart';
 import '../controllers/maintenance_controller.dart';
@@ -21,10 +22,10 @@ class MaintenanceView extends GetView<MaintenanceController> {
         ],
       ),
       body: Obx(
-        () => controller.isLoading.value &&
-                controller.maintenanceRequests.isEmpty
-            ? const LoadingView(label: 'Loading requests…')
-            : _buildList(context),
+        () =>
+            controller.isLoading.value && controller.maintenanceRequests.isEmpty
+                ? const LoadingView(label: 'Loading requests…')
+                : _buildList(context),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showForm(context),
@@ -53,18 +54,16 @@ class MaintenanceView extends GetView<MaintenanceController> {
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 96),
         itemCount: controller.maintenanceRequests.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (context, index) => _buildRequestCard(
-          context,
-          controller.maintenanceRequests[index],
-        ),
+        itemBuilder:
+            (context, index) => _buildRequestCard(
+              context,
+              controller.maintenanceRequests[index],
+            ),
       ),
     );
   }
 
-  Widget _buildRequestCard(
-    BuildContext context,
-    Map<String, dynamic> request,
-  ) {
+  Widget _buildRequestCard(BuildContext context, Map<String, dynamic> request) {
     final theme = Theme.of(context);
     final title = request['title']?.toString() ?? '—';
     final description = request['description']?.toString() ?? '';
@@ -107,7 +106,9 @@ class MaintenanceView extends GetView<MaintenanceController> {
                   children: [
                     Text(
                       title,
-                      style: theme.textTheme.titleMedium?.copyWith(fontSize: 15),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 15,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -190,39 +191,43 @@ class MaintenanceView extends GetView<MaintenanceController> {
           _confirmDelete(context, request['id'] as int);
         }
       },
-      itemBuilder: (context) => [
-        const PopupMenuItem(
-          value: 'edit',
-          child: Row(
-            children: [
-              Icon(Icons.edit_outlined, size: 19),
-              SizedBox(width: 10),
-              Text('Edit'),
-            ],
-          ),
-        ),
-        const PopupMenuItem(
-          value: 'status',
-          child: Row(
-            children: [
-              Icon(Icons.track_changes_rounded, size: 19),
-              SizedBox(width: 10),
-              Text('Update Status'),
-            ],
-          ),
-        ),
-        const PopupMenuItem(
-          value: 'delete',
-          child: Row(
-            children: [
-              Icon(Icons.delete_outline_rounded,
-                  size: 19, color: AppColors.danger),
-              SizedBox(width: 10),
-              Text('Delete', style: TextStyle(color: AppColors.danger)),
-            ],
-          ),
-        ),
-      ],
+      itemBuilder:
+          (context) => [
+            const PopupMenuItem(
+              value: 'edit',
+              child: Row(
+                children: [
+                  Icon(Icons.edit_outlined, size: 19),
+                  SizedBox(width: 10),
+                  Text('Edit'),
+                ],
+              ),
+            ),
+            const PopupMenuItem(
+              value: 'status',
+              child: Row(
+                children: [
+                  Icon(Icons.track_changes_rounded, size: 19),
+                  SizedBox(width: 10),
+                  Text('Update Status'),
+                ],
+              ),
+            ),
+            const PopupMenuItem(
+              value: 'delete',
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.delete_outline_rounded,
+                    size: 19,
+                    color: AppColors.danger,
+                  ),
+                  SizedBox(width: 10),
+                  Text('Delete', style: TextStyle(color: AppColors.danger)),
+                ],
+              ),
+            ),
+          ],
     );
   }
 
@@ -292,9 +297,10 @@ class MaintenanceView extends GetView<MaintenanceController> {
     showFormSheet(
       context: context,
       title: isEditing ? 'Edit Request' : 'New Request',
-      subtitle: isEditing
-          ? 'Update the details of this maintenance request.'
-          : 'Log a repair or maintenance task.',
+      subtitle:
+          isEditing
+              ? 'Update the details of this maintenance request.'
+              : 'Log a repair or maintenance task.',
       submitLabel: isEditing ? 'Save Changes' : 'Add Request',
       isLoading: controller.isLoading,
       onSubmit: () {

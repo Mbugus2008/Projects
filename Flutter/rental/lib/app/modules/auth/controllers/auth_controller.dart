@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../data/auth_service.dart';
 
 class AuthController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
-  
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  
+
   final RxBool isLoading = false.obs;
   final RxBool obscurePassword = true.obs;
-  
+
   @override
   void onInit() {
     super.onInit();
     // Check if user is already authenticated
     checkAuthStatus();
   }
-  
+
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;
   }
-  
+
   Future<void> checkAuthStatus() async {
     if (_authService.isAuthenticated.value) {
       // Validate token
@@ -34,7 +35,7 @@ class AuthController extends GetxController {
       }
     }
   }
-  
+
   Future<void> login() async {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
       Get.snackbar(
@@ -46,15 +47,15 @@ class AuthController extends GetxController {
       );
       return;
     }
-    
+
     isLoading.value = true;
-    
+
     try {
       final success = await _authService.loginWithJWT(
         emailController.text.trim(),
-        passwordController.text,
+        passwordController.text.trim(),
       );
-      
+
       if (success) {
         Get.offAllNamed('/dashboard');
       } else {
@@ -78,13 +79,13 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   Future<void> loginWithOAuth(String provider) async {
     isLoading.value = true;
-    
+
     try {
       final success = await _authService.loginWithOAuth(provider);
-      
+
       if (success) {
         Get.offAllNamed('/dashboard');
       } else {
@@ -108,9 +109,9 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   Future<void> register() async {
-    if (emailController.text.isEmpty || 
+    if (emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         firstNameController.text.isEmpty ||
         lastNameController.text.isEmpty) {
@@ -123,20 +124,20 @@ class AuthController extends GetxController {
       );
       return;
     }
-    
+
     isLoading.value = true;
-    
+
     try {
       final userData = {
         'email': emailController.text.trim(),
-        'password': passwordController.text,
+        'password': passwordController.text.trim(),
         'firstName': firstNameController.text.trim(),
         'lastName': lastNameController.text.trim(),
         'phone': phoneController.text.trim(),
       };
-      
+
       final success = await _authService.register(userData);
-      
+
       if (success) {
         Get.offAllNamed('/login');
         Get.snackbar(
@@ -167,12 +168,12 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
-  
+
   Future<void> logout() async {
     await _authService.logout();
     Get.offAllNamed('/login');
   }
-  
+
   @override
   void onClose() {
     emailController.dispose();

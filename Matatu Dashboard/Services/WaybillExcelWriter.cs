@@ -67,8 +67,9 @@ public static class WaybillExcelWriter
     {
         string[] columns =
         [
-            "Entry", "Vehicle", "Trip", "From", "To", "Departure", "Arrival",
-            "Pax", "Fare", "Total", "Received", "Status", "Started By", "Comments"
+            "Entry", "Vehicle", "Trip", "From", "Description", "Departure", "Arrival",
+            "Pax", "Fare", "Total", "Received", "M-Pesa", "Cash", "Status",
+            "Closed By", "Started By", "Comments"
         ];
 
         var vehicleByEntry = report.Waybills.ToDictionary(
@@ -89,14 +90,17 @@ public static class WaybillExcelWriter
                 XlsxCell.OfText(vehicleByEntry.TryGetValue(entry, out var v) ? v : "-"),
                 XlsxCell.OfNumber(WaybillReport.Whole(trip, "Trip_No")),
                 XlsxCell.OfText(WaybillReport.Value(trip, "From", "-")),
-                XlsxCell.OfText(WaybillReport.Value(trip, "To", "-")),
+                XlsxCell.OfText(WaybillReport.Value(trip, "Description", "-")),
                 XlsxCell.OfText(WaybillReport.Clock(WaybillReport.Value(trip, "From_Time"))),
                 XlsxCell.OfText(WaybillReport.Clock(WaybillReport.Value(trip, "To_Time"))),
                 XlsxCell.OfNumber(WaybillReport.Whole(trip, "Pax_No")),
                 XlsxCell.OfNumber(WaybillReport.Number(trip, "Fare_Amount"), XlsxStyle.Money),
                 XlsxCell.OfNumber(WaybillReport.Number(trip, "Total"), XlsxStyle.Money),
                 XlsxCell.OfText(WaybillReport.Value(trip, "Amount_Received", "-")),
+                XlsxCell.OfNumber(WaybillReport.Number(trip, "Mpesa_Amount"), XlsxStyle.Money),
+                XlsxCell.OfNumber(WaybillReport.Number(trip, "Cash_amount"), XlsxStyle.Money),
                 XlsxCell.OfText(WaybillReport.TripStatus(trip)),
+                XlsxCell.OfText(WaybillReport.Value(trip, "Closed_by", "-")),
                 XlsxCell.OfText(WaybillReport.Value(trip, "Started_By", "-")),
                 XlsxCell.OfText(WaybillReport.Value(trip, "Comments", string.Empty))
             ]);

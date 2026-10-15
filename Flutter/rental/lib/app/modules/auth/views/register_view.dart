@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/app_ui.dart';
 import '../controllers/auth_controller.dart';
 
@@ -25,8 +26,10 @@ class RegisterView extends GetView<AuthController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text('Create your account',
-                      style: theme.textTheme.headlineMedium),
+                  Text(
+                    'Create your account',
+                    style: theme.textTheme.headlineMedium,
+                  ),
                   const SizedBox(height: 6),
                   Text(
                     'Set up your landlord workspace in a minute',
@@ -66,6 +69,9 @@ class RegisterView extends GetView<AuthController> {
                           controller: controller.emailController,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
+                          textCapitalization: TextCapitalization.none,
+                          autocorrect: false,
+                          enableSuggestions: false,
                           decoration: const InputDecoration(
                             labelText: 'Email address',
                             prefixIcon: Icon(Icons.alternate_email_rounded),
@@ -87,12 +93,16 @@ class RegisterView extends GetView<AuthController> {
                           () => TextField(
                             controller: controller.passwordController,
                             obscureText: controller.obscurePassword.value,
+                            textCapitalization: TextCapitalization.none,
+                            autocorrect: false,
+                            enableSuggestions: false,
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              prefixIcon: const Icon(Icons.lock_outline_rounded),
+                              prefixIcon: const Icon(
+                                Icons.lock_outline_rounded,
+                              ),
                               suffixIcon: IconButton(
-                                onPressed:
-                                    controller.togglePasswordVisibility,
+                                onPressed: controller.togglePasswordVisibility,
                                 icon: Icon(
                                   controller.obscurePassword.value
                                       ? Icons.visibility_off_outlined
@@ -118,8 +128,10 @@ class RegisterView extends GetView<AuthController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Already have an account?',
-                          style: theme.textTheme.bodyMedium),
+                      Text(
+                        'Already have an account?',
+                        style: theme.textTheme.bodyMedium,
+                      ),
                       TextButton(
                         onPressed: () => Get.back(),
                         child: const Text('Sign in'),

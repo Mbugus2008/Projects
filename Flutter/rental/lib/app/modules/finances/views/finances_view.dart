@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/app_ui.dart';
 import '../../../theme/app_theme.dart';
 import '../controllers/finances_controller.dart';
@@ -21,9 +22,10 @@ class FinancesView extends GetView<FinancesController> {
         ],
       ),
       body: Obx(
-        () => controller.isLoading.value && controller.transactions.isEmpty
-            ? const LoadingView(label: 'Loading transactions…')
-            : _buildContent(context),
+        () =>
+            controller.isLoading.value && controller.transactions.isEmpty
+                ? const LoadingView(label: 'Loading transactions…')
+                : _buildContent(context),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showTransactionForm(context),
@@ -106,8 +108,9 @@ class FinancesView extends GetView<FinancesController> {
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 96),
         itemCount: controller.transactions.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (context, index) =>
-            _buildTransactionCard(context, controller.transactions[index]),
+        itemBuilder:
+            (context, index) =>
+                _buildTransactionCard(context, controller.transactions[index]),
       ),
     );
   }
@@ -203,8 +206,9 @@ class FinancesView extends GetView<FinancesController> {
           ),
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert_rounded, size: 20),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
             onSelected: (value) {
               if (value == 'edit') {
                 _showTransactionForm(context, transaction);
@@ -212,29 +216,36 @@ class FinancesView extends GetView<FinancesController> {
                 _confirmDelete(context, transaction['id'] as int);
               }
             },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'edit',
-                child: Row(
-                  children: [
-                    Icon(Icons.edit_outlined, size: 19),
-                    SizedBox(width: 10),
-                    Text('Edit'),
-                  ],
-                ),
-              ),
-              const PopupMenuItem(
-                value: 'delete',
-                child: Row(
-                  children: [
-                    Icon(Icons.delete_outline_rounded,
-                        size: 19, color: AppColors.danger),
-                    SizedBox(width: 10),
-                    Text('Delete', style: TextStyle(color: AppColors.danger)),
-                  ],
-                ),
-              ),
-            ],
+            itemBuilder:
+                (context) => [
+                  const PopupMenuItem(
+                    value: 'edit',
+                    child: Row(
+                      children: [
+                        Icon(Icons.edit_outlined, size: 19),
+                        SizedBox(width: 10),
+                        Text('Edit'),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    value: 'delete',
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.delete_outline_rounded,
+                          size: 19,
+                          color: AppColors.danger,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Delete',
+                          style: TextStyle(color: AppColors.danger),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
           ),
         ],
       ),
@@ -251,7 +262,8 @@ class FinancesView extends GetView<FinancesController> {
       lastDate: DateTime(now.year + 5),
     );
     if (picked != null) {
-      controller.dateController.text = picked.toIso8601String().split('T').first;
+      controller.dateController.text =
+          picked.toIso8601String().split('T').first;
     }
   }
 
@@ -285,9 +297,10 @@ class FinancesView extends GetView<FinancesController> {
     showFormSheet(
       context: context,
       title: isEditing ? 'Edit Transaction' : 'New Transaction',
-      subtitle: isEditing
-          ? 'Update the details of this transaction.'
-          : 'Record a rent payment or an expense.',
+      subtitle:
+          isEditing
+              ? 'Update the details of this transaction.'
+              : 'Record a rent payment or an expense.',
       submitLabel: isEditing ? 'Save Changes' : 'Add Transaction',
       isLoading: controller.isLoading,
       onSubmit: () {
@@ -350,9 +363,10 @@ class FinancesView extends GetView<FinancesController> {
             decoration: InputDecoration(
               labelText: 'Category',
               prefixIcon: const Icon(Icons.sell_outlined),
-              hintText: rxIsIncome.value
-                  ? 'e.g., Rent, Deposit'
-                  : 'e.g., Maintenance, Utilities',
+              hintText:
+                  rxIsIncome.value
+                      ? 'e.g., Rent, Deposit'
+                      : 'e.g., Maintenance, Utilities',
             ),
           ),
         ),

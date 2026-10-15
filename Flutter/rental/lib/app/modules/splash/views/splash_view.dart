@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/app_ui.dart';
 import '../../../theme/app_theme.dart';
 import '../controllers/splash_controller.dart';
@@ -22,13 +23,14 @@ class SplashView extends GetView<SplashController> {
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 900),
                 curve: Curves.easeOutCubic,
-                builder: (context, value, child) => Opacity(
-                  opacity: value,
-                  child: Transform.translate(
-                    offset: Offset(0, 24 * (1 - value)),
-                    child: child,
-                  ),
-                ),
+                builder:
+                    (context, value, child) => Opacity(
+                      opacity: value,
+                      child: Transform.translate(
+                        offset: Offset(0, 24 * (1 - value)),
+                        child: child,
+                      ),
+                    ),
                 child: Column(
                   children: [
                     const AppLogo(size: 84),

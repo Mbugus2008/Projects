@@ -84,6 +84,7 @@
     </style>
 </head>
 <body>
+    @await Html.PartialAsync("_DashboardNav")
     <div class="header">
         <h1>@ViewData["Title"]</h1>
         @if (!printMode)

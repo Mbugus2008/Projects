@@ -18,6 +18,8 @@
     var retrievedAt = (DateTime?)ViewData["RetrievedAt"] ?? DateTime.Now;
 
     string Money(decimal value) => value.ToString("N2");
+    // Amount columns that nobody has filled yet read as "-" instead of 0.00.
+    string Amount(decimal value) => value == 0 ? "-" : value.ToString("N2");
     var totalPassengers = Model.Trips.Sum(t => WaybillReport.Whole(t, "Pax_No"));
 }
 
@@ -90,6 +92,7 @@
     </style>
 </head>
 <body>
+    @await Html.PartialAsync("_DashboardNav")
     <div class="header">
         <h1>@ViewData["Title"]</h1>
         @if (!printMode)
@@ -241,27 +244,32 @@
                             <table class="detail-table">
                                 <thead>
                                     <tr>
-                                        <th class="num">Trip</th><th>From</th><th>To</th>
+                                        <th class="num">Trip</th><th>From</th><th>Description</th>
                                         <th>Departure</th><th>Arrival</th><th class="num">Pax</th>
                                         <th class="num">Fare</th><th class="num">Total</th><th>Received</th>
-                                        <th>Status</th><th>Started By</th><th>Comments</th>
+                                        <th class="num">M-Pesa</th><th class="num">Cash</th>
+                                        <th>Status</th><th>Closed By</th><th>Started By</th><th>Comments</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var trip in trips)
                                     {
                                         var status = WaybillReport.TripStatus(trip);
+                                        var closedBy = WaybillReport.Value(trip, "Closed_by", "-");
                                         <tr>
                                             <td class="num">@WaybillReport.Whole(trip, "Trip_No")</td>
                                             <td>@WaybillReport.Value(trip, "From", "-")</td>
-                                            <td>@WaybillReport.Value(trip, "To", "-")</td>
+                                            <td>@WaybillReport.Value(trip, "Description", "-")</td>
                                             <td>@WaybillReport.Clock(WaybillReport.Value(trip, "From_Time"))</td>
                                             <td>@WaybillReport.Clock(WaybillReport.Value(trip, "To_Time"))</td>
                                             <td class="num">@WaybillReport.Whole(trip, "Pax_No")</td>
                                             <td class="num">@Money(WaybillReport.Number(trip, "Fare_Amount"))</td>
                                             <td class="num" style="font-weight:700;">@Money(WaybillReport.Number(trip, "Total"))</td>
                                             <td>@WaybillReport.Value(trip, "Amount_Received", "-")</td>
+                                            <td class="num">@Amount(WaybillReport.Number(trip, "Mpesa_Amount"))</td>
+                                            <td class="num">@Amount(WaybillReport.Number(trip, "Cash_amount"))</td>
                                             <td class="@(status == "Open" ? "open" : "closed")">@status</td>
+                                            <td class="@(closedBy == "-" ? "muted" : "closed")">@closedBy</td>
                                             <td>@WaybillReport.Value(trip, "Started_By", "-")</td>
                                             <td class="muted">@WaybillReport.Value(trip, "Comments", string.Empty)</td>
                                         </tr>
@@ -286,27 +294,32 @@
     <table id="tripTable">
         <thead>
             <tr>
-                <th class="num">Entry</th><th class="num">Trip</th><th>From</th><th>To</th>
+                <th class="num">Entry</th><th class="num">Trip</th><th>From</th><th>Description</th>
                 <th>Departure</th><th>Arrival</th><th class="num">Pax</th><th class="num">Fare</th>
-                <th class="num">Total</th><th>Received</th><th>Status</th><th>Started By</th><th>Comments</th>
+                <th class="num">Total</th><th>Received</th><th class="num">M-Pesa</th><th class="num">Cash</th>
+                <th>Status</th><th>Closed By</th><th>Started By</th><th>Comments</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var trip in Model.Trips)
             {
                 var status = WaybillReport.TripStatus(trip);
+                var closedBy = WaybillReport.Value(trip, "Closed_by", "-");
                 <tr>
                     <td class="num">@WaybillReport.Whole(trip, "Weign_Bridge_id")</td>
                     <td class="num">@WaybillReport.Whole(trip, "Trip_No")</td>
                     <td>@WaybillReport.Value(trip, "From", "-")</td>
-                    <td>@WaybillReport.Value(trip, "To", "-")</td>
+                    <td>@WaybillReport.Value(trip, "Description", "-")</td>
                     <td>@WaybillReport.Clock(WaybillReport.Value(trip, "From_Time"))</td>
                     <td>@WaybillReport.Clock(WaybillReport.Value(trip, "To_Time"))</td>
                     <td class="num">@WaybillReport.Whole(trip, "Pax_No")</td>
                     <td class="num">@Money(WaybillReport.Number(trip, "Fare_Amount"))</td>
                     <td class="num" style="font-weight:700;">@Money(WaybillReport.Number(trip, "Total"))</td>
                     <td>@WaybillReport.Value(trip, "Amount_Received", "-")</td>
+                    <td class="num">@Amount(WaybillReport.Number(trip, "Mpesa_Amount"))</td>
+                    <td class="num">@Amount(WaybillReport.Number(trip, "Cash_amount"))</td>
                     <td class="@(status == "Open" ? "open" : "closed")">@status</td>
+                    <td class="@(closedBy == "-" ? "muted" : "closed")">@closedBy</td>
                     <td>@WaybillReport.Value(trip, "Started_By", "-")</td>
                     <td class="muted">@WaybillReport.Value(trip, "Comments", string.Empty)</td>
                 </tr>

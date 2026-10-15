@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/app_ui.dart';
 import '../../../theme/app_theme.dart';
 import '../controllers/properties_controller.dart';
@@ -21,9 +22,10 @@ class PropertiesView extends GetView<PropertiesController> {
         ],
       ),
       body: Obx(
-        () => controller.isLoading.value && controller.properties.isEmpty
-            ? const LoadingView(label: 'Loading properties…')
-            : _buildList(context),
+        () =>
+            controller.isLoading.value && controller.properties.isEmpty
+                ? const LoadingView(label: 'Loading properties…')
+                : _buildList(context),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showForm(context),
@@ -52,13 +54,17 @@ class PropertiesView extends GetView<PropertiesController> {
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 96),
         itemCount: controller.properties.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (context, index) =>
-            _buildPropertyCard(context, controller.properties[index]),
+        itemBuilder:
+            (context, index) =>
+                _buildPropertyCard(context, controller.properties[index]),
       ),
     );
   }
 
-  Widget _buildPropertyCard(BuildContext context, Map<String, dynamic> property) {
+  Widget _buildPropertyCard(
+    BuildContext context,
+    Map<String, dynamic> property,
+  ) {
     final theme = Theme.of(context);
     final name = property['name']?.toString() ?? '—';
     final address = property['address']?.toString() ?? '';
@@ -96,7 +102,9 @@ class PropertiesView extends GetView<PropertiesController> {
                   children: [
                     Text(
                       name,
-                      style: theme.textTheme.titleMedium?.copyWith(fontSize: 15),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 15,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -152,28 +160,33 @@ class PropertiesView extends GetView<PropertiesController> {
           _confirmDelete(context, property['id'] as int);
         }
       },
-      itemBuilder: (context) => [
-        const PopupMenuItem(
-          value: 'edit',
-          child: Row(
-            children: [
-              Icon(Icons.edit_outlined, size: 19),
-              SizedBox(width: 10),
-              Text('Edit'),
-            ],
-          ),
-        ),
-        const PopupMenuItem(
-          value: 'delete',
-          child: Row(
-            children: [
-              Icon(Icons.delete_outline_rounded, size: 19, color: AppColors.danger),
-              SizedBox(width: 10),
-              Text('Delete', style: TextStyle(color: AppColors.danger)),
-            ],
-          ),
-        ),
-      ],
+      itemBuilder:
+          (context) => [
+            const PopupMenuItem(
+              value: 'edit',
+              child: Row(
+                children: [
+                  Icon(Icons.edit_outlined, size: 19),
+                  SizedBox(width: 10),
+                  Text('Edit'),
+                ],
+              ),
+            ),
+            const PopupMenuItem(
+              value: 'delete',
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.delete_outline_rounded,
+                    size: 19,
+                    color: AppColors.danger,
+                  ),
+                  SizedBox(width: 10),
+                  Text('Delete', style: TextStyle(color: AppColors.danger)),
+                ],
+              ),
+            ),
+          ],
     );
   }
 
@@ -194,7 +207,8 @@ class PropertiesView extends GetView<PropertiesController> {
           property['purchasePrice']?.toString() ?? '';
       controller.currentValueController.text =
           property['marketValue']?.toString() ?? '';
-      controller.notesController.text = property['description']?.toString() ?? '';
+      controller.notesController.text =
+          property['description']?.toString() ?? '';
     } else {
       controller.clearForm();
     }
@@ -202,9 +216,10 @@ class PropertiesView extends GetView<PropertiesController> {
     showFormSheet(
       context: context,
       title: isEditing ? 'Edit Property' : 'New Property',
-      subtitle: isEditing
-          ? 'Update the details for this property.'
-          : 'Fill in the details to add a property to your portfolio.',
+      subtitle:
+          isEditing
+              ? 'Update the details for this property.'
+              : 'Fill in the details to add a property to your portfolio.',
       submitLabel: isEditing ? 'Save Changes' : 'Add Property',
       isLoading: controller.isLoading,
       onSubmit: () {

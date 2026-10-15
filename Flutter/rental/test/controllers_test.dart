@@ -132,7 +132,12 @@ void main() {
       api.store['transactions']!.addAll([
         {'id': 1, 'type': 'Income', 'amount': 85000.0, 'category': 'Rent'},
         {'id': 2, 'type': 'Income', 'amount': 95000.0, 'category': 'Rent'},
-        {'id': 3, 'type': 'Expense', 'amount': 12500.0, 'category': 'Maintenance'},
+        {
+          'id': 3,
+          'type': 'Expense',
+          'amount': 12500.0,
+          'category': 'Maintenance',
+        },
       ]);
 
       final controller = Get.put(FinancesController());

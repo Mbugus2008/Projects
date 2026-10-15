@@ -49,28 +49,30 @@ class BalancesController extends GetxController {
         final tenant = tenantById[tenantId];
 
         final leaseTenant = (lease['tenant'] ?? '').toString();
-        final tenantName = leaseTenant.isNotEmpty
-            ? leaseTenant
-            : tenant == null
+        final tenantName =
+            leaseTenant.isNotEmpty
+                ? leaseTenant
+                : tenant == null
                 ? ''
                 : '${tenant['firstName'] ?? ''} ${tenant['lastName'] ?? ''}'
                     .trim();
 
-        final propertyName = (lease['property'] ?? '').toString().isNotEmpty
-            ? lease['property'].toString()
-            : propertyNameById[lease['propertyId']] ?? '';
+        final propertyName =
+            (lease['property'] ?? '').toString().isNotEmpty
+                ? lease['property'].toString()
+                : propertyNameById[lease['propertyId']] ?? '';
 
         final unit = (lease['unit'] ?? lease['unitId'] ?? '').toString();
 
         final phone = tenant?['phoneNumber']?.toString() ?? '';
 
         final rent = _toDouble(lease['monthlyRent']);
-        final start =
-            DateTime.tryParse(lease['startDate']?.toString() ?? '');
+        final start = DateTime.tryParse(lease['startDate']?.toString() ?? '');
         if (tenantName.isEmpty || rent <= 0 || start == null) continue;
 
         final end = DateTime.tryParse(lease['endDate']?.toString() ?? '');
-        var months = (now.year - start.year) * 12 + (now.month - start.month) + 1;
+        var months =
+            (now.year - start.year) * 12 + (now.month - start.month) + 1;
         if (end != null) {
           final endMonths =
               (end.year - start.year) * 12 + (end.month - start.month) + 1;
@@ -80,15 +82,16 @@ class BalancesController extends GetxController {
         if (months > 600) months = 600;
 
         final expected = months * rent;
-        final payments = transactions.where((t) {
-          if (t['type']?.toString() != 'Income') return false;
-          if (t['tenantId'] != null && tenantId != null) {
-            return t['tenantId'] == tenantId;
-          }
-          return t['tenant']?.toString() == tenantName &&
-              tenantName.isNotEmpty;
-        }).toList()
-          ..sort((a, b) => _dateOf(b).compareTo(_dateOf(a)));
+        final payments =
+            transactions.where((t) {
+                if (t['type']?.toString() != 'Income') return false;
+                if (t['tenantId'] != null && tenantId != null) {
+                  return t['tenantId'] == tenantId;
+                }
+                return t['tenant']?.toString() == tenantName &&
+                    tenantName.isNotEmpty;
+              }).toList()
+              ..sort((a, b) => _dateOf(b).compareTo(_dateOf(a)));
 
         final paid = payments.fold<double>(
           0,
@@ -97,9 +100,8 @@ class BalancesController extends GetxController {
         final lastPayment = payments.isEmpty ? null : payments.first;
         final balance = expected - paid > 0 ? expected - paid : 0.0;
 
-        final status = balance <= 0
-            ? 'Paid'
-            : (paid <= 0 ? 'Overdue' : 'Partial');
+        final status =
+            balance <= 0 ? 'Paid' : (paid <= 0 ? 'Overdue' : 'Partial');
 
         outstanding += balance;
         if (balance > 0) arrears++;
@@ -118,12 +120,14 @@ class BalancesController extends GetxController {
           'phone': phone,
           'lastPaymentAmount':
               lastPayment == null ? null : _toDouble(lastPayment['amount']),
-          'lastPaymentDate': lastPayment == null
-              ? null
-              : _dateOf(lastPayment).toIso8601String(),
-          'lastPaymentRef': lastPayment == null || lastPayment['id'] == null
-              ? null
-              : 'RCPT-${lastPayment['id']}',
+          'lastPaymentDate':
+              lastPayment == null
+                  ? null
+                  : _dateOf(lastPayment).toIso8601String(),
+          'lastPaymentRef':
+              lastPayment == null || lastPayment['id'] == null
+                  ? null
+                  : 'RCPT-${lastPayment['id']}',
         });
       }
 

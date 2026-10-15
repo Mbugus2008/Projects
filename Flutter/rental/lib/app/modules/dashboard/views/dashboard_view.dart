@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/app_ui.dart';
 import '../../../data/auth_service.dart';
 import '../../../theme/app_theme.dart';
@@ -35,37 +36,38 @@ class DashboardView extends GetView<DashboardController> {
         ],
       ),
       bottomNavigationBar: Builder(
-        builder: (ctx) => Obx(
-          () => BottomNavigationBar(
-            currentIndex: controller.selectedIndex.value,
-            onTap: (index) {
-              if (index == 3) {
-                Scaffold.of(ctx).openDrawer();
-                return;
-              }
-              if (index == controller.selectedIndex.value) return;
-              controller.changeTab(index);
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.grid_view_rounded),
-                label: 'Dashboard',
+        builder:
+            (ctx) => Obx(
+              () => BottomNavigationBar(
+                currentIndex: controller.selectedIndex.value,
+                onTap: (index) {
+                  if (index == 3) {
+                    Scaffold.of(ctx).openDrawer();
+                    return;
+                  }
+                  if (index == controller.selectedIndex.value) return;
+                  controller.changeTab(index);
+                },
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.grid_view_rounded),
+                    label: 'Dashboard',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_work_rounded),
+                    label: 'Properties',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.people_alt_rounded),
+                    label: 'Tenants',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.more_horiz_rounded),
+                    label: 'More',
+                  ),
+                ],
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_work_rounded),
-                label: 'Properties',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.people_alt_rounded),
-                label: 'Tenants',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz_rounded),
-                label: 'More',
-              ),
-            ],
-          ),
-        ),
+            ),
       ),
       drawer: _buildDrawer(context, authService),
     );
@@ -79,10 +81,10 @@ class DashboardView extends GetView<DashboardController> {
   }
 
   String _displayName(Map<dynamic, dynamic> user) {
-    final name = [user['firstName'], user['lastName']]
-        .whereType<String>()
-        .where((s) => s.trim().isNotEmpty)
-        .join(' ');
+    final name = [
+      user['firstName'],
+      user['lastName'],
+    ].whereType<String>().where((s) => s.trim().isNotEmpty).join(' ');
     return name.isEmpty ? 'Landlord' : name;
   }
 
@@ -207,6 +209,16 @@ class DashboardView extends GetView<DashboardController> {
             caption: 'income recorded',
           ),
           StatCard(
+            icon: Icons.pending_actions_rounded,
+            iconColor: AppColors.danger,
+            value: formatMoney(controller.pendingInvoiceAmount.value),
+            label: 'Pending Invoices',
+            caption:
+                controller.pendingInvoiceCount.value == 1
+                    ? '1 awaiting payment'
+                    : '${controller.pendingInvoiceCount.value} awaiting payment',
+          ),
+          StatCard(
             icon: Icons.build_circle_rounded,
             iconColor: AppColors.warning,
             value: controller.pendingMaintenance.value.toString(),
@@ -231,14 +243,19 @@ class DashboardView extends GetView<DashboardController> {
         'Add Property',
         Icons.add_home_rounded,
         AppColors.primary,
-        '/properties'
+        '/properties',
       ),
-      ('Add Tenant', Icons.person_add_alt_1_rounded, AppColors.success, '/tenants'),
+      (
+        'Add Tenant',
+        Icons.person_add_alt_1_rounded,
+        AppColors.success,
+        '/tenants',
+      ),
       (
         'Record Payment',
         Icons.payments_rounded,
         AppColors.warning,
-        '/finances'
+        '/finances',
       ),
       ('New Request', Icons.handyman_rounded, AppColors.danger, '/maintenance'),
     ];
@@ -250,38 +267,41 @@ class DashboardView extends GetView<DashboardController> {
       childAspectRatio: 2.6,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      children: actions
-          .map(
-            (action) => AppCard(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              onTap: () => Get.toNamed(action.$4),
-              child: Row(
-                children: [
-                  Container(
-                    width: 38,
-                    height: 38,
-                    decoration: BoxDecoration(
-                      color: action.$3.withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(11),
-                    ),
-                    child: Icon(action.$2, color: action.$3, size: 20),
+      children:
+          actions
+              .map(
+                (action) => AppCard(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 12,
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      action.$1,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontSize: 13.5),
-                      maxLines: 2,
-                    ),
+                  onTap: () => Get.toNamed(action.$4),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 38,
+                        height: 38,
+                        decoration: BoxDecoration(
+                          color: action.$3.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(11),
+                        ),
+                        child: Icon(action.$2, color: action.$3, size: 20),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          action.$1,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleMedium?.copyWith(fontSize: 13.5),
+                          maxLines: 2,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          )
-          .toList(),
+                ),
+              )
+              .toList(),
     );
   }
 
@@ -315,10 +335,9 @@ class DashboardView extends GetView<DashboardController> {
                     count == 0
                         ? 'No renewals due'
                         : '$count lease${count == 1 ? '' : 's'} expiring soon',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(fontSize: 14),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.copyWith(fontSize: 14),
                   ),
                   const SizedBox(height: 3),
                   Text(

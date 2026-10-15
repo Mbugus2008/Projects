@@ -41,7 +41,8 @@ class FakeApiService extends ApiService {
   Future<bool> addProperty(Map<String, dynamic> data) async {
     addCalls++;
     lastPayload = data;
-    if (addResult) store['properties']!.add({...data, 'id': _nextId('properties')});
+    if (addResult)
+      store['properties']!.add({...data, 'id': _nextId('properties')});
     return addResult;
   }
 
@@ -205,6 +206,7 @@ class FakeAuthService extends AuthService {
   bool loginResult = true;
   bool registerResult = true;
   String? lastLoginEmail;
+  String? lastLoginPassword;
   Map<String, dynamic>? lastRegisterPayload;
   int logoutCalls = 0;
 
@@ -214,6 +216,7 @@ class FakeAuthService extends AuthService {
   @override
   Future<bool> loginWithJWT(String email, String password) async {
     lastLoginEmail = email;
+    lastLoginPassword = password;
     if (loginResult) {
       token.value = 'fake-token';
       isAuthenticated.value = true;

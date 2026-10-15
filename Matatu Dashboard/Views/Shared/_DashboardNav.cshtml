@@ -1,0 +1,205 @@
+@*
+    One navigation bar for every dashboard page.
+
+    Each screen is standalone (Layout = null, its own inline CSS), so the bar carries its own styles
+    and can be dropped in with a single line. Links keep whatever period the visitor is looking at,
+    and the current page is highlighted from the request path - no per-page wiring needed.
+
+    Wide screens get a vertical sidebar down the left; a phone is too narrow for that, so there it
+    collapses back to a horizontal strip above the content.
+*@
+@{
+    var pathBase = Context.Request.PathBase.HasValue ? Context.Request.PathBase.Value! : string.Empty;
+    var path = (Context.Request.Path.Value ?? "/").ToLowerInvariant();
+
+    var range = ViewData["SelectedRange"] as string;
+    if (string.IsNullOrWhiteSpace(range) &&
+        Context.Request.RouteValues.TryGetValue("range", out var routeRange) &&
+        routeRange is string routeText &&
+        !string.IsNullOrWhiteSpace(routeText))
+    {
+        range = routeText.ToLowerInvariant();
+    }
+
+    if (string.IsNullOrWhiteSpace(range))
+    {
+        range = "today";
+    }
+
+    string Link(string prefix) => $"{pathBase}{prefix}/{range}";
+
+    var pages = new (string Key, string Label, string Url)[]
+    {
+        ("dashboard", "Dashboard", $"{pathBase}/d/{range}"),
+        ("fuel", "Depot Fuel", Link("/fuel")),
+        ("fuelsummary", "Fuel Summary", Link("/fuelsummary")),
+        ("dispatch", "Dispatch Summary", Link("/dispatchsummary")),
+        ("tripbook", "Trip Book", Link("/tripbook")),
+        ("waybill", "Waybill Summary", Link("/waybillsummary")),
+        ("loading", "Loading", Link("/loading")),
+        ("vehicles", "Vehicle Detail", Link("/loading/vehicles")),
+    };
+
+    var current =
+        path.StartsWith("/loading/vehicles") ? "vehicles" :
+        path.StartsWith("/loading") ? "loading" :
+        path.StartsWith("/fuelsummary") ? "fuelsummary" :
+        path.StartsWith("/fuel") ? "fuel" :
+        path.StartsWith("/dispatchsummary") ? "dispatch" :
+        path.StartsWith("/tripbook") ? "tripbook" :
+        path.StartsWith("/waybillsummary") || path.StartsWith("/waybill") ? "waybill" :
+        "dashboard";
+    var period = range switch
+    {
+        "yesterday" => "Yesterday",
+        "week" => "This week",
+        "month" => "This month",
+        _ => "Today"
+    };
+}
+<nav class="dash-nav" aria-label="Dashboards">
+    <div class="dash-nav-brand">
+        <span class="dash-nav-mark">M</span>
+        <span class="dash-nav-name">Matatu<br /><small>Dashboards</small></span>
+    </div>
+    @foreach (var link in pages)
+    {
+        <a href="@link.Url" class="@(link.Key == current ? "active" : null)">@link.Label</a>
+    }
+    <div class="dash-nav-period">@period</div>
+</nav>
+<style>
+    .dash-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 186px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 14px 10px;
+        background: #0b3d2c;
+        overflow-y: auto;
+        z-index: 60;
+        box-shadow: 1px 0 4px rgba(0, 0, 0, .14);
+        font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+        box-sizing: border-box;
+    }
+
+    .dash-nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 2px 6px 12px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid rgba(255, 255, 255, .14);
+    }
+
+    .dash-nav-mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        background: #ffffff;
+        color: #0b3d2c;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    .dash-nav-name {
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.15;
+    }
+
+    .dash-nav-name small {
+        color: #8fb3a4;
+        font-size: 10.5px;
+        font-weight: 600;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+    }
+
+    .dash-nav a {
+        display: block;
+        padding: 9px 12px;
+        border-radius: 8px;
+        font-size: 13.5px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #cfe3da;
+        background: transparent;
+    }
+
+    .dash-nav a:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, .14);
+    }
+
+    .dash-nav a.active {
+        color: #0b3d2c;
+        background: #ffffff;
+    }
+
+    .dash-nav-period {
+        margin-top: auto;
+        padding: 10px 12px 2px;
+        color: #8fb3a4;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+    }
+
+    /* Leave room for the fixed sidebar. Only the left edge is touched, so each page keeps its own
+       padding and max-widths. */
+    body {
+        padding-left: 186px !important;
+    }
+
+    @@media (max-width: 820px) {
+        .dash-nav {
+            position: static;
+            flex-direction: row;
+            align-items: center;
+            width: auto;
+            gap: 6px;
+            padding: 8px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .dash-nav-brand,
+        .dash-nav-period {
+            display: none;
+        }
+
+        .dash-nav a {
+            padding: 7px 12px;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, .08);
+        }
+
+        body {
+            padding-left: inherit !important;
+        }
+    }
+
+    @@media print {
+        .dash-nav {
+            display: none !important;
+        }
+
+        body {
+            padding-left: 0 !important;
+        }
+    }
+</style>

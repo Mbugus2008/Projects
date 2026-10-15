@@ -23,19 +23,15 @@ class ContactLauncher {
       _launch(Uri(scheme: 'tel', path: _clean(phone)));
 
   static Future<void> sms(String phone, String message) => _launch(
-        Uri(
-          scheme: 'sms',
-          path: _clean(phone),
-          queryParameters: {'body': message},
-        ),
-      );
+    Uri(scheme: 'sms', path: _clean(phone), queryParameters: {'body': message}),
+  );
 
   static Future<void> whatsApp(String phone, String message) => _launch(
-        Uri.parse(
-          'https://wa.me/${normalizeKePhone(phone)}'
-          '?text=${Uri.encodeComponent(message)}',
-        ),
-      );
+    Uri.parse(
+      'https://wa.me/${normalizeKePhone(phone)}'
+      '?text=${Uri.encodeComponent(message)}',
+    ),
+  );
 
   /// Copies a message to the clipboard (fallback when no SMS app is set up).
   static Future<void> copy(String message) async {
@@ -44,8 +40,7 @@ class ContactLauncher {
 
   static Future<void> _launch(Uri uri) async {
     try {
-      final opened =
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
+      final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
       if (!opened) {
         _notify('Could not open the messaging app on this device.');
       }

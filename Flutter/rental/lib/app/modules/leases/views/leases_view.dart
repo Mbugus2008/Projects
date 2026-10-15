@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/app_ui.dart';
 import '../../../theme/app_theme.dart';
 import '../controllers/leases_controller.dart';
@@ -21,9 +22,10 @@ class LeasesView extends GetView<LeasesController> {
         ],
       ),
       body: Obx(
-        () => controller.isLoading.value && controller.leases.isEmpty
-            ? const LoadingView(label: 'Loading leases…')
-            : _buildList(context),
+        () =>
+            controller.isLoading.value && controller.leases.isEmpty
+                ? const LoadingView(label: 'Loading leases…')
+                : _buildList(context),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showForm(context),
@@ -52,8 +54,9 @@ class LeasesView extends GetView<LeasesController> {
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 96),
         itemCount: controller.leases.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (context, index) =>
-            _buildLeaseCard(context, controller.leases[index]),
+        itemBuilder:
+            (context, index) =>
+                _buildLeaseCard(context, controller.leases[index]),
       ),
     );
   }
@@ -84,9 +87,10 @@ class LeasesView extends GetView<LeasesController> {
       statusColor = AppColors.success;
     }
 
-    final title = [property, if (unit.isNotEmpty) 'Unit $unit']
-        .where((s) => s.isNotEmpty)
-        .join(' · ');
+    final title = [
+      property,
+      if (unit.isNotEmpty) 'Unit $unit',
+    ].where((s) => s.isNotEmpty).join(' · ');
 
     return AppCard(
       padding: const EdgeInsets.all(16),
@@ -115,7 +119,9 @@ class LeasesView extends GetView<LeasesController> {
                   children: [
                     Text(
                       title.isEmpty ? 'Lease #${lease['id']}' : title,
-                      style: theme.textTheme.titleMedium?.copyWith(fontSize: 15),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 15,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -147,8 +153,8 @@ class LeasesView extends GetView<LeasesController> {
           const SizedBox(height: 14),
           Row(
             children: [
-              Expanded(child: _detail(context, 'Start', startDate)),
-              Expanded(child: _detail(context, 'End', endDate)),
+              Expanded(child: _detail(context, 'Start', formatDate(startDate))),
+              Expanded(child: _detail(context, 'End', formatDate(endDate))),
               Expanded(
                 child: _detail(
                   context,
@@ -161,7 +167,9 @@ class LeasesView extends GetView<LeasesController> {
           if (daysRemaining != null && daysRemaining >= 0) ...[
             const SizedBox(height: 10),
             Text(
-              daysRemaining == 0 ? 'Ends today' : '$daysRemaining days remaining',
+              daysRemaining == 0
+                  ? 'Ends today'
+                  : '$daysRemaining days remaining',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: statusColor,
                 fontWeight: FontWeight.w600,
@@ -205,39 +213,43 @@ class LeasesView extends GetView<LeasesController> {
           _confirmDelete(context, lease['id'] as int);
         }
       },
-      itemBuilder: (context) => [
-        const PopupMenuItem(
-          value: 'edit',
-          child: Row(
-            children: [
-              Icon(Icons.edit_outlined, size: 19),
-              SizedBox(width: 10),
-              Text('Edit'),
-            ],
-          ),
-        ),
-        const PopupMenuItem(
-          value: 'renew',
-          child: Row(
-            children: [
-              Icon(Icons.autorenew_rounded, size: 19),
-              SizedBox(width: 10),
-              Text('Renew'),
-            ],
-          ),
-        ),
-        const PopupMenuItem(
-          value: 'delete',
-          child: Row(
-            children: [
-              Icon(Icons.delete_outline_rounded,
-                  size: 19, color: AppColors.danger),
-              SizedBox(width: 10),
-              Text('Delete', style: TextStyle(color: AppColors.danger)),
-            ],
-          ),
-        ),
-      ],
+      itemBuilder:
+          (context) => [
+            const PopupMenuItem(
+              value: 'edit',
+              child: Row(
+                children: [
+                  Icon(Icons.edit_outlined, size: 19),
+                  SizedBox(width: 10),
+                  Text('Edit'),
+                ],
+              ),
+            ),
+            const PopupMenuItem(
+              value: 'renew',
+              child: Row(
+                children: [
+                  Icon(Icons.autorenew_rounded, size: 19),
+                  SizedBox(width: 10),
+                  Text('Renew'),
+                ],
+              ),
+            ),
+            const PopupMenuItem(
+              value: 'delete',
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.delete_outline_rounded,
+                    size: 19,
+                    color: AppColors.danger,
+                  ),
+                  SizedBox(width: 10),
+                  Text('Delete', style: TextStyle(color: AppColors.danger)),
+                ],
+              ),
+            ),
+          ],
     );
   }
 
@@ -258,8 +270,11 @@ class LeasesView extends GetView<LeasesController> {
     }
   }
 
-  List<Widget> _dateFields(BuildContext context, String startLabel,
-      String endLabel) {
+  List<Widget> _dateFields(
+    BuildContext context,
+    String startLabel,
+    String endLabel,
+  ) {
     return [
       Row(
         children: [
@@ -325,8 +340,8 @@ class LeasesView extends GetView<LeasesController> {
     if (isEditing) {
       controller.unitController.text = lease['unit']?.toString() ?? '';
       controller.tenantController.text = lease['tenant']?.toString() ?? '';
-      controller.startDateController.text = lease['startDate']?.toString() ?? '';
-      controller.endDateController.text = lease['endDate']?.toString() ?? '';
+      controller.startDateController.text = formatDateInput(lease['startDate']);
+      controller.endDateController.text = formatDateInput(lease['endDate']);
       controller.monthlyRentController.text =
           lease['monthlyRent']?.toString() ?? '';
       controller.securityDepositController.text =
@@ -340,9 +355,10 @@ class LeasesView extends GetView<LeasesController> {
     showFormSheet(
       context: context,
       title: isEditing ? 'Edit Lease' : 'New Lease',
-      subtitle: isEditing
-          ? 'Update the terms of this lease.'
-          : 'Set up a new lease for a unit and tenant.',
+      subtitle:
+          isEditing
+              ? 'Update the terms of this lease.'
+              : 'Set up a new lease for a unit and tenant.',
       submitLabel: isEditing ? 'Save Changes' : 'Add Lease',
       isLoading: controller.isLoading,
       onSubmit: () {
@@ -386,8 +402,11 @@ class LeasesView extends GetView<LeasesController> {
     final currentEndDate =
         DateTime.tryParse(lease['endDate']?.toString() ?? '') ?? DateTime.now();
     final newStartDate = currentEndDate.add(const Duration(days: 1));
-    final newEndDate =
-        DateTime(newStartDate.year + 1, newStartDate.month, newStartDate.day);
+    final newEndDate = DateTime(
+      newStartDate.year + 1,
+      newStartDate.month,
+      newStartDate.day,
+    );
 
     controller.unitController.text = lease['unit']?.toString() ?? '';
     controller.tenantController.text = lease['tenant']?.toString() ?? '';

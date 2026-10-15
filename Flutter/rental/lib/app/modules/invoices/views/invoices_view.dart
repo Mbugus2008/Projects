@@ -27,9 +27,10 @@ class InvoicesView extends GetView<InvoicesController> {
         ],
       ),
       body: Obx(
-        () => controller.isLoading.value && controller.invoices.isEmpty
-            ? const LoadingView(label: 'Loading invoices…')
-            : _buildList(context),
+        () =>
+            controller.isLoading.value && controller.invoices.isEmpty
+                ? const LoadingView(label: 'Loading invoices…')
+                : _buildList(context),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showCreateSheet(context),
@@ -58,8 +59,9 @@ class InvoicesView extends GetView<InvoicesController> {
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 96),
         itemCount: controller.invoices.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (context, index) =>
-            _buildInvoiceCard(context, controller.invoices[index]),
+        itemBuilder:
+            (context, index) =>
+                _buildInvoiceCard(context, controller.invoices[index]),
       ),
     );
   }
@@ -77,10 +79,7 @@ class InvoicesView extends GetView<InvoicesController> {
     }
   }
 
-  Widget _buildInvoiceCard(
-    BuildContext context,
-    Map<String, dynamic> invoice,
-  ) {
+  Widget _buildInvoiceCard(BuildContext context, Map<String, dynamic> invoice) {
     final theme = Theme.of(context);
     final number = invoice['invoiceNumber']?.toString() ?? '';
     final tenant = controller.tenantName(invoice['tenantId'] as int?);
@@ -91,9 +90,10 @@ class InvoicesView extends GetView<InvoicesController> {
         .map((line) => (line as Map)['description']?.toString() ?? '')
         .where((text) => text.isNotEmpty)
         .join(' · ');
-    final due = invoice['dueDate'] != null
-        ? ' · Due ${formatDate(invoice['dueDate'])}'
-        : '';
+    final due =
+        invoice['dueDate'] != null
+            ? ' · Due ${formatDate(invoice['dueDate'])}'
+            : '';
 
     return AppCard(
       padding: const EdgeInsets.all(16),
@@ -181,40 +181,41 @@ class InvoicesView extends GetView<InvoicesController> {
       icon: const Icon(Icons.more_vert_rounded, size: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       onSelected: (value) => _onAction(context, invoice, value),
-      itemBuilder: (context) => [
-        if (hasPhone) ...[
-          const PopupMenuItem(
-            value: 'send_sms',
-            child: _MenuRow(Icons.sms_outlined, 'Send via SMS'),
-          ),
-          const PopupMenuItem(
-            value: 'send_wa',
-            child: _MenuRow(Icons.chat_outlined, 'Send via WhatsApp'),
-          ),
-        ],
-        const PopupMenuItem(
-          value: 'payment',
-          child: _MenuRow(Icons.payments_outlined, 'Record Payment'),
-        ),
-        if (paid > 0 && hasPhone) ...[
-          const PopupMenuItem(
-            value: 'receipt_sms',
-            child: _MenuRow(Icons.task_alt_rounded, 'Receipt via SMS'),
-          ),
-          const PopupMenuItem(
-            value: 'receipt_wa',
-            child: _MenuRow(Icons.task_alt_rounded, 'Receipt via WhatsApp'),
-          ),
-        ],
-        const PopupMenuItem(
-          value: 'delete',
-          child: _MenuRow(
-            Icons.delete_outline_rounded,
-            'Delete',
-            color: AppColors.danger,
-          ),
-        ),
-      ],
+      itemBuilder:
+          (context) => [
+            if (hasPhone) ...[
+              const PopupMenuItem(
+                value: 'send_sms',
+                child: _MenuRow(Icons.sms_outlined, 'Send via SMS'),
+              ),
+              const PopupMenuItem(
+                value: 'send_wa',
+                child: _MenuRow(Icons.chat_outlined, 'Send via WhatsApp'),
+              ),
+            ],
+            const PopupMenuItem(
+              value: 'payment',
+              child: _MenuRow(Icons.payments_outlined, 'Record Payment'),
+            ),
+            if (paid > 0 && hasPhone) ...[
+              const PopupMenuItem(
+                value: 'receipt_sms',
+                child: _MenuRow(Icons.task_alt_rounded, 'Receipt via SMS'),
+              ),
+              const PopupMenuItem(
+                value: 'receipt_wa',
+                child: _MenuRow(Icons.task_alt_rounded, 'Receipt via WhatsApp'),
+              ),
+            ],
+            const PopupMenuItem(
+              value: 'delete',
+              child: _MenuRow(
+                Icons.delete_outline_rounded,
+                'Delete',
+                color: AppColors.danger,
+              ),
+            ),
+          ],
     );
   }
 
@@ -310,9 +311,10 @@ class InvoicesView extends GetView<InvoicesController> {
       fields: [
         Obx(
           () => DropdownButtonFormField<int>(
-            value: controller.draftTenantId.value == 0
-                ? null
-                : controller.draftTenantId.value,
+            value:
+                controller.draftTenantId.value == 0
+                    ? null
+                    : controller.draftTenantId.value,
             decoration: const InputDecoration(
               labelText: 'Tenant',
               prefixIcon: Icon(Icons.person_outline_rounded),
@@ -393,9 +395,7 @@ class InvoicesView extends GetView<InvoicesController> {
                         flex: 3,
                         child: TextField(
                           controller: controller.lineDescriptions[i],
-                          decoration: const InputDecoration(
-                            labelText: 'Item',
-                          ),
+                          decoration: const InputDecoration(labelText: 'Item'),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -605,10 +605,7 @@ class _WaterUnitsDialogState extends State<_WaterUnitsDialog> {
           onPressed: () => Navigator.of(context).pop(),
           child: const Text('Cancel'),
         ),
-        ElevatedButton(
-          onPressed: _submit,
-          child: const Text('Add'),
-        ),
+        ElevatedButton(onPressed: _submit, child: const Text('Add')),
       ],
     );
   }

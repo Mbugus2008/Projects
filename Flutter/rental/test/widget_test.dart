@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
+import 'package:rental/app/data/api_service.dart';
 import 'package:rental/app/data/auth_service.dart';
 import 'package:rental/app/middleware/api_middleware.dart';
 import 'package:rental/app/modules/auth/controllers/auth_controller.dart';
 import 'package:rental/app/modules/auth/views/login_view.dart';
+import 'package:rental/app/modules/leases/controllers/leases_controller.dart';
+import 'package:rental/app/modules/leases/views/leases_view.dart';
 import 'package:rental/app/routes/app_pages.dart';
 import 'package:rental/app/theme/app_theme.dart';
 
@@ -105,15 +108,45 @@ void main() {
 
       await tester.enterText(
         find.byType(TextField).at(0),
-        'admin@rental.local',
+        '  admin@rental.local  ',
       );
-      await tester.enterText(find.byType(TextField).at(1), 'Admin123!');
+      await tester.enterText(find.byType(TextField).at(1), '  Admin123!  ');
 
       await tester.tap(find.text('Sign In'));
       await tester.pumpAndSettle();
 
+      // Padded input must be trimmed before reaching the service.
       expect(auth.lastLoginEmail, 'admin@rental.local');
+      expect(auth.lastLoginPassword, 'Admin123!');
       expect(find.text('DASHBOARD_OK'), findsOneWidget);
+    });
+  });
+
+  group('Leases screen', () {
+    testWidgets('shows calendar dates instead of raw API timestamps',
+        (tester) async {
+      final api = FakeApiService();
+      api.store['leases']!.add({
+        'id': 1,
+        'tenant': 'Wanjiru Kamau',
+        'startDate': '2026-08-10T00:00:00',
+        'endDate': '2027-08-10T00:00:00',
+        'monthlyRent': 75000.0,
+        'securityDeposit': 75000.0,
+        'status': 'Active',
+      });
+      Get.put<ApiService>(api);
+      Get.put(LeasesController());
+
+      await tester.pumpWidget(GetMaterialApp(home: const LeasesView()));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Regression: the card used to render the raw API value
+      // `2026-08-10T00:00:00`, which then ellipsised mid-string.
+      expect(find.text('10 Aug 2026'), findsOneWidget);
+      expect(find.text('10 Aug 2027'), findsOneWidget);
+      expect(find.textContaining('T00:00:00'), findsNothing);
     });
   });
 }

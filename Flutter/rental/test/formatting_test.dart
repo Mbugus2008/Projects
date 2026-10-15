@@ -64,6 +64,33 @@ void main() {
     });
   });
 
+  group('formatDateInput', () {
+    test('formats DateTime as an ISO calendar date', () {
+      expect(formatDateInput(DateTime(2026, 8, 10)), '2026-08-10');
+    });
+
+    test('strips the time component from API timestamps', () {
+      expect(formatDateInput('2026-08-10T00:00:00'), '2026-08-10');
+      expect(formatDateInput('2026-01-05T09:30:00'), '2026-01-05');
+    });
+
+    test('accepts date-only strings', () {
+      expect(formatDateInput('2026-08-10'), '2026-08-10');
+    });
+
+    test('returns empty string for null', () {
+      expect(formatDateInput(null), '');
+    });
+
+    test('returns empty string for empty input', () {
+      expect(formatDateInput(''), '');
+    });
+
+    test('returns empty string when unparseable', () {
+      expect(formatDateInput('N/A'), '');
+    });
+  });
+
   group('initialsOf', () {
     test('takes first letters of both names', () {
       expect(initialsOf('Wanjiru', 'Kamau'), 'WK');

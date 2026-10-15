@@ -79,9 +79,10 @@ class RentMessages {
     required double total,
     DateTime? dueDate,
   }) {
-    final buffer = StringBuffer()
-      ..writeln('RENT INVOICE $invoiceNumber')
-      ..writeln('Tenant: $tenant');
+    final buffer =
+        StringBuffer()
+          ..writeln('RENT INVOICE $invoiceNumber')
+          ..writeln('Tenant: $tenant');
     final location = _location(property, unit);
     if (location.isNotEmpty) buffer.writeln('Unit: $location');
     for (final line in lines) {

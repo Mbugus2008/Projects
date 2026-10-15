@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/utils/contact_launcher.dart';
 import '../../../core/widgets/app_ui.dart';
 import '../../../theme/app_theme.dart';
@@ -22,9 +23,10 @@ class TenantsView extends GetView<TenantsController> {
         ],
       ),
       body: Obx(
-        () => controller.isLoading.value && controller.tenants.isEmpty
-            ? const LoadingView(label: 'Loading tenants…')
-            : _buildList(context),
+        () =>
+            controller.isLoading.value && controller.tenants.isEmpty
+                ? const LoadingView(label: 'Loading tenants…')
+                : _buildList(context),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showForm(context),
@@ -52,8 +54,9 @@ class TenantsView extends GetView<TenantsController> {
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 96),
         itemCount: controller.tenants.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (context, index) =>
-            _buildTenantCard(context, controller.tenants[index]),
+        itemBuilder:
+            (context, index) =>
+                _buildTenantCard(context, controller.tenants[index]),
       ),
     );
   }
@@ -87,8 +90,9 @@ class TenantsView extends GetView<TenantsController> {
                       '$firstName $lastName'.trim().isEmpty
                           ? '—'
                           : '$firstName $lastName'.trim(),
-                      style:
-                          theme.textTheme.titleMedium?.copyWith(fontSize: 15),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 15,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -155,61 +159,65 @@ class TenantsView extends GetView<TenantsController> {
           ContactLauncher.whatsApp(phone, 'Hello $name, ');
         }
       },
-      itemBuilder: (context) => [
-        const PopupMenuItem(
-          value: 'edit',
-          child: Row(
-            children: [
-              Icon(Icons.edit_outlined, size: 19),
-              SizedBox(width: 10),
-              Text('Edit'),
+      itemBuilder:
+          (context) => [
+            const PopupMenuItem(
+              value: 'edit',
+              child: Row(
+                children: [
+                  Icon(Icons.edit_outlined, size: 19),
+                  SizedBox(width: 10),
+                  Text('Edit'),
+                ],
+              ),
+            ),
+            if (hasPhone) ...[
+              const PopupMenuItem(
+                value: 'call',
+                child: Row(
+                  children: [
+                    Icon(Icons.call_outlined, size: 19),
+                    SizedBox(width: 10),
+                    Text('Call'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'sms',
+                child: Row(
+                  children: [
+                    Icon(Icons.sms_outlined, size: 19),
+                    SizedBox(width: 10),
+                    Text('SMS'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'whatsapp',
+                child: Row(
+                  children: [
+                    Icon(Icons.chat_outlined, size: 19),
+                    SizedBox(width: 10),
+                    Text('WhatsApp'),
+                  ],
+                ),
+              ),
             ],
-          ),
-        ),
-        if (hasPhone) ...[
-          const PopupMenuItem(
-            value: 'call',
-            child: Row(
-              children: [
-                Icon(Icons.call_outlined, size: 19),
-                SizedBox(width: 10),
-                Text('Call'),
-              ],
+            const PopupMenuItem(
+              value: 'delete',
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.delete_outline_rounded,
+                    size: 19,
+                    color: AppColors.danger,
+                  ),
+                  SizedBox(width: 10),
+                  Text('Delete', style: TextStyle(color: AppColors.danger)),
+                ],
+              ),
             ),
-          ),
-          const PopupMenuItem(
-            value: 'sms',
-            child: Row(
-              children: [
-                Icon(Icons.sms_outlined, size: 19),
-                SizedBox(width: 10),
-                Text('SMS'),
-              ],
-            ),
-          ),
-          const PopupMenuItem(
-            value: 'whatsapp',
-            child: Row(
-              children: [
-                Icon(Icons.chat_outlined, size: 19),
-                SizedBox(width: 10),
-                Text('WhatsApp'),
-              ],
-            ),
-          ),
-        ],
-        const PopupMenuItem(
-          value: 'delete',
-          child: Row(
-            children: [
-              Icon(Icons.delete_outline_rounded,
-                  size: 19, color: AppColors.danger),
-              SizedBox(width: 10),
-              Text('Delete', style: TextStyle(color: AppColors.danger)),
-            ],
-          ),
-        ),
-      ],
+          ],
     );
   }
 
@@ -234,9 +242,10 @@ class TenantsView extends GetView<TenantsController> {
     showFormSheet(
       context: context,
       title: isEditing ? 'Edit Tenant' : 'New Tenant',
-      subtitle: isEditing
-          ? 'Update contact details for this tenant.'
-          : 'Add a tenant and their contact information.',
+      subtitle:
+          isEditing
+              ? 'Update contact details for this tenant.'
+              : 'Add a tenant and their contact information.',
       submitLabel: isEditing ? 'Save Changes' : 'Add Tenant',
       isLoading: controller.isLoading,
       onSubmit: () {

@@ -154,10 +154,17 @@ public sealed class BusinessCentralDashboardService
         }
     }
 
-    public async Task<DashboardSectionViewModel> GetSourceSectionAsync(string sourceName, string? range, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// A single configured source as a dashboard section.
+    ///
+    /// <paramref name="fullRows"/> is for the reports that must show every record they loaded
+    /// (Trip Book builds one row per trip); without it a section carries only the first
+    /// <see cref="BusinessCentralDashboardOptions.MaxRows"/> rows meant for on-screen tables.
+    /// </summary>
+    public async Task<DashboardSectionViewModel> GetSourceSectionAsync(string sourceName, string? range, CancellationToken cancellationToken = default, bool fullRows = false)
     {
         var selectedRange = NormalizeRange(range);
-        var cacheKey = $"section:{NormalizeSourceName(sourceName)}:{selectedRange}";
+        var cacheKey = $"section:{NormalizeSourceName(sourceName)}:{selectedRange}:{(fullRows ? "all" : "first")}";
 
         if (_cache.TryGetValue<DashboardSectionViewModel>(cacheKey, out var cachedSection) && cachedSection is not null)
         {
@@ -174,7 +181,7 @@ public sealed class BusinessCentralDashboardService
                 return cachedSection;
             }
 
-            var section = await BuildSourceSectionAsync(sourceName, selectedRange, cancellationToken);
+            var section = await BuildSourceSectionAsync(sourceName, selectedRange, cancellationToken, fullRows);
             if (_options.SectionCacheSeconds > 0)
             {
                 _cache.Set(cacheKey, section, TimeSpan.FromSeconds(_options.SectionCacheSeconds));
@@ -502,7 +509,7 @@ public sealed class BusinessCentralDashboardService
         }
     }
 
-    private async Task<DashboardSectionViewModel> BuildSourceSectionAsync(string sourceName, string selectedRange, CancellationToken cancellationToken)
+    private async Task<DashboardSectionViewModel> BuildSourceSectionAsync(string sourceName, string selectedRange, CancellationToken cancellationToken, bool fullRows = false)
     {
         var sectionTitle = GetSectionDisplayTitle(sourceName);
 
@@ -525,7 +532,7 @@ public sealed class BusinessCentralDashboardService
             };
         }
 
-        return await BuildSectionAsync(source, selectedRange, cancellationToken, source.MaxItemsToLoad);
+        return await BuildSectionAsync(source, selectedRange, cancellationToken, source.MaxItemsToLoad, fullRows);
     }
 
     private async Task<BusinessCentralDashboardViewModel> BuildDashboardAsync(string selectedRange, bool transactionsOnly, CancellationToken cancellationToken)
@@ -577,7 +584,7 @@ public sealed class BusinessCentralDashboardService
         return $"dashboard:{(transactionsOnly ? "share" : "full")}:{selectedRange}";
     }
 
-    private async Task<DashboardSectionViewModel> BuildSectionAsync(BusinessCentralDashboardSourceOptions source, string selectedRange, CancellationToken cancellationToken, int? maxItemsToLoad = null)
+    private async Task<DashboardSectionViewModel> BuildSectionAsync(BusinessCentralDashboardSourceOptions source, string selectedRange, CancellationToken cancellationToken, int? maxItemsToLoad = null, bool fullRows = false)
     {
         var requestUrl = BuildRequestUrl(source, selectedRange);
         var section = new DashboardSectionViewModel
@@ -608,8 +615,7 @@ public sealed class BusinessCentralDashboardService
 
             section.TotalRecords = items.Count;
             section.Columns = columns;
-            section.Rows = items
-                .Take(Math.Max(1, _options.MaxRows))
+            section.Rows = (fullRows ? items : items.Take(Math.Max(1, _options.MaxRows)))
                 .Select(item => CreateRow(item, columns))
                 .ToList();
 

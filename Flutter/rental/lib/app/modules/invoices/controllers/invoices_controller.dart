@@ -153,15 +153,17 @@ class InvoicesController extends GetxController {
   /// Adds a Water line billed as units × the global price per unit.
   void addWaterLine(double units) {
     final amount = units * waterRate.value;
-    final label = units == units.roundToDouble()
-        ? units.toStringAsFixed(0)
-        : units.toString();
+    final label =
+        units == units.roundToDouble()
+            ? units.toStringAsFixed(0)
+            : units.toString();
     addLine('Water ($label units)', _money(amount));
   }
 
-  static String _money(double value) => value == value.roundToDouble()
-      ? value.toStringAsFixed(0)
-      : value.toStringAsFixed(2);
+  static String _money(double value) =>
+      value == value.roundToDouble()
+          ? value.toStringAsFixed(0)
+          : value.toStringAsFixed(2);
 
   void removeLine(int index) {
     lineDescriptions.removeAt(index).dispose();

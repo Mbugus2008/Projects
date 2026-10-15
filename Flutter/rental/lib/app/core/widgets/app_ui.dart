@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../theme/app_theme.dart';
 
 // ---------------------------------------------------------------------------
@@ -22,22 +23,40 @@ String formatMoney(num? value, {String symbol = 'KSh'}) {
 }
 
 const List<String> _months = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 
 /// Formats an ISO date-ish value as e.g. "8 Oct 2026". Returns [fallback] when
 /// the value cannot be parsed.
 String formatDate(dynamic value, {String fallback = '—'}) {
   if (value == null) return fallback;
-  final parsed = value is DateTime
-      ? value
-      : DateTime.tryParse(value.toString());
+  final parsed =
+      value is DateTime ? value : DateTime.tryParse(value.toString());
   if (parsed == null) {
     final s = value.toString();
     return s.isEmpty ? fallback : s;
   }
   return '${parsed.day} ${_months[parsed.month - 1]} ${parsed.year}';
+}
+
+/// Formats a date-ish value as an ISO calendar date (yyyy-MM-dd), suitable for
+/// form inputs and API payloads. Returns an empty string when unparseable.
+String formatDateInput(dynamic value) {
+  if (value == null) return '';
+  final parsed =
+      value is DateTime ? value : DateTime.tryParse(value.toString());
+  return parsed == null ? '' : parsed.toIso8601String().split('T').first;
 }
 
 /// Extracts initials from a name, e.g. "Alicia Gomez" -> "AG".
@@ -73,7 +92,8 @@ class AppCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final card = Container(
       decoration: BoxDecoration(
-        color: color ??
+        color:
+            color ??
             Theme.of(context).cardTheme.color ??
             Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -181,10 +201,7 @@ class StatCard extends StatelessWidget {
           return FittedBox(
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerLeft,
-            child: SizedBox(
-              width: constraints.maxWidth,
-              child: content,
-            ),
+            child: SizedBox(width: constraints.maxWidth, child: content),
           );
         },
       ),
@@ -287,7 +304,11 @@ class EmptyState extends StatelessWidget {
               child: Icon(icon, size: 40, color: AppColors.primary),
             ),
             const SizedBox(height: 20),
-            Text(title, style: theme.textTheme.titleLarge, textAlign: TextAlign.center),
+            Text(
+              title,
+              style: theme.textTheme.titleLarge,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 8),
             Text(
               message,
@@ -357,25 +378,26 @@ class LoadingButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
-        child: isLoading
-            ? const SizedBox(
-                width: 22,
-                height: 22,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.4,
-                  color: Colors.white,
-                ),
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (icon != null) ...[
-                    Icon(icon, size: 20),
-                    const SizedBox(width: 8),
+        child:
+            isLoading
+                ? const SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.4,
+                    color: Colors.white,
+                  ),
+                )
+                : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (icon != null) ...[
+                      Icon(icon, size: 20),
+                      const SizedBox(width: 8),
+                    ],
+                    Text(label),
                   ],
-                  Text(label),
-                ],
-              ),
+                ),
       ),
     );
   }
@@ -523,15 +545,11 @@ Future<void> showFormSheet({
     builder: (ctx) {
       final theme = Theme.of(ctx);
       return Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(ctx).viewInsets.bottom,
-        ),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
         child: Container(
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(24),
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
           ),
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
           child: SingleChildScrollView(
@@ -584,28 +602,30 @@ Future<void> showConfirmDialog({
   final theme = Theme.of(context);
   return showDialog(
     context: context,
-    builder: (ctx) => AlertDialog(
-      title: Text(title),
-      content: Text(message),
-      actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      actions: [
-        OutlinedButton(
-          onPressed: () => Navigator.of(ctx).pop(),
-          child: const Text('Cancel'),
+    builder:
+        (ctx) => AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          actions: [
+            OutlinedButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              style:
+                  destructive
+                      ? ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.danger,
+                      )
+                      : null,
+              onPressed: () {
+                Navigator.of(ctx).pop();
+                onConfirm();
+              },
+              child: Text(confirmLabel),
+            ),
+          ],
         ),
-        ElevatedButton(
-          style: destructive
-              ? ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.danger,
-                )
-              : null,
-          onPressed: () {
-            Navigator.of(ctx).pop();
-            onConfirm();
-          },
-          child: Text(confirmLabel),
-        ),
-      ],
-    ),
   );
 }

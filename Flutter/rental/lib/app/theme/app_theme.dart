@@ -92,11 +92,7 @@ class AppTheme {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: AppColors.primary,
       brightness: brightness,
-    ).copyWith(
-      primary: primary,
-      surface: surface,
-      error: AppColors.danger,
-    );
+    ).copyWith(primary: primary, surface: surface, error: AppColors.danger);
 
     final textTheme = TextTheme(
       displaySmall: TextStyle(
@@ -173,11 +169,7 @@ class AppTheme {
           side: BorderSide(color: border.withValues(alpha: isDark ? 0.6 : 1)),
         ),
       ),
-      dividerTheme: DividerThemeData(
-        color: border,
-        thickness: 1,
-        space: 1,
-      ),
+      dividerTheme: DividerThemeData(color: border, thickness: 1, space: 1),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: primary,
@@ -211,20 +203,18 @@ class AppTheme {
         backgroundColor: primary,
         foregroundColor: Colors.white,
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: inputFill,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 15,
+        ),
         border: inputBorder,
         enabledBorder: inputBorder.copyWith(
-          borderSide: BorderSide(
-            color: isDark ? border : Colors.transparent,
-          ),
+          borderSide: BorderSide(color: isDark ? border : Colors.transparent),
         ),
         focusedBorder: inputBorder.copyWith(
           borderSide: BorderSide(color: primary, width: 1.6),
@@ -246,9 +236,7 @@ class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: inputFill,
         side: BorderSide(color: border),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(999),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
         labelStyle: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
@@ -259,9 +247,7 @@ class AppTheme {
       dialogTheme: DialogThemeData(
         backgroundColor: surface,
         elevation: 8,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         titleTextStyle: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w700,
@@ -275,9 +261,7 @@ class AppTheme {
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         contentTextStyle: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
@@ -291,8 +275,10 @@ class AppTheme {
         unselectedItemColor: textSecondary,
         type: BottomNavigationBarType.fixed,
         elevation: 0,
-        selectedLabelStyle:
-            const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+        selectedLabelStyle: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+        ),
         unselectedLabelStyle: const TextStyle(fontSize: 12),
       ),
       drawerTheme: DrawerThemeData(
@@ -307,9 +293,7 @@ class AppTheme {
       listTileTheme: ListTileThemeData(
         iconColor: textSecondary,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: primary,
@@ -318,9 +302,7 @@ class AppTheme {
       popupMenuTheme: PopupMenuThemeData(
         color: surface,
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
     );
   }

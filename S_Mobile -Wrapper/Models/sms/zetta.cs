@@ -24,8 +24,8 @@ namespace S_Mobile.Models
             var request = new RestRequest("/SMSApi/send", Method.Post);
 
             request.AlwaysMultipartFormData = true;
-            request.AddParameter("userid", "Paul");
-            request.AddParameter("password", "Touran2018");
+            request.AddParameter("userid", Setting("ZettaUserId"));
+            request.AddParameter("password", Setting("ZettaPassword"));
             request.AddParameter("mobile", s.Phone);
             request.AddParameter("senderid", s.Client);
             request.AddParameter("msg", s.Message_to_send);
@@ -69,6 +69,26 @@ namespace S_Mobile.Models
             }
 
             return results;
+        }
+
+        /// <summary>
+        /// Reads a Zetta SMS gateway setting from the environment first, falling back to
+        /// Web.config &lt;appSettings&gt;, so credentials are never hardcoded in source.
+        /// </summary>
+        private static string Setting(string key)
+        {
+            string value = Environment.GetEnvironmentVariable(key);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                value = System.Configuration.ConfigurationManager.AppSettings[key];
+            }
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new System.Configuration.ConfigurationErrorsException(
+                    "Missing configuration value '" + key + "'. Set the '" + key +
+                    "' environment variable (recommended) or add it to Web.config <appSettings>.");
+            }
+            return value;
         }
     }
 }

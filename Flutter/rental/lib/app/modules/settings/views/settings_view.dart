@@ -42,8 +42,9 @@ class SettingsView extends GetView<SettingsController> {
               const SizedBox(height: 16),
               TextField(
                 controller: controller.waterRateController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 decoration: const InputDecoration(
                   labelText: 'Water price per unit (KSh)',
                   prefixIcon: Icon(Icons.water_drop_outlined),
@@ -53,8 +54,9 @@ class SettingsView extends GetView<SettingsController> {
               const SizedBox(height: 16),
               TextField(
                 controller: controller.garbageFeeController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 decoration: const InputDecoration(
                   labelText: 'Garbage fee per month (KSh)',
                   prefixIcon: Icon(Icons.delete_outline_rounded),
@@ -98,31 +100,32 @@ class SettingsView extends GetView<SettingsController> {
                   controller.waterRateController,
                   controller.garbageFeeController,
                 ]),
-                builder: (context, _) => Column(
-                  children: [
-                    DetailRow(
-                      icon: Icons.water_drop_outlined,
-                      label: 'Water per unit',
-                      value: formatMoney(
-                        double.tryParse(
-                              controller.waterRateController.text.trim(),
-                            ) ??
-                            0,
-                      ),
+                builder:
+                    (context, _) => Column(
+                      children: [
+                        DetailRow(
+                          icon: Icons.water_drop_outlined,
+                          label: 'Water per unit',
+                          value: formatMoney(
+                            double.tryParse(
+                                  controller.waterRateController.text.trim(),
+                                ) ??
+                                0,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        DetailRow(
+                          icon: Icons.delete_outline_rounded,
+                          label: 'Garbage per month',
+                          value: formatMoney(
+                            double.tryParse(
+                                  controller.garbageFeeController.text.trim(),
+                                ) ??
+                                0,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    DetailRow(
-                      icon: Icons.delete_outline_rounded,
-                      label: 'Garbage per month',
-                      value: formatMoney(
-                        double.tryParse(
-                              controller.garbageFeeController.text.trim(),
-                            ) ??
-                            0,
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ),

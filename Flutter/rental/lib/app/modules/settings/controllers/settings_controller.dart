@@ -54,9 +54,10 @@ class SettingsController extends GetxController {
   }
 
   static String _format(dynamic value) {
-    final parsed = value is num
-        ? value.toDouble()
-        : double.tryParse(value?.toString() ?? '') ?? 0;
+    final parsed =
+        value is num
+            ? value.toDouble()
+            : double.tryParse(value?.toString() ?? '') ?? 0;
     return parsed == parsed.roundToDouble()
         ? parsed.toStringAsFixed(0)
         : parsed.toString();

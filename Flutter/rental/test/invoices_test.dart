@@ -169,35 +169,34 @@ void main() {
       controller.onClose();
     });
 
-    test('recordPayment marks a full payment as Paid and logs income',
-        () async {
-      final controller = Get.put(InvoicesController());
-      await flush();
+    test(
+      'recordPayment marks a full payment as Paid and logs income',
+      () async {
+        final controller = Get.put(InvoicesController());
+        await flush();
 
-      final invoice = {
-        'id': 3,
-        'invoiceNumber': 'INV-0003',
-        'tenantId': 1,
-        'propertyId': 1,
-        'totalAmount': 88200.0,
-        'amountPaid': 0.0,
-      };
+        final invoice = {
+          'id': 3,
+          'invoiceNumber': 'INV-0003',
+          'tenantId': 1,
+          'propertyId': 1,
+          'totalAmount': 88200.0,
+          'amountPaid': 0.0,
+        };
 
-      final success = await controller.recordPayment(invoice, 88200);
-      await flush();
+        final success = await controller.recordPayment(invoice, 88200);
+        await flush();
 
-      expect(success, isTrue);
-      expect(api.updateCalls, 1);
-      expect(api.lastId, 3);
-      expect(api.lastUpdatePayload!['amountPaid'], 88200.0);
-      expect(api.lastUpdatePayload!['status'], 'Paid');
-      expect(api.addCalls, 1);
-      expect(
-        api.lastPayload!['description'],
-        'Payment for INV-0003',
-      );
-      controller.onClose();
-    });
+        expect(success, isTrue);
+        expect(api.updateCalls, 1);
+        expect(api.lastId, 3);
+        expect(api.lastUpdatePayload!['amountPaid'], 88200.0);
+        expect(api.lastUpdatePayload!['status'], 'Paid');
+        expect(api.addCalls, 1);
+        expect(api.lastPayload!['description'], 'Payment for INV-0003');
+        controller.onClose();
+      },
+    );
 
     test('recordPayment marks a partial payment as Partial', () async {
       final controller = Get.put(InvoicesController());
@@ -263,27 +262,29 @@ void main() {
       controller.onClose();
     });
 
-    test('rent preset fills an existing empty Rent line, not a new one',
-        () async {
-      api.store['leases']!.add({
-        'id': 1,
-        'tenantId': 1,
-        'monthlyRent': 52000.0,
-        'status': 'Active',
-      });
-      final controller = Get.put(InvoicesController());
-      await flush();
+    test(
+      'rent preset fills an existing empty Rent line, not a new one',
+      () async {
+        api.store['leases']!.add({
+          'id': 1,
+          'tenantId': 1,
+          'monthlyRent': 52000.0,
+          'status': 'Active',
+        });
+        final controller = Get.put(InvoicesController());
+        await flush();
 
-      controller.clearDraft();
-      controller.addLine('Rent');
-      controller.addLine('Water (3 units)');
-      controller.onTenantChanged(1);
+        controller.clearDraft();
+        controller.addLine('Rent');
+        controller.addLine('Water (3 units)');
+        controller.onTenantChanged(1);
 
-      expect(controller.lineAmounts.length, 2);
-      expect(controller.lineAmounts[0].text, '52000');
-      expect(controller.lineAmounts[1].text, '');
-      controller.onClose();
-    });
+        expect(controller.lineAmounts.length, 2);
+        expect(controller.lineAmounts[0].text, '52000');
+        expect(controller.lineAmounts[1].text, '');
+        controller.onClose();
+      },
+    );
 
     test('garbage quick-add uses the global monthly fee', () async {
       api.settingsData = {'waterRatePerUnit': 180.0, 'garbageFee': 700.0};

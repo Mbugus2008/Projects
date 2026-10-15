@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/widgets/app_ui.dart';
 import '../../../theme/app_theme.dart';
 import '../controllers/auth_controller.dart';
@@ -43,6 +44,9 @@ class LoginView extends GetView<AuthController> {
                           controller: controller.emailController,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
+                          textCapitalization: TextCapitalization.none,
+                          autocorrect: false,
+                          enableSuggestions: false,
                           autofillHints: const [AutofillHints.email],
                           decoration: const InputDecoration(
                             labelText: 'Email address',
@@ -54,13 +58,17 @@ class LoginView extends GetView<AuthController> {
                           () => TextField(
                             controller: controller.passwordController,
                             obscureText: controller.obscurePassword.value,
+                            textCapitalization: TextCapitalization.none,
+                            autocorrect: false,
+                            enableSuggestions: false,
                             onSubmitted: (_) => controller.login(),
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              prefixIcon: const Icon(Icons.lock_outline_rounded),
+                              prefixIcon: const Icon(
+                                Icons.lock_outline_rounded,
+                              ),
                               suffixIcon: IconButton(
-                                onPressed:
-                                    controller.togglePasswordVisibility,
+                                onPressed: controller.togglePasswordVisibility,
                                 icon: Icon(
                                   controller.obscurePassword.value
                                       ? Icons.visibility_off_outlined
@@ -88,8 +96,10 @@ class LoginView extends GetView<AuthController> {
                       const Expanded(child: Divider()),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14),
-                        child: Text('or continue with',
-                            style: theme.textTheme.bodySmall),
+                        child: Text(
+                          'or continue with',
+                          style: theme.textTheme.bodySmall,
+                        ),
                       ),
                       const Expanded(child: Divider()),
                     ],
@@ -100,7 +110,11 @@ class LoginView extends GetView<AuthController> {
                       Expanded(
                         child: OutlinedButton.icon(
                           onPressed: () => controller.loginWithOAuth('google'),
-                          icon: const Icon(Icons.g_mobiledata_rounded, size: 26, color: AppColors.danger),
+                          icon: const Icon(
+                            Icons.g_mobiledata_rounded,
+                            size: 26,
+                            color: AppColors.danger,
+                          ),
                           label: const FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text('Google'),
@@ -110,9 +124,13 @@ class LoginView extends GetView<AuthController> {
                       const SizedBox(width: 14),
                       Expanded(
                         child: OutlinedButton.icon(
-                          onPressed: () =>
-                              controller.loginWithOAuth('microsoft'),
-                          icon: const Icon(Icons.window_rounded, size: 20, color: AppColors.info),
+                          onPressed:
+                              () => controller.loginWithOAuth('microsoft'),
+                          icon: const Icon(
+                            Icons.window_rounded,
+                            size: 20,
+                            color: AppColors.info,
+                          ),
                           label: const FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text('Microsoft'),
@@ -126,8 +144,10 @@ class LoginView extends GetView<AuthController> {
                     alignment: WrapAlignment.center,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      Text("Don't have an account?",
-                          style: theme.textTheme.bodyMedium),
+                      Text(
+                        "Don't have an account?",
+                        style: theme.textTheme.bodyMedium,
+                      ),
                       TextButton(
                         onPressed: () => Get.toNamed('/register'),
                         child: const Text('Create one'),

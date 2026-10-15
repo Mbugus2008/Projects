@@ -26,9 +26,10 @@ class BalancesView extends GetView<BalancesController> {
         ],
       ),
       body: Obx(
-        () => controller.isLoading.value && controller.rows.isEmpty
-            ? const LoadingView(label: 'Checking tenant balances…')
-            : _buildContent(context),
+        () =>
+            controller.isLoading.value && controller.rows.isEmpty
+                ? const LoadingView(label: 'Checking tenant balances…')
+                : _buildContent(context),
       ),
     );
   }
@@ -44,12 +45,7 @@ class BalancesView extends GetView<BalancesController> {
       );
     }
 
-    return Column(
-      children: [
-        _buildSummary(),
-        Expanded(child: _buildList()),
-      ],
-    );
+    return Column(children: [_buildSummary(), Expanded(child: _buildList())]);
   }
 
   Widget _buildSummary() {
@@ -91,10 +87,8 @@ class BalancesView extends GetView<BalancesController> {
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
         itemCount: controller.rows.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (context, index) => _buildRowCard(
-          context,
-          controller.rows[index],
-        ),
+        itemBuilder:
+            (context, index) => _buildRowCard(context, controller.rows[index]),
       ),
     );
   }
@@ -111,9 +105,10 @@ class BalancesView extends GetView<BalancesController> {
     final status = row['status']?.toString() ?? '';
     final months = row['months'] as int;
 
-    final statusColor = status == 'Paid'
-        ? AppColors.success
-        : status == 'Partial'
+    final statusColor =
+        status == 'Paid'
+            ? AppColors.success
+            : status == 'Partial'
             ? AppColors.warning
             : AppColors.danger;
 
@@ -123,9 +118,10 @@ class BalancesView extends GetView<BalancesController> {
     ].where((s) => s.isNotEmpty).join(' · ');
 
     final nameParts = name.split(' ');
-    final initials = nameParts.length > 1
-        ? initialsOf(nameParts.first, nameParts[1])
-        : initialsOf(name, '');
+    final initials =
+        nameParts.length > 1
+            ? initialsOf(nameParts.first, nameParts[1])
+            : initialsOf(name, '');
 
     return AppCard(
       padding: const EdgeInsets.all(16),
@@ -134,11 +130,7 @@ class BalancesView extends GetView<BalancesController> {
         children: [
           Row(
             children: [
-              InitialsAvatar(
-                initials: initials,
-                color: statusColor,
-                size: 46,
-              ),
+              InitialsAvatar(initials: initials, color: statusColor, size: 46),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -146,7 +138,9 @@ class BalancesView extends GetView<BalancesController> {
                   children: [
                     Text(
                       name,
-                      style: theme.textTheme.titleMedium?.copyWith(fontSize: 15),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 15,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -209,57 +203,58 @@ class BalancesView extends GetView<BalancesController> {
       icon: const Icon(Icons.more_vert_rounded, size: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       onSelected: (value) => _onAction(context, row, value),
-      itemBuilder: (context) => [
-        const PopupMenuItem(
-          value: 'payment',
-          child: _MenuRow(Icons.payments_outlined, 'Record Payment'),
-        ),
-        if (hasPhone) ...[
-          const PopupMenuItem(
-            value: 'call',
-            child: _MenuRow(Icons.call_outlined, 'Call'),
-          ),
-          const PopupMenuItem(
-            value: 'reminder_sms',
-            child: _MenuRow(Icons.sms_outlined, 'Reminder via SMS'),
-          ),
-          const PopupMenuItem(
-            value: 'reminder_wa',
-            child: _MenuRow(Icons.chat_outlined, 'Reminder via WhatsApp'),
-          ),
-          const PopupMenuItem(
-            value: 'invoice_sms',
-            child: _MenuRow(Icons.receipt_long_outlined, 'Invoice via SMS'),
-          ),
-          const PopupMenuItem(
-            value: 'invoice_wa',
-            child: _MenuRow(
-              Icons.receipt_long_outlined,
-              'Invoice via WhatsApp',
-            ),
-          ),
-          if (hasReceipt) ...[
+      itemBuilder:
+          (context) => [
             const PopupMenuItem(
-              value: 'receipt_sms',
-              child: _MenuRow(Icons.task_alt_rounded, 'Receipt via SMS'),
+              value: 'payment',
+              child: _MenuRow(Icons.payments_outlined, 'Record Payment'),
             ),
-            const PopupMenuItem(
-              value: 'receipt_wa',
-              child: _MenuRow(
-                Icons.task_alt_rounded,
-                'Receipt via WhatsApp',
+            if (hasPhone) ...[
+              const PopupMenuItem(
+                value: 'call',
+                child: _MenuRow(Icons.call_outlined, 'Call'),
               ),
-            ),
+              const PopupMenuItem(
+                value: 'reminder_sms',
+                child: _MenuRow(Icons.sms_outlined, 'Reminder via SMS'),
+              ),
+              const PopupMenuItem(
+                value: 'reminder_wa',
+                child: _MenuRow(Icons.chat_outlined, 'Reminder via WhatsApp'),
+              ),
+              const PopupMenuItem(
+                value: 'invoice_sms',
+                child: _MenuRow(Icons.receipt_long_outlined, 'Invoice via SMS'),
+              ),
+              const PopupMenuItem(
+                value: 'invoice_wa',
+                child: _MenuRow(
+                  Icons.receipt_long_outlined,
+                  'Invoice via WhatsApp',
+                ),
+              ),
+              if (hasReceipt) ...[
+                const PopupMenuItem(
+                  value: 'receipt_sms',
+                  child: _MenuRow(Icons.task_alt_rounded, 'Receipt via SMS'),
+                ),
+                const PopupMenuItem(
+                  value: 'receipt_wa',
+                  child: _MenuRow(
+                    Icons.task_alt_rounded,
+                    'Receipt via WhatsApp',
+                  ),
+                ),
+              ],
+              const PopupMenuItem(
+                value: 'statement_wa',
+                child: _MenuRow(
+                  Icons.description_outlined,
+                  'Statement via WhatsApp',
+                ),
+              ),
+            ],
           ],
-          const PopupMenuItem(
-            value: 'statement_wa',
-            child: _MenuRow(
-              Icons.description_outlined,
-              'Statement via WhatsApp',
-            ),
-          ),
-        ],
-      ],
     );
   }
 
@@ -369,11 +364,7 @@ class _MenuRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        Icon(icon, size: 19),
-        const SizedBox(width: 10),
-        Text(label),
-      ],
+      children: [Icon(icon, size: 19), const SizedBox(width: 10), Text(label)],
     );
   }
 }

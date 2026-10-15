@@ -90,8 +90,8 @@ public class HomeController : Controller
         // Depot gives the vehicle list plus each vehicle's management figure,
         // the waybill gives crew/cash and the trips hang off its entry number.
         var depotTask = _dashboardService.GetSourceSectionAsync("Deport Fuel", range, cancellationToken);
-        var waybillsTask = _dashboardService.GetSourceSectionAsync("Waybill", range, cancellationToken);
-        var tripsTask = _dashboardService.GetSourceSectionAsync("Waybill Trip", range, cancellationToken);
+        var waybillsTask = _dashboardService.GetSourceSectionAsync("Waybill", range, cancellationToken, fullRows: true);
+        var tripsTask = _dashboardService.GetSourceSectionAsync("Waybill Trip", range, cancellationToken, fullRows: true);
         await Task.WhenAll(depotTask, waybillsTask, tripsTask);
 
         ViewData["Title"] = "Trip Book";
@@ -173,9 +173,10 @@ public class HomeController : Controller
         CancellationToken cancellationToken)
     {
         // Trips carry no date of their own, so they come back unfiltered and are
-        // matched to the in-range waybills by entry number.
-        var waybillsTask = _dashboardService.GetSourceSectionAsync("Waybill", range, cancellationToken);
-        var tripsTask = _dashboardService.GetSourceSectionAsync("Waybill Trip", range, cancellationToken);
+        // matched to the in-range waybills by entry number. fullRows: the report
+        // needs every row — the display cap would hide most trips.
+        var waybillsTask = _dashboardService.GetSourceSectionAsync("Waybill", range, cancellationToken, fullRows: true);
+        var tripsTask = _dashboardService.GetSourceSectionAsync("Waybill Trip", range, cancellationToken, fullRows: true);
         await Task.WhenAll(waybillsTask, tripsTask);
 
         return WaybillReportBuilder.Build(

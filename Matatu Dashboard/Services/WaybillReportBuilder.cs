@@ -49,12 +49,20 @@ public sealed class WaybillReport
         return string.IsNullOrWhiteSpace(trimmed) || trimmed == "00:00" ? "-" : trimmed;
     }
 
-    /// <summary>A trip with no arrival time has not been closed yet.</summary>
+    /// <summary>
+    /// A trip is closed when an arrival time is recorded — or when the new
+    /// Closed flag is set (housekeeping / receipt closes stamp the flag).
+    /// Either signal wins, so opens are never hidden behind a stale flag.
+    /// </summary>
+    public static bool IsClosed(Dictionary<string, string> trip) =>
+        (!string.IsNullOrWhiteSpace(Value(trip, "To_Time")) &&
+         Clock(Value(trip, "To_Time")) != "-") ||
+        (bool.TryParse(Value(trip, "Closed").Trim(), out var flag) && flag) ||
+        Value(trip, "Closed").Trim() == "1";
+
+    /// <summary>A trip with no closure signal has not been closed yet.</summary>
     public static string TripStatus(Dictionary<string, string> trip) =>
-        string.IsNullOrWhiteSpace(Value(trip, "To_Time")) ||
-        Clock(Value(trip, "To_Time")) == "-"
-            ? "Open"
-            : "Closed";
+        IsClosed(trip) ? "Closed" : "Open";
 }
 
 public static class WaybillReportBuilder

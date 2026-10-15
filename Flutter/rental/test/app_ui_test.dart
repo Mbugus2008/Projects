@@ -3,8 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:rental/app/core/widgets/app_ui.dart';
 
-Widget wrap(Widget child) =>
-    GetMaterialApp(home: Scaffold(body: child));
+Widget wrap(Widget child) => GetMaterialApp(home: Scaffold(body: child));
 
 void main() {
   setUp(() {
@@ -207,18 +206,20 @@ void main() {
       await tester.pumpWidget(
         wrap(
           Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () => showFormSheet(
-                context: context,
-                title: 'New Property',
-                subtitle: 'Fill in the details.',
-                submitLabel: 'Add Property',
-                isLoading: loading,
-                onSubmit: () => submitted = true,
-                fields: const [TextField()],
-              ),
-              child: const Text('Open'),
-            ),
+            builder:
+                (context) => ElevatedButton(
+                  onPressed:
+                      () => showFormSheet(
+                        context: context,
+                        title: 'New Property',
+                        subtitle: 'Fill in the details.',
+                        submitLabel: 'Add Property',
+                        isLoading: loading,
+                        onSubmit: () => submitted = true,
+                        fields: const [TextField()],
+                      ),
+                  child: const Text('Open'),
+                ),
           ),
         ),
       );
@@ -241,16 +242,18 @@ void main() {
       await tester.pumpWidget(
         wrap(
           Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () => showConfirmDialog(
-                context: context,
-                title: 'Delete Property',
-                message: 'This cannot be undone.',
-                confirmLabel: 'Delete',
-                onConfirm: () => confirmed = true,
-              ),
-              child: const Text('Open'),
-            ),
+            builder:
+                (context) => ElevatedButton(
+                  onPressed:
+                      () => showConfirmDialog(
+                        context: context,
+                        title: 'Delete Property',
+                        message: 'This cannot be undone.',
+                        confirmLabel: 'Delete',
+                        onConfirm: () => confirmed = true,
+                      ),
+                  child: const Text('Open'),
+                ),
           ),
         ),
       );
@@ -269,16 +272,18 @@ void main() {
       await tester.pumpWidget(
         wrap(
           Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () => showConfirmDialog(
-                context: context,
-                title: 'Delete Property',
-                message: 'This cannot be undone.',
-                confirmLabel: 'Delete',
-                onConfirm: () => confirmed = true,
-              ),
-              child: const Text('Open'),
-            ),
+            builder:
+                (context) => ElevatedButton(
+                  onPressed:
+                      () => showConfirmDialog(
+                        context: context,
+                        title: 'Delete Property',
+                        message: 'This cannot be undone.',
+                        confirmLabel: 'Delete',
+                        onConfirm: () => confirmed = true,
+                      ),
+                  child: const Text('Open'),
+                ),
           ),
         ),
       );

@@ -25,8 +25,10 @@ void main() {
     });
 
     test('converts +254 with spaces', () {
-      expect(ContactLauncher.normalizeKePhone('+254 712 345 678'),
-          '254712345678');
+      expect(
+        ContactLauncher.normalizeKePhone('+254 712 345 678'),
+        '254712345678',
+      );
     });
 
     test('converts leading 0 format', () {
@@ -38,8 +40,10 @@ void main() {
     });
 
     test('strips dashes and parentheses', () {
-      expect(ContactLauncher.normalizeKePhone('(0712) 345-678'),
-          '254712345678');
+      expect(
+        ContactLauncher.normalizeKePhone('(0712) 345-678'),
+        '254712345678',
+      );
     });
   });
 
@@ -139,9 +143,24 @@ void main() {
       final now = DateTime.now();
       seedLease(start: DateTime(now.year, now.month - 2, 1));
       api.store['transactions']!.addAll([
-        {'id': 1, 'type': 'Income', 'amount': 85000.0, 'tenant': 'Wanjiru Kamau'},
-        {'id': 2, 'type': 'Income', 'amount': 85000.0, 'tenant': 'Wanjiru Kamau'},
-        {'id': 3, 'type': 'Expense', 'amount': 12500.0, 'tenant': 'Wanjiru Kamau'},
+        {
+          'id': 1,
+          'type': 'Income',
+          'amount': 85000.0,
+          'tenant': 'Wanjiru Kamau',
+        },
+        {
+          'id': 2,
+          'type': 'Income',
+          'amount': 85000.0,
+          'tenant': 'Wanjiru Kamau',
+        },
+        {
+          'id': 3,
+          'type': 'Expense',
+          'amount': 12500.0,
+          'tenant': 'Wanjiru Kamau',
+        },
       ]);
       api.store['tenants']!.add({
         'id': 1,
@@ -172,8 +191,18 @@ void main() {
       final now = DateTime.now();
       seedLease(start: DateTime(now.year, now.month - 1, 1));
       api.store['transactions']!.addAll([
-        {'id': 1, 'type': 'Income', 'amount': 85000.0, 'tenant': 'Wanjiru Kamau'},
-        {'id': 2, 'type': 'Income', 'amount': 85000.0, 'tenant': 'Wanjiru Kamau'},
+        {
+          'id': 1,
+          'type': 'Income',
+          'amount': 85000.0,
+          'tenant': 'Wanjiru Kamau',
+        },
+        {
+          'id': 2,
+          'type': 'Income',
+          'amount': 85000.0,
+          'tenant': 'Wanjiru Kamau',
+        },
       ]);
 
       final controller = Get.put(BalancesController());
@@ -219,8 +248,18 @@ void main() {
 
     test('skips leases without tenant or rent', () async {
       api.store['leases']!.addAll([
-        {'id': 1, 'tenant': '', 'monthlyRent': 85000.0, 'startDate': '2026-01-01'},
-        {'id': 2, 'tenant': 'Someone', 'monthlyRent': 0.0, 'startDate': '2026-01-01'},
+        {
+          'id': 1,
+          'tenant': '',
+          'monthlyRent': 85000.0,
+          'startDate': '2026-01-01',
+        },
+        {
+          'id': 2,
+          'tenant': 'Someone',
+          'monthlyRent': 0.0,
+          'startDate': '2026-01-01',
+        },
         {'id': 3, 'tenant': 'No Start', 'monthlyRent': 5000.0},
       ]);
 

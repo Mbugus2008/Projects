@@ -3,12 +3,13 @@ class AppConfig {
 
   /// Base URL for the API.
   ///
-  /// Override per environment with --dart-define, e.g.:
-  /// - Android emulator: `flutter run --dart-define=API_BASE_URL=http://10.0.2.2:7171/api`
-  /// - Physical device:  `flutter run --dart-define=API_BASE_URL=http://192.168.8.226:7171/api`
+  /// Production default (main.trimline.co.ke). Override per environment with
+  /// --dart-define, e.g.:
+  /// - Android emulator (local dev API): `flutter run --dart-define=API_BASE_URL=http://10.0.2.2:7171/api`
+  /// - Physical device (local dev API):  `flutter run --dart-define=API_BASE_URL=http://192.168.8.226:7171/api`
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'https://192.168.0.100:7170/api',
+    defaultValue: 'https://main.trimline.co.ke:4018/api',
   );
 
   /// Connect / read timeouts in seconds.
