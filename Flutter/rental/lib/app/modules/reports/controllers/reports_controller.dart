@@ -38,7 +38,7 @@ class ReportsController extends GetxController {
           result['occupancyRate'] : double.parse(result['occupancyRate'].toString());
       
     } catch (e) {
-      print('Error loading report summary: $e');
+      debugPrint('Error loading report summary: $e');
       Get.snackbar(
         'Error',
         'Failed to load report summary',
@@ -76,7 +76,7 @@ class ReportsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error generating income report: $e');
+      debugPrint('Error generating income report: $e');
       Get.snackbar(
         'Error',
         'Failed to generate income report: $e',
@@ -113,7 +113,7 @@ class ReportsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error generating expense report: $e');
+      debugPrint('Error generating expense report: $e');
       Get.snackbar(
         'Error',
         'Failed to generate expense report: $e',
@@ -150,7 +150,7 @@ class ReportsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error generating occupancy report: $e');
+      debugPrint('Error generating occupancy report: $e');
       Get.snackbar(
         'Error',
         'Failed to generate occupancy report: $e',
@@ -187,7 +187,7 @@ class ReportsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error generating lease expiration report: $e');
+      debugPrint('Error generating lease expiration report: $e');
       Get.snackbar(
         'Error',
         'Failed to generate lease expiration report: $e',
@@ -224,7 +224,7 @@ class ReportsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error generating maintenance report: $e');
+      debugPrint('Error generating maintenance report: $e');
       Get.snackbar(
         'Error',
         'Failed to generate maintenance report: $e',
@@ -261,7 +261,7 @@ class ReportsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error exporting report to PDF: $e');
+      debugPrint('Error exporting report to PDF: $e');
       Get.snackbar(
         'Error',
         'Failed to export report to PDF: $e',

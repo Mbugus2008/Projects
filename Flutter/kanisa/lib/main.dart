@@ -14,9 +14,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   Get.put(LoggerService(), permanent: true);
-  Get.put(ImageSliderController());
-  Get.put(DimensionController());
-  Get.put(PaymentController());
+  // App-wide controllers must be permanent, otherwise GetX's default
+  // SmartManagement.full disposes them when routes are replaced/removed
+  // (e.g. Get.offAll on logout), leaving Get.find<>() in screens to throw and
+  // the dimension dropdowns with no data.
+  Get.put(ImageSliderController(), permanent: true);
+  Get.put(DimensionController(), permanent: true);
+  Get.put(PaymentController(), permanent: true);
 
   runApp(MyApp());
 }

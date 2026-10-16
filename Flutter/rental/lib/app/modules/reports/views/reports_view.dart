@@ -6,7 +6,7 @@ import '../../../theme/app_theme.dart';
 import '../controllers/reports_controller.dart';
 
 class ReportsView extends GetView<ReportsController> {
-  const ReportsView({Key? key}) : super(key: key);
+  const ReportsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import '../../../theme/app_theme.dart';
 import '../controllers/leases_controller.dart';
 
 class LeasesView extends GetView<LeasesController> {
-  const LeasesView({Key? key}) : super(key: key);
+  const LeasesView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +71,7 @@ class LeasesView extends GetView<LeasesController> {
     final status = lease['status']?.toString() ?? 'Active';
 
     final end = DateTime.tryParse(endDate);
-    final daysRemaining =
-        end == null ? null : end.difference(DateTime.now()).inDays;
+    final daysRemaining = end?.difference(DateTime.now()).inDays;
 
     Color statusColor = AppColors.primary;
     String statusLabel = status;

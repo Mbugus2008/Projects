@@ -11,7 +11,7 @@ import '../controllers/invoices_controller.dart';
 /// send them via SMS/WhatsApp, record payments, and issue receipts against
 /// the invoice.
 class InvoicesView extends GetView<InvoicesController> {
-  const InvoicesView({Key? key}) : super(key: key);
+  const InvoicesView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -311,7 +311,7 @@ class InvoicesView extends GetView<InvoicesController> {
       fields: [
         Obx(
           () => DropdownButtonFormField<int>(
-            value:
+            initialValue:
                 controller.draftTenantId.value == 0
                     ? null
                     : controller.draftTenantId.value,

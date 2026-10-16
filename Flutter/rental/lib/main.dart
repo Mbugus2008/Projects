@@ -16,7 +16,7 @@ void main() async {
     GetMaterialApp(
       title: 'Rental Management',
       initialRoute:
-          authService.isAuthenticated.value ? AppPages.INITIAL : Routes.LOGIN,
+          authService.isAuthenticated.value ? AppPages.initial : Routes.login,
       getPages: AppPages.routes,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

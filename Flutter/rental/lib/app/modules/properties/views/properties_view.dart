@@ -6,7 +6,7 @@ import '../../../theme/app_theme.dart';
 import '../controllers/properties_controller.dart';
 
 class PropertiesView extends GetView<PropertiesController> {
-  const PropertiesView({Key? key}) : super(key: key);
+  const PropertiesView({super.key});
 
   @override
   Widget build(BuildContext context) {

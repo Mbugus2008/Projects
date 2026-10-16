@@ -6,7 +6,7 @@ import '../../../theme/app_theme.dart';
 import '../controllers/finances_controller.dart';
 
 class FinancesView extends GetView<FinancesController> {
-  const FinancesView({Key? key}) : super(key: key);
+  const FinancesView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import '../controllers/settings_controller.dart';
 /// Global settings: water price per unit and the monthly garbage fee,
 /// used when creating tenant invoices.
 class SettingsView extends GetView<SettingsController> {
-  const SettingsView({Key? key}) : super(key: key);
+  const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {

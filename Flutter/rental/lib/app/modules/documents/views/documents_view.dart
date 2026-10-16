@@ -6,7 +6,7 @@ import '../../../theme/app_theme.dart';
 import '../controllers/documents_controller.dart';
 
 class DocumentsView extends GetView<DocumentsController> {
-  const DocumentsView({Key? key}) : super(key: key);
+  const DocumentsView({super.key});
 
   @override
   Widget build(BuildContext context) {

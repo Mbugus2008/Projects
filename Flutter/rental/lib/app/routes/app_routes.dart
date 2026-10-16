@@ -1,18 +1,18 @@
 abstract class Routes {
   Routes._();
 
-  static const SPLASH = '/splash';
-  static const LOGIN = '/login';
-  static const REGISTER = '/register';
-  static const DASHBOARD = '/dashboard';
-  static const PROPERTIES = '/properties';
-  static const TENANTS = '/tenants';
-  static const LEASES = '/leases';
-  static const FINANCES = '/finances';
-  static const MAINTENANCE = '/maintenance';
-  static const DOCUMENTS = '/documents';
-  static const REPORTS = '/reports';
-  static const BALANCES = '/balances';
-  static const INVOICES = '/invoices';
-  static const SETTINGS = '/settings';
+  static const splash = '/splash';
+  static const login = '/login';
+  static const register = '/register';
+  static const dashboard = '/dashboard';
+  static const properties = '/properties';
+  static const tenants = '/tenants';
+  static const leases = '/leases';
+  static const finances = '/finances';
+  static const maintenance = '/maintenance';
+  static const documents = '/documents';
+  static const reports = '/reports';
+  static const balances = '/balances';
+  static const invoices = '/invoices';
+  static const settings = '/settings';
 }

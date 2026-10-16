@@ -52,7 +52,7 @@ class PropertiesController extends GetxController {
       final result = await _apiService.getProperties();
       properties.value = result;
     } catch (e) {
-      print('Error loading properties: $e');
+      debugPrint('Error loading properties: $e');
       Get.snackbar(
         'Error',
         'Failed to load properties',
@@ -104,7 +104,7 @@ class PropertiesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error adding property: $e');
+      debugPrint('Error adding property: $e');
       Get.snackbar(
         'Error',
         'Failed to add property: $e',
@@ -156,7 +156,7 @@ class PropertiesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error updating property: $e');
+      debugPrint('Error updating property: $e');
       Get.snackbar(
         'Error',
         'Failed to update property: $e',
@@ -195,7 +195,7 @@ class PropertiesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error deleting property: $e');
+      debugPrint('Error deleting property: $e');
       Get.snackbar(
         'Error',
         'Failed to delete property: $e',

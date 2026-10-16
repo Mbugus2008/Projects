@@ -41,8 +41,9 @@ class FakeApiService extends ApiService {
   Future<bool> addProperty(Map<String, dynamic> data) async {
     addCalls++;
     lastPayload = data;
-    if (addResult)
+    if (addResult) {
       store['properties']!.add({...data, 'id': _nextId('properties')});
+    }
     return addResult;
   }
 

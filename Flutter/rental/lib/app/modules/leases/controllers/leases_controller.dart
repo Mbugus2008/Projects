@@ -45,7 +45,7 @@ class LeasesController extends GetxController {
       final result = await _apiService.getLeases();
       leases.value = result;
     } catch (e) {
-      print('Error loading leases: $e');
+      debugPrint('Error loading leases: $e');
       Get.snackbar(
         'Error',
         'Failed to load leases',
@@ -100,7 +100,7 @@ class LeasesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error adding lease: $e');
+      debugPrint('Error adding lease: $e');
       Get.snackbar(
         'Error',
         'Failed to add lease: $e',
@@ -154,7 +154,7 @@ class LeasesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error updating lease: $e');
+      debugPrint('Error updating lease: $e');
       Get.snackbar(
         'Error',
         'Failed to update lease: $e',
@@ -193,7 +193,7 @@ class LeasesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error deleting lease: $e');
+      debugPrint('Error deleting lease: $e');
       Get.snackbar(
         'Error',
         'Failed to delete lease: $e',
@@ -236,7 +236,7 @@ class LeasesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error renewing lease: $e');
+      debugPrint('Error renewing lease: $e');
       Get.snackbar(
         'Error',
         'Failed to renew lease: $e',

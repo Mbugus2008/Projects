@@ -49,7 +49,7 @@ class FinancesController extends GetxController {
       transactions.value = result;
       _calculateSummaryMetrics();
     } catch (e) {
-      print('Error loading transactions: $e');
+      debugPrint('Error loading transactions: $e');
       Get.snackbar(
         'Error',
         'Failed to load transactions',
@@ -121,7 +121,7 @@ class FinancesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error adding transaction: $e');
+      debugPrint('Error adding transaction: $e');
       Get.snackbar(
         'Error',
         'Failed to add transaction: $e',
@@ -176,7 +176,7 @@ class FinancesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error updating transaction: $e');
+      debugPrint('Error updating transaction: $e');
       Get.snackbar(
         'Error',
         'Failed to update transaction: $e',
@@ -215,7 +215,7 @@ class FinancesController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error deleting transaction: $e');
+      debugPrint('Error deleting transaction: $e');
       Get.snackbar(
         'Error',
         'Failed to delete transaction: $e',

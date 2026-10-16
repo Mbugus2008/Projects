@@ -43,7 +43,7 @@ class TenantsController extends GetxController {
       final result = await _apiService.getTenants();
       tenants.value = result;
     } catch (e) {
-      print('Error loading tenants: $e');
+      debugPrint('Error loading tenants: $e');
       Get.snackbar(
         'Error',
         'Failed to load tenants',
@@ -92,7 +92,7 @@ class TenantsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error adding tenant: $e');
+      debugPrint('Error adding tenant: $e');
       Get.snackbar(
         'Error',
         'Failed to add tenant: $e',
@@ -141,7 +141,7 @@ class TenantsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error updating tenant: $e');
+      debugPrint('Error updating tenant: $e');
       Get.snackbar(
         'Error',
         'Failed to update tenant: $e',
@@ -180,7 +180,7 @@ class TenantsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error deleting tenant: $e');
+      debugPrint('Error deleting tenant: $e');
       Get.snackbar(
         'Error',
         'Failed to delete tenant: $e',

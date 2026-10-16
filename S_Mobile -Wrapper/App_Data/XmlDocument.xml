@@ -4558,6 +4558,12 @@
         <member name="T:S_Mobile.Models.MpesaPull.MpesaConfigRow">
             <summary>Row of [Subscription Mpesa Config].</summary>
         </member>
+        <member name="M:S_Mobile.Models.zetta.Setting(System.String)">
+            <summary>
+            Reads a Zetta SMS gateway setting from the environment first, falling back to
+            Web.config &lt;appSettings&gt;, so credentials are never hardcoded in source.
+            </summary>
+        </member>
         <member name="P:S_Mobile.Logs.Logger.BaseLogPath">
             <summary>
             Gets or sets the base log path for all logger instances

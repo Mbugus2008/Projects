@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,7 +43,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load properties');
       }
     } catch (e) {
-      print('Error fetching properties: $e');
+      debugPrint('Error fetching properties: $e');
       return [];
     }
   }
@@ -54,11 +55,11 @@ class ApiService extends GetxService {
         headers: headers,
         body: jsonEncode(propertyData),
       );
-      print(response.statusCode);
-      print(response.body);
+      debugPrint(response.statusCode.toString());
+      debugPrint(response.body);
       return response.statusCode == 201;
     } catch (e) {
-      print('Error adding property: $e');
+      debugPrint('Error adding property: $e');
       return false;
     }
   }
@@ -73,7 +74,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error updating property: $e');
+      debugPrint('Error updating property: $e');
       return false;
     }
   }
@@ -87,7 +88,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error deleting property: $e');
+      debugPrint('Error deleting property: $e');
       return false;
     }
   }
@@ -107,7 +108,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load tenants');
       }
     } catch (e) {
-      print('Error fetching tenants: $e');
+      debugPrint('Error fetching tenants: $e');
       return [];
     }
   }
@@ -122,7 +123,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 201;
     } catch (e) {
-      print('Error adding tenant: $e');
+      debugPrint('Error adding tenant: $e');
       return false;
     }
   }
@@ -137,7 +138,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error updating tenant: $e');
+      debugPrint('Error updating tenant: $e');
       return false;
     }
   }
@@ -151,7 +152,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error deleting tenant: $e');
+      debugPrint('Error deleting tenant: $e');
       return false;
     }
   }
@@ -171,7 +172,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load leases');
       }
     } catch (e) {
-      print('Error fetching leases: $e');
+      debugPrint('Error fetching leases: $e');
       return [];
     }
   }
@@ -186,7 +187,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 201;
     } catch (e) {
-      print('Error adding lease: $e');
+      debugPrint('Error adding lease: $e');
       return false;
     }
   }
@@ -201,7 +202,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error updating lease: $e');
+      debugPrint('Error updating lease: $e');
       return false;
     }
   }
@@ -215,7 +216,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error deleting lease: $e');
+      debugPrint('Error deleting lease: $e');
       return false;
     }
   }
@@ -235,7 +236,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load transactions');
       }
     } catch (e) {
-      print('Error fetching transactions: $e');
+      debugPrint('Error fetching transactions: $e');
       return [];
     }
   }
@@ -250,7 +251,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 201;
     } catch (e) {
-      print('Error adding transaction: $e');
+      debugPrint('Error adding transaction: $e');
       return false;
     }
   }
@@ -268,7 +269,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error updating transaction: $e');
+      debugPrint('Error updating transaction: $e');
       return false;
     }
   }
@@ -282,7 +283,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error deleting transaction: $e');
+      debugPrint('Error deleting transaction: $e');
       return false;
     }
   }
@@ -302,7 +303,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load maintenance requests');
       }
     } catch (e) {
-      print('Error fetching maintenance requests: $e');
+      debugPrint('Error fetching maintenance requests: $e');
       return [];
     }
   }
@@ -317,7 +318,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 201;
     } catch (e) {
-      print('Error adding maintenance request: $e');
+      debugPrint('Error adding maintenance request: $e');
       return false;
     }
   }
@@ -335,7 +336,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error updating maintenance request: $e');
+      debugPrint('Error updating maintenance request: $e');
       return false;
     }
   }
@@ -349,7 +350,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error deleting maintenance request: $e');
+      debugPrint('Error deleting maintenance request: $e');
       return false;
     }
   }
@@ -369,7 +370,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load documents');
       }
     } catch (e) {
-      print('Error fetching documents: $e');
+      debugPrint('Error fetching documents: $e');
       return [];
     }
   }
@@ -384,7 +385,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 201;
     } catch (e) {
-      print('Error adding document: $e');
+      debugPrint('Error adding document: $e');
       return false;
     }
   }
@@ -399,7 +400,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error updating document: $e');
+      debugPrint('Error updating document: $e');
       return false;
     }
   }
@@ -413,7 +414,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error deleting document: $e');
+      debugPrint('Error deleting document: $e');
       return false;
     }
   }
@@ -432,7 +433,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load settings');
       }
     } catch (e) {
-      print('Error fetching settings: $e');
+      debugPrint('Error fetching settings: $e');
       return {'waterRatePerUnit': 150.0, 'garbageFee': 500.0};
     }
   }
@@ -447,7 +448,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error updating settings: $e');
+      debugPrint('Error updating settings: $e');
       return false;
     }
   }
@@ -467,7 +468,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load invoices');
       }
     } catch (e) {
-      print('Error fetching invoices: $e');
+      debugPrint('Error fetching invoices: $e');
       return [];
     }
   }
@@ -482,7 +483,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 201;
     } catch (e) {
-      print('Error adding invoice: $e');
+      debugPrint('Error adding invoice: $e');
       return false;
     }
   }
@@ -497,7 +498,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error updating invoice: $e');
+      debugPrint('Error updating invoice: $e');
       return false;
     }
   }
@@ -511,7 +512,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error deleting invoice: $e');
+      debugPrint('Error deleting invoice: $e');
       return false;
     }
   }
@@ -530,7 +531,7 @@ class ApiService extends GetxService {
         throw Exception('Failed to load report summary');
       }
     } catch (e) {
-      print('Error fetching report summary: $e');
+      debugPrint('Error fetching report summary: $e');
       return {
         'totalRevenue': 0.0,
         'totalExpenses': 0.0,
@@ -549,7 +550,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error generating income report: $e');
+      debugPrint('Error generating income report: $e');
       return false;
     }
   }
@@ -563,7 +564,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error generating expense report: $e');
+      debugPrint('Error generating expense report: $e');
       return false;
     }
   }
@@ -577,7 +578,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error generating occupancy report: $e');
+      debugPrint('Error generating occupancy report: $e');
       return false;
     }
   }
@@ -591,7 +592,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error generating lease expiration report: $e');
+      debugPrint('Error generating lease expiration report: $e');
       return false;
     }
   }
@@ -605,7 +606,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error generating maintenance report: $e');
+      debugPrint('Error generating maintenance report: $e');
       return false;
     }
   }
@@ -620,7 +621,7 @@ class ApiService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Error exporting report to PDF: $e');
+      debugPrint('Error exporting report to PDF: $e');
       return false;
     }
   }

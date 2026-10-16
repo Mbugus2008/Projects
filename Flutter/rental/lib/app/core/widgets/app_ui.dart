@@ -599,7 +599,6 @@ Future<void> showConfirmDialog({
   required VoidCallback onConfirm,
   bool destructive = true,
 }) {
-  final theme = Theme.of(context);
   return showDialog(
     context: context,
     builder:

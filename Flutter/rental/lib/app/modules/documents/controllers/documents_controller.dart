@@ -45,7 +45,7 @@ class DocumentsController extends GetxController {
       final result = await _apiService.getDocuments();
       documents.value = result;
     } catch (e) {
-      print('Error loading documents: $e');
+      debugPrint('Error loading documents: $e');
       Get.snackbar(
         'Error',
         'Failed to load documents',
@@ -106,7 +106,7 @@ class DocumentsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error adding document: $e');
+      debugPrint('Error adding document: $e');
       Get.snackbar(
         'Error',
         'Failed to add document: $e',
@@ -163,7 +163,7 @@ class DocumentsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error updating document: $e');
+      debugPrint('Error updating document: $e');
       Get.snackbar(
         'Error',
         'Failed to update document: $e',
@@ -202,7 +202,7 @@ class DocumentsController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error deleting document: $e');
+      debugPrint('Error deleting document: $e');
       Get.snackbar(
         'Error',
         'Failed to delete document: $e',

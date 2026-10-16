@@ -6,7 +6,7 @@ import '../../../theme/app_theme.dart';
 import '../controllers/maintenance_controller.dart';
 
 class MaintenanceView extends GetView<MaintenanceController> {
-  const MaintenanceView({Key? key}) : super(key: key);
+  const MaintenanceView({super.key});
 
   @override
   Widget build(BuildContext context) {

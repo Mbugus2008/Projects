@@ -47,7 +47,7 @@ class MaintenanceController extends GetxController {
       final result = await _apiService.getMaintenanceRequests();
       maintenanceRequests.value = result;
     } catch (e) {
-      print('Error loading maintenance requests: $e');
+      debugPrint('Error loading maintenance requests: $e');
       Get.snackbar(
         'Error',
         'Failed to load maintenance requests',
@@ -103,7 +103,7 @@ class MaintenanceController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error adding maintenance request: $e');
+      debugPrint('Error adding maintenance request: $e');
       Get.snackbar(
         'Error',
         'Failed to add maintenance request: $e',
@@ -160,7 +160,7 @@ class MaintenanceController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error updating maintenance request: $e');
+      debugPrint('Error updating maintenance request: $e');
       Get.snackbar(
         'Error',
         'Failed to update maintenance request: $e',
@@ -199,7 +199,7 @@ class MaintenanceController extends GetxController {
         );
       }
     } catch (e) {
-      print('Error deleting maintenance request: $e');
+      debugPrint('Error deleting maintenance request: $e');
       Get.snackbar(
         'Error',
         'Failed to delete maintenance request: $e',

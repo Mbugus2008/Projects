@@ -7,7 +7,7 @@ import '../../../theme/app_theme.dart';
 import '../controllers/tenants_controller.dart';
 
 class TenantsView extends GetView<TenantsController> {
-  const TenantsView({Key? key}) : super(key: key);
+  const TenantsView({super.key});
 
   @override
   Widget build(BuildContext context) {

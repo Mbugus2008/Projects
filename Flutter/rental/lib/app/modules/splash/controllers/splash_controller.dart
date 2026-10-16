@@ -19,12 +19,12 @@ class SplashController extends GetxController {
       // Validate the stored token before proceeding
       final isValid = await _authService.validateToken();
       if (isValid) {
-        Get.offAllNamed(Routes.DASHBOARD);
+        Get.offAllNamed(Routes.dashboard);
         return;
       }
       // Token invalid — clear it
       await _authService.logout();
     }
-    Get.offAllNamed(Routes.LOGIN);
+    Get.offAllNamed(Routes.login);
   }
 }

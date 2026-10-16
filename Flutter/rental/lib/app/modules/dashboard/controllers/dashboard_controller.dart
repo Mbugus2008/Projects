@@ -36,25 +36,25 @@ class DashboardController extends BaseController {
 
   // Navigation items
   final List<Map<String, dynamic>> navigationItems = [
-    {'title': 'Dashboard', 'icon': Icons.dashboard, 'route': Routes.DASHBOARD},
+    {'title': 'Dashboard', 'icon': Icons.dashboard, 'route': Routes.dashboard},
     {
       'title': 'Properties',
       'icon': Icons.home_work,
-      'route': Routes.PROPERTIES,
+      'route': Routes.properties,
     },
-    {'title': 'Tenants', 'icon': Icons.people, 'route': Routes.TENANTS},
-    {'title': 'Leases', 'icon': Icons.description, 'route': Routes.LEASES},
-    {'title': 'Finances', 'icon': Icons.attach_money, 'route': Routes.FINANCES},
+    {'title': 'Tenants', 'icon': Icons.people, 'route': Routes.tenants},
+    {'title': 'Leases', 'icon': Icons.description, 'route': Routes.leases},
+    {'title': 'Finances', 'icon': Icons.attach_money, 'route': Routes.finances},
     {
       'title': 'Balances',
       'icon': Icons.account_balance_wallet,
-      'route': Routes.BALANCES,
+      'route': Routes.balances,
     },
-    {'title': 'Invoices', 'icon': Icons.receipt_long, 'route': Routes.INVOICES},
-    {'title': 'Maintenance', 'icon': Icons.build, 'route': Routes.MAINTENANCE},
-    {'title': 'Documents', 'icon': Icons.folder, 'route': Routes.DOCUMENTS},
-    {'title': 'Reports', 'icon': Icons.bar_chart, 'route': Routes.REPORTS},
-    {'title': 'Settings', 'icon': Icons.settings, 'route': Routes.SETTINGS},
+    {'title': 'Invoices', 'icon': Icons.receipt_long, 'route': Routes.invoices},
+    {'title': 'Maintenance', 'icon': Icons.build, 'route': Routes.maintenance},
+    {'title': 'Documents', 'icon': Icons.folder, 'route': Routes.documents},
+    {'title': 'Reports', 'icon': Icons.bar_chart, 'route': Routes.reports},
+    {'title': 'Settings', 'icon': Icons.settings, 'route': Routes.settings},
   ];
 
   @override
@@ -130,6 +130,6 @@ class DashboardController extends BaseController {
 
   Future<void> logout() async {
     await _authService.logout();
-    Get.offAllNamed(Routes.LOGIN);
+    Get.offAllNamed(Routes.login);
   }
 }

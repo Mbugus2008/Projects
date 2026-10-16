@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -45,7 +46,7 @@ class AuthService extends GetxService {
         return false;
       }
     } catch (e) {
-      print('Login error: $e');
+      debugPrint('Login error: $e');
       return false;
     }
   }
@@ -71,7 +72,7 @@ class AuthService extends GetxService {
         return false;
       }
     } catch (e) {
-      print('OAuth login error: $e');
+      debugPrint('OAuth login error: $e');
       return false;
     }
   }
@@ -79,16 +80,16 @@ class AuthService extends GetxService {
   // Register new user
   Future<bool> register(Map<String, dynamic> userData) async {
     try {
-      print(jsonEncode(userData));
+      debugPrint(jsonEncode(userData));
       final response = await http.post(
         Uri.parse('${AppConfig.baseUrl}/auth/register'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(userData),
       );
-      print(response.statusCode);
+      debugPrint(response.statusCode.toString());
       return response.statusCode == 200;
     } catch (e) {
-      print('Registration error: $e');
+      debugPrint('Registration error: $e');
       return false;
     }
   }
@@ -122,7 +123,7 @@ class AuthService extends GetxService {
         await logout();
       }
     } catch (e) {
-      print('Error fetching user profile: $e');
+      debugPrint('Error fetching user profile: $e');
     }
   }
 
@@ -136,7 +137,7 @@ class AuthService extends GetxService {
 
       return response.statusCode == 200;
     } catch (e) {
-      print('Token validation error: $e');
+      debugPrint('Token validation error: $e');
       return false;
     }
   }
@@ -159,7 +160,7 @@ class AuthService extends GetxService {
         return false;
       }
     } catch (e) {
-      print('Token refresh error: $e');
+      debugPrint('Token refresh error: $e');
       await logout();
       return false;
     }

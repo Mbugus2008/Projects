@@ -10,7 +10,7 @@ import '../controllers/balances_controller.dart';
 /// Rent collection view: who has paid, who is behind, and quick actions to
 /// remind, invoice and share statements over SMS / WhatsApp.
 class BalancesView extends GetView<BalancesController> {
-  const BalancesView({Key? key}) : super(key: key);
+  const BalancesView({super.key});
 
   @override
   Widget build(BuildContext context) {

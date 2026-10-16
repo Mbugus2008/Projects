@@ -33,89 +33,89 @@ import 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const initial = Routes.splash;
 
   static final routes = [
     // Public routes (no middleware)
     GetPage(
-      name: Routes.SPLASH,
+      name: Routes.splash,
       page: () => const SplashView(),
       binding: SplashBinding(),
     ),
     GetPage(
-      name: Routes.LOGIN,
+      name: Routes.login,
       page: () => const LoginView(),
       binding: AuthBinding(),
     ),
     GetPage(
-      name: Routes.REGISTER,
+      name: Routes.register,
       page: () => const RegisterView(),
       binding: AuthBinding(),
     ),
 
     // Protected routes (with auth middleware)
     GetPage(
-      name: Routes.DASHBOARD,
+      name: Routes.dashboard,
       page: () => const DashboardView(),
       binding: DashboardBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.PROPERTIES,
+      name: Routes.properties,
       page: () => const PropertiesView(),
       binding: PropertiesBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.TENANTS,
+      name: Routes.tenants,
       page: () => const TenantsView(),
       binding: TenantsBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.LEASES,
+      name: Routes.leases,
       page: () => const LeasesView(),
       binding: LeasesBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.FINANCES,
+      name: Routes.finances,
       page: () => const FinancesView(),
       binding: FinancesBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.MAINTENANCE,
+      name: Routes.maintenance,
       page: () => const MaintenanceView(),
       binding: MaintenanceBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.DOCUMENTS,
+      name: Routes.documents,
       page: () => const DocumentsView(),
       binding: DocumentsBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.REPORTS,
+      name: Routes.reports,
       page: () => const ReportsView(),
       binding: ReportsBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.BALANCES,
+      name: Routes.balances,
       page: () => const BalancesView(),
       binding: BalancesBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.INVOICES,
+      name: Routes.invoices,
       page: () => const InvoicesView(),
       binding: InvoicesBinding(),
       middlewares: [ApiMiddleware()],
     ),
     GetPage(
-      name: Routes.SETTINGS,
+      name: Routes.settings,
       page: () => const SettingsView(),
       binding: SettingsBinding(),
       middlewares: [ApiMiddleware()],
