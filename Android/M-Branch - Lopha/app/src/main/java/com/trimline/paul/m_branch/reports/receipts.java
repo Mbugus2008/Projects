@@ -56,6 +56,8 @@ TextView total ;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Summary Report");
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(v -> finish());
         db = new DB(this);
         progress = new ProgressDialog(receipts.this);
         progress.setMessage("Loading report");

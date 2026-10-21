@@ -56,6 +56,8 @@ public class status extends AppCompatActivity {
         setContentView(R.layout.activity_status);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(v -> finish());
         db = new DB(this);
         vehno = (AutoCompleteTextView) findViewById(R.id.searchno);
         p = (ProgressBar) findViewById(R.id.searchprogress);

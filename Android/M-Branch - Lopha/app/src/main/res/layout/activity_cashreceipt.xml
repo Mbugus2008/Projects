@@ -1,255 +1,608 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_cashreceipt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/brand_bg"
+    android:orientation="vertical"
     tools:context="com.trimline.paul.m_branch.cashreceipt">
 
-    <LinearLayout
-
+    <include
+        layout="@layout/view_back_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:layout_height="?attr/actionBarSize" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:fillViewport="true">
 
-            <AutoCompleteTextView
-                android:id="@+id/memberno"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="ACC/Vehicle no"
-                android:inputType="number" />
-
-            <ImageButton
-                android:id="@+id/find"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/memberno"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginRight="80dp"
-                android:background="@null"
-                android:src="@drawable/search" />
-
-            <ImageButton
-                android:id="@+id/clear"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignTop="@id/memberno"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-
-                android:layout_marginTop="20dp"
-                android:background="@null"
-                android:scaleType="fitXY"
-                android:src="@drawable/deletered" />
-
-            <ProgressBar
-                android:id="@+id/findmember"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_toRightOf="@id/memberno"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/memberno"
-                android:layout_alignLeft="@id/memberno"
-                android:gravity="right"
-                android:text="A/C" />
-
-            <TextView
-                android:id="@+id/id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:layout_alignLeft="@id/memberno"
-                android:gravity="right"
-                android:text="Account Name"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/LoanBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/id"
-                android:layout_alignLeft="@id/name"
-                android:gravity="right"
-                android:text="Loan balance" />
-
-            <TextView
-                android:id="@+id/Penalty"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/LoanBalance"
-                android:layout_alignLeft="@id/name"
-                android:layout_alignRight="@id/LoanBalance"
-                android:gravity="right"
-                android:text="Penalty"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/operation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Penalty"
-                android:layout_alignLeft="@id/name"
-
-                android:gravity="right"
-                android:text="Operation" />
-
-            <ScrollView
-                android:id="@+id/scroll"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_below="@id/Penalty"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:layout_toRightOf="@id/operation"
-                android:fadeScrollbars="false"
-                android:orientation="vertical"
-                android:scrollbars="vertical">
-
-                <TextView
-                    android:id="@+id/collections"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/Penalty"
-                    android:layout_alignParentRight="true"
-                    android:layout_toRightOf="@id/operation"
-                    android:gravity="right"
-                    android:scrollbars="vertical|horizontal"
-                    android:text="Collections" />
-            </ScrollView>
-
-            <include
-                android:id="@+id/seperator"
-                layout="@layout/transactions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/scroll" />
-
-            <Spinner
-                android:id="@+id/ttype"
-                android:layout_width="110dp"
-                android:layout_height="30dp"
-                android:layout_below="@id/seperator"
-                android:layout_marginTop="10dp">
-
-            </Spinner>
-
-            <Spinner
-                android:id="@+id/tvehicles"
-                android:layout_width="120dp"
-                android:layout_height="30dp"
-                android:layout_below="@id/seperator"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/ttype">
-
-            </Spinner>
-
-            <Spinner
-                android:id="@+id/tloans"
-                android:layout_width="120dp"
-                android:layout_height="30dp"
-                android:layout_below="@id/tvehicles"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/ttype" />
-
-            <EditText
-                android:id="@+id/tamount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/seperator"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="70dp"
-                android:hint="Amount"
-                android:inputType="numberDecimal" />
-
-            <Button
-                android:id="@+id/addtrans"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_below="@id/seperator"
-                android:layout_alignParentRight="true"
-                android:drawableLeft="@drawable/add"
-                android:text="Add" />
-
-            <include
-                android:id="@+id/seperator1"
-                layout="@layout/transactions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/addtrans"
-                android:layout_marginTop="20dp" />
-
-            <ListView
-                android:id="@+id/ttrans"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/seperator1"
-                android:scrollbarStyle="insideOverlay"
-                android:scrollbars="horizontal" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/bottom"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingTop="12dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingBottom="16dp">
+
+            <!-- Account lookup + balances -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/brand_surface"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Account / vehicle no"
+                            app:boxBackgroundColor="@color/brand_surface"
+                            app:boxCornerRadiusBottomEnd="14dp"
+                            app:boxCornerRadiusBottomStart="14dp"
+                            app:boxCornerRadiusTopEnd="14dp"
+                            app:boxCornerRadiusTopStart="14dp"
+                            app:boxStrokeColor="@color/brand_orange">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/memberno"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:imeOptions="actionSearch"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:minHeight="56dp"
+                                android:paddingTop="14dp"
+                                android:paddingBottom="14dp"
+                                android:popupBackground="@drawable/bg_dropdown"
+                                android:textColor="@color/brand_ink"
+                                android:textColorHint="@color/brand_muted"
+                                android:textSize="20sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/find"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginStart="6dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Find account"
+                            android:padding="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/search"
+                            android:tint="@color/brand_orange_dark" />
+
+                        <ImageButton
+                            android:id="@+id/clear"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Clear account"
+                            android:padding="9dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/deletered" />
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/findmember"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="A/C"
+                        android:textColor="@color/brand_ink"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Account Name"
+                        android:textColor="@color/brand_muted"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <!-- Compact balances -->
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:clipToPadding="false"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:background="@drawable/bg_input"
+                                android:orientation="vertical"
+                                android:paddingStart="10dp"
+                                android:paddingTop="6dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:letterSpacing="0.06"
+                                    android:text="LOAN"
+                                    android:textColor="@color/brand_muted"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/loanArrears"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textColor="@color/brand_ink"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:background="@drawable/bg_input"
+                                android:orientation="vertical"
+                                android:paddingStart="10dp"
+                                android:paddingTop="6dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:letterSpacing="0.06"
+                                    android:text="SAVINGS"
+                                    android:textColor="@color/brand_muted"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/savingsValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textColor="@color/brand_ink"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:background="@drawable/bg_input"
+                                android:orientation="vertical"
+                                android:paddingStart="10dp"
+                                android:paddingTop="6dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:letterSpacing="0.06"
+                                    android:text="XMAS"
+                                    android:textColor="@color/brand_muted"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/xmasValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textColor="@color/brand_ink"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:background="@drawable/bg_input"
+                                android:orientation="vertical"
+                                android:paddingStart="10dp"
+                                android:paddingTop="6dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:letterSpacing="0.06"
+                                    android:text="DEPOSIT"
+                                    android:textColor="@color/brand_muted"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/depositValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textColor="@color/brand_ink"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:background="@drawable/bg_input"
+                                android:orientation="vertical"
+                                android:paddingStart="10dp"
+                                android:paddingTop="6dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:letterSpacing="0.06"
+                                    android:text="WELFARE"
+                                    android:textColor="@color/brand_muted"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/welfareValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textColor="@color/brand_ink"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:background="@drawable/bg_input"
+                                android:orientation="vertical"
+                                android:paddingStart="10dp"
+                                android:paddingTop="6dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:letterSpacing="0.06"
+                                    android:text="PARKING"
+                                    android:textColor="@color/brand_muted"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/parkingValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textColor="@color/brand_ink"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:background="@drawable/bg_input"
+                                android:orientation="vertical"
+                                android:paddingStart="10dp"
+                                android:paddingTop="6dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:letterSpacing="0.06"
+                                    android:text="OPERATION"
+                                    android:textColor="@color/brand_muted"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/operation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textColor="@color/brand_ink"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_input"
+                                android:orientation="vertical"
+                                android:paddingStart="10dp"
+                                android:paddingTop="6dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:letterSpacing="0.06"
+                                    android:text="PENALTY"
+                                    android:textColor="@color/brand_muted"
+                                    android:textSize="9sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/Penalty"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.00"
+                                    android:textColor="@color/brand_ink"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Add a collection line -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/brand_surface"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.08"
+                        android:text="ADD COLLECTION"
+                        android:textColor="@color/brand_muted"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/ttype"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_spinner"
+                        android:dropDownVerticalOffset="4dp"
+                        android:popupBackground="@drawable/bg_dropdown" />
+
+                    <Spinner
+                        android:id="@+id/tloans"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_spinner"
+                        android:dropDownVerticalOffset="4dp"
+                        android:popupBackground="@drawable/bg_dropdown"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/input_layout_amount"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Amount"
+                            app:boxCornerRadiusBottomEnd="14dp"
+                            app:boxCornerRadiusBottomStart="14dp"
+                            app:boxCornerRadiusTopEnd="14dp"
+                            app:boxCornerRadiusTopStart="14dp">
+
+                            <EditText
+                                android:id="@+id/tamount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:imeOptions="actionDone"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"
+                                android:textSize="18sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/addtrans"
+                            style="@style/AppButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="56dp"
+                            android:layout_marginStart="8dp"
+                            android:text="Add"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/ic_add"
+                            app:iconGravity="textStart"
+                            app:iconPadding="6dp"
+                            app:iconTint="@color/white" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:letterSpacing="0.08"
+                        android:text="TODAY'S COLLECTIONS"
+                        android:textColor="@color/brand_muted"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                    <ScrollView
+                        android:id="@+id/scroll"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/collections_height"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_input"
+                        android:fadeScrollbars="true"
+                        android:padding="8dp"
+                        android:scrollbars="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/collectionsBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" />
+                    </ScrollView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:letterSpacing="0.08"
+                android:text="RECEIPT LINES"
+                android:textColor="@color/brand_muted"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/brand_surface"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="false">
+
+                <com.trimline.paul.m_branch.NonScrollListView
+                    android:id="@+id/ttrans"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:divider="@color/brand_outline"
+                    android:dividerHeight="1dp"
+                    android:minHeight="56dp"
+                    android:padding="6dp" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Fixed totals + print actions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/brand_surface"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="10dp"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/totalreceipt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Total"
-                android:textSize="30dp" />
+                android:letterSpacing="0.08"
+                android:text="TOTAL"
+                android:textColor="@color/brand_muted"
+                android:textSize="10sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/postnew"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="30dp"
-                android:drawableLeft="@drawable/print"
-                android:text="  Print" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalreceipt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="0.00"
+                android:textColor="@color/brand_ink"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="22sp"
+                app:autoSizeMinTextSize="14sp"
+                app:autoSizeTextType="uniform" />
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/reprint"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="30dp"
-                android:drawableStart="@drawable/print"
-                android:drawableLeft="@drawable/print"
-                android:text="Reprint"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/reprint"
+            style="@style/AppButton.Outlined"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:text="Reprint"
+            android:textAllCaps="false"
+            app:icon="@drawable/print"
+            app:iconGravity="textStart"
+            app:iconPadding="6dp"
+            app:iconSize="20dp" />
 
-                />
-        </RelativeLayout>
-
-
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/postnew"
+            style="@style/AppButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:text="Print"
+            android:textAllCaps="false"
+            app:icon="@drawable/print"
+            app:iconGravity="textStart"
+            app:iconPadding="6dp"
+            app:iconSize="20dp"
+            app:iconTint="@color/white" />
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical" />
-</RelativeLayout>
+</LinearLayout>

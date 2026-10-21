@@ -28,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -44,6 +45,7 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -62,9 +64,11 @@ public class cashreceipt extends AppCompatActivity {
     StringBuilder s;
     EditText amount;
     AutoCompleteTextView memberno;
-    TextView membername, id, totalrec, penalty, loanbalance, operationcost,collections;
+    TextView membername, id, totalrec, penalty, operationcost;
+    TextView loanArrears, savingsValue, xmasValue, depositValue, welfareValue, parkingValue;
+    LinearLayout collectionsBox;
     ImageButton find, clear;
-    Spinner ttypes, tvehicles, tloans;
+    Spinner ttypes, tloans;
     String type;
     Button addtrans, postnew, reprint;
     ProgressBar findmember;
@@ -81,11 +85,11 @@ public class cashreceipt extends AppCompatActivity {
     SharedPreferences preferences;
     private summaries.printer p = new summaries.printer();
     static ArrayAdapter<loan> loanAdapter;
-    static ArrayAdapter<vehicles> vehicleAdapter;
     String selectedvalue;
     String selectedtext = "";
     String selectedvehicle = "";
     String selectedloan = "";
+    TextInputLayout amountLayout;
     vehicles currentvehcle;
     final static int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
 
@@ -93,13 +97,14 @@ public class cashreceipt extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashreceipt);
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        ((android.widget.TextView) findViewById(R.id.backTitle)).setText("Cash receipt");
         preferences = getSharedPreferences("Settings", MODE_PRIVATE);
         db = new DB(this);
         ttrans = findViewById(R.id.ttrans);
         ttypes = findViewById(R.id.ttype);
-        tvehicles = findViewById(R.id.tvehicles);
         tloans = findViewById(R.id.tloans);
-        collections = findViewById(R.id.collections);
+        collectionsBox = findViewById(R.id.collectionsBox);
         permissions();
 
 
@@ -109,37 +114,36 @@ public class cashreceipt extends AppCompatActivity {
 ////        new getclients().execute();
 new Getdate().execute();
         final ArrayAdapter<types> dataAdapter;
-        dataAdapter = new ArrayAdapter<types>(this,android.R.layout.simple_spinner_item, db.gettypes());
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter = new ArrayAdapter<types>(this, R.layout.spinner_item, db.gettypes());
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         ttypes.setAdapter(dataAdapter);
 
         ttypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    amount.setHint("AMOUNT");
+                    setAmountHint("Amount");
                     t = dataAdapter.getItem(position);
                     selectedvalue = "";
                     selectedtext = "";
                     selectedloan = "";
                     type = "";
-                    if (t.Code != null)
-                        if (t.Attach_to_vehicle) {
-                            tvehicles.setVisibility(View.VISIBLE);
-                            vehicleAdapter = new ArrayAdapter<vehicles>(cashreceipt.this, android.R.layout.simple_spinner_item, mvehicles);
-                            vehicleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            tvehicles.setAdapter(vehicleAdapter);
-                            if (!selectedvehicle.equals("")) {
-                                tvehicles.setSelection(getIndex(tvehicles, selectedvehicle));
+                    if (t.Code != null) {
+                        if (t.Attach_to_vehicle && !selectedvehicle.isEmpty()) {
+                            vehicles selected = vehicleByNumber(selectedvehicle);
+                            if (selected != null && "SERVICE FEE PAID".equals(t.Code)) {
+                                amount.setText(String.valueOf(selected.Daily_Contribution));
+                                amount.setSelection(0, amount.getText().length());
                             }
                         }
-                    if (t.Code.equals("FUEL"))
-                        amount.setHint("LITRES");
+                        if (t.Code.equals("FUEL"))
+                            setAmountHint("LITRES");
+                    }
 
                     if (t.Code.equals("LOAN")) {
                         tloans.setVisibility(View.VISIBLE);
-                        loanAdapter = new ArrayAdapter<loan>(cashreceipt.this, android.R.layout.simple_spinner_item, db.getcustomerloans(f.No));
-                        loanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        loanAdapter = new ArrayAdapter<loan>(cashreceipt.this, R.layout.spinner_item, db.getcustomerloans(f.No));
+                        loanAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                         tloans.setAdapter(loanAdapter);
                     } else
                         tloans.setVisibility(View.GONE);
@@ -150,22 +154,6 @@ new Getdate().execute();
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        tvehicles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedvalue = vehicleAdapter.getItem(position).Vehicle_Number;
-                if (t.Code.equals("SERVICE FEE PAID"))
-                    amount.setText(String.valueOf(vehicleAdapter.getItem(position).Daily_Contribution));
-                else
-                    amount.setText("");
-                amount.setSelection(0, amount.getText().length());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         tloans.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -186,34 +174,35 @@ new Getdate().execute();
         memberno = findViewById(R.id.memberno);
         memberno.setSelection(memberno.getText().length());
         amount = findViewById(R.id.tamount);
+        amountLayout = findViewById(R.id.input_layout_amount);
         membername = findViewById(R.id.name);
         id = findViewById(R.id.id);
         operationcost = findViewById(R.id.operation);
-        loanbalance = findViewById(R.id.LoanBalance);
         penalty = findViewById(R.id.Penalty);
+        loanArrears = findViewById(R.id.loanArrears);
+        savingsValue = findViewById(R.id.savingsValue);
+        xmasValue = findViewById(R.id.xmasValue);
+        depositValue = findViewById(R.id.depositValue);
+        welfareValue = findViewById(R.id.welfareValue);
+        parkingValue = findViewById(R.id.parkingValue);
         memberno.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long iid) {
                 f = null;
                 membername.setText("");
                 id.setText("");
-                loanbalance.setText("");
-                penalty.setText("");
-                operationcost.setText("");
+                clearBalances();
                 selectedvehicle = "";
                 Toast.makeText(getApplicationContext(), memberno.getText().toString(), Toast.LENGTH_LONG).show();
                 vehicles veh = db.getvehicle(memberno.getText().toString());
                 if (veh != null) {
                     selectedvehicle = veh.Vehicle_Number;
+                    selectedvalue = veh.Vehicle_Number;
                     Log.i("v1", veh.Code);
                     f = db.getmemberbyid(veh.Code);
                     Log.i("arrears", String.valueOf(veh.Arrears));
                     currentvehcle = veh;
-                    penalty.setText(Html.fromHtml(String.format("Penalty: <b>%s</b>", String.format("%,.2f", veh.Penalty))));
-
-                    //penalty.setText("Penalty: " + veh.Penalty);
-                    operationcost.setText(Html.fromHtml(String.format("Operation: <b>%s</b>", String.format("%,.2f", veh.Arrears))));
-                    //operationcost.setText("Operation: " + veh.Arrears);
+                    showVehicle(veh);
                 }
                 if (f == null) {
                     f = db.getmember(memberno.getText().toString());
@@ -252,13 +241,11 @@ new Getdate().execute();
 
                 }
                 //id.setText(f.No);
-                String loans = String.format("Loan Arrears: <b>%s</b>   Last Payment :<b>%s</b><br/>Savings: <b>%s</b> Last Payment: <b>%s</b><br/>Xmas: <b>%s</b>  Last Payment: <b>%s</b>", String.format("%,.2f", f.Loan_Arrears + f.dailyrepayment), f.Last_update_Loan, String.format("%,.2f", (f.Savings >= 0 ? 0 : f.Savings)), f.Last_update_savings, String.format("%,.2f", (f.Xmas >= 0 ? 0 : f.Xmas)), f.Last_update_xmas);
-
-                loanbalance.setText(Html.fromHtml(loans));
+                showBalances(f);
                 ttypes.setSelection(0, true);
-                tvehicles.setAdapter(null);
                 Log.i("Looking for vehicles", f.No);
                 mvehicles = db.getcustomervehicles(f.No);
+                applyDefaultVehicle();
             }
         });
         ArrayList<String> clients = new ArrayList<>();
@@ -275,7 +262,6 @@ new Getdate().execute();
             ) {
                 if (m.No != null) {
                     clients.add(m.No);
-                    Log.i("Member", m.No);
                 }
             }
 
@@ -302,9 +288,7 @@ new Getdate().execute();
                 f = null;
                 membername.setText("");
                 id.setText("");
-                loanbalance.setText("");
-                penalty.setText("");
-                operationcost.setText("");
+                clearBalances();
                 if (memberno.getText().toString().equals("")) {
                     memberno.setError("Member no required");
                     memberno.requestFocus();
@@ -314,11 +298,10 @@ new Getdate().execute();
                 vehicles veh = db.getvehicle(memberno.getText().toString());
                 if (veh != null) {
                     selectedvehicle = veh.Vehicle_Number;
+                    selectedvalue = veh.Vehicle_Number;
                     f = db.getmemberbyid(veh.Code);
                     Log.i("arrears", String.valueOf(veh.Arrears));
-                    penalty.setText("Penalty: " + veh.Penalty);
-
-                    operationcost.setText("Operation: " + veh.Arrears);
+                    showVehicle(veh);
                 }
                 if (f == null) {
                     f = db.getmember(memberno.getText().toString());
@@ -340,12 +323,11 @@ new Getdate().execute();
                 ttypes.setAdapter(dataAdapter);
                 membername.setText(f.Name);
                 id.setText(f.No);
-                loanbalance.setText("Loan Balance: " + f.Loan_Balances);
+                setMoney(loanArrears, f.Loan_Balances);
 
                 ttypes.setSelection(0, true);
-                tvehicles.setAdapter(null);
                 mvehicles = db.getcustomervehicles(f.ID_No);
-
+                applyDefaultVehicle();
             }
         });
 
@@ -413,6 +395,12 @@ new Getdate().execute();
                         Toast.makeText(getApplicationContext(), "Please select transaction type", Toast.LENGTH_LONG).show();
                         return;
                     }
+                    if (Boolean.TRUE.equals(t.Attach_to_vehicle) && selectedvehicle.isEmpty() && !mvehicles.isEmpty()) {
+                        memberno.setError("Enter the vehicle no in the account field");
+                        memberno.requestFocus();
+                        Toast.makeText(getApplicationContext(), "Enter the vehicle no in the account field", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     cdt = Calendar.getInstance();
                     SimpleDateFormat dy = new SimpleDateFormat("yy");
                     final String formattedy = dy.format(cdt.getTime());
@@ -467,7 +455,7 @@ new Getdate().execute();
                                         ) {
                                             totalr += tr.Amount;
                                         }
-                                        totalrec.setText(String.valueOf(totalr));
+                                        totalrec.setText(String.format(java.util.Locale.US, "%,.2f", totalr));
                                         ListAdapter fc = new trans(cashreceipt.this, tt, db);
                                         ttrans.setAdapter(fc);
                                     }
@@ -489,7 +477,7 @@ new Getdate().execute();
                     ) {
                         totalr += tr.Amount;
                     }
-                    totalrec.setText(String.valueOf(totalr));
+                    totalrec.setText(String.format(java.util.Locale.US, "%,.2f", totalr));
                     ListAdapter fc = new trans(cashreceipt.this, tt, db);
                     ttrans.setAdapter(fc);
                     cleartrans();
@@ -501,6 +489,118 @@ new Getdate().execute();
         });
     }
     private static final int PERMISSION_REQUEST_CODE = 200;
+
+    private void setMoney(TextView tv, double value) {
+        if (tv == null) return;
+        tv.setText(String.format(java.util.Locale.US, "%,.2f", value));
+    }
+
+    private void clearBalances() {
+        setMoney(loanArrears, 0);
+        setMoney(savingsValue, 0);
+        setMoney(xmasValue, 0);
+        setMoney(depositValue, 0);
+        setMoney(welfareValue, 0);
+        setMoney(parkingValue, 0);
+        setMoney(operationcost, 0);
+        setMoney(penalty, 0);
+        if (collectionsBox != null) collectionsBox.removeAllViews();
+    }
+
+    private void showVehicle(vehicles v) {
+        if (v == null) return;
+        setMoney(penalty, v.Penalty);
+        setMoney(operationcost, v.Arrears);
+    }
+
+    private vehicles vehicleByNumber(String number) {
+        if (number == null) return null;
+        for (vehicles v : mvehicles) {
+            if (number.equals(v.Vehicle_Number)) return v;
+        }
+        return null;
+    }
+
+    /** When the account has exactly one vehicle, use it automatically. */
+    private void applyDefaultVehicle() {
+        if (selectedvehicle != null && !selectedvehicle.isEmpty()) return;
+        if (mvehicles.size() == 1) {
+            currentvehcle = mvehicles.get(0);
+            selectedvehicle = currentvehcle.Vehicle_Number;
+            selectedvalue = selectedvehicle;
+            showVehicle(currentvehcle);
+        }
+    }
+
+    private void showBalances(member f) {
+        if (f == null) return;
+        boolean fullView = Myvariables.CurrentAgent != null && Myvariables.CurrentAgent.Account_type == 1;
+        setMoney(loanArrears, f.Loan_Arrears + f.dailyrepayment);
+        setMoney(savingsValue, fullView ? f.Savings : (f.Savings >= 0 ? 0 : f.Savings));
+        setMoney(xmasValue, fullView ? f.Xmas : (f.Xmas >= 0 ? 0 : f.Xmas));
+        setMoney(depositValue, f.Deposit);
+        setMoney(welfareValue, f.Welfare);
+        setMoney(parkingValue, f.ParkingBal);
+    }
+
+    private String typeName(List<types> list, String code) {
+        if (list != null && code != null) {
+            for (types item : list) {
+                if (code.equals(item.Code)) {
+                    return item.Name == null ? code.toUpperCase() : item.Name.toUpperCase();
+                }
+            }
+        }
+        return code == null ? "" : code.toUpperCase();
+    }
+
+    private void addCollectionRow(String label, double amount, boolean totalRow) {
+        if (collectionsBox == null) return;
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        row.setPadding(0, dp(6), 0, dp(6));
+
+        TextView name = new TextView(this);
+        name.setText(label);
+        name.setTextColor(ContextCompat.getColor(this, totalRow ? R.color.brand_ink : R.color.brand_text));
+        name.setTextSize(13);
+        name.setTypeface(name.getTypeface(), totalRow ? android.graphics.Typeface.BOLD : android.graphics.Typeface.NORMAL);
+        name.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+
+        TextView value = new TextView(this);
+        value.setText(String.format(java.util.Locale.US, "%,.2f", amount));
+        value.setTextColor(ContextCompat.getColor(this, totalRow ? R.color.brand_orange_dark : R.color.brand_ink));
+        value.setTextSize(13);
+        value.setTypeface(value.getTypeface(), android.graphics.Typeface.BOLD);
+        value.setGravity(android.view.Gravity.END);
+
+        row.addView(name);
+        row.addView(value);
+        collectionsBox.addView(row);
+    }
+
+    private void showCollectionsMessage(String message) {
+        if (collectionsBox == null) return;
+        TextView tv = new TextView(this);
+        tv.setText(message);
+        tv.setTextColor(ContextCompat.getColor(this, R.color.brand_muted));
+        tv.setTextSize(12);
+        tv.setPadding(0, dp(6), 0, dp(6));
+        collectionsBox.addView(tv);
+    }
+
+    private int dp(int value) {
+        return (int) (getResources().getDisplayMetrics().density * value);
+    }
+
+    private void setAmountHint(String text) {
+        if (amountLayout != null) {
+            amountLayout.setHint(text);
+        } else if (amount != null) {
+            amount.setHint(text);
+        }
+    }
     private  boolean checkPermission(transaction c) {
 
         return ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -776,43 +876,14 @@ public static void createfile(transaction c)
         protected void onPostExecute(member f) {
             try {
                 if (f != null) {
-                    String loans = String.format("Loan Arrears: <b>%s</b> Last Payment :<b>%s</b><br/>" +
-                                    "Savings: <b>%s</b> Last Payment: <b>%s</b><br/>" +
-                                    "Xmas: <b>%s</b>  Last Payment: <b>%s</b><br/><br/>" +
-                                    "Deposit arrears: <b>%s</b><br/>"+
-                                    "Welfare arrears: <b>%s</b>"+
-                                    "Parking arrears: <b>%s</b>",
-                            String.format("%,.2f", f.Loan_Arrears + f.dailyrepayment),
-                            f.Last_update_Loan, String.format("%,.2f", (f.Savings >= 0 ? 0 : f.Savings)),
-                            f.Last_update_savings, String.format("%,.2f", (f.Xmas >= 0 ? 0 : f.Xmas)), f.Last_update_xmas,String.format("%,.2f",f.Deposit),String.format("%,.2f",f.Welfare)
-                            ,String.format("%,.2f",f.ParkingBal));
-
-                    if (Myvariables.CurrentAgent.Account_type == 1)
-                        loans = String.format("Loan Arrears: <b>%s</b>  " +
-                                        " Last Payment :<b>%s</b><br/>" +
-                                        "Savings: <b>%s</b> " +
-                                        "Last Payment: <b>%s</b><br/>" +
-                                        "Xmas: <b>%s</b>  " +
-                                        "Last Payment: <b>%s</b><br/>"+
-                                        "Deposit arrears: <b>%s</b><br/>"+
-                                        "Welfare arrears: <b>%s</b><br/>"+
-                                "Parking arrears: <b>%s</b><br/>",
-                                String.format("%,.2f", f.Loan_Arrears + f.dailyrepayment),
-                                f.Last_update_Loan, String.format("%,.2f", f.Savings),
-                                f.Last_update_savings, String.format("%,.2f", f.Xmas), f.Last_update_xmas,String.format("%,.2f",f.Deposit),String.format("%,.2f",f.Welfare),String.format("%,.2f",f.ParkingBal));
-
-                    loanbalance.setText(Html.fromHtml(loans));
+                    showBalances(f);
 
                     List<vehicles> v = Arrays.asList(f.vehicles);
 
                     List<vehicles> vv = v.stream().filter(o -> o.Vehicle_Number.contentEquals(selectedvehicle)).collect(Collectors.toList());
                     if (vv != null)
                         if (vv.size() > 0) {
-                            penalty.setText(Html.fromHtml(String.format("Penalty: <b>%s</b>", String.format("%,.2f", vv.get(0).Penalty))));
-
-//                            operationcost.setText(Html.fromHtml(String.format("Penalty: <b>%s</b><br/> Operation: <b>%s</b><br/>Parking Bal: <b>%s</b>",String.format("%,.2f", vv.get(0).Penalty), String.format("%,.2f", vv.get(0).Arrears),String.format("%,.2f", vv.get(0).Parking))));
-
-                            operationcost.setText(Html.fromHtml(String.format("Penalty: <b>%s</b><br/> Operation: <b>%s</b><br/>",String.format("%,.2f", vv.get(0).Penalty), String.format("%,.2f", vv.get(0).Arrears))));
+                            showVehicle(vv.get(0));
                         }
                 }
             } catch (Exception ex) {
@@ -857,89 +928,42 @@ public static void createfile(transaction c)
         @Override
         protected void onPostExecute(List<transaction> res) {
             try {
+                if (collectionsBox == null) return;
+                collectionsBox.removeAllViews();
 
-                if (res != null)
-                    if (res.size() > 0) {
-                        s= new StringBuilder();
-                        List<types> tyy = db.gettypes();
-                        List<String> membertrans = Arrays.asList("SACCO", "WELFARE","SHARE");
-                        List<transaction> memtrans =  res.stream().filter(o ->  membertrans.contains(o.getType())  ).collect(Collectors.toList());
+                if (res == null || res.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "No payment for Vehicle " + c + " today", Toast.LENGTH_LONG).show();
+                    showCollectionsMessage("No payment for vehicle " + c + " today");
+                    return;
+                }
 
+                List<types> tyy = db.gettypes();
+                List<String> membertrans = Arrays.asList("SACCO", "WELFARE", "SHARE");
 
-                        Map<String, Double> Trans = memtrans.stream().collect(
-                                Collectors.groupingBy(transaction::getType, Collectors.summingDouble(transaction::getAmount)));
-                        s.append(String.format(" <b><u>Todays Collections</u></b><br>"));
-                        Iterator it = Trans.entrySet().iterator();
-                        while (it.hasNext()) {
-                            Map.Entry pair = (Map.Entry)it.next();
+                // member-wide collections
+                List<transaction> memtrans = res.stream()
+                        .filter(o -> o.getType() != null && membertrans.contains(o.getType()))
+                        .collect(Collectors.toList());
+                Map<String, Double> Trans = memtrans.stream().collect(
+                        Collectors.groupingBy(transaction::getType, Collectors.summingDouble(transaction::getAmount)));
+                for (Map.Entry<String, Double> pair : Trans.entrySet()) {
+                    addCollectionRow(typeName(tyy, pair.getKey()), pair.getValue(), false);
+                }
 
-                            System.out.println(pair.getKey() + " = " + pair.getValue());
-                            List<types> rr = tyy.stream().filter(o -> o.Code.contentEquals(pair.getKey().toString())).collect(Collectors.toList());
-                            String type;
-                            if (rr.size() > 0)
-                                type = rr.get(0).Name;
-                            else
-                                type = pair.getKey().toString();
-                            String amount = String.format("%,.2f", pair.getValue());
-//                            if (i == res.size()-1)
-//                                s.append(String.format("<u>%8s | %15s | <b>%10s</b></u><br>", t.Time, type.toUpperCase(), t.Agent_Code, amount));
-//                            else
+                // collections for the selected vehicle
+                String vehicleNo = currentvehcle == null ? null : currentvehcle.Vehicle_Number;
+                memtrans = res.stream()
+                        .filter(o -> o.getType() != null && !membertrans.contains(o.getType())
+                                && vehicleNo != null && o.Loan_No != null && o.Loan_No.contentEquals(vehicleNo))
+                        .collect(Collectors.toList());
+                Map<String, Double> vehicleTrans = memtrans.stream().collect(
+                        Collectors.groupingBy(transaction::getType, Collectors.summingDouble(transaction::getAmount)));
+                for (Map.Entry<String, Double> pair : vehicleTrans.entrySet()) {
+                    addCollectionRow(typeName(tyy, pair.getKey()), pair.getValue(), false);
+                }
 
-                                s.append(String.format(" %15s | <b>%10s</b><br>",  type.toUpperCase(), amount));
-
-                        }
-                        s.append(String.format("<br>"));
-                        memtrans =  res.stream().filter(o -> ! membertrans.contains(o.getType()) && o.Loan_No.contentEquals(currentvehcle.Vehicle_Number)  ).collect(Collectors.toList());
-
-
-                        Trans = memtrans.stream().collect(
-                                Collectors.groupingBy(transaction::getType, Collectors.summingDouble(transaction::getAmount)));
-
-                  it = Trans.entrySet().iterator();
-                        while (it.hasNext()) {
-                            Map.Entry pair = (Map.Entry)it.next();
-
-                            System.out.println(pair.getKey() + " = " + pair.getValue());
-                            List<types> rr = tyy.stream().filter(o -> o.Code.contentEquals(pair.getKey().toString())).collect(Collectors.toList());
-                            String type;
-                            if (rr.size() > 0)
-                                type = rr.get(0).Name;
-                            else
-                                type = pair.getKey().toString();
-                            String amount = String.format("%,.2f", pair.getValue());
-//                            if (i == res.size()-1)
-//                                s.append(String.format("<u>%8s | %15s | <b>%10s</b></u><br>", t.Time, type.toUpperCase(), t.Agent_Code, amount));
-//                            else
-                            s.append(String.format(" %15s | <b>%10s</b><br>",  type.toUpperCase(), amount));
-
-                        }
-//                        for (int i = 0; i < res.size(); i++) {
-//
-//                            transaction t = res.get(i);
-//                            List<types> rr = tyy.stream().filter(o -> o.Code.contentEquals(t.Type)).collect(Collectors.toList());
-//                            String type;
-//                            if (rr.size() > 0)
-//                                type = rr.get(0).Name;
-//                            else
-//                                type = t.Type;
-//                            String amount = String.format("%,.2f", t.Amount);
-//                            //if (t.Constituency.equalsIgnoreCase("1"))
-//                            //   amount = String.format("<s>%,.2f</s>", t.Amount);
-//
-//                            if (i == res.size()-1)
-//                                s.append(String.format("<u>%8s | %15s | %10s | <b>%10s</b></u><br>", t.Time, type.toUpperCase(), t.Agent_Code, amount));
-//                            else
-//                                s.append(String.format("%8s | %15s | %10s | <b>%10s</b><br>", t.Time, type.toUpperCase(), t.Agent_Code, amount));
-//                        }
-                        String total = String.format("%,.2f", res.stream().mapToDouble(a -> a.Amount).sum());
-                        s.append(String.format("<br>"));
-                       // s.append(String.format("<u>%10s | <b>%10s</b></u><br>","TOTAL", total));
-
-                    } else
-
-                    {  Toast.makeText(getApplicationContext(), "No payment for Vehicle " + c + " today", Toast.LENGTH_LONG).show();
-                        s.append(String.format("No payment for vehicle %s today",c));}
-                collections.setText(Html.fromHtml(s.toString().replace(" ", "&nbsp;")));
+                double total = res.stream().mapToDouble(a -> a.Amount == null ? 0 : a.Amount).sum();
+                addCollectionRow("TOTAL", total, true);
 
             } catch (Exception ex) {
                 ex.printStackTrace();

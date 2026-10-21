@@ -1,76 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="4dp">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgroundactionbar"
+        android:orientation="vertical"
+        android:padding="12dp">
 
-        <TextView
-            android:id="@+id/Receiptno"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Member No"
-            android:textColor="#000"
-            android:textSize="10dp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/Receiptno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Receipt No"
+                android:textColor="@color/brand_ink"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="amount"
+                android:textColor="@color/brand_success"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Receiptno"
-            android:hint="Time"
-            android:textColor="#000"
-            android:textSize="10dp" />
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/Receiptno"
-            android:layout_marginLeft="150dp"
-            android:text="Type"
-            android:textSize="10dp" />
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Time"
+                android:textColor="@color/brand_muted"
+                android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/Amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
-            android:hint="amount"
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Type"
+                android:textColor="@color/brand_muted"
+                android:textSize="11sp" />
 
-            android:textSize="10dp" />
+            <ImageView
+                android:id="@+id/sent"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/sent" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/loanno"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/type"
-
-            android:layout_marginLeft="150dp"
+            android:layout_marginTop="4dp"
             android:text="loan no"
-            android:textSize="10dp" />
-        <!--<TextView-->
-        <!--android:id="@+id/tamount"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/transtype"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginRight="15dp"-->
-        <!--android:textSize="10dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:textColor="@android:color/holo_green_light"-->
-        <!--android:hint="total" />-->
-        <ImageView
-            android:id="@+id/sent"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/sent" />
-    </RelativeLayout>
+            android:textColor="@color/brand_muted"
+            android:textSize="11sp" />
+    </LinearLayout>
 </RelativeLayout>

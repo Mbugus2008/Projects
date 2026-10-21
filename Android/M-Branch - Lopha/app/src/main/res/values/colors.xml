@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="textbackcolor">#EEE5DB</color>
+    <!-- Brand palette (from the Homabay County Women SACCO logo) -->
+    <color name="brand_orange">#E87511</color>
+    <color name="brand_orange_dark">#B9590A</color>
+    <color name="brand_orange_soft">#FFF0E1</color>
+    <color name="brand_ink">#20242B</color>
+    <color name="brand_ink_soft">#ECE8E2</color>
+    <color name="brand_text">#2B2F36</color>
+    <color name="brand_muted">#6B7280</color>
+    <color name="brand_bg">#F7F5F2</color>
+    <color name="brand_surface">#FFFFFF</color>
+    <color name="brand_tint">#FBF8F4</color>
+    <color name="brand_outline">#E6DFD6</color>
+    <color name="brand_success">#2E7D32</color>
+    <color name="brand_danger">#C0392B</color>
 
+    <!-- Legacy names kept so existing screens keep compiling -->
+    <color name="colorPrimary">@color/brand_orange</color>
+    <color name="colorPrimaryDark">@color/brand_orange_dark</color>
+    <color name="colorAccent">@color/brand_orange_dark</color>
+    <color name="textbackcolor">@color/brand_bg</color>
 
+    <color name="bg_line">@color/brand_outline</color>
 
-
-    <color name="bg_line">#E7E7E7</color>
-
-    <color name="cell_background_color">#ffffff</color>
-    <color name="header_line_color">@android:color/holo_red_light</color>
+    <color name="cell_background_color">@color/brand_surface</color>
+    <color name="header_line_color">@color/brand_orange</color>
 <color name="white">#ffffff</color>
-    <color name="table_view_default_text_color">#0a0a0a</color>
+    <color name="table_view_default_text_color">@color/brand_text</color>
 </resources>

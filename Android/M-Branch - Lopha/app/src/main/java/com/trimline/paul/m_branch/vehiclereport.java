@@ -29,6 +29,8 @@ public class vehiclereport extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Summary Report");
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(v -> finish());
         report = (ExpandableListView) findViewById(R.id.summuryreport);
         db = new DB(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)

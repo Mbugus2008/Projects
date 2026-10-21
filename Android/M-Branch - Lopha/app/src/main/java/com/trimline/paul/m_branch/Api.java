@@ -5,9 +5,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.trimline.paul.m_branch.jsonhandlers.Doublserializer;
 import com.trimline.paul.m_branch.jsonhandlers.UnparseableDateHandler;
 
@@ -15,13 +13,11 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class Api {
     private static final String TAG = "HttpClient";
@@ -30,7 +26,7 @@ public class Api {
     static String json = "";
     public static SharedPreferences preferences;
    //public static String WEBSERVICE_URL = "trimline.co.ke:4005/Lopha/api";
-   public static String WEBSERVICE_URL = "trimline.co.ke:4000/Lopha/Collect.asmx";
+   public static String WEBSERVICE_URL = "matatu.trimline.co.ke/Collect.asmx";
     public String apicalli_get(String[] path, HashMap<String,String> args) {
         String result = new String();
         try {

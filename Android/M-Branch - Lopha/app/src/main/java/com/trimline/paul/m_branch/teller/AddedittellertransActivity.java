@@ -26,6 +26,8 @@ public class AddedittellertransActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.addedittellertrans);
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        ((android.widget.TextView) findViewById(R.id.backTitle)).setText("Teller transfer");
         Intent i = getIntent();
         Teller t = (Teller) i.getSerializableExtra("teller");
 

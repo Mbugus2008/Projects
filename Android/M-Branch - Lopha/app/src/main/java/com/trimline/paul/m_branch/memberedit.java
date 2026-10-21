@@ -20,6 +20,8 @@ public class memberedit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memberedit);
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        ((android.widget.TextView) findViewById(R.id.backTitle)).setText("Member details");
         String jsonMyObject = "";
         db = new DB(this);
         Bundle extras = getIntent().getExtras();

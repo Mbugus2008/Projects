@@ -83,6 +83,8 @@
   .pill.o{background:#FDF3E2;color:#B26A00}
   .pill.r{background:#FDECEA;color:#C0392B}
   .muted{color:var(--muted)}
+  .xno{display:inline-flex;align-items:center;vertical-align:-1px}
+  .xno svg{display:block}
   #status{max-width:1200px;margin:14px auto 0;padding:10px 16px;font-size:13px;color:var(--muted);
           display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
   #error{display:none;max-width:1200px;margin:14px auto 0;padding:12px 16px;border-radius:10px;
@@ -1184,6 +1186,19 @@
     return codes.map(function(c){ return (types[c] || c) + " " + fmt(m[c]); }).join(" \u00b7 ");
   }
 
+  // Fleet numbers sort naturally (M9 < M129 < M601), not character by character
+  function fleetSortKey(s){
+    var m = String(s == null ? "" : s).toUpperCase().match(/^(.*?)(\d+)$/);
+    return m ? [m[1], parseInt(m[2], 10)] : [String(s == null ? "" : s).toUpperCase(), -1];
+  }
+  function cmpFleet(a, b){
+    var ka = fleetSortKey(a), kb = fleetSortKey(b);
+    var c = ka[0].localeCompare(kb[0]);
+    if(c) return c;
+    if(ka[1] !== kb[1]) return ka[1] - kb[1];
+    return String(a || "").localeCompare(String(b || ""));
+  }
+
   function renderVehicles(map, vDaily, vType, vDay7){
     vDaily = vDaily || {};
     vType = vType || {};
@@ -1207,13 +1222,15 @@
       var m = vehMetaByPlate(k) || {};
       return selRoutes.indexOf(m.route || "NO ROUTE") !== -1;
     });
-    // amount desc, then fleet no A-Z (the no-collection vehicles group at the bottom)
+    // fleet no A-Z, natural numeric order (M9 < M129 < M601); ties by amount desc
     keys.sort(function(a, b){
-      var d = ((map[b] && map[b].s) || 0) - ((map[a] && map[a].s) || 0);
-      if(d) return d;
       var fa = (vehMetaByPlate(a) || {}).fleetNo || "";
       var fb = (vehMetaByPlate(b) || {}).fleetNo || "";
-      return fa.localeCompare(fb);
+      var c = cmpFleet(fa, fb);
+      if(c) return c;
+      var d = ((map[b] && map[b].s) || 0) - ((map[a] && map[a].s) || 0);
+      if(d) return d;
+      return a.localeCompare(b);
     });
     var hiddenV = 0, hiddenS = 0;
     allKeys.forEach(function(k){
@@ -1246,20 +1263,23 @@
     document.querySelector("#vehTable thead").innerHTML = "<tr><th>Vehicle</th><th title='Last 7 days daily totals - darker bar = best day in the selection'>Trend</th>" +
       typeCols.map(function(c){ return "<th class='num ths'" + (c === "MANAGEMENT" ? " title='Management + Sacco + Welfare + Operation + F1'" : "") + ">" + esc(types[c] || c) + "</th>"; }).join("") +
       "<th class='num'>Amount</th></tr>";
+    var SEP = " <span class='muted'>|</span> ";
     keys.forEach(function(k){
       var meta = vehMetaByPlate(k) || {};
       var amt = (map[k] && map[k].s) || 0;
       var pct = max ? Math.round(amt / max * 100) : 0;
       var label = k === "NO VEHICLE" ? "<span class='muted'>NO VEHICLE</span>" : esc(k);
-      if(meta.fleetNo) label += " <span class='muted'>" + esc(meta.fleetNo) + "</span>";
-      if(meta.route) label += " <span class='muted'>" + esc(routes[meta.route] || meta.route) + "</span>";
+      if(meta.fleetNo) label += SEP + "<span class='muted'>" + esc(meta.fleetNo) + "</span>";
+      label += SEP + (meta.route
+        ? "<span class='muted'>" + esc(routes[meta.route] || meta.route) + "</span>"
+        : "<span class='xno' title='No route' role='img' aria-label='No route'><svg viewBox='0 0 12 12' width='11' height='11' aria-hidden='true'><path d='M2.5 2.5l7 7M9.5 2.5l-7 7' fill='none' stroke='#C0243F' stroke-width='2.2' stroke-linecap='round'/></svg></span>");
       var badge = meta.owner === 1 ? "<span class='pill g'>SACCO</span>" :
                   (meta.owner === 2 ? "<span class='pill b'>INVESTOR</span>" : "");
       if(meta.collect === 1) badge += " <span class='pill o' title='Vehicles page: Collect = Loan'>LOAN</span>";
       else if(meta.collect === 2) badge += " <span class='pill r' title='Vehicles page: Collect = Offload'>OFFLOAD</span>";
       var tr = document.createElement("tr");
       var tm = groupMap(vType[k] || {});
-      tr.innerHTML = "<td><div class='nm'><span>" + label + " " + badge + "</span>" +
+      tr.innerHTML = "<td><div class='nm'><span>" + label + (badge ? SEP + badge : "") + "</span>" +
                      "<span class='track'><i style='width:" + pct + "%'></i></span></div></td>" +
                      "<td class='trc'>" + (amt ? sparkHtml(k, vDay7) : "<span class='muted'>\u2014</span>") + "</td>" +
                      typeCols.map(function(c){ return "<td class='num'>" + fmt0(tm[c] || 0) + "</td>"; }).join("") +

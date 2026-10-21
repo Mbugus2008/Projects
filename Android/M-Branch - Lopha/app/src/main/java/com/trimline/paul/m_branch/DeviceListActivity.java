@@ -73,6 +73,8 @@ String SP ;
         // Setup the window
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_device_list);
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        ((android.widget.TextView) findViewById(R.id.backTitle)).setText("Select printer");
         Bundle bundle = getIntent().getExtras();
         SP = bundle.getString("SP");
         // Set result CANCELED in case the user backs out

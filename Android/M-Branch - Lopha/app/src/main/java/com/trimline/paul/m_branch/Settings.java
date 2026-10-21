@@ -23,6 +23,8 @@ public class Settings extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        ((android.widget.TextView) findViewById(R.id.backTitle)).setText("Settings");
 
         printer = (EditText) findViewById(R.id.setprinter);
         copies =(EditText)findViewById(R.id.copiestoprint);

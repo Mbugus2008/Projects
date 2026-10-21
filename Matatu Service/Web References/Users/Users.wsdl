@@ -30,6 +30,7 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="Password" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Account_type" type="tns:Account_type" />
           <xsd:element minOccurs="0" maxOccurs="1" name="Amount_Collected" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Account_Balance" type="xsd:decimal" />
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Users_List">
@@ -48,6 +49,7 @@
           <xsd:enumeration value="Password" />
           <xsd:enumeration value="Account_type" />
           <xsd:enumeration value="Amount_Collected" />
+          <xsd:enumeration value="Account_Balance" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:complexType name="Users_Filter">

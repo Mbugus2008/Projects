@@ -1,5 +1,16 @@
 apply plugin: 'com.android.application'
 
+// --- Release signing ---
+// Loaded from D:\DB\key.properties + D:\DB\upload-keystore.jks (the shared
+// Trimline keystore layout, alias "trimline"). Debug builds are unaffected;
+// if the file is missing, assembleRelease produces an unsigned APK.
+def keystoreProps = new Properties()
+def keystorePropsFile = file('D:/DB/key.properties')
+def hasReleaseSigning = keystorePropsFile.exists()
+if (hasReleaseSigning) {
+    keystorePropsFile.withInputStream { keystoreProps.load(it) }
+}
+
 android {
     compileSdkVersion 33
     defaultConfig {
@@ -7,14 +18,27 @@ android {
 
         minSdkVersion 24
         targetSdkVersion 33
-        versionCode 1
-        versionName "1.2"
+        versionCode 3
+        versionName "1.4"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+    signingConfigs {
+        if (hasReleaseSigning) {
+            release {
+                storeFile file('D:/DB/' + keystoreProps.getProperty('storeFile'))
+                storePassword keystoreProps.getProperty('storePassword')
+                keyAlias keystoreProps.getProperty('keyAlias')
+                keyPassword keystoreProps.getProperty('keyPassword')
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (hasReleaseSigning) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     compileOptions {

@@ -87,6 +87,7 @@ public class summaries {
     }
     public static class Printerthread extends Thread {
         private BluetoothSocket pSocket;
+        private volatile boolean stopped = false;
         SharedPreferences preferences;
         public Printerthread(SharedPreferences s) {
             try {
@@ -96,6 +97,20 @@ public class summaries {
                 ex.printStackTrace();
             }
         }
+
+        /** Stops this thread and releases the socket so a new one can take over. */
+        public void halt() {
+            stopped = true;
+            interrupt();
+            try {
+                if (printersock != null) printersock.close();
+            } catch (Exception ignored) {
+            }
+            printersock = null;
+            printerout = null;
+            pSocket = null;
+        }
+
         public void run() {
             byte[] pbuffer = new byte[1024];
             int pbytes = 0;
@@ -105,7 +120,7 @@ public class summaries {
             BluetoothAdapter ad = BluetoothAdapter.getDefaultAdapter();
             BluetoothDevice prnt;
             // Make a connection to the BluetoothSocket
-            while (true) {
+            while (!stopped) {
                 try {
                     String value = preferences.getString("PRINTER", "");
                     if (!value.equals("")){
@@ -157,7 +172,7 @@ public class summaries {
                                 //Log.i("thread", "printer connected");
                                 //return;
                                 try {
-                                    while (printersock.isConnected()) {
+                                    while (!stopped && printersock.isConnected()) {
                                         Log.i("thread", "printer connected");
                                         this.sleep(2000);
                                     }
@@ -197,7 +212,13 @@ public class summaries {
                 }
                 } catch (Exception ex) {
                     ex.printStackTrace();
-
+                    if (stopped) break;
+                    // back off before retrying so we don't hammer the printer
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException ie) {
+                        break;
+                    }
                 }
                 //}
             }

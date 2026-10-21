@@ -18,6 +18,11 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
+    <include
+        layout="@layout/view_back_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
     <TextView
         android:id="@+id/title_paired_devices"
         android:layout_width="match_parent"

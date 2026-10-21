@@ -5,11 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,19 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.stetho.Stetho;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
-import com.trimline.m_branch.Utilities.collectiondates;
-import com.trimline.m_branch.db.Models.tViewModel;
-import com.trimline.m_branch.reports.receipts;
 public class login extends AppCompatActivity {
     EditText username, pass;
     Button Login;

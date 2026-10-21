@@ -19,7 +19,10 @@ public class DB extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "MBranch.db";
 
     public DB(Context context) {
-        super(context, DATABASE_NAME, null, 22);
+        super(context, DATABASE_NAME, null, 23);
+        // WAL lets screens read while the background sync threads write,
+        // avoiding "database is locked (SQLITE_BUSY)" crashes.
+        setWriteAheadLoggingEnabled(true);
     }
 
     class a {
@@ -34,6 +37,7 @@ public class DB extends SQLiteOpenHelper {
         public static final String Password = "Password";
         public static final String Constituency = "Constituency";
         public static final String Account_type = "Account_type";
+        public static final String Account_Balance = "Account_Balance";
     }
 
     @Override
@@ -71,6 +75,7 @@ public class DB extends SQLiteOpenHelper {
                         a.Account + " text," +
                         a.Constituency + " text," +
                         a.Account_type + " integer," +
+                        a.Account_Balance + " float," +
                         a.Password + " text )");
         db.execSQL(
                 "create table " + l.Loanstable + "" +
@@ -862,6 +867,7 @@ public class DB extends SQLiteOpenHelper {
         contentValues.put(a.Password, f.Password);
         contentValues.put(a.Constituency, f.Constituency);
         contentValues.put(a.Account_type, f.Account_type);
+        contentValues.put(a.Account_Balance, f.Account_Balance);
         db.insertWithOnConflict(a.agent_Table, null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
         return true;
     }
@@ -877,6 +883,7 @@ public class DB extends SQLiteOpenHelper {
         contentValues.put(a.Password, f.Password);
         contentValues.put(a.Constituency, f.Constituency);
         contentValues.put(a.Account_type, f.Account_type);
+        contentValues.put(a.Account_Balance, f.Account_Balance);
         db.update(a.agent_Table, contentValues, a.Code + " = ? ", new String[]{f.Agent_Code});
         return true;
     }
@@ -898,6 +905,7 @@ public class DB extends SQLiteOpenHelper {
             f.Password = res.getString(res.getColumnIndex(a.Password));
             f.Constituency = res.getString(res.getColumnIndex(a.Constituency));
             f.Account_type = res.getInt(res.getColumnIndex(a.Account_type));
+            f.Account_Balance = res.getDouble(res.getColumnIndex(a.Account_Balance));
         }
         res.close();
         return f;

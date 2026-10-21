@@ -6,10 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.trimline.paul.m_branch.memberedit">
 
+    <include
+        layout="@layout/view_back_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
     <TextView
         android:id="@+id/mno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/backbar"
         android:layout_centerHorizontal="true"
         android:text="No" />
 

@@ -42,6 +42,8 @@ public class tellertranslist extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tellertranslist);
+        findViewById(R.id.back).setOnClickListener(v -> finish());
+        ((android.widget.TextView) findViewById(R.id.backTitle)).setText("Teller transactions");
 
         recyclerView = findViewById(R.id.tableview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

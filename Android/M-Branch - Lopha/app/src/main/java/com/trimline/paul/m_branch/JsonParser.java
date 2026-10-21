@@ -1,12 +1,10 @@
 package com.trimline.paul.m_branch;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -19,7 +17,7 @@ public class JsonParser {
     static String json = "";
     public static SharedPreferences preferences;
     //public static String WEBSERVICE_URL = ":4000/Lopha/Collect.asmx";
-    public static String WEBSERVICE_URL = "http://5.189.167.52:4000/Lopha/Collect.asmx";
+    public static String WEBSERVICE_URL = "http://matatu.trimline.co.ke/Collect.asmx";
     public static String WEBSERVICE_URL2 = "http://localhost:8344/api";
 
     public static String postjson(String Method, String param, String json) {

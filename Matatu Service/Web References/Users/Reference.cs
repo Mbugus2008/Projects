@@ -473,6 +473,10 @@ namespace Collection.Users {
         
         private string routeField;
         
+        private decimal account_BalanceField;
+        
+        private bool account_BalanceFieldSpecified;
+        
         /// <remarks/>
         public string Key {
             get {
@@ -615,6 +619,27 @@ namespace Collection.Users {
                 this.routeField = value;
             }
         }
+        
+        /// <remarks/>
+        public decimal Account_Balance {
+            get {
+                return this.account_BalanceField;
+            }
+            set {
+                this.account_BalanceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Account_BalanceSpecified {
+            get {
+                return this.account_BalanceFieldSpecified;
+            }
+            set {
+                this.account_BalanceFieldSpecified = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -726,6 +751,9 @@ namespace Collection.Users {
         
         /// <remarks/>
         Route,
+        
+        /// <remarks/>
+        Account_Balance,
     }
     
     /// <remarks/>

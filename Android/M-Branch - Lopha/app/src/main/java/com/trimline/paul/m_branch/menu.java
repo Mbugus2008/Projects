@@ -1,6 +1,7 @@
 package com.trimline.paul.m_branch;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,11 +29,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.facebook.stetho.BuildConfig;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.trimline.paul.m_branch.reports.dailysummary;
@@ -40,19 +41,33 @@ import com.trimline.paul.m_branch.reports.receipts;
 import com.trimline.paul.m_branch.teller.tellertranslist;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
     Button  cash,paymentstatus,transfer;
     DB db;
-    CheckBox printer;
+    TextView printer;
+    View printerDot;
     SharedPreferences preferences;
     private summaries.printer p = new summaries.printer();
     summaries.Printerthread sp;
     private updatemembers membersupdate;
+
+    // Inline Z report
+    private final Calendar zSelected = Calendar.getInstance();
+    private final SimpleDateFormat zDayFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+    private TextView zDate, zTotal, zReceipts, zGenerated;
+    private LinearLayout zTypes;
 //1200 8219396 - jul
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -62,9 +77,15 @@ public class menu extends AppCompatActivity
                 try {
                     BluetoothDevice device = intent
                             .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    if (summaries.printer.printerdevice.equals(device)) {
-                        summaries.printer.printersock.close();
-                        summaries.printer.printerout.close();
+                    if (summaries.printer.printerdevice != null && summaries.printer.printerdevice.equals(device)) {
+                        try {
+                            if (summaries.printer.printersock != null) summaries.printer.printersock.close();
+                            if (summaries.printer.printerout != null) summaries.printer.printerout.close();
+                        } catch (Exception ignored) {
+                        }
+                        // drop the socket so the printer thread reconnects cleanly, no flapping
+                        summaries.printer.printersock = null;
+                        summaries.printer.printerout = null;
                         mHandler.obtainMessage(Constants.PRINTER_DISCONNECTED).sendToTarget();
 
                     }
@@ -75,27 +96,157 @@ public class menu extends AppCompatActivity
         }
     };
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    private void refreshBalance() {
+        if (Myvariables.CurrentAgent == null || db == null) return;
+        agent fresh = db.getagent(Myvariables.CurrentAgent.Agent_Code);
+        if (fresh != null) Myvariables.CurrentAgent = fresh;
+        ((android.widget.TextView) findViewById(R.id.agentBalance)).setText(
+                String.format(java.util.Locale.US, "KES %,.2f", Myvariables.CurrentAgent.Account_Balance));
+    }
+
+    private void setPrinterStatus(boolean connected) {
+        int color = ContextCompat.getColor(this, connected ? R.color.brand_success : R.color.brand_danger);
+        if (printerDot != null) {
+            printerDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(color));
+        }
+        if (printer != null) {
+            printer.setTextColor(ContextCompat.getColor(this, R.color.white));
+        }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    protected void onResume() {
+        super.onResume();
+        refreshBalance();
+        if (zTypes != null) loadZReport();
+        UpdateChecker.onResume(this);
+    }
 
+    private void loadZReport() {
+        if (db == null || zTypes == null) return;
 
-        switch (item.getItemId()) {
+        String date = zDayFormat.format(zSelected.getTime());
+        zDate.setText(date + "  \u25BE");
 
-            case R.id.settings: {
-                Intent summary = new Intent(menu.this, Settings.class);
-                startActivity(summary);
-                return true;
+        ArrayList<transaction> rows = db.gettransbydate(date);
+        double total = 0;
+        LinkedHashMap<String, Double> typeAmounts = new LinkedHashMap<>();
+        LinkedHashMap<String, Integer> typeCounts = new LinkedHashMap<>();
+
+        for (transaction t : rows) {
+            double amount = t.Amount == null ? 0 : t.Amount;
+            total += amount;
+
+            String type = t.typename;
+            if (type == null || type.trim().isEmpty()) {
+                type = (t.Type == null || t.Type.trim().isEmpty()) ? "OTHER" : t.Type;
             }
-
+            Double typeAmount = typeAmounts.get(type);
+            typeAmounts.put(type, (typeAmount == null ? 0 : typeAmount) + amount);
+            Integer typeCount = typeCounts.get(type);
+            typeCounts.put(type, (typeCount == null ? 0 : typeCount) + 1);
         }
-        return super.onOptionsItemSelected(item);
+
+        zTotal.setText(String.format(Locale.US, "KES %,.2f", total));
+        zReceipts.setText(String.valueOf(rows.size()));
+
+        zTypes.removeAllViews();
+        if (typeAmounts.isEmpty()) {
+            zTypes.addView(zEmptyRow("No collections for this date"));
+        } else {
+            List<Map.Entry<String, Double>> entries = new ArrayList<>(typeAmounts.entrySet());
+            Collections.sort(entries, new Comparator<Map.Entry<String, Double>>() {
+                @Override
+                public int compare(Map.Entry<String, Double> a, Map.Entry<String, Double> b) {
+                    return b.getValue().compareTo(a.getValue());
+                }
+            });
+            for (Map.Entry<String, Double> entry : entries) {
+                Integer count = typeCounts.get(entry.getKey());
+                zAddRow(entry.getKey(), (count == null ? 0 : count) + " receipts", entry.getValue());
+            }
+            zAddTotalRow(total);
+        }
+
+        zGenerated.setText("Generated " + new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US).format(new java.util.Date()));
+    }
+
+    private void zAddRow(String label, String detail, double amount) {
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        row.setPadding(0, dp(7), 0, dp(7));
+
+        TextView name = new TextView(this);
+        name.setText(label);
+        name.setTextColor(ContextCompat.getColor(this, R.color.brand_text));
+        name.setTextSize(13);
+        name.setTypeface(name.getTypeface(), android.graphics.Typeface.BOLD);
+        name.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+
+        TextView meta = new TextView(this);
+        meta.setText(detail);
+        meta.setTextColor(ContextCompat.getColor(this, R.color.brand_muted));
+        meta.setTextSize(11);
+        meta.setPadding(dp(8), 0, dp(12), 0);
+
+        TextView value = new TextView(this);
+        value.setText(String.format(Locale.US, "%,.2f", amount));
+        value.setTextColor(ContextCompat.getColor(this, R.color.brand_ink));
+        value.setTextSize(13);
+        value.setTypeface(value.getTypeface(), android.graphics.Typeface.BOLD);
+        value.setGravity(android.view.Gravity.END);
+
+        row.addView(name);
+        row.addView(meta);
+        row.addView(value);
+        zTypes.addView(row);
+        zTypes.addView(zDivider());
+    }
+
+    private void zAddTotalRow(double total) {
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        row.setPadding(0, dp(10), 0, 0);
+
+        TextView name = new TextView(this);
+        name.setText("TOTAL");
+        name.setTextColor(ContextCompat.getColor(this, R.color.brand_ink));
+        name.setTextSize(13);
+        name.setTypeface(name.getTypeface(), android.graphics.Typeface.BOLD);
+        name.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+
+        TextView value = new TextView(this);
+        value.setText(String.format(Locale.US, "%,.2f", total));
+        value.setTextColor(ContextCompat.getColor(this, R.color.brand_orange_dark));
+        value.setTextSize(14);
+        value.setTypeface(value.getTypeface(), android.graphics.Typeface.BOLD);
+        value.setGravity(android.view.Gravity.END);
+
+        row.addView(name);
+        row.addView(value);
+        zTypes.addView(row);
+    }
+
+    private TextView zEmptyRow(String text) {
+        TextView empty = new TextView(this);
+        empty.setText(text);
+        empty.setTextColor(ContextCompat.getColor(this, R.color.brand_muted));
+        empty.setTextSize(12);
+        empty.setPadding(0, dp(8), 0, dp(4));
+        return empty;
+    }
+
+    private View zDivider() {
+        View line = new View(this);
+        line.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(1)));
+        line.setBackgroundColor(ContextCompat.getColor(this, R.color.brand_outline));
+        return line;
+    }
+
+    private int dp(int value) {
+        return (int) (getResources().getDisplayMetrics().density * value);
     }
 
     @Override
@@ -111,19 +262,41 @@ public class menu extends AppCompatActivity
         if (Myvariables.CurrentAgent.Account_type == 2)
             cash.setVisibility(View.GONE);
         db = new DB(this);
+        refreshBalance();
+
+        zDate = findViewById(R.id.zDate);
+        zTotal = findViewById(R.id.zTotal);
+        zReceipts = findViewById(R.id.zReceipts);
+        zTypes = findViewById(R.id.zTypes);
+        zGenerated = findViewById(R.id.zGenerated);
+        zDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(menu.this, (view, year, month, dayOfMonth) -> {
+                    zSelected.set(year, month, dayOfMonth);
+                    loadZReport();
+                }, zSelected.get(Calendar.YEAR), zSelected.get(Calendar.MONTH), zSelected.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        loadZReport();
+
+        UpdateChecker.checkForUpdate(this);
         printer = findViewById(R.id.printer);
         preferences = getSharedPreferences("Settings", MODE_PRIVATE);
         JsonParser.preferences = preferences;
         summaries.mHandler = mHandler;
+        // Re-login creates a new menu: stop any previous printer thread so we never
+        // end up with two threads fighting over the same Bluetooth socket.
+        if (summaries.printer.printThread != null) {
+            summaries.printer.printThread.halt();
+        }
         sp = new summaries.Printerthread(preferences);
         sp.start();
 
         permission();
-        if ( summaries.printer.printersock !=null)
-            if (summaries.printer.printersock.isConnected())
-                printer.setChecked(true);
-            else
-                printer.setChecked(false);
+        printer = findViewById(R.id.printer);
+        printerDot = findViewById(R.id.printerDot);
+        setPrinterStatus(summaries.printer.printersock != null && summaries.printer.printersock.isConnected());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -132,6 +305,10 @@ public class menu extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView navVersion = findViewById(R.id.navVersion);
+        if (navVersion != null) {
+            navVersion.setText("Version " + BuildConfig.VERSION_NAME);
+        }
         membersupdate = new updatemembers();
         membersupdate.start();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -175,6 +352,8 @@ public class menu extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.nav_settings) {
             i = new Intent(this, Settings.class);
+        } else if (id == R.id.nav_changepin) {
+            i = new Intent(this, Changepassword.class);
         } else if (id == R.id.summary) {
             i= new Intent(this, dailysummary.class);
         } else if (id == R.id.vehicle_collection) {
@@ -303,15 +482,11 @@ public class menu extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         try {
-//            if (summaries.printer.printersock != null) {
-//                summaries.printer.printerout.close();
-//                summaries.printer.printersock.close();
-//                summaries.printer.printersock = null;
-//                sp.cancel();
-//                Log.i("disconnect", "bluetooth");
-            //}
-        } catch (Exception e) {
-            e.printStackTrace();
+            unregisterReceiver(mReceiver);
+        } catch (Exception ignored) {
+        }
+        if (sp != null) {
+            sp.halt();
         }
     }
 
@@ -500,12 +675,12 @@ public class menu extends AppCompatActivity
 
                 case Constants.PRINTER_CONNECTED:
                     Toast.makeText(getApplicationContext(), "Printer connected", Toast.LENGTH_LONG).show();
-                    printer.setChecked(true);
+                    setPrinterStatus(true);
                     break;
 
                 case Constants.PRINTER_DISCONNECTED:
                     Toast.makeText(getApplicationContext(), "Printer Disconnected", Toast.LENGTH_LONG).show();
-                    printer.setChecked(false);
+                    setPrinterStatus(false);
                     break;
 
                 case Constants.PRINTER_MESSAGE_READ:

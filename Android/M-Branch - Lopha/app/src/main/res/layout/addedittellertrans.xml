@@ -22,10 +22,16 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
+            <include
+                layout="@layout/view_back_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintTop_toTopOf="parent" />
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background2"
+                app:layout_constraintTop_toBottomOf="@id/backbar"
                 android:id="@+id/title">
             <TextView
                 android:text="Teller Transfer"
