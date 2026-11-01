@@ -259,12 +259,16 @@ class MaintenanceView extends GetView<MaintenanceController> {
     switch (status) {
       case 'Open':
         return AppColors.danger;
+      case 'Assigned':
+        return AppColors.purple;
       case 'In Progress':
         return AppColors.warning;
-      case 'Scheduled':
+      case 'Pending':
         return AppColors.info;
       case 'Completed':
         return AppColors.success;
+      case 'Cancelled':
+        return AppColors.textSecondary;
       default:
         return AppColors.info;
     }
@@ -491,6 +495,15 @@ class MaintenanceView extends GetView<MaintenanceController> {
             },
           ),
           _dialogOption(
+            icon: Icons.assignment_ind_rounded,
+            color: AppColors.purple,
+            label: 'Assigned',
+            onTap: () {
+              controller.statusController.text = 'Assigned';
+              Get.back();
+            },
+          ),
+          _dialogOption(
             icon: Icons.hourglass_top_rounded,
             color: AppColors.warning,
             label: 'In Progress',
@@ -500,11 +513,11 @@ class MaintenanceView extends GetView<MaintenanceController> {
             },
           ),
           _dialogOption(
-            icon: Icons.event_available_rounded,
+            icon: Icons.pause_circle_outline_rounded,
             color: AppColors.info,
-            label: 'Scheduled',
+            label: 'Pending',
             onTap: () {
-              controller.statusController.text = 'Scheduled';
+              controller.statusController.text = 'Pending';
               Get.back();
             },
           ),
@@ -514,6 +527,15 @@ class MaintenanceView extends GetView<MaintenanceController> {
             label: 'Completed',
             onTap: () {
               controller.statusController.text = 'Completed';
+              Get.back();
+            },
+          ),
+          _dialogOption(
+            icon: Icons.cancel_outlined,
+            color: AppColors.textSecondary,
+            label: 'Cancelled',
+            onTap: () {
+              controller.statusController.text = 'Cancelled';
               Get.back();
             },
           ),

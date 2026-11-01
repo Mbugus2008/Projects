@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1E3A8A; --primary: #2563EB; --sky: #3B82F6; --ink: #0B1120;
+    --cloud: #F4F6FB; --success: #16A34A; --warning: #F59E0B; --danger: #DC2626;
+    --indigo: #6366F1; --info: #0EA5E9; --border: #E2E8F0; --muted: #64748B;
+    --muted-2: #94A3B8; --ink-text: #0F172A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 760px; overflow: hidden;
+    background:
+      radial-gradient(900px 460px at 12% -10%, rgba(37, 99, 235, .22), transparent 60%),
+      radial-gradient(800px 460px at 108% 112%, rgba(30, 58, 138, .30), transparent 55%),
+      #0B1120;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: #fff; padding: 48px 56px;
+  }
+  .head { display: flex; align-items: center; gap: 18px; margin-bottom: 34px; }
+  .head img { width: 64px; height: 64px; border-radius: 16px; display: block; }
+  .head .title { font-size: 30px; font-weight: 800; letter-spacing: -.6px; }
+  .head .sub { font-size: 15px; color: var(--muted-2); margin-top: 3px; }
+  .head .tag { margin-left: auto; font-size: 13px; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; }
+  .rows { display: flex; flex-direction: column; gap: 18px; }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .swatch { border-radius: 16px; overflow: hidden; border: 1px solid rgba(148, 163, 184, .18); }
+  .chip { height: 108px; }
+  .meta { background: rgba(15, 23, 42, .55); padding: 10px 14px 12px; }
+  .name { font-size: 13.5px; font-weight: 600; color: #E2E8F0; }
+  .hex { font-size: 12px; font-weight: 500; color: var(--muted-2); letter-spacing: .06em; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .gradient { background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 55%, #3B82F6 100%); }
+  .c-primary { background: #2563EB; } .c-sky { background: #3B82F6; }
+  .c-navy { background: #1E3A8A; } .c-ink { background: #0B1120; border: 1px solid rgba(148,163,184,.25); }
+  .c-cloud { background: #F4F6FB; } .c-white { background: #FFFFFF; }
+  .c-success { background: #16A34A; } .c-warning { background: #F59E0B; }
+  .c-danger { background: #DC2626; } .c-indigo { background: #6366F1; }
+  .c-info { background: #0EA5E9; } .c-border { background: #E2E8F0; }
+  .c-muted { background: #64748B; } .c-muted2 { background: #94A3B8; }
+  .c-inktext { background: #0F172A; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <img src="../app_icon-tile.png" onerror="this.src='../../assets/icon/app_icon.png'" alt="" />
+    <div>
+      <div class="title">Rental Management — Brand Palette</div>
+      <div class="sub">Official colours. Same tokens across the Android app, admin console and store assets.</div>
+    </div>
+    <div class="tag">v1 · Oct 2026</div>
+  </div>
+
+  <div class="rows">
+    <div class="row">
+      <div class="swatch"><div class="chip gradient"></div><div class="meta"><div class="name">Brand gradient</div><div class="hex">#1E3A8A &rarr; #2563EB &rarr; #3B82F6</div></div></div>
+      <div class="swatch"><div class="chip c-primary"></div><div class="meta"><div class="name">Rental Blue &mdash; primary</div><div class="hex">#2563EB</div></div></div>
+      <div class="swatch"><div class="chip c-sky"></div><div class="meta"><div class="name">Sky Blue &mdash; gradient end</div><div class="hex">#3B82F6</div></div></div>
+      <div class="swatch"><div class="chip c-navy"></div><div class="meta"><div class="name">Navy &mdash; gradient start</div><div class="hex">#1E3A8A</div></div></div>
+    </div>
+    <div class="row">
+      <div class="swatch"><div class="chip c-ink"></div><div class="meta"><div class="name">Ink &mdash; dark surfaces</div><div class="hex">#0B1120</div></div></div>
+      <div class="swatch"><div class="chip c-inktext"></div><div class="meta"><div class="name">Ink text &mdash; headings</div><div class="hex">#0F172A</div></div></div>
+      <div class="swatch"><div class="chip c-cloud"></div><div class="meta"><div class="name">Cloud &mdash; app background</div><div class="hex">#F4F6FB</div></div></div>
+      <div class="swatch"><div class="chip c-border"></div><div class="meta"><div class="name">Border &mdash; dividers</div><div class="hex">#E2E8F0</div></div></div>
+    </div>
+    <div class="row">
+      <div class="swatch"><div class="chip c-success"></div><div class="meta"><div class="name">Success</div><div class="hex">#16A34A</div></div></div>
+      <div class="swatch"><div class="chip c-warning"></div><div class="meta"><div class="name">Warning</div><div class="hex">#F59E0B</div></div></div>
+      <div class="swatch"><div class="chip c-danger"></div><div class="meta"><div class="name">Danger</div><div class="hex">#DC2626</div></div></div>
+      <div class="swatch"><div class="chip c-indigo"></div><div class="meta"><div class="name">Accent indigo</div><div class="hex">#6366F1</div></div></div>
+    </div>
+  </div>
+</body>
+</html>

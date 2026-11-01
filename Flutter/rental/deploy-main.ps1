@@ -36,6 +36,22 @@ if (-not (Test-Path $share)) {
     throw "No SMB session to $Server. Re-run with -ServerPassword, e.g.: .\deploy-main.ps1 -ServerPassword '<your password>'"
 }
 
+# 2b. Stop the app pool so in-process hosting releases Rental.dll before the mirror
+$remoteCred = $null
+if ($ServerPassword) {
+    $secure = ConvertTo-SecureString $ServerPassword -AsPlainText -Force
+    $remoteCred = New-Object System.Management.Automation.PSCredential($ServerUser, $secure)
+}
+if ($remoteCred) {
+    Write-Host '==> Stopping app pool...' -ForegroundColor Cyan
+    Invoke-Command -ComputerName $Server -Credential $remoteCred -ScriptBlock {
+        Import-Module WebAdministration
+        $pool = (Get-Item 'IIS:\Sites\Rental').applicationPool
+        Stop-WebAppPool -Name $pool -ErrorAction SilentlyContinue
+        Start-Sleep -Seconds 2
+    }
+}
+
 # 3. Incremental mirror (only changed files; production-side settings preserved)
 Write-Host '==> Copying changed files...' -ForegroundColor Cyan
 $dest = "\\$Server\$RemotePath"
@@ -47,8 +63,28 @@ if ($code -ge 8) { throw "robocopy failed with exit code $code" }
 Write-Host '==> Recycling app (web.config touch)...' -ForegroundColor Cyan
 (Get-Item "$dest\web.config").LastWriteTime = Get-Date
 
-# 5. Verify
+# 4b. Restart the app pool we stopped before the copy
+if ($remoteCred) {
+    Write-Host '==> Starting app pool...' -ForegroundColor Cyan
+    Invoke-Command -ComputerName $Server -Credential $remoteCred -ScriptBlock {
+        Import-Module WebAdministration
+        Start-WebAppPool -Name 'Rental'
+        Start-Sleep -Seconds 4
+    }
+}
+
+# 5. Verify (401 = live and protected). Loopback via WinRM when creds are available,
+#    because this dev machine's curl cannot reach the 443 binding.
 Write-Host '==> Verifying...' -ForegroundColor Cyan
-Start-Sleep -Seconds 3
-$resp = curl.exe -s -o NUL -w '%{http_code}' https://main.trimline.co.ke:4018/api/settings
-Write-Host "API /api/settings -> HTTP $resp (401 = live and protected)" -ForegroundColor Green
+if ($remoteCred) {
+    $code = Invoke-Command -ComputerName $Server -Credential $remoteCred -ScriptBlock {
+        $req = [System.Net.HttpWebRequest]::Create('https://main.trimline.co.ke:4018/api/settings')
+        $req.Timeout = 15000
+        try { $r = $req.GetResponse(); [int]$r.StatusCode; $r.Close() }
+        catch [System.Net.WebException] { if ($_.Exception.Response) { [int]$_.Exception.Response.StatusCode } else { -1 } }
+    }
+} else {
+    Start-Sleep -Seconds 3
+    $code = curl.exe -s -o NUL -w '%{http_code}' https://main.trimline.co.ke:4018/api/settings
+}
+Write-Host "API /api/settings -> HTTP $code (401 = live and protected)" -ForegroundColor Green

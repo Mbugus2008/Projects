@@ -72,6 +72,7 @@ class PropertiesView extends GetView<PropertiesController> {
     final state = property['state']?.toString() ?? '';
     final type = property['propertyType']?.toString() ?? '';
     final units = property['totalUnits']?.toString() ?? '0';
+    final status = property['status']?.toString() ?? '';
     final description = property['description']?.toString() ?? '';
     final location = [city, state].where((s) => s.isNotEmpty).join(', ');
 
@@ -131,6 +132,15 @@ class PropertiesView extends GetView<PropertiesController> {
                 color: AppColors.primary,
               ),
               StatusChip(label: '$units units', color: AppColors.teal),
+              if (status.isNotEmpty)
+                StatusChip(
+                  label: status,
+                  color: status == 'Maintenance'
+                      ? AppColors.warning
+                      : status == 'Occupied'
+                          ? AppColors.success
+                          : AppColors.textSecondary,
+                ),
               if (location.isNotEmpty)
                 StatusChip(label: location, color: AppColors.info),
             ],

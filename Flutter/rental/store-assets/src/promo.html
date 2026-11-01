@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background:
+      radial-gradient(1000px 640px at 12% -8%, rgba(37, 99, 235, .24), transparent 60%),
+      radial-gradient(900px 640px at 108% 110%, rgba(30, 58, 138, .34), transparent 55%),
+      linear-gradient(160deg, #0B1120 0%, #101B32 55%, #12224A 100%);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: #fff; display: flex; flex-direction: column; align-items: center;
+    padding: 76px 72px 0;
+  }
+  .brand { align-self: flex-start; display: flex; align-items: center; gap: 18px; }
+  .brand img { width: 64px; height: 64px; border-radius: 16px; display: block; }
+  .brand .name { font-size: 33px; font-weight: 700; letter-spacing: -.4px; }
+  h1 { margin-top: 52px; font-size: 68px; font-weight: 800; letter-spacing: -2px; line-height: 1.06; text-align: center; }
+  h1 span { background: linear-gradient(90deg, #60A5FA, #93C5FD); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  p { margin-top: 22px; font-size: 32px; line-height: 1.4; color: #94A3B8; font-weight: 500; text-align: center; max-width: 860px; }
+  .phone {
+    margin-top: 54px; width: 780px; height: 1387px;
+    border-radius: 56px; overflow: hidden; border: 2px solid rgba(148, 163, 184, .30);
+    background: #0B1120; box-shadow: 0 60px 140px rgba(2, 6, 23, .6);
+    flex: none;
+  }
+  .phone img { width: 100%; height: 100%; object-fit: contain; display: block; }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <img src="../../assets/icon/app_icon.png" alt="" />
+    <div class="name">Rental Management</div>
+  </div>
+  <h1 id="headline"></h1>
+  <p id="subline"></p>
+  <div class="phone"><img id="shot" alt="" /></div>
+
+<script>
+  const SHOTS = {
+    1: { img: '../../screenshots/03-dashboard.png',   h: 'Everything <span>at a glance</span>', s: 'Rent, occupancy and invoices the moment you open the app.' },
+    2: { img: '../../screenshots/05-properties.png',  h: 'Every unit <span>in one place</span>', s: 'Track houses, blocks and units across your whole portfolio.' },
+    3: { img: '../../screenshots/10-invoices.png',    h: 'Bill in <span>Kenyan Shillings</span>', s: 'Rent, water and garbage invoices with partial-payment tracking.' },
+    4: { img: '../../screenshots/11-maintenance.png', h: 'Repairs know <span>their unit</span>', s: 'Log maintenance against the exact house or room number.' },
+    5: { img: '../../screenshots/09-balances.png',    h: 'Know <span>who owes what</span>', s: 'Live balances that update with every payment you record.' },
+    6: { img: '../../screenshots/13-reports.png',     h: 'Reports <span>that matter</span>', s: 'Income, expenses, arrears and occupancy in one clear view.' }
+  };
+  const id = new URLSearchParams(location.search).get('shot') || '1';
+  const cfg = SHOTS[id] || SHOTS[1];
+  document.getElementById('headline').innerHTML = cfg.h;
+  document.getElementById('subline').textContent = cfg.s;
+  document.getElementById('shot').src = cfg.img;
+</script>
+</body>
+</html>

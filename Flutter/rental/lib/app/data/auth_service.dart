@@ -14,6 +14,14 @@ class AuthService extends GetxService {
   final RxString token = ''.obs;
   final RxMap<String, dynamic> currentUser = <String, dynamic>{}.obs;
 
+  /// Normalised staff role used to filter app modules.
+  /// Legacy 'Landlord' accounts are treated as Admin.
+  String get role {
+    final raw = currentUser['role']?.toString() ?? '';
+    if (raw.isEmpty) return 'Owner';
+    return raw == 'Landlord' ? 'Admin' : raw;
+  }
+
   // Initialize the service
   Future<AuthService> init() async {
     // Check if we have a stored token

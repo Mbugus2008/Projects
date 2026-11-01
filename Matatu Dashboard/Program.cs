@@ -8,6 +8,12 @@ builder.Services.AddMemoryCache();
 builder.Services.AddControllersWithViews();
 builder.Services.Configure<BusinessCentralDashboardOptions>(builder.Configuration.GetSection("BusinessCentral"));
 builder.Services.AddScoped<BusinessCentralDashboardService>();
+
+// KMOS is a separate NAV instance - its own options section and service, sharing nothing
+// with the CityServices dashboard service above.
+builder.Services.Configure<KmosOptions>(builder.Configuration.GetSection("Kmos"));
+builder.Services.AddScoped<KmosDashboardService>();
+
 builder.Services.AddHostedService<ShareDashboardWarmService>();
 
 var app = builder.Build();
@@ -81,6 +87,11 @@ app.MapControllerRoute(
     name: "admin",
     pattern: "admin/{action=Index}/{id?}",
     defaults: new { controller = "Home" });
+
+app.MapControllerRoute(
+    name: "kmos",
+    pattern: "kmos/{range?}",
+    defaults: new { controller = "Kmos", action = "Index" });
 
 app.MapControllerRoute(
     name: "default",

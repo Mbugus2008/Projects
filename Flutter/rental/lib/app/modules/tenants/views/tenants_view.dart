@@ -68,6 +68,7 @@ class TenantsView extends GetView<TenantsController> {
     final email = tenant['email']?.toString() ?? '';
     final phone = tenant['phoneNumber']?.toString() ?? '';
     final notes = tenant['notes']?.toString() ?? '';
+    final paymentStatus = tenant['paymentStatus']?.toString() ?? '';
 
     return AppCard(
       padding: const EdgeInsets.all(16),
@@ -121,6 +122,17 @@ class TenantsView extends GetView<TenantsController> {
                 const SizedBox(width: 8),
                 Text(phone, style: theme.textTheme.bodyMedium),
               ],
+            ),
+          ],
+          if (paymentStatus.isNotEmpty && paymentStatus != '—') ...[
+            const SizedBox(height: 12),
+            StatusChip(
+              label: paymentStatus,
+              color: paymentStatus == 'Paid'
+                  ? AppColors.success
+                  : paymentStatus == 'Partial'
+                      ? AppColors.warning
+                      : AppColors.danger,
             ),
           ],
           if (notes.isNotEmpty) ...[

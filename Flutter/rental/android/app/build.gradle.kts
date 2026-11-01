@@ -8,7 +8,8 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-// Release signing (upload key). See android/key.properties — never commit it.
+// Upload signing key lives in the D:/DB key vault (see android/key.properties — never commit it).
+// It signs BOTH debug and release builds so every install shares the same app identity.
 val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
 if (keystorePropertiesFile.exists()) {
@@ -42,6 +43,17 @@ android {
 
     signingConfigs {
         create("release") {
+            if (keystorePropertiesFile.exists()) {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+
+        // Sign debug builds with the same upload key, so debug and release
+        // installs have one identity (no uninstall when switching builds).
+        getByName("debug") {
             if (keystorePropertiesFile.exists()) {
                 keyAlias = keystoreProperties["keyAlias"] as String
                 keyPassword = keystoreProperties["keyPassword"] as String

@@ -40,7 +40,10 @@
         ("vehicles", "Vehicle Detail", Link("/loading/vehicles")),
     };
 
+    // KMOS is deliberately not in this menu, but its pages still render the bar - matching the
+    // sentinel keeps "Dashboard" from being highlighted while you are on the KMOS screen.
     var current =
+        path.StartsWith("/kmos") ? "kmos" :
         path.StartsWith("/loading/vehicles") ? "vehicles" :
         path.StartsWith("/loading") ? "loading" :
         path.StartsWith("/fuelsummary") ? "fuelsummary" :

@@ -34,8 +34,56 @@ class DashboardController extends BaseController {
   final RxDouble pendingInvoiceAmount = 0.0.obs;
   final RxInt pendingInvoiceCount = 0.obs;
 
-  // Navigation items
-  final List<Map<String, dynamic>> navigationItems = [
+  // Navigation items, filtered by the signed-in user's type.
+  static const Map<String, List<String>> _roleRoutes = {
+    'Admin': [
+      '/dashboard',
+      '/properties',
+      '/tenants',
+      '/leases',
+      '/finances',
+      '/balances',
+      '/invoices',
+      '/maintenance',
+      '/documents',
+      '/reports',
+      '/settings',
+    ],
+    'Owner': [
+      '/dashboard',
+      '/properties',
+      '/tenants',
+      '/leases',
+      '/finances',
+      '/balances',
+      '/invoices',
+      '/maintenance',
+      '/documents',
+      '/reports',
+    ],
+    'Finance': [
+      '/dashboard',
+      '/finances',
+      '/balances',
+      '/invoices',
+      '/reports',
+    ],
+    'Agent': [
+      '/dashboard',
+      '/properties',
+      '/tenants',
+      '/leases',
+      '/invoices',
+      '/balances',
+      '/maintenance',
+      '/documents',
+    ],
+    'Maintenance': [
+      '/maintenance',
+    ],
+  };
+
+  final List<Map<String, dynamic>> _allNavigationItems = [
     {'title': 'Dashboard', 'icon': Icons.dashboard, 'route': Routes.dashboard},
     {
       'title': 'Properties',
@@ -56,6 +104,13 @@ class DashboardController extends BaseController {
     {'title': 'Reports', 'icon': Icons.bar_chart, 'route': Routes.reports},
     {'title': 'Settings', 'icon': Icons.settings, 'route': Routes.settings},
   ];
+
+  List<Map<String, dynamic>> get navigationItems {
+    final allowed = _roleRoutes[_authService.role] ?? _roleRoutes['Owner']!;
+    return _allNavigationItems
+        .where((item) => allowed.contains(item['route']))
+        .toList();
+  }
 
   @override
   void onInit() {
